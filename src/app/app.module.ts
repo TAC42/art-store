@@ -7,12 +7,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './cmps/header/header.component';
+import { AboutComponent } from './pages/about/about.component';
+import { StoreComponent } from './pages/store/store.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
+    AboutComponent,
+    StoreComponent,
   ],
   imports: [
     BrowserModule,
