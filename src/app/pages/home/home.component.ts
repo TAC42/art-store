@@ -6,7 +6,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent  {
   // private userService = inject(UserService)
   // private bitcoinService = inject(BitcoinService)
   // subscription!: Subscription
