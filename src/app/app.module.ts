@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './cmps/header/header.component';
 import { AboutComponent } from './pages/about/about.component';
 import { StoreComponent } from './pages/store/store.component';
+import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { StoreComponent } from './pages/store/store.component';
     HomeComponent,
     AboutComponent,
     StoreComponent,
+    SvgRenderComponent,
   ],
   imports: [
     BrowserModule,
