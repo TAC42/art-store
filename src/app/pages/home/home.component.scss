@@ -1,0 +1,22 @@
+@import "../../../assets/scss/setup/functions";
+@import "../../../assets/scss/setup/variables";
+
+.home-page {
+    min-width: 350px;
+    min-height: 350px;
+    width: max-content;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    font-family: monospace;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: auto;
+    
+    h1 {
+        color: $clr8;
+        font-size: rem(30px);
+        font-weight: 700;
+    }
+
+}
