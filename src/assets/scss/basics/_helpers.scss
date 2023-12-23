@@ -6,7 +6,7 @@
     padding: 0;
     list-style-type: none;
 
-    & > li {
+    &>li {
         margin: 0;
         padding: 0;
     }
@@ -15,29 +15,37 @@
 // Positioning
 .flex {
     display: flex;
+
     &.column {
         flex-direction: column;
     }
+
     &.justify-center {
         justify-content: center;
     }
+
     &.align-center {
         align-items: center;
     }
+
     &.wrap {
         flex-wrap: wrap;
     }
+
     &.space-between {
         justify-content: space-between;
     }
+
     &.space-around {
         justify-content: space-around;
     }
+
     &.auto-center {
         justify-content: center;
         align-items: center;
     }
-    > *.full-grow {
+
+    >*.full-grow {
         flex: 1;
     }
 }
@@ -45,9 +53,11 @@
 .text-center {
     text-align: center;
 }
+
 .text-right {
     text-align: right;
 }
+
 .text-left {
     text-align: left;
 }
@@ -106,9 +116,11 @@
 .fast-trans {
     transition: 0.25s all;
 }
+
 .normal-trans {
     transition: 0.4s all;
 }
+
 .slow-trans {
     transition: 0.7s all;
 }
@@ -117,18 +129,23 @@
 .p5 {
     padding: 5px;
 }
+
 .p10 {
     padding: 10px;
 }
+
 .p20 {
     padding: 20px;
 }
+
 .m5 {
     margin: 5px;
 }
+
 .m10 {
     margin: 10px;
 }
+
 .m20 {
     margin: 20px;
 }
@@ -158,7 +175,7 @@
     width: 300px;
     margin: 15px auto;
 
-    & > *:not(:last-child) {
+    &>*:not(:last-child) {
         margin-bottom: 10px;
     }
 

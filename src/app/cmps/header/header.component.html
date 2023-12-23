@@ -1,16 +1,16 @@
-<header class="main-header"> 
-   <span><svg-render [svgName]="oc"></svg-render></span>
-    <h1>{{title}}</h1>
-  
-    <ul>
-      <li>
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      </li>
-      <li>
-        <a routerLink="/store" routerLinkActive="active">Store</a>
-      </li>
-      <li>
-        <a routerLink="/about" routerLinkActive="active">About</a>
-      </li>
-    </ul>
-  </header>
+<header class="header-contents layout-row flex row">
+  <span><svg-render [svgName]="oc"></svg-render></span>
+  <h1>{{title}}</h1>
+
+  <ul>
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    </li>
+    <li>
+      <a routerLink="/store" routerLinkActive="active">Store</a>
+    </li>
+    <li>
+      <a routerLink="/about" routerLinkActive="active">About</a>
+    </li>
+  </ul>
+</header>

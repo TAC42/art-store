@@ -1,27 +1,27 @@
-.main-layout {
+.main-container {
+  width: 100%;
+  height: 100%;
   display: grid;
-  grid-template-columns: 32px 1fr 32px;
+  grid-template-rows: auto 1fr;
 
-  > * {
+  >* {
     grid-column: 2;
-    max-width: 1400px;
-    margin: auto;
-    width: 100%;
-    padding:0;
 
     &.full {
       grid-column: 1 /-1;
     }
   }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 16px 1fr 16px;
+  }
+
+  @media (min-width: 481px) {
+    grid-template-columns: 32px 1fr 32px;
+  }
 }
 
-.container {
-  padding-inline: 10vw;
-}
-
-// GRIDS
-.simple-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 10px;
+.layout-row {
+  margin: auto;
+  max-width: 1000px;
 }
