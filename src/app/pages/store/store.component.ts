@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrl: './store.component.scss'
+  templateUrl: './store.component.html'
 })
 export class StoreComponent {
 

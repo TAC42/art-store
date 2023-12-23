@@ -1,5 +1,5 @@
-@import "../../../assets/scss/setup/functions";
-@import "../../../assets/scss/setup/variables";
+@import "../setup/functions";
+@import "../setup/variables";
 
 .home-page {
     min-width: 350px;
@@ -12,11 +12,10 @@
     flex-direction: column;
     justify-content: space-around;
     margin: auto;
-    
+
     h1 {
         color: $clr8;
         font-size: rem(30px);
         font-weight: 700;
     }
-
 }

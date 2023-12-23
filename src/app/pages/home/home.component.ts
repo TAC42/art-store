@@ -3,8 +3,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './home.component.html'
 })
 export class HomeComponent  {
   // private userService = inject(UserService)

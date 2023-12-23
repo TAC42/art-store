@@ -3,8 +3,7 @@ import { SvgRenderService } from '../../services/svg-render.service';
 
 @Component({
   selector: 'svg-render',
-  templateUrl: './svg-render-component.html',
-  styleUrls: ['./svg-render-component.scss']
+  templateUrl: './svg-render-component.html'
 })
 export class SvgRenderComponent implements OnInit {
   svgContent: string = '';
