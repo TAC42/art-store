@@ -11,7 +11,9 @@ import { AboutComponent } from './pages/about/about.component'
 import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-component'
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShopListComponent } from './cmps/shop-list/shop-list.component'
-import { ProductComponent } from './pages/product/product.component'
+import { ProductComponent } from './pages/product/product.component';
+import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component';
+import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ProductComponent } from './pages/product/product.component'
     ShopComponent,
     ShopListComponent,
     ProductComponent,
+    ShopFilterComponent,
+    ProductPreviewComponent,
   ],
   imports: [
     BrowserModule,
