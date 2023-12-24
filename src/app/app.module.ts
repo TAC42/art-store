@@ -12,6 +12,8 @@ import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-compo
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShopListComponent } from './cmps/shop-list/shop-list.component'
 import { ProductComponent } from './pages/product/product.component'
+import { AsideMenuComponent } from './cmps/aside-menu/aside-menu.component'
+import { OutsideClickDirective } from './directives/outside-click.directive'
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ProductComponent } from './pages/product/product.component'
     ShopComponent,
     ShopListComponent,
     ProductComponent,
+    AsideMenuComponent,
+    OutsideClickDirective,
   ],
   imports: [
     BrowserModule,

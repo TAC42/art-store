@@ -1,0 +1,19 @@
+<section class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
+    <section appOutsideClick (outsideClick)="closeMenu()" class="aside-menu flex column">
+        <div>
+            <a routerLink="/about" routerLinkActive="active">About</a>
+        </div>
+
+        <div>
+            <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        </div>
+
+        <div>
+            <a routerLink="/artworks" routerLinkActive="active">Artworks</a>
+        </div>
+
+        <div>
+            <a routerLink="/shop" routerLinkActive="active">Shop</a>
+        </div>
+    </section>
+</section>
