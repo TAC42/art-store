@@ -8,8 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './cmps/header/header.component';
 import { AboutComponent } from './pages/about/about.component';
-import { StoreComponent } from './pages/store/store.component';
 import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-component';
+import { ShopComponent } from './pages/shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +17,8 @@ import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-compo
     HeaderComponent,
     HomeComponent,
     AboutComponent,
-    StoreComponent,
     SvgRenderComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,
