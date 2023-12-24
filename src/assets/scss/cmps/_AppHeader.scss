@@ -1,40 +1,35 @@
 .app-header {
     font-family: 'nh-medium';
-    background-color: rgb(42, 202, 42);
+    background-color: $prmclr2;
+    border-bottom: 1px solid $scdclr3;
 
     .header-contents {
         align-items: center;
         padding: .5em 1em;
         gap: 1em;
 
-        h1 {
-            font-weight: 900;
-            color: rgb(36, 50, 53);
-        }
+        .links {
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
 
-        img {
-            margin: 0 0.5em;
-            width: 64px;
-            height: 64px;
-        }
+            a {
+                font-size: 18px;
+                line-height: 1.6;
+                transition: all 0.3s;
 
-        ul {
-            margin-inline-start: auto;
-            display: flex;
-            gap: 1em;
-
-            li {
-                img {
-                    width: 42px;
-                    height: 42px;
-                    object-fit: cover;
+                span {
+                    width: 48px;
+                    height: 48px;
                 }
 
-                a {
-                    &.active {
-                        border-radius: 50%;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-                    }
+                &.active {
+                    color: $scdclr1;
+                }
+
+                &:hover {
+                    color: $scdclr1;
+                    text-decoration: none;
                 }
             }
         }
