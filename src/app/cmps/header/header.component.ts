@@ -7,5 +7,5 @@ import { Component } from '@angular/core'
 
 export class HeaderComponent {
   title = 'Ori Art Store'
-  oc: string = 'oc'
+  ocLogo: string = 'ocLogo'
 }

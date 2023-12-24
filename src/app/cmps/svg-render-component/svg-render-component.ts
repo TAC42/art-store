@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { SvgRenderService } from '../../services/svg-render.service'
 
 @Component({
@@ -6,20 +7,14 @@ import { SvgRenderService } from '../../services/svg-render.service'
   templateUrl: './svg-render-component.html'
 })
 export class SvgRenderComponent implements OnInit {
-  svgContent: string = ''
+  svgContent: SafeHtml = ''
   @Input() svgName: string = ''
 
-  constructor(private svgRenderService: SvgRenderService) { }
+  constructor(private svgRenderService: SvgRenderService,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    console.log('Hello from oninit svgrender', this.svgName)
-
-    if (this.svgName) {
-      this.displaySvg(this.svgName)
-    }
-  }
-
-  displaySvg(name: string): void {
-    this.svgContent = this.svgRenderService.getSvg(name)
+    const rawSvg = this.svgRenderService.getSvg(this.svgName)
+    this.svgContent = this.sanitizer.bypassSecurityTrustHtml(rawSvg)
   }
 }
