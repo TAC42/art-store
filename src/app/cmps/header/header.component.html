@@ -1,16 +1,23 @@
 <header class="header-contents layout-row flex row">
-  <span><svg-render [svgName]="oc"></svg-render></span>
-  <h1>{{title}}</h1>
-
-  <ul>
-    <li>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-    </li>
-    <li>
-      <a routerLink="/shop" routerLinkActive="active">Shop</a>
-    </li>
-    <li>
+  <section class="links flex row">
+    <div>
       <a routerLink="/about" routerLinkActive="active">About</a>
-    </li>
-  </ul>
+    </div>
+    <div>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    </div>
+    <div>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <span class="flex">
+          <svg-render [svgName]="oc"></svg-render>
+        </span>
+      </a>
+    </div>
+    <div>
+      <a routerLink="/artworks" routerLinkActive="active">Artworks</a>
+    </div>
+    <div>
+      <a routerLink="/shop" routerLinkActive="active">Shop</a>
+    </div>
+  </section>
 </header>
