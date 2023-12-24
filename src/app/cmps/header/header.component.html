@@ -1,7 +1,7 @@
 <header class="header-contents layout-row">
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row">
-      <span class="flex">
+      <span class="flex" (click)="onToggleAsideMenu($event)">
         <svg-render [svgName]="burgerMenuIcon"></svg-render>
       </span>
 
