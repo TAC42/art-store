@@ -14,6 +14,8 @@ import { ShopListComponent } from './cmps/shop-list/shop-list.component'
 import { ProductComponent } from './pages/product/product.component'
 import { AsideMenuComponent } from './cmps/aside-menu/aside-menu.component'
 import { OutsideClickDirective } from './directives/outside-click.directive'
+import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
+import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { OutsideClickDirective } from './directives/outside-click.directive'
     ProductComponent,
     AsideMenuComponent,
     OutsideClickDirective,
+    ShopFilterComponent,
+    ProductPreviewComponent,
   ],
   imports: [
     BrowserModule,
