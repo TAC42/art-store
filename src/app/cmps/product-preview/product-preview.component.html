@@ -1,0 +1,8 @@
+<section class="product-preview">
+    <a routerLink="/{{ product.name }}">
+      <article class="prod-img"><img [src]="prodImg" [alt]="product.name" /></article>
+      <article class="name">{{ product.name }}</article>
+    </a>
+    <button (click)="onRemoveProduct()" class="remove-btn">X</button>
+  </section>
+  

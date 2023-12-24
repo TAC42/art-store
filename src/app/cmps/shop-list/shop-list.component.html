@@ -1,1 +1,8 @@
-<p>shop-list works!</p>
+<section class="shop-list">
+    <product-preview
+      (remove)="remove.emit($event)"
+      *ngFor="let product of products"
+      [product]="product"
+    />
+  </section>
+  
