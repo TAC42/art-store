@@ -1,6 +1,15 @@
 <section class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
     <section appOutsideClick (outsideClick)="closeMenu()" class="aside-menu flex column">
         <div>
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <span class="logo-container flex row">
+                    <svg-render [svgName]="ocLogo"></svg-render>
+                    <p>Ori Carlin 2023</p>
+                </span>
+            </a>
+        </div>
+
+        <div>
             <a routerLink="/about" routerLinkActive="active">About</a>
         </div>
 

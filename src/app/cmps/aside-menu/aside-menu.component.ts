@@ -7,6 +7,7 @@ import { Component, ElementRef, HostListener } from '@angular/core'
 
 export class AsideMenuComponent {
   isMenuOpen: boolean = false
+  ocLogo: string = 'ocLogo'
 
   constructor(private elementRef: ElementRef) { }
 

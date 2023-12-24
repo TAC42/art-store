@@ -11,8 +11,50 @@
         background: $prmclr2;
         min-width: 275px;
         height: 100vh;
-        gap: 1em;
         z-index: 15;
-        padding: 1em;
+        padding: 0.5em 1em;
+
+        .logo-container {
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            svg-render {
+                width: 48px;
+                height: 48px;
+            }
+
+            p {
+                font-size: 21px;
+                line-height: 1.6;
+                align-self: center;
+                font-family: 'nh-bold';
+            }
+        }
+
+        div {
+            a {
+                font-size: 21px;
+                width: 100%;
+                display: inline-block;
+                transition: all 0.3s;
+                padding: 0.5em 0;
+
+                &.active {
+                    color: $scdclr1;
+                }
+
+                &:hover {
+                    color: $scdclr1;
+                    text-decoration: none;
+                }
+            }
+
+            &:not(:first-child) {
+                a {
+                    border-top: 1px solid $scdclr3;
+                }
+            }
+        }
     }
 }
