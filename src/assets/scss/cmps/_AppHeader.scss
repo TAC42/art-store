@@ -16,16 +16,25 @@
                 width: 100%;
                 align-items: center;
 
+                span {
+                    width: 48px;
+                    height: 48px;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    svg-render {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
                 a {
                     font-size: 18px;
                     line-height: 1.6;
                     transition: all 0.3s;
                     letter-spacing: 0.05em;
 
-                    span {
-                        width: 48px;
-                        height: 48px;
-                    }
 
                     &.active {
                         color: $scdclr1;

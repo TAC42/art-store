@@ -1,6 +1,10 @@
 <header class="header-contents layout-row">
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row">
+      <span class="flex">
+        <svg-render [svgName]="burgerMenuIcon"></svg-render>
+      </span>
+
       <div>
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <span class="flex">
@@ -8,6 +12,11 @@
           </span>
         </a>
       </div>
+
+      <span class="flex">
+        <svg-render [svgName]="searchIcon" style="width: 24px; height: 24px;">
+        </svg-render>
+      </span>
     </section>
   </section>
 
@@ -16,9 +25,11 @@
       <div>
         <a routerLink="/about" routerLinkActive="active">About</a>
       </div>
+
       <div>
         <a routerLink="/contact" routerLinkActive="active">Contact</a>
       </div>
+
       <div>
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <span class="flex">
@@ -26,9 +37,11 @@
           </span>
         </a>
       </div>
+
       <div>
         <a routerLink="/artworks" routerLinkActive="active">Artworks</a>
       </div>
+
       <div>
         <a routerLink="/shop" routerLinkActive="active">Shop</a>
       </div>

@@ -10,6 +10,8 @@ import { DeviceTypeService } from '../../services/device-type.service'
 export class HeaderComponent implements OnDestroy {
   title = 'Ori Art Store'
   ocLogo: string = 'ocLogo'
+  burgerMenuIcon: string = 'burgerMenuIcon'
+  searchIcon: string = 'searchIcon'
   deviceType: string = 'mini-tablet'
   private subscription: Subscription
 
