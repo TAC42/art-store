@@ -1,36 +1,40 @@
 .app-header {
-    font-family: 'nh-medium';
     background-color: $prmclr2;
     border-bottom: 1px solid $scdclr3;
 
     .header-contents {
-        align-items: center;
-        padding: .5em 1em;
-        gap: 1em;
 
-        .links {
-            justify-content: space-between;
+        .desktop-view,
+        .mobile-view {
             width: 100%;
             align-items: center;
+            padding: .5em 1em;
+            gap: 1em;
 
-            a {
-                font-size: 18px;
-                line-height: 1.6;
-                transition: all 0.3s;
-                letter-spacing: 0.05em;
+            .links {
+                justify-content: space-between;
+                width: 100%;
+                align-items: center;
 
-                span {
-                    width: 48px;
-                    height: 48px;
-                }
+                a {
+                    font-size: 18px;
+                    line-height: 1.6;
+                    transition: all 0.3s;
+                    letter-spacing: 0.05em;
 
-                &.active {
-                    color: $scdclr1;
-                }
+                    span {
+                        width: 48px;
+                        height: 48px;
+                    }
 
-                &:hover {
-                    color: $scdclr1;
-                    text-decoration: none;
+                    &.active {
+                        color: $scdclr1;
+                    }
+
+                    &:hover {
+                        color: $scdclr1;
+                        text-decoration: none;
+                    }
                 }
             }
         }

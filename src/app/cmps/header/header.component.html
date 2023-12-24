@@ -1,23 +1,37 @@
-<header class="header-contents layout-row flex row">
-  <section class="links flex row">
-    <div>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-    </div>
-    <div>
-      <a routerLink="/contact" routerLinkActive="active">Contact</a>
-    </div>
-    <div>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <span class="flex">
-          <svg-render [svgName]="ocLogo"></svg-render>
-        </span>
-      </a>
-    </div>
-    <div>
-      <a routerLink="/artworks" routerLinkActive="active">Artworks</a>
-    </div>
-    <div>
-      <a routerLink="/shop" routerLinkActive="active">Shop</a>
-    </div>
+<header class="header-contents layout-row">
+  <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
+    <section class="links flex row">
+      <div>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <span class="flex">
+            <svg-render [svgName]="ocLogo"></svg-render>
+          </span>
+        </a>
+      </div>
+    </section>
+  </section>
+
+  <section *ngIf="deviceType === 'tablet' || deviceType === 'desktop'" class="desktop-view flex row">
+    <section class="links flex row">
+      <div>
+        <a routerLink="/about" routerLinkActive="active">About</a>
+      </div>
+      <div>
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      </div>
+      <div>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <span class="flex">
+            <svg-render [svgName]="ocLogo"></svg-render>
+          </span>
+        </a>
+      </div>
+      <div>
+        <a routerLink="/artworks" routerLinkActive="active">Artworks</a>
+      </div>
+      <div>
+        <a routerLink="/shop" routerLinkActive="active">Shop</a>
+      </div>
+    </section>
   </section>
 </header>
