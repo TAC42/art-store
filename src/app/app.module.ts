@@ -10,6 +10,8 @@ import { HeaderComponent } from './cmps/header/header.component';
 import { AboutComponent } from './pages/about/about.component';
 import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-component';
 import { ShopComponent } from './pages/shop/shop.component';
+import { ShopListComponent } from './cmps/shop-list/shop-list.component';
+import { ProductComponent } from './pages/product/product.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ShopComponent } from './pages/shop/shop.component';
     AboutComponent,
     SvgRenderComponent,
     ShopComponent,
+    ShopListComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
