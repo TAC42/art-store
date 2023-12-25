@@ -4,7 +4,7 @@ import { Product } from '../../models/shop';
 import { ShopService } from '../../services/shop.service';
 
 @Component({
-  selector: 'app-shop',
+  selector: 'shop',
   templateUrl: './shop.component.html'
 })
 export class ShopComponent implements OnInit, OnDestroy {

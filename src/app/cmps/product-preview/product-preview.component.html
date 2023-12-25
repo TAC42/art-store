@@ -1,8 +1,11 @@
-<section class="product-preview">
-    <a routerLink="/{{ product.name }}">
-      <article class="prod-img"><img [src]="prodImg" [alt]="product.name" /></article>
-      <article class="name">{{ product.name }}</article>
-    </a>
-    <button (click)="onRemoveProduct()" class="remove-btn">X</button>
-  </section>
-  
+<a class="content" routerLink="/{{ product.name }}">
+  <article class="prod-img">
+    <img [src]="prodImg" [alt]="product.name" />
+  </article>
+  <div class="preview-body">
+    <article class="name">{{ product.name }}</article>
+    <article class="price">${{ product.price }}</article>
+  </div>
+
+  <button (click)="onRemoveProduct()" class="remove-btn"><svg-render svgName="trashIcon"></svg-render></button>
+</a>
