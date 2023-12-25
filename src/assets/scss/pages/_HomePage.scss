@@ -2,10 +2,11 @@ app-home {
     .home-page-contents {
         width: 100%;
         gap: 1em;
+        text-align: center;
+        margin-block-end: 1em;
 
         .introduction {
             position: relative;
-            text-align: center;
 
             img {
                 max-height: 450px;
@@ -17,10 +18,11 @@ app-home {
                 position: absolute;
                 top: 5%;
                 left: 0%;
-                color: $scdclr2;
+                color: $prmclr3;
                 width: 100%;
                 padding: 0 1em;
-                transition: all 0.3s;
+                transition: all 0.3s ease-in-out;
+                opacity: 0;
 
                 p {
                     font-size: 27px;
@@ -33,7 +35,7 @@ app-home {
                 }
 
                 .text-overlay {
-                    color: $prmclr3;
+                    opacity: 1;
                 }
             }
         }
@@ -43,7 +45,6 @@ app-home {
 
             .teaser-area {
                 gap: 0.5em;
-                text-align: center;
                 cursor: pointer;
                 height: fit-content;
                 padding: 0 1em 1em 1em;
@@ -72,6 +73,62 @@ app-home {
                     img {
                         filter: brightness(.9);
                     }
+                }
+            }
+        }
+
+        .gallery-carousel {
+            position: relative;
+
+            p {
+                color: $scdclr2;
+                font-size: 14px;
+                line-height: 1.6;
+                padding: 0 1em;
+            }
+
+            h2 {
+                color: $prmclr1;
+                font-size: 21px;
+                line-height: 1.6;
+                padding: 0 1em;
+            }
+
+            .carousel-container {
+                position: relative;
+                overflow: hidden;
+                max-height: 300px;
+            }
+
+            .carousel-slide {
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+
+                img {
+                    width: 100%;
+                    max-height: 300px;
+                    object-fit: cover;
+                }
+            }
+
+            button {
+                position: absolute;
+                top: 50%;
+                background-color: #fff;
+                border: none;
+                padding: 10px;
+                z-index: 100;
+                border-radius: 50%;
+
+                &:first-of-type {
+                    left: 10px;
+                }
+
+                &:last-of-type {
+                    right: 10px;
                 }
             }
         }
