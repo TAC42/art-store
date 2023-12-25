@@ -1,20 +1,79 @@
-@import "../setup/functions";
-@import "../setup/variables";
-
 app-home {
-    // :host(.full) {
-    //     grid-column: 1 / -1;
-    // }
-
     .home-page-contents {
         width: 100%;
-        padding: 1em;
-        justify-content: space-around;
+        gap: 1em;
 
-        h1 {
-            color: $prmclr1;
-            font-size: rem(30px);
-            font-weight: 700;
+        .introduction {
+            position: relative;
+            text-align: center;
+
+            img {
+                max-height: 450px;
+                width: 100%;
+                transition: all 0.3s;
+            }
+
+            .text-overlay {
+                position: absolute;
+                top: 5%;
+                left: 0%;
+                color: $scdclr2;
+                width: 100%;
+                padding: 0 1em;
+                transition: all 0.3s;
+
+                p {
+                    font-size: 27px;
+                }
+            }
+
+            &:hover {
+                img {
+                    filter: brightness(.75);
+                }
+
+                .text-overlay {
+                    color: $prmclr3;
+                }
+            }
+        }
+
+        .teasers {
+            grid-template-columns: 1fr 1fr;
+
+            .teaser-area {
+                gap: 0.5em;
+                text-align: center;
+                cursor: pointer;
+                height: fit-content;
+                padding: 0 1em 1em 1em;
+
+                p {
+                    color: $scdclr2;
+                    font-size: 14px;
+                    line-height: 1.6;
+                    padding: 0 1em;
+                }
+
+                h2 {
+                    color: $prmclr1;
+                    font-size: 21px;
+                    line-height: 1.6;
+                    padding: 0 1em;
+                }
+
+                img {
+                    transition: all 0.3s;
+                    margin-block-end: 1em;
+                    border-radius: 0.5em;
+                }
+
+                &:hover {
+                    img {
+                        filter: brightness(.9);
+                    }
+                }
+            }
         }
     }
 }
