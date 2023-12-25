@@ -2,9 +2,9 @@
 @import "../setup/variables";
 
 app-home {
-    :host(.full) {
-        grid-column: 1 / -1;
-    }
+    // :host(.full) {
+    //     grid-column: 1 / -1;
+    // }
 
     .home-page-contents {
         width: 100%;
