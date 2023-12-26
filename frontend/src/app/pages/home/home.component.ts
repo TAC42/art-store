@@ -1,10 +1,10 @@
-import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core';
-// import { Subscription, switchMap, take } from 'rxjs';
+import { Component, HostBinding } from '@angular/core'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
+
 export class HomeComponent {
   @HostBinding('class.full') fullClass = true
 
@@ -25,23 +25,4 @@ export class HomeComponent {
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/xgumpzx2inejeyjfhoem.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/sr7vuhhliiq6mnwnbdqv.png'
   ]
-  
-  currentFunctionIndex: number = 0;
-  currentShopIndex: number = 0;
-
-  nextFunction(): void {
-    if (this.currentFunctionIndex < this.functionImageUrls.length - 1) {
-      this.currentFunctionIndex++;
-    } else {
-      this.currentFunctionIndex = 0;
-    }
-  }
-
-  previousFunction(): void {
-    if (this.currentFunctionIndex > 0) {
-      this.currentFunctionIndex--;
-    } else {
-      this.currentFunctionIndex = this.functionImageUrls.length - 1;
-    }
-  }
 }
