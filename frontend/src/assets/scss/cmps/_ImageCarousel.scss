@@ -1,0 +1,51 @@
+app-image-carousel {
+    position: relative;
+
+    .carousel-container {
+        position: relative;
+        overflow: hidden;
+        max-height: 300px;
+
+        .carousel-slide {
+            position: relative;
+            display: none;
+
+            &.active {
+                display: block;
+            }
+
+            img {
+                width: 100%;
+                max-height: 300px;
+                object-fit: cover;
+            }
+        }
+
+    }
+
+    button {
+        position: absolute;
+        top: 50%;
+        background-color: #fff;
+        border: none;
+        padding: 0.5em;
+        z-index: 10;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+
+        &:first-of-type {
+            left: 10px;
+            transform: rotate(-180deg);
+        }
+
+        &:last-of-type {
+            right: 10px;
+        }
+
+        svg-render {
+            width: 24px;
+            height: 24px;
+        }
+    }
+}

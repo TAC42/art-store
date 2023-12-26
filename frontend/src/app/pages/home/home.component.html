@@ -24,26 +24,12 @@
   <section class="gallery-carousel flex column">
     <p>OUR FUNCTIONS</p>
     <h2>Where Creativity And Use Come Together</h2>
-    <div class="carousel-container">
-      <div class="carousel-slide" *ngFor="let imageUrl of functionImageUrls; let i = index"
-        [ngClass]="{'active': currentFunctionIndex === i}">
-        <img [src]="imageUrl" [alt]="'Function Art ' + (i + 1)">
-      </div>
-    </div>
-    <button (click)="previousFunction()">-</button>
-    <button (click)="nextFunction()">+</button>
+    <app-image-carousel [imageUrls]="functionImageUrls"></app-image-carousel>
   </section>
 
   <section class="gallery-carousel flex column">
     <p>OUR LATEST PRODUCTS</p>
     <h2>Available Now For You To Order!</h2>
-    <div class="carousel-container">
-      <div class="carousel-slide" *ngFor="let imageUrl of shopImageUrls; let i = index"
-        [ngClass]="{'active': currentFunctionIndex === i}">
-        <img [src]="imageUrl" [alt]="'Function Art ' + (i + 1)">
-      </div>
-    </div>
-    <button (click)="previousFunction()">-</button>
-    <button (click)="nextFunction()">+</button>
+    <app-image-carousel [imageUrls]="shopImageUrls"></app-image-carousel>
   </section>
 </main>

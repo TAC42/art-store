@@ -1,0 +1,12 @@
+<div class="carousel-container">
+    <div class="carousel-slide" *ngFor="let imageUrl of imageUrls; let i = index"
+        [ngClass]="{'active': currentIndex === i}">
+        <img [src]="imageUrl" [alt]="'Image ' + (i + 1)">
+    </div>
+</div>
+<button class="flex" (click)="previousImage()">
+    <svg-render [svgName]="arrowIcon"></svg-render>
+</button>
+<button class="flex" (click)="nextImage()">
+    <svg-render [svgName]="arrowIcon"></svg-render>
+</button>
