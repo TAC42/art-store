@@ -11,7 +11,7 @@ app-home {
             img {
                 max-height: 450px;
                 width: 100%;
-                transition: all 0.3s;
+                transition: all 0.5s ease;
             }
 
             .text-overlay {
@@ -31,7 +31,7 @@ app-home {
 
             &:hover {
                 img {
-                    filter: brightness(.75);
+                    filter: brightness(.65);
                 }
 
                 .text-overlay {
@@ -42,18 +42,20 @@ app-home {
 
         .teasers {
             grid-template-columns: 1fr 1fr;
+            padding: 0 1em 1em 1em;
+            gap: 1em;
 
             .teaser-area {
                 gap: 0.5em;
                 cursor: pointer;
                 height: fit-content;
-                padding: 0 1em 1em 1em;
 
                 p {
                     color: $scdclr2;
                     font-size: 14px;
                     line-height: 1.6;
                     padding: 0 1em;
+                    letter-spacing: 0.05em;
                 }
 
                 h2 {
@@ -64,14 +66,14 @@ app-home {
                 }
 
                 img {
-                    transition: all 0.3s;
+                    transition: all 0.5s ease;
                     margin-block-end: 1em;
                     border-radius: 0.5em;
                 }
 
                 &:hover {
                     img {
-                        filter: brightness(.9);
+                        filter: brightness(.85);
                     }
                 }
             }
@@ -79,12 +81,14 @@ app-home {
 
         .gallery-carousel {
             position: relative;
+            padding: 0 1em;
 
             p {
                 color: $scdclr2;
                 font-size: 14px;
                 line-height: 1.6;
                 padding: 0 1em;
+                letter-spacing: 0.05em;
             }
 
             h2 {
@@ -92,6 +96,7 @@ app-home {
                 font-size: 21px;
                 line-height: 1.6;
                 padding: 0 1em;
+                margin-block-end: 0.5em;
             }
         }
     }

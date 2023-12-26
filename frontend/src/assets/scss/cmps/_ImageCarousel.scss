@@ -4,28 +4,35 @@ app-image-carousel {
     .carousel-container {
         position: relative;
         overflow: hidden;
-        max-height: 300px;
+        width: 100%;
+        min-height: 400px;
+        border-radius: 0.5em;
 
         .carousel-slide {
-            position: relative;
-            display: none;
-
-            &.active {
-                display: block;
-            }
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-radius: 0.5em;
+            transition: transform 1s ease, opacity 1s ease;
 
             img {
                 width: 100%;
-                max-height: 300px;
+                max-height: 400px;
                 object-fit: cover;
+                transition: all 0.5s ease;
+                cursor: pointer;
+                border-radius: 0.5em;
             }
         }
-
     }
 
     button {
         position: absolute;
-        top: 50%;
+        top: 45%;
         background-color: #fff;
         border: none;
         padding: 0.5em;
@@ -33,19 +40,33 @@ app-image-carousel {
         border-radius: 50%;
         align-items: center;
         justify-content: center;
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+        transition: all 0.5s ease;
 
         &:first-of-type {
-            left: 10px;
+            left: 1.5em;
             transform: rotate(-180deg);
         }
 
         &:last-of-type {
-            right: 10px;
+            right: 1.5em;
         }
 
         svg-render {
             width: 24px;
             height: 24px;
+        }
+    }
+
+    &:hover {
+        img {
+            filter: brightness(.9);
+        }
+
+        button {
+            opacity: 1;
         }
     }
 }
