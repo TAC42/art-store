@@ -4,7 +4,9 @@
             <a (click)="closeMenu()" routerLink="/" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }">
                 <span class="logo-container flex row">
-                    <svg-render [svgName]="ocLogo"></svg-render>
+                    <span class="flex">
+                        <svg-render [svgName]="ocLogo"></svg-render>
+                    </span>
                     <p>Ori Carlin 2023</p>
                 </span>
             </a>
