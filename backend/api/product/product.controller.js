@@ -3,21 +3,14 @@ import { loggerService } from '../../services/logger.service.js'
 
 export async function getProducts(req, res) {
   try {
-    console.log(req.query)
-    let filterBy = {}
-    const { user } = req.query
+    const { search } = req.query
+    filterBy = { search }
 
-    if (user) filterBy = { user }
-
-    else {
-      const { search, cat, tag, time, level, min, max, page } = req.query
-      filterBy = { search, cat, tag, time, level, min, max, page }
-    }
     loggerService.debug('Getting Products', filterBy)
     const products = await productService.query(filterBy)
     res.json(products)
-  }
-  catch (err) {
+    
+  } catch (err) {
     loggerService.error('Failed to get products', err)
     res.status(500).send({ err: 'Failed to get products' })
   }
@@ -28,8 +21,7 @@ export async function getProductById(req, res) {
     const productId = req.params.id
     const product = await productService.getById(productId)
     res.json(product)
-  }
-  catch (err) {
+  } catch (err) {
     loggerService.error('Failed to get product', err)
     res.status(500).send({ err: 'Failed to get product' })
   }
@@ -41,8 +33,7 @@ export async function addProduct(req, res) {
     console.log('creating product: ', product)
     const addedProduct = await productService.save(product)
     res.json(addedProduct)
-  }
-  catch (err) {
+  } catch (err) {
     loggerService.error('Failed to add product', err)
     res.status(500).send({ err: 'Failed to add product' })
   }
@@ -51,11 +42,10 @@ export async function addProduct(req, res) {
 export async function updateProduct(req, res) {
   try {
     const product = req.body
-    console.log('updating product: ',product)
+    console.log('updating product: ', product)
     const updatedProduct = await productService.save(product)
     res.send(updatedProduct)
-  }
-  catch (err) {
+  } catch (err) {
     loggerService.error('Failed to update product', err)
     res.status(500).send({ err: 'Failed to update product' })
   }
@@ -66,8 +56,7 @@ export async function removeProduct(req, res) {
     const productId = req.params.id
     await productService.remove(productId)
     res.send()
-  }
-  catch (err) {
+  } catch (err) {
     loggerService.error('Failed to remove product', err)
     res.status(500).send({ err: 'Failed to remove product' })
   }
