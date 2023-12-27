@@ -6,6 +6,7 @@ app-image-carousel {
         overflow: hidden;
         width: 100%;
         min-height: 400px;
+        justify-content: center;
 
         .carousel-slide {
             position: absolute;
@@ -24,6 +25,35 @@ app-image-carousel {
                 object-fit: cover;
                 transition: all 0.5s ease;
                 cursor: pointer;
+            }
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 10px;
+            position: absolute;
+            align-items: center;
+            bottom: 1em;
+
+            .dot {
+                height: 10px;
+                width: 10px;
+                margin: 0 5px;
+                background-color: $scdclr2;
+                border-radius: 50%;
+                display: inline-block;
+                transition: all 0.5s ease;
+                cursor: pointer;
+
+                &.active {
+                    background: $prmclr3;
+                    height: 12px;
+                    width: 12px;
+                }
+
+                &:hover {
+                    background: $prmclr3;
+                }
             }
         }
     }

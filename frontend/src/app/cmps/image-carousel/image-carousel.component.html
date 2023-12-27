@@ -1,6 +1,11 @@
-<div class="carousel-container">
+<div class="carousel-container flex">
     <div class="carousel-slide" *ngFor="let imageUrl of imageUrls; let i = index" [ngStyle]="getSlideStyle(i)">
         <img [src]="imageUrl" [alt]="'Image ' + (i + 1)">
+    </div>
+
+    <div class="carousel-dots flex row">
+        <span *ngFor="let url of imageUrls; let i = index" class="dot" [ngClass]="{'active': currentIndex === i}"
+            (click)="currentIndex = i"></span>
     </div>
 </div>
 
