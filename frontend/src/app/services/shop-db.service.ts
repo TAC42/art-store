@@ -55,6 +55,10 @@ export class ShopDbService {
     return this.currentFilter
   }
 
+  static getDefaultFilterInstance(httpService: HttpService): ShopFilter {
+    const service = new ShopDbService(httpService)
+    return service.getDefaultFilter()
+  }
   escapeRegExp(string: string): string {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
