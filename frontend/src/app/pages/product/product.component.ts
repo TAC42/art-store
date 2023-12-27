@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, HostBinding } from '@angular/core'
 
 @Component({
   selector: 'app-product',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core'
 })
 
 export class ProductComponent {
-
+  @HostBinding('class.full') fullClass = true
+  @HostBinding('class.layout-row') layoutRowClass = true
 }

@@ -1,14 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, HostBinding } from '@angular/core'
 import { Observable, Subscription, of } from 'rxjs'
 import { Product } from '../../models/shop'
 import { ShopDbService } from '../../services/shop-db.service'
 
 @Component({
-  selector: 'shop',
+  selector: 'app-shop',
   templateUrl: './shop.component.html'
 })
 
 export class ShopComponent implements OnInit, OnDestroy {
+  @HostBinding('class.full') fullClass = true
+  @HostBinding('class.layout-row') layoutRowClass = true
+
   products$: Observable<Product[]> = of([])
   private subscription: Subscription = new Subscription()
 

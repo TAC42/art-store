@@ -3,6 +3,7 @@
 @import "setup/functions";
 @import "setup/mixins";
 @import "setup/typography";
+@import "setup/mq";
 
 // Basics
 @import "basics/base";
@@ -12,7 +13,7 @@
 @import "basics/animations";
 
 // Pages
-@import "pages/HomePage";
+@import "pages/Home";
 @import "pages/Shop";
 @import "pages/Product";
 
