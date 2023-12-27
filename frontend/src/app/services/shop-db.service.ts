@@ -11,6 +11,7 @@ const BASE_URL = 'product/'
 })
 
 export class ShopDbService {
+  private currentFilter: ShopFilter = this.getDefaultFilter()
 
   constructor(private httpService: HttpService) { }
 
@@ -43,27 +44,20 @@ export class ShopDbService {
     }
   }
 
-  setFilter(filter: any) {
-    this.setFilter(filter)
+  setFilter(filter: ShopFilter): void {
+    this.currentFilter = filter
+    // Optionally, trigger a new fetch here if that's the intended behavior
+    // For example, you might emit a new value on an Observable that 
+    // ShopComponent is subscribed to
+  }
+
+  getCurrentFilter(): ShopFilter {
+    return this.currentFilter
   }
 
   escapeRegExp(string: string): string {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }
-
-  // getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
-  //   const newFilterBy: ShopFilter = this.getDefaultFilter()
-  //   let isNewRefresh = false
-
-  //   for (const [key, value] of searchParams) {
-  //     newFilterBy[key as keyof ShopFilter] = value;
-  //     if (newFilterBy[key as keyof ShopFilter]) isNewRefresh = true
-  //   }
-
-  //   if (isNewRefresh) this.setFilter({ ...newFilterBy })
-
-  //   return newFilterBy
-  // }
 
   getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
     const newFilterBy: ShopFilter = this.getDefaultFilter()
@@ -80,3 +74,17 @@ export class ShopDbService {
     return newFilterBy
   }
 }
+
+// getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
+//   const newFilterBy: ShopFilter = this.getDefaultFilter()
+//   let isNewRefresh = false
+
+//   for (const [key, value] of searchParams) {
+//     newFilterBy[key as keyof ShopFilter] = value;
+//     if (newFilterBy[key as keyof ShopFilter]) isNewRefresh = true
+//   }
+
+//   if (isNewRefresh) this.setFilter({ ...newFilterBy })
+
+//   return newFilterBy
+// }

@@ -73,8 +73,6 @@ async function save(product) {
       const id = new ObjectId(product._id)
       delete productToSave._id
 
-      _convertIdsToObjectIds(productToSave)
-
       const response = await collection.updateOne({ _id: id }, { $set: productToSave })
       if (response.matchedCount === 0) {
         throw new Error(`Product with id ${id.toHexString()} was not found`)
@@ -83,8 +81,6 @@ async function save(product) {
 
       return { _id: id, ...productToSave }
     } else {
-      _convertIdsToObjectIds(productToSave)
-
       const response = await collection.insertOne(productToSave)
       _checkRedundantProductImages()
 
@@ -94,17 +90,6 @@ async function save(product) {
     loggerService.error(`cannot save product ${product._id}`, err)
     throw err
   }
-}
-
-function _convertIdsToObjectIds(productData) {
-  const fieldsToConvert = ['ownerId', 'likedByUsers', 'reviews']
-  fieldsToConvert.forEach(field => {
-    if (Array.isArray(productData[field])) {
-      productData[field] = productData[field].map(id => new ObjectId(id))
-    } else if (productData[field] && typeof productData[field] === 'string') {
-      productData[field] = new ObjectId(productData[field])
-    }
-  })
 }
 
 function _buildPipeline(filterBy) {

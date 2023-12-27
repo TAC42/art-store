@@ -19,7 +19,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   }
 
   loadProducts(): void {
-    this.products$ = this.shopDbService.query();
+    this.products$ = this.shopDbService.query()
   }
 
   onRemoveProduct(productId: string): void {
