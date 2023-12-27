@@ -6,7 +6,6 @@ app-image-carousel {
         overflow: hidden;
         width: 100%;
         min-height: 400px;
-        border-radius: 0.5em;
 
         .carousel-slide {
             position: absolute;
@@ -16,7 +15,6 @@ app-image-carousel {
             right: 0;
             top: 0;
             bottom: 0;
-            border-radius: 0.5em;
             transition: transform 1s ease, opacity 1s ease;
 
             img {
@@ -26,7 +24,6 @@ app-image-carousel {
                 object-fit: cover;
                 transition: all 0.5s ease;
                 cursor: pointer;
-                border-radius: 0.5em;
             }
         }
     }

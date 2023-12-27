@@ -2,7 +2,8 @@
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row">
       <span class="flex" (click)="onToggleAsideMenu($event)">
-        <svg-render [svgName]="burgerMenuIcon"></svg-render>
+        <svg-render [svgName]="burgerMenuIcon" style="width: 32px; height: 32px;">
+        </svg-render>
       </span>
 
       <div>
@@ -27,7 +28,7 @@
       </div>
 
       <div>
-        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        <a routerLink="/sculptures" routerLinkActive="active">Sculptures</a>
       </div>
 
       <div>
@@ -39,7 +40,7 @@
       </div>
 
       <div>
-        <a routerLink="/artworks" routerLinkActive="active">Artworks</a>
+        <a routerLink="/functions" routerLinkActive="active">Functions</a>
       </div>
 
       <div>
