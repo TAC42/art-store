@@ -4,12 +4,12 @@ import { loggerService } from '../../services/logger.service.js'
 export async function getProducts(req, res) {
   try {
     const { search } = req.query
-    filterBy = { search }
+    let filterBy = { search }
 
     loggerService.debug('Getting Products', filterBy)
     const products = await productService.query(filterBy)
     res.json(products)
-    
+
   } catch (err) {
     loggerService.error('Failed to get products', err)
     res.status(500).send({ err: 'Failed to get products' })

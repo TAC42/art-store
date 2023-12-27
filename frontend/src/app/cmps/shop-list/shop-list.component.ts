@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from '../../models/shop';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Product } from '../../models/shop'
 
 @Component({
   selector: 'shop-list',
@@ -12,5 +12,4 @@ export class ShopListComponent implements OnInit {
   ngOnInit(): void {
     console.log('this.products:', this.products)
   }
-
 }

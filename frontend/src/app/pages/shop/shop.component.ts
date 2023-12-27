@@ -1,34 +1,33 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { Observable, Subscription, take } from 'rxjs';
-import { Product } from '../../models/shop';
-import { ShopService } from '../../services/shop.service';
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Observable, Subscription, of } from 'rxjs'
+import { Product } from '../../models/shop'
+import { ShopDbService } from '../../services/shop-db.service'
 
 @Component({
   selector: 'shop',
   templateUrl: './shop.component.html'
 })
+
 export class ShopComponent implements OnInit, OnDestroy {
-  shopService = inject(ShopService)
-  subscription!: Subscription
-  products$!: Observable<Product[]>
-  prm = Promise.resolve(99)
+  products$: Observable<Product[]> = of([])
+  private subscription: Subscription = new Subscription()
+
+  constructor(private shopDbService: ShopDbService) { }
 
   ngOnInit(): void {
-    this.subscription = this.shopService.loadProducts()
-      .pipe(take(1))
-      .subscribe({
-        error: err => console.log('err:', err)
-      })
-
-    this.products$ = this.shopService.products$
+    this.loadProducts()
   }
 
+  loadProducts(): void {
+    this.products$ = this.shopDbService.query();
+  }
 
-  onRemoveProduct(shopId: string) {
-    this.shopService.deleteProduct(shopId)
-      .subscribe({
-        error: err => console.log('err:', err)
-      })
+  onRemoveProduct(productId: string): void {
+    const removeSubscription = this.shopDbService.remove(productId).subscribe({
+      next: () => this.loadProducts(),
+      error: err => console.error('Error removing product:', err)
+    })
+    this.subscription.add(removeSubscription)
   }
 
   ngOnDestroy(): void {
