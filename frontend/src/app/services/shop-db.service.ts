@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable, throwError } from 'rxjs'
-import { catchError } from 'rxjs/operators'
+import { Observable, throwError, catchError } from 'rxjs'
 import { HttpService } from './http.service'
 import { Product, ShopFilter } from '../models/shop'
 
@@ -33,7 +32,7 @@ export class ShopDbService {
   }
 
   save(product: Product): Observable<Product> {
-    if (product._id) {
+    if (product) {
       return this.httpService.put<Product>(`${BASE_URL}${product._id}`, product)
     } else return this.httpService.post<Product>(BASE_URL, product)
   }
