@@ -4,6 +4,7 @@ export interface Product {
   price: number
   description: string
   inStock: boolean
+  type: string
   createdAt: number
   _id: string
 }
