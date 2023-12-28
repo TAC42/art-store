@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
-import { productsLoaded } from './shop.actions'
+import { productsLoaded, loadProductByName } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
-import { ShopDbService } from '../services/shop-db.service'
 
 export interface ShopState {
   products: Product[]
@@ -12,7 +11,7 @@ export const initialState: ShopState = {
   products: [],
   filterBy: {
     search: '',
-  }
+  },
 }
 
 export const shopReducer = createReducer(
@@ -20,6 +19,11 @@ export const shopReducer = createReducer(
   on(productsLoaded, (state, { products }) => ({
     ...state,
     products: products,
+  })),
+  on(loadProductByName, (state, { name }) => ({
+    ...state,
+    // Return the product that matches the provided name
+    selectedProduct: state.products.find((product) => product.name === name) || null,
   })),
   // Other reducer logic for additional actions
 )

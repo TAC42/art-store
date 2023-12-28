@@ -1,11 +1,18 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store'
+import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { ShopState } from './shop.reducers'
 
-export const selectShopState = createFeatureSelector<ShopState>('shop')
+// Get the entire shop state slice
+export const selectShopState = createFeatureSelector<ShopState>('shop');
 
+// Get the products from the shop state
 export const selectProducts = createSelector(
   selectShopState,
   (state: ShopState) => state.products
 )
 
-// Other selectors for different parts of the state can be added here
+// Get a product by name from the products array
+export const selectProductByName = (name: string) =>
+  createSelector(
+    selectProducts,
+    (products) => products.find((product) => product.name === name)
+  )

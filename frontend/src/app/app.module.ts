@@ -17,7 +17,9 @@ import { AsideMenuComponent } from './cmps/aside-menu/aside-menu.component'
 import { OutsideClickDirective } from './directives/outside-click.directive'
 import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
 import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component';
-import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.component'
+import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.component';
+import { ProductDetailsComponent } from './cmps/product-details/product-details.component';
+import { ProductEditComponent } from './cmps/product-edit/product-edit.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.com
     ShopFilterComponent,
     ProductPreviewComponent,
     ImageCarouselComponent,
+    ProductDetailsComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
