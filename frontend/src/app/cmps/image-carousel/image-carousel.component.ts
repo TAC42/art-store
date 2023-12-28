@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core'
-import { interval, Subscription } from 'rxjs'
+import { interval, Subscription, BehaviorSubject } from 'rxjs'
+import { toSignal } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'app-image-carousel',
@@ -12,6 +13,9 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
   arrowIcon: string = 'arrowIcon'
   currentIndex: number = 0
   private autoSwitchSubscription: Subscription | null = null
+
+  private currentIndexSubject = new BehaviorSubject<number>(this.currentIndex)
+  currentIndexSignal = toSignal(this.currentIndexSubject.asObservable())
 
   ngOnInit() {
     if (this.autoSwitch) {
@@ -29,12 +33,15 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
 
   nextImage(): void {
     this.currentIndex = (this.currentIndex + 1) % this.imageUrls.length
+    this.currentIndexSubject.next(this.currentIndex)
   }
 
   previousImage(): void {
     if (this.currentIndex === 0) {
       this.currentIndex = this.imageUrls.length - 1
     } else this.currentIndex--
+
+    this.currentIndexSubject.next(this.currentIndex)
   }
 
   getSlideStyle(index: number): object {
