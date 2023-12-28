@@ -26,3 +26,17 @@ app-shop {
         padding: 1em 2em;
     }
 }
+
+app-home{
+    .home-page-contents{
+        .teasers{
+            @media(max-width: 600px) {
+                grid-template-columns: 1fr;
+            }
+        
+            @media(min-width: 601px) {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    }
+}

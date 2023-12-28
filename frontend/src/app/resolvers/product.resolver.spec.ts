@@ -1,17 +1,24 @@
-import { TestBed } from '@angular/core/testing';
-import { ResolveFn } from '@angular/router';
+import { TestBed } from '@angular/core/testing'
+import { ProductResolver } from './product.resolver'
+import { StoreModule } from '@ngrx/store'
+import { shopReducer } from '../store/shop.reducers'
 
-import { productResolver } from './product.resolver';
-
-describe('productResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
-      TestBed.runInInjectionContext(() => productResolver(...resolverParameters));
+describe('ProductResolver', () => {
+  let resolver: ProductResolver
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
+    TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot({ shop: shopReducer }),
+      ],
+      providers: [
+        ProductResolver,
+      ],
+    })
+    resolver = TestBed.inject(ProductResolver)
+  })
 
   it('should be created', () => {
-    expect(executeResolver).toBeTruthy();
-  });
-});
+    expect(resolver).toBeTruthy();
+  })
+})
