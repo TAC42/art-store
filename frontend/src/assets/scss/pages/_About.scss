@@ -1,0 +1,42 @@
+app-about {
+    width: 100%;
+
+    .about-page-contents {
+        width: 100%;
+        gap: 1em;
+        text-align: center;
+        margin-block-end: 1em;
+
+        .gallery-carousel {
+            position: relative;
+            padding: 1em 0 0 0;
+
+            app-image-carousel {
+                .carousel-container {
+                    .carousel-slide {
+                        img {
+                            cursor: default;
+                        }
+                    }
+                }
+
+                button {
+                    display: none;
+                }
+            }
+        }
+
+        .about-text {
+            text-align: left;
+            gap: 1em;
+            padding: 0 1em;
+
+            p {
+                color: $prmclr1;
+                font-family: 'sabon';
+                font-size: 18px;
+                line-height: 1.6;
+            }
+        }
+    }
+}

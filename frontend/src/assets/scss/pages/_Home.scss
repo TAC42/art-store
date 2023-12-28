@@ -1,4 +1,6 @@
 app-home {
+    width: 100%;
+
     .home-page-contents {
         width: 100%;
         gap: 1em;
@@ -41,7 +43,6 @@ app-home {
         }
 
         .teasers {
-            grid-template-columns: 1fr 1fr;
             padding: 0 1em 1em 1em;
             gap: 1em;
 
