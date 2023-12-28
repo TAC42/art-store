@@ -1,14 +1,31 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { interval, Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-image-carousel',
   templateUrl: './image-carousel.component.html',
 })
 
-export class ImageCarouselComponent {
+export class ImageCarouselComponent implements OnInit, OnDestroy {
   @Input() imageUrls: string[] = []
+  @Input() autoSwitch: boolean = false
   arrowIcon: string = 'arrowIcon'
   currentIndex: number = 0
+  private autoSwitchSubscription: Subscription | null = null
+
+  ngOnInit() {
+    if (this.autoSwitch) {
+      this.autoSwitchSubscription = interval(10000).subscribe(() => {
+        this.nextImage()
+      })
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.autoSwitchSubscription) {
+      this.autoSwitchSubscription.unsubscribe()
+    }
+  }
 
   nextImage(): void {
     this.currentIndex = (this.currentIndex + 1) % this.imageUrls.length
