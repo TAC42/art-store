@@ -5,16 +5,16 @@ import { AboutComponent } from './pages/about/about.component'
 import { IntroductionComponent } from './pages/introduction/introduction.component'
 import { ContactComponent } from './pages/contact/contact.component'
 import { ShopComponent } from './pages/shop/shop.component'
-import { ProductEditComponent } from './cmps/product-edit/product-edit.component'
-import { ProductDetailsComponent } from './cmps/product-details/product-details.component'
+import { ProductEditComponent } from './pages/product-edit/product-edit.component'
+import { ProductDetailsComponent } from './pages/product-details/product-details.component'
 import { ProductResolver } from './resolvers/product.resolver'
 
 const routes: Routes = [
   {
     path: 'shop', component: ShopComponent, children: [
-      { path: ':name', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
       { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
       { path: 'edit', component: ProductEditComponent },
+      { path: ':name', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
   {
