@@ -4,8 +4,8 @@
     </div>
 
     <div class="carousel-dots flex row">
-        <span *ngFor="let url of imageUrls; let i = index" class="dot" [ngClass]="{'active': currentIndex === i}"
-            (click)="currentIndex = i"></span>
+        <span *ngFor="let url of imageUrls; let i = index" class="dot"
+            [ngClass]="{'active': currentIndexSignal() === i}" (click)="goToSlide(i)"></span>
     </div>
 </div>
 
