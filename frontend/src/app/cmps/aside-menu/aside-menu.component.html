@@ -1,30 +1,30 @@
 <section class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
     <section appOutsideClick (outsideClick)="closeMenu()" [@slideInOut] class="aside-menu flex column">
-        <div>
+        <div class="logo-container flex row">
+            <h1>Carlin</h1>
+            <svg-render [svgName]="ocLogo" style="width: 32px; height: 32px;">
+            </svg-render>
+        </div>
+
+        <div class="link-area">
             <a (click)="closeMenu()" routerLink="/" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">
-                <span class="logo-container flex row">
-                    <span class="flex">
-                        <svg-render [svgName]="ocLogo"></svg-render>
-                    </span>
-                    <p>Ori Carlin 2023</p>
-                </span>
+                [routerLinkActiveOptions]="{ exact: true }">Home
             </a>
         </div>
 
-        <div>
+        <div class="link-area">
             <a (click)="closeMenu()" routerLink="/about" routerLinkActive="active">About & Contact</a>
         </div>
 
-        <div>
+        <div class="link-area">
             <a (click)="closeMenu()" routerLink="/sculptures" routerLinkActive="active">Sculptures</a>
         </div>
 
-        <div>
+        <div class="link-area">
             <a (click)="closeMenu()" routerLink="/artware" routerLinkActive="active">Artware</a>
         </div>
 
-        <div>
+        <div class="link-area">
             <a (click)="closeMenu()" routerLink="/shop" routerLinkActive="active">Shop</a>
         </div>
     </section>
