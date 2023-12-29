@@ -10,8 +10,7 @@ export const userService = {
   query,
   remove,
   save,
-  getById,
-  getByUsername,
+  getById
 }
 
 async function query(filterBy = {}) {
@@ -21,21 +20,9 @@ async function query(filterBy = {}) {
     const users = await collection.find(criteria).toArray()
     // console.log(users)
     return users
-  } 
+  }
   catch (err) {
     loggerService.error('cannot find users', err)
-    throw err
-  }
-}
-
-async function getByUsername(username) {
-  try {
-    const collection = await dbService.getCollection(USERS_COLLECTION)
-    const user = await collection.findOne({ username })
-    return user
-  } 
-  catch (err) {
-    logger.error(`while finding user by username: ${username}`, err)
     throw err
   }
 }
@@ -45,7 +32,7 @@ async function getById(userId) {
     const collection = await dbService.getCollection(USERS_COLLECTION)
     const user = collection.findOne({ _id: new ObjectId(userId) })
     return user
-  } 
+  }
   catch (err) {
     loggerService.error(`while finding user ${userId}`, err)
     throw err
@@ -60,7 +47,7 @@ async function remove(userId) {
       throw new Error(`User with id ${userId} was not found`)
     }
     return deletedCount
-  } 
+  }
   catch (err) {
     loggerService.error(`cannot remove user ${userId}`, err)
     throw err
@@ -84,7 +71,7 @@ async function save(user) {
         throw new Error(`User with id ${id} was not found`)
       }
       return { _id: id, ...userToSave }
-    } 
+    }
     catch (err) {
       loggerService.error(`cannot update user ${user._id}`, err)
       throw err
@@ -94,7 +81,7 @@ async function save(user) {
     try {
       const response = await collection.insertOne(user)
       return { ...user, _id: response.insertedId }
-    } 
+    }
     catch (err) {
       loggerService.error('cannot insert user', err)
       throw err
