@@ -4,6 +4,7 @@ import { selectProducts } from '../../store/shop.selectors'
 import { Product } from '../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-shop',
@@ -15,6 +16,7 @@ export class ShopComponent implements OnInit {
   @HostBinding('class.layout-row') layoutRowClass = true
 
   constructor(private store: Store<AppState>) { }
+  router = inject(Router)
   
   products$: Observable<Product[]> = this.store.select(selectProducts)
 

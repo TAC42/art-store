@@ -6,9 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/shop';
 
 @Component({
-  selector: 'product-details',
-  templateUrl: './product-details.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'product-details',
+    templateUrl: './product-details.component.html',
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 
@@ -32,43 +32,27 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     product$!: Observable<Product>
     msg = ''
 
+
     async ngOnInit(): Promise<void> {
-        this.product$ = this.route.data.pipe(map(data => data['product']))
+        this.product$ = this.route.data.pipe(
+            map(data => data['product']),
+            tap((product) => console.log('product in details: ', product))
+        );
+
+        this.product$.subscribe((product) => {
+            this.product = product;
+            // Do anything else with the product here
+            // For example, you might want to update the UI after getting the product details
+            this.msg = 'Welcome to Product Details!';
+            this.cd.markForCheck();
+        });
+
         setTimeout(() => {
-            this.msg = 'Welcome to Product Details!'
-            this.cd.markForCheck()
-            // this.cd.detectChanges()
-        }, 1500)
-        // this.zone.runOutsideAngular()
-        // this.pet$ = this.route.params.pipe(
-        //     switchMap(params => this.petService.getById(params['id']))
-        // )
-
-        // Ok'ish solution...
-        // this.route.params.subscribe(async params => {
-        //     const id = params['id']
-        //     const pet = await lastValueFrom(this.petService.getById(id))
-        //     console.log('pet:', pet)
-        // })
-
-        // VERY BAD, never subscribe inside a subscribe!
-        // this.route.params.subscribe(params => {
-        //     const id = params['id']
-        //     this.petService.getById(id).subscribe(pet => {
-        //         console.log('pet:', pet)
-        //     })
-        // })
-
-
-
-        // First Day
-        // this.pet$ = this.petService.getById(this.petId)
-
-        // this.petService.getById(this.petId)
-        //     .pipe(takeUntil(this.destroySubject$))
-        //     .subscribe(pet=>this.pet=pet)
-
-        // this.pet = await lastValueFrom(this.petService.getById(this.petId))
+            // Avoid using setTimeout to simulate loading data,
+            // Instead, handle the message and UI updates based on the subscription
+            this.msg = 'Welcome to Product Details!';
+            this.cd.markForCheck();
+        }, 1500);
     }
 
     // onShouldAdoptPet() {

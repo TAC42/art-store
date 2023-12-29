@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'shop', component: ShopComponent, children: [
       { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
       { path: 'edit', component: ProductEditComponent },
-      { path: ':name', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
+      { path: 'details/:name', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
   {
