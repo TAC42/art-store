@@ -37,7 +37,7 @@ export class AsideMenuComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    const clickedInside = this.elementRef.nativeElement.contains(event.target)
 
     if (!clickedInside) this.closeMenu()
   }
