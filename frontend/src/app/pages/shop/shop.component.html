@@ -1,3 +1,6 @@
 <h1>Shop Page</h1>
 <shop-filter />
+
+<loader></loader> <!-- Display loader component when products are loading -->
+
 <shop-list (remove)="onRemoveProduct($event)" [products]="products$ | async" />
