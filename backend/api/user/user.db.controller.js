@@ -1,17 +1,6 @@
 import { loggerService } from '../../services/logger.service.js'
 import { userService } from '../user/user.db.service.js'
 
-export async function getUser(req, res) {
-  try {
-    const user = await userService.getById(req.params.id)
-    res.send(user)
-  }
-  catch (err) {
-    loggerService.error('Failed to get user', err)
-    res.status(500).send({ err: 'Failed to get user' })
-  }
-}
-
 export async function getUsers(req, res) {
   try {
     const users = await userService.query(req.query)
@@ -20,6 +9,17 @@ export async function getUsers(req, res) {
   catch (err) {
     loggerService.error('Cannot get users', err)
     res.status(500).send({ err: 'Failed to get users' })
+  }
+}
+
+export async function getUser(req, res) {
+  try {
+    const user = await userService.getById(req.params.id)
+    res.send(user)
+  }
+  catch (err) {
+    loggerService.error('Failed to get user', err)
+    res.status(500).send({ err: 'Failed to get user' })
   }
 }
 

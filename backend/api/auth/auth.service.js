@@ -27,22 +27,7 @@ async function login(username, password) {
   // delete user.password
   return user
 }
-async function signup(
-  username,
-  password,
-  fullName,
-  imgUrl,
-  description = '',
-  level = 'New Seller',
-  rating = 0,
-  country = 'United States',
-  languages = [],
-  education = [],
-  skills = [],
-  lastDelivery = null,
-  balance = 0,
-  isAdmin = false
-) {
+async function signup(username, password, fullName, imgUrl, isAdmin = false) {
   console.log(`Attempting to signup user: ${username}`)
   const saltRounds = 10
 
@@ -51,22 +36,10 @@ async function signup(
   }
 
   const hash = await bcrypt.hash(password, saltRounds)
+
   return userService.save({
-    username,
-    password: hash,
-    fullName,
-    description,
-    balance,
-    level,
-    rating,
-    imgUrl,
-    country,
-    languages,
-    education,
-    skills,
-    createdAt: Date.now(),
-    lastDelivery,
-    isAdmin,
+    username, password: hash, fullName, imgUrl,
+    createdAt: Date.now(), isAdmin,
   })
 }
 
