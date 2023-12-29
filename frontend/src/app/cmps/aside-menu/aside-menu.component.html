@@ -1,5 +1,5 @@
 <section class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
-    <section appOutsideClick (outsideClick)="closeMenu()" [@slideInOut] class="aside-menu flex column">
+    <section (clickOutside)="closeMenu()" [@slideInOut] class="aside-menu flex column">
         <div class="logo-container flex row">
             <h1>Carlin</h1>
             <svg-render [svgName]="ocLogo" style="width: 32px; height: 32px;">

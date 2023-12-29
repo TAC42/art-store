@@ -16,7 +16,7 @@ import { ShopComponent } from './pages/shop/shop.component'
 import { ShopListComponent } from './cmps/shop-list/shop-list.component'
 import { ProductComponent } from './pages/product/product.component'
 import { AsideMenuComponent } from './cmps/aside-menu/aside-menu.component'
-import { OutsideClickDirective } from './directives/outside-click.directive'
+import { ClickOutsideDirective } from './directives/click-outside.directive'
 import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
 import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
 import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.component'
@@ -34,7 +34,7 @@ import { ProductEditComponent } from './cmps/product-edit/product-edit.component
     ShopListComponent,
     ProductComponent,
     AsideMenuComponent,
-    OutsideClickDirective,
+    ClickOutsideDirective,
     ShopFilterComponent,
     ProductPreviewComponent,
     ImageCarouselComponent,
