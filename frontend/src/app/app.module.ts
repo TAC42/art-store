@@ -25,6 +25,8 @@ import { ProductEditComponent } from './cmps/product-edit/product-edit.component
 import { reducers } from './store/shop.reducers'
 import { StoreModule } from '@ngrx/store';
 import { LoaderComponent } from './cmps/loader/loader.component'
+import { EffectsModule } from '@ngrx/effects'
+import { ShopEffects } from './store/shop.effects'
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { LoaderComponent } from './cmps/loader/loader.component'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers), 
+    EffectsModule.forRoot([ShopEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

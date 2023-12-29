@@ -10,9 +10,13 @@ export class ShopEffects {
     loadProducts$ = createEffect(() =>
         this.actions$.pipe(
             ofType(loadProducts),
-            mergeMap(() =>
-                this.shopDbService.query().pipe(
-                    map((products) => productsLoaded({ products })),
+            mergeMap(({ filterBy }) =>
+                this.shopDbService.query(filterBy).pipe( // Pass the filter to your query method
+                    map((products) => {
+                        console.log('products: ',products)
+                       return productsLoaded({ products })
+                    }
+                    ),
                 )
             )
         )

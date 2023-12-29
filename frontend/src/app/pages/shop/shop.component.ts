@@ -1,29 +1,28 @@
-import { Component, OnDestroy, OnInit, HostBinding } from '@angular/core'
+import { Component, OnDestroy, OnInit, HostBinding, inject } from '@angular/core'
 import { Observable, Subscription, of } from 'rxjs'
+import { selectProducts } from '../../store/shop.selectors'
 import { Product } from '../../models/shop'
-import { ShopDbService } from '../../services/shop-db.service'
+import { Store } from '@ngrx/store'
+import { AppState } from '../../store/app.state'
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html'
 })
 
-export class ShopComponent implements OnInit, OnDestroy {
+export class ShopComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
 
-  products$: Observable<Product[]> = of([])
-  private subscription: Subscription = new Subscription()
+  constructor(private store: Store<AppState>) { }
+  
+  products$: Observable<Product[]> = this.store.select(selectProducts)
 
-  constructor(private shopDbService: ShopDbService) { }
-
+  
   ngOnInit(): void {
-    this.loadProducts()
+    this.store.dispatch({ type: '[Shop] Load Products' })
   }
-
-  loadProducts(): void {
-    this.products$ = this.shopDbService.query()
-  }
+  
 
   onRemoveProduct(productId: string): void {
     // const removeSubscription = this.shopDbService.remove(productId).subscribe({
@@ -33,7 +32,4 @@ export class ShopComponent implements OnInit, OnDestroy {
     // this.subscription.add(removeSubscription)
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe()
-  }
 }
