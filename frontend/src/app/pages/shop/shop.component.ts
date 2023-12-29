@@ -26,11 +26,11 @@ export class ShopComponent implements OnInit, OnDestroy {
   }
 
   onRemoveProduct(productId: string): void {
-    const removeSubscription = this.shopDbService.remove(productId).subscribe({
-      next: () => this.loadProducts(),
-      error: err => console.error('Error removing product:', err)
-    })
-    this.subscription.add(removeSubscription)
+    // const removeSubscription = this.shopDbService.remove(productId).subscribe({
+    //   next: () => this.loadProducts(),
+    //   error: err => console.error('Error removing product:', err)
+    // })
+    // this.subscription.add(removeSubscription)
   }
 
   ngOnDestroy(): void {

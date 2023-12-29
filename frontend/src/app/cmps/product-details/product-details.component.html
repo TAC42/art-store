@@ -1,1 +1,9 @@
-<p>product-details works!</p>
+<section *ngIf="product$|async as product" class="product-details">
+    <h1 *ngIf="msg">{{msg}}</h1>
+    <img src={{product.imgUrl}} />
+    <p> {{product.name}}</p>
+    <p> {{product.description}}</p>
+    <section class="actions">
+        <button (click)="onBack()" class="back-btn">Back</button>
+    </section>
+</section>
