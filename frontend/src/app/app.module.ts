@@ -22,6 +22,9 @@ import { ProductPreviewComponent } from './cmps/product-preview/product-preview.
 import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.component'
 import { ProductDetailsComponent } from './cmps/product-details/product-details.component'
 import { ProductEditComponent } from './cmps/product-edit/product-edit.component'
+import { reducers } from './store/shop.reducers'
+import { StoreModule } from '@ngrx/store';
+import { LoaderComponent } from './cmps/loader/loader.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { ProductEditComponent } from './cmps/product-edit/product-edit.component
     ImageCarouselComponent,
     ProductDetailsComponent,
     ProductEditComponent,
+    LoaderComponent,
     ContactComponent,
     IntroductionComponent,
   ],
@@ -49,7 +53,8 @@ import { ProductEditComponent } from './cmps/product-edit/product-edit.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot(reducers), 
   ],
   providers: [],
   bootstrap: [AppComponent]

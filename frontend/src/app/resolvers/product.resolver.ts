@@ -28,7 +28,10 @@ export class ProductResolver implements Resolve<Product | null> {
     return this.store.select(selectProductByName(name)).pipe(
       filter(product => !!product), // Filter to wait for the product to be available
       delay(500), // Introduce a delay of 500ms
-      tap(() => this.loaderService.setIsLoading(false)), // Set loading state to false
+      tap((product) => {
+        this.loaderService.setIsLoading(false)
+        console.log('product in resolver: ', product)
+      }), // Set loading state to false
       map(product => product || null), // Map undefined values to null
       take(1) // Take one emitted value and complete the resolver
     )
