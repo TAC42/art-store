@@ -1,19 +1,7 @@
 <main class="about-page-contents flex column">
-    <section class="gallery-carousel flex column">
-        <app-image-carousel [imageUrls]="functionImageUrls" [autoSwitch]="true" />
-    </section>
-
-    <section class="about-text flex column">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni repudiandae explicabo quasi cum temporibus
-            dolor dolorum, autem minus corrupti? Quis eos nesciunt vel dolorem? Corrupti consequuntur minima error et
-            nam!</p>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni repudiandae explicabo quasi cum temporibus
-            dolor dolorum, autem minus corrupti? Quis eos nesciunt vel dolorem? Corrupti consequuntur minima error et
-            nam!</p>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni repudiandae explicabo quasi cum temporibus
-            dolor dolorum, autem minus corrupti? Quis eos nesciunt vel dolorem? Corrupti consequuntur minima error et
-            nam!</p>
-    </section>
+    <div class="about-nav flex row">
+        <a routerLink="/about/introduction" routerLinkActive="active" class="nav-button">Introduction</a>
+        <a routerLink="/about/contact" routerLinkActive="active" class="nav-button">Contact</a>
+    </div>
+    <router-outlet></router-outlet>
 </main>
