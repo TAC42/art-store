@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, HostBinding } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
@@ -7,6 +7,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 
 export class ContactComponent {
+  @HostBinding('class.full') fullClass = true
+  @HostBinding('class.layout-row') layoutRowClass = true
+
+  paperPlaneIcon: string = 'paperPlaneIcon'
+  personIcon: string = 'personIcon'
+  emailIcon: string = 'emailIcon'
+  titleIcon: string = 'titleIcon'
+  descriptionIcon: string = 'descriptionIcon'
+
   loneImg: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703511845/Gallery/Function/zhyc1jbekytmh92gjdea.png'
 
   contactForm: FormGroup

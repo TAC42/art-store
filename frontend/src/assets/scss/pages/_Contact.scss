@@ -8,7 +8,6 @@ app-contact {
         margin-block-end: 1em;
 
         img {
-            max-width: 600px;
             max-height: 400px;
             object-fit: cover;
         }
@@ -31,41 +30,84 @@ app-contact {
             padding: 1em;
             align-items: center;
             max-width: 600px;
-            background: $scdclr4;
+            background: linear-gradient(to bottom, $prmclr3, $scdclr3, $scdclr4, $scdclr5, $scdclr2);
 
-            input,
-            textarea {
-                text-align: left;
-                padding: 0.5em 0.75em;
+            .input-area {
                 width: 100%;
-                transition: all 0.3s;
-                border-radius: 0.5em;
-                border: 1px solid $scdclr3;
-                color: $prmclr1;
-                font-family: 'nh-medium';
+                text-align: left;
+                gap: 0.25em;
+                font-size: 18px;
 
-                &:focus {
-                    border: 1px solid $prmclr1;
-                    outline: none;
+                label {
+                    padding: 0 0.5em;
+                    gap: 0.5em;
+                    align-items: center;
+
+                    span {
+                        line-height: 1.6;
+                        color: $prmclr1;
+                        letter-spacing: 0.025em;
+                    }
+                }
+
+                input,
+                textarea {
+                    padding: 0.5em;
+                    width: 100%;
+                    transition: all 0.3s;
+                    border-radius: 0.5em;
+                    border: 1px solid $scdclr4;
+                    color: $prmclr1;
+                    font-family: 'nh-medium';
+                    font-size: 16px;
+                    line-height: 1.6;
+
+                    &:focus {
+                        border: 1px solid $prmclr1;
+                        outline: none;
+                    }
+                }
+
+                textarea {
+                    resize: none;
+                    min-height: 100px;
                 }
             }
 
-            textarea {
-                resize: none;
-                min-height: 100px;
-            }
+            .form-actions {
+                width: 100%;
+                justify-content: space-between;
+                padding: 0 0.5em;
 
-            button {
-                width: fit-content;
-                padding: 0.5em 1em;
-                transition: all 0.5s;
-                background: $prmclr2;
-                font-family: 'nh-bold';
-                border-radius: 0.5em;
+                button {
+                    padding: 0.5em 1.5em;
+                    transition: all 0.5s;
+                    background: $prmclr2;
+                    border-radius: 0.5em;
+                    align-items: center;
+                    gap: 0.75em;
 
-                &:hover {
-                    background: $mnrclr1;
-                    color: $prmclr3;
+                    span {
+                        font-size: 19px;
+                        line-height: 1.6;
+                        font-family: 'nh-bold';
+                    }
+
+                    svg {
+                        transition: all 0.5s;
+                        fill: $prmclr1;
+                        transform: rotate(45deg);
+                    }
+
+                    &:hover {
+                        background: $mnrclr1;
+                        color: $prmclr3;
+
+                        svg {
+                            fill: $prmclr3;
+                            transform: rotate(0deg);
+                        }
+                    }
                 }
             }
         }
