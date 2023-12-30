@@ -1,6 +1,16 @@
 <main class="contact-page-contents flex column">
+    <img [src]="loneImg" alt="Contact">
+
     <section class="contact-text flex column">
-        <p>Got a request or a question, I'll be glad to answer them for you!</p>
+        <p>Got an art request or a question, I'll be glad to answer them for you!</p>
         <p>If you're interested, please contact me using the form below:</p>
     </section>
+
+    <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="name" placeholder="Handsome Person...">
+        <input type="email" formControlName="email" placeholder="you@gmail.com...">
+        <input type="text" formControlName="title" placeholder="Dormammu ...">
+        <textarea formControlName="message" placeholder="i've come to bargain..."></textarea>
+        <button type="submit">Send</button>
+    </form>
 </main>

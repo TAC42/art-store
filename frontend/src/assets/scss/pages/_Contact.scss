@@ -7,6 +7,12 @@ app-contact {
         text-align: center;
         margin-block-end: 1em;
 
+        img {
+            max-width: 600px;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
         .contact-text {
             text-align: left;
             gap: 1em;
@@ -17,6 +23,50 @@ app-contact {
                 font-family: 'sabon';
                 font-size: 18px;
                 line-height: 1.6;
+            }
+        }
+
+        form {
+            gap: 1em;
+            padding: 1em;
+            align-items: center;
+            max-width: 600px;
+            background: $scdclr4;
+
+            input,
+            textarea {
+                text-align: left;
+                padding: 0.5em 0.75em;
+                width: 100%;
+                transition: all 0.3s;
+                border-radius: 0.5em;
+                border: 1px solid $scdclr3;
+                color: $prmclr1;
+                font-family: 'nh-medium';
+
+                &:focus {
+                    border: 1px solid $prmclr1;
+                    outline: none;
+                }
+            }
+
+            textarea {
+                resize: none;
+                min-height: 100px;
+            }
+
+            button {
+                width: fit-content;
+                padding: 0.5em 1em;
+                transition: all 0.5s;
+                background: $prmclr2;
+                font-family: 'nh-bold';
+                border-radius: 0.5em;
+
+                &:hover {
+                    background: $mnrclr1;
+                    color: $prmclr3;
+                }
             }
         }
     }
