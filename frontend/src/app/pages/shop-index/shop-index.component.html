@@ -1,0 +1,6 @@
+<loader></loader>
+<shop-filter />
+<shop-list
+  (remove)="onRemoveProduct($event)"
+  [products]="products$ | async"
+></shop-list>

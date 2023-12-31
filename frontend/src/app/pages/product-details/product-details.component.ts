@@ -69,7 +69,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     // }
 
     onBack() {
-        this.router.navigateByUrl('/')
+        this.router.navigateByUrl('/shop')
         // this.router.navigate(['/'], { queryParams: { name: 'JJojo', age: 30 } })
     }
 

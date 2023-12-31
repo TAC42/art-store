@@ -8,6 +8,7 @@ import { ShopComponent } from './pages/shop/shop.component'
 import { ProductEditComponent } from './pages/product-edit/product-edit.component'
 import { ProductDetailsComponent } from './pages/product-details/product-details.component'
 import { ProductResolver } from './resolvers/product.resolver'
+import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
       { path: 'edit', component: ProductEditComponent },
       { path: 'details/:name', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
+      { path: '', component: ShopIndexComponent }
     ]
   },
   {

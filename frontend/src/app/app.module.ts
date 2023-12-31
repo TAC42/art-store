@@ -14,7 +14,6 @@ import { IntroductionComponent } from './pages/introduction/introduction.compone
 import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-component'
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShopListComponent } from './cmps/shop-list/shop-list.component'
-import { ProductComponent } from './pages/product/product.component'
 import { AsideMenuComponent } from './cmps/aside-menu/aside-menu.component'
 import { ClickOutsideDirective } from './directives/click-outside.directive'
 import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
@@ -26,7 +25,8 @@ import { reducers } from './store/shop.reducers'
 import { StoreModule } from '@ngrx/store';
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { EffectsModule } from '@ngrx/effects'
-import { ShopEffects } from './store/shop.effects'
+import { ShopEffects } from './store/shop.effects';
+import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +37,6 @@ import { ShopEffects } from './store/shop.effects'
     SvgRenderComponent,
     ShopComponent,
     ShopListComponent,
-    ProductComponent,
     AsideMenuComponent,
     ClickOutsideDirective,
     ShopFilterComponent,
@@ -48,6 +47,7 @@ import { ShopEffects } from './store/shop.effects'
     LoaderComponent,
     ContactComponent,
     IntroductionComponent,
+    ShopIndexComponent,
   ],
   imports: [
     BrowserModule,

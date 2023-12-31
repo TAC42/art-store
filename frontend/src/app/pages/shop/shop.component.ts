@@ -11,27 +11,8 @@ import { Router } from '@angular/router'
   templateUrl: './shop.component.html'
 })
 
-export class ShopComponent implements OnInit {
+export class ShopComponent  {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
-
-  constructor(private store: Store<AppState>) { }
-  router = inject(Router)
-  
-  products$: Observable<Product[]> = this.store.select(selectProducts)
-
-  
-  ngOnInit(): void {
-    this.store.dispatch({ type: '[Shop] Load Products' })
-  }
-  
-
-  onRemoveProduct(productId: string): void {
-    // const removeSubscription = this.shopDbService.remove(productId).subscribe({
-    //   next: () => this.loadProducts(),
-    //   error: err => console.error('Error removing product:', err)
-    // })
-    // this.subscription.add(removeSubscription)
-  }
 
 }
