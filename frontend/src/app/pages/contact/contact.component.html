@@ -4,41 +4,50 @@
     <section class="contact-text flex column">
         <p>Got an art request or a question, I'll be glad to answer them for you!</p>
         <p>If you're interested, please contact me using the form below:</p>
+        <p>*Reply time can vary, between 1 to 3 business days*</p>
     </section>
 
-    <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-        <div class="input-area flex column">
+    <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+        <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
             <label for="name" class="flex row">
-                <svg-render [svgName]="personIcon" style="width: 24px; height: 24px;">
-                </svg-render>
-                <span>Name</span>
+                <div class="label-info flex row">
+                    <svg-render [svgName]="personIcon" style="width: 24px; height: 24px;"></svg-render>
+                    <span>Name*</span>
+                </div>
+                <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
             </label>
             <input id="name" type="text" formControlName="name" placeholder="Handsome Person...">
         </div>
 
-        <div class="input-area flex column">
+        <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
             <label for="email" class="flex row">
-                <svg-render [svgName]="emailIcon" style="width: 24px; height: 24px;">
-                </svg-render>
-                <span>Email</span>
+                <div class="label-info flex row">
+                    <svg-render [svgName]="emailIcon" style="width: 24px; height: 24px;"></svg-render>
+                    <span>Email*</span>
+                </div>
+                <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
             </label>
             <input id="email" type="email" formControlName="email" placeholder="you@gmail.com...">
         </div>
 
-        <div class="input-area flex column">
+        <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
             <label for="title" class="flex row">
-                <svg-render [svgName]="titleIcon" style="width: 24px; height: 24px;">
-                </svg-render>
-                <span>Title</span>
+                <div class="label-info flex row">
+                    <svg-render [svgName]="titleIcon" style="width: 24px; height: 24px;"></svg-render>
+                    <span>Title*</span>
+                </div>
+                <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
             </label>
             <input id="title" type="text" formControlName="title" placeholder="Dormammu ...">
         </div>
 
-        <div class="input-area flex column">
+        <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
             <label for="message" class="flex row">
-                <svg-render [svgName]="descriptionIcon" style="width: 24px; height: 24px;">
-                </svg-render>
-                <span>Description</span>
+                <div class="label-info flex row">
+                    <svg-render [svgName]="descriptionIcon" style="width: 24px; height: 24px;"></svg-render>
+                    <span>Description*</span>
+                </div>
+                <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
             </label>
             <textarea id="message" formControlName="message" placeholder="I've come to bargain..."></textarea>
         </div>
