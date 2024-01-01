@@ -1,37 +1,31 @@
-import { Component, OnInit } from '@angular/core'
-import { Subject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs'
-import { ShopDbService } from '../../services/shop-db.service'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'shop-filter',
   templateUrl: './shop-filter.component.html'
 })
-export class ShopFilterComponent implements OnInit {
-  private subscription!: Subscription
+export class ShopFilterComponent {
+ @Input() filterBy!: ShopFilter;
+ @Output() onSetFilter = new EventEmitter<string>();
 
-  filterBy: ShopFilter = this.shopDbService.getDefaultFilter()
-  filterSubject$ = new Subject<string>()
 
-  constructor(private shopDbService: ShopDbService) { }
+ private filterSubject: Subject<string> = new Subject<string>();
 
-  ngOnInit(): void {
-    this.filterSubject$
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged()
-      )
-      .subscribe(filterValue => {
-        const newFilter = { ...this.filterBy, search: filterValue }
-        this.shopDbService.setFilter(newFilter)
-      })
-  }
+ constructor() {
+   this.filterSubject
+     .pipe(
+       debounceTime(500), 
+       distinctUntilChanged()
+     )
+     .subscribe((value: string) => {
+       console.log('Value: ',value)
+       this.onSetFilter.emit(value)
+     })
+ }
 
-  onSetFilter(val: string): void {
-    this.filterSubject$.next(val)
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe()
-  }
+ onFilterChange(value: string): void {
+   this.filterSubject.next(value)
+ }
 }

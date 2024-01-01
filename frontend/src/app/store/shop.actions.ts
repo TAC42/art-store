@@ -12,3 +12,12 @@ export const loadProductByName = createAction(
   '[Shop] Load Product By Name',
   props<{ name: string }>()
 )
+
+export const filterUpdated = createAction(
+  '[Shop] Filter Updated',
+  props<{ updatedFilter: Partial<ShopFilter> }>() 
+)
+
+export const loadFilter = createAction(
+  '[Shop] Load Filter'
+)

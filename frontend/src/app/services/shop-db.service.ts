@@ -15,6 +15,7 @@ export class ShopDbService {
   constructor(private httpService: HttpService) { }
 
   query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
+    console.log('filterBy in Query ',filterBy)
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError((error) => {
         console.error('Error querying products:', error)
