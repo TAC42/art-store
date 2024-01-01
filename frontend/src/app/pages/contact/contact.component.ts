@@ -1,5 +1,6 @@
 import { Component, HostBinding } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { UtilityService } from '../../services/utility.service'
 
 @Component({
   selector: 'app-contact',
@@ -20,7 +21,7 @@ export class ContactComponent {
 
   contactForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private utilityService: UtilityService) {
     this.contactForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -31,8 +32,17 @@ export class ContactComponent {
 
   onSubmit() {
     if (this.contactForm.valid) {
-      // Code to handle form submission, like sending an email
-      console.log(this.contactForm.value)
+      this.utilityService.sendMail(this.contactForm.value).subscribe({
+        next: (response) => {
+          console.log(response)
+          Object.keys(this.contactForm.controls).forEach(key => {
+            this.contactForm.controls[key].reset()
+          })
+        },
+        error: (error) => {
+          console.error(error)
+        }
+      })
     }
   }
 }
