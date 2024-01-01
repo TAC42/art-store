@@ -1,5 +1,8 @@
 <loader></loader>
-<shop-filter />
+<shop-filter
+  [filterBy]="filterBy"
+  (onSetFilter)="onSetFilter($event)"
+/>
 <shop-list
   (remove)="onRemoveProduct($event)"
   [products]="products$ | async"

@@ -16,3 +16,8 @@ export const selectProductByName = (name: string) =>
     selectProducts,
     (products) => products.find((product) => product.name === name)
   )
+
+export const selectFilterBy = createSelector(
+  selectShopState,
+  (state: ShopState) => state.filterBy 
+)

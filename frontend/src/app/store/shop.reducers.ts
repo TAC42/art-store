@@ -1,5 +1,5 @@
 import { ActionReducerMap, createReducer, on } from '@ngrx/store'
-import { productsLoaded, loadProductByName } from './shop.actions'
+import { productsLoaded, loadProductByName ,filterUpdated, loadFilter} from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
 import { AppState } from './app.state'
 
@@ -26,7 +26,13 @@ export const shopReducer = createReducer(
     // Return the product that matches the provided name
     selectedProduct: state.products.find((product) => product.name === name) || null,
   })),
-  // Other reducer logic for additional actions
+  on(filterUpdated, (state, { updatedFilter }) => ({
+    ...state,
+    filterBy: { ...state.filterBy, ...updatedFilter },
+  })),
+  on(loadFilter, (state) => ({
+    ...state, filterBy: {search:'',}
+  })),
 )
 
 // Combine all reducers into one object

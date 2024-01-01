@@ -99,52 +99,52 @@ function _buildPipeline(filterBy) {
     $match: {},
   }
   console.log('FILTERBY: ', filterBy)
-  const { search, cat, level, min, max, tag, time } = filterBy
+  const { search} = filterBy
 
   if (search) {
     criteria.$match.$or = [
-      { title: { $regex: search, $options: 'i' } },
+      { name: { $regex: search, $options: 'i' } },
       { description: { $regex: search, $options: 'i' } },
     ]
   }
 
-  if (cat) {
-    criteria.$match.category = { $regex: cat, $options: 'i' }
-  }
+  // if (cat) {
+  //   criteria.$match.category = { $regex: cat, $options: 'i' }
+  // }
 
-  criteria.$match.price = {}
+  // criteria.$match.price = {}
 
-  if (min) {
-    criteria.$match.price.$gte = parseInt(min)
-  } else criteria.$match.price.$gte = parseInt(0)
+  // if (min) {
+  //   criteria.$match.price.$gte = parseInt(min)
+  // } else criteria.$match.price.$gte = parseInt(0)
 
-  if (max) {
-    criteria.$match.price.$lte = parseInt(max)
-  } else criteria.$match.price.$lte = parseInt(10000)
+  // if (max) {
+  //   criteria.$match.price.$lte = parseInt(max)
+  // } else criteria.$match.price.$lte = parseInt(10000)
 
-  if (tag) {
-    criteria.$match.tags = { $regex: tag, $options: 'i' }
-  }
+  // if (tag) {
+  //   criteria.$match.tags = { $regex: tag, $options: 'i' }
+  // }
 
-  if (time) {
-    criteria.$match.daysToMake = { $regex: time, $options: 'i' }
-  }
+  // if (time) {
+  //   criteria.$match.daysToMake = { $regex: time, $options: 'i' }
+  // }
 
-  if (level) {
-    pipeline.push({
-      $lookup: {
-        from: 'user',
-        localField: 'ownerId',
-        foreignField: '_id',
-        as: 'userDetails',
-      },
-    })
-    pipeline.push({
-      $match: {
-        'userDetails.level': { $regex: level, $options: 'i' },
-      },
-    })
-  }
+  // if (level) {
+  //   pipeline.push({
+  //     $lookup: {
+  //       from: 'user',
+  //       localField: 'ownerId',
+  //       foreignField: '_id',
+  //       as: 'userDetails',
+  //     },
+  //   })
+  //   pipeline.push({
+  //     $match: {
+  //       'userDetails.level': { $regex: level, $options: 'i' },
+  //     },
+  //   })
+  // }
 
   if (Object.keys(criteria.$match).length > 0) {
     pipeline.push(criteria)
