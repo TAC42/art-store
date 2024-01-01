@@ -18,6 +18,4 @@ export const filterUpdated = createAction(
   props<{ updatedFilter: Partial<ShopFilter> }>() 
 )
 
-export const loadFilter = createAction(
-  '[Shop] Load Filter'
-)
+export const loadFilter = createAction('[Shop] Load Filter')

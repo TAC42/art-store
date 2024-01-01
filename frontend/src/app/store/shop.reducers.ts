@@ -10,9 +10,7 @@ export interface ShopState {
 
 export const initialState: ShopState = {
   products: [],
-  filterBy: {
-    search: '',
-  },
+  filterBy: {search: ''},
 }
 
 export const shopReducer = createReducer(
@@ -23,7 +21,6 @@ export const shopReducer = createReducer(
   })),
   on(loadProductByName, (state, { name }) => ({
     ...state,
-    // Return the product that matches the provided name
     selectedProduct: state.products.find((product) => product.name === name) || null,
   })),
   on(filterUpdated, (state, { updatedFilter }) => ({
@@ -35,8 +32,6 @@ export const shopReducer = createReducer(
   })),
 )
 
-// Combine all reducers into one object
 export const reducers: ActionReducerMap<AppState> = {
   shop: shopReducer,
-  // ... other reducers if present
-};
+}

@@ -39,6 +39,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   onOpenSearch() {
+    console.log('inside ONOPENSEARCH')
     this.searchState = !this.searchState
     if (!this.searchState && this.searchValue) {
       const updatedFilter: Partial<ShopFilter> = { search: this.searchValue }
