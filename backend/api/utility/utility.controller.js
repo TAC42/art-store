@@ -7,6 +7,7 @@ export async function sendMail(req, res) {
 
     try {
         await utilityService.sendMail(name, email, title, message)
+        res.status(200).end()
     } catch (error) {
         loggerService.error('Failed sending mail:' + error)
         res.status(500).json({ error: 'Failed sending mail' })

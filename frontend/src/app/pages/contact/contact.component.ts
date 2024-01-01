@@ -30,17 +30,39 @@ export class ContactComponent {
     })
   }
 
-  onSubmit() {
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.contactForm.get(fieldName)
+    return field ? field.invalid && (field.dirty || field.touched) : false
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const field = this.contactForm.get(fieldName)
+    if (field?.errors?.['required']) {
+      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`
+    }
+    if (field?.errors?.['email']) return 'Invalid email format'
+
+    return ''
+  }
+
+  resetForm() {
+    this.contactForm.reset({
+      name: '',
+      email: '',
+      title: '',
+      message: ''
+    })
+  }
+
+  onSubmit(event: Event) {
+    event.preventDefault()
     if (this.contactForm.valid) {
       this.utilityService.sendMail(this.contactForm.value).subscribe({
-        next: (response) => {
-          console.log(response)
-          Object.keys(this.contactForm.controls).forEach(key => {
-            this.contactForm.controls[key].reset()
-          })
-        },
         error: (error) => {
           console.error(error)
+        },
+        complete: () => {
+          this.resetForm()
         }
       })
     }
