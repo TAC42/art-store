@@ -38,12 +38,13 @@ if (process.env.NODE_ENV === 'production') {
 import { productRoutes } from './api/product/product.routes.js'
 import { userRoutes } from './api/user/user.routes.js'
 import { authRoutes } from './api/auth/auth.routes.js'
+import { utilRoutes } from './api/utility/utility.routes.js'
 import { setupSocketAPI } from './services/socket.service.js'
 
 app.use('/api/product', productRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
-
+app.use('/api/utility', utilRoutes)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
