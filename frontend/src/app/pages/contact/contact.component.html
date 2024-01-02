@@ -7,57 +7,61 @@
         <p>*Reply time can vary, between 1 to 3 business days*</p>
     </section>
 
-    <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
-        <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
-            <label for="name" class="flex row">
-                <div class="label-info flex row">
-                    <svg-render [svgName]="personIcon" style="width: 24px; height: 24px;"></svg-render>
-                    <span>Name*</span>
-                </div>
-                <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
-            </label>
-            <input id="name" type="text" formControlName="name" placeholder="Handsome Person...">
-        </div>
+    <section class="form-area">
+        <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+            <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
+                <label for="name" class="flex row">
+                    <div class="label-info flex row">
+                        <svg-render [svgName]="personIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <span>Name*</span>
+                    </div>
+                    <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
+                </label>
+                <input id="name" type="text" formControlName="name" placeholder="Handsome Person...">
+            </div>
 
-        <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
-            <label for="email" class="flex row">
-                <div class="label-info flex row">
-                    <svg-render [svgName]="emailIcon" style="width: 24px; height: 24px;"></svg-render>
-                    <span>Email*</span>
-                </div>
-                <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
-            </label>
-            <input id="email" type="email" formControlName="email" placeholder="you@gmail.com...">
-        </div>
+            <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
+                <label for="email" class="flex row">
+                    <div class="label-info flex row">
+                        <svg-render [svgName]="emailIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <span>Email*</span>
+                    </div>
+                    <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
+                </label>
+                <input id="email" type="email" formControlName="email" placeholder="you@gmail.com...">
+            </div>
 
-        <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
-            <label for="title" class="flex row">
-                <div class="label-info flex row">
-                    <svg-render [svgName]="titleIcon" style="width: 24px; height: 24px;"></svg-render>
-                    <span>Title*</span>
-                </div>
-                <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
-            </label>
-            <input id="title" type="text" formControlName="title" placeholder="Dormammu ...">
-        </div>
+            <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
+                <label for="title" class="flex row">
+                    <div class="label-info flex row">
+                        <svg-render [svgName]="titleIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <span>Title*</span>
+                    </div>
+                    <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
+                </label>
+                <input id="title" type="text" formControlName="title" placeholder="Dormammu ...">
+            </div>
 
-        <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
-            <label for="message" class="flex row">
-                <div class="label-info flex row">
-                    <svg-render [svgName]="descriptionIcon" style="width: 24px; height: 24px;"></svg-render>
-                    <span>Description*</span>
-                </div>
-                <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
-            </label>
-            <textarea id="message" formControlName="message" placeholder="I've come to bargain..."></textarea>
-        </div>
+            <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
+                <label for="message" class="flex row">
+                    <div class="label-info flex row">
+                        <svg-render [svgName]="descriptionIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <span>Description*</span>
+                    </div>
+                    <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
+                </label>
+                <textarea id="message" formControlName="message" placeholder="I've come to bargain..."></textarea>
+            </div>
 
-        <div class="form-actions flex row">
-            <button class="flex row" type="submit">
-                <span>Send</span>
-                <svg-render [svgName]="paperPlaneIcon" style="width: 32px; height: 32px;">
-                </svg-render>
-            </button>
-        </div>
-    </form>
+            <div class="form-actions flex row">
+                <button class="flex row" type="submit" [disabled]="!isCaptchaResolved || !contactForm.valid"
+                    [class.disabled]="!isCaptchaResolved || !contactForm.valid">
+                    <span>Send</span>
+                    <svg-render [svgName]="paperPlaneIcon" style="width: 32px; height: 32px;">
+                    </svg-render>
+                </button>
+                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize"></re-captcha>
+            </div>
+        </form>
+    </section>
 </main>

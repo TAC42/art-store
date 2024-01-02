@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app-root/app.component'
 import { HomeComponent } from './pages/home/home.component'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
 import { HeaderComponent } from './cmps/header/header.component'
 import { AboutComponent } from './pages/about/about.component'
 import { ContactComponent } from './pages/contact/contact.component'
@@ -22,10 +25,8 @@ import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.com
 import { ProductDetailsComponent } from './pages/product-details/product-details.component'
 import { ProductEditComponent } from './pages/product-edit/product-edit.component'
 import { reducers } from './store/shop.reducers'
-import { StoreModule } from '@ngrx/store';
 import { LoaderComponent } from './cmps/loader/loader.component'
-import { EffectsModule } from '@ngrx/effects'
-import { ShopEffects } from './store/shop.effects';
+import { ShopEffects } from './store/shop.effects'
 import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 
 @NgModule({
@@ -56,8 +57,10 @@ import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(reducers), 
-    EffectsModule.forRoot([ShopEffects])
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([ShopEffects]),
+    RecaptchaFormsModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
