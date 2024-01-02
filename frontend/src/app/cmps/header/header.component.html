@@ -2,25 +2,22 @@
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row">
       <ng-container *ngIf="!searchState; else elseTemplate">
-
         <span class="flex" (click)="onToggleAsideMenu($event)">
           <svg-render [svgName]="burgerMenuIcon" style="width: 32px; height: 32px;">
           </svg-render>
         </span>
-        
+
         <div>
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <h1>carlin</h1>
+            <h1>oricarlin</h1>
           </a>
         </div>
       </ng-container>
-      
+
       <ng-template #elseTemplate>
-       
-          <input type="text" (input)="onSearchInput($event)" placeholder="Search...">
-       
+        <input type="text" (input)="onSearchInput($event)" placeholder="Search...">
       </ng-template>
-        
+
       <span class="flex" (click)="onOpenSearch()">
         <svg-render [svgName]="searchIcon" style="width: 24px; height: 24px;">
         </svg-render>

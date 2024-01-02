@@ -7,9 +7,22 @@ app-contact {
         text-align: center;
         margin-block-end: 1em;
 
-        img {
-            max-height: 400px;
-            object-fit: cover;
+        .gallery-carousel {
+            position: relative;
+
+            app-image-carousel {
+                .carousel-container {
+                    .carousel-slide {
+                        img {
+                            cursor: default;
+                        }
+                    }
+                }
+
+                button {
+                    display: none;
+                }
+            }
         }
 
         .contact-text {

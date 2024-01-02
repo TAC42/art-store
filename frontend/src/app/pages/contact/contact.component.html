@@ -1,5 +1,7 @@
 <main class="contact-page-contents flex column">
-    <img [src]="loneImg" alt="Contact">
+    <section class="gallery-carousel flex column">
+        <app-image-carousel [imageUrls]="contactImageUrls" [autoSwitch]="true" />
+    </section>
 
     <section class="contact-text flex column">
         <p>Got an art request or a question, I'll be glad to answer them for you!</p>
@@ -17,7 +19,7 @@
                     </div>
                     <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
                 </label>
-                <input id="name" type="text" formControlName="name" placeholder="Handsome Person...">
+                <input id="name" type="text" formControlName="name" placeholder="John Doe...">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
@@ -28,7 +30,7 @@
                     </div>
                     <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
                 </label>
-                <input id="email" type="email" formControlName="email" placeholder="you@gmail.com...">
+                <input id="email" type="email" formControlName="email" placeholder="john@gmail.com...">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
@@ -39,7 +41,7 @@
                     </div>
                     <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
                 </label>
-                <input id="title" type="text" formControlName="title" placeholder="Dormammu ...">
+                <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question...">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
@@ -50,7 +52,7 @@
                     </div>
                     <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
                 </label>
-                <textarea id="message" formControlName="message" placeholder="I've come to bargain..."></textarea>
+                <textarea id="message" formControlName="message" placeholder="I'd like to'..."></textarea>
             </div>
 
             <div class="form-actions flex row">
