@@ -27,7 +27,8 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { reducers } from './store/shop.reducers'
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { ShopEffects } from './store/shop.effects'
-import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
+import { ShopIndexComponent } from './pages/shop-index/shop-index.component';
+import { FooterComponent } from './cmps/footer/footer.component'
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
     ContactComponent,
     IntroductionComponent,
     ShopIndexComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
