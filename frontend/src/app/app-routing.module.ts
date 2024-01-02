@@ -21,9 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'about', component: AboutComponent, children: [
-      { path: '', redirectTo: 'introduction', pathMatch: 'full' },
       { path: 'introduction', component: IntroductionComponent },
-      { path: 'contact', component: ContactComponent },
+      { path: 'contact', component: ContactComponent }
     ]
   },
   { path: '', component: HomeComponent },
