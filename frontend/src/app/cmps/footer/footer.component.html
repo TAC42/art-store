@@ -1,7 +1,8 @@
 <footer class="footer-contents layout-row">
     <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
         <div class="links flex row">
-            <a routerLink="/about/contact">studio.oricarlin&#64;gmail.com</a>
+            <a class="mail-link" routerLink="/about/contact">studio.oricarlin&#64;gmail.com</a>
+
             <div class="social-media flex row">
                 <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
                     <svg-render [svgName]="instagramIcon">
@@ -18,6 +19,28 @@
     </section>
 
     <section *ngIf="deviceType === 'tablet' || deviceType === 'desktop'" class="desktop-view flex row">
-        <a routerLink="/about/contact">studio.oricarlin&#64;gmail.com</a>
+        <a class="mail-link" routerLink="/about/contact">studio.oricarlin&#64;gmail.com</a>
+
+        <div class="footer-part flex column">
+            <a routerLink="/about/introduction" routerLinkActive="active">About</a>
+            <a routerLink="/shop" routerLinkActive="active">Shop</a>
+            <a routerLink="/sculptures" routerLinkActive="active">Sculptures</a>
+            <a routerLink="/artware" routerLinkActive="active">Artware</a>
+        </div>
+
+        <div class="footer-part flex column">
+            <div class="social-media flex row">
+                <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
+                    <svg-render [svgName]="instagramIcon">
+                    </svg-render>
+                </a>
+
+                <a class="flex" href="https://venmo.com/" target="_blank">
+                    <svg-render [svgName]="venmoIcon">
+                    </svg-render>
+                </a>
+            </div>
+            <span>© ORICARLIN 2023</span>
+        </div>
     </section>
 </footer>
