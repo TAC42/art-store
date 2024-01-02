@@ -9,7 +9,8 @@ import { interval, Subscription } from 'rxjs'
 export class ImageCarouselComponent implements OnInit, OnDestroy {
   @Input() imageUrls: string[] = []
   @Input() autoSwitch: boolean = false
-  arrowIcon: string = 'arrowIcon'
+  rightArrowIcon: string = 'rightArrowIcon'
+  leftArrowIcon: string = 'leftArrowIcon'
   currentIndex: number = 0
   private autoSwitchSubscription: Subscription | null = null
 

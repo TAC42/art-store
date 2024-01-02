@@ -24,10 +24,10 @@ export class ContactComponent {
   recaptchaSize: ReCaptchaV2.Size = 'normal'
   contactForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder,
-    private utilityService: UtilityService,
-    private deviceTypeService: DeviceTypeService) {
-    this.contactForm = this.formBuilder.group({
+  constructor(private fB: FormBuilder,
+    private uS: UtilityService,
+    private dTS: DeviceTypeService) {
+    this.contactForm = this.fB.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       title: ['', Validators.required],
@@ -36,7 +36,7 @@ export class ContactComponent {
   }
 
   ngOnInit() {
-    this.deviceTypeService.deviceType$.subscribe(deviceType => {
+    this.dTS.deviceType$.subscribe(deviceType => {
       this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
     })
   }
@@ -49,7 +49,7 @@ export class ContactComponent {
   getErrorMessage(fieldName: string): string {
     const field = this.contactForm.get(fieldName)
     if (field?.errors?.['required']) {
-      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`
+      return `${fieldName} is required`
     }
     if (field?.errors?.['email']) return 'Invalid email format'
 
@@ -69,10 +69,10 @@ export class ContactComponent {
     })
   }
 
-  onSubmit(event: Event) {    
+  onSubmit(event: Event) {
     event.preventDefault()
     if (this.contactForm.valid && this.isCaptchaResolved) {
-      this.utilityService.sendMail(this.contactForm.value).subscribe({
+      this.uS.sendMail(this.contactForm.value).subscribe({
         error: (error) => {
           console.error(error)
         },
@@ -80,6 +80,6 @@ export class ContactComponent {
           this.resetForm()
         }
       })
-    } else this.contactForm.markAllAsTouched()
+    }
   }
 }
