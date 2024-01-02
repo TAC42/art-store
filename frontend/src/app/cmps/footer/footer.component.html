@@ -1,1 +1,23 @@
-<p>footer works!</p>
+<footer class="footer-contents layout-row">
+    <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
+        <div class="links flex row">
+            <a routerLink="/about/contact">studio.oricarlin&#64;gmail.com</a>
+            <div class="social-media flex row">
+                <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
+                    <svg-render [svgName]="instagramIcon">
+                    </svg-render>
+                </a>
+
+                <a class="flex" href="https://venmo.com/" target="_blank">
+                    <svg-render [svgName]="venmoIcon">
+                    </svg-render>
+                </a>
+            </div>
+        </div>
+        <span>© ORICARLIN 2023</span>
+    </section>
+
+    <section *ngIf="deviceType === 'tablet' || deviceType === 'desktop'" class="desktop-view flex row">
+        <a routerLink="/about/contact">studio.oricarlin&#64;gmail.com</a>
+    </section>
+</footer>

@@ -9,10 +9,10 @@ import { Router } from '@angular/router'
 })
 
 export class HeaderComponent implements OnDestroy {
-  searchState: boolean = false
-  searchValue: string = ''
   burgerMenuIcon: string = 'burgerMenuIcon'
   searchIcon: string = 'searchIcon'
+  searchState: boolean = false
+  searchValue: string = ''
   deviceType: string = 'mini-tablet'
   private router = inject(Router)
   private subscription: Subscription

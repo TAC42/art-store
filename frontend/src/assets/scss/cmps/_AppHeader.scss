@@ -8,7 +8,6 @@ app-header {
         .mobile-view {
             width: 100%;
             align-items: center;
-            gap: 1em;
 
             .links {
                 justify-content: space-between;
@@ -26,9 +25,8 @@ app-header {
                 a {
                     font-size: 18px;
                     line-height: 1.6;
-                    transition: all 0.3s;
+                    transition: all 0.3s ease;
                     letter-spacing: 0.05em;
-
 
                     &.active {
                         color: $scdclr1;
