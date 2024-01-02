@@ -37,7 +37,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.product$ = this.route.data.pipe(
             map(data => data['product']),
             tap((product) => console.log('product in details: ', product))
-        );
+        )
 
         this.product$.subscribe((product) => {
             this.product = product;

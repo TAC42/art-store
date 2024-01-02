@@ -6,7 +6,7 @@ export interface Product {
   inStock: boolean
   type: string
   createdAt: number
-  _id: string
+  _id?: string
 }
 
 export interface ShopFilter {

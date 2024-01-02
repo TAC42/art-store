@@ -20,7 +20,7 @@ export class HeaderComponent implements OnDestroy {
   searchIcon: string = 'searchIcon'
   deviceType: string = 'mini-tablet'
   private router = inject(Router)
-    private route = inject(ActivatedRoute)
+  private route = inject(ActivatedRoute)
   private subscription: Subscription
 
   constructor(private store: Store<AppState>,

@@ -15,7 +15,7 @@ export class ShopDbService {
   constructor(private httpService: HttpService) { }
 
   query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
-    console.log('filterBy in Query ',filterBy)
+    console.log('filterBy in Query ', filterBy)
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError((error) => {
         console.error('Error querying products:', error)
@@ -41,6 +41,20 @@ export class ShopDbService {
   getDefaultFilter(): ShopFilter {
     return {
       search: '',
+    }
+  }
+
+  getDefaultProduct(): Product {
+    const currentTimestamp = Date.now()
+    
+    return {
+      name: '',
+      imgUrl: '',
+      price: 0,
+      description: '',
+      inStock: true,
+      type: 'shop',
+      createdAt: currentTimestamp
     }
   }
 
