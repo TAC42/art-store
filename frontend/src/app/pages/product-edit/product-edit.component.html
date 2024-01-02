@@ -1,1 +1,44 @@
-<p>product-edit works!</p>
+<section class="product-edit">
+    <form [formGroup]="form" (ngSubmit)="onSaveProduct()">
+        <label for="name">Name</label>
+        <input #elNameInput type="text" formControlName="name" id="name">
+
+        <ng-container *ngIf="form.controls['name'] as nameInput">
+            <p class="errors" *ngIf="nameInput.touched && nameInput.invalid">
+                <span *ngIf="nameInput.errors?.['required']">name is required!</span>
+                <span *ngIf="nameInput.errors?.['startWithNumber']">Cannot start with a number!</span>
+                <span *ngIf="nameInput.errors?.['nameTaken']">Name is already taken!</span>
+            </p>
+            <span *ngIf="nameInput.pending && nameInput.dirty">Fetching for data...</span>
+        </ng-container>
+
+        <label for="imgUrl">Image Url</label>
+        <input  type="text" formControlName="imgUrl" id="imgUrl">
+        
+        <label for="price">Price</label>
+        <input  type="number" formControlName="price" id="price">
+        
+        
+        <label for="description">Description</label>
+        <input  type="text" formControlName="description" id="description">
+
+          
+        <label for="in-stock">In Stock</label>
+        <select formControlName="inStock" id="in-stock">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+
+          
+        <label for="type">Location</label>
+        <select formControlName="type" id="type">
+          <option value="shop">Shop</option>
+          <option value="sculpture">Sculpture</option>
+          <option value="ware">Ware</option>
+        </select>
+
+
+        <button>Save</button>
+    </form>
+    <button (click)="onBack()" class="back-btn"><svg-render svgName="back"></svg-render></button>
+</section>

@@ -26,7 +26,7 @@ product-preview {
       }
     }
 
-    .remove-btn {
+    .remove-btn , .edit-btn {
       position: absolute;
       right: 0.5em;
       top: 0.5em;
@@ -35,6 +35,10 @@ product-preview {
       border: none;
       background: none;
       display: flex;
+    }
+
+    .edit-btn{
+      right: 1.75em;
     }
 
     .preview-body {
