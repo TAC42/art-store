@@ -39,12 +39,9 @@ export class HeaderComponent implements OnDestroy {
   }
 
   onOpenSearch() {
-    console.log('inside ONOPENSEARCH')
     this.searchState = !this.searchState
-    if (!this.searchState && this.searchValue) {
-      const updatedFilter: Partial<ShopFilter> = { search: this.searchValue }
-      this.store.dispatch(filterUpdated({ updatedFilter }))
-      this.router.navigateByUrl('/shop')
+    if (!this.searchState && this.searchValue.trim() !== '') {
+      this.router.navigateByUrl(`/shop?search=${encodeURIComponent(this.searchValue.trim())}`)
     }
   }
 
