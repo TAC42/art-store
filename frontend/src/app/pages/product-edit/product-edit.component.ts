@@ -32,14 +32,17 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
   initializeForm(): void {
     this.form = this.fb.group({
       name: [this.product.name || '', [Validators.required]],
-      imgUrl: [this.product.imgUrl || '', Validators.required],
+      imgUrls: [
+        (this.product.imgUrls || []).join(', '), 
+        [Validators.required]
+      ],
       price: [this.product.price || '', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       description: [
         this.product.description || '',
         [Validators.required, Validators.minLength(10), Validators.maxLength(150)],
       ],
       inStock: [this.product.inStock || true, Validators.required],
-      type: [this.product.type || '', [Validators.required, Validators.pattern(/^(shop|sculpture|ware)$/)]],
+      type: [this.product.type || '', [Validators.required, Validators.pattern(/^(shop|sculpture|artware)$/)]],
     })
   }
 
@@ -53,7 +56,7 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
         this.product = product
         this.initializeForm()
         console.log('This is edit ', product)
-      });
+      })
   }
 
   ngAfterViewInit(): void {
@@ -62,6 +65,7 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onSaveProduct() {
     const productToSave = { ...this.product, ...this.form.value }
+    console.log('saved product: ', productToSave)
     // this.petService.save(productToSave as Product)
   }
 
@@ -71,7 +75,7 @@ export class ProductEditComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onBack = () => {
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 
   ngOnDestroy(): void {

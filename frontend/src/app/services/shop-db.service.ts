@@ -46,10 +46,10 @@ export class ShopDbService {
 
   getDefaultProduct(): Product {
     const currentTimestamp = Date.now()
-    
+
     return {
       name: '',
-      imgUrl: '',
+      imgUrls: [],
       price: 0,
       description: '',
       inStock: true,

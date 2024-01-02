@@ -1,6 +1,6 @@
 <section *ngIf="product$|async as product" class="product-details">
     <h1 *ngIf="msg">{{msg}}</h1>
-    <img src={{product.imgUrl}} />
+    <img src={{product.imgUrls[0]}} />
     <p> {{product.name}} </p>
     <span>${{product.price}}</span>
     <p> {{product.description}}</p>

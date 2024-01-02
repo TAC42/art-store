@@ -164,9 +164,9 @@ async function _checkRedundantProductImages() {
       console.log('No orphaned images found')
     } else {
       console.log('Total orphaned images found: ', orphanedImages.length)
-      for (const publicId of orphanedImages) {
-        await cloudinaryService.deleteImageFromCloudinary(publicId)
-      }
+      // for (const publicId of orphanedImages) {
+      //   await cloudinaryService.deleteImageFromCloudinary(publicId)
+      // }
       console.log('Deletion of orphaned images completed, no more left')
     }
   } catch (err) {

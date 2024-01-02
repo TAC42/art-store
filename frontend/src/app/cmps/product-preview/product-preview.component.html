@@ -1,6 +1,6 @@
 <a class="content" [routerLink]="['/shop/details',product.name]">
   <article class="prod-img">
-    <img [src]="product.imgUrl" [alt]="product.name" />
+    <img [src]="product.imgUrls[0]" [alt]="product.name" />
   </article>
   <div class="preview-body">
     <article class="name">{{ product.name }}</article>

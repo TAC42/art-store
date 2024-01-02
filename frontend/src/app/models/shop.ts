@@ -1,6 +1,6 @@
 export interface Product {
   name: string
-  imgUrl: string
+  imgUrls: string[]
   price: number
   description: string
   inStock: boolean
