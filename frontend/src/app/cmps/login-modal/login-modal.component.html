@@ -1,5 +1,5 @@
-<main class="login-modal-wrapper flex">
-    <section class="login-modal flex column">
-
+<main class="modal-wrapper flex justify-center" *ngIf="mS.isModalOpen('login')">
+    <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
+        <h2>Hello?</h2>
     </section>
 </main>

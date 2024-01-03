@@ -7,6 +7,7 @@ import { Component, HostBinding } from '@angular/core'
 
 export class HomeComponent {
   @HostBinding('class.full') fullClass = true
+  @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
   
   loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'

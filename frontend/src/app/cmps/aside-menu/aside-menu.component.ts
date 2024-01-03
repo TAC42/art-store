@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core'
 import { trigger, style, animate, transition } from '@angular/animations'
+import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'app-aside-menu',
@@ -21,7 +22,7 @@ export class AsideMenuComponent {
   isMenuOpen: boolean = false
   ocLogo: string = 'ocLogo'
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private eR: ElementRef, private mS: ModalService) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen
@@ -35,9 +36,15 @@ export class AsideMenuComponent {
     this.isMenuOpen = false
   }
 
+  openLogin(event: MouseEvent) {
+    event.stopPropagation()
+    this.mS.openModal('login')
+    this.closeMenu()
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    const clickedInside = this.elementRef.nativeElement.contains(event.target)
+    const clickedInside = this.eR.nativeElement.contains(event.target)
 
     if (!clickedInside) this.closeMenu()
   }

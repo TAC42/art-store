@@ -1,4 +1,4 @@
-<main class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
+<main class="modal-wrapper flex" *ngIf="isMenuOpen">
     <section (clickOutside)="closeMenu()" [@slideInOut] class="aside-menu flex column">
         <div class="logo-container flex row">
             <h1>oricarlin</h1>
@@ -7,7 +7,7 @@
         </div>
 
         <div class="link-area">
-            <span (click)="closeMenu()">Login</span>
+            <span (click)="openLogin($event)">Login</span>
         </div>
 
         <div class="link-area">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="link-area">
-            <span (click)="closeMenu()">Logout</span>
+            <span (click)="openLogin($event)">Logout</span>
         </div>
     </section>
 </main>
