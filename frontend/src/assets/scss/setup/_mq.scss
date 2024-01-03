@@ -17,6 +17,12 @@ app-header {
     }
 }
 
+app-aside-menu {
+    @media(min-width: 601px) {
+        display: none;
+    }
+}
+
 app-footer {
     .footer-contents {
         @media(max-width: 600px) {}
