@@ -1,9 +1,13 @@
-<section class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
+<main class="aside-menu-wrapper flex" *ngIf="isMenuOpen">
     <section (clickOutside)="closeMenu()" [@slideInOut] class="aside-menu flex column">
         <div class="logo-container flex row">
             <h1>oricarlin</h1>
             <svg-render [svgName]="ocLogo" style="width: 32px; height: 32px;">
             </svg-render>
+        </div>
+
+        <div class="link-area">
+            <span (click)="closeMenu()">Login</span>
         </div>
 
         <div class="link-area">
@@ -27,5 +31,9 @@
         <div class="link-area">
             <a (click)="closeMenu()" routerLink="/shop" routerLinkActive="active">Shop</a>
         </div>
+
+        <div class="link-area">
+            <span (click)="closeMenu()">Logout</span>
+        </div>
     </section>
-</section>
+</main>

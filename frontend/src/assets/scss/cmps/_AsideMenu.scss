@@ -30,7 +30,10 @@
         }
 
         .link-area {
-            a {
+            cursor: pointer;
+
+            a,
+            span {
                 font-size: 21px;
                 width: 100%;
                 display: inline-block;
