@@ -1,0 +1,38 @@
+shop-filter {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+
+  input {
+    padding: 0.5em;
+    transition: all 0.3s;
+    border-radius: 0.5em 0 0 0.5em;
+    border: 1px solid $scdclr4;
+    color: $prmclr1;
+    font-family: "nh-medium";
+    font-size: 1em;
+    line-height: 1.6;
+
+   
+    &:focus
+     {
+        outline: 1px solid $scdclr2; 
+        outline-offset: -1px; 
+      }
+  }
+  svg-render {
+    span {
+      padding: 1.25em 1em 6px 1em;
+      border-radius: 0 0.5em 0.5em 0;
+      background-color: $scdclr1;
+      opacity: 0.4;
+
+      svg {
+        fill: $prmclr2;
+        width: 1.5em;
+        height: 1.5em;
+      }
+    }
+  }
+}

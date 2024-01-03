@@ -1,6 +1,5 @@
 shop-list {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  padding: 1.5em 1em;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   width: 100%;
@@ -30,5 +29,16 @@ shop-list {
   @media screen and (min-width: 1160px) {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 32px;
+  }
+
+  .sorry{
+    display: grid;
+    gap: 1em;
+    text-align: center;
+    svg-render{
+      span{
+        justify-self: center;
+      }
+    }
   }
 }

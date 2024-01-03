@@ -1,5 +1,16 @@
-<product-preview
-  (remove)="remove.emit($event)"
-  *ngFor="let product of products"
-  [product]="product"
-/>
+<ng-container *ngIf="products && products.length === 0; else productList">
+  <div class="sorry">
+    <h1>Ops! looks like you have no art available!
+    </h1>
+    <svg-render svgName="sorryRobot" style="width: 150px; height: 150px;"></svg-render>
+  </div>
+
+</ng-container>
+
+<ng-template #productList>
+  <product-preview
+    (remove)="remove.emit($event)"
+    *ngFor="let product of products"
+    [product]="product"
+  ></product-preview>
+</ng-template>
