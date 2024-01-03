@@ -43,25 +43,67 @@ app-footer {
 }
 
 app-shop {
-    @media(max-width: 600px) {
-        padding: .5em 1em;
-    }
+    shop-index {
+        @media(max-width: 600px) {
+            padding: .5em 1em;
+        }
 
-    @media(min-width: 601px) {
-        padding: 1em 2em;
+        @media(min-width: 601px) {
+            padding: 1em 2em;
+        }
     }
 }
 
 app-home {
     .home-page-contents {
-        .teasers {
-            @media(max-width: 600px) {
+        @media(max-width: 600px) {
+            .teasers {
                 grid-template-columns: 1fr;
+                padding: 0 1em 1em 1em;
             }
 
-            @media(min-width: 601px) {
-                grid-template-columns: 1fr 1fr;
+            .gallery-carousel {
+                padding: 0 1em;
             }
+        }
+
+        @media(min-width: 601px) {
+            .teasers {
+                grid-template-columns: 1fr 1fr;
+                padding: 0 2em 1em 2em;
+            }
+
+            .gallery-carousel {
+                padding: 0 2em;
+            }
+        }
+    }
+}
+
+app-introduction {
+    @media(max-width: 600px) {
+        .introduction-text {
+            padding: 0 1em;
+        }
+    }
+
+    @media(min-width: 601px) {
+        .introduction-text {
+            padding: 0 2em;
+        }
+    }
+}
+
+app-contact {
+    @media(max-width: 600px) {
+        .contact-text {
+            padding: 0 1em;
+        }
+    }
+
+    @media(min-width: 601px) {
+        .contact-text {
+            padding: 0 2em;
         }
     }
 }

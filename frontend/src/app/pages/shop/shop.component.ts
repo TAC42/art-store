@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core'
 
 
 @Component({
-  selector: 'shop',
+  selector: 'app-shop',
   templateUrl: './shop.component.html'
 })
 

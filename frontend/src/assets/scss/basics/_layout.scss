@@ -12,11 +12,11 @@
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     grid-template-columns: 16px 1fr 16px;
   }
 
-  @media (min-width: 481px) {
+  @media (min-width: 601px) {
     grid-template-columns: 32px 1fr 32px;
   }
 }
