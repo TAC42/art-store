@@ -1,8 +1,5 @@
 app-introduction {
-    width: 100%;
-
     .introduction-page-contents {
-        width: 100%;
         gap: 1em;
         text-align: center;
         margin-block-end: 1em;
@@ -28,7 +25,6 @@ app-introduction {
         .introduction-text {
             text-align: left;
             gap: 1em;
-            padding: 0 1em;
 
             p {
                 color: $prmclr1;

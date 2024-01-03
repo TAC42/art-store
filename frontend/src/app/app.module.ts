@@ -28,7 +28,8 @@ import { reducers } from './store/shop.reducers'
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { ShopEffects } from './store/shop.effects'
 import { ShopIndexComponent } from './pages/shop-index/shop-index.component';
-import { FooterComponent } from './cmps/footer/footer.component'
+import { FooterComponent } from './cmps/footer/footer.component';
+import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FooterComponent } from './cmps/footer/footer.component'
     IntroductionComponent,
     ShopIndexComponent,
     FooterComponent,
+    LoginModalComponent,
   ],
   imports: [
     BrowserModule,

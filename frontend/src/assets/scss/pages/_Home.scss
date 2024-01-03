@@ -1,8 +1,5 @@
 app-home {
-    width: 100%;
-
     .home-page-contents {
-        width: 100%;
         gap: 1em;
         text-align: center;
         margin-block-end: 1em;
@@ -43,7 +40,6 @@ app-home {
         }
 
         .teasers {
-            padding: 0 1em 1em 1em;
             gap: 1em;
 
             .teaser-area {
@@ -81,7 +77,6 @@ app-home {
 
         .gallery-carousel {
             position: relative;
-            padding: 0 1em;
 
             p {
                 color: $scdclr2;

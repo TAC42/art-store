@@ -3,7 +3,7 @@
     <section class="links flex row">
       <ng-container *ngIf="!searchState; else elseTemplate">
         <span class="flex" (click)="onToggleAsideMenu($event)">
-          <svg-render [svgName]="burgerMenuIcon" style="width: 32px; height: 32px;">
+          <svg-render [svgName]="burgerMenuIcon">
           </svg-render>
         </span>
 

@@ -1,8 +1,5 @@
 app-contact {
-    width: 100%;
-
     .contact-page-contents {
-        width: 100%;
         gap: 1em;
         text-align: center;
         margin-block-end: 1em;
@@ -28,7 +25,6 @@ app-contact {
         .contact-text {
             text-align: left;
             gap: 1em;
-            padding: 0 1em;
 
             p {
                 color: $prmclr1;

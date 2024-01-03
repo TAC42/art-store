@@ -1,0 +1,11 @@
+.modal-wrapper {
+    .login-modal {
+        position: absolute;
+        top: 10%;
+        background: $prmclr2;
+        min-width: 300px;
+        min-height: 400px;
+        z-index: 15;
+        padding: 0.5em 1em;
+    }
+}

@@ -10,6 +10,7 @@ import { DeviceTypeService } from '../../services/device-type.service'
 
 export class ContactComponent {
   @HostBinding('class.full') fullClass = true
+  @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
 
   paperPlaneIcon: string = 'paperPlaneIcon'

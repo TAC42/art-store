@@ -7,6 +7,7 @@ import { Component, HostBinding } from '@angular/core'
 
 export class IntroductionComponent {
   @HostBinding('class.full') fullClass = true
+  @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
 
   aboutImageUrls: string[] = [

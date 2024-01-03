@@ -1,12 +1,4 @@
-.aside-menu-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .75);
-    z-index: 10;
-
+.modal-wrapper {
     .aside-menu {
         background: $prmclr2;
         min-width: 275px;
@@ -30,7 +22,10 @@
         }
 
         .link-area {
-            a {
+            cursor: pointer;
+
+            a,
+            span {
                 font-size: 21px;
                 width: 100%;
                 display: inline-block;
