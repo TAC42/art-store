@@ -21,3 +21,8 @@ export const selectFilterBy = createSelector(
   selectShopState,
   (state: ShopState) => state.filterBy 
 )
+
+export const selectIsLoading = createSelector(
+  selectShopState,
+  (state: ShopState) => state.isLoading 
+)

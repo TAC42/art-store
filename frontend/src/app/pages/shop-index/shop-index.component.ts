@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { Observable, catchError, defaultIfEmpty, filter, of, switchMap } from 'rxjs'
-import { selectProducts, selectFilterBy } from '../../store/shop.selectors'
+import { selectProducts, selectFilterBy, selectIsLoading } from '../../store/shop.selectors'
 import { Product } from '../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -20,14 +20,17 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private shopDbService = inject(ShopDbService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
-  filterBy: ShopFilter = { search: '' };
-
+  isLoading: boolean = false
+  filterBy: ShopFilter = { search: '' }
 
 
   ngOnInit(): void {
+    this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
+      this.isLoading = isLoading 
+    })
+
     this.store.dispatch({ type: '[Shop] Load Filter' })
     this.store.dispatch({ type: '[Shop] Load Products' })
-
   }
 
   onRemoveProduct(productId: string): void {

@@ -5,6 +5,9 @@ import { Subject, filter, map, tap } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { nameTaken, startWithNumber } from '../../custom-validators/product-validators'
+import { saveProduct } from '../../store/shop.actions'
+import { Store } from '@ngrx/store'
+import { AppState } from '../../store/app.state'
 
 @Component({
   selector: 'product-edit',
@@ -21,9 +24,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   product: Product = this.shopDbService.getDefaultProduct()
   // @ViewChild('elNameInput') elNameInput!: ElementRef<HTMLInputElement>
 
-  constructor() {
+  constructor(private store: Store<AppState>) {
     this.initializeForm()
   }
+  
 
   ngOnInit(): void {
     this.fetchProductData()
@@ -66,7 +70,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   onSaveProduct() {
     const productToSave = { ...this.product, ...this.editForm.value }
     console.log('saved product: ', productToSave)
-    // this.petService.save(productToSave as Product)
+    this.store.dispatch(saveProduct({ product: productToSave }))
+    this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 
 

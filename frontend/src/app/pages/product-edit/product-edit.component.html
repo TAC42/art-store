@@ -134,6 +134,20 @@
       </select>
     </div>
 
-    <button>Save</button>
+    <div class="form-actions flex row">
+      <button
+        class="flex row"
+        type="submit"
+        [disabled]="!editForm.valid"
+        [class.disabled]="!editForm.valid"
+      >
+        <span>Submit</span>
+        <svg-render
+          svgName="paperPlaneIcon"
+          style="width: 32px; height: 32px"
+        >
+        </svg-render>
+      </button>
+    </div>
   </form>
 </section>

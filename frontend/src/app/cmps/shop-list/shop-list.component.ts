@@ -8,6 +8,7 @@ import { Product } from '../../models/shop'
 
 export class ShopListComponent implements OnInit, OnChanges {
   @Input() products!: Product[] | null
+  @Input() isLoading!: boolean
   @Output() remove = new EventEmitter<string>()
 
   ngOnInit(): void {

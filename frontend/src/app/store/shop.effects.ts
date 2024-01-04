@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { map, mergeMap, tap, withLatestFrom } from 'rxjs/operators'
 import { ShopDbService } from '../services/shop-db.service'
-import { filterUpdated, loadFilter, loadProducts, productsLoaded } from './shop.actions'
+import { filterUpdated, loadFilter, loadProducts, productsLoaded, saveProduct, setLoadingState } from './shop.actions'
 import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
-import { selectFilterBy } from './shop.selectors'
+import { selectFilterBy, selectIsLoading } from './shop.selectors'
 import { ActivatedRoute } from '@angular/router'
 import { ShopFilter } from '../models/shop'
 
@@ -23,12 +23,23 @@ export class ShopEffects {
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProducts),
-      withLatestFrom(this.store.pipe(select(selectFilterBy))),
-      tap(() => this.loaderService.setIsLoading(true)), // Start the loader
+      withLatestFrom(
+        this.store.pipe(select(selectFilterBy)),
+        this.store.pipe(select(selectIsLoading))
+      ),
+      tap(([action, filterBy, isLoading]) => {
+        if (!isLoading) {
+          this.store.dispatch(setLoadingState({ isLoading: true }));
+          this.loaderService.setIsLoading(true);
+        }
+      }),
       mergeMap(([action, filterBy]) =>
         this.shopDbService.query(filterBy).pipe(
           map((products) => productsLoaded({ products })),
-          tap(() => this.loaderService.setIsLoading(false)) // Stop the loader after products are loaded
+          tap(() => {
+            this.store.dispatch(setLoadingState({ isLoading: false }));
+            this.loaderService.setIsLoading(false);
+          })
         )
       )
     )
@@ -54,5 +65,27 @@ export class ShopEffects {
     return filterFromParams;
   }
 
+  saveProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(saveProduct),
+      tap(({ product }) => {
+        this.store.dispatch(setLoadingState({ isLoading: true }))
+        this.loaderService.setIsLoading(true)
+        this.shopDbService.save(product).subscribe(
+          () => {
+            this.store.dispatch(setLoadingState({ isLoading: false }))
+            this.loaderService.setIsLoading(false)
+          },
+          (error) => {
+            console.error('Error saving product:', error)
+            this.store.dispatch(setLoadingState({ isLoading: false }))
+            this.loaderService.setIsLoading(false)
+          }
+        )
+      })
+    ),
+    { dispatch: false } 
+  )
 }
+
 

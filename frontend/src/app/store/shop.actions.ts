@@ -19,3 +19,10 @@ export const filterUpdated = createAction(
 )
 
 export const loadFilter = createAction('[Shop] Load Filter')
+
+export const setLoadingState = createAction('[Shop] Set Loading State', props<{ isLoading: boolean }>())
+
+export const saveProduct = createAction(
+  '[Shop] Save Product',
+  props<{ product: Product }>()
+)

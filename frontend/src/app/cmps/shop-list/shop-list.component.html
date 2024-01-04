@@ -1,4 +1,4 @@
-<ng-container *ngIf="products && products.length === 0; else productList">
+<ng-container *ngIf="(!isLoading && (products && products.length === 0)); else productList">
   <div class="sorry">
     <h1>Ops! looks like you have no art available!
     </h1>
