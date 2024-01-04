@@ -10,7 +10,8 @@ export const userService = {
   query,
   remove,
   save,
-  getById
+  getById,
+  getByUsername
 }
 
 async function query(filterBy = {}) {
@@ -35,6 +36,18 @@ async function getById(userId) {
   }
   catch (err) {
     loggerService.error(`while finding user ${userId}`, err)
+    throw err
+  }
+}
+
+async function getByUsername(username) {
+  try {
+    const collection = await dbService.getCollection(USERS_COLLECTION)
+    const user = await collection.findOne({ username })
+    return user
+  }
+  catch (err) {
+    logger.error(`while finding user by username: ${username}`, err)
     throw err
   }
 }

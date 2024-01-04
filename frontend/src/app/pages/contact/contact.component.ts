@@ -55,9 +55,7 @@ export class ContactComponent {
 
   getErrorMessage(fieldName: string): string {
     const field = this.contactForm.get(fieldName)
-    if (field?.errors?.['required']) {
-      return `${fieldName} is required`
-    }
+    if (field?.errors?.['required']) return `${fieldName} is required`
     if (field?.errors?.['email']) return 'Invalid email format'
 
     return ''
@@ -67,25 +65,12 @@ export class ContactComponent {
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  resetForm() {
-    this.contactForm.reset({
-      name: '',
-      email: '',
-      title: '',
-      message: ''
-    })
-  }
-
   onSubmit(event: Event) {
     event.preventDefault()
     if (this.contactForm.valid && this.isCaptchaResolved) {
       this.uS.sendMail(this.contactForm.value).subscribe({
-        error: (error) => {
-          console.error(error)
-        },
-        complete: () => {
-          this.resetForm()
-        }
+        error: (error) => console.error(error),
+        complete: () => this.contactForm.reset()
       })
     }
   }

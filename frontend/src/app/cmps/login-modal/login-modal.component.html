@@ -1,5 +1,26 @@
 <main class="modal-wrapper flex justify-center" *ngIf="mS.isModalOpen('login')">
     <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
-        <h2>Hello?</h2>
+        <h2 *ngIf="isLoginMode">Login</h2>
+        <h2 *ngIf="!isLoginMode">Signup</h2>
+
+        <form [formGroup]="isLoginMode ? loginForm : signupForm" (ngSubmit)="onSubmit()">
+            <!-- Login Form Inputs -->
+            <ng-container *ngIf="isLoginMode">
+                <input formControlName="username" placeholder="Username">
+                <input formControlName="password" placeholder="Password" type="password">
+            </ng-container>
+
+            <!-- Signup Form Inputs -->
+            <ng-container *ngIf="!isLoginMode">
+                <input formControlName="firstName" placeholder="First Name">
+                <input formControlName="lastName" placeholder="Last Name">
+                <input formControlName="username" placeholder="Username">
+                <input formControlName="email" placeholder="Email" type="email">
+                <input formControlName="password" placeholder="Password" type="password">
+            </ng-container>
+
+            <button type="submit">{{ isLoginMode ? 'Login' : 'Signup' }}</button>
+        </form>
+        <button (click)="toggleMode()">Switch to {{ isLoginMode ? 'Signup' : 'Login' }}</button>
     </section>
 </main>

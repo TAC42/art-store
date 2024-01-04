@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpService } from './http.service'
 import { Observable, throwError, catchError, tap } from 'rxjs'
-import { User, UserCredentials } from '../models/user'
+import { User, UserCredentials, UserSignup } from '../models/user'
 
 const SESSION_KEY_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'user/'
@@ -51,6 +51,19 @@ export class UserService {
       catchError((error) => {
         console.error('Error during login:', error)
         return throwError(() => new Error('Error during login'))
+      })
+    )
+  }
+
+  signup(signupData: UserSignup): Observable<User> {
+    return this.httpService.post<User>('auth/signup', signupData).pipe(
+      tap((newUser) => {
+        console.log('Registered user:', newUser.fullName)
+        this.setLoggedinUser(newUser)
+      }),
+      catchError((error) => {
+        console.error('Error during signup:', error)
+        return throwError(() => new Error('Error during signup'))
       })
     )
   }

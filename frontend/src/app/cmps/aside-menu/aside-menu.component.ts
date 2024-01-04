@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener } from '@angular/core'
 import { trigger, style, animate, transition } from '@angular/animations'
 import { ModalService } from '../../services/modal.service'
+import { UserService } from '../../services/user.service'
 
 @Component({
   selector: 'app-aside-menu',
@@ -22,7 +23,7 @@ export class AsideMenuComponent {
   isMenuOpen: boolean = false
   ocLogo: string = 'ocLogo'
 
-  constructor(private eR: ElementRef, private mS: ModalService) { }
+  constructor(private eR: ElementRef, private uS: UserService, private mS: ModalService) { }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen
@@ -39,6 +40,14 @@ export class AsideMenuComponent {
   openLogin(event: MouseEvent) {
     event.stopPropagation()
     this.mS.openModal('login')
+    this.closeMenu()
+  }
+
+  exitAccount(event: MouseEvent) {
+    event.stopPropagation()
+    this.uS.logout().subscribe({
+      error: (err) => console.error('Logout error:', err)
+    })
     this.closeMenu()
   }
 
