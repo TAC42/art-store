@@ -27,7 +27,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) {
     this.initializeForm()
   }
-  
+
 
   ngOnInit(): void {
     this.fetchProductData()
@@ -37,7 +37,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.editForm = this.fb.group({
       name: [this.product.name || '', [Validators.required]],
       imgUrls: [
-        (this.product.imgUrls || []).join(', '), 
+        (this.product.imgUrls || []).join(', '),
         [Validators.required]
       ],
       price: [this.product.price || '', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
@@ -68,7 +68,16 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   // }
 
   onSaveProduct() {
-    const productToSave = { ...this.product, ...this.editForm.value }
+    const imgUrls = this.editForm.value.imgUrls
+    const imgUrlsArray = imgUrls.includes(',')
+      ? imgUrls.split(',').map(url => url.trim())
+      : [imgUrls.trim()]
+
+    const productToSave = {
+      ...this.product,
+      ...this.editForm.value,
+      imgUrls: imgUrlsArray,
+    }
     console.log('saved product: ', productToSave)
     this.store.dispatch(saveProduct({ product: productToSave }))
     this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
@@ -88,7 +97,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     return ''
   }
 
-  
+
   isFieldInvalid(fieldName: string): boolean {
     const field = this.editForm.get(fieldName)
     return field ? field.invalid && (field.dirty || field.touched) : false

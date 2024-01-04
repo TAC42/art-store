@@ -77,12 +77,12 @@ async function save(product) {
       if (response.matchedCount === 0) {
         throw new Error(`Product with id ${id.toHexString()} was not found`)
       }
-      _checkRedundantProductImages()
+      //_checkRedundantProductImages()
 
       return { _id: id, ...productToSave }
     } else {
       const response = await collection.insertOne(productToSave)
-      _checkRedundantProductImages()
+     // _checkRedundantProductImages()
 
       return { ...productToSave, _id: response.insertedId }
     }

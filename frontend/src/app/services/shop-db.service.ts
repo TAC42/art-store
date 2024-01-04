@@ -33,7 +33,7 @@ export class ShopDbService {
   }
 
   save(product: Product): Observable<Product> {
-    if (product) {
+    if (product._id) {
       return this.httpService.put<Product>(`${BASE_URL}${product._id}`, product)
     } else return this.httpService.post<Product>(BASE_URL, product)
   }
