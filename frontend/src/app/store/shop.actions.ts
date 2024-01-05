@@ -3,7 +3,7 @@ import { Product, ShopFilter } from '../models/shop'
 
 export const loadProducts = createAction(
   '[Shop] Load Products',
-  props<{ filterBy: ShopFilter }>() // Modify the payload to include filter
+  props<{ filterBy: ShopFilter }>() 
 )
 export const productsLoaded = createAction('[Shop] Products Loaded', props<{ products: Product[] }>())
 

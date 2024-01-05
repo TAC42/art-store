@@ -46,7 +46,7 @@ export class UserService {
     return this.httpService.post<User>('auth/login', userCred).pipe(
       tap((user) => {
         console.log('Logged in user:', user.fullName)
-        this.setLoggedinUser(user)
+        this._setLoggedinUser(user)
       }),
       catchError((error) => {
         console.error('Error during login:', error)
@@ -59,7 +59,7 @@ export class UserService {
     return this.httpService.post<User>('auth/signup', signupData).pipe(
       tap((newUser) => {
         console.log('Registered user:', newUser.fullName)
-        this.setLoggedinUser(newUser)
+        this._setLoggedinUser(newUser)
       }),
       catchError((error) => {
         console.error('Error during signup:', error)
@@ -78,13 +78,25 @@ export class UserService {
     )
   }
 
-  setLoggedinUser(user: User): User {
+  _setLoggedinUser(user: User): User {
     sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
   }
 
-  getLoggedinUser(): User | null {
+  static getLoggedinUser(): User  {
     const user = sessionStorage.getItem(SESSION_KEY_LOGGEDIN_USER)
     return user ? JSON.parse(user) : null
+  }
+
+  static getDefaultUser(): User {
+    return {
+      fullName: '',
+      email: '',
+      imgUrl: '',
+      username: '',
+      password: '',
+      createdAt: 0,
+      isAdmin: false,
+    }
   }
 }
