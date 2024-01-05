@@ -74,25 +74,25 @@
     0%,
     100% {
         border-color: transparent;
-        border-top-color: $hoverOutlineColor;
-        clip-path: inset(0 0 100% 0);
+        border-top-color: $mnrclr3;
+        clip-path: inset(0 0 75% 0);
     }
 
     25% {
         border-color: transparent;
-        border-right-color: $hoverOutlineColor;
-        clip-path: inset(0 0 0 100%);
+        border-right-color: $mnrclr3;
+        clip-path: inset(0 0 0 75%);
     }
 
     50% {
         border-color: transparent;
-        border-bottom-color: $hoverOutlineColor;
-        clip-path: inset(100% 0 0 0);
+        border-bottom-color: $mnrclr3;
+        clip-path: inset(75% 0 0 0);
     }
 
     75% {
         border-color: transparent;
-        border-left-color: $hoverOutlineColor;
-        clip-path: inset(0 100% 0 0);
+        border-left-color: $mnrclr3;
+        clip-path: inset(0 75% 0 0);
     }
 }
