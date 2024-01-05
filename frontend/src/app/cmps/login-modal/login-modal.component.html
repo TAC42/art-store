@@ -1,26 +1,93 @@
 <main class="modal-wrapper flex justify-center" *ngIf="mS.isModalOpen('login')">
     <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
-        <h2 *ngIf="isLoginMode">Login</h2>
-        <h2 *ngIf="!isLoginMode">Signup</h2>
-
-        <form [formGroup]="isLoginMode ? loginForm : signupForm" (ngSubmit)="onSubmit()">
-            <!-- Login Form Inputs -->
+        <form class="flex column" [formGroup]="isLoginMode ? loginForm : signupForm" (ngSubmit)="onSubmit()">
             <ng-container *ngIf="isLoginMode">
-                <input formControlName="username" placeholder="Username">
-                <input formControlName="password" placeholder="Password" type="password">
+                <div class="input-area flex column" [class.error]="isFieldInvalid('username')">
+                    <label for="username" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="personIcon"></svg-render>
+                            <span>Username</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
+                    </label>
+                    <input id="username" type="text" formControlName="username" placeholder="Username">
+                </div>
+
+                <div class="input-area flex column" [class.error]="isFieldInvalid('password')">
+                    <label for="password" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="lockIcon"></svg-render>
+                            <span>Password</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
+                    </label>
+                    <input id="password" type="password" formControlName="password" placeholder="Password">
+                </div>
             </ng-container>
 
-            <!-- Signup Form Inputs -->
             <ng-container *ngIf="!isLoginMode">
-                <input formControlName="firstName" placeholder="First Name">
-                <input formControlName="lastName" placeholder="Last Name">
-                <input formControlName="username" placeholder="Username">
-                <input formControlName="email" placeholder="Email" type="email">
-                <input formControlName="password" placeholder="Password" type="password">
+                <div class="input-area flex column" [class.error]="isFieldInvalid('firstName')">
+                    <label for="firstName" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="idIcon"></svg-render>
+                            <span>First Name</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('firstName')">{{ getErrorMessage('firstName') }}</span>
+                    </label>
+                    <input id="firstName" type="text" formControlName="firstName" placeholder="First name">
+                </div>
+
+                <div class="input-area flex column" [class.error]="isFieldInvalid('lastName')">
+                    <label for="lastName" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="idIcon"></svg-render>
+                            <span>Last Name</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('lastName')">{{ getErrorMessage('lastName') }}</span>
+                    </label>
+                    <input id="lastName" type="text" formControlName="lastName" placeholder="Last name">
+                </div>
+
+                <div class="input-area flex column" [class.error]="isFieldInvalid('username')">
+                    <label for="username" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="personIcon"></svg-render>
+                            <span>Username</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
+                    </label>
+                    <input id="username" type="text" formControlName="username" placeholder="Username">
+                </div>
+
+                <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
+                    <label for="email" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="emailIcon"></svg-render>
+                            <span>Email</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
+                    </label>
+                    <input id="email" type="email" formControlName="email" placeholder="Email">
+                </div>
+
+                <div class="input-area flex column" [class.error]="isFieldInvalid('password')">
+                    <label for="password" class="flex row">
+                        <div class="label-info flex row">
+                            <svg-render [svgName]="lockIcon"></svg-render>
+                            <span>Password</span>
+                        </div>
+                        <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
+                    </label>
+                    <input id="password" type="password" formControlName="password" placeholder="Password">
+                </div>
             </ng-container>
 
-            <button type="submit">{{ isLoginMode ? 'Login' : 'Signup' }}</button>
+            <button class="flex" type="submit">
+                <span>{{ isLoginMode ? 'Login' : 'Signup' }}</span>
+            </button>
         </form>
-        <button (click)="toggleMode()">Switch to {{ isLoginMode ? 'Signup' : 'Login' }}</button>
+        <button class="switch" (click)="toggleMode()">
+            {{ isLoginMode ? "Don't have an account yet? Signup" : "Already registered? Login" }}
+        </button>
     </section>
 </main>

@@ -36,6 +36,7 @@ app-contact {
 
         .form-area {
             background: linear-gradient(to bottom, $prmclr3, $scdclr3, $scdclr4, $scdclr5, $scdclr2);
+            user-select: none;
 
             form {
                 gap: 1em;
@@ -69,6 +70,11 @@ app-contact {
                                 color: $prmclr1;
                                 letter-spacing: 0.025em;
                                 font-size: 18px;
+                            }
+
+                            svg-render {
+                                width: 24px;
+                                height: 24px;
                             }
                         }
                     }
@@ -110,6 +116,11 @@ app-contact {
                     justify-content: space-between;
                     align-items: center;
                     padding: 0 0.5em;
+
+                    svg-render {
+                        width: 32px;
+                        height: 32px;
+                    }
 
                     button {
                         padding: 0.75em 2em 0.75em 1.25em;

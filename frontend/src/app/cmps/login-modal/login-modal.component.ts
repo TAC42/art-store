@@ -14,12 +14,16 @@ export class LoginModalComponent {
   signupForm: FormGroup
   isLoginMode = true
 
+  emailIcon: string = 'emailIcon'
+  lockIcon: string = 'lockIcon'
+  personIcon: string = 'personIcon'
+  idIcon: string = 'idIcon'
+
   constructor(public mS: ModalService, private uS: UserService, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
-
     this.signupForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -35,6 +39,27 @@ export class LoginModalComponent {
 
   closeLoginModal() {
     this.mS.closeModal('login')
+    this.signupForm.reset()
+    this.loginForm.reset()
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const form = this.isLoginMode ? this.loginForm : this.signupForm
+    const field = form.get(fieldName)
+    return field ? field.invalid && (field.dirty || field.touched) : false
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const form = this.isLoginMode ? this.loginForm : this.signupForm
+    const field = form.get(fieldName)
+    if (field?.errors?.['required']) {
+      if (fieldName === 'firstName') return 'first name is required'
+      else if (fieldName === 'lastName') return 'last name is required'
+      else return `${fieldName} is required`
+    }
+    if (field?.errors?.['email']) return 'Invalid email format'
+
+    return ''
   }
 
   onSubmit() {

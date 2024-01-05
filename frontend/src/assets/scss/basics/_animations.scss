@@ -68,3 +68,31 @@
         transform: scale(1);
     }
 }
+
+@keyframes snakeAround {
+
+    0%,
+    100% {
+        border-color: transparent;
+        border-top-color: $mnrclr3;
+        clip-path: inset(0 0 75% 0);
+    }
+
+    25% {
+        border-color: transparent;
+        border-right-color: $mnrclr3;
+        clip-path: inset(0 0 0 75%);
+    }
+
+    50% {
+        border-color: transparent;
+        border-bottom-color: $mnrclr3;
+        clip-path: inset(75% 0 0 0);
+    }
+
+    75% {
+        border-color: transparent;
+        border-left-color: $mnrclr3;
+        clip-path: inset(0 75% 0 0);
+    }
+}

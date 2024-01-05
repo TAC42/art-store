@@ -14,7 +14,7 @@
             <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
                 <label for="name" class="flex row">
                     <div class="label-info flex row">
-                        <svg-render [svgName]="personIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <svg-render [svgName]="personIcon"></svg-render>
                         <span>Name*</span>
                     </div>
                     <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
@@ -25,7 +25,7 @@
             <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
                 <label for="email" class="flex row">
                     <div class="label-info flex row">
-                        <svg-render [svgName]="emailIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <svg-render [svgName]="emailIcon"></svg-render>
                         <span>Email*</span>
                     </div>
                     <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
@@ -36,7 +36,7 @@
             <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
                 <label for="title" class="flex row">
                     <div class="label-info flex row">
-                        <svg-render [svgName]="titleIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <svg-render [svgName]="titleIcon"></svg-render>
                         <span>Title*</span>
                     </div>
                     <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
@@ -47,7 +47,7 @@
             <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
                 <label for="message" class="flex row">
                     <div class="label-info flex row">
-                        <svg-render [svgName]="descriptionIcon" style="width: 24px; height: 24px;"></svg-render>
+                        <svg-render [svgName]="descriptionIcon"></svg-render>
                         <span>Description*</span>
                     </div>
                     <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
@@ -59,8 +59,7 @@
                 <button class="flex row" type="submit" [disabled]="!isCaptchaResolved || !contactForm.valid"
                     [class.disabled]="!isCaptchaResolved || !contactForm.valid">
                     <span>Send</span>
-                    <svg-render [svgName]="paperPlaneIcon" style="width: 32px; height: 32px;">
-                    </svg-render>
+                    <svg-render [svgName]="paperPlaneIcon"></svg-render>
                 </button>
                 <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize"></re-captcha>
             </div>
