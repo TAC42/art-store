@@ -7,6 +7,8 @@
     <article class="price">${{ product.price }}</article>
   </div>
 
-  <button (click)="onRemoveProduct($event)" class="remove-btn"><svg-render svgName="trashIcon"></svg-render></button>
-  <button (click)="onEditProduct($event)" class="edit-btn"><svg-render svgName="edit"></svg-render></button>
+  <div class="admin-btns">
+    <button (click)="onRemoveProduct($event)" class="remove-btn"><svg-render svgName="trashIcon"></svg-render></button>
+    <button (click)="onEditProduct($event)" class="edit-btn"><svg-render svgName="edit"></svg-render></button>
+  </div>
 </a>

@@ -70,7 +70,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   onSaveProduct() {
     const imgUrls = this.editForm.value.imgUrls
     const imgUrlsArray = imgUrls.includes(',')
-      ? imgUrls.split(',').map(url => url.trim())
+      ? imgUrls.split(',').map((url: string) => url.trim())
       : [imgUrls.trim()]
 
     const productToSave = {
