@@ -3,6 +3,8 @@ import { User, UserCredentials, UserSignup } from '../models/user'
 
 export const LOAD_USERS = createAction('[User] Load Users')
 export const LOAD_USER = createAction('[User] Load User', props<{ userId: string }>())
+export const LOAD_LOGGEDIN_USER = createAction('[User] Load Loggedin User')
+
 export const UPDATE_USER = createAction('[User] Update User', props<{ updatedUser: User }>())
 export const REMOVE_USER = createAction('[User] Remove User', props<{ userId: string }>())
 export const LOGIN = createAction('[User] Login', props<{ credentials: UserCredentials }>())
