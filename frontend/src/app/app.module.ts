@@ -63,8 +63,7 @@ import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ShopEffects]),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([ShopEffects, UserEffects]),
     RecaptchaFormsModule,
     RecaptchaModule
   ],

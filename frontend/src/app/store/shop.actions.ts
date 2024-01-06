@@ -1,28 +1,28 @@
 import { createAction, props } from '@ngrx/store'
 import { Product, ShopFilter } from '../models/shop'
 
-export const loadProducts = createAction(
+export const LOAD_PRODUCTS = createAction(
   '[Shop] Load Products',
-  props<{ filterBy: ShopFilter }>() 
+  props<{ filterBy: ShopFilter }>()
 )
-export const productsLoaded = createAction('[Shop] Products Loaded', props<{ products: Product[] }>())
+export const PRODUCTS_LOADED = createAction('[Shop] Products Loaded', props<{ products: Product[] }>())
 
-// Action to load a product by name
-export const loadProductByName = createAction(
+
+export const LOAD_PRODUCT_BY_NAME = createAction(
   '[Shop] Load Product By Name',
   props<{ name: string }>()
 )
 
-export const filterUpdated = createAction(
+export const FILTER_UPDATED = createAction(
   '[Shop] Filter Updated',
-  props<{ updatedFilter: Partial<ShopFilter> }>() 
+  props<{ updatedFilter: Partial<ShopFilter> }>()
 )
 
-export const loadFilter = createAction('[Shop] Load Filter')
+export const LOAD_FILTER = createAction('[Shop] Load Filter')
 
-export const setLoadingState = createAction('[Shop] Set Loading State', props<{ isLoading: boolean }>())
+export const SET_LOADING_STATE = createAction('[Shop] Set Loading State', props<{ isLoading: boolean }>())
 
-export const saveProduct = createAction(
+export const SAVE_PRODUCT = createAction(
   '[Shop] Save Product',
   props<{ product: Product }>()
 )

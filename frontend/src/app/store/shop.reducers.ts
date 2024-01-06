@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store'
-import { productsLoaded, loadProductByName, filterUpdated, loadFilter, setLoadingState, saveProduct } from './shop.actions'
+import { PRODUCTS_LOADED, LOAD_PRODUCT_BY_NAME, FILTER_UPDATED, LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
 
 export interface ShopState {
@@ -16,27 +16,26 @@ export const initialState: ShopState = {
 
 export const shopReducer = createReducer(
   initialState,
-  on(productsLoaded, (state, { products }) => ({
+  on(PRODUCTS_LOADED, (state, { products }) => ({
     ...state,
     products: products,
   })),
-  on(loadProductByName, (state, { name }) => ({
+  on(LOAD_PRODUCT_BY_NAME, (state, { name }) => ({
     ...state,
     selectedProduct: state.products.find((product) => product.name === name) || null,
   })),
-  on(filterUpdated, (state, { updatedFilter }) => ({
+  on(FILTER_UPDATED, (state, { updatedFilter }) => ({
     ...state,
     filterBy: { ...state.filterBy, ...updatedFilter },
   })),
-  on(loadFilter, (state) => ({
+  on(LOAD_FILTER, (state) => ({
     ...state, filterBy: { search: '', }
   })),
-  on(setLoadingState, (state, { isLoading }) => ({
+  on(SET_LOADING_STATE, (state, { isLoading }) => ({
     ...state,
     isLoading: isLoading,
   })),
-  on(saveProduct, (state, { product }) => {
-    // Logic to save or update the product in the state
+  on(SAVE_PRODUCT, (state, { product }) => {
     let updatedProducts: Product[] = []
     const existingProductIndex = state.products.findIndex((p) => p._id === product._id)
 
@@ -47,7 +46,6 @@ export const shopReducer = createReducer(
         ...state.products.slice(existingProductIndex + 1),
       ]
     } else {
-      // If the product is new, add it to the list
       updatedProducts = [...state.products, product]
     }
 
