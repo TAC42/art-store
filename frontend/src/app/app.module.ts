@@ -24,11 +24,12 @@ import { ProductPreviewComponent } from './cmps/product-preview/product-preview.
 import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.component'
 import { ProductDetailsComponent } from './pages/product-details/product-details.component'
 import { ProductEditComponent } from './pages/product-edit/product-edit.component'
-import { reducers } from './store/shop.reducers'
+import { reducers } from './store/app.state'
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { ShopEffects } from './store/shop.effects'
-import { ShopIndexComponent } from './pages/shop-index/shop-index.component';
-import { FooterComponent } from './cmps/footer/footer.component';
+import { UserEffects } from './store/user.effects'
+import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
+import { FooterComponent } from './cmps/footer/footer.component'
 import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 
 @NgModule({
@@ -63,6 +64,7 @@ import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ShopEffects]),
+    EffectsModule.forRoot([UserEffects]),
     RecaptchaFormsModule,
     RecaptchaModule
   ],

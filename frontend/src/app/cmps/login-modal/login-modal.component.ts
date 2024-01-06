@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ModalService } from '../../services/modal.service'
-import { UserService } from '../../services/user.service'
 import { UserSignup } from '../../models/user'
 import { AppState } from '../../store/app.state'
 import { Store } from '@ngrx/store'
@@ -22,12 +21,14 @@ export class LoginModalComponent {
   personIcon: string = 'personIcon'
   idIcon: string = 'idIcon'
 
-  constructor(public mS: ModalService, private uS: UserService, private fb: FormBuilder, private store: Store<AppState>) {
-    this.loginForm = this.fb.group({
+  constructor(public mService: ModalService,
+    private fBuilder: FormBuilder,
+    private store: Store<AppState>) {
+    this.loginForm = this.fBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
-    this.signupForm = this.fb.group({
+    this.signupForm = this.fBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       username: ['', [Validators.required]],
@@ -41,7 +42,7 @@ export class LoginModalComponent {
   }
 
   closeLoginModal() {
-    this.mS.closeModal('login')
+    this.mService.closeModal('login')
     this.signupForm.reset()
     this.loginForm.reset()
   }
@@ -72,14 +73,6 @@ export class LoginModalComponent {
         this.store.dispatch(LOGIN({ credentials }))
         this.closeLoginModal()
         this.loginForm.reset()
-        // this.uS.login(credentials).subscribe({
-        //   next: (user) => {
-        //     console.log('Logged in user:', user)
-        //     this.closeLoginModal()
-        //   },
-        //   error: (err) => console.error('Login error:', err),
-        //   complete: () => this.loginForm.reset()
-        // })
       }
     } else {
       if (this.signupForm.valid) {
@@ -94,14 +87,6 @@ export class LoginModalComponent {
         this.store.dispatch(SIGNUP({ credentials }))
         this.closeLoginModal()
         this.signupForm.reset()
-        // this.uS.signup(signupData).subscribe({
-        //   next: (user) => {
-        //     console.log('Registered user:', user)
-        //     this.closeLoginModal()
-        //   },
-        //   error: (err) => console.error('Signup error:', err),
-        //   complete: () => this.signupForm.reset()
-        // })
       }
     }
   }

@@ -1,14 +1,13 @@
 import { createReducer, on } from '@ngrx/store'
 import * as UserActions from './user.actions'
 import { User } from '../models/user'
-import { UserService } from '../services/user.service';
+import { UserService } from '../services/user.service'
 
 export interface UserState {
     user: User
     loggedinUser: User
     users: User[]
     isLoading: boolean
-
 }
 
 const defaultUser: User = UserService.getDefaultUser()
@@ -43,11 +42,9 @@ export const userReducer = createReducer(
 
     on(UserActions.SET_LOADING_STATE, (state, { isLoading }) => ({ ...state, isLoading })),
 
-
     on(UserActions.LOGOUT, (state) => ({
         ...state,
         // Implement logout logic here if needed
         loggedinUser: defaultUser,
     })),
-    
 )

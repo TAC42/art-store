@@ -45,7 +45,6 @@ export class UserService {
   login(userCred: UserCredentials): Observable<User> {
     return this.httpService.post<User>('auth/login', userCred).pipe(
       tap((user) => {
-        console.log('Logged in user:', user.fullName)
         this._setLoggedinUser(user)
       }),
       catchError((error) => {
@@ -78,12 +77,16 @@ export class UserService {
     )
   }
 
-  _setLoggedinUser(user: User): User {
-    sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(user))
-    return user
+  _setLoggedinUser(user: User): void {
+    const userForSession = {
+      _id: user._id,
+      username: user.username,
+      isAdmin: user.isAdmin
+    }
+    sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
   }
 
-  static getLoggedinUser(): User  {
+  static getLoggedinUser(): User {
     const user = sessionStorage.getItem(SESSION_KEY_LOGGEDIN_USER)
     return user ? JSON.parse(user) : null
   }

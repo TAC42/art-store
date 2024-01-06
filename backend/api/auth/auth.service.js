@@ -15,7 +15,6 @@ dotenv.config()
 const cryptr = new Cryptr(process.env.DECRYPTION)
 
 async function login(username, password) {
-  console.log(`Attempting to login user: ${username}`)
   loggerService.debug(`auth.service - login with username: ${username}`)
 
   const user = await userService.getByUsername(username)
@@ -27,8 +26,9 @@ async function login(username, password) {
   // delete user.password
   return user
 }
-async function signup(username, password, fullName, imgUrl, isAdmin = false) {
-  console.log(`Attempting to signup user: ${username}`)
+async function signup(username, password, fullName, email, imgUrl, isAdmin = false) {
+  loggerService.debug(`auth.service - signup with username: ${username}`)
+  
   const saltRounds = 10
 
   if (!username || !password || !fullName) {
@@ -38,7 +38,7 @@ async function signup(username, password, fullName, imgUrl, isAdmin = false) {
   const hash = await bcrypt.hash(password, saltRounds)
 
   return userService.save({
-    username, password: hash, fullName, imgUrl,
+    username, password: hash, fullName, email, imgUrl,
     createdAt: Date.now(), isAdmin,
   })
 }
@@ -46,7 +46,7 @@ async function signup(username, password, fullName, imgUrl, isAdmin = false) {
 function getLoginToken(user) {
   const userInfo = {
     _id: user._id,
-    fullName: user.fullName,
+    username: user.username,
     isAdmin: user.isAdmin,
   }
   return cryptr.encrypt(JSON.stringify(userInfo))

@@ -1,7 +1,6 @@
-import { ActionReducerMap, createReducer, on } from '@ngrx/store'
+import { createReducer, on } from '@ngrx/store'
 import { productsLoaded, loadProductByName, filterUpdated, loadFilter, setLoadingState, saveProduct } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
-import { AppState } from './app.state'
 
 export interface ShopState {
   products: Product[]
@@ -57,9 +56,4 @@ export const shopReducer = createReducer(
       products: updatedProducts,
     }
   }),
-
 )
-
-export const reducers: ActionReducerMap<AppState> = {
-  shop: shopReducer,
-}

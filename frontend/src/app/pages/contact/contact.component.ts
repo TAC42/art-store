@@ -31,10 +31,10 @@ export class ContactComponent {
   recaptchaSize: ReCaptchaV2.Size = 'normal'
   contactForm: FormGroup
 
-  constructor(private fB: FormBuilder,
+  constructor(private fBuilder: FormBuilder,
     private uS: UtilityService,
     private dTS: DeviceTypeService) {
-    this.contactForm = this.fB.group({
+    this.contactForm = this.fBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       title: ['', Validators.required],

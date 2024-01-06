@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, map, mergeMap } from 'rxjs/operators'
-import { EMPTY, of } from 'rxjs'
+import { EMPTY } from 'rxjs'
 import * as UserActions from './user.actions'
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
 
 @Injectable()
 export class UserEffects {
-    constructor(private actions$: Actions, private userService: UserService) { }
+    constructor(private actions$: Actions, private uService: UserService) { }
 
     loadUsers$ = createEffect(() =>
         this.actions$.pipe(
             ofType(UserActions.LOAD_USERS),
             mergeMap(() =>
-                this.userService.query().pipe(
+                this.uService.query().pipe(
                     map((users: User[]) => UserActions.SET_USERS({ users })),
                     catchError((error) => {
                         console.error('Error loading users:', error)
@@ -29,7 +29,7 @@ export class UserEffects {
         this.actions$.pipe(
             ofType(UserActions.LOAD_USER),
             mergeMap((action) =>
-                this.userService.getById(action.userId).pipe(
+                this.uService.getById(action.userId).pipe(
                     map((user: User) => UserActions.SET_USER({ user })),
                     catchError((error) => {
                         console.error(`Error loading user ${action.userId}:`, error)
@@ -44,7 +44,7 @@ export class UserEffects {
         this.actions$.pipe(
             ofType(UserActions.LOGIN),
             mergeMap((action) =>
-                this.userService.login(action.credentials).pipe(
+                this.uService.login(action.credentials).pipe(
                     map((user: User) => UserActions.SET_LOGGEDIN_USER({ user })),
                     catchError((error) => {
                         console.error(`Error fetching loggedin user: `, error)
@@ -59,7 +59,7 @@ export class UserEffects {
         this.actions$.pipe(
             ofType(UserActions.SIGNUP),
             mergeMap((action) =>
-                this.userService.signup(action.credentials).pipe(
+                this.uService.signup(action.credentials).pipe(
                     map((user: User) => UserActions.SET_LOGGEDIN_USER({ user })),
                     catchError((error) => {
                         console.error(`Error fetching signup user: `, error)
@@ -74,7 +74,7 @@ export class UserEffects {
         this.actions$.pipe(
             ofType(UserActions.LOGOUT),
             mergeMap((action) =>
-                this.userService.logout().pipe(
+                this.uService.logout().pipe(
                     map(() => UserActions.LOGOUT()),
                     catchError((error) => {
                         console.error(`Error logging out user: `, error)
@@ -84,6 +84,4 @@ export class UserEffects {
             )
         )
     )
-
-    // havent done (Login, Signup, Logout) actions
 }
