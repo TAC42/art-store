@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, map, mergeMap } from 'rxjs/operators'
-import { EMPTY, of } from 'rxjs'
+import { EMPTY } from 'rxjs'
 import * as UserActions from './user.actions'
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
@@ -70,20 +70,6 @@ export class UserEffects {
         )
     )
 
-    // logout$ = createEffect(() =>
-    //     this.actions$.pipe(
-    //         ofType(UserActions.LOGOUT),
-    //         mergeMap((action) =>
-    //             this.uService.logout().pipe(
-    //                 map(() => UserActions.LOGOUT()),
-    //                 catchError((error) => {
-    //                     console.error(`Error logging out user: `, error)
-    //                     return EMPTY
-    //                 })
-    //             )
-    //         )
-    //     )
-    // )
     logout$ = createEffect(() =>
         this.actions$.pipe(
             ofType(UserActions.LOGOUT),
@@ -91,7 +77,7 @@ export class UserEffects {
                 this.uService.logout().pipe(
                     catchError((error) => {
                         console.error(`Error logging out user: `, error)
-                        return of({ type: '[User] Logout Failed' })
+                        return EMPTY
                     }),
                     map(() => ({ type: '[User] Logout No Operation' }))
                 )

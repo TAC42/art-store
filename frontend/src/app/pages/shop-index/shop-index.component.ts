@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { Observable, catchError, defaultIfEmpty, filter, of, switchMap } from 'rxjs'
-import { selectProducts, selectFilterBy, selectIsLoading } from '../../store/shop.selectors'
+import { Observable } from 'rxjs'
+import { selectProducts, selectIsLoading } from '../../store/shop.selectors'
 import { Product } from '../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ShopDbService } from '../../services/shop-db.service'
 import { ShopFilter } from '../../models/shop'
 import { filterUpdated } from '../../store/shop.actions'
 
@@ -17,7 +16,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) { }
   router = inject(Router)
   private activatedRoute = inject(ActivatedRoute)
-  private shopDbService = inject(ShopDbService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
@@ -26,7 +24,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
-      this.isLoading = isLoading 
+      this.isLoading = isLoading
     })
 
     this.store.dispatch({ type: '[Shop] Load Filter' })
@@ -50,7 +48,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(filterUpdated({ updatedFilter: newFilter }))
     this.store.dispatch({ type: '[Shop] Load Products' })
 
-
     // Update route parameters with search filter
     this.activatedRoute.queryParams.subscribe((params) => {
       const updatedParams = { ...params, search: newFilter.search }
@@ -67,5 +64,3 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   }
 }
-
-
