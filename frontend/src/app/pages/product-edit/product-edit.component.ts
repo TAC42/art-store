@@ -5,7 +5,7 @@ import { Subject, filter, map, tap } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { nameTaken, startWithNumber } from '../../custom-validators/product-validators'
-import { saveProduct } from '../../store/shop.actions'
+import { SAVE_PRODUCT } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 
@@ -79,7 +79,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       imgUrls: imgUrlsArray,
     }
     console.log('saved product: ', productToSave)
-    this.store.dispatch(saveProduct({ product: productToSave }))
+    this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
     this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 

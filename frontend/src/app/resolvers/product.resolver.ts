@@ -1,8 +1,8 @@
-import { Resolve ,ActivatedRouteSnapshot} from '@angular/router'
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
-import { loadProductByName } from '../store/shop.actions'
+import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
 import { selectProductByName } from '../store/shop.selectors'
 import { Observable } from 'rxjs'
 import { filter, take, delay, tap, map } from 'rxjs/operators'
@@ -16,24 +16,24 @@ export class ProductResolver implements Resolve<Product | null> {
   constructor(
     private store: Store<AppState>,
     private loaderService: LoaderService
-  ) {}
+  ) { }
 
-  resolve(route:ActivatedRouteSnapshot): Observable<Product | null> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Product | null> {
     const name = route.params['name']
 
-    this.loaderService.setIsLoading(true) // Set loading state
+    this.loaderService.setIsLoading(true)
 
-    this.store.dispatch(loadProductByName({ name })) // Dispatch action to load product by name
-    
+    this.store.dispatch(LOAD_PRODUCT_BY_NAME({ name }))
+
     return this.store.select(selectProductByName(name)).pipe(
-      filter(product => !!product), // Filter to wait for the product to be available
-      delay(500), // Introduce a delay of 500ms
+      filter(product => !!product),
+      delay(500),
       tap((product) => {
         this.loaderService.setIsLoading(false)
         console.log('product in resolver: ', product)
-      }), // Set loading state to false
-      map(product => product || null), // Map undefined values to null
-      take(1) // Take one emitted value and complete the resolver
+      }),
+      map(product => product || null),
+      take(1)
     )
   }
 }

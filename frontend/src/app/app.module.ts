@@ -65,8 +65,7 @@ import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ShopEffects]),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([ShopEffects, UserEffects]),
     RecaptchaFormsModule,
     RecaptchaModule
   ],
