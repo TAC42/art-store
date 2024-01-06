@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ShopFilter } from '../../models/shop'
-import { filterUpdated } from '../../store/shop.actions'
+import { FILTER_UPDATED } from '../../store/shop.actions'
 
 @Component({
   selector: 'shop-index',
@@ -45,7 +45,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   private updateFilter(newFilter: Partial<ShopFilter>): void {
-    this.store.dispatch(filterUpdated({ updatedFilter: newFilter }))
+    this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch({ type: '[Shop] Load Products' })
 
     // Update route parameters with search filter
