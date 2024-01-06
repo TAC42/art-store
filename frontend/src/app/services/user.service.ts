@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpService } from './http.service'
-import { Observable, throwError, catchError, tap } from 'rxjs'
+import { Observable, throwError, catchError, tap, of } from 'rxjs'
 import { User, UserCredentials, UserSignup } from '../models/user'
 
 const SESSION_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -67,12 +67,12 @@ export class UserService {
     )
   }
 
-  logout(): Observable<void> {
+  logout(): Observable<any> {
     return this.httpService.post<void>('auth/logout', null).pipe(
       tap(() => sessionStorage.removeItem(SESSION_KEY_LOGGEDIN_USER)),
       catchError((error) => {
         console.error('Cannot logout:', error)
-        return throwError(() => new Error('Error during logout'))
+        return of({ error: true, message: 'Logout failed. Please try again.' })
       })
     )
   }

@@ -43,8 +43,6 @@ export const userReducer = createReducer(
     on(UserActions.SET_LOADING_STATE, (state, { isLoading }) => ({ ...state, isLoading })),
 
     on(UserActions.LOGOUT, (state) => ({
-        ...state,
-        // Implement logout logic here if needed
-        loggedinUser: defaultUser,
+        ...state, loggedinUser: defaultUser,
     })),
 )
