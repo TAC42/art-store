@@ -30,8 +30,9 @@ import { ShopEffects } from './store/shop.effects'
 import { UserEffects } from './store/user.effects'
 import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 import { FooterComponent } from './cmps/footer/footer.component'
-import { LoginModalComponent } from './cmps/login-modal/login-modal.component';
+import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
+import { CustomValidatorDirective } from './directives/custom-validator.directive'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
     FooterComponent,
     LoginModalComponent,
     UserMsgComponent,
+    CustomValidatorDirective,
   ],
   imports: [
     BrowserModule,

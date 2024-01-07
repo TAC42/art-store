@@ -1,7 +1,6 @@
 <main *ngIf="isVisible" [@messageAnimation]="msgState" class="user-msg-contents flex column">
     <span class="msg-title flex row {{ msg?.type }}">
-        <svg-render [svgName]="msg?.type === 'success' ? successIcon : errorIcon">
-        </svg-render>
+        <svg-render [svgName]="msg?.type === 'success' ? successIcon : errorIcon" />
         <h4>{{ msg?.title }}</h4>
     </span>
     <p class="{{ msg?.type }}">{{ msg?.txt }}</p>
