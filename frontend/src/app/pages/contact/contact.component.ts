@@ -19,6 +19,7 @@ export class ContactComponent {
   emailIcon: string = 'emailIcon'
   titleIcon: string = 'titleIcon'
   descriptionIcon: string = 'descriptionIcon'
+  contactForm: FormGroup
 
   contactImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513247/Gallery/Function/im2hkdn3k8zkrl4oidm5.png',
@@ -30,7 +31,6 @@ export class ContactComponent {
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false
   recaptchaSize: ReCaptchaV2.Size = 'normal'
-  contactForm: FormGroup
 
   constructor(private fBuilder: FormBuilder,
     private uS: UtilityService,

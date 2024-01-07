@@ -20,7 +20,7 @@
                     <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
                 </label>
                 <input id="name" type="text" formControlName="name" placeholder="John Doe..." customValidator
-                    [cvMaxLength]=30 [allowedSpecialChars]="'. '">
+                    [maxLength]=48 [allowedSpecialChars]="'. '">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
@@ -32,7 +32,7 @@
                     <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
                 </label>
                 <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
-                    [cvMaxLength]=50 [allowedSpecialChars]="'@.'">
+                    [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
@@ -44,7 +44,7 @@
                     <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
                 </label>
                 <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question..."
-                    customValidator [cvMaxLength]=50 [allowedSpecialChars]="' '">
+                    customValidator [maxLength]=48 [allowedSpecialChars]="' '">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
@@ -56,7 +56,7 @@
                     <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
                 </label>
                 <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator
-                    [cvMaxLength]=50 [allowedSpecialChars]="'*#$! '"></textarea>
+                    [maxLength]=256 [allowedSpecialChars]="'*#$! '"></textarea>
             </div>
 
             <div class="form-actions flex row">
@@ -65,7 +65,7 @@
                     <span>Send</span>
                     <svg-render [svgName]="paperPlaneIcon" />
                 </button>
-                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize"></re-captcha>
+                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
             </div>
         </form>
     </section>
