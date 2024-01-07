@@ -62,6 +62,8 @@ export class LoginModalComponent {
       else return `${fieldName} is required`
     }
     if (field?.errors?.['email']) return 'Invalid email format'
+    if (field?.errors?.['maxLength']) return `Maximum length reached`
+    if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
 
     return ''
   }

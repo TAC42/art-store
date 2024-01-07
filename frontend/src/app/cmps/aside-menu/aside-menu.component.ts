@@ -2,7 +2,10 @@ import { Component, ElementRef, HostListener } from '@angular/core'
 import { trigger, style, animate, transition } from '@angular/animations'
 import { ModalService } from '../../services/modal.service'
 import { AppState } from '../../store/app.state'
-import { Store } from '@ngrx/store'
+import { Store, select } from '@ngrx/store'
+import { User } from '../../models/user'
+import { selectLoggedinUser } from '../../store/user.selectors'
+import { Observable } from 'rxjs'
 import { LOGOUT } from '../../store/user.actions'
 
 @Component({
@@ -11,11 +14,11 @@ import { LOGOUT } from '../../store/user.actions'
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
-        style({ transform: 'translateX(-100%)' }),
-        animate('500ms ease-in-out', style({ transform: 'translateX(0%)' }))
+        style({ transform: 'translate3d(-100%, 0, 0)' }),
+        animate('500ms ease-in-out', style({ transform: 'translate3d(0, 0, 0)' }))
       ]),
       transition(':leave', [
-        animate('500ms ease-in-out', style({ transform: 'translateX(-100%)' }))
+        animate('500ms ease-in-out', style({ transform: 'translate3d(-100%, 0 ,0)' }))
       ])
     ])
   ]
@@ -24,10 +27,13 @@ import { LOGOUT } from '../../store/user.actions'
 export class AsideMenuComponent {
   isMenuOpen: boolean = false
   ocLogo: string = 'ocLogo'
+  loggedinUser$: Observable<User>
 
   constructor(private eR: ElementRef,
     private mS: ModalService,
-    private store: Store<AppState>) { }
+    private store: Store<AppState>) {
+    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen

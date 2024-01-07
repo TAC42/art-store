@@ -27,9 +27,18 @@
                 overflow: hidden;
                 position: relative;
 
+                span {
+                    transition: all 0.5s;
+                    opacity: 1;
+                }
+
                 &.disabled {
-                    background: $scdclr2;
+                    background: $scdclr1;
                     pointer-events: none;
+
+                    span {
+                        opacity: 0;
+                    }
                 }
 
                 &:hover {
