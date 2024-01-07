@@ -48,7 +48,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch({ type: '[Shop] Load Products' })
 
-    // Update route parameters with search filter
     this.activatedRoute.queryParams.subscribe((params) => {
       const updatedParams = { ...params, search: newFilter.search }
       this.router.navigate([], {
