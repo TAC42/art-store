@@ -1,8 +1,11 @@
 shop-filter {
-  display: flex;
+  display: grid;
+  // grid-auto-flow: column;
+  grid-template-columns: 1fr 56px;
   align-items: center;
   padding: 1em;
   width: 100%;
+  position: relative;
 
   input {
     padding: 0.5em;
@@ -24,7 +27,15 @@ shop-filter {
       // outline-offset: -1px;
     }
   }
-  svg-render {
+  .clear {
+    position:absolute;
+    right: 5em;
+    svg{
+      fill: $scdclr4;
+      opacity: .8;
+    }
+  }
+  .search {
     span {
       padding: 1.2em 1em 6px 1em;
       border-radius: 0 0.5em 0.5em 0;
