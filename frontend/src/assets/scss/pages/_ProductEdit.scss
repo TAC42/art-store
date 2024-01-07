@@ -7,12 +7,14 @@ product-edit {
     text-align: center;
     margin-block-end: 1em;
 
-    background: linear-gradient(to bottom,
-        $prmclr3,
-        $scdclr3,
-        $scdclr4,
-        $scdclr5,
-        $scdclr2 );
+    background: linear-gradient(
+      to bottom,
+      $prmclr3,
+      $scdclr3,
+      $scdclr4,
+      $scdclr5,
+      $scdclr2
+    );
 
     form {
       gap: 1em;
@@ -30,7 +32,7 @@ product-edit {
           padding: 0 0.5em;
           align-items: center;
           justify-content: space-between;
-          margin: .25em 0;
+          margin: 0.25em 0;
 
           span {
             color: $mnrclr2;
@@ -69,13 +71,20 @@ product-edit {
           }
         }
 
+        button {
+          background-color: transparent;
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
         textarea {
           resize: none;
           min-height: 100px;
         }
 
         &.error {
-
           input,
           textarea {
             border: 1px solid $mnrclr2;
@@ -136,7 +145,7 @@ product-edit {
   }
 
   .back-btn {
-    margin: .5em 1em;
+    margin: 0.5em 1em;
     width: 36px;
 
     svg {

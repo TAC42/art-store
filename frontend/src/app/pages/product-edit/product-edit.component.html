@@ -35,17 +35,31 @@
             style="width: 24px; height: 24px"
           ></svg-render>
           <span>Image Urls*</span>
+          <button type="button" (click)="addImage()">Add Image</button>
         </div>
         <span *ngIf="isFieldInvalid('imgUrls')">{{
           getErrorMessage("imgUrls")
         }}</span>
       </label>
-      <textarea
-        formControlName="imgUrls"
-        id="imgUrls"
-        rows="4"
-        placeholder="Please enter image URLs separated by commas..."
-      ></textarea>
+
+      <div formArrayName="imgUrls">
+        <div *ngFor="let imgUrl of imgUrlsFormArray.controls; let i = index">
+          <div class="img-url-input flex row">
+            <input
+              type="file"
+              (change)="onFileChange($event, i)"
+              [formControlName]="i"
+              accept=".png, .jpg, .jpeg"
+            />
+            <button *ngIf="isRemove(i)"
+              type="button"
+              (click)="removeImage(i)"
+            >
+              <svg-render svgName="removeIcon" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('price')">
@@ -142,10 +156,7 @@
         [class.disabled]="!editForm.valid"
       >
         <span>Submit</span>
-        <svg-render
-          svgName="paperPlaneIcon"
-          style="width: 32px; height: 32px"
-        >
+        <svg-render svgName="paperPlaneIcon" style="width: 32px; height: 32px">
         </svg-render>
       </button>
     </div>
