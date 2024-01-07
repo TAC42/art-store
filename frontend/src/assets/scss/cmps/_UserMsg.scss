@@ -8,10 +8,11 @@ app-user-msg {
     .user-msg-contents {
         width: fit-content;
         margin: 0 auto;
-        padding: 1.5em 1.5em 1em 1.5em;
+        padding: 1.75em 1em 1em 1em;
         border: 1px solid $scdclr2;
         border-radius: 0.5em;
         max-width: 300px;
+        min-width: 250px;
         background: $prmclr3;
         justify-content: center;
         align-items: center;
@@ -50,6 +51,8 @@ app-user-msg {
 
         p {
             font-size: 18px;
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             &.success {
                 color: $mnrclr6;
