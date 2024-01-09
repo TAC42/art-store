@@ -44,7 +44,6 @@ app-header {
         }
 
         input {
-          // width: 100%;
           padding: 0.5em;
           transition: all 0.3s;
           border-radius: 0.5em 0 0 0.5em;
@@ -54,7 +53,9 @@ app-header {
           font-family: "nh-medium";
           font-size: 1em;
           line-height: 1.6;
-
+          opacity: 0;
+          transform: translateX(0%);
+          
           &:focus,
           &:focus-visible {
             outline: none;
@@ -62,12 +63,13 @@ app-header {
             border-width: 1px 0 1px 1px;
           }
         }
-
+        
         &.search-on {
-        //   justify-content: center;
-        transition: all 0.6s ease-in-out;
-        input{
+          //   justify-content: center;
+          input{
             transform: translateX(30%);
+            opacity:1;
+            transition: all 0.6s ease-in-out;
         }
             
           .clear {
