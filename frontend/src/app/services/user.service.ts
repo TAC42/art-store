@@ -93,10 +93,11 @@ export class UserService {
 
   static getDefaultUser(): User {
     return {
+      _id: '',
+      username: '',
       fullName: '',
       email: '',
       imgUrl: '',
-      username: '',
       password: '',
       createdAt: 0,
       isAdmin: false,
