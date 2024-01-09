@@ -7,14 +7,12 @@ product-edit {
     text-align: center;
     margin-block-end: 1em;
 
-    background: linear-gradient(
-      to bottom,
-      $prmclr3,
-      $scdclr3,
-      $scdclr4,
-      $scdclr5,
-      $scdclr2
-    );
+    background: linear-gradient(to bottom,
+        $prmclr3,
+        $scdclr3,
+        $scdclr4,
+        $scdclr5,
+        $scdclr2 );
 
     form {
       gap: 1em;
@@ -73,6 +71,7 @@ product-edit {
 
         button {
           background-color: transparent;
+
           svg {
             width: 24px;
             height: 24px;
@@ -80,11 +79,11 @@ product-edit {
         }
 
         textarea {
-          resize: none;
           min-height: 100px;
         }
 
         &.error {
+
           input,
           textarea {
             border: 1px solid $mnrclr2;

@@ -6,121 +6,52 @@
     <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
       <label for="name" class="flex row">
         <div class="label-info flex row">
-          <svg-render
-            svgName="productName"
-            style="width: 24px; height: 24px"
-          ></svg-render>
+          <svg-render svgName="productName" style="width: 24px; height: 24px"></svg-render>
           <span>Name*</span>
         </div>
-        <span *ngIf="isFieldInvalid('name')">{{
-          getErrorMessage("name")
-        }}</span>
+        <span *ngIf="isFieldInvalid('name')">
+          {{ getErrorMessage("name") }}
+        </span>
       </label>
-      <input
-        id="name"
-        type="text"
-        formControlName="name"
-        placeholder="Please enter product name..."
-      />
-    </div>
-
-    <div
-      class="input-area flex column"
-      [class.error]="isFieldInvalid('imgUrls')"
-    >
-      <label for="imgUrls" class="flex row">
-        <div class="label-info flex row">
-          <svg-render
-            svgName="imgUrls"
-            style="width: 24px; height: 24px"
-          ></svg-render>
-          <span>Image Urls*</span>
-          <button type="button" (click)="addImage()">Add Image</button>
-        </div>
-        <span *ngIf="isFieldInvalid('imgUrls')">{{
-          getErrorMessage("imgUrls")
-        }}</span>
-      </label>
-
-      <div formArrayName="imgUrls">
-        <div *ngFor="let imgUrl of imgUrlsFormArray.controls; let i = index">
-          <div class="img-url-input flex row">
-            <input
-              type="file"
-              (change)="onFileChange($event, i)"
-              [formControlName]="i"
-              accept=".png, .jpg, .jpeg"
-            />
-            <button *ngIf="isRemove(i)"
-              type="button"
-              (click)="removeImage(i)"
-            >
-              <svg-render svgName="removeIcon" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." />
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('price')">
       <label for="price" class="flex row">
         <div class="label-info flex row">
-          <svg-render
-            svgName="price"
-            style="width: 24px; height: 24px"
-          ></svg-render>
+          <svg-render svgName="price" style="width: 24px; height: 24px"></svg-render>
           <span>Price*</span>
         </div>
-        <span *ngIf="isFieldInvalid('price')">{{
-          getErrorMessage("price")
-        }}</span>
+        <span *ngIf="isFieldInvalid('price')">
+          {{ getErrorMessage("price") }}
+        </span>
       </label>
-      <input
-        id="price"
-        type="number"
-        formControlName="price"
-        placeholder="Please enter a price..."
-      />
+      <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." />
     </div>
 
-    <div
-      class="input-area flex column"
-      [class.error]="isFieldInvalid('description')"
-    >
+    <div class="input-area flex column" [class.error]="isFieldInvalid('description')">
       <label for="description" class="flex row">
         <div class="label-info flex row">
-          <svg-render
-            svgName="descriptionIcon"
-            style="width: 24px; height: 24px"
-          ></svg-render>
+          <svg-render svgName="descriptionIcon" style="width: 24px; height: 24px"></svg-render>
           <span>Description*</span>
         </div>
-        <span *ngIf="isFieldInvalid('description')">{{
-          getErrorMessage("description")
-        }}</span>
+        <span *ngIf="isFieldInvalid('description')">
+          {{ getErrorMessage("description") }}
+        </span>
       </label>
-      <textarea
-        id="description"
-        formControlName="description"
-        placeholder="Please enter info regarding your product..."
-      ></textarea>
+      <textarea id="description" formControlName="description"
+        placeholder="Please enter info regarding your product..."></textarea>
     </div>
 
-    <div
-      class="input-area flex column"
-      [class.error]="isFieldInvalid('in-stock')"
-    >
+    <div class="input-area flex column" [class.error]="isFieldInvalid('in-stock')">
       <label for="in-stock" class="flex row">
         <div class="label-info flex row">
-          <svg-render
-            svgName="inStock"
-            style="width: 24px; height: 24px"
-          ></svg-render>
+          <svg-render svgName="inStock" style="width: 24px; height: 24px"></svg-render>
           <span>In Stock*</span>
         </div>
-        <span *ngIf="isFieldInvalid('in-stock')">{{
-          getErrorMessage("in-stock")
-        }}</span>
+        <span *ngIf="isFieldInvalid('in-stock')">
+          {{ getErrorMessage("in-stock")}}
+        </span>
       </label>
       <select formControlName="inStock" id="in-stock">
         <option value="true">True</option>
@@ -131,15 +62,12 @@
     <div class="input-area flex column" [class.error]="isFieldInvalid('type')">
       <label for="type" class="flex row">
         <div class="label-info flex row">
-          <svg-render
-            svgName="location"
-            style="width: 24px; height: 24px"
-          ></svg-render>
+          <svg-render svgName="location" style="width: 24px; height: 24px"></svg-render>
           <span>Location*</span>
         </div>
-        <span *ngIf="isFieldInvalid('type')">{{
-          getErrorMessage("type")
-        }}</span>
+        <span *ngIf="isFieldInvalid('type')">
+          {{ getErrorMessage("type") }}
+        </span>
       </label>
       <select formControlName="type" id="type">
         <option value="shop">Shop</option>
@@ -149,12 +77,7 @@
     </div>
 
     <div class="form-actions flex row">
-      <button
-        class="flex row"
-        type="submit"
-        [disabled]="!editForm.valid"
-        [class.disabled]="!editForm.valid"
-      >
+      <button class="flex row" type="submit" [disabled]="!editForm.valid" [class.disabled]="!editForm.valid">
         <span>Submit</span>
         <svg-render svgName="paperPlaneIcon" style="width: 32px; height: 32px">
         </svg-render>
