@@ -1,7 +1,8 @@
-import { Component, OnDestroy, Output, EventEmitter, inject } from '@angular/core'
+import { Component, OnDestroy, Output, EventEmitter, inject, HostBinding } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
+import { DimmerService } from '../../services/dimmer.service'
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnDestroy {
   searchValue: string = ''
   deviceType: string = 'mini-tablet'
   private router = inject(Router)
+  private dimmerService = inject(DimmerService)
   private subscription: Subscription
 
   constructor(private deviceTypeService: DeviceTypeService) {
@@ -32,6 +34,7 @@ export class HeaderComponent implements OnDestroy {
 
   onOpenSearch() {
     this.searchState = !this.searchState
+    this.dimmerService.toggleDimmerClass()
     if (!this.searchState && this.searchValue.trim() !== '') {
       this.router.navigateByUrl(`/shop?search=${encodeURIComponent(this.searchValue.trim())}`)
     }
@@ -42,9 +45,13 @@ export class HeaderComponent implements OnDestroy {
     this.searchValue = target.value
   }
 
-  onClearFilter(event: Event){
+  onClearFilter(event: Event) {
     event.stopPropagation()
     this.searchValue = ''
+  }
+
+  closeMenu() {
+    this.searchState = false
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-<header class="header-contents w-h-100 layout-row">
+<header class="header-contents w-h-100 layout-row" (clickOutside)="closeMenu()">
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else elseTemplate">
