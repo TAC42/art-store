@@ -42,6 +42,11 @@ export class HeaderComponent implements OnDestroy {
     this.searchValue = target.value
   }
 
+  onClearFilter(event: Event){
+    event.stopPropagation()
+    this.searchValue = ''
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe()
   }
