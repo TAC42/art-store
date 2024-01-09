@@ -1,15 +1,18 @@
 import { createReducer, on } from '@ngrx/store'
-import { PRODUCTS_LOADED, LOAD_PRODUCT_BY_NAME, FILTER_UPDATED, LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT } from './shop.actions'
+import { PRODUCTS_LOADED, SET_PRODUCT_BY_NAME, FILTER_UPDATED, LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
+import { ShopDbService } from '../services/shop-db.service'
 
 export interface ShopState {
   products: Product[]
+  selectedProduct: Product | null
   filterBy: ShopFilter
   isLoading: boolean
 }
 
 export const initialState: ShopState = {
-  products: [],
+  products: [], 
+  selectedProduct: null,
   filterBy: { search: '' },
   isLoading: false,
 }
@@ -20,9 +23,9 @@ export const shopReducer = createReducer(
     ...state,
     products: products,
   })),
-  on(LOAD_PRODUCT_BY_NAME, (state, { name }) => ({
+  on(SET_PRODUCT_BY_NAME, (state, { product }) => ({
     ...state,
-    selectedProduct: state.products.find((product) => product.name === name) || null,
+    selectedProduct: product,
   })),
   on(FILTER_UPDATED, (state, { updatedFilter }) => ({
     ...state,

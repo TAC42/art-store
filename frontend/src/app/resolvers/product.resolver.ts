@@ -5,7 +5,7 @@ import { AppState } from '../store/app.state'
 import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
 import { selectProductByName } from '../store/shop.selectors'
 import { Observable, of } from 'rxjs'
-import { take, tap, switchMap } from 'rxjs/operators'
+import { take, tap, switchMap, filter, delay, map } from 'rxjs/operators'
 import { LoaderService } from '../services/loader.service'
 import { Product } from '../models/shop'
 
@@ -25,17 +25,14 @@ export class ProductResolver implements Resolve<Product | null> {
     this.lService.setIsLoading(true)
     this.store.dispatch(LOAD_PRODUCT_BY_NAME({ name }))
 
-    return this.store.select(selectProductByName(name)).pipe(
-      switchMap(product => {
-        if (product) {
-          console.log('Product resolved:', product)
-          return of(product)
-        }
-        else return of(null)
+    return this.store.select(selectProductByName).pipe(
+      filter((product): product is Product => !!product), 
+      delay(500),
+      tap((product) => {
+        this.lService.setIsLoading(false);
+        console.log('product in resolver: ', product)
       }),
-      tap(() => {
-        this.lService.setIsLoading(false)
-      }),
+      map((product) => product || null), // Ensure the map outputs Product or null
       take(1)
     )
   }

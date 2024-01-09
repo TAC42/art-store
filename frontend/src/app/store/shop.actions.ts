@@ -13,6 +13,10 @@ export const LOAD_PRODUCT_BY_NAME = createAction(
   '[Shop] Load Product By Name',
   props<{ name: string }>())
 
+export const SET_PRODUCT_BY_NAME = createAction(
+  '[Shop] Set Product By Name',
+  props<{ product: Product }>())
+
 export const FILTER_UPDATED = createAction(
   '[Shop] Filter Updated',
   props<{ updatedFilter: Partial<ShopFilter> }>())

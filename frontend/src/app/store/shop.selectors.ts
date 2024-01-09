@@ -7,9 +7,9 @@ export const selectProducts = createSelector(
   selectShopState,
   (state: ShopState) => state.products)
 
-export const selectProductByName = (name: string) => createSelector(
-  selectProducts,
-  (products) => products.find((product) => product.name === name))
+export const selectProductByName = createSelector(
+  selectShopState,
+  (state: ShopState) => state.selectedProduct)
 
 export const selectFilterBy = createSelector(
   selectShopState,

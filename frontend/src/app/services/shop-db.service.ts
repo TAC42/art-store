@@ -47,7 +47,7 @@ export class ShopDbService {
     }
   }
 
-  getDefaultProduct(): Product {
+ static getDefaultProduct(): Product {
     const currentTimestamp = Date.now()
 
     return {

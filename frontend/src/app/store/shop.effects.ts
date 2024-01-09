@@ -3,11 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { map, mergeMap, tap, withLatestFrom, catchError } from 'rxjs/operators'
 import { EMPTY } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED, SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE } from './shop.actions'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED, SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE, SET_PRODUCT_BY_NAME } from './shop.actions'
 import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
-import { selectFilterBy, selectIsLoading } from './shop.selectors'
+import { selectFilterBy, selectIsLoading, selectProductByName } from './shop.selectors'
 import { ActivatedRoute } from '@angular/router'
 import { ShopFilter } from '../models/shop'
 
@@ -75,8 +75,8 @@ export class ShopEffects {
       }),
       mergeMap(action =>
         this.shopDbService.getByName(action.name).pipe(
-          tap(product => console.log('Loaded product:', product)),
-          map(product => PRODUCTS_LOADED({ products: [product] })),
+          map(product => SET_PRODUCT_BY_NAME({ product})),
+          tap(product => console.log('Loaded product:', product.product)),
           tap(() => {
             this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
             this.loaderService.setIsLoading(false)

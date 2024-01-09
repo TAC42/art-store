@@ -29,6 +29,8 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
     this.store.dispatch({ type: '[Shop] Load Filter' })
     this.store.dispatch({ type: '[Shop] Load Products' })
+    console.log('THIS IS FILTERBY ',this.filterBy);
+    
   }
 
   onRemoveProduct(productId: string): void {
