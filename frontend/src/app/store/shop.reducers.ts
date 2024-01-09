@@ -45,9 +45,7 @@ export const shopReducer = createReducer(
         product,
         ...state.products.slice(existingProductIndex + 1),
       ]
-    } else {
-      updatedProducts = [...state.products, product]
-    }
+    } else updatedProducts = [...state.products, product]
 
     return {
       ...state,

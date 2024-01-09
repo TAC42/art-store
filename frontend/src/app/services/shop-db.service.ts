@@ -15,17 +15,20 @@ export class ShopDbService {
   constructor(private httpService: HttpService) { }
 
   query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
-    console.log('filterBy in Query ', filterBy)
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError((error) => {
         console.error('Error querying products:', error)
-        return throwError(error)
+        return throwError(() => new Error('Error fetching products'))
       })
     )
   }
 
   getById(productId: string): Observable<any> {
     return this.httpService.get(`${BASE_URL}${productId}`)
+  }
+
+  getByName(productName: string): Observable<any> {
+    return this.httpService.get(`${BASE_URL}${productName}`)
   }
 
   remove(productId: string): Observable<any> {

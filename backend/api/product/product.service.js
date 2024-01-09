@@ -10,6 +10,7 @@ const PRODUCTS_COLLECTION = 'product'
 export const productService = {
   query,
   getById,
+  getByName,
   remove,
   save,
 }
@@ -43,6 +44,23 @@ async function getById(productId) {
     return product
   } catch (err) {
     loggerService.error(`while finding product ${productId}`, err)
+    throw err
+  }
+}
+
+async function getByName(productName) {
+  try {
+    const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
+    const product = await collection.findOne({ name: productName })
+
+    if (!product) {
+      loggerService.error(`Product not found with name: ${productName}`)
+      throw new Error(`Product not found with name: ${productName}`)
+    }
+
+    return product
+  } catch (err) {
+    loggerService.error(`while finding product with name ${productName}`, err);
     throw err
   }
 }
@@ -82,7 +100,7 @@ async function save(product) {
       return { _id: id, ...productToSave }
     } else {
       const response = await collection.insertOne(productToSave)
-     // _checkRedundantProductImages()
+      // _checkRedundantProductImages()
 
       return { ...productToSave, _id: response.insertedId }
     }
@@ -99,7 +117,7 @@ function _buildPipeline(filterBy) {
     $match: {},
   }
   console.log('FILTERBY: ', filterBy)
-  const { search} = filterBy
+  const { search } = filterBy
 
   if (search) {
     criteria.$match.$or = [

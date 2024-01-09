@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { map, mergeMap, tap, withLatestFrom } from 'rxjs/operators'
+import { map, mergeMap, tap, withLatestFrom, catchError } from 'rxjs/operators'
+import { EMPTY } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED, SAVE_PRODUCT, SET_LOADING_STATE} from './shop.actions'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED, SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE } from './shop.actions'
 import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
@@ -48,7 +49,7 @@ export class ShopEffects {
   loadFilter$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_FILTER),
-      withLatestFrom(this.activatedRoute.queryParamMap), // Get the current query parameters
+      withLatestFrom(this.activatedRoute.queryParamMap),
       mergeMap(([action, queryParams]) => {
         const filterFromParams = this.getInitialFilter(queryParams)
         return [FILTER_UPDATED({ updatedFilter: filterFromParams })]
@@ -62,8 +63,33 @@ export class ShopEffects {
     if (queryParams.has('search')) {
       filterFromParams.search = queryParams.get('search') || ''
     }
-    return filterFromParams;
+    return filterFromParams
   }
+
+  loadProductByName$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_PRODUCT_BY_NAME),
+      tap(() => {
+        this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
+        this.loaderService.setIsLoading(true)
+      }),
+      mergeMap(action =>
+        this.shopDbService.getByName(action.name).pipe(
+          map(product => PRODUCTS_LOADED({ products: [product] })),
+          tap(() => {
+            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+            this.loaderService.setIsLoading(false)
+          }),
+          catchError(error => {
+            console.error('Error loading product by name:', error)
+            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+            this.loaderService.setIsLoading(false)
+            return EMPTY
+          })
+        )
+      )
+    )
+  )
 
   saveProduct$ = createEffect(() =>
     this.actions$.pipe(
@@ -84,7 +110,7 @@ export class ShopEffects {
         )
       })
     ),
-    { dispatch: false } 
+    { dispatch: false }
   )
 }
 

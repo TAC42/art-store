@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
 import { selectProductByName } from '../store/shop.selectors'
-import { Observable } from 'rxjs'
-import { filter, take, delay, tap, map } from 'rxjs/operators'
+import { Observable, of } from 'rxjs'
+import { take, tap, switchMap } from 'rxjs/operators'
 import { LoaderService } from '../services/loader.service'
 import { Product } from '../models/shop'
 
@@ -22,17 +22,17 @@ export class ProductResolver implements Resolve<Product | null> {
     const name = route.params['name']
 
     this.lService.setIsLoading(true)
-
     this.store.dispatch(LOAD_PRODUCT_BY_NAME({ name }))
 
     return this.store.select(selectProductByName(name)).pipe(
-      filter(product => !!product),
-      delay(500),
-      tap((product) => {
-        this.lService.setIsLoading(false)
-        console.log('product in resolver: ', product)
+      switchMap(product => {
+        if (product) {
+          console.log('Product resolved:', product)
+          return of(product)
+        }
+        else return of(null)
       }),
-      map(product => product || null),
+      tap(() => this.lService.setIsLoading(false)),
       take(1)
     )
   }

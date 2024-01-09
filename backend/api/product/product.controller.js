@@ -20,10 +20,24 @@ export async function getProductById(req, res) {
   try {
     const productId = req.params.id
     const product = await productService.getById(productId)
+
     res.json(product)
   } catch (err) {
     loggerService.error('Failed to get product', err)
     res.status(500).send({ err: 'Failed to get product' })
+  }
+}
+
+export async function getProductByName(req, res) {
+  try {
+    const productName = req.params.name
+    const product = await productService.getByName(productName)
+
+    if (!product) res.status(404).send({ err: 'Product not found' })
+    else res.json(product)
+  } catch (err) {
+    loggerService.error('Failed to get product by name', err)
+    res.status(500).send({ err: 'Failed to get product by name' })
   }
 }
 
@@ -32,6 +46,7 @@ export async function addProduct(req, res) {
     const product = req.body
     console.log('creating product: ', product)
     const addedProduct = await productService.save(product)
+
     res.json(addedProduct)
   } catch (err) {
     loggerService.error('Failed to add product', err)
@@ -44,6 +59,7 @@ export async function updateProduct(req, res) {
     const product = req.body
     console.log('updating product: ', product)
     const updatedProduct = await productService.save(product)
+
     res.send(updatedProduct)
   } catch (err) {
     loggerService.error('Failed to update product', err)
@@ -55,6 +71,7 @@ export async function removeProduct(req, res) {
   try {
     const productId = req.params.id
     await productService.remove(productId)
+    
     res.send()
   } catch (err) {
     loggerService.error('Failed to remove product', err)
