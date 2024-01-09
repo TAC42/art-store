@@ -20,7 +20,8 @@ export class ProductResolver implements Resolve<Product | null> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Product | null> {
     const name = route.params['name']
-
+    console.log(name)
+    
     this.lService.setIsLoading(true)
     this.store.dispatch(LOAD_PRODUCT_BY_NAME({ name }))
 
@@ -32,7 +33,9 @@ export class ProductResolver implements Resolve<Product | null> {
         }
         else return of(null)
       }),
-      tap(() => this.lService.setIsLoading(false)),
+      tap(() => {
+        this.lService.setIsLoading(false)
+      }),
       take(1)
     )
   }
