@@ -13,11 +13,10 @@ import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 const routes: Routes = [
   {
     path: 'shop', component: ShopComponent, children: [
-      // { path: '', redirectTo: 'products', pathMatch: 'full' },
+      { path: '', component: ShopIndexComponent },
       { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
       { path: 'edit', component: ProductEditComponent },
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
-      { path: '', component: ShopIndexComponent }
     ]
   },
   {

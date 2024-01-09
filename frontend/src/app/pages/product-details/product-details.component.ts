@@ -24,9 +24,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     async ngOnInit(): Promise<void> {
         this.product$ = this.route.data.pipe(
             map(data => {
-                console.log('THIS IS THE DATA', data);
-                
-               return data['product']
+                return data['product']
             }))
 
         this.product$.subscribe((product) => {

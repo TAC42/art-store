@@ -22,8 +22,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private router = inject(Router)
   private dimmerService = inject(DimmerService)
   private subscription: Subscription
- 
-
 
   constructor(private deviceTypeService: DeviceTypeService) {
     this.subscription = this.deviceTypeService.deviceType$.subscribe(
@@ -44,12 +42,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onOpenSearch() {
-    // this.searchState = !this.searchState
+    const currentUrl = this.router.url
+    if (currentUrl.startsWith('/shop')) return
+
     if (!this.searchState) this.dimmerService.setDimmerActive(true)
-    else {
-      this.dimmerService.setDimmerActive(false)
-      console.log('THIS IS WHEN SEARCH STATE IS FALSE ', this.searchState)
-    }
+    else this.dimmerService.setDimmerActive(false)
+
     if (!this.searchState && this.searchValue.trim() !== '') {
       this.router.navigateByUrl(`/shop?search=${encodeURIComponent(this.searchValue.trim())}`)
     }
