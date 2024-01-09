@@ -15,13 +15,13 @@ import { Product } from '../models/shop'
 export class ProductResolver implements Resolve<Product | null> {
   constructor(
     private store: Store<AppState>,
-    private loaderService: LoaderService
+    private lService: LoaderService
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Product | null> {
     const name = route.params['name']
 
-    this.loaderService.setIsLoading(true)
+    this.lService.setIsLoading(true)
 
     this.store.dispatch(LOAD_PRODUCT_BY_NAME({ name }))
 
@@ -29,7 +29,7 @@ export class ProductResolver implements Resolve<Product | null> {
       filter(product => !!product),
       delay(500),
       tap((product) => {
-        this.loaderService.setIsLoading(false)
+        this.lService.setIsLoading(false)
         console.log('product in resolver: ', product)
       }),
       map(product => product || null),
