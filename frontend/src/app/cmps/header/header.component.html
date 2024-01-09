@@ -1,4 +1,4 @@
-<header class="header-contents w-h-100 layout-row" (clickOutside)="closeMenu()">
+<header class="header-contents w-h-100 layout-row" [ngClass]="{ 'z-50': searchState }"  (clickOutside)="closeMenu()">
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else elseTemplate">
@@ -14,7 +14,7 @@
       </ng-container>
 
       <ng-template #elseTemplate>
-        <input type="text" (input)="onSearchInput($event)" placeholder="Search...">
+        <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
         <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" style="width: 24px; height: 24px;"/>
 
       </ng-template>
