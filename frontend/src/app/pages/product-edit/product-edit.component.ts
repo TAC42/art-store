@@ -120,10 +120,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         if (fileControl) {
           fileControl.patchValue(file)
         }
-      } else {
-        // You can handle the case where the file size exceeds 4MB here (show a message, reset the input, etc.)
+      } else {     
         alert('File size exceeds 4MB limit!')
-        // Clear the input value
         input.value = ''
       }
     }
