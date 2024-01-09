@@ -50,17 +50,17 @@ async function getById(productId) {
 
 async function getByName(productName) {
   try {
-    const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-    const product = await collection.findOne({ name: productName })
-
+    const filterBy = { search: productName }
+    const products = await query(filterBy)
+    const product = products.find(p => p.name === productName)
+    console.log('found product: ', product)
     if (!product) {
       loggerService.error(`Product not found with name: ${productName}`)
       throw new Error(`Product not found with name: ${productName}`)
     }
-
     return product
   } catch (err) {
-    loggerService.error(`while finding product with name ${productName}`, err);
+    loggerService.error(`while finding product with name ${productName}`, err)
     throw err
   }
 }

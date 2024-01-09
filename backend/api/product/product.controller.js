@@ -33,8 +33,7 @@ export async function getProductByName(req, res) {
     const productName = req.params.name
     const product = await productService.getByName(productName)
 
-    if (!product) res.status(404).send({ err: 'Product not found' })
-    else res.json(product)
+    res.json(product)
   } catch (err) {
     loggerService.error('Failed to get product by name', err)
     res.status(500).send({ err: 'Failed to get product by name' })
@@ -71,7 +70,7 @@ export async function removeProduct(req, res) {
   try {
     const productId = req.params.id
     await productService.remove(productId)
-    
+
     res.send()
   } catch (err) {
     loggerService.error('Failed to remove product', err)

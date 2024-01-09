@@ -54,7 +54,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       .subscribe(product => {
         this.product = product
         this.initializeForm()
-        console.log('This is edit ', product)
+        // console.log('This is edit ', product)
       })
   }
 
