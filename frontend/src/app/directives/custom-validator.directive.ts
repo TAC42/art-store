@@ -21,7 +21,7 @@ export class CustomValidatorDirective implements Validator {
       return { 'maxLength': { 'requiredLength': this.maxLength, 'actualLength': value.length } }
     } // length max limit check
 
-    if (value && !new RegExp(`^[${this.allowedSpecialChars}a-zA-Z0-9]*$`).test(value)) {
+    if (value && !new RegExp(`^[${this.allowedSpecialChars}a-zA-Z0-9\\s]*$`).test(value)) {
       return { 'invalidCharacters': true }
     } // special characters check (for sql injections and that)
 
