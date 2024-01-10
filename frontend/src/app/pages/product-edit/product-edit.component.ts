@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
 import { Subject, filter, map } from 'rxjs'
@@ -14,6 +14,8 @@ import { AppState } from '../../store/app.state'
 })
 
 export class ProductEditComponent implements OnInit, OnDestroy {
+  @HostBinding('class.w-h-100') fullWidthHeightClass = true
+
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   private fBuilder = inject(FormBuilder)

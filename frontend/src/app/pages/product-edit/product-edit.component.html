@@ -1,8 +1,8 @@
-<section class="product-edit flex column">
+<main class="product-edit-contents flex column w-h-100">
   <button (click)="onBack()" class="back-btn">
     <svg-render svgName="leftArrowIcon" />
   </button>
-  <form [formGroup]="editForm" (ngSubmit)="onSaveProduct()">
+  <form class="flex column" [formGroup]="editForm" (ngSubmit)="onSaveProduct()">
     <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
       <label for="name" class="flex row">
         <div class="label-info flex row">
@@ -73,14 +73,13 @@
     </div>
 
     <div class="input-area flex column">
-      <div formArrayName="imgUrls">
+      <div class="upload-area" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <app-image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="editForm.get('type')?.value"
             (onUploaded)="handleImageUpload($event, i)" />
         </div>
       </div>
     </div>
-
 
     <div class="form-actions flex row">
       <button class="flex row" type="submit" [disabled]="!editForm.valid" [class.disabled]="!editForm.valid">
@@ -89,4 +88,4 @@
       </button>
     </div>
   </form>
-</section>
+</main>
