@@ -12,14 +12,14 @@ export class HomeComponent {
   @HostBinding('class.layout-row') layoutRowClass = true
 
   loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
-  loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513505/Gallery/Sculpture/jyij4j04qy2bq7yeirmi.png'
-  loneImg3: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513504/Gallery/Sculpture/qy5s6xe5vjaej7oncsy6.png'
+  loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
+  loneImg3: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/fjq1w6fb8ozzau1mfd6n.png'
 
   functionImageUrls: string[] = [
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513248/Gallery/Function/btmyi6brioqwsbskotjn.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513247/Gallery/Function/im2hkdn3k8zkrl4oidm5.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703512615/Gallery/Function/ti9l3ndpiq7cwdmwsckx.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703512615/Gallery/Function/ioctdtajxdsqu25eg3s8.png'
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/ibyk1mbjlblc3hrymhpi.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/au6tanmghe9rzwbp3jnj.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/spwj3lmccf44ke56d53p.png'
   ]
 
   shopImageUrls: string[] = [
