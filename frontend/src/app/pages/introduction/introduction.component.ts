@@ -11,9 +11,9 @@ export class IntroductionComponent {
   @HostBinding('class.layout-row') layoutRowClass = true
 
   aboutImageUrls: string[] = [
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513248/Gallery/Function/btmyi6brioqwsbskotjn.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703513247/Gallery/Function/im2hkdn3k8zkrl4oidm5.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703512615/Gallery/Function/ti9l3ndpiq7cwdmwsckx.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703512615/Gallery/Function/ioctdtajxdsqu25eg3s8.png'
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/qminrkpf5nftfmnredx5.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/zion4h33enmpgxvz0yqa.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880472/Artware/yfpb9qax5r3qvqz2kc6c.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880476/Artware/jloyblpg0ith2jnudq9z.png'
   ]
 }

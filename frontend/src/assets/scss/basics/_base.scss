@@ -55,10 +55,7 @@ button {
   font-family: inherit;
   cursor: pointer;
   border: none;
-
-  * {
-    pointer-events: none;
-  }
+  background: none;
 }
 
 input {
