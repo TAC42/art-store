@@ -45,7 +45,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   onRemoveProduct(productId: string) {
-    console.log('onRemoveProduct in shop-index ', productId)
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }
 

@@ -8,9 +8,6 @@ import { DeviceTypeService } from '../../services/device-type.service'
 })
 
 export class FooterComponent implements OnDestroy {
-  copyrightIcon: string = 'copyrightIcon'
-  instagramIcon: string = 'instagramIcon'
-  venmoIcon: string = 'venmoIcon'
   deviceType: string = 'mini-tablet'
   private subscription: Subscription
 
