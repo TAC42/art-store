@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
 import { Subject, filter, map } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { SAVE_PRODUCT } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -24,6 +24,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   destroySubject$ = new Subject<void>()
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
+  defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/w9ukn7dnssrdxgksfxgk.png'
 
   constructor() {
     this.initializeForm()
@@ -74,6 +75,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   get imgUrlsControls(): AbstractControl[] {
     return (this.editForm.get('imgUrls') as FormArray).controls
+  }
+
+  addNewImageUploader(): void {
+    const imgUrlsArray = this.editForm.get('imgUrls') as FormArray
+    if (imgUrlsArray.length < 5) imgUrlsArray.push(this.fBuilder.control(this.defaultImgUrl))
   }
 
   handleImageUpload(event: { url: string, index: number }, index: number): void {
