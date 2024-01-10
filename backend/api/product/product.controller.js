@@ -3,8 +3,8 @@ import { loggerService } from '../../services/logger.service.js'
 
 export async function getProducts(req, res) {
   try {
-    const { search } = req.query
-    let filterBy = { search }
+    const { search , type} = req.query
+    let filterBy = { search , type}
 
     loggerService.debug('Getting Products', filterBy)
     const products = await productService.query(filterBy)

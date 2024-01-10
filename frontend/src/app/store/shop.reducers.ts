@@ -31,8 +31,8 @@ export const shopReducer = createReducer(
     ...state,
     filterBy: { ...state.filterBy, ...updatedFilter },
   })),
-  on(LOAD_FILTER, (state) => ({
-    ...state, filterBy: { search: '', }
+  on(LOAD_FILTER, (state, { filterBy }) => ({
+    ...state, filterBy
   })),
   on(SET_LOADING_STATE, (state, { isLoading }) => ({
     ...state,

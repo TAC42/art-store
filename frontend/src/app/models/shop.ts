@@ -10,6 +10,6 @@ export interface Product {
 }
 
 export interface ShopFilter {
-  search: string
+  search?: string
   type?: string
 }

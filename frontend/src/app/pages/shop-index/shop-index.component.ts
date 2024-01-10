@@ -27,9 +27,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
       this.isLoading = isLoading
     })
 
-    // this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
-    // this.store.dispatch({ type: '[Shop] Load Products' })
-
+    this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
 
     console.log('THIS IS FILTERBY ',this.filterBy);

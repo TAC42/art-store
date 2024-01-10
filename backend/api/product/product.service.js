@@ -117,13 +117,17 @@ function _buildPipeline(filterBy) {
     $match: {},
   }
   console.log('FILTERBY: ', filterBy)
-  const { search } = filterBy
+  const { search, type } = filterBy
 
   if (search) {
     criteria.$match.$or = [
       { name: { $regex: search, $options: 'i' } },
       { description: { $regex: search, $options: 'i' } },
     ]
+  }
+
+  if (type) {
+    criteria.$match.type = { $regex: type, $options: 'i' }
   }
 
   // if (cat) {
