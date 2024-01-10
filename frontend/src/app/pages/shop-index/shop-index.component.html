@@ -2,6 +2,6 @@
 <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" />
 <shop-list
   [isLoading]="(isLoading)"
-  (remove)="onRemoveProduct($event)"
+  (remove)="onRemoveProductModal($event)"
   [products]="products$ | async"
 ></shop-list>
