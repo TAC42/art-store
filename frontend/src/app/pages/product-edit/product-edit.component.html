@@ -72,6 +72,16 @@
       </select>
     </div>
 
+    <div class="input-area flex column">
+      <div formArrayName="imgUrls">
+        <div *ngFor="let control of imgUrlsControls; let i = index">
+          <app-image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="editForm.get('type')?.value"
+            (onUploaded)="handleImageUpload($event, i)" />
+        </div>
+      </div>
+    </div>
+
+
     <div class="form-actions flex row">
       <button class="flex row" type="submit" [disabled]="!editForm.valid" [class.disabled]="!editForm.valid">
         <span>Submit</span>

@@ -34,7 +34,8 @@ import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
 import { CustomValidatorDirective } from './directives/custom-validator.directive';
 import { SculptureComponent } from './pages/sculpture/sculpture.component';
-import { ArtwareComponent } from './pages/artware/artware.component'
+import { ArtwareComponent } from './pages/artware/artware.component';
+import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component'
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ArtwareComponent } from './pages/artware/artware.component'
     CustomValidatorDirective,
     SculptureComponent,
     ArtwareComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     BrowserModule,
