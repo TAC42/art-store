@@ -1,0 +1,12 @@
+<main class="modal-wrapper flex" *ngIf="isModalOpen">
+
+    <section (clickOutside)="closeModal()" class="confirm-modal flex column">
+        <span>Are you sure?</span>
+        <div class="btns grid">
+            <button (click)="onAnswer($event,true)">Yes</button>
+            <button (click)="onAnswer($event,false)">No</button>
+        </div>
+
+
+    </section>
+</main>
