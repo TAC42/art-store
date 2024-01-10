@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component, HostBinding, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../services/utility.service'
 import { DeviceTypeService } from '../../services/device-type.service'
@@ -13,6 +13,11 @@ export class ContactComponent {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
+
+  private uS = inject(UtilityService)
+  private dTS = inject(DeviceTypeService)
+  private eBusService = inject(EventBusService)
+  private fBuilder = inject(FormBuilder)
 
   paperPlaneIcon: string = 'paperPlaneIcon'
   personIcon: string = 'personIcon'
@@ -32,10 +37,7 @@ export class ContactComponent {
   isCaptchaResolved: boolean = false
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
-  constructor(private fBuilder: FormBuilder,
-    private uS: UtilityService,
-    private dTS: DeviceTypeService,
-    private eBusService: EventBusService) {
+  constructor() {
     this.contactForm = this.fBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -59,6 +61,7 @@ export class ContactComponent {
     const field = this.contactForm.get(fieldName)
     if (field?.errors?.['required']) return `${fieldName} is required`
     if (field?.errors?.['email']) return 'Invalid email format'
+    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
     if (field?.errors?.['maxLength']) return `Maximum length reached`
     if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
 

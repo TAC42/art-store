@@ -20,7 +20,7 @@
                     <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
                 </label>
                 <input id="name" type="text" formControlName="name" placeholder="John Doe..." customValidator
-                    [maxLength]=48 [allowedSpecialChars]="'. '">
+                    [minLength]=1 [maxLength]=48 [allowedSpecialChars]="'. '">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
@@ -32,7 +32,7 @@
                     <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
                 </label>
                 <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
-                    [maxLength]=48 [allowedSpecialChars]="'@.'">
+                    [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
@@ -44,7 +44,7 @@
                     <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
                 </label>
                 <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question..."
-                    customValidator [maxLength]=48 [allowedSpecialChars]="' '">
+                    [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' '">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
@@ -56,7 +56,7 @@
                     <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
                 </label>
                 <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator
-                    [maxLength]=256 [allowedSpecialChars]="'*#$! '"></textarea>
+                    [minLength]=32 [maxLength]=256 [allowedSpecialChars]="'*#$!:/ '"></textarea>
             </div>
 
             <div class="form-actions flex row">

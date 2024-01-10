@@ -11,7 +11,7 @@
                         <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
                     </label>
                     <input id="username" type="text" formControlName="username" placeholder="Your username..."
-                        customValidator [maxLength]=24>
+                        customValidator [minLength]=3 [maxLength]=24>
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('password')">
@@ -23,7 +23,7 @@
                         <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
                     </label>
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
-                        customValidator [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
+                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
                 </div>
             </ng-container>
 
@@ -37,7 +37,7 @@
                         <span *ngIf="isFieldInvalid('firstName')">{{ getErrorMessage('firstName') }}</span>
                     </label>
                     <input id="firstName" type="text" formControlName="firstName" placeholder="Your first name..."
-                        customValidator [maxLength]=24>
+                        customValidator [minLength]=3 [maxLength]=24>
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('lastName')">
@@ -49,7 +49,7 @@
                         <span *ngIf="isFieldInvalid('lastName')">{{ getErrorMessage('lastName') }}</span>
                     </label>
                     <input id="lastName" type="text" formControlName="lastName" placeholder="Your last name..."
-                        customValidator [maxLength]=24>
+                        customValidator [minLength]=3 [maxLength]=24>
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('username')">
@@ -61,7 +61,7 @@
                         <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
                     </label>
                     <input id="username" type="text" formControlName="username" placeholder="Your username..."
-                        customValidator [maxLength]=24>
+                        customValidator [minLength]=3 [maxLength]=24>
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
@@ -73,7 +73,7 @@
                         <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
                     </label>
                     <input id="email" type="email" formControlName="email" placeholder="Your email..." customValidator
-                        [maxLength]=48 [allowedSpecialChars]="'@.'">
+                        [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('password')">
@@ -85,7 +85,7 @@
                         <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
                     </label>
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
-                        customValidator [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
+                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
                 </div>
             </ng-container>
 

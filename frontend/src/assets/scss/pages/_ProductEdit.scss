@@ -41,6 +41,11 @@ product-edit {
             gap: 0.5em;
             align-items: center;
 
+            svg-render {
+              width: 24px;
+              height: 24px;
+            }
+
             span {
               line-height: 1.6;
               color: $prmclr1;
@@ -119,10 +124,15 @@ product-edit {
             font-family: "nh-bold";
           }
 
-          svg {
-            transition: all 0.5s;
-            fill: $prmclr1;
-            transform: rotate(45deg);
+          svg-render {
+            width: 32px;
+            height: 32px;
+
+            svg {
+              transition: all 0.5s;
+              fill: $prmclr1;
+              transform: rotate(45deg);
+            }
           }
 
           &:hover {

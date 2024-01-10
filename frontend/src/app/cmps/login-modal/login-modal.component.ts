@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ModalService } from '../../services/modal.service'
 import { UserSignup } from '../../models/user'
@@ -12,6 +12,9 @@ import { LOGIN, SIGNUP } from '../../store/user.actions'
 })
 
 export class LoginModalComponent {
+  public mService = inject(ModalService)
+  private fBuilder = inject(FormBuilder)
+
   loginForm: FormGroup
   signupForm: FormGroup
   isLoginMode = true
@@ -21,9 +24,7 @@ export class LoginModalComponent {
   personIcon: string = 'personIcon'
   idIcon: string = 'idIcon'
 
-  constructor(public mService: ModalService,
-    private fBuilder: FormBuilder,
-    private store: Store<AppState>) {
+  constructor(private store: Store<AppState>) {
     this.loginForm = this.fBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -62,6 +63,7 @@ export class LoginModalComponent {
       else return `${fieldName} is required`
     }
     if (field?.errors?.['email']) return 'Invalid email format'
+    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
     if (field?.errors?.['maxLength']) return `Maximum length reached`
     if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
 

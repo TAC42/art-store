@@ -16,7 +16,7 @@ import { AppState } from '../../store/app.state'
 export class ProductEditComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute)
   private router = inject(Router)
-  private fb = inject(FormBuilder)
+  private fBuilder = inject(FormBuilder)
 
   destroySubject$ = new Subject<void>()
   editForm!: FormGroup
@@ -31,15 +31,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   initializeForm(): void {
-    this.editForm = this.fb.group({
+    this.editForm = this.fBuilder.group({
       name: [this.product.name || '', [Validators.required]],
-      price: [this.product.price || '', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      description: [
-        this.product.description || '',
-        [Validators.required, Validators.minLength(10), Validators.maxLength(150)],
-      ],
+      price: [this.product.price || '', [Validators.required]],
+      description: [this.product.description || '', [Validators.required]],
       inStock: [this.product.inStock || true, Validators.required],
-      type: [this.product.type || '', [Validators.required, Validators.pattern(/^(shop|sculpture|artware)$/)]],
+      type: [this.product.type || '', [Validators.required]],
       imgUrls: [this.product.imgUrls || [], [Validators.required]]
     })
   }
@@ -67,22 +64,19 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 
-  formatTime(date: Date | number | string) {
-    return new Date(date).toISOString().slice(0, 10)
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.editForm.get(fieldName)
+    return field ? field.invalid && (field.dirty || field.touched) : false
   }
 
   getErrorMessage(fieldName: string): string {
     const field = this.editForm.get(fieldName)
     if (field?.errors?.['required']) return `${fieldName} is required!`
-    if (field?.errors?.['pattern']) return `Please enter a valid ${fieldName}!`
-    if (field?.errors?.['minlength']) return `Minlength 10 chars!`
-    if (field?.errors?.['maxlength']) return `Maxlength 150 chars!`
-    return ''
-  }
+    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
+    if (field?.errors?.['maxLength']) return `Maximum length reached`
+    if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
 
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.editForm.get(fieldName)
-    return field ? field.invalid && (field.dirty || field.touched) : false
+    return ''
   }
 
   onBack = () => {
