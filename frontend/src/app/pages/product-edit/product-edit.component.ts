@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
 import { Subject, filter, map } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { SAVE_PRODUCT } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -38,7 +38,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       description: [this.product.description || '', [Validators.required]],
       inStock: [this.product.inStock || true, Validators.required],
       type: [this.product.type || '', [Validators.required]],
-      imgUrls: [this.product.imgUrls || [], [Validators.required]]
+      imgUrls: this.fBuilder.array(this.product.imgUrls?.map(url => this.fBuilder.control(url)) || [])
     })
   }
 
@@ -53,16 +53,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         this.initializeForm()
         // console.log('This is edit ', product)
       })
-  }
-
-  onSaveProduct() {
-    const productToSave = {
-      ...this.product,
-      ...this.editForm.value
-    }
-    console.log('saved product: ', productToSave)
-    this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
-    this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 
   isFieldInvalid(fieldName: string): boolean {
@@ -80,11 +70,31 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     return ''
   }
 
-  onBack = () => {
+  get imgUrlsControls(): AbstractControl[] {
+    return (this.editForm.get('imgUrls') as FormArray).controls
+  }
+
+  handleImageUpload(event: { url: string, index: number }, index: number): void {
+    const imgUrlsArray = this.editForm.get('imgUrls') as FormArray
+    if (index < imgUrlsArray.length) imgUrlsArray.at(index).setValue(event.url)
+    else imgUrlsArray.push(this.fBuilder.control(event.url))
+  }
+
+  onSaveProduct() {
+    const productToSave = {
+      ...this.product,
+      ...this.editForm.value
+    }
+    console.log('saved product: ', productToSave)
+    this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
     this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 
   ngOnDestroy(): void {
     this.destroySubject$.next()
+  }
+
+  onBack = () => {
+    this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
 }

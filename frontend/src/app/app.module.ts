@@ -36,6 +36,7 @@ import { CustomValidatorDirective } from './directives/custom-validator.directiv
 import { SculptureComponent } from './pages/sculpture/sculpture.component';
 import { ArtwareComponent } from './pages/artware/artware.component';
 import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.component'
+import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component'
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.compon
     SculptureComponent,
     ArtwareComponent,
     ConfirmModalComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<main class="upload-preview flex column">
+    <div class="file-upload-container">
+        <label for="{{inputId}}" class="custom-file-upload flex column">
+            {{ getUploadLabel() }}
+            <img *ngIf="imgUrl" [src]="imgUrl" />
+        </label>
+        <input type="file" (change)="uploadImg($event)" accept="image/*" [id]="inputId" style="display: none" />
+    </div>
+</main>
