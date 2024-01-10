@@ -73,11 +73,16 @@
     </div>
 
     <div class="input-area flex column">
-      <div class="upload-area" formArrayName="imgUrls">
+      <div class="upload-area grid" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <app-image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="editForm.get('type')?.value"
             (onUploaded)="handleImageUpload($event, i)" />
         </div>
+
+        <button class="flex column" type="button" (click)="addNewImageUploader()" *ngIf="imgUrlsControls.length < 5">
+          <svg-render svgName="addIcon" />
+          <span>Add Image</span>
+        </button>
       </div>
     </div>
 
