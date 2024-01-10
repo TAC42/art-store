@@ -13,30 +13,14 @@ export class ProductPreviewComponent {
   @Input() product!: Product
   @Output() remove = new EventEmitter()
   private router = inject(Router)
-  private mService = inject(ModalService)
-  private communicationService = inject(CommunicationService)
-  private removeAnswer: boolean = false
 
-  ngOnInit() {
-    this.communicationService.removeProduct$.subscribe((productId: string) => {
-      this.onRemoveProduct(productId)
-    })
-  }
-
-  onRemoveProduct(productId: string) {
-    console.log('IN REMOVE PRODUCT PRODUCT PREVIEW',productId)
-    this.remove.emit(productId)
-  }
-
-  onToggleConfirmModal(event: MouseEvent) {
+  onRemoveProduct(event: Event) {
     event.preventDefault()
     event.stopPropagation()
-    this.mService.openModal(`confirm`,this.product._id)
+    this.remove.emit(this.product._id)
   }
 
-  // toggleRemoveAnswer() {
-  //   this.removeAnswer = !this.removeAnswer
-  // }
+
   onEditProduct(event: MouseEvent) {
     event.preventDefault()
     event.stopPropagation()

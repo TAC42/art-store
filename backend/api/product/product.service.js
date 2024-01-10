@@ -52,7 +52,7 @@ async function getByName(productName) {
   try {
     const filterBy = { search: productName }
     const products = await query(filterBy)
-    const product = products.find(p => p.name === productName)
+    const product = products.find((p) => p.name === productName)
     console.log('found product: ', product)
     if (!product) {
       loggerService.error(`Product not found with name: ${productName}`)
@@ -71,6 +71,7 @@ async function remove(productId) {
     const { deletedCount } = await collection.deleteOne({
       _id: new ObjectId(productId),
     })
+    console.log('DELETED COUNT IN REMOVE', deletedCount)
     if (deletedCount === 0) {
       throw new Error(`Product with id ${productId} was not found`)
     }
@@ -91,7 +92,10 @@ async function save(product) {
       const id = new ObjectId(product._id)
       delete productToSave._id
 
-      const response = await collection.updateOne({ _id: id }, { $set: productToSave })
+      const response = await collection.updateOne(
+        { _id: id },
+        { $set: productToSave }
+      )
       if (response.matchedCount === 0) {
         throw new Error(`Product with id ${id.toHexString()} was not found`)
       }
@@ -177,10 +181,12 @@ function _buildPipeline(filterBy) {
 async function _checkRedundantProductImages() {
   try {
     const productImagePublicIds = await _getAllProductImages()
-    const cloudinaryImagePublicIds = await cloudinaryService.getAllCloudinaryImages('product-images')
+    const cloudinaryImagePublicIds =
+      await cloudinaryService.getAllCloudinaryImages('product-images')
 
-    const orphanedImages = cloudinaryImagePublicIds.filter
-      (publicId => !productImagePublicIds.includes(publicId))
+    const orphanedImages = cloudinaryImagePublicIds.filter(
+      (publicId) => !productImagePublicIds.includes(publicId)
+    )
 
     if (orphanedImages.length === 0) {
       console.log('No orphaned images found')
@@ -200,9 +206,11 @@ async function _checkRedundantProductImages() {
 async function _getAllProductImages() {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-    const products = await collection.find({}, { projection: { imgUrl: 1 } }).toArray()
+    const products = await collection
+      .find({}, { projection: { imgUrl: 1 } })
+      .toArray()
     // Extract public IDs from product image URL
-    const productImagePublicIds = products.map(product =>
+    const productImagePublicIds = products.map((product) =>
       cloudinaryService.extractPublicIdFromUrl(product.imgUrl)
     )
     return productImagePublicIds

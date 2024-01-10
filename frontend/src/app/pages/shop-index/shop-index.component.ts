@@ -6,7 +6,9 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ShopFilter } from '../../models/shop'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS } from '../../store/shop.actions'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../store/shop.actions'
+import { CommunicationService } from '../../services/communication.service'
+import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'shop-index',
@@ -16,6 +18,8 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>) { }
   router = inject(Router)
   private activatedRoute = inject(ActivatedRoute)
+  private mService = inject(ModalService)
+  private communicationService = inject(CommunicationService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
@@ -27,24 +31,27 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
       this.isLoading = isLoading
     })
 
+    this.communicationService.removeProduct$.subscribe((productId: string) => {
+      this.onRemoveProduct(productId)
+    })
+
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
-
-    console.log('THIS IS FILTERBY ',this.filterBy);
-    
   }
 
-  onRemoveProduct(productId: string): void {
-    // const removeSubscription = this.shopDbService.remove(productId).subscribe({
-    //   next: () => this.loadProducts(),
-    //   error: err => console.error('Error removing product:', err)
-    // })
-    // this.subscription.add(removeSubscription)
+  onRemoveProductModal(productId: string): void {
+    this.mService.openModal(`confirm`, productId)
+
+  }
+
+  onRemoveProduct(productId: string) {
+    console.log('onRemoveProduct in shop-index ', productId)
+    this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }
 
   onSetFilter(newFilterValue: string): void {
     let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
-    updatedFilter = {...updatedFilter, type:'shop'} 
+    updatedFilter = { ...updatedFilter, type: 'shop' }
     this.updateFilter(updatedFilter)
   }
 

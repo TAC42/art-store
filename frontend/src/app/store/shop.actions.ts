@@ -31,3 +31,12 @@ export const SET_LOADING_STATE = createAction('[Shop] Set Loading State',
 export const SAVE_PRODUCT = createAction(
   '[Shop] Save Product',
   props<{ product: Product }>())
+
+export const REMOVE_PRODUCT = createAction(
+  '[Shop] Remove Product',
+  props<{ productId: string }>())
+
+export const PRODUCT_REMOVED_SUCCESSFULLY = createAction(
+  '[Shop] Product Removed Successfully',
+  props<{ productId: string }>()
+)

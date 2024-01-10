@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
-import { PRODUCTS_LOADED, SET_PRODUCT_BY_NAME, FILTER_UPDATED, LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT } from './shop.actions'
+import { PRODUCTS_LOADED, SET_PRODUCT_BY_NAME, FILTER_UPDATED, LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
-import { ShopDbService } from '../services/shop-db.service'
 
 export interface ShopState {
   products: Product[]
@@ -55,4 +54,8 @@ export const shopReducer = createReducer(
       products: updatedProducts,
     }
   }),
+  on(PRODUCT_REMOVED_SUCCESSFULLY, (state, { productId }) => ({
+    ...state,
+    products: state.products.filter(product => product._id !== productId),
+  }))
 )
