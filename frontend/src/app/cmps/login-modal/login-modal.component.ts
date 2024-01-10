@@ -14,6 +14,7 @@ import { LOGIN, SIGNUP } from '../../store/user.actions'
 export class LoginModalComponent {
   public mService = inject(ModalService)
   private fBuilder = inject(FormBuilder)
+  private store = inject(Store<AppState>)
 
   loginForm: FormGroup
   signupForm: FormGroup
@@ -24,7 +25,7 @@ export class LoginModalComponent {
   personIcon: string = 'personIcon'
   idIcon: string = 'idIcon'
 
-  constructor(private store: Store<AppState>) {
+  constructor() {
     this.loginForm = this.fBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]

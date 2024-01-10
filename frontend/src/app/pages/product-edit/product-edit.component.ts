@@ -17,12 +17,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   private fBuilder = inject(FormBuilder)
+  private store = inject(Store<AppState>)
 
   destroySubject$ = new Subject<void>()
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
 
-  constructor(private store: Store<AppState>) {
+  constructor() {
     this.initializeForm()
   }
 
