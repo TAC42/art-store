@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ShopFilter } from '../../models/shop'
-import { FILTER_UPDATED } from '../../store/shop.actions'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS } from '../../store/shop.actions'
 
 @Component({
   selector: 'shop-index',
@@ -19,7 +19,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
-  filterBy: ShopFilter = { search: '' }
+  filterBy: ShopFilter = { search: '', type: 'shop' }
 
 
   ngOnInit(): void {
@@ -27,8 +27,11 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
       this.isLoading = isLoading
     })
 
-    this.store.dispatch({ type: '[Shop] Load Filter' })
-    this.store.dispatch({ type: '[Shop] Load Products' })
+    // this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
+    // this.store.dispatch({ type: '[Shop] Load Products' })
+
+    this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
+
     console.log('THIS IS FILTERBY ',this.filterBy);
     
   }
@@ -42,7 +45,8 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   onSetFilter(newFilterValue: string): void {
-    const updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
+    let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
+    updatedFilter = {...updatedFilter, type:'shop'} 
     this.updateFilter(updatedFilter)
   }
 

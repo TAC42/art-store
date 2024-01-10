@@ -9,6 +9,8 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { ProductDetailsComponent } from './pages/product-details/product-details.component'
 import { ProductResolver } from './resolvers/product.resolver'
 import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
+import { SculptureComponent } from './pages/sculpture/sculpture.component'
+import { ArtwareComponent } from './pages/artware/artware.component'
 
 const routes: Routes = [
   {
@@ -26,6 +28,8 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent }
     ]
   },
+  { path: 'sculpture', component: SculptureComponent },
+  { path: 'artware', component: ArtwareComponent },
   { path: '', component: HomeComponent },
 ]
 

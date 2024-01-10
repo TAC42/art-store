@@ -21,7 +21,9 @@ export const FILTER_UPDATED = createAction(
   '[Shop] Filter Updated',
   props<{ updatedFilter: Partial<ShopFilter> }>())
 
-export const LOAD_FILTER = createAction('[Shop] Load Filter')
+export const LOAD_FILTER = createAction(
+  '[Shop] Load Filter',
+  props<{ filterBy: Partial<ShopFilter> }>())
 
 export const SET_LOADING_STATE = createAction('[Shop] Set Loading State',
   props<{ isLoading: boolean }>())

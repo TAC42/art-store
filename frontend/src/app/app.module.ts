@@ -32,7 +32,9 @@ import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 import { FooterComponent } from './cmps/footer/footer.component'
 import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
-import { CustomValidatorDirective } from './directives/custom-validator.directive'
+import { CustomValidatorDirective } from './directives/custom-validator.directive';
+import { SculptureComponent } from './pages/sculpture/sculpture.component';
+import { ArtwareComponent } from './pages/artware/artware.component'
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { CustomValidatorDirective } from './directives/custom-validator.directiv
     LoginModalComponent,
     UserMsgComponent,
     CustomValidatorDirective,
+    SculptureComponent,
+    ArtwareComponent,
   ],
   imports: [
     BrowserModule,
