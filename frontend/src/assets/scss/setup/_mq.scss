@@ -29,14 +29,14 @@ app-footer {
 
         .desktop-view,
         .mobile-view {
-            padding: .5em 1em;
+            padding: 1em;
         }
 
         @media(min-width: 601px) {
 
             .desktop-view,
             .mobile-view {
-                padding: .5em 2em;
+                padding: 1em 2em;
             }
         }
     }
