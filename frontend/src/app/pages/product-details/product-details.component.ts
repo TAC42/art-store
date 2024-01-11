@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
-import { Observable, Subject, Subscription, map } from 'rxjs'
+import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
+import { Subscription, map } from 'rxjs'
 
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
@@ -15,37 +15,27 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     private router = inject(Router)
     private route = inject(ActivatedRoute)
-    private cd = inject(ChangeDetectorRef)
 
-    destroySubject$ = new Subject<void>()
-
-    subscription!: Subscription
-    ans!: string
+    private productSubscription!: Subscription
     product: Product | null = null
-    product$!: Observable<Product>
 
-    async ngOnInit(): Promise<void> {
-        this.product$ = this.route.data.pipe(
-            map(data => {
-                return data['product']
-            }))
+    constructor() { }
 
-        this.product$.subscribe((product) => {
-            this.product = product
-            this.cd.markForCheck()
-        })
-
-        setTimeout(() => {
-            this.cd.markForCheck()
-        }, 1500)
+    ngOnInit(): void {
+        this.productSubscription = this.route.data
+            .pipe(
+                map(data => data['product'])
+            )
+            .subscribe((product: Product) => {
+                this.product = product
+            })
     }
 
-    onBack() {
+    onBack(): void {
         this.router.navigateByUrl('/shop')
     }
 
     ngOnDestroy(): void {
-        this.destroySubject$.next()
-        this.destroySubject$.complete()
+        if (this.productSubscription) this.productSubscription.unsubscribe()
     }
 }
