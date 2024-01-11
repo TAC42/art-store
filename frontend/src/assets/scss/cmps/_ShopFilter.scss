@@ -1,11 +1,11 @@
 shop-filter {
+  position: sticky;
   display: grid;
   // grid-auto-flow: column;
   grid-template-columns: 1fr 56px 56px;
   align-items: center;
   padding: 1em;
   width: 100%;
-  position: relative;
 
   input {
     padding: 0.5em;

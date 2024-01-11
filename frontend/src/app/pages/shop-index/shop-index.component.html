@@ -1,5 +1,8 @@
 <loader></loader>
 <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" />
+<a class="edit-link grid" routerLink="/shop/edit">
+  <svg-render svgName="addIcon"> </svg-render> <span>Add</span>
+</a>
 <shop-list
   [isLoading]="(isLoading)"
   (remove)="onRemoveProductModal($event)"
