@@ -24,7 +24,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   destroySubject$ = new Subject<void>()
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
-  defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/w9ukn7dnssrdxgksfxgk.png'
+  defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
 
   constructor() {
     this.initializeForm()

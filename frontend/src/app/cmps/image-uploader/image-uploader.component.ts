@@ -8,7 +8,7 @@ import { UploadService } from '../../services/upload.service'
 
 export class ImageUploaderComponent {
   @Input() index: number = 0
-  @Input() defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/w9ukn7dnssrdxgksfxgk.png'
+  @Input() defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
   @Input() productType: string = ''
   @Output() onUploaded = new EventEmitter<{ url: string, index: number }>()
 
