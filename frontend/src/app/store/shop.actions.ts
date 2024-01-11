@@ -15,7 +15,7 @@ export const LOAD_PRODUCT_BY_NAME = createAction(
 
 export const SET_PRODUCT_BY_NAME = createAction(
   '[Shop] Set Product By Name',
-  props<{ product: Product }>())
+  props<{ product: Product | null }>())
 
 export const FILTER_UPDATED = createAction(
   '[Shop] Filter Updated',

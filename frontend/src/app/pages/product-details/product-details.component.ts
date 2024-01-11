@@ -3,6 +3,9 @@ import { Subscription, map } from 'rxjs'
 
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
+import { Store } from '@ngrx/store'
+import { AppState } from '../../store/app.state'
+import { SET_PRODUCT_BY_NAME } from '../../store/shop.actions'
 
 @Component({
     selector: 'product-details',
@@ -15,11 +18,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     private router = inject(Router)
     private route = inject(ActivatedRoute)
+    constructor(private store: Store<AppState>) { }
 
     private productSubscription!: Subscription
     product: Product | null = null
 
-    constructor() { }
+   
 
     ngOnInit(): void {
         this.productSubscription = this.route.data
@@ -37,5 +41,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.productSubscription) this.productSubscription.unsubscribe()
+        this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }));
+
     }
 }
