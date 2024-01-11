@@ -15,7 +15,7 @@ const app = express()
 
 app.use(cookieParser()) // for res.cookies
 app.use(express.json()) // for req.body
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 if (process.env.NODE_ENV === 'production') {
   // Express serve static files on production environment
@@ -25,6 +25,7 @@ if (process.env.NODE_ENV === 'production') {
   const corsOptions = {
     // Make sure origin contains the url your frontend is running on
     origin: [
+      'https://oricarlin.onrender.com',
       'http://127.0.0.1:4200',
       'http://localhost:4200',
       'http://127.0.0.1:3030',
