@@ -25,7 +25,7 @@ export class HomeComponent {
   shopImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/vc8dzka5spwt0jwkfgmy.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/fekcvwmimrtm9wghntnr.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/xgumpzx2inejeyjfhoem.png',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/sr7vuhhliiq6mnwnbdqv.png'
   ]
 

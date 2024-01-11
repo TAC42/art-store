@@ -82,6 +82,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if (imgUrlsArray.length < 5) imgUrlsArray.push(this.fBuilder.control(this.defaultImgUrl))
   }
 
+  removeImageUploader(index: number): void {
+    const imgUrlsArray = this.editForm.get('imgUrls') as FormArray
+    if (imgUrlsArray.length > 1) imgUrlsArray.removeAt(index)
+  }
+
   handleImageUpload(event: { url: string, index: number }, index: number): void {
     const imgUrlsArray = this.editForm.get('imgUrls') as FormArray
     if (index < imgUrlsArray.length) imgUrlsArray.at(index).setValue(event.url)

@@ -107,3 +107,23 @@ app-contact {
         }
     }
 }
+
+product-edit {
+    .product-edit-contents {
+        form {
+            .input-area {
+                @media(max-width: 400px) {
+                    .upload-area {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                @media(min-width: 401px) {
+                    .upload-area {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+            }
+        }
+    }
+}
