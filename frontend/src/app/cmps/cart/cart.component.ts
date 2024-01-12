@@ -1,11 +1,11 @@
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, ElementRef } from '@angular/core'
-import { Observable } from 'rxjs';
-import { User } from '../../models/user';
-import { ModalService } from '../../services/modal.service';
-import { AppState } from '../../store/app.state';
-import { Store, select } from '@ngrx/store';
-import { selectLoggedinUser } from '../../store/user.selectors';
+import { animate, style, transition, trigger } from '@angular/animations'
+import { Component, ElementRef, inject } from '@angular/core'
+import { Observable } from 'rxjs'
+import { User } from '../../models/user'
+import { ModalService } from '../../services/modal.service'
+import { AppState } from '../../store/app.state'
+import { Store, select } from '@ngrx/store'
+import { selectLoggedinUser } from '../../store/user.selectors'
 
 @Component({
   selector: 'cart',
@@ -23,16 +23,16 @@ import { selectLoggedinUser } from '../../store/user.selectors';
   ]
 })
 export class CartComponent {
-  isCartOpen: boolean = false
+  private store = inject(Store<AppState>)
+  private mService = inject(ModalService)
+  private elRef = inject(ElementRef)
 
+  isCartOpen: boolean = false
   loggedinUser$: Observable<User>
 
-  constructor(private eR: ElementRef,
-    private mS: ModalService,
-    private store: Store<AppState>) {
+  constructor() {
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
   }
-
 
   toggleCart() {
     this.isCartOpen = !this.isCartOpen

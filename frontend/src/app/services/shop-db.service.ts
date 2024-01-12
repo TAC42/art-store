@@ -47,7 +47,7 @@ export class ShopDbService {
     }
   }
 
- static getDefaultProduct(): Product {
+  static getDefaultProduct(): Product {
     const currentTimestamp = Date.now()
 
     return {
@@ -63,9 +63,6 @@ export class ShopDbService {
 
   setFilter(filter: ShopFilter): void {
     this.currentFilter = filter
-    // Optionally, trigger a new fetch here if that's the intended behavior
-    // For example, you might emit a new value on an Observable that 
-    // ShopComponent is subscribed to
   }
 
   getCurrentFilter(): ShopFilter {
@@ -95,17 +92,3 @@ export class ShopDbService {
     return newFilterBy
   }
 }
-
-// getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
-//   const newFilterBy: ShopFilter = this.getDefaultFilter()
-//   let isNewRefresh = false
-
-//   for (const [key, value] of searchParams) {
-//     newFilterBy[key as keyof ShopFilter] = value;
-//     if (newFilterBy[key as keyof ShopFilter]) isNewRefresh = true
-//   }
-
-//   if (isNewRefresh) this.setFilter({ ...newFilterBy })
-
-//   return newFilterBy
-// }

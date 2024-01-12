@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { trigger, state, style, transition, animate } from '@angular/animations'
 import { EventBusService } from '../../services/event-bus.service'
 
@@ -22,6 +22,8 @@ import { EventBusService } from '../../services/event-bus.service'
 })
 
 export class UserMsgComponent implements OnInit, OnDestroy {
+  private eBusService = inject(EventBusService)
+
   successIcon: string = 'successIcon'
   errorIcon: string = 'errorIcon'
 
@@ -30,7 +32,6 @@ export class UserMsgComponent implements OnInit, OnDestroy {
   msg: { title: string; txt: string; type: string } | null = null
 
   private unsubscribe: () => void = () => { }
-  constructor(private eBusService: EventBusService) { }
 
   ngOnInit(): void {
     this.unsubscribe = this.eBusService.on('show-user-msg', (newMsg) => {

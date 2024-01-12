@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { HttpService } from './http.service'
 import { Observable, throwError, catchError, tap, of } from 'rxjs'
 import { User, UserCredentials, UserSignup } from '../models/user'
@@ -11,8 +11,7 @@ const BASE_URL = 'user/'
 })
 
 export class UserService {
-
-  constructor(private httpService: HttpService) { }
+  private httpService = inject(HttpService)
 
   query(): Observable<User[]> {
     return this.httpService.get<User[]>(BASE_URL).pipe(

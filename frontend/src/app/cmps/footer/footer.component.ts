@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, inject } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 
@@ -8,16 +8,18 @@ import { DeviceTypeService } from '../../services/device-type.service'
 })
 
 export class FooterComponent implements OnDestroy {
-  deviceType: string = 'mini-tablet'
-  private subscription: Subscription
+  private dTypeService = inject(DeviceTypeService)
 
-  constructor(private deviceTypeService: DeviceTypeService) {
-    this.subscription = this.deviceTypeService.deviceType$.subscribe(
+  deviceType: string = 'mini-tablet'
+  private dTypeSubscription: Subscription
+
+  constructor() {
+    this.dTypeSubscription = this.dTypeService.deviceType$.subscribe(
       (type) => this.deviceType = type
     )
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.dTypeSubscription.unsubscribe()
   }
 }

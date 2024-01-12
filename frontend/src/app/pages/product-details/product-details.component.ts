@@ -18,12 +18,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     private router = inject(Router)
     private route = inject(ActivatedRoute)
-    constructor(private store: Store<AppState>) { }
+    private store = inject(Store<AppState>)
 
     private productSubscription!: Subscription
     product: Product | null = null
-
-   
 
     ngOnInit(): void {
         this.productSubscription = this.route.data
@@ -41,7 +39,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.productSubscription) this.productSubscription.unsubscribe()
-        this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }));
-
+        this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
     }
 }

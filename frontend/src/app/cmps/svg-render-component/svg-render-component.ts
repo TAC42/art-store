@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, inject } from '@angular/core'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { SvgRenderService } from '../../services/svg-render.service'
 
@@ -7,11 +7,11 @@ import { SvgRenderService } from '../../services/svg-render.service'
   templateUrl: './svg-render-component.html'
 })
 export class SvgRenderComponent implements OnInit {
+  private svgRenderService = inject(SvgRenderService)
+  private sanitizer = inject(DomSanitizer)
+  
   svgContent: SafeHtml = ''
   @Input() svgName: string = ''
-
-  constructor(private svgRenderService: SvgRenderService,
-    private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     const rawSvg = this.svgRenderService.getSvg(this.svgName)

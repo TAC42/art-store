@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { UploadService } from '../../services/upload.service'
 
 @Component({
@@ -12,11 +12,11 @@ export class ImageUploaderComponent {
   @Input() productType: string = ''
   @Output() onUploaded = new EventEmitter<{ url: string, index: number }>()
 
+  public uService = inject(UploadService)
+
   imgUrl: string = ''
   isUploading: boolean = false
   inputId: string = ''
-
-  constructor(private uploadService: UploadService) { }
 
   ngOnChanges(): void {
     this.imgUrl = this.defaultImgUrl
@@ -30,7 +30,7 @@ export class ImageUploaderComponent {
 
     this.isUploading = true
     try {
-      const data = await this.uploadService.uploadImg(fileInput.files[0], this.productType)
+      const data = await this.uService.uploadImg(fileInput.files[0], this.productType)
       this.imgUrl = data.secure_url
       this.onUploaded.emit({ url: this.imgUrl, index: this.index })
     } catch (error) {

@@ -15,33 +15,29 @@ import { ModalService } from '../../services/modal.service'
   templateUrl: './shop-index.component.html'
 })
 export class ShopIndexComponent implements OnInit, OnDestroy {
-  constructor(private store: Store<AppState>) { }
-  router = inject(Router)
+  private store = inject(Store<AppState>)
+  private router = inject(Router)
   private activatedRoute = inject(ActivatedRoute)
   private mService = inject(ModalService)
-  private communicationService = inject(CommunicationService)
+  private comService = inject(CommunicationService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'shop' }
 
-
   ngOnInit(): void {
     this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
       this.isLoading = isLoading
     })
-
-    this.communicationService.removeProduct$.subscribe((productId: string) => {
+    this.comService.removeProduct$.subscribe((productId: string) => {
       this.onRemoveProduct(productId)
     })
-
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
   }
 
   onRemoveProductModal(productId: string): void {
     this.mService.openModal(`confirm`, productId)
-
   }
 
   onRemoveProduct(productId: string) {
@@ -66,7 +62,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
         queryParamsHandling: 'merge',
       })
     })
-
   }
 
   ngOnDestroy(): void {

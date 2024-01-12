@@ -32,12 +32,12 @@ import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 import { FooterComponent } from './cmps/footer/footer.component'
 import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
-import { CustomValidatorDirective } from './directives/custom-validator.directive';
-import { SculptureComponent } from './pages/sculpture/sculpture.component';
-import { ArtwareComponent } from './pages/artware/artware.component';
+import { CustomValidatorDirective } from './directives/custom-validator.directive'
+import { SculptureComponent } from './pages/sculpture/sculpture.component'
+import { ArtwareComponent } from './pages/artware/artware.component'
 import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.component'
-import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component';
-import { CartComponent } from './cmps/cart/cart.component';
+import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component'
+import { CartComponent } from './cmps/cart/cart.component'
 
 @NgModule({
   declarations: [

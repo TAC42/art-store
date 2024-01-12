@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener } from '@angular/core'
+import { Component, ElementRef, HostListener, inject } from '@angular/core'
 import { trigger, style, animate, transition } from '@angular/animations'
 import { ModalService } from '../../services/modal.service'
 import { AppState } from '../../store/app.state'
@@ -25,13 +25,15 @@ import { LOGOUT } from '../../store/user.actions'
 })
 
 export class AsideMenuComponent {
+  private store = inject(Store<AppState>)
+  private mService = inject(ModalService)
+  private elRef = inject(ElementRef)
+
   isMenuOpen: boolean = false
   ocLogo: string = 'ocLogo'
   loggedinUser$: Observable<User>
 
-  constructor(private eR: ElementRef,
-    private mS: ModalService,
-    private store: Store<AppState>) {
+  constructor() {
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
   }
 
@@ -49,7 +51,7 @@ export class AsideMenuComponent {
 
   openLogin(event: MouseEvent) {
     event.stopPropagation()
-    this.mS.openModal('login')
+    this.mService.openModal('login')
     this.closeMenu()
   }
 
@@ -61,7 +63,7 @@ export class AsideMenuComponent {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
-    const clickedInside = this.eR.nativeElement.contains(event.target)
+    const clickedInside = this.elRef.nativeElement.contains(event.target)
 
     if (!clickedInside) this.closeMenu()
   }

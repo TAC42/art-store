@@ -13,27 +13,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @HostBinding('class.z-50') get zIndex() {
     return this.searchState
   }
+  @Output() toggleAsideMenu = new EventEmitter<void>()
+
+  private router = inject(Router)
+  private dimService = inject(DimmerService)
+  private dTypeService = inject(DeviceTypeService)
+
   burgerMenuIcon: string = 'burgerMenuIcon'
   searchIcon: string = 'searchIcon'
   searchState: boolean = false
   searchValue: string = ''
   deviceType: string = 'mini-tablet'
-  dimmerSubscription: Subscription | undefined
-  private router = inject(Router)
-  private dimmerService = inject(DimmerService)
-  private subscription: Subscription
 
-  constructor(private deviceTypeService: DeviceTypeService) {
-    this.subscription = this.deviceTypeService.deviceType$.subscribe(
+  dimSubscription: Subscription | undefined
+  private dTypesubscription: Subscription
+
+  constructor() {
+    this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
       (type) => this.deviceType = type
     )
   }
 
-  @Output() toggleAsideMenu = new EventEmitter<void>()
-
   ngOnInit(): void {
-    this.dimmerSubscription = this.dimmerService.dimmerSubject.subscribe((active: boolean) => {
-      this.searchState = active;
+    this.dimSubscription = this.dimService.dimmerSubject.subscribe((active: boolean) => {
+      this.searchState = active
     })
   }
   onToggleAsideMenu(event: MouseEvent) {
@@ -45,8 +48,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const currentUrl = this.router.url
     if (currentUrl.startsWith('/shop')) return
 
-    if (!this.searchState) this.dimmerService.setDimmerActive(true)
-    else this.dimmerService.setDimmerActive(false)
+    if (!this.searchState) this.dimService.setDimmerActive(true)
+    else this.dimService.setDimmerActive(false)
 
     if (!this.searchState && this.searchValue.trim() !== '') {
       this.router.navigateByUrl(`/shop?search=${encodeURIComponent(this.searchValue.trim())}`)
@@ -68,6 +71,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.dTypesubscription.unsubscribe()
   }
 }
