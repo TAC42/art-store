@@ -19,8 +19,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private dimService = inject(DimmerService)
   private dTypeService = inject(DeviceTypeService)
 
-  burgerMenuIcon: string = 'burgerMenuIcon'
-  searchIcon: string = 'searchIcon'
   searchState: boolean = false
   searchValue: string = ''
   deviceType: string = 'mini-tablet'
@@ -30,8 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
-      (type) => this.deviceType = type
-    )
+      (type) => this.deviceType = type)
   }
 
   ngOnInit(): void {

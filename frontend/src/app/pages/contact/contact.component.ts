@@ -19,11 +19,6 @@ export class ContactComponent {
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
 
-  paperPlaneIcon: string = 'paperPlaneIcon'
-  personIcon: string = 'personIcon'
-  emailIcon: string = 'emailIcon'
-  titleIcon: string = 'titleIcon'
-  descriptionIcon: string = 'descriptionIcon'
   contactForm: FormGroup
 
   contactImageUrls: string[] = [

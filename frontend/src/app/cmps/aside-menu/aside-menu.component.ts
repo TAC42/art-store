@@ -30,7 +30,6 @@ export class AsideMenuComponent {
   private elRef = inject(ElementRef)
 
   isMenuOpen: boolean = false
-  ocLogo: string = 'ocLogo'
   loggedinUser$: Observable<User>
 
   constructor() {

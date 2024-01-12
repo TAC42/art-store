@@ -20,11 +20,6 @@ export class LoginModalComponent {
   signupForm: FormGroup
   isLoginMode = true
 
-  emailIcon: string = 'emailIcon'
-  lockIcon: string = 'lockIcon'
-  personIcon: string = 'personIcon'
-  idIcon: string = 'idIcon'
-
   constructor() {
     this.loginForm = this.fBuilder.group({
       username: ['', [Validators.required]],

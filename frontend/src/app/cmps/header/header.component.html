@@ -3,7 +3,7 @@
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else elseTemplate">
         <span class="flex" (click)="onToggleAsideMenu($event)">
-          <svg-render [svgName]="burgerMenuIcon"></svg-render>
+          <svg-render svgName="burgerMenuIcon" />
         </span>
 
         <div>
@@ -17,11 +17,10 @@
         <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
         <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon"
           style="width: 24px; height: 24px;" />
-
       </ng-template>
 
       <span class="search flex" (click)="onOpenSearch()">
-        <svg-render [svgName]="searchIcon" style="width: 24px; height: 24px;" />
+        <svg-render svgName="searchIcon" style="width: 24px; height: 24px;" />
       </span>
     </section>
   </section>

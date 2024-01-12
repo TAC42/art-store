@@ -1,6 +1,6 @@
 <main class="product-details-contents w-h-100 flex column">
     <section *ngIf="product" class="product-area flex column">
-        <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" [autoSwitch]="true" />
+        <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
         <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image" />
 
         <p> {{product.name}} </p>

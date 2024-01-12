@@ -2,8 +2,7 @@
     <section (clickOutside)="closeMenu()" [@slideInOut] class="aside-menu flex column">
         <div class="logo-container flex row">
             <h1>oricarlin</h1>
-            <svg-render [svgName]="ocLogo" style="width: 32px; height: 32px;">
-            </svg-render>
+            <svg-render svgName="ocLogo" style="width: 32px; height: 32px;" />
         </div>
 
         <div class="link-area">
@@ -31,6 +30,6 @@
         <div class="link-area" *ngIf="loggedinUser$ | async as loggedinUser">
             <span *ngIf="!loggedinUser?._id" (click)="openLogin($event)">Login</span>
             <span *ngIf="loggedinUser?._id" (click)="exitAccount($event)">Logout</span>
-        </div>        
+        </div>
     </section>
 </main>

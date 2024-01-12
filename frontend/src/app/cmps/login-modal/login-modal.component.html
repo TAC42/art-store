@@ -5,7 +5,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('username')">
                     <label for="username" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="personIcon" />
+                            <svg-render svgName="personIcon" />
                             <span>Username</span>
                         </div>
                         <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
@@ -17,7 +17,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('password')">
                     <label for="password" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="lockIcon" />
+                            <svg-render svgName="lockIcon" />
                             <span>Password</span>
                         </div>
                         <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
@@ -31,7 +31,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('firstName')">
                     <label for="firstName" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="idIcon" />
+                            <svg-render svgName="idIcon" />
                             <span>First Name</span>
                         </div>
                         <span *ngIf="isFieldInvalid('firstName')">{{ getErrorMessage('firstName') }}</span>
@@ -43,7 +43,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('lastName')">
                     <label for="lastName" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="idIcon" />
+                            <svg-render svgName="idIcon" />
                             <span>Last Name</span>
                         </div>
                         <span *ngIf="isFieldInvalid('lastName')">{{ getErrorMessage('lastName') }}</span>
@@ -55,7 +55,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('username')">
                     <label for="username" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="personIcon" />
+                            <svg-render svgName="personIcon" />
                             <span>Username</span>
                         </div>
                         <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
@@ -67,7 +67,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
                     <label for="email" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="emailIcon" />
+                            <svg-render svgName="emailIcon" />
                             <span>Email</span>
                         </div>
                         <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
@@ -79,7 +79,7 @@
                 <div class="input-area flex column" [class.error]="isFieldInvalid('password')">
                     <label for="password" class="flex row">
                         <div class="label-info flex row">
-                            <svg-render [svgName]="lockIcon" />
+                            <svg-render svgName="lockIcon" />
                             <span>Password</span>
                         </div>
                         <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>

@@ -1,37 +1,23 @@
 <footer class="footer-contents layout-row">
-  <section
-    *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'"
-    class="mobile-view flex column"
-  >
+  <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
     <div class="links flex row">
       <a class="mail-link" routerLink="/about/contact">
-        <svg-render svgName="envelopeIcon"> </svg-render>
+        <svg-render svgName="envelopeIcon" />
       </a>
 
-      <a
-        class="flex"
-        href="https://www.instagram.com/oricarlin/"
-        target="_blank"
-      >
-        <svg-render svgName="instagramIcon"> </svg-render>
+      <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
+        <svg-render svgName="instagramIcon" />
       </a>
 
-      <a
-        class="flex"
-        href="https://account.venmo.com/u/ori-carlin"
-        target="_blank"
-      >
-        <svg-render svgName="venmoIcon"> </svg-render>
+      <a class="flex" href="https://account.venmo.com/u/ori-carlin" target="_blank">
+        <svg-render svgName="venmoIcon" />
       </a>
     </div>
 
     <span>© ORICARLIN 2023</span>
   </section>
 
-  <section
-    *ngIf="deviceType === 'tablet' || deviceType === 'desktop'"
-    class="desktop-view flex row"
-  >
+  <section *ngIf="deviceType === 'tablet' || deviceType === 'desktop'" class="desktop-view flex row">
     <div class="footer-part flex column">
       <a routerLink="/about/introduction" routerLinkActive="active">About</a>
       <a routerLink="/shop" routerLinkActive="active">Shop</a>
@@ -42,18 +28,14 @@
     <div class="footer-part flex column">
       <div class="social-media flex row">
         <a class="mail-link" routerLink="/about/contact">
-          <svg-render svgName="envelopeIcon"> </svg-render>
+          <svg-render svgName="envelopeIcon" />
         </a>
-        <a
-          class="flex"
-          href="https://www.instagram.com/oricarlin/"
-          target="_blank"
-        >
-          <svg-render svgName="instagramIcon"> </svg-render>
+        <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
+          <svg-render svgName="instagramIcon" />
         </a>
 
         <a class="flex" href="https://venmo.com/" target="_blank">
-          <svg-render svgName="venmoIcon"> </svg-render>
+          <svg-render svgName="venmoIcon" />
         </a>
       </div>
       <span>© ORICARLIN 2023</span>

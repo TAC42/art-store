@@ -10,8 +10,6 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
   @Input() imageUrls: string[] = []
   @Input() autoSwitch: boolean = false
 
-  rightArrowIcon: string = 'rightArrowIcon'
-  leftArrowIcon: string = 'leftArrowIcon'
   currentIndex: number = 0
 
   private autoSwitchSubscription: Subscription | null = null
