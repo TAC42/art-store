@@ -1,13 +1,25 @@
 <main class="product-details-contents w-h-100 flex column">
-    <section *ngIf="product" class="product-area flex column">
-        <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
-        <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image" />
+    <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
+        <section class="actions flex row">
+            <button (click)="onBack()" title="Return to previous page?">
+                <svg-render svgName="leftArrowIcon" />
+            </button>
+            <button title="Buy product?">
+                <svg-render svgName="shoppingCart" />
+            </button>
+        </section>
+        <section *ngIf="product" class="product-area flex column">
+            <div class="image-container flex column">
+                <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
+                <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image" />
+                <span class="price-tag flex">${{product.price}}</span>
+            </div>
 
-        <p> {{product.name}} </p>
-        <span>${{product.price}}</span>
-        <p> {{product.description}}</p>
-    </section>
-    <section class="actions">
-        <button (click)="onBack()" class="back-btn">Back</button>
+            <h2> {{product.name}} </h2>
+            <div class="text-area flex column">
+                <h3>About The Product</h3>
+                <p> {{product.description}}</p>
+            </div>
+        </section>
     </section>
 </main>

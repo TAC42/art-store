@@ -1,4 +1,4 @@
-<div class="carousel-container flex">
+<div class="carousel-container flex" customSwipe (swipeLeft)="previousImage()" (swipeRight)="nextImage()">
     <div class="carousel-slide" *ngFor="let imageUrl of imageUrls; let i = index" [ngStyle]="getSlideStyle(i)">
         <img [src]="imageUrl" [alt]="'Image ' + (i + 1)">
     </div>

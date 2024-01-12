@@ -13,6 +13,7 @@ product-preview {
     &:hover {
       text-decoration: none;
     }
+
     .prod-img {
       background: $scdclr3;
       grid-column: 1 / 3;
@@ -38,7 +39,7 @@ product-preview {
       grid-template-columns: row;
     }
 
-    .edit-btn{
+    .edit-btn {
       right: 1.75em;
     }
 

@@ -6,8 +6,12 @@ import { EffectsModule } from '@ngrx/effects'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha'
-
 import { AppRoutingModule } from './app-routing.module'
+
+import { ClickOutsideDirective } from './directives/click-outside.directive'
+import { CustomValidatorDirective } from './directives/custom-validator.directive'
+import { SwipeDirective } from './directives/swipe.directive'
+
 import { AppComponent } from './app-root/app.component'
 import { HomeComponent } from './pages/home/home.component'
 import { HeaderComponent } from './cmps/header/header.component'
@@ -18,7 +22,6 @@ import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-compo
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShopListComponent } from './cmps/shop-list/shop-list.component'
 import { AsideMenuComponent } from './cmps/aside-menu/aside-menu.component'
-import { ClickOutsideDirective } from './directives/click-outside.directive'
 import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
 import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
 import { ImageCarouselComponent } from './cmps/image-carousel/image-carousel.component'
@@ -32,7 +35,6 @@ import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 import { FooterComponent } from './cmps/footer/footer.component'
 import { LoginModalComponent } from './cmps/login-modal/login-modal.component'
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component'
-import { CustomValidatorDirective } from './directives/custom-validator.directive'
 import { SculptureComponent } from './pages/sculpture/sculpture.component'
 import { ArtwareComponent } from './pages/artware/artware.component'
 import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.component'
@@ -68,6 +70,7 @@ import { CartComponent } from './cmps/cart/cart.component'
     ConfirmModalComponent,
     ImageUploaderComponent,
     CartComponent,
+    SwipeDirective,
   ],
   imports: [
     BrowserModule,
