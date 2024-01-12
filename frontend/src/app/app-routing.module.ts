@@ -11,6 +11,7 @@ import { ProductResolver } from './resolvers/product.resolver'
 import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 import { SculptureComponent } from './pages/sculpture/sculpture.component'
 import { ArtwareComponent } from './pages/artware/artware.component'
+import { ScrollToTopResolver } from './resolvers/scroll-to-top.resolver'
 
 const routes: Routes = [
   {
@@ -19,18 +20,20 @@ const routes: Routes = [
       { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
       { path: 'edit', component: ProductEditComponent },
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
-    ]
+    ],
+    resolve: { scrollToTop: ScrollToTopResolver } 
   },
   {
     path: 'about', component: AboutComponent, children: [
       { path: '', redirectTo: 'introduction', pathMatch: 'full' },
       { path: 'introduction', component: IntroductionComponent },
       { path: 'contact', component: ContactComponent }
-    ]
+    ],
+    resolve: { scrollToTop: ScrollToTopResolver } 
   },
-  { path: 'sculpture', component: SculptureComponent },
-  { path: 'artware', component: ArtwareComponent },
-  { path: '', component: HomeComponent },
+  { path: 'sculpture', component: SculptureComponent ,resolve: { scrollToTop: ScrollToTopResolver } },
+  { path: 'artware', component: ArtwareComponent ,resolve: { scrollToTop: ScrollToTopResolver } },
+  { path: '', component: HomeComponent , resolve: { scrollToTop: ScrollToTopResolver }  },
 ]
 
 @NgModule({
