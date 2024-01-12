@@ -1,3 +1,5 @@
+import { Product } from "./shop"
+
 export interface User {
     _id?: string
     fullName: string
@@ -7,6 +9,7 @@ export interface User {
     password: string
     createdAt: number
     isAdmin: boolean
+    cart?: Product[]
 }
 
 export interface UserCredentials {

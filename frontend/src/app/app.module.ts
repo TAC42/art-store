@@ -37,6 +37,7 @@ import { SculptureComponent } from './pages/sculpture/sculpture.component';
 import { ArtwareComponent } from './pages/artware/artware.component';
 import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.component'
 import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component';
+import { CartComponent } from './cmps/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.com
     ArtwareComponent,
     ConfirmModalComponent,
     ImageUploaderComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
