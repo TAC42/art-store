@@ -11,18 +11,15 @@ export const productService = {
   query,
   getById,
   getByName,
+  getRandomProducts,
   remove,
   save,
 }
 
 async function query(filterBy = {}) {
   try {
-    // const page = filterBy.page || 1
-    // const itemsPerPage = 12
-    // const skipCount = (page - 1) * itemsPerPage
-
     const pipeline = _buildPipeline(filterBy)
-    // console.log('Filter Criteria:', criteria)
+
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
     let products = await collection.aggregate(pipeline).toArray()
 
@@ -61,6 +58,22 @@ async function getByName(productName) {
     return product
   } catch (err) {
     loggerService.error(`while finding product with name ${productName}`, err)
+    throw err
+  }
+}
+
+async function getRandomProducts(type, excludeProductId) {
+  try {
+    const pipeline = [
+      { $match: { _id: { $ne: new ObjectId(excludeProductId) }, type: type } },
+      { $sample: { size: 3 } }
+    ]
+    const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
+    let products = await collection.aggregate(pipeline).toArray()
+
+    return products
+  } catch (err) {
+    loggerService.error('Error getting random products', err)
     throw err
   }
 }
@@ -134,44 +147,6 @@ function _buildPipeline(filterBy) {
     criteria.$match.type = { $regex: type, $options: 'i' }
   }
 
-  // if (cat) {
-  //   criteria.$match.category = { $regex: cat, $options: 'i' }
-  // }
-
-  // criteria.$match.price = {}
-
-  // if (min) {
-  //   criteria.$match.price.$gte = parseInt(min)
-  // } else criteria.$match.price.$gte = parseInt(0)
-
-  // if (max) {
-  //   criteria.$match.price.$lte = parseInt(max)
-  // } else criteria.$match.price.$lte = parseInt(10000)
-
-  // if (tag) {
-  //   criteria.$match.tags = { $regex: tag, $options: 'i' }
-  // }
-
-  // if (time) {
-  //   criteria.$match.daysToMake = { $regex: time, $options: 'i' }
-  // }
-
-  // if (level) {
-  //   pipeline.push({
-  //     $lookup: {
-  //       from: 'user',
-  //       localField: 'ownerId',
-  //       foreignField: '_id',
-  //       as: 'userDetails',
-  //     },
-  //   })
-  //   pipeline.push({
-  //     $match: {
-  //       'userDetails.level': { $regex: level, $options: 'i' },
-  //     },
-  //   })
-  // }
-
   if (Object.keys(criteria.$match).length > 0) {
     pipeline.push(criteria)
   }
@@ -219,3 +194,42 @@ async function _getAllProductImages() {
     throw err
   }
 }
+
+
+// if (cat) {
+//   criteria.$match.category = { $regex: cat, $options: 'i' }
+// }
+
+// criteria.$match.price = {}
+
+// if (min) {
+//   criteria.$match.price.$gte = parseInt(min)
+// } else criteria.$match.price.$gte = parseInt(0)
+
+// if (max) {
+//   criteria.$match.price.$lte = parseInt(max)
+// } else criteria.$match.price.$lte = parseInt(10000)
+
+// if (tag) {
+//   criteria.$match.tags = { $regex: tag, $options: 'i' }
+// }
+
+// if (time) {
+//   criteria.$match.daysToMake = { $regex: time, $options: 'i' }
+// }
+
+// if (level) {
+//   pipeline.push({
+//     $lookup: {
+//       from: 'user',
+//       localField: 'ownerId',
+//       foreignField: '_id',
+//       as: 'userDetails',
+//     },
+//   })
+//   pipeline.push({
+//     $match: {
+//       'userDetails.level': { $regex: level, $options: 'i' },
+//     },
+//   })
+// }

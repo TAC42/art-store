@@ -3,8 +3,8 @@ import { loggerService } from '../../services/logger.service.js'
 
 export async function getProducts(req, res) {
   try {
-    const { search , type} = req.query
-    let filterBy = { search , type}
+    const { search, type } = req.query
+    let filterBy = { search, type }
 
     loggerService.debug('Getting Products', filterBy)
     const products = await productService.query(filterBy)
@@ -37,6 +37,18 @@ export async function getProductByName(req, res) {
   } catch (err) {
     loggerService.error('Failed to get product by name', err)
     res.status(500).send({ err: 'Failed to get product by name' })
+  }
+}
+
+export async function getRandomProducts(req, res) {
+  try {
+    const { type, excludeProductId } = req.query
+    const products = await productService.getRandomProducts(type, excludeProductId)
+
+    res.json(products)
+  } catch (err) {
+    loggerService.error('Failed to get random products', err)
+    res.status(500).send({ err: 'Failed to get random products' })
   }
 }
 

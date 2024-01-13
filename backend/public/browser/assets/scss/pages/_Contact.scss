@@ -30,19 +30,16 @@ app-contact {
         color: $prmclr1;
         font-family: "sabon";
         font-size: 18px;
-        line-height: 1.6;
       }
     }
 
     .form-area {
-      background: linear-gradient(
-        to bottom,
-        $prmclr3,
-        $scdclr3,
-        $scdclr4,
-        $scdclr5,
-        $scdclr2
-      );
+      background: linear-gradient(to bottom,
+          $prmclr3,
+          $scdclr3,
+          $scdclr4,
+          $scdclr5,
+          $scdclr2 );
       user-select: none;
 
       form {
@@ -109,6 +106,7 @@ app-contact {
           }
 
           &.error {
+
             input,
             textarea {
               border: 1px solid $mnrclr2;
@@ -166,13 +164,10 @@ app-contact {
           }
 
           re-captcha {
-            // width: fit-content;
+            width: fit-content;
           }
         }
       }
     }
   }
 }
-
-
-

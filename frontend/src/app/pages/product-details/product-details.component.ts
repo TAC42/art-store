@@ -6,6 +6,7 @@ import { Product } from '../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { SET_PRODUCT_BY_NAME } from '../../store/shop.actions'
+import { ShopDbService } from '../../services/shop-db.service'
 
 @Component({
     selector: 'product-details',
@@ -20,6 +21,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private route = inject(ActivatedRoute)
     private store = inject(Store<AppState>)
     private dTypeService = inject(DeviceTypeService)
+    private shopDbService = inject(ShopDbService)
+
+    randomProducts: Product[] = []
 
     deviceType: string = 'mini-tablet'
     private dTypesubscription: Subscription
@@ -34,11 +38,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.productSubscription = this.route.data
-            .pipe(
-                map(data => data['product'])
-            )
-            .subscribe((product: Product) => {
-                this.product = product
+            .pipe(map(data => data['product']))
+            .subscribe({
+                next: (product: Product) => {
+                    this.product = product
+
+                    if (product && product._id) {
+                        this.shopDbService.getRandomProducts('shop', product._id)
+                            .subscribe({
+                                next: (products: Product[]) => this.randomProducts = products,
+                                error: (error) => console.error('Error fetching random products:', error)
+                            })
+                    }
+                },
+                error: (error) => console.error('Error fetching product:', error)
             })
     }
 

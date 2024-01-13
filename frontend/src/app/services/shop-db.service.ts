@@ -31,6 +31,16 @@ export class ShopDbService {
     return this.httpService.get(`${BASE_URL}${productName}`)
   }
 
+  getRandomProducts(type: string, excludeProductId: string): Observable<Product[]> {
+    const url = `${BASE_URL}random?type=${encodeURIComponent(type)}&excludeProductId=${encodeURIComponent(excludeProductId)}`
+    return this.httpService.get<Product[]>(url).pipe(
+      catchError((error) => {
+        console.error('Error fetching random products:', error)
+        return throwError(() => new Error('Error fetching random products'));
+      })
+    )
+  }
+
   remove(productId: string): Observable<any> {
     return this.httpService.delete(`${BASE_URL}${productId}`)
   }

@@ -52,23 +52,93 @@ product-details {
                     border-bottom: 1px solid $scdclr3;
                     width: 100%;
                     text-align: center;
+                    font-family: 'nh-bold';
                 }
 
-                .text-area {
+                p {
                     padding: 0.5em 1em;
                     margin-block-start: 1em;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 1em;
+                    white-space: pre-line;
+                    width: 100%;
+                    font-family: 'sabon';
+                }
 
-                    h3 {
-                        border-bottom: 1px solid $scdclr2;
-                        padding: 0 0.25em;
+                margin-block-end: 1em;
+            }
+
+            h3 {
+                padding: 0.5em 1em;
+                width: 100%;
+                text-align: center;
+            }
+
+            .buy-product {
+                border-radius: 0.5em;
+                gap: 0.25em;
+                margin: 1em auto;
+                border: 1px solid $prmclr1;
+                align-items: center;
+                padding: 0.5em 1.5em;
+                transition: all 0.3s ease-in-out;
+
+                span {
+                    font-size: 16px;
+                    font-family: 'nh-bold';
+                    color: $prmclr1;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                svg-render {
+                    width: 32px;
+                    height: 32px;
+
+                    svg {
+                        transition: all 0.3s ease-in-out;
+                        fill: $scdclr2;
+                    }
+                }
+
+                &:hover {
+                    background: $prmclr1;
+
+                    span {
+                        color: $prmclr3;
+                    }
+
+                    svg {
+                        fill: $prmclr3;
+                        transform: translateX(5px);
+                    }
+                }
+            }
+
+            .other-products-area {
+                padding: 0.5em 1em;
+                text-align: center;
+                gap: 1em;
+
+                .other-product-area {
+                    min-height: 180px;
+                    gap: 0.25em;
+                    cursor: pointer;
+
+                    img {
+                        height: 100%;
+                        max-height: 160px;
+                        object-fit: cover;
+                        transition: all 0.5s ease;
                     }
 
                     p {
-                        white-space: pre-line;
-                        width: 100%;
+                        font-family: 'nh-bold';
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(.85);
+                        }
+
+                        text-decoration: none;
                     }
                 }
             }

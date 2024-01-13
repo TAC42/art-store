@@ -1,0 +1,149 @@
+product-details {
+    .product-details-contents {
+        color: $prmclr1;
+
+        .mobile-view {
+            .actions {
+                justify-content: space-between;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 62px;
+                z-index: 1;
+                padding: 0.5em 1em;
+                background: white;
+
+                button {
+                    width: 32px;
+                    height: 32px;
+
+                    svg {
+                        fill: $scdclr2;
+                        transition: fill 0.3s ease-in-out;
+
+                        &:hover {
+                            fill: $prmclr1;
+                        }
+                    }
+                }
+            }
+
+            .product-area {
+                .image-container {
+                    position: relative;
+
+                    .price-tag {
+                        position: absolute;
+                        bottom: 1em;
+                        left: 1em;
+                        padding: 0.55em 0.5em;
+                        background: rgba(0, 0, 0, 0.5);
+                        color: $prmclr3;
+                        border-radius: 0.5em;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+
+                h2 {
+                    padding: 0.25em 1em;
+                    border-top: 1px solid $scdclr3;
+                    border-bottom: 1px solid $scdclr3;
+                    width: 100%;
+                    text-align: center;
+                    font-family: 'nh-bold';
+                }
+
+                p {
+                    padding: 0.5em 1em;
+                    margin-block-start: 1em;
+                    white-space: pre-line;
+                    width: 100%;
+                    font-family: 'sabon';
+                }
+
+                margin-block-end: 1em;
+            }
+
+            h3 {
+                padding: 0.5em 1em;
+                width: 100%;
+                text-align: center;
+            }
+
+            .buy-product {
+                border-radius: 0.5em;
+                gap: 0.25em;
+                margin: 1em auto;
+                border: 1px solid $prmclr1;
+                align-items: center;
+                padding: 0.5em 1.5em;
+                transition: all 0.3s ease-in-out;
+
+                span {
+                    font-size: 16px;
+                    font-family: 'nh-bold';
+                    color: $prmclr1;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                svg-render {
+                    width: 32px;
+                    height: 32px;
+
+                    svg {
+                        transition: all 0.3s ease-in-out;
+                        fill: $scdclr2;
+                    }
+                }
+
+                &:hover {
+                    background: $prmclr1;
+
+                    span {
+                        color: $prmclr3;
+                    }
+
+                    svg {
+                        fill: $prmclr3;
+                        transform: translateX(5px);
+                    }
+                }
+            }
+
+            .other-products-area {
+                padding: 0.5em 1em;
+                text-align: center;
+                gap: 1em;
+
+                .other-product-area {
+                    min-height: 180px;
+                    gap: 0.25em;
+                    cursor: pointer;
+
+                    img {
+                        height: 100%;
+                        max-height: 160px;
+                        object-fit: cover;
+                        transition: all 0.5s ease;
+                    }
+
+                    p {
+                        font-family: 'nh-bold';
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(.85);
+                        }
+
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        margin-block-end: 2em;
+    }
+}
