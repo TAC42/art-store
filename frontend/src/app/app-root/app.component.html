@@ -1,9 +1,10 @@
-<app-header (toggleAsideMenu)="asideMenu.toggleMenu()" class="full" />
-<app-aside-menu #asideMenu />
+<app-header class="full" />
+<app-aside-menu />
 <app-login-modal />
 <confirm-modal />
 <cart />
-<router-outlet  />
+<router-outlet />
 <app-user-msg />
 <app-footer class="full" />
-<div *ngIf="dimmer" (click)="onCloseDimmer($event)" class="modal-wrapper"></div>
+<div *ngIf="dimmer" (click)="onCloseDimmer($event)" class="modal-wrapper">
+</div>

@@ -2,7 +2,7 @@
   <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else elseTemplate">
-        <span class="flex" (click)="onToggleAsideMenu($event)">
+        <span class="flex" (click)="openAsideMenu($event)">
           <svg-render svgName="burgerMenuIcon" />
         </span>
 

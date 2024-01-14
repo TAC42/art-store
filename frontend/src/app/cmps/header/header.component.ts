@@ -1,8 +1,9 @@
-import { Component, OnDestroy, Output, EventEmitter, inject, HostBinding, OnInit } from '@angular/core'
+import { Component, OnDestroy, inject, HostBinding, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
 import { DimmerService } from '../../services/dimmer.service'
+import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'app-header',
@@ -13,11 +14,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @HostBinding('class.z-50') get zIndex() {
     return this.searchState
   }
-  @Output() toggleAsideMenu = new EventEmitter<void>()
 
   private router = inject(Router)
   private dimService = inject(DimmerService)
   private dTypeService = inject(DeviceTypeService)
+  public mService = inject(ModalService)
 
   searchState: boolean = false
   searchValue: string = ''
@@ -36,9 +37,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.searchState = active
     })
   }
-  onToggleAsideMenu(event: MouseEvent) {
+
+  openAsideMenu(event: MouseEvent) {
     event.stopPropagation()
-    this.toggleAsideMenu.emit()
+    this.mService.openModal('aside-menu')
   }
 
   onOpenSearch() {
