@@ -33,6 +33,13 @@ product-details {
                 .image-container {
                     position: relative;
 
+                    img {
+                        min-height: 400px;
+                        max-height: 400px;
+                        object-fit: cover;
+                        cursor: pointer;
+                    }
+
                     .price-tag {
                         position: absolute;
                         bottom: 1em;

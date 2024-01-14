@@ -1,7 +1,7 @@
 <loader></loader>
 <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
 <a class="edit-link grid" routerLink="/shop/edit">
-  <svg-render svgName="addIcon" />
-  <span>Add</span>
+    <svg-render svgName="addIcon" />
+    <span>Add</span>
 </a>
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />

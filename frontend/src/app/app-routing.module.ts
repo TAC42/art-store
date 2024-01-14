@@ -10,12 +10,30 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { ProductResolver } from './resolvers/product.resolver'
 import { ShopIndexComponent } from './pages/shop-index/shop-index.component'
 import { SculptureComponent } from './pages/sculpture/sculpture.component'
+import { SculptureIndexComponent } from './pages/sculpture-index/sculpture-index.component'
 import { ArtwareComponent } from './pages/artware/artware.component'
+import { ArtwareIndexComponent } from './pages/artware-index/artware-index.component'
 
 const routes: Routes = [
   {
     path: 'shop', component: ShopComponent, children: [
       { path: '', component: ShopIndexComponent },
+      { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
+      { path: 'edit', component: ProductEditComponent },
+      { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
+    ]
+  },
+  {
+    path: 'sculpture', component: SculptureComponent, children: [
+      { path: '', component: SculptureIndexComponent },
+      { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
+      { path: 'edit', component: ProductEditComponent },
+      { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
+    ]
+  },
+  {
+    path: 'artware', component: ArtwareComponent, children: [
+      { path: '', component: ArtwareIndexComponent },
       { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
       { path: 'edit', component: ProductEditComponent },
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
@@ -28,8 +46,6 @@ const routes: Routes = [
       { path: 'contact', component: ContactComponent }
     ]
   },
-  { path: 'sculpture', component: SculptureComponent },
-  { path: 'artware', component: ArtwareComponent },
   { path: '', component: HomeComponent },
 ]
 
