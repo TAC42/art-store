@@ -1,9 +1,55 @@
 <main class="modal-wrapper flex" *ngIf="isCartOpen">
-    <section (clickOutside)="closeCart()" [@slideInOut] class="shopping-cart flex column">
+  <section
+    (clickOutside)="closeCart()"
+    [@slideInOut]
+    class="shopping-cart flex column"
+  >
     <div class="cart-header flex">
-        <h1 class="title">Cart</h1>
-        <svg-render class="cart" svgName="shoppingCart" />
+      <h1 class="title">Cart</h1>
+      <svg-render class="cart" svgName="shoppingCart" />
     </div>
+    <ng-container *ngIf="cart.length > 0; else sorry">
+      <section class="cart-list">
+        <article *ngFor="let cartItem of cart">
+          <img (src)="(cartItem.imgUrls[0])" (alt)="(cartItem.name)" />
+          <div class="item-info">
+            <span class="name">{{ cartItem.name }}</span>
+            <span class="price">{{ cartItem.price }}</span>
+          </div>
+        </article>
+      </section>
 
-        </section>
+      <section class="check-out" *ngIf="cart.length > 0">
+        <ng-container *ngIf="orderSummary as orderSummary">
+          <span
+            >Total
+            {{ orderSummary.total | currency : "USD" : "symbol" }}</span
+          >
+          <span
+          >Taxes
+          {{ orderSummary.taxes | currency : "USD" : "symbol" }}</span
+        >
+        <span
+        >Delivery
+        {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }}</span
+      >
+          <span
+            >Grand Total
+            {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}</span
+          >
+          <button>Check-Out</button>
+        </ng-container>
+      </section>
+    </ng-container>
+
+    <ng-template #sorry>
+      <section class="sorry">
+        <h3>Ops! Your cart is empty!</h3>
+        <svg-render
+          svgName="sorryRobot"
+          style="width: 150px; height: 150px"
+        ></svg-render>
+      </section>
+    </ng-template>
+  </section>
 </main>
