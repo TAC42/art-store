@@ -40,6 +40,10 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.mService.openModal(`confirm`, productId)
   }
 
+  onOpenCart():void {
+    this.mService.openModal('cart')
+  }
+
   onRemoveProduct(productId: string) {
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }

@@ -61,7 +61,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.productSubscription) this.productSubscription.unsubscribe()
-        this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
 
         this.dTypesubscription.unsubscribe()
     }

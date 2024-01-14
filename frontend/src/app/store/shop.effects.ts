@@ -72,6 +72,7 @@ export class ShopEffects {
       tap(() => {
         this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
         this.loaderService.setIsLoading(true)
+        this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
       }),
       mergeMap(action =>
         this.shopDbService.getByName(action.name).pipe(

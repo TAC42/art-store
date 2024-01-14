@@ -9,6 +9,7 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 export class ShopFilterComponent implements OnInit {
   @Input() filterBy!: ShopFilter
   @Output() onSetFilter = new EventEmitter<string>()
+  @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false
 
   private filterSubject: Subject<string> = new Subject<string>()
@@ -39,6 +40,11 @@ export class ShopFilterComponent implements OnInit {
     this.filterBy.search = ''
     this.onSetFilter.emit('')
     this.hasValue = false
+  }
+
+  onCartOpen(event: Event){
+    event.stopPropagation()
+    this.onOpenCart.emit()
   }
   
 }
