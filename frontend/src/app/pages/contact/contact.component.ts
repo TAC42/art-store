@@ -30,6 +30,7 @@ export class ContactComponent {
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false
+  captchaResponse: string | null = null
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
   constructor() {
@@ -64,17 +65,27 @@ export class ContactComponent {
   }
 
   resolved(captchaResponse: string | null) {
+    this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
   }
 
   onSubmit(event: Event) {
     event.preventDefault()
     if (this.contactForm.valid && this.isCaptchaResolved) {
-      this.uS.sendMail(this.contactForm.value).subscribe({
+      // Add the recaptcha response to the form, to be sent to backend
+      const formDataWithCaptcha = {
+        ...this.contactForm.value,
+        recaptchaToken: this.captchaResponse
+      }
+
+      this.uS.sendMail(formDataWithCaptcha).subscribe({
         next: () => {
           showSuccessMsg('Email Sent!',
             'Thank you for contacting!', this.eBusService)
           this.contactForm.reset()
+          // reset of recaptcha token
+          this.isCaptchaResolved = false
+          this.captchaResponse = null
         },
         error: (error) => {
           console.error(error)
