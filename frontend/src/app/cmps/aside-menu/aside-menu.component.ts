@@ -26,26 +26,17 @@ import { LOGOUT } from '../../store/user.actions'
 
 export class AsideMenuComponent {
   private store = inject(Store<AppState>)
-  private mService = inject(ModalService)
   private elRef = inject(ElementRef)
+  public mService = inject(ModalService)
 
-  isMenuOpen: boolean = false
   loggedinUser$: Observable<User>
 
   constructor() {
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
   }
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen
-  }
-
-  get menuState() {
-    return this.isMenuOpen ? 'in' : 'out'
-  }
-
   closeMenu() {
-    this.isMenuOpen = false
+    this.mService.closeModal('aside-menu')
   }
 
   openLogin(event: MouseEvent) {

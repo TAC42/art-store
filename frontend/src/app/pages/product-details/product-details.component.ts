@@ -3,9 +3,6 @@ import { Subscription, map } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
-import { Store } from '@ngrx/store'
-import { AppState } from '../../store/app.state'
-import { SET_PRODUCT_BY_NAME } from '../../store/shop.actions'
 import { ShopDbService } from '../../services/shop-db.service'
 
 @Component({
@@ -19,7 +16,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     private router = inject(Router)
     private route = inject(ActivatedRoute)
-    private store = inject(Store<AppState>)
     private dTypeService = inject(DeviceTypeService)
     private shopDbService = inject(ShopDbService)
 
@@ -44,7 +40,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
                     this.product = product
 
                     if (product && product._id) {
-                        this.shopDbService.getRandomProducts('shop', product._id)
+                        this.shopDbService.getRandomProducts(product.type, product._id)
                             .subscribe({
                                 next: (products: Product[]) => this.randomProducts = products,
                                 error: (error) => console.error('Error fetching random products:', error)

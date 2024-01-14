@@ -40,6 +40,8 @@ import { ArtwareComponent } from './pages/artware/artware.component'
 import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.component'
 import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component'
 import { CartComponent } from './cmps/cart/cart.component'
+import { SculptureIndexComponent } from './pages/sculpture-index/sculpture-index.component'
+import { ArtwareIndexComponent } from './pages/artware-index/artware-index.component'
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { CartComponent } from './cmps/cart/cart.component'
     ImageUploaderComponent,
     CartComponent,
     SwipeDirective,
+    SculptureIndexComponent,
+    ArtwareIndexComponent,
   ],
   imports: [
     BrowserModule,

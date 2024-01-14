@@ -1,0 +1,30 @@
+cart {
+  .modal-wrapper {
+    .shopping-cart {
+      position: fixed;
+      top: 0;
+      right: 0;
+      background: $prmclr2;
+      min-width: 275px;
+      height: 100vh;
+      z-index: 15;
+      padding: 0.5em 1em;
+
+      .cart-header{
+        justify-content: space-between;
+        align-items: center;
+
+        .title{
+            font-family: "nunito";
+            font-size: 1.75em;
+            color: $prmclr1;
+        }
+        .cart{
+            width: 32px;
+            height: 32px;
+            fill:$prmclr1;
+        }
+      }
+    }
+  }
+}
