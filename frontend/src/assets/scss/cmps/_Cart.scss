@@ -10,19 +10,20 @@ cart {
       z-index: 15;
       padding: 0.5em 1em;
 
-      .cart-header{
+      .cart-header {
         justify-content: space-between;
         align-items: center;
 
-        .title{
-            font-family: "nunito";
-            font-size: 1.75em;
-            color: $prmclr1;
+        .title {
+          font-family: "nunito";
+          font-size: 1.75em;
+          color: $prmclr1;
         }
-        .cart{
-            width: 32px;
-            height: 32px;
-            fill:$prmclr1;
+        .cart {
+          width: 32px;
+          height: 32px;
+          fill: $prmclr1;
+        
         }
       }
     }

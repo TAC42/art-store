@@ -9,7 +9,7 @@ export interface User {
     password: string
     createdAt: number
     isAdmin: boolean
-    cart?: Product[]
+    cart: Product[]
 }
 
 export interface UserCredentials {

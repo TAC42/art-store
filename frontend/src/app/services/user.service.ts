@@ -100,6 +100,7 @@ export class UserService {
       password: '',
       createdAt: 0,
       isAdmin: false,
+      cart: []
     }
   }
 }
