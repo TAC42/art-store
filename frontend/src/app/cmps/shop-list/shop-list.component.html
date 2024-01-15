@@ -10,6 +10,7 @@
 <ng-template #productList>
   <product-preview
     (remove)="remove.emit($event)"
+    (add)="add.emit($event)"
     *ngFor="let product of products"
     [product]="product"
   ></product-preview>

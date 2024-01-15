@@ -4,7 +4,7 @@ shop-filter {
   // grid-auto-flow: column;
   grid-template-columns: 1fr 56px 56px;
   align-items: center;
-  padding: 1em;
+  padding: 1em 0;
   width: 100%;
 
   input {
@@ -53,7 +53,7 @@ shop-filter {
 
   .cart {
     span {
-      padding: 1.2em 1em 6px 1em;
+      padding: 1.2em 1em 6px 1.5em;
       border-radius: 0 0.5em 0.5em 0;
       opacity: .7;
     }

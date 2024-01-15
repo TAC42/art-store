@@ -4,4 +4,4 @@
   <svg-render svgName="addIcon" />
   <span>Add</span>
 </a>
-<shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
+<shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)" [products]="products$ | async" />

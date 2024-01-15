@@ -12,12 +12,19 @@ import { CommunicationService } from '../../services/communication.service'
 export class ProductPreviewComponent {
   @Input() product!: Product
   @Output() remove = new EventEmitter()
+  @Output() add = new EventEmitter()
   private router = inject(Router)
 
   onRemoveProduct(event: Event) {
     event.preventDefault()
     event.stopPropagation()
     this.remove.emit(this.product._id)
+  }
+
+  onAddCart(event: Event) {
+    event.preventDefault()
+    event.stopPropagation()
+    this.add.emit(this.product)
   }
 
 

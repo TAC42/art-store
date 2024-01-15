@@ -10,6 +10,7 @@ export class ShopListComponent implements OnInit, OnChanges {
   @Input() products!: Product[] | null
   @Input() isLoading!: boolean
   @Output() remove = new EventEmitter<string>()
+  @Output() add = new EventEmitter<Product>()
 
   ngOnInit(): void {
     console.log('OnInit - this.products:', this.products)

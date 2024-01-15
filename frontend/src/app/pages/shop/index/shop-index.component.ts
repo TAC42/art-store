@@ -48,6 +48,11 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }
 
+  onAddToCart(product: Product){
+    console.log('this is the product to add: ',product);
+    
+  }
+
   onSetFilter(newFilterValue: string): void {
     let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
     updatedFilter = { ...updatedFilter, type: 'shop' }

@@ -44,6 +44,7 @@ product-preview {
     }
 
     .preview-body {
+      position: relative;
       grid-column: 3 / -1;
       width: 100%;
       height: 100%;
@@ -58,6 +59,41 @@ product-preview {
         line-height: 1.2;
         max-height: 2.4em;
         text-transform: capitalize;
+      }
+
+      .add-to-cart {
+        position: absolute;
+        left: 1em;
+        bottom: -3.25px;
+
+        grid-auto-flow: column;
+        border-radius: 0.5em;
+        gap: 0.25em;
+        margin: 1em auto;
+        border: 1px solid $prmclr1;
+        padding: 0.25em 0.75em;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background: $prmclr1;
+
+          .title {
+            color: $prmclr3;
+          }
+
+          svg {
+            fill: $prmclr3;
+            transform: translateX(5px);
+          }
+        }
+        
+        .title{
+          transition: all 0.3s ease-in-out;
+        }
+        svg {
+          width: 1em;
+          transition: all 0.3s ease-in-out;
+        }
       }
 
       .price {
