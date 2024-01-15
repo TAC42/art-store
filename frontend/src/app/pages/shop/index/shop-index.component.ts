@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, take } from 'rxjs'
 import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
 import { Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
@@ -9,6 +9,9 @@ import { ShopFilter } from '../../../models/shop'
 import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
 import { CommunicationService } from '../../../services/communication.service'
 import { ModalService } from '../../../services/modal.service'
+import { UPDATE_USER } from '../../../store/user.actions'
+import { User } from '../../../models/user'
+import { selectLoggedinUser } from '../../../store/user.selectors'
 
 @Component({
   selector: 'shop-index',
@@ -22,6 +25,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private comService = inject(CommunicationService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
+  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'shop' }
 
@@ -47,11 +51,15 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   onRemoveProduct(productId: string) {
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }
-
-  onAddToCart(product: Product){
-    console.log('this is the product to add: ',product);
-    
+  onAddToCart(product: Product) {
+    // Assuming this.loggedinUser$ emits a User object
+    this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
+      const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, product] }
+      console.log('This is the product to add:', product)
+      this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+    })
   }
+  
 
   onSetFilter(newFilterValue: string): void {
     let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
