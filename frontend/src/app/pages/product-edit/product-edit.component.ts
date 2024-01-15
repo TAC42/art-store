@@ -59,19 +59,19 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return control.valueChanges.pipe(
         debounceTime(500),
-        switchMap(value => {
-          if (value === existingName || !value) return of(null)
-
-          return this.sDbService.checkNameAvailable(value).pipe(
-            map(response => {
-              return response.isNameAvailable ? null : { nameTaken: true }
-            }),
-            catchError(() => of())
-          )
-        }),
+        switchMap(value => this.validateName(value, existingName)),
         first()
       )
     }
+  }
+
+  private validateName(value: string, existingName: string): Observable<ValidationErrors | null> {
+    if (value === existingName || !value) return of(null)
+
+    return this.sDbService.checkNameAvailable(value).pipe(
+      map(response => response.isNameAvailable ? null : { nameTaken: true }),
+      catchError(() => of({ error: 'Network or server error' }))
+    )
   }
 
   isFieldInvalid(fieldName: string): boolean {
@@ -115,7 +115,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       ...this.product,
       ...this.editForm.value
     }
-    console.log('saved product: ', productToSave)
     this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
     this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
   }
