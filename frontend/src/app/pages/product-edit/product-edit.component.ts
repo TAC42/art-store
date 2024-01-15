@@ -1,9 +1,9 @@
 import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
-import { Subject, filter, map } from 'rxjs'
+import { Observable, Subject, catchError, debounceTime, filter, first, map, of, switchMap } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 import { SAVE_PRODUCT, SET_PRODUCT_BY_NAME } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -20,23 +20,21 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private router = inject(Router)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
+  private sDbService = inject(ShopDbService)
 
   destroySubject$ = new Subject<void>()
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
   defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
 
-  constructor() {
-    this.initializeForm()
-  }
-
   ngOnInit(): void {
+    this.initializeForm()
     this.fetchProductData()
   }
 
   initializeForm(): void {
     this.editForm = this.fBuilder.group({
-      name: [this.product.name || '', [Validators.required]],
+      name: [this.product.name || '', [Validators.required], [this.nameValidator(this.product.name)]],
       price: [this.product.price || '', [Validators.required]],
       description: [this.product.description || '', [Validators.required]],
       inStock: [this.product.inStock || true, Validators.required],
@@ -54,8 +52,27 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       .subscribe(product => {
         this.product = product
         this.initializeForm()
-        // console.log('This is edit ', product)
       })
+  }
+
+
+  nameValidator(existingName: string): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return control.valueChanges.pipe(
+        debounceTime(500),
+        switchMap(value => {
+          if (value === existingName || !value) return of(null)
+
+          return this.sDbService.checkNameAvailable(value).pipe(
+            map(response => {
+              return response.isNameAvailable ? null : { nameTaken: true }
+            }),
+            catchError(() => of())
+          )
+        }),
+        first()
+      )
+    }
   }
 
   isFieldInvalid(fieldName: string): boolean {
@@ -68,7 +85,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if (field?.errors?.['required']) return `${fieldName} is required!`
     if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
     if (field?.errors?.['maxLength']) return `Maximum length reached`
-    if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
+    if (field?.errors?.['invalidCharacters']) return `Invalid characters used!`
+    if (field?.errors?.['nameTaken']) return 'This name is already in use!'
 
     return ''
   }
@@ -105,7 +123,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroySubject$.next()
-    this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }));
+    this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
   }
 
   onBack = () => {

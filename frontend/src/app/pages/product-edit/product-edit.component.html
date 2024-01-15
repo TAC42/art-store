@@ -10,11 +10,11 @@
           <span>Name*</span>
         </div>
         <span *ngIf="isFieldInvalid('name')">
-          {{ getErrorMessage("name") }}
+          {{ getErrorMessage('name') }}
         </span>
       </label>
       <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." customValidator
-        [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. $%'" />
+        [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. $%:'" />
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('price')">
@@ -24,11 +24,11 @@
           <span>Price*</span>
         </div>
         <span *ngIf="isFieldInvalid('price')">
-          {{ getErrorMessage("price") }}
+          {{ getErrorMessage('price') }}
         </span>
       </label>
       <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." customValidator
-        [minLength]=1 [maxLength]=12 />
+        [minLength]=1 [maxLength]=3 min="0" max="999" />
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('description')">
@@ -38,11 +38,11 @@
           <span>Description*</span>
         </div>
         <span *ngIf="isFieldInvalid('description')">
-          {{ getErrorMessage("description") }}
+          {{ getErrorMessage('description') }}
         </span>
       </label>
       <textarea id="description" formControlName="description" placeholder="Please enter info regarding your product..."
-        customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="'. $%#!*&/:'"></textarea>
+        customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="'. $%#!*&/:,'"></textarea>
     </div>
 
     <div class="input-area flex column">
@@ -92,6 +92,7 @@
             <svg-render svgName="addIcon" />
             <span>Add Image</span>
           </button>
+
           <button class="flex column" type="button" (click)="removeImageUploader(imgUrlsControls.length - 1)"
             [disabled]="imgUrlsControls.length <= 1" [class.disabled]="imgUrlsControls.length <= 1">
             <svg-render svgName="removeIcon" />

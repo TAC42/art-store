@@ -5,6 +5,7 @@ import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@an
   selector: '[customValidator]',
   providers: [{ provide: NG_VALIDATORS, useExisting: CustomValidatorDirective, multi: true }]
 })
+
 export class CustomValidatorDirective implements Validator {
   @Input() maxLength: number = 1000
   @Input() minLength: number = 0

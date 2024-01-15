@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { Observable, throwError, catchError } from 'rxjs'
 import { HttpService } from './http.service'
 import { Product, ShopFilter } from '../models/shop'
@@ -10,9 +10,8 @@ const BASE_URL = 'product/'
 })
 
 export class ShopDbService {
+  private httpService = inject(HttpService)
   private currentFilter: ShopFilter = this.getDefaultFilter()
-
-  constructor(private httpService: HttpService) { }
 
   query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
     return this.httpService.get(BASE_URL, filterBy).pipe(
@@ -24,11 +23,30 @@ export class ShopDbService {
   }
 
   getById(productId: string): Observable<any> {
-    return this.httpService.get(`${BASE_URL}${productId}`)
+    return this.httpService.get(`${BASE_URL}${productId}`).pipe(
+      catchError((error) => {
+        console.error('Error fetching product by id:', error)
+        return throwError(() => new Error('Error fetching product by id'))
+      })
+    )
   }
 
-  getByName(productName: string): Observable<any> {
-    return this.httpService.get(`${BASE_URL}${productName}`)
+  getByName(productName: string): Observable<Product | null> {
+    return this.httpService.get<Product>(`${BASE_URL}${productName}`).pipe(
+      catchError((error) => {
+        console.error('Error fetching product by name:', error)
+        return throwError(() => new Error('Error fetching product by name'))
+      })
+    )
+  }
+
+  checkNameAvailable(productName: string): Observable<{ isNameAvailable: boolean }> {
+    return this.httpService.get<{ isNameAvailable: boolean }>(`${BASE_URL}check-name/${productName}`).pipe(
+      catchError((error) => {
+        console.error('Error checking name availability:', error)
+        return throwError(() => new Error('Error checking name availability'))
+      })
+    )
   }
 
   getRandomProducts(type: string, excludeProductId: string): Observable<Product[]> {
@@ -79,10 +97,6 @@ export class ShopDbService {
     return this.currentFilter
   }
 
-  static getDefaultFilterInstance(httpService: HttpService): ShopFilter {
-    const service = new ShopDbService(httpService)
-    return service.getDefaultFilter()
-  }
   escapeRegExp(string: string): string {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   }

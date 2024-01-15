@@ -34,11 +34,9 @@ async function getById(productId) {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
     const product = await collection.findOne({ _id: new ObjectId(productId) })
-    if (!product) {
-      loggerService.error(`Product not found with id: ${productId}`)
-      throw new Error(`Product not found with id: ${productId}`)
-    }
-    return product
+    console.log('found product: ', product)
+
+    return product || null
   } catch (err) {
     loggerService.error(`while finding product ${productId}`, err)
     throw err
@@ -49,13 +47,11 @@ async function getByName(productName) {
   try {
     const filterBy = { search: productName }
     const products = await query(filterBy)
-    const product = products.find((p) => p.name === productName)
+    const product = products.find((p) => p.name.toLowerCase() ===
+      productName.toLowerCase())
     console.log('found product: ', product)
-    if (!product) {
-      loggerService.error(`Product not found with name: ${productName}`)
-      throw new Error(`Product not found with name: ${productName}`)
-    }
-    return product
+
+    return product || null
   } catch (err) {
     loggerService.error(`while finding product with name ${productName}`, err)
     throw err

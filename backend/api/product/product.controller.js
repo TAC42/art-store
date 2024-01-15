@@ -21,10 +21,14 @@ export async function getProductById(req, res) {
     const productId = req.params.id
     const product = await productService.getById(productId)
 
+    if (!product) {
+      loggerService.error('Product not found')
+      res.status(404).send('Product not found')
+    }
     res.json(product)
   } catch (err) {
-    loggerService.error('Failed to get product', err)
-    res.status(500).send({ err: 'Failed to get product' })
+    loggerService.error('Failed to get product')
+    res.status(500).send('Failed to get product')
   }
 }
 
@@ -33,10 +37,29 @@ export async function getProductByName(req, res) {
     const productName = req.params.name
     const product = await productService.getByName(productName)
 
+    if (!product) {
+      loggerService.error('Product not found')
+      res.status(404).send('Product not found')
+    }
     res.json(product)
   } catch (err) {
     loggerService.error('Failed to get product by name', err)
     res.status(500).send({ err: 'Failed to get product by name' })
+  }
+}
+
+export async function checkNameAvailable(req, res) {
+  try {
+    const productName = req.params.name
+    const product = await productService.getByName(productName)
+
+    if (product) loggerService.debug('Product name is not availble', product.name)
+    else loggerService.debug('Product name is availble', productName)
+
+    res.json({ isNameAvailable: !product })
+  } catch (err) {
+    loggerService.error('Error with checking availability of name', err)
+    res.status(500).send({ err: 'Error with checking availability of name' })
   }
 }
 

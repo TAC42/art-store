@@ -2,7 +2,7 @@ import express from 'express'
 import { log } from '../../middlewares/logger.middleware.js'
 import {
     getProducts, getProductById, getProductByName, addProduct,
-    updateProduct, removeProduct, getRandomProducts
+    updateProduct, removeProduct, getRandomProducts, checkNameAvailable
 } from './product.controller.js'
 
 export const productRoutes = express.Router()
@@ -13,6 +13,7 @@ export const productRoutes = express.Router()
 productRoutes.get('/', log, getProducts)
 productRoutes.get('/random', getRandomProducts)
 productRoutes.get('/:name', getProductByName)
+productRoutes.get('/check-name/:name', checkNameAvailable)
 productRoutes.get('/:id', getProductById)
 productRoutes.post('/', addProduct)
 productRoutes.put('/:id', updateProduct)
