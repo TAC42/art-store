@@ -1,8 +1,8 @@
 import { Component, HostBinding, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { UtilityService } from '../../services/utility.service'
-import { DeviceTypeService } from '../../services/device-type.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
+import { UtilityService } from '../../../services/utility.service'
+import { DeviceTypeService } from '../../../services/device-type.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 
 @Component({
   selector: 'app-contact',

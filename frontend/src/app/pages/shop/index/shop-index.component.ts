@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { Observable } from 'rxjs'
-import { selectProducts, selectIsLoading } from '../../store/shop.selectors'
-import { Product } from '../../models/shop'
+import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
+import { Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
-import { AppState } from '../../store/app.state'
+import { AppState } from '../../../store/app.state'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ShopFilter } from '../../models/shop'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../store/shop.actions'
-import { CommunicationService } from '../../services/communication.service'
-import { ModalService } from '../../services/modal.service'
+import { ShopFilter } from '../../../models/shop'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
+import { CommunicationService } from '../../../services/communication.service'
+import { ModalService } from '../../../services/modal.service'
 
 @Component({
   selector: 'shop-index',
