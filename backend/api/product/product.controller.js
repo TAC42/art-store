@@ -53,8 +53,8 @@ export async function checkNameAvailable(req, res) {
     const productName = req.params.name
     const product = await productService.getByName(productName)
 
-    if (product) loggerService.debug('Product name is not availble', product.name)
-    else loggerService.debug('Product name is availble', productName)
+    if (product) loggerService.error('Product name is not availble', product.name)
+    else loggerService.info('Product name is availble', productName)
 
     res.json({ isNameAvailable: !product })
   } catch (err) {

@@ -55,7 +55,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       })
   }
 
-
   nameValidator(existingName: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return control.valueChanges.pipe(

@@ -49,7 +49,9 @@ async function getByName(productName) {
     const products = await query(filterBy)
     const product = products.find((p) => p.name.toLowerCase() ===
       productName.toLowerCase())
-    console.log('found product: ', product)
+
+    if (product) loggerService.info('found product: ', product)
+    else loggerService.error('no found product')
 
     return product || null
   } catch (err) {
