@@ -1,8 +1,10 @@
-<main class="modal-wrapper flex" *ngIf="mService.isModalOpen('aside-menu')">
-    <section (clickOutside)="closeMenu()" [@slideInOut] class="aside-menu flex column">
+<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('aside-menu')">
+    <section [@slideInOut] (clickOutside)="closeMenu()" class="aside-menu flex column">
         <div class="logo-container flex row">
             <h1>oricarlin</h1>
-            <svg-render svgName="ocLogo" style="width: 32px; height: 32px;" />
+            <ng-container *ngIf="loggedinUser$ | async as loggedinUser">
+                <img *ngIf="loggedinUser.imgUrl" [src]="loggedinUser.imgUrl" alt="User Image">
+            </ng-container>
         </div>
 
         <div class="link-area">

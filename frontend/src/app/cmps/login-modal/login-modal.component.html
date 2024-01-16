@@ -1,4 +1,4 @@
-<main class="modal-wrapper flex justify-center" *ngIf="mService.isModalOpen('login')">
+<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('login')">
     <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
         <form class="flex column" [formGroup]="isLoginMode ? loginForm : signupForm" (ngSubmit)="onSubmit()">
             <ng-container *ngIf="isLoginMode">

@@ -1,11 +1,11 @@
-import { Component, ElementRef, HostListener, inject } from '@angular/core'
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core'
 import { trigger, style, animate, transition } from '@angular/animations'
 import { ModalService } from '../../services/modal.service'
 import { AppState } from '../../store/app.state'
 import { Store, select } from '@ngrx/store'
 import { User } from '../../models/user'
 import { selectLoggedinUser } from '../../store/user.selectors'
-import { Observable } from 'rxjs'
+import { EMPTY, Observable } from 'rxjs'
 import { LOGOUT } from '../../store/user.actions'
 
 @Component({
@@ -24,24 +24,29 @@ import { LOGOUT } from '../../store/user.actions'
   ]
 })
 
-export class AsideMenuComponent {
+export class AsideMenuComponent implements OnInit {
+  public modService = inject(ModalService)
   private store = inject(Store<AppState>)
   private elRef = inject(ElementRef)
-  public mService = inject(ModalService)
 
-  loggedinUser$: Observable<User>
+  loggedinUser$: Observable<User> = EMPTY
+  isVisible: boolean = false
 
-  constructor() {
+  ngOnInit() {
+    this.isVisible = true
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
   }
 
   closeMenu() {
-    this.mService.closeModal('aside-menu')
+    this.isVisible = false
+    setTimeout(() => {
+      this.modService.closeModal('aside-menu')
+    }, 500)
   }
 
   openLogin(event: MouseEvent) {
     event.stopPropagation()
-    this.mService.openModal('login')
+    this.modService.openModal('login')
     this.closeMenu()
   }
 
