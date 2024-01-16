@@ -9,35 +9,37 @@
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
     </div>
     <ng-container *ngIf="cart.length > 0; else sorry">
-      <section class="cart-list grid">
-        <article class="cart-item grid" *ngFor="let cartItem of cart">
-          <img [src]="cartItem.imgUrls[0]" [alt]="cartItem.name" />
-          <div class="cart-item-body">
-            <span class="name">{{ cartItem.name }}</span>
-            <span class="price">${{ cartItem.price }}</span>
-          </div>
-        </article>
-      </section>
-
-      <section class="check-out" *ngIf="cart.length > 0">
-        <ng-container *ngIf="orderSummary as orderSummary">
-          <span
+      <main class="cart-main grid">
+        <section class="cart-list grid">
+          <article class="cart-item grid" *ngFor="let cartItem of cart">
+            <img [src]="cartItem.imgUrls[0]" [alt]="cartItem.name" />
+            <div class="cart-item-body">
+              <span class="name">{{ cartItem.name }}</span>
+              <span class="price">${{ cartItem.price }}</span>
+            </div>
+          </article>
+        </section>
+        
+        <section class="check-out" *ngIf="cart.length > 0">
+          <ng-container *ngIf="orderSummary as orderSummary">
+            <span
             >Total {{ orderSummary.total | currency : "USD" : "symbol" }}</span
-          >
-          <span
+            >
+            <span
             >Taxes {{ orderSummary.taxes | currency : "USD" : "symbol" }}</span
-          >
-          <span
+            >
+            <span
             >Delivery
             {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }}</span
-          >
-          <span
+            >
+            <span
             >Grand Total
             {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}</span
-          >
-          <button>Check-Out</button>
-        </ng-container>
-      </section>
+            >
+            <button>Check-Out</button>
+          </ng-container>
+        </section>
+      </main>
     </ng-container>
 
     <ng-template #sorry>
