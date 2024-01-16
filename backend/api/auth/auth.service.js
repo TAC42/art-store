@@ -26,9 +26,16 @@ async function login(username, password) {
   // delete user.password
   return user
 }
-async function signup(username, password, fullName, email, imgUrl, isAdmin = false) {
+async function signup(
+  username,
+  password,
+  fullName,
+  email,
+  imgUrl,
+  isAdmin = false
+) {
   loggerService.debug(`auth.service - signup with username: ${username}`)
-  
+
   const saltRounds = 10
 
   if (!username || !password || !fullName) {
@@ -38,8 +45,14 @@ async function signup(username, password, fullName, email, imgUrl, isAdmin = fal
   const hash = await bcrypt.hash(password, saltRounds)
 
   return userService.save({
-    username, password: hash, fullName, email, imgUrl,
-    createdAt: Date.now(), isAdmin,
+    username,
+    password: hash,
+    fullName,
+    email,
+    imgUrl,
+    createdAt: Date.now(),
+    isAdmin,
+    cart: [],
   })
 }
 
@@ -48,6 +61,8 @@ function getLoginToken(user) {
     _id: user._id,
     username: user.username,
     isAdmin: user.isAdmin,
+    cart: user.cart,
+    imgUrl: user.imgUrl,
   }
   return cryptr.encrypt(JSON.stringify(userInfo))
 }

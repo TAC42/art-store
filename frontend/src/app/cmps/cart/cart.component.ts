@@ -43,6 +43,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.loggedinUser$.subscribe(user => {
       // Assuming user has a 'cart' property
       this.cart = user?.cart || []
+      console.log('cart in cart: ',this.cart  )
     })
   }
   
