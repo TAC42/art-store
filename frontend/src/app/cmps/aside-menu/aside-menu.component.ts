@@ -33,6 +33,7 @@ export class AsideMenuComponent {
 
   constructor() {
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
+    this.loggedinUser$.subscribe(user => console.log(user))
   }
 
   closeMenu() {

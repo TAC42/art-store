@@ -16,8 +16,10 @@
                 color: $prmclr1;
             }
 
-            svg-render {
-                align-self: baseline;
+            img {
+                width: 32px;
+                height: 32px;
+                object-fit: cover;
             }
         }
 
