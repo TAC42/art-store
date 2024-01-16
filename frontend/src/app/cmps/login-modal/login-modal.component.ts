@@ -5,6 +5,7 @@ import { UserSignup } from '../../models/user'
 import { AppState } from '../../store/app.state'
 import { Store } from '@ngrx/store'
 import { LOGIN, SIGNUP } from '../../store/user.actions'
+import { UtilityService } from '../../services/utility.service'
 
 @Component({
   selector: 'app-login-modal',
@@ -12,9 +13,10 @@ import { LOGIN, SIGNUP } from '../../store/user.actions'
 })
 
 export class LoginModalComponent {
-  public mService = inject(ModalService)
+  public modService = inject(ModalService)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
+  private utilService = inject(UtilityService)
 
   loginForm: FormGroup
   signupForm: FormGroup
@@ -39,7 +41,7 @@ export class LoginModalComponent {
   }
 
   closeLoginModal() {
-    this.mService.closeModal('login')
+    this.modService.closeModal('login')
     this.signupForm.reset()
     this.loginForm.reset()
   }
@@ -77,11 +79,15 @@ export class LoginModalComponent {
     } else {
       if (this.signupForm.valid) {
         const { firstName, lastName, username, email, password } = this.signupForm.value
+
+        const randColor = this.utilService.getRandomMidColor().substring(1)
+        let imgUrl = `https://placehold.co/${100}/${randColor}/ffffff?text=${firstName[0].toUpperCase()}`
+
         const credentials: UserSignup = {
           fullName: `${firstName} ${lastName}`,
           username,
           email,
-          imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704381304/PlaceholderImages/evddzhxtr6kropnslvdb.png',
+          imgUrl,
           password
         }
         this.store.dispatch(SIGNUP({ credentials }))

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject, HostBinding, OnInit } from '@angular/core'
+import { Component, inject, HostBinding, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
@@ -10,7 +10,7 @@ import { ModalService } from '../../services/modal.service'
   templateUrl: './header.component.html'
 })
 
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   @HostBinding('class.z-50') get zIndex() {
     return this.searchState
   }
@@ -25,14 +25,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   deviceType: string = 'mini-tablet'
 
   dimSubscription: Subscription | undefined
-  private dTypesubscription: Subscription
-
-  constructor() {
-    this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
-      (type) => this.deviceType = type)
-  }
+  dTypesubscription: Subscription | undefined
 
   ngOnInit(): void {
+    this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
+      (type) => this.deviceType = type)
     this.dimSubscription = this.dimService.dimmerSubject.subscribe((active: boolean) => {
       this.searchState = active
     })
@@ -67,9 +64,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   closeMenu() {
     this.searchState = false
-  }
-
-  ngOnDestroy() {
-    this.dTypesubscription.unsubscribe()
   }
 }
