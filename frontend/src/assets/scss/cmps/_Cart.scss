@@ -67,7 +67,51 @@ cart {
         }
         .check-out {
           // position: fixed;
+          padding: 1em;
+          border-width: 1px 0 0 0;
+          border-color: #ebebeb;
+          border-style: solid;
           // bottom: 0;
+          .subtotal {
+            font-size: 1.25em;
+            justify-content: space-between;
+            text-transform: capitalize;
+            color: $mnrclr9;
+            margin-block-end: 1em;
+          }
+
+          .check-out-btn {
+            gap: .5em;
+            justify-content: center;
+            text-transform: capitalize;
+            font-family: "nh-bold";
+            font-size: 1em;
+            width: 100%;
+            padding: 1em;
+            color: $prmclr3;
+            border: 2px solid transparent;
+            background-color: $mnrclr9;
+            border-radius: 2em;
+            transition: all 0.3s ease-in-out;
+            svg-render {
+              width: 1em;
+              &:first-child {
+                transform: rotateY(180deg);
+              }
+              fill: $prmclr3;
+            }
+
+            &:hover {
+              color: $mnrclr9;
+              border: 2px solid $mnrclr9;
+              background-color: $prmclr3;
+              svg-render {
+             
+              
+                fill: $mnrclr9;
+              }
+            }
+          }
         }
       }
     }
