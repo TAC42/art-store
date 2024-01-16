@@ -112,7 +112,7 @@ export class UserEffects {
             }),
             mergeMap(action =>
                 this.uService.save(action.updatedUser).pipe(
-                    map(user => SET_USER({ user })),
+                    map(user => SET_LOGGEDIN_USER({ user })),
                     tap(user => console.log('saved user in effects:', user)),
                     tap(() => {
                         this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))

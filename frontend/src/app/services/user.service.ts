@@ -80,7 +80,9 @@ export class UserService {
     const userForSession = {
       _id: user._id,
       username: user.username,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      cart: user.cart,
+      imgUrl: user.imgUrl,
     }
     sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
   }
