@@ -52,7 +52,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     onBack(): void {
-        this.router.navigateByUrl('/shop')
+        this.router.navigateByUrl(`/${encodeURIComponent(this.product?.type || 'shop')}`)
     }
 
     ngOnDestroy(): void {

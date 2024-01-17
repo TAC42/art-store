@@ -81,7 +81,7 @@ cart {
           }
 
           .check-out-btn {
-            gap: .5em;
+            gap: 0.5em;
             justify-content: center;
             text-transform: capitalize;
             font-family: "nh-bold";
@@ -92,23 +92,78 @@ cart {
             border: 2px solid transparent;
             background-color: $mnrclr9;
             border-radius: 2em;
-            transition: all 0.3s ease-in-out;
+            // transition: all 1s ease-in-out;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+
             svg-render {
               width: 1em;
+              fill: $prmclr3;
+              transition: all 1.5s ease-in-out;
               &:first-child {
                 transform: rotateY(180deg);
               }
-              fill: $prmclr3;
             }
 
             &:hover {
               color: $mnrclr9;
               border: 2px solid $mnrclr9;
               background-color: $prmclr3;
+
               svg-render {
-             
-              
+                &:first-child {
+                  animation: m-wave 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                }
+
+                &:last-child {
+                  animation: wave 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                }
+
+                &:first-child {
+                  // transform: translateX(-4em) rotateY(180deg);
+                }
+
+                &:last-child {
+                  // transform: translateX(4em);
+                }
+
                 fill: $mnrclr9;
+                transition: all 0.3s ease-in-out;
+              }
+            }
+
+            @keyframes m-wave {
+              0% {
+                transform: translate(0,0) rotateY(180deg) ;
+              }
+              25% {
+                transform: translate(-1em, -0.5em) rotateY(180deg);
+              }
+              50% {
+                transform: translate(-2em, 0) rotateY(180deg);
+              }
+              75% {
+                transform: translate(-3em, 0.5em) rotateY(180deg);
+              }
+              100% {
+                transform: translate(-4em,0) rotateY(180deg);
+              }
+            }
+
+            @keyframes wave {
+              0% {
+                transform: translateY(0) translateX(0);
+              }
+              25% {
+                transform: translateY(-0.5em) translateX(1em);
+              }
+              50% {
+                transform: translateY(0) translateX(2em);
+              }
+              75% {
+                transform: translateY(0.5em) translateX(3em);
+              }
+              100% {
+                transform: translateY(0) translateX(4em);
               }
             }
           }
