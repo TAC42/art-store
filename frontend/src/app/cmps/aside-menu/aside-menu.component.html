@@ -1,5 +1,5 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('aside-menu')">
-    <section [@slideInOut] (clickOutside)="closeMenu()" class="aside-menu flex column">
+    <section [@slideInOut]="menuState" (clickOutside)="closeMenu()" class="aside-menu flex column">
         <div class="logo-container flex row">
             <h1>oricarlin</h1>
             <ng-container *ngIf="loggedinUser$ | async as loggedinUser">

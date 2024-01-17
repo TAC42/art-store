@@ -1,83 +1,111 @@
-cart {
-  .modal-wrapper {
-    .shopping-cart {
-      position: fixed;
-      top: 0;
-      right: 0;
-      background: $prmclr2;
-      min-width: 275px;
-      max-width: 600px;
-      height: 100vh;
-      z-index: 15;
-      padding: 0.5em 1em;
+.modal-wrapper {
+  .shopping-cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: $prmclr2;
+    min-width: 275px;
+    max-width: 600px;
+    height: 100vh;
+    z-index: 15;
+    padding: 0.5em 1em;
 
-      .cart-header {
-        justify-content: space-between;
-        align-items: center;
+    .cart-header {
+      justify-content: space-between;
+      align-items: center;
+      margin-block-end: 1em;
 
-        .title {
-          font-family: "nunito";
-          font-size: 1.75em;
-          color: $prmclr1;
-        }
-        .exit {
-          width: 2em;
-          height: 2em;
-        }
-        margin-block-end: 1em;
+      .title {
+        font-family: "nunito";
+        font-size: 1.75em;
+        color: $prmclr1;
       }
-      .cart-main {
-        height: 100%;
-        grid-template-rows: 1fr auto;
-        gap: 2em;
-        .cart-list {
-          gap: 1.5em;
-          height: fit-content;
-          .cart-item {
-            max-height: 100px;
-            grid-auto-flow: column;
-            grid-template-columns: repeat(5, 1fr);
-            padding: 0 0.25em;
 
-            img {
-              grid-column: 1 / 3;
-              height: 100%;
-              width: 100%;
-              aspect-ratio: 1.5/1;
-              object-fit: cover;
+      .exit {
+        width: 2em;
+        height: 2em;
+      }
+    }
+
+    .cart-main {
+      height: 100%;
+      grid-template-rows: 1fr auto;
+      gap: 2em;
+
+      .cart-list {
+        gap: 1.5em;
+        height: fit-content;
+
+        .cart-item {
+          max-height: 100px;
+          grid-auto-flow: column;
+          grid-template-columns: repeat(5, 1fr);
+          padding: 0 0.25em;
+
+          img {
+            grid-column: 1 / 3;
+            height: 100%;
+            width: 100%;
+            aspect-ratio: 1.5/1;
+            object-fit: cover;
+          }
+
+          .cart-item-body {
+            grid-column: 3 / -1;
+            padding: 0 0.75em;
+            display: flex;
+            justify-content: space-between;
+
+            .name {
+              text-transform: capitalize;
+              color: $mnrclr8;
             }
 
-            .cart-item-body {
-              grid-column: 3 / -1;
-              padding: 0 0.75em;
-              display: flex;
-              justify-content: space-between;
-              .name {
-                text-transform: capitalize;
-                color: $mnrclr8;
-              }
-              .price {
-                font-family: "nh-bold";
-                display: block;
-                justify-self: end;
-                color: $mnrclr8;
-              }
+            .price {
+              font-family: "nh-bold";
+              display: block;
+              justify-self: end;
+              color: $mnrclr8;
             }
           }
         }
-        .check-out {
-          // position: fixed;
+      }
+
+      .check-out {
+        padding: 1em;
+        border-width: 1px 0 0 0;
+        border-color: #ebebeb;
+        border-style: solid;
+
+        .subtotal {
+          font-size: 1.25em;
+          justify-content: space-between;
+          text-transform: capitalize;
+          color: $mnrclr9;
+          margin-block-end: 1em;
+        }
+
+        .check-out-btn {
+          gap: .5em;
+          justify-content: center;
+          text-transform: capitalize;
+          font-family: "nh-bold";
+          font-size: 1em;
+          width: 100%;
           padding: 1em;
-          border-width: 1px 0 0 0;
-          border-color: #ebebeb;
-          border-style: solid;
-          // bottom: 0;
-          .subtotal {
-            font-size: 1.25em;
-            justify-content: space-between;
-            text-transform: capitalize;
-            color: $mnrclr9;
-            margin-block-end: 1em;
+          color: $prmclr3;
+          border: 2px solid transparent;
+          background-color: $mnrclr9;
+          border-radius: 2em;
+          transition: all 0.3s ease-in-out;
+
+          svg-render {
+            width: 1em;
+            fill: $prmclr3;
+
+            &:first-child {
+              transform: rotateY(180deg);
+            }
           }
 
           .check-out-btn {
@@ -168,6 +196,16 @@ cart {
             }
           }
         }
+      }
+    }
+
+    .sorry {
+      align-items: center;
+      gap: 1em;
+
+      svg-render {
+        width: 10em;
+        height: 10em;
       }
     }
   }

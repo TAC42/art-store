@@ -4,11 +4,10 @@ import { Subject } from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
+
 export class ModalService {
   private modals: { [key: string]: any } = {}
   private modalSubjects: { [key: string]: Subject<boolean> } = {}
-
-  constructor() { }
 
   openModal(id: string, productId?: string) {
     this.modals[id] = { isOpen: true, productId }
