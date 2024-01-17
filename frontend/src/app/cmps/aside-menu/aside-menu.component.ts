@@ -1,11 +1,11 @@
-import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core'
-import { trigger, style, animate, transition } from '@angular/animations'
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core'
+import { trigger, style, animate, transition, state } from '@angular/animations'
 import { ModalService } from '../../services/modal.service'
 import { AppState } from '../../store/app.state'
 import { Store, select } from '@ngrx/store'
 import { User } from '../../models/user'
 import { selectLoggedinUser } from '../../store/user.selectors'
-import { EMPTY, Observable } from 'rxjs'
+import { EMPTY, Observable, Subscription } from 'rxjs'
 import { LOGOUT } from '../../store/user.actions'
 
 @Component({
@@ -13,35 +13,42 @@ import { LOGOUT } from '../../store/user.actions'
   templateUrl: './aside-menu.component.html',
   animations: [
     trigger('slideInOut', [
-      transition(':enter', [
-        style({ transform: 'translate3d(-100%, 0, 0)' }),
-        animate('500ms ease-in-out', style({ transform: 'translate3d(0, 0, 0)' }))
-      ]),
-      transition(':leave', [
-        animate('500ms ease-in-out', style({ transform: 'translate3d(-100%, 0 ,0)' }))
-      ])
+      state('visible', style({
+        transform: 'translateX(0)'
+      })),
+      state('hidden', style({
+        transform: 'translateX(-100%)'
+      })),
+      transition('hidden => visible', animate('500ms ease-out')),
+      transition('visible => hidden', animate('500ms ease-in'))
     ])
   ]
 })
 
-export class AsideMenuComponent implements OnInit {
+export class AsideMenuComponent implements OnInit, OnDestroy {
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
   private elRef = inject(ElementRef)
 
+  private modalSubscription: Subscription | undefined
   loggedinUser$: Observable<User> = EMPTY
-  isVisible: boolean = false
+  menuState: string = 'hidden'
 
   ngOnInit() {
-    this.isVisible = true
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
+
+    this.modalSubscription = this.modService.onModalStateChange('aside-menu').subscribe(isOpen => {
+      if (isOpen) {
+        setTimeout(() => this.menuState = 'visible', 60)
+      } else this.menuState = 'hidden'
+    })
   }
 
   closeMenu() {
-    this.isVisible = false
+    this.menuState = 'hidden'
     setTimeout(() => {
       this.modService.closeModal('aside-menu')
-    }, 500)
+    }, 600)
   }
 
   openLogin(event: MouseEvent) {
@@ -61,5 +68,11 @@ export class AsideMenuComponent implements OnInit {
     const clickedInside = this.elRef.nativeElement.contains(event.target)
 
     if (!clickedInside) this.closeMenu()
+  }
+
+  ngOnDestroy() {
+    if (this.modalSubscription) {
+      this.modalSubscription.unsubscribe()
+    }
   }
 }

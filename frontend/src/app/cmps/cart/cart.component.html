@@ -1,9 +1,5 @@
-<main class="modal-wrapper flex" *ngIf="isCartOpen">
-  <section
-    (clickOutside)="closeCart()"
-    [@slideInOut]
-    class="shopping-cart flex column"
-  >
+<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
+  <section (clickOutside)="closeCart()" [@slideInOut]="cartState" class="shopping-cart flex column">
     <div class="cart-header flex">
       <h1 class="title">Your cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
@@ -25,8 +21,7 @@
             <div class="subtotal flex">
               <span>subtotal</span>
               <span>
-                {{ orderSummary.total | currency : "USD" : "symbol" }}</span
-              >
+                {{ orderSummary.total | currency : "USD" : "symbol" }}</span>
             </div>
             <!-- <span
             >Taxes {{ orderSummary.taxes | currency : "USD" : "symbol" }}</span
@@ -50,12 +45,9 @@
     </ng-container>
 
     <ng-template #sorry>
-      <section class="sorry">
-        <h3>Ops! Your cart is empty!</h3>
-        <svg-render
-          svgName="sorryRobot"
-          style="width: 150px; height: 150px"
-        ></svg-render>
+      <section class="sorry flex column">
+        <h3>Oops, Your cart is empty!</h3>
+        <svg-render svgName="sorryRobot" />
       </section>
     </ng-template>
   </section>
