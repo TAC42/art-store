@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { trigger, style, animate, transition, state } from '@angular/animations'
 import { ModalService } from '../../services/modal.service'
 import { AppState } from '../../store/app.state'
@@ -28,7 +28,6 @@ import { LOGOUT } from '../../store/user.actions'
 export class AsideMenuComponent implements OnInit, OnDestroy {
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
-  private elRef = inject(ElementRef)
 
   private modalSubscription: Subscription | undefined
   loggedinUser$: Observable<User> = EMPTY
@@ -61,13 +60,6 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
     event.stopPropagation()
     this.store.dispatch(LOGOUT())
     this.closeMenu()
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    const clickedInside = this.elRef.nativeElement.contains(event.target)
-
-    if (!clickedInside) this.closeMenu()
   }
 
   ngOnDestroy() {

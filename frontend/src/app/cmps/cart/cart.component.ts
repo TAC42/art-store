@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations'
-import { Component, ElementRef, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { EMPTY, Observable, Subscription } from 'rxjs'
 import { User } from '../../models/user'
 import { ModalService } from '../../services/modal.service'
@@ -29,7 +29,6 @@ import { OrderService } from '../../services/order.service'
 export class CartComponent implements OnInit, OnDestroy {
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
-  private elRef = inject(ElementRef)
   private comService = inject(CommunicationService)
   private oService = inject(OrderService)
 
