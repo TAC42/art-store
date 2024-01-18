@@ -1,0 +1,139 @@
+.modal-wrapper {
+    .login-modal {
+        position: absolute;
+        top: 10%;
+        background: $prmclr2;
+        width: 300px;
+        height: fit-content;
+        z-index: 15;
+        padding: 1em;
+        border-radius: 0.5em;
+        user-select: none;
+
+        form {
+            align-items: center;
+            margin-block-end: 1em;
+            gap: 1em;
+
+            button {
+                width: fit-content;
+                margin: 0 auto;
+                padding: 0.5em 0.75em;
+                transition: all 0.5s;
+                background: $prmclr1;
+                color: $prmclr2;
+                border-radius: 0.5em;
+                font-size: 16px;
+                overflow: hidden;
+                position: relative;
+
+                span {
+                    transition: all 0.5s;
+                    opacity: 1;
+                }
+
+                &.disabled {
+                    background: $scdclr1;
+                    pointer-events: none;
+
+                    span {
+                        opacity: 0.5;
+                    }
+                }
+
+                &:hover {
+                    background: $mnrclr1;
+                    color: $prmclr3;
+
+                    &::before {
+                        animation: snakeAround 4s linear infinite;
+                    }
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 90%;
+                    height: 85%;
+                    border: 3px solid $mnrclr3;
+                    border-color: transparent;
+                    border-radius: inherit;
+                    transition: all 0.5s;
+                    z-index: 0;
+                }
+            }
+
+            .input-area {
+                width: 100%;
+                gap: 0.25em;
+
+                label {
+                    padding: 0 0.5em;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    span {
+                        color: $mnrclr2;
+                        font-size: 12px;
+                    }
+
+                    .label-info {
+                        gap: 0.5em;
+                        align-items: center;
+
+                        span {
+                            line-height: 1.6;
+                            color: $prmclr1;
+                            letter-spacing: 0.025em;
+                            font-size: 15px;
+                        }
+
+                        svg-render {
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+                }
+
+                input {
+                    padding: 0.25em 0.5em;
+                    width: 100%;
+                    transition: all 0.3s;
+                    border-radius: 0.5em;
+                    border: 1px solid $scdclr4;
+                    color: $prmclr1;
+                    font-family: 'nh-medium';
+                    font-size: 14px;
+                    line-height: 1.6;
+
+                    &:focus {
+                        border: 1px solid $prmclr1;
+                        outline: none;
+                    }
+                }
+
+                &.error {
+
+                    input,
+                    textarea {
+                        border: 1px solid $mnrclr2;
+                    }
+                }
+            }
+        }
+
+        .switch {
+            background: none;
+            color: $scdclr2;
+            transition: all 0.3s;
+            font-size: 15px;
+            font-family: 'nh-bold';
+
+            &:hover {
+                color: $prmclr1;
+            }
+        }
+    }
+}

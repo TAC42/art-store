@@ -1,0 +1,27 @@
+shop-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  // opacity: 0;
+  transition: all 0.7s ease-in-out;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  .sorry {
+    gap: 1em;
+    text-align: center;
+    align-items: center;
+
+    svg-render {
+      width: 200px;
+      height: 200px;
+
+      span {
+        justify-self: center;
+      }
+    }
+  }
+}

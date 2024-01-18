@@ -1,0 +1,39 @@
+// Setup
+@import "setup/variables";
+@import "setup/functions";
+@import "setup/mixins";
+@import "setup/typography";
+@import "setup/mq";
+
+// Basics
+@import "basics/base";
+@import "basics/helpers";
+@import "basics/layout";
+@import "basics/modals";
+@import "basics/animations";
+
+// Pages
+@import "pages/Home";
+@import "pages/ShopIndex";
+@import "pages/ProductDetails";
+@import "pages/About";
+@import "pages/Contact";
+@import "pages/Introduction";
+@import "pages/ProductEdit";
+@import "pages/SculptureIndex";
+@import "pages/ArtwareIndex";
+
+// Cmps
+@import "cmps/AppHeader";
+@import "cmps/ShopFilter";
+@import "cmps/ShopList";
+@import "cmps/ProductPreview";
+@import "cmps/AsideMenu";
+@import "cmps/ImageCarousel";
+@import "cmps/AppFooter";
+@import "cmps/LoginModal";
+@import "cmps/UserMsg";
+@import "cmps/ImageUploader";
+@import "cmps/ConfirmModal";
+@import "cmps/Cart";
+@import "cmps/UserMsg";

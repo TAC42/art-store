@@ -15,12 +15,11 @@
 
       <ng-template #elseTemplate>
         <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
-        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon"
-          style="width: 24px; height: 24px;" />
+        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
       </ng-template>
 
       <span class="search flex" (click)="onOpenSearch()">
-        <svg-render svgName="searchIcon" style="width: 24px; height: 24px;" />
+        <svg-render svgName="searchIcon" />
       </span>
     </section>
   </section>

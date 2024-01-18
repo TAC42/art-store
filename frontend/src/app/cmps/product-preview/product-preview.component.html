@@ -1,18 +1,24 @@
-<a class="content" [routerLink]="['/shop/details',product.name]">
+<a class="preview-contents grid" [routerLink]="['/shop/details',product.name]">
   <article class="prod-img">
     <img [src]="product.imgUrls[0]" [alt]="product.name" />
   </article>
-  <div class="preview-body">
-    <article class="name">{{ product.name }}</article>
-    <article class="add-to-cart grid" (click)="onAddCart($event)" >
-      <span class="title">Add</span>
-      <svg-render svgName="shoppingCart"/>
-    </article>
-    <article class="price">${{ product.price }}</article>
-  </div>
+  <article class="preview-body grid">
+    <div class="name">{{ product.name }}</div>
 
-  <div class="admin-btns">
-    <button (click)="onRemoveProduct($event)" class="remove-btn"><svg-render svgName="trashIcon"></svg-render></button>
-    <button (click)="onEditProduct($event)" class="edit-btn"><svg-render svgName="edit"></svg-render></button>
-  </div>
+    <div class="admin-btns flex column">
+      <button (click)="onRemoveProduct($event)" class="remove-btn">
+        <svg-render svgName="trashIcon" />
+      </button>
+      <button (click)="onEditProduct($event)" class="edit-btn">
+        <svg-render svgName="edit" />
+      </button>
+    </div>
+
+    <button *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
+      <span>Add</span>
+      <svg-render svgName="shoppingCart" />
+    </button>
+
+    <div *ngIf="product.type === 'shop'" class="price">${{ product.price }}</div>
+  </article>
 </a>

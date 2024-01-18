@@ -1,7 +1,7 @@
 import { Component, HostBinding } from '@angular/core'
 
 @Component({
-  selector: 'artware',
+  selector: 'app-artware',
   templateUrl: './artware.component.html'
 })
 

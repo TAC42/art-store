@@ -1,0 +1,137 @@
+.modal-wrapper {
+  .shopping-cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: $prmclr2;
+    min-width: 275px;
+    max-width: 600px;
+    height: 100vh;
+    z-index: 15;
+    padding: 0.5em 1em;
+
+    .cart-header {
+      justify-content: space-between;
+      align-items: center;
+      margin-block-end: 1em;
+
+      .title {
+        font-family: "nunito";
+        font-size: 1.75em;
+        color: $prmclr1;
+      }
+
+      .exit {
+        cursor: pointer;
+        width: 2em;
+        height: 2em;
+      }
+    }
+
+    .cart-main {
+      height: 100%;
+      grid-template-rows: 1fr auto;
+      gap: 2em;
+
+      .cart-list {
+        gap: 1.5em;
+        height: fit-content;
+
+        .cart-item {
+          max-height: 120px;
+          grid-template-columns: repeat(5, 1fr);
+
+          img {
+            grid-column: 1 / 3;
+            height: 100%;
+            width: 100%;
+            aspect-ratio: 1.5/1;
+            object-fit: cover;
+          }
+
+          .cart-item-body {
+            grid-column: 3 / -1;
+            padding: 0 0.75em;
+            justify-content: space-between;
+
+            .name {
+              text-transform: capitalize;
+              color: $mnrclr8;
+            }
+
+            .price {
+              font-family: "nh-bold";
+              display: block;
+              justify-self: end;
+              color: $mnrclr8;
+            }
+          }
+        }
+      }
+
+      .check-out {
+        padding: 1em;
+        border-top: 1px solid $scdclr3;
+
+        .subtotal {
+          font-size: 1.25em;
+          justify-content: space-between;
+          color: $mnrclr9;
+          margin-block-end: 1em;
+        }
+
+        .check-out-btn {
+          gap: 0.5em;
+          justify-content: center;
+          font-family: "nh-bold";
+          font-size: 1em;
+          width: 100%;
+          padding: 1em;
+          color: $prmclr3;
+          border: 2px solid transparent;
+          background: $mnrclr9;
+          border-radius: 2em;
+          transition: all 0.3s ease-in-out;
+
+          svg-render {
+            width: 1em;
+            fill: $prmclr3;
+            transition: all 0.3s ease-in-out;
+
+            &:first-child {
+              transform: rotateY(180deg);
+            }
+          }
+
+          &:hover {
+            color: $mnrclr9;
+            border-color: $mnrclr9;
+            background: $prmclr3;
+
+            svg-render {
+              fill: $mnrclr9;
+
+              &:first-child {
+                animation: m-wave 2s linear infinite;
+              }
+
+              &:last-child {
+                animation: wave 2s linear infinite;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .sorry {
+      align-items: center;
+      gap: 1em;
+
+      svg-render {
+        width: 10em;
+        height: 10em;
+      }
+    }
+  }
+}

@@ -29,7 +29,8 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'shop' }
-
+  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
+  
   ngOnInit(): void {
     this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
       this.isLoading = isLoading

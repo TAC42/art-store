@@ -1,8 +1,12 @@
 <loader></loader>
-<shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
-<a class="edit-link flex row" routerLink="/shop/edit">
-  <svg-render svgName="addIcon" />
-  <span>Add</span>
-</a>
+<section class="filter-area flex column">
+  <img src="{{ backgroundImage }}" alt="Background">
+  <h4>Shop</h4>
+  <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
+  <a class="edit-link flex row" routerLink="/shop/edit">
+    <svg-render svgName="addIcon" />
+    <span>Add product</span>
+  </a>
+</section>
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
   [products]="products$ | async" />

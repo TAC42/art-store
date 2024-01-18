@@ -25,6 +25,7 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'sculpture' }
+  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
 
   ngOnInit(): void {
     this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
@@ -51,7 +52,7 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
 
   onSetFilter(newFilterValue: string): void {
     let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
-    updatedFilter = { ...updatedFilter, type: 'shop' }
+    updatedFilter = { ...updatedFilter, type: 'sculpture' }
     this.updateFilter(updatedFilter)
   }
 
