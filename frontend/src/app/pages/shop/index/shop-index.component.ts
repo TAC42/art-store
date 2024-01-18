@@ -17,6 +17,7 @@ import { selectLoggedinUser } from '../../../store/user.selectors'
   selector: 'shop-index',
   templateUrl: './shop-index.component.html'
 })
+
 export class ShopIndexComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   private router = inject(Router)
@@ -44,22 +45,22 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.mService.openModal(`confirm`, productId)
   }
 
-  onOpenCart():void {
+  onOpenCart(): void {
     this.mService.openModal('cart')
   }
 
   onRemoveProduct(productId: string) {
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }
+
   onAddToCart(product: Product) {
     this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-      console.log('updatedUser: ',updatedUser)
+      console.log('updatedUser: ', updatedUser)
       const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, product] }
       console.log('This is the product to add:', product)
       this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
     })
   }
-  
 
   onSetFilter(newFilterValue: string): void {
     let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }

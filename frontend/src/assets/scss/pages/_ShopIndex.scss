@@ -4,10 +4,11 @@ shop-index {
     height: 100%;
 
     .edit-link {
-        grid-auto-flow: column;
+        width: fit-content;
+        margin: 0 auto;
         align-items: center;
         justify-content: center;
-        gap: .5em;
+        gap: 0.5em;
 
         svg-render {
             width: 1.5em;

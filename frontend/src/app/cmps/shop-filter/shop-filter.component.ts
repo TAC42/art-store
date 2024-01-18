@@ -6,6 +6,7 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
   selector: 'shop-filter',
   templateUrl: './shop-filter.component.html'
 })
+
 export class ShopFilterComponent implements OnInit {
   @Input() filterBy!: ShopFilter
   @Output() onSetFilter = new EventEmitter<string>()
@@ -23,14 +24,14 @@ export class ShopFilterComponent implements OnInit {
       .subscribe((value: string) => {
         console.log('Value: ', value)
         this.onSetFilter.emit(value)
-        this.hasValue = true;
+        this.hasValue = true
       })
   }
 
   ngOnInit(): void {
-    console.log('filterBy in shopfilter: ',this.filterBy);
-    
+    console.log('filterBy in shopfilter: ', this.filterBy)
   }
+
   onFilterChange(value: string): void {
     this.filterSubject.next(value)
   }
@@ -42,9 +43,8 @@ export class ShopFilterComponent implements OnInit {
     this.hasValue = false
   }
 
-  onCartOpen(event: Event){
+  onCartOpen(event: Event) {
     event.stopPropagation()
     this.onOpenCart.emit()
   }
-  
 }
