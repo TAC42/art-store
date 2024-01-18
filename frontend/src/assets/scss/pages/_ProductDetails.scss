@@ -60,6 +60,7 @@ product-details {
                     width: 100%;
                     text-align: center;
                     font-family: 'nh-bold';
+                    text-transform: capitalize;
                 }
 
                 p {
@@ -138,6 +139,7 @@ product-details {
 
                     p {
                         font-family: 'nh-bold';
+                        text-transform: capitalize;
                     }
 
                     &:hover {

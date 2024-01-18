@@ -80,7 +80,6 @@ export class UserService {
     const userForSession = {
       _id: user._id,
       username: user.username,
-      isAdmin: user.isAdmin,
       cart: user.cart,
       imgUrl: user.imgUrl,
     }

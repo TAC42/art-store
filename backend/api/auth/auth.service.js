@@ -60,7 +60,6 @@ function getLoginToken(user) {
   const userInfo = {
     _id: user._id,
     username: user.username,
-    isAdmin: user.isAdmin,
     cart: user.cart,
     imgUrl: user.imgUrl,
   }

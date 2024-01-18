@@ -1,7 +1,7 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
   <section (clickOutside)="closeCart()" [@slideInOut]="cartState" class="shopping-cart flex column">
-    <div class="cart-header flex">
-      <h1 class="title">Your cart</h1>
+    <div class="cart-header flex row">
+      <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
     </div>
     <ng-container *ngIf="cart.length > 0; else sorry">
@@ -9,7 +9,7 @@
         <section class="cart-list grid">
           <article class="cart-item grid" *ngFor="let cartItem of cart">
             <img [src]="cartItem.imgUrls[0]" [alt]="cartItem.name" />
-            <div class="cart-item-body">
+            <div class="cart-item-body flex">
               <span class="name">{{ cartItem.name }}</span>
               <span class="price">${{ cartItem.price }}</span>
             </div>
@@ -19,7 +19,7 @@
         <section class="check-out" *ngIf="cart.length > 0">
           <ng-container *ngIf="orderSummary as orderSummary">
             <div class="subtotal flex">
-              <span>subtotal</span>
+              <span>Subtotal</span>
               <span>
                 {{ orderSummary.total | currency : "USD" : "symbol" }}</span>
             </div>
@@ -36,7 +36,7 @@
             > -->
             <button class="check-out-btn flex">
               <svg-render svgName="shoppingCart" />
-              <span> checkout </span>
+              <span> Checkout </span>
               <svg-render svgName="shoppingCart" />
             </button>
           </ng-container>
