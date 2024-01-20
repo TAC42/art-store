@@ -41,7 +41,8 @@ import { ConfirmModalComponent } from './cmps/confirm-modal/confirm-modal.compon
 import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.component'
 import { CartComponent } from './cmps/cart/cart.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
-import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
+import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component';
+import { ProductCarouselComponent } from './cmps/product-carousel/product-carousel.component'
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ArtwareIndexComponent } from './pages/artware/index/artware-index.compo
     SwipeDirective,
     SculptureIndexComponent,
     ArtwareIndexComponent,
+    ProductCarouselComponent,
   ],
   imports: [
     BrowserModule,

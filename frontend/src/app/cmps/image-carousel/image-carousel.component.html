@@ -7,12 +7,12 @@
         <span *ngFor="let url of imageUrls; let i = index" class="dot"
             [ngClass]="{'active': currentIndexSignal() === i}" (click)="goToSlide(i)"></span>
     </div>
+
+    <button class="flex" (click)="previousImage()">
+        <svg-render svgName="leftArrowIcon" />
+    </button>
+
+    <button class="flex" (click)="nextImage()">
+        <svg-render svgName="rightArrowIcon" />
+    </button>
 </div>
-
-<button class="flex" (click)="previousImage()">
-    <svg-render svgName="leftArrowIcon" />
-</button>
-
-<button class="flex" (click)="nextImage()">
-    <svg-render svgName="rightArrowIcon" />
-</button>
