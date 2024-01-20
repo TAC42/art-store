@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, signal } from '@angular/core'
 import { Subscription, interval } from 'rxjs'
-import { MiniProduct } from '../../models/shop'
+import { MiniProduct } from '../../../models/shop'
 
 @Component({
   selector: 'product-carousel',

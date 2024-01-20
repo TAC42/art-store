@@ -1,14 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { EMPTY, Observable, Subscription } from 'rxjs'
-import { User } from '../../models/user'
-import { ModalService } from '../../services/modal.service'
-import { AppState } from '../../store/app.state'
+import { User } from '../../../models/user'
+import { ModalService } from '../../../services/modal.service'
+import { AppState } from '../../../store/app.state'
 import { Store, select } from '@ngrx/store'
-import { selectLoggedinUser } from '../../store/user.selectors'
-import { CommunicationService } from '../../services/communication.service'
-import { Product } from '../../models/shop'
-import { OrderService } from '../../services/order.service'
+import { selectLoggedinUser } from '../../../store/user.selectors'
+import { CommunicationService } from '../../../services/communication.service'
+import { Product } from '../../../models/shop'
+import { OrderService } from '../../../services/order.service'
 
 @Component({
   selector: 'cart',

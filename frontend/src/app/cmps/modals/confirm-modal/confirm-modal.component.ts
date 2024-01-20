@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { ModalService } from '../../services/modal.service'
-import { CommunicationService } from '../../services/communication.service';
+import { ModalService } from '../../../services/modal.service'
+import { CommunicationService } from '../../../services/communication.service';
 
 @Component({
   selector: 'confirm-modal',

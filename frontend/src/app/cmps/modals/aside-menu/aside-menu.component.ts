@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { trigger, style, animate, transition, state } from '@angular/animations'
-import { ModalService } from '../../services/modal.service'
-import { AppState } from '../../store/app.state'
+import { ModalService } from '../../../services/modal.service'
+import { AppState } from '../../../store/app.state'
 import { Store, select } from '@ngrx/store'
-import { User } from '../../models/user'
-import { selectLoggedinUser } from '../../store/user.selectors'
+import { User } from '../../../models/user'
+import { selectLoggedinUser } from '../../../store/user.selectors'
 import { EMPTY, Observable, Subscription } from 'rxjs'
-import { LOGOUT } from '../../store/user.actions'
+import { LOGOUT } from '../../../store/user.actions'
 
 @Component({
   selector: 'app-aside-menu',

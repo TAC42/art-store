@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ModalService } from '../../services/modal.service'
-import { UserSignup } from '../../models/user'
-import { AppState } from '../../store/app.state'
+import { ModalService } from '../../../services/modal.service'
+import { UserSignup } from '../../../models/user'
+import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
-import { LOGIN, SIGNUP } from '../../store/user.actions'
-import { UtilityService } from '../../services/utility.service'
+import { LOGIN, SIGNUP } from '../../../store/user.actions'
+import { UtilityService } from '../../../services/utility.service'
 
 @Component({
   selector: 'app-login-modal',
