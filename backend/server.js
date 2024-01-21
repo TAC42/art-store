@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'production') {
   const corsOptions = {
     // Make sure origin contains the url your frontend is running on
     origin: [
-      'https://oricarlin.onrender.com',
+      'http://oricarlin.onrender.com',
       'http://127.0.0.1:4200',
       'http://localhost:4200',
       'http://127.0.0.1:3030',
