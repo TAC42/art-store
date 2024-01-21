@@ -4,12 +4,12 @@ import dotenv from 'dotenv'
 import fetch from 'node-fetch'
 
 export const utilityService = {
-    sendMail,
+    sendContactUsMail,
     verifyRecaptcha
 }
 dotenv.config()
 
-async function sendMail(name, email, title, message, recaptchaToken) {
+async function sendContactUsMail(name, email, title, message, recaptchaToken) {
     const isCaptchaValid = await verifyRecaptcha(recaptchaToken)
     if (!isCaptchaValid) throw new Error('Invalid reCAPTCHA')
 

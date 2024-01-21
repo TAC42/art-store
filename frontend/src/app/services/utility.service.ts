@@ -11,8 +11,8 @@ const BASE_URL = 'utility/'
 export class UtilityService {
   private httpService = inject(HttpService)
 
-  sendMail(formData: any): Observable<any> {
-    return this.httpService.post<any>(`${BASE_URL}mail`, formData)
+  sendContactUsMail(formData: any): Observable<any> {
+    return this.httpService.post<any>(`${BASE_URL}mail/contact`, formData)
   }
 
   getRandomMidColor(): string {

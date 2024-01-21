@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { EventBusService } from '../../../services/event-bus.service'
 
 @Component({
-  selector: 'app-user-msg',
+  selector: 'user-msg',
   templateUrl: './user-msg.component.html',
   animations: [
     trigger('messageAnimation', [

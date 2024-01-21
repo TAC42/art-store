@@ -1,0 +1,79 @@
+.modal-wrapper {
+    .user-auth-modal {
+        position: absolute;
+        top: 10%;
+        background: $prmclr2;
+        width: 100%;
+        max-width: 350px;
+        height: fit-content;
+        z-index: 15;
+        padding: 1em;
+        border-radius: 0.5em;
+        user-select: none;
+        gap: 1em;
+
+        form {
+            align-items: center;
+            margin-block-end: 1em;
+            gap: 1em;
+
+            .input-area {
+                width: 100%;
+                gap: 0.25em;
+
+                label {
+                    padding: 0 0.5em;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    span {
+                        color: $mnrclr2;
+                        font-size: 12px;
+                    }
+
+                    .label-info {
+                        gap: 0.5em;
+                        align-items: center;
+
+                        span {
+                            line-height: 1.6;
+                            color: $prmclr1;
+                            letter-spacing: 0.025em;
+                            font-size: 15px;
+                        }
+
+                        svg-render {
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+                }
+
+                input {
+                    padding: 0.25em 0.5em;
+                    width: 100%;
+                    transition: all 0.3s;
+                    border-radius: 0.5em;
+                    border: 1px solid $scdclr4;
+                    color: $prmclr1;
+                    font-family: 'nh-medium';
+                    font-size: 14px;
+                    line-height: 1.6;
+
+                    &:focus {
+                        border: 1px solid $prmclr1;
+                        outline: none;
+                    }
+                }
+
+                &.error {
+
+                    input,
+                    textarea {
+                        border: 1px solid $mnrclr2;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -42,7 +42,8 @@ import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.com
 import { CartComponent } from './cmps/modals/cart/cart.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
-import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component'
+import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component';
+import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ProductCarouselComponent } from './cmps/carousels/product-carousel/prod
     SculptureIndexComponent,
     ArtwareIndexComponent,
     ProductCarouselComponent,
+    UserAuthModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject } from '@angular/core'
+import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../../services/utility.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
@@ -9,17 +9,17 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
   templateUrl: './contact.component.html'
 })
 
-export class ContactComponent {
+export class ContactComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
 
-  private uS = inject(UtilityService)
-  private dTS = inject(DeviceTypeService)
+  private utilService = inject(UtilityService)
+  private dTypeService = inject(DeviceTypeService)
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
 
-  contactForm: FormGroup
+  contactForm!: FormGroup
   textareaSpecialChars = "'. ?$%#!*&:,()\"'"
 
   contactImageUrls: string[] = [
@@ -34,18 +34,19 @@ export class ContactComponent {
   captchaResponse: string | null = null
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
-  constructor() {
+  ngOnInit() {
+    this.dTypeService.deviceType$.subscribe(deviceType => {
+      this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
+    })
+    this.initializeForm()
+  }
+
+  initializeForm(): void {
     this.contactForm = this.fBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       title: ['', Validators.required],
       message: ['', Validators.required]
-    })
-  }
-
-  ngOnInit() {
-    this.dTS.deviceType$.subscribe(deviceType => {
-      this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
     })
   }
 
@@ -78,7 +79,7 @@ export class ContactComponent {
         recaptchaToken: this.captchaResponse
       }
 
-      this.uS.sendMail(formDataWithCaptcha).subscribe({
+      this.utilService.sendContactUsMail(formDataWithCaptcha).subscribe({
         next: () => {
           showSuccessMsg('Email Sent!',
             'Thank you for contacting!', this.eBusService)

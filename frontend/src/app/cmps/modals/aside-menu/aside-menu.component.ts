@@ -9,7 +9,7 @@ import { EMPTY, Observable, Subscription } from 'rxjs'
 import { LOGOUT } from '../../../store/user.actions'
 
 @Component({
-  selector: 'app-aside-menu',
+  selector: 'aside-menu',
   templateUrl: './aside-menu.component.html',
   animations: [
     trigger('slideInOut', [

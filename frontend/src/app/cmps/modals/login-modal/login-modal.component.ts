@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ModalService } from '../../../services/modal.service'
 import { UserCredentials, UserSignup } from '../../../models/user'
@@ -12,14 +12,14 @@ import { UtilityService } from '../../../services/utility.service'
   templateUrl: './login-modal.component.html'
 })
 
-export class LoginModalComponent {
+export class LoginModalComponent implements OnInit {
   public modService = inject(ModalService)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   private utilService = inject(UtilityService)
 
-  loginForm: FormGroup
-  signupForm: FormGroup
+  loginForm!: FormGroup
+  signupForm!: FormGroup
   isLoginMode = true
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
@@ -27,7 +27,11 @@ export class LoginModalComponent {
   captchaResponse: string | null = null
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
-  constructor() {
+  ngOnInit() {
+    this.initializeForm()
+  }
+
+  initializeForm(): void {
     this.loginForm = this.fBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -82,7 +86,7 @@ export class LoginModalComponent {
     if (this.isLoginMode) {
       if (this.loginForm.valid && this.isCaptchaResolved) {
         const { username, password } = this.loginForm.value
-        
+
         const credentials: UserCredentials = {
           username,
           password,
@@ -93,6 +97,7 @@ export class LoginModalComponent {
         this.isCaptchaResolved = false
         this.captchaResponse = null
         this.loginForm.reset()
+        this.modService.openModal('user-auth')
       }
     } else {
       if (this.signupForm.valid && this.isCaptchaResolved) {
@@ -114,6 +119,7 @@ export class LoginModalComponent {
         this.isCaptchaResolved = false
         this.captchaResponse = null
         this.signupForm.reset()
+        this.modService.openModal('user-auth')
       }
     }
   }

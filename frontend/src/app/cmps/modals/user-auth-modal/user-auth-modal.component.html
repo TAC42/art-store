@@ -1,0 +1,6 @@
+<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')">
+    <section class="user-auth-modal flex column" (clickOutside)="closeModal()">
+        <span>We've sent an authentication code to your email address...</span>
+        <span>Please insert it in the input below, to pass the verification check:</span>
+    </section>
+</main>
