@@ -8,7 +8,7 @@ import { LOGIN, SIGNUP } from '../../../store/user.actions'
 import { UtilityService } from '../../../services/utility.service'
 
 @Component({
-  selector: 'app-login-modal',
+  selector: 'login-modal',
   templateUrl: './login-modal.component.html'
 })
 
@@ -21,6 +21,11 @@ export class LoginModalComponent {
   loginForm: FormGroup
   signupForm: FormGroup
   isLoginMode = true
+
+  siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
+  isCaptchaResolved: boolean = false
+  captchaResponse: string | null = null
+  recaptchaSize: ReCaptchaV2.Size = 'normal'
 
   constructor() {
     this.loginForm = this.fBuilder.group({
@@ -68,16 +73,23 @@ export class LoginModalComponent {
     return ''
   }
 
+  resolved(captchaResponse: string | null) {
+    this.captchaResponse = captchaResponse
+    this.isCaptchaResolved = !!captchaResponse
+  }
+
   onSubmit() {
     if (this.isLoginMode) {
-      if (this.loginForm.valid) {
+      if (this.loginForm.valid && this.isCaptchaResolved) {
         const credentials = this.loginForm.value
         this.store.dispatch(LOGIN({ credentials }))
         this.closeLoginModal()
+        this.isCaptchaResolved = false
+        this.captchaResponse = null
         this.loginForm.reset()
       }
     } else {
-      if (this.signupForm.valid) {
+      if (this.signupForm.valid && this.isCaptchaResolved) {
         const { firstName, lastName, username, email, password } = this.signupForm.value
 
         const randColor = this.utilService.getRandomMidColor().substring(1)
@@ -92,6 +104,8 @@ export class LoginModalComponent {
         }
         this.store.dispatch(SIGNUP({ credentials }))
         this.closeLoginModal()
+        this.isCaptchaResolved = false
+        this.captchaResponse = null
         this.signupForm.reset()
       }
     }

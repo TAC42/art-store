@@ -3,7 +3,8 @@
         position: absolute;
         top: 10%;
         background: $prmclr2;
-        width: 300px;
+        width: 100%;
+        max-width: 350px;
         height: fit-content;
         z-index: 15;
         padding: 1em;
@@ -14,6 +15,10 @@
             align-items: center;
             margin-block-end: 1em;
             gap: 1em;
+
+            re-captcha {
+                width: fit-content;
+            }
 
             button {
                 width: fit-content;

@@ -10,6 +10,7 @@ export interface User {
     createdAt: number
     isAdmin: boolean
     cart: Product[]
+    isVerified: boolean
 }
 
 export interface UserCredentials {

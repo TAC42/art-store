@@ -82,6 +82,7 @@ export class UserService {
       username: user.username,
       cart: user.cart,
       imgUrl: user.imgUrl,
+      isVerified: user.isVerified
     }
     sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
   }
@@ -99,9 +100,10 @@ export class UserService {
       email: '',
       imgUrl: '',
       password: '',
+      cart: [],
       createdAt: 0,
       isAdmin: false,
-      cart: []
+      isVerified: false
     }
   }
 }

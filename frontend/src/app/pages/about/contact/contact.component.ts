@@ -20,6 +20,7 @@ export class ContactComponent {
   private fBuilder = inject(FormBuilder)
 
   contactForm: FormGroup
+  textareaSpecialChars = "'. ?$%#!*&:,()\"'"
 
   contactImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/r0vaet9gmlapbshf6hb1.png',
@@ -69,8 +70,7 @@ export class ContactComponent {
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault()
+  onSubmit() {
     if (this.contactForm.valid && this.isCaptchaResolved) {
       // Add the recaptcha response to the form, to be sent to backend
       const formDataWithCaptcha = {

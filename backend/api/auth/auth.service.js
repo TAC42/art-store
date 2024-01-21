@@ -31,8 +31,7 @@ async function signup(
   password,
   fullName,
   email,
-  imgUrl,
-  isAdmin = false
+  imgUrl
 ) {
   loggerService.debug(`auth.service - signup with username: ${username}`)
 
@@ -50,9 +49,10 @@ async function signup(
     fullName,
     email,
     imgUrl,
-    createdAt: Date.now(),
-    isAdmin,
     cart: [],
+    createdAt: Date.now(),
+    isAdmin: false,
+    isVerified: false
   })
 }
 

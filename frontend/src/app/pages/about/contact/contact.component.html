@@ -10,7 +10,7 @@
     </section>
 
     <section class="form-area">
-        <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit($event)">
+        <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
                 <label for="name" class="flex row">
                     <div class="label-info flex row">
@@ -44,7 +44,7 @@
                     <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
                 </label>
                 <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question..."
-                    [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :'">
+                    [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :?&!$'">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
@@ -56,7 +56,7 @@
                     <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
                 </label>
                 <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator
-                    [minLength]=32 [maxLength]=256 [allowedSpecialChars]="'. $%#!*&/:,'"></textarea>
+                    [minLength]=32 [maxLength]=256 [allowedSpecialChars]="textareaSpecialChars"></textarea>
             </div>
 
             <div class="form-actions flex row">
