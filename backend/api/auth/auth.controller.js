@@ -1,8 +1,16 @@
 import { authService } from './auth.service.js'
 import { loggerService } from '../../services/logger.service.js'
+import { utilityService } from '../utility/utility.service.js'
 
 export async function login(req, res) {
-  const { username, password } = req.body
+  const { username, password, recaptchaToken } = req.body
+
+  const isCaptchaValid = await utilityService.verifyRecaptcha(recaptchaToken)
+  if (!isCaptchaValid) {
+    loggerService.error('Invalid reCAPTCHA')
+    return res.status(401).send({ err: 'Invalid reCAPTCHA' })
+  }
+
   try {
     const user = await authService.login(username, password)
     const loginToken = authService.getLoginToken(user)
@@ -18,19 +26,20 @@ export async function login(req, res) {
 }
 
 export async function signup(req, res) {
-  try {
-    const { username, password, fullName, email, imgUrl } = req.body
+  const { username, password, fullName, email, imgUrl, recaptchaToken } = req.body
 
-    const account = await authService.signup(
-      username,
-      password,
-      fullName,
-      email,
-      imgUrl
-    )
-    loggerService.debug(
-      `auth.route - new account created: ` + JSON.stringify(account)
-    )
+  const isCaptchaValid = await utilityService.verifyRecaptcha(recaptchaToken)
+  if (!isCaptchaValid) {
+    loggerService.error('Invalid reCAPTCHA')
+    return res.status(401).send({ err: 'Invalid reCAPTCHA' })
+  }
+
+  try {
+    const account = await authService.signup(username, password,
+      fullName, email, imgUrl)
+
+    loggerService.debug(`auth.route - new account created: `
+      + JSON.stringify(account))
 
     const user = await authService.login(username, password)
     const loginToken = authService.getLoginToken(user)

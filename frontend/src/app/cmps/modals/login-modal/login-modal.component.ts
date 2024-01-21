@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ModalService } from '../../../services/modal.service'
-import { UserSignup } from '../../../models/user'
+import { UserCredentials, UserSignup } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { LOGIN, SIGNUP } from '../../../store/user.actions'
@@ -81,7 +81,13 @@ export class LoginModalComponent {
   onSubmit() {
     if (this.isLoginMode) {
       if (this.loginForm.valid && this.isCaptchaResolved) {
-        const credentials = this.loginForm.value
+        const { username, password } = this.loginForm.value
+        
+        const credentials: UserCredentials = {
+          username,
+          password,
+          recaptchaToken: this.captchaResponse
+        }
         this.store.dispatch(LOGIN({ credentials }))
         this.closeLoginModal()
         this.isCaptchaResolved = false
@@ -100,7 +106,8 @@ export class LoginModalComponent {
           username,
           email,
           imgUrl,
-          password
+          password,
+          recaptchaToken: this.captchaResponse
         }
         this.store.dispatch(SIGNUP({ credentials }))
         this.closeLoginModal()

@@ -15,7 +15,8 @@ export interface User {
 
 export interface UserCredentials {
     username: string
-    password: string
+    password: string,
+    recaptchaToken: string | null
 }
 
 export interface UserSignup {
@@ -23,5 +24,6 @@ export interface UserSignup {
     username: string
     email: string
     imgUrl: string
-    password: string
+    password: string,
+    recaptchaToken: string | null
 }

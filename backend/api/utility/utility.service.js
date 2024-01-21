@@ -4,7 +4,8 @@ import dotenv from 'dotenv'
 import fetch from 'node-fetch'
 
 export const utilityService = {
-    sendMail
+    sendMail,
+    verifyRecaptcha
 }
 dotenv.config()
 

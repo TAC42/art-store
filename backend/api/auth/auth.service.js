@@ -26,13 +26,8 @@ async function login(username, password) {
   // delete user.password
   return user
 }
-async function signup(
-  username,
-  password,
-  fullName,
-  email,
-  imgUrl
-) {
+
+async function signup(username, password, fullName, email, imgUrl) {
   loggerService.debug(`auth.service - signup with username: ${username}`)
 
   const saltRounds = 10

@@ -108,7 +108,6 @@ export class UserEffects {
             tap(() => {
                 this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
                 this.loaderService.setIsLoading(true)
-
             }),
             mergeMap(action =>
                 this.uService.save(action.updatedUser).pipe(
