@@ -97,7 +97,6 @@ export class LoginModalComponent implements OnInit {
         this.isCaptchaResolved = false
         this.captchaResponse = null
         this.loginForm.reset()
-        this.modService.openModal('user-auth')
       }
     } else {
       if (this.signupForm.valid && this.isCaptchaResolved) {

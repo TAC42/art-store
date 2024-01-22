@@ -15,6 +15,19 @@ export class UtilityService {
     return this.httpService.post<any>(`${BASE_URL}mail/contact`, formData)
   }
 
+  sendVerificationMail(formData: any): Observable<any> {
+    return this.httpService.post<any>(`${BASE_URL}mail/verify`, formData)
+  }
+
+  generateRandomCode(): string {
+    let code = ''
+    for (let i = 0; i < 6; i++) {
+      const digit = Math.floor(Math.random() * 10)
+      code += digit.toString()
+    }
+    return code
+  }
+
   getRandomMidColor(): string {
     const letters = '3456789ABC'
     let color = '#'
