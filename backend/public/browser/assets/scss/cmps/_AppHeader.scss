@@ -45,6 +45,7 @@ app-header {
 
         input {
           padding: 0.5em;
+          width: 65%;
           border-radius: 0.5em 0 0 0.5em;
           border: 1px solid $scdclr4;
           border-width: 1px 0 1px 1px;
@@ -73,7 +74,7 @@ app-header {
 
           .clear {
             position: absolute;
-            right: 12em;
+            right: 7.5em;
             fill: $scdclr4;
             opacity: 0.8;
             width: 24px;
@@ -81,7 +82,7 @@ app-header {
           }
 
           .search {
-            transform: translateX(-250%);
+            transform: translateX(-100%);
             transition: all 0.6s ease-in-out;
             border-radius: 0 0.5em 0.5em 0;
             background: $scdclr1;

@@ -1,5 +1,5 @@
 <main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')">
-    <section class="user-auth-modal flex column" (clickOutside)="closeModal()" *ngIf="verifyForm">
+    <section class="user-auth-modal flex column" *ngIf="verifyForm">
         <span>We've sent an authentication code to your email address...</span>
         <span>Please insert the code below, to pass the test:</span>
         <form class="flex column" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
