@@ -8,10 +8,19 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 })
 
 export class ShopFilterComponent implements OnInit {
-  @Input() filterBy!: ShopFilter
+  @Input() set filterBy(value: ShopFilter) {
+    this._filterBy = { ...value }
+  }
   @Output() onSetFilter = new EventEmitter<string>()
   @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false
+
+get filterBy(): ShopFilter {
+  return this._filterBy
+}
+
+private _filterBy!: ShopFilter
+
 
   private filterSubject: Subject<string> = new Subject<string>()
 
