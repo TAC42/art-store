@@ -56,9 +56,10 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   onAddToCart(product: Product) {
     this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
+      const newProduct: Product = { ...product, amount: 1 }
       console.log('updatedUser: ', updatedUser)
-      const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, product] }
-      console.log('This is the product to add:', product)
+      const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
+      console.log('This is the product to add:', newProduct)
       this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
     })
   }

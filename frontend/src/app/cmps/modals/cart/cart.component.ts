@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { EMPTY, Observable, Subscription } from 'rxjs'
+import { EMPTY, Observable, Subscription, take } from 'rxjs'
 import { User } from '../../../models/user'
 import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
@@ -9,6 +9,7 @@ import { selectLoggedinUser } from '../../../store/user.selectors'
 import { CommunicationService } from '../../../services/communication.service'
 import { Product } from '../../../models/shop'
 import { OrderService } from '../../../services/order.service'
+import { UPDATE_USER } from '../../../store/user.actions'
 
 @Component({
   selector: 'cart',
@@ -60,6 +61,30 @@ export class CartComponent implements OnInit, OnDestroy {
       this.modService.closeModal('cart')
     }, 600)
   }
+
+  changeAmount(cartItem: Product, action: string) {
+    if (action === '+' && cartItem.amount) {
+      cartItem.amount++
+    } else if (action === '-' && cartItem.amount && cartItem.amount > 1) {
+      cartItem.amount--
+    } else if (action === '-' && cartItem.amount === 1) {
+      // Remove the cartItem when amount becomes zero
+      this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
+        const newCart: Product[] = this.cart.filter(product => product.name !== cartItem.name);
+        const newUser: User = { ...updatedUser, cart: newCart }
+        this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+      })
+      return
+    }
+
+    // Update the user's cart for any other changes
+    this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
+      const newCart: Product[] = this.cart.map(product => (product.name === cartItem.name ? cartItem : product))
+      const newUser: User = { ...updatedUser, cart: newCart }
+      this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+    })
+  }
+
 
   ngOnDestroy() {
     if (this.modalSubscription) {
