@@ -1,8 +1,14 @@
 <main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')">
     <section class="user-auth-modal flex column" *ngIf="verifyForm">
-        <span>We've sent an authentication code to your email address...</span>
-        <span>Please insert the code below, to pass the test:</span>
-        <form class="flex column" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+        <span>{{ message }}</span>
+
+        <button class="send-code" (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
+            [class.disabled]="!resendAvailable && codeSent">
+            <span *ngIf="!resendAvailable && codeSent">{{ timer }} seconds</span>
+            <span *ngIf="resendAvailable || !codeSent">{{ codeSent ? 'Resend code' : 'Send code' }}</span>
+        </button>
+
+        <form *ngIf="codeSent" class="flex column" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column" [class.error]="isFieldInvalid('code')">
                 <label for="code" class="flex row">
                     <span *ngIf="isFieldInvalid('code')">{{ getErrorMessage('code') }}</span>
@@ -10,15 +16,11 @@
                 <input id="code" type="text" formControlName="code" placeholder="XXXXXX" maxlength="6" customValidator
                     [maxLength]=6>
             </div>
-
-            <div class="form-actions flex row">
-                <button class="flex row" type="submit" [disabled]="!verifyForm.valid"
-                    [class.disabled]="!verifyForm.valid">
-                    <span>Submit</span>
-                </button>
-            </div>
         </form>
-        <span class="sidenote">You may skip this step, but your account will be in risk of deletion within 7
+
+        <span class="footnote">You may skip this step, but your account will be in risk of deletion within 7
             days...</span>
+
+        <button class="exit" (click)="closeModal()">I understand, but I wish to skip the process for now</button>
     </section>
 </main>

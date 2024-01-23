@@ -54,47 +54,51 @@
                 }
 
                 &.error {
-
                     input {
                         border-bottom: 1px solid $mnrclr2;
                     }
                 }
             }
+        }
 
-            button {
-                width: fit-content;
-                margin: 0 auto;
-                padding: 0.5em 0.75em;
-                transition: all 0.5s;
-                background: $prmclr1;
-                color: $prmclr2;
-                border-radius: 0.5em;
-                font-size: 16px;
-                overflow: hidden;
-                position: relative;
+        button {
+            width: fit-content;
+            margin: 0 auto;
+            padding: 0.5em 0.75em;
+            transition: all 0.5s;
+            background: $prmclr1;
+            color: $prmclr2;
+            border-radius: 0.5em;
+            font-size: 16px;
+            overflow: hidden;
+
+            &.disabled {
+                pointer-events: none;
+                background: $scdclr1;
 
                 span {
-                    transition: all 0.5s;
-                    opacity: 1;
+                    opacity: 0.5;
                 }
+            }
 
-                &.disabled {
-                    background: $scdclr1;
-                    pointer-events: none;
-
-                    span {
-                        opacity: 0.5;
-                    }
-                }
-
-                &:hover {
-                    background: $mnrclr4;
-                    color: $prmclr1;
-                }
+            &:hover {
+                background: $mnrclr1;
             }
         }
 
-        .sidenote {
+        .exit {
+            background: none;
+            color: $prmclr1;
+            border: 1px solid $prmclr1;
+            font-size: 14px;
+
+            &:hover {
+                background: $mnrclr2;
+                color: $prmclr2;
+            }
+        }
+
+        .footnote {
             font-size: 0.75em;
         }
     }
