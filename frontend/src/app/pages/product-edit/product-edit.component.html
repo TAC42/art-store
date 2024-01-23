@@ -42,20 +42,18 @@
         </span>
       </label>
       <textarea id="description" formControlName="description" placeholder="Please enter info regarding your product..."
-        customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="'. $%#!*&/:,'"></textarea>
+        customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
     </div>
 
     <div class="input-area flex column">
-      <label for="in-stock" class="flex row">
+      <label for="stock" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="inStock" />
-          <span>In Stock</span>
+          <span>Stock Amount*</span>
         </div>
       </label>
-      <select formControlName="inStock" id="in-stock">
-        <option value="true">True</option>
-        <option value="false">False</option>
-      </select>
+      <input id="stock" type="number" formControlName="stock" placeholder="Please enter stock amount..." customValidator
+        [minLength]=1 [maxLength]=3 min="0" max="999" />
     </div>
 
     <div class="input-area flex column">

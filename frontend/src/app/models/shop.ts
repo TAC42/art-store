@@ -3,9 +3,10 @@ export interface Product {
   imgUrls: string[]
   price: number
   description: string
-  inStock: boolean
+  stock: number
   type: string
   createdAt: number
+  amount?: number
   _id?: string
 }
 

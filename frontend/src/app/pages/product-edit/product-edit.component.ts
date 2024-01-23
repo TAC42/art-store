@@ -26,6 +26,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
   defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
+  specialChars: string = ".' $%#!*&/:\""
 
   ngOnInit(): void {
     this.initializeForm()
@@ -37,7 +38,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       name: [this.product.name || '', [Validators.required], [this.nameValidator(this.product.name)]],
       price: [this.product.price || '', [Validators.required]],
       description: [this.product.description || '', [Validators.required]],
-      inStock: [this.product.inStock || true, Validators.required],
+      stock: [this.product.stock || 1, Validators.required],
       type: [this.product.type || '', [Validators.required]],
       imgUrls: this.fBuilder.array(this.product.imgUrls?.map(url => this.fBuilder.control(url)) || [])
     })
