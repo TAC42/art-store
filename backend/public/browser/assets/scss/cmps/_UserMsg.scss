@@ -4,6 +4,7 @@ user-msg {
     position: fixed;
     right: 0;
     bottom: 3em;
+    z-index: 15;
 
     .user-msg-contents {
         width: fit-content;

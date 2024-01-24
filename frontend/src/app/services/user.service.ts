@@ -76,20 +76,21 @@ export class UserService {
     )
   }
 
+  static getLoggedinUser(): User {
+    const user = sessionStorage.getItem(SESSION_KEY_LOGGEDIN_USER)
+    return user ? JSON.parse(user) : null
+  }
+
   _setLoggedinUser(user: User): void {
     const userForSession = {
       _id: user._id,
       username: user.username,
+      email: user.email,
       cart: user.cart,
       imgUrl: user.imgUrl,
       isVerified: user.isVerified
     }
     sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
-  }
-
-  static getLoggedinUser(): User {
-    const user = sessionStorage.getItem(SESSION_KEY_LOGGEDIN_USER)
-    return user ? JSON.parse(user) : null
   }
 
   static getDefaultUser(): User {

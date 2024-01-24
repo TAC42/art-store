@@ -7,8 +7,7 @@ import { filter, Subscription } from 'rxjs'
 import { NavigationEnd, Router } from '@angular/router'
 import { ModalService } from '../services/modal.service'
 import { selectLoggedinUser } from '../store/user.selectors'
-
-const SESSION_KEY_LOGGEDIN_USER = 'loggedinUser'
+import { UserService } from '../services/user.service'
 
 @Component({
   selector: 'app-root',
@@ -28,14 +27,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // user session check
-    const userJson = sessionStorage.getItem(SESSION_KEY_LOGGEDIN_USER)
-    if (userJson) {
-      const loggedinUser = JSON.parse(userJson)
+    const loggedinUser = UserService.getLoggedinUser()
+    if (loggedinUser) {
       this.store.dispatch(SET_LOGGEDIN_USER({ user: loggedinUser }))
     } else this.store.dispatch(LOGOUT())
 
     this.userSubscription = this.store.pipe(select(selectLoggedinUser)).subscribe(user => {
-      if (user && user.createdAt !== 0 && user.email && !user.isVerified) {
+      if (user && user.createdAt !== 0 && !user.isVerified) {
         this.modService.openModal('user-auth')
       }
     })

@@ -67,6 +67,12 @@ product-preview {
         }
       }
 
+      .out-of-stock{
+        align-self: end;
+        text-transform: capitalize;
+        color: $mnrclr5;
+        
+      }
       .price {
         align-self: end;
         text-align: right;
@@ -84,6 +90,7 @@ product-preview {
           width: 32px;
         }
       }
+
     }
   }
 }

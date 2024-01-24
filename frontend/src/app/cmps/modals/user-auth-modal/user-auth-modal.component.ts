@@ -8,7 +8,7 @@ import { EMPTY, Observable, Subscription, debounceTime, filter, take } from 'rxj
 import { User } from '../../../models/user'
 import { UtilityService } from '../../../services/utility.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
-import { UPDATE_USER } from '../../../store/user.actions'
+import { LOGOUT, UPDATE_USER } from '../../../store/user.actions'
 
 @Component({
   selector: 'user-auth-modal',
@@ -32,19 +32,22 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   timer: number = 0
   resendAvailable: boolean = false
   private resendCodeTimer?: number
-  private closeModalTimer?: number
+  private authModalTimer?: number
 
   ngOnInit() {
     this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
 
     this.userSubscription = this.loggedinUser$.subscribe(user => {
-      if (!user || user._id === '' || user.username === '') return
+      if (!user || user._id === '') return
       if (this.modService.isModalOpen('user-auth')) {
         this.initializeForm()
-        this.closeModalTimer = setTimeout(() => {
-          this.closeModal()
+        this.authModalTimer = setTimeout(() => {
+          showErrorMsg('Authentication Timeout', 'Please log back in to retry!', this.eBusService)
+          this.store.dispatch(LOGOUT())
+
+          setTimeout(() => window.location.reload(), 2000)
         }, 300000) as unknown as number
-      }
+      } else clearTimeout(this.authModalTimer)
     })
   }
 
@@ -115,24 +118,20 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
     return ''
   }
 
-  closeModal() {
-    this.modService.closeModal('user-auth')
-    if (this.closeModalTimer) clearTimeout(this.closeModalTimer)
-  }
-
   onSubmit() {
     if (this.verifyForm.value.code === this.verificationCode) {
       this.loggedinUser$.pipe(take(1)).subscribe(user => {
         if (user && user._id) {
           const updatedUser: User = { ...user, isVerified: true }
           this.store.dispatch(UPDATE_USER({ updatedUser }))
-          showSuccessMsg('User Verified!', 'Thank you for your patience',
+          showSuccessMsg('User Verified!', 'You may login back!',
             this.eBusService)
         }
       })
-      this.closeModal()
+      this.store.dispatch(LOGOUT())
+      setTimeout(() => window.location.reload(), 2000)
     } else {
-      showErrorMsg('Verification failed!', 'Please try again later',
+      showErrorMsg('Verification Failed!', 'Please try again later',
         this.eBusService)
     }
   }
@@ -140,6 +139,6 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.userSubscription) this.userSubscription.unsubscribe()
     if (this.resendCodeTimer) clearInterval(this.resendCodeTimer)
-    if (this.closeModalTimer) clearTimeout(this.closeModalTimer)
+    if (this.authModalTimer) clearTimeout(this.authModalTimer)
   }
 }

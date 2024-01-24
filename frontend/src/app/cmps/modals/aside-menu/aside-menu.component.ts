@@ -7,6 +7,7 @@ import { User } from '../../../models/user'
 import { selectLoggedinUser } from '../../../store/user.selectors'
 import { EMPTY, Observable, Subscription } from 'rxjs'
 import { LOGOUT } from '../../../store/user.actions'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'aside-menu',
@@ -28,6 +29,7 @@ import { LOGOUT } from '../../../store/user.actions'
 export class AsideMenuComponent implements OnInit, OnDestroy {
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
+  private router = inject(Router)
 
   private modalSubscription: Subscription | undefined
   loggedinUser$: Observable<User> = EMPTY
@@ -60,6 +62,7 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
     event.stopPropagation()
     this.store.dispatch(LOGOUT())
     this.closeMenu()
+    this.router.navigate(['/'])
   }
 
   ngOnDestroy() {
