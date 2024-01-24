@@ -38,7 +38,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       name: [this.product.name || '', [Validators.required], [this.nameValidator(this.product.name)]],
       price: [this.product.price || '', [Validators.required]],
       description: [this.product.description || '', [Validators.required]],
-      stock: [this.product.stock || 1, Validators.required],
+      stock: [this.product.stock || '', Validators.required],
       type: [this.product.type || '', [Validators.required]],
       imgUrls: this.fBuilder.array(this.product.imgUrls?.map(url => this.fBuilder.control(url)) || [])
     })

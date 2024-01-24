@@ -14,10 +14,21 @@
       </button>
     </div>
 
-    <button *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
+    <!-- <button *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
       <span>Add</span>
       <svg-render svgName="shoppingCart" />
-    </button>
+    </button> -->
+
+    <ng-container *ngIf="product.stock > 0; else outOfStock">
+      <button  *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
+        <span>Add</span>
+        <svg-render svgName="shoppingCart" />
+      </button>
+    </ng-container>
+    
+    <ng-template #outOfStock>
+      <div class="out-of-stock">out of stock</div>
+    </ng-template>
 
     <div *ngIf="product.type === 'shop'" class="price">${{ product.price }}</div>
   </article>
