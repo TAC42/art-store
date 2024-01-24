@@ -85,21 +85,5 @@
                 background: $mnrclr1;
             }
         }
-
-        .exit {
-            background: none;
-            color: $prmclr1;
-            border: 1px solid $prmclr1;
-            font-size: 14px;
-
-            &:hover {
-                background: $mnrclr2;
-                color: $prmclr2;
-            }
-        }
-
-        .footnote {
-            font-size: 0.75em;
-        }
     }
 }

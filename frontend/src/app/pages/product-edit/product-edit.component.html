@@ -88,13 +88,13 @@
           <button class="flex column" type="button" (click)="addNewImageUploader()"
             [disabled]="imgUrlsControls.length >= 5" [class.disabled]="imgUrlsControls.length >= 5">
             <svg-render svgName="addIcon" />
-            <span>Add Image</span>
+            <span>Add</span>
           </button>
 
           <button class="flex column" type="button" (click)="removeImageUploader(imgUrlsControls.length - 1)"
             [disabled]="imgUrlsControls.length <= 1" [class.disabled]="imgUrlsControls.length <= 1">
             <svg-render svgName="removeIcon" />
-            <span>Remove Image</span>
+            <span>Remove</span>
           </button>
         </div>
       </div>

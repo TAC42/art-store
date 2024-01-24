@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
-import { Observable, Subject, catchError, debounceTime, filter, first, map, of, switchMap } from 'rxjs'
+import { Observable, Subject, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
 import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 import { SAVE_PRODUCT, SET_PRODUCT_BY_NAME } from '../../store/shop.actions'
@@ -35,7 +35,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   initializeForm(): void {
     this.editForm = this.fBuilder.group({
-      name: [this.product.name || '', [Validators.required], [this.nameValidator(this.product.name)]],
+      name: [this.product.name || '', [Validators.required], this.nameValidator()],
       price: [this.product.price || '', [Validators.required]],
       description: [this.product.description || '', [Validators.required]],
       stock: [this.product.stock || '', Validators.required],
@@ -56,18 +56,22 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       })
   }
 
-  nameValidator(existingName: string): AsyncValidatorFn {
+  nameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges || control.value === this.product.name) {
+        return of(null)
+      }
       return control.valueChanges.pipe(
         debounceTime(500),
-        switchMap(value => this.validateName(value, existingName)),
+        distinctUntilChanged(),
+        switchMap(value => this.validateName(value)),
         first()
       )
     }
   }
 
-  private validateName(value: string, existingName: string): Observable<ValidationErrors | null> {
-    if (value === existingName || !value) return of(null)
+  private validateName(value: string): Observable<ValidationErrors | null> {
+    if (!value) return of(null)
 
     return this.sDbService.checkNameAvailable(value).pipe(
       map(response => response.isNameAvailable ? null : { nameTaken: true }),
@@ -122,7 +126,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroySubject$.next()
-    this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
+    // this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
   }
 
   onBack = () => {

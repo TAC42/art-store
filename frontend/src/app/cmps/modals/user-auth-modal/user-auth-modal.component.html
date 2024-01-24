@@ -2,7 +2,7 @@
     <section class="user-auth-modal flex column" *ngIf="verifyForm">
         <span>{{ message }}</span>
 
-        <button class="send-code" (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
+        <button (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
             [class.disabled]="!resendAvailable && codeSent">
             <span *ngIf="!resendAvailable && codeSent">{{ timer }} seconds</span>
             <span *ngIf="resendAvailable || !codeSent">{{ codeSent ? 'Resend code' : 'Send code' }}</span>
@@ -17,10 +17,5 @@
                     [maxLength]=6>
             </div>
         </form>
-
-        <span class="footnote">You may skip this step, but your account will be in risk of deletion within 7
-            days...</span>
-
-        <button class="exit" (click)="closeModal()">I understand, but I wish to skip the process for now</button>
     </section>
 </main>

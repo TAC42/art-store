@@ -56,7 +56,7 @@
                     <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
                 </label>
                 <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator
-                    [minLength]=32 [maxLength]=256 [allowedSpecialChars]="textareaSpecialChars"></textarea>
+                    [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
             </div>
 
             <div class="form-actions flex row">
