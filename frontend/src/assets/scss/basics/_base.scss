@@ -16,8 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-body>div:last-child {
+body > div:last-child {
   position: absolute !important;
   bottom: 0 !important;
   left: 0 !important;
@@ -93,3 +92,12 @@ router-outlet {
   height: fit-content;
   width: 100%;
 }
+
+loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+

@@ -6,6 +6,8 @@ import { Product } from '../../models/shop'
 import { ShopDbService } from '../../services/shop-db.service'
 import { AppState } from '../../store/app.state'
 import { Store } from '@ngrx/store'
+import { SET_LOADING_STATE } from '../../store/shop.actions'
+import { LoaderService } from '../../services/loader.service'
 
 @Component({
     selector: 'product-details',
@@ -22,6 +24,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private route = inject(ActivatedRoute)
     private dTypeService = inject(DeviceTypeService)
     private shopDbService = inject(ShopDbService)
+    private loaderService = inject(LoaderService)
 
     deviceType: string = 'mini-tablet'
     private dTypesubscription!: Subscription
@@ -32,25 +35,46 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
-            (type) => this.deviceType = type)
+            (type) => this.deviceType = type
+        )
+
+        this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
+        this.loaderService.setIsLoading(true)
 
         this.productSubscription = this.route.data
             .pipe(map(data => data['product']))
             .subscribe({
                 next: (product: Product) => {
-                    this.product = product
+                    this.product = product;
 
                     if (product && product._id) {
                         this.shopDbService.getRandomProducts(product.type, product._id)
                             .subscribe({
-                                next: (products: Product[]) => this.randomProducts = products,
-                                error: (error) => console.error('Error fetching random products:', error)
+                                next: (products: Product[]) => {
+                                    this.randomProducts = products
+                                },
+                                error: (error) => {
+                                    console.error('Error fetching random products:', error)
+                                },
+                                complete: () => {
+                                    this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+                                    this.loaderService.setIsLoading(false)
+                                }
                             })
+                    } else {
+                        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+                        this.loaderService.setIsLoading(false)
                     }
                 },
-                error: (error) => console.error('Error fetching product:', error)
+                error: (error) => {
+                    console.error('Error fetching product:', error)
+                    this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+                    this.loaderService.setIsLoading(false);
+                }
             })
     }
+
+
 
     onBack(): void {
         this.router.navigateByUrl(`/${encodeURIComponent(this.product?.type || 'shop')}`)

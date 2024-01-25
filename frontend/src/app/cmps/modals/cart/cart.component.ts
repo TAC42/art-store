@@ -63,27 +63,32 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   changeAmount(cartItem: Product, action: string) {
-    if (action === '+' && cartItem.amount) {
-      cartItem.amount++
-    } else if (action === '-' && cartItem.amount && cartItem.amount > 1) {
-      cartItem.amount--
-    } else if (action === '-' && cartItem.amount === 1) {
+    const updatedCartItem = { ...cartItem }
+
+    if (action === '+' && updatedCartItem.amount) {
+      updatedCartItem.amount++
+    } else if (action === '-' && updatedCartItem.amount && updatedCartItem.amount > 1) {
+      updatedCartItem.amount--
+    } else if (action === '-' && updatedCartItem.amount === 1) {
       // Remove the cartItem when amount becomes zero
       this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-        const newCart: Product[] = this.cart.filter(product => product.name !== cartItem.name);
+        const newCart: Product[] = this.cart.filter(product => product.name !== updatedCartItem.name)
         const newUser: User = { ...updatedUser, cart: newCart }
         this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
       })
+      return
+    } else {
       return
     }
 
     // Update the user's cart for any other changes
     this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-      const newCart: Product[] = this.cart.map(product => (product.name === cartItem.name ? cartItem : product))
+      const newCart: Product[] = this.cart.map(product => (product.name === updatedCartItem.name ? updatedCartItem : product))
       const newUser: User = { ...updatedUser, cart: newCart }
       this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
     })
   }
+
 
 
   ngOnDestroy() {
