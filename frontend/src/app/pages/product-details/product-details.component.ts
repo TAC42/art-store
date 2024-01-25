@@ -6,7 +6,6 @@ import { Product } from '../../models/shop'
 import { ShopDbService } from '../../services/shop-db.service'
 import { AppState } from '../../store/app.state'
 import { Store } from '@ngrx/store'
-import { selectIsLoading } from '../../store/shop.selectors'
 
 @Component({
     selector: 'product-details',
@@ -27,7 +26,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     deviceType: string = 'mini-tablet'
     private dTypesubscription!: Subscription
 
-    isLoading: boolean = false
     randomProducts: Product[] = []
     private productSubscription!: Subscription
     product: Product | null = null
@@ -35,10 +33,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
             (type) => this.deviceType = type)
-
-        this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
-            this.isLoading = isLoading
-        })
 
         this.productSubscription = this.route.data
             .pipe(map(data => data['product']))

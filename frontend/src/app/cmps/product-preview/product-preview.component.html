@@ -2,6 +2,7 @@
   <article class="prod-img">
     <img [src]="product.imgUrls[0]" [alt]="product.name" />
   </article>
+
   <article class="preview-body grid">
     <div class="name">{{ product.name }}</div>
 
@@ -9,23 +10,19 @@
       <button (click)="onRemoveProduct($event)" class="remove-btn">
         <svg-render svgName="trashIcon" />
       </button>
+      
       <button (click)="onEditProduct($event)" class="edit-btn">
         <svg-render svgName="edit" />
       </button>
     </div>
 
-    <!-- <button *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
-      <span>Add</span>
-      <svg-render svgName="shoppingCart" />
-    </button> -->
-
     <ng-container *ngIf="product.stock > 0; else outOfStock">
-      <button  *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
+      <button *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
         <span>Add</span>
         <svg-render svgName="shoppingCart" />
       </button>
     </ng-container>
-    
+
     <ng-template #outOfStock>
       <div class="out-of-stock">out of stock</div>
     </ng-template>

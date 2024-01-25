@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { Product } from '../../models/shop'
 import { Router } from '@angular/router'
-import { ModalService } from '../../services/modal.service'
-import { CommunicationService } from '../../services/communication.service'
 
 @Component({
   selector: 'product-preview',
@@ -26,7 +24,6 @@ export class ProductPreviewComponent {
     event.stopPropagation()
     this.add.emit(this.product)
   }
-
 
   onEditProduct(event: MouseEvent) {
     event.preventDefault()

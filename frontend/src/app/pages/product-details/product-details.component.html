@@ -1,6 +1,4 @@
 <main class="product-details-contents w-h-100 flex column">
-    <loader />
-
     <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
         <section class="actions flex row">
             <button (click)="onBack()" title="Return to previous page?">

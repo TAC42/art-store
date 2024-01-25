@@ -148,8 +148,8 @@ export class SvgRenderService {
 
     loader: `<svg xmlns="http://www.w3.org/2000/svg" with="600" height="600" viewBox="0 0 200 200">
       <linearGradient id="a">
-        <stop offset="0" stop-color="#0940FF" stop-opacity="0"/>
-        <stop offset="1" stop-color="#0940FF"/>
+        <stop offset="0" stop-color="#333230" stop-opacity="0"/>
+        <stop offset="1" stop-color="#333230"/>
       </linearGradient>
       <circle fill="none" stroke="url(#a)" stroke-width="30" stroke-linecap="round" stroke-dasharray="0 44 0 44 0 44 0 44 0 360" cx="100" cy="100" r="70" transform-origin="center">
         <animateTransform type="rotate" attributeName="transform" calcMode="discrete" dur="2" values="360;324;288;252;216;180;144;108;72;36" repeatCount="indefinite"/>
@@ -194,9 +194,8 @@ export class SvgRenderService {
     </svg>`,
 
     exit: `<svg width="64" height="64" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-    <path fill="#000" d="M12.78 4.28a.75.75 0 0 0-1.06-1.06L8 6.94 4.28 3.22a.75.75 0 0 0-1.06 1.06L6.94 8l-3.72 3.72a.75.75 0 1 0 1.06 1.06L8 9.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L9.06 8l3.72-3.72z"/>
-  </svg>
-   `,
+      <path fill="#000" d="M12.78 4.28a.75.75 0 0 0-1.06-1.06L8 6.94 4.28 3.22a.75.75 0 0 0-1.06 1.06L6.94 8l-3.72 3.72a.75.75 0 1 0 1.06 1.06L8 9.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L9.06 8l3.72-3.72z"/>
+    </svg> `,
   }
 
   constructor() { }
