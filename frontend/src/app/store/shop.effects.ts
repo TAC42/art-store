@@ -1,25 +1,27 @@
-import { Injectable } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { map, mergeMap, tap, withLatestFrom, catchError, switchMap } from 'rxjs/operators'
 import { EMPTY, of } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED, SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE, SET_PRODUCT_BY_NAME, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY } from './shop.actions'
+import {
+  FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
+  SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
+  SET_PRODUCT_BY_NAME, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY
+} from './shop.actions'
 import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
-import { selectFilterBy, selectIsLoading, selectProductByName } from './shop.selectors'
+import { selectFilterBy, selectIsLoading } from './shop.selectors'
 import { ActivatedRoute } from '@angular/router'
 import { ShopFilter } from '../models/shop'
 
 @Injectable()
 export class ShopEffects {
-  constructor(
-    private actions$: Actions,
-    private shopDbService: ShopDbService,
-    private loaderService: LoaderService,
-    private activatedRoute: ActivatedRoute,
-    private store: Store<AppState>
-  ) { }
+  private actions$ = inject(Actions)
+  private shopDbService = inject(ShopDbService)
+  private loaderService = inject(LoaderService)
+  private activatedRoute = inject(ActivatedRoute)
+  private store = inject(Store<AppState>)
 
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
