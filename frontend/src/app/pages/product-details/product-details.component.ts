@@ -4,35 +4,42 @@ import { DeviceTypeService } from '../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
 import { ShopDbService } from '../../services/shop-db.service'
+import { AppState } from '../../store/app.state'
+import { Store } from '@ngrx/store'
+import { selectIsLoading } from '../../store/shop.selectors'
 
 @Component({
     selector: 'product-details',
     templateUrl: './product-details.component.html',
 })
+
 export class ProductDetailsComponent implements OnInit, OnDestroy {
     @HostBinding('class.full') fullClass = true
     @HostBinding('class.w-h-100') fullWidthHeightClass = true
     @HostBinding('class.layout-row') layoutRowClass = true
 
+    private store = inject(Store<AppState>)
     private router = inject(Router)
     private route = inject(ActivatedRoute)
     private dTypeService = inject(DeviceTypeService)
     private shopDbService = inject(ShopDbService)
 
-    randomProducts: Product[] = []
-
     deviceType: string = 'mini-tablet'
-    private dTypesubscription: Subscription
+    private dTypesubscription!: Subscription
 
+    isLoading: boolean = false
+    randomProducts: Product[] = []
     private productSubscription!: Subscription
     product: Product | null = null
 
-    constructor() {
+    ngOnInit(): void {
         this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
             (type) => this.deviceType = type)
-    }
 
-    ngOnInit(): void {
+        this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
+            this.isLoading = isLoading
+        })
+
         this.productSubscription = this.route.data
             .pipe(map(data => data['product']))
             .subscribe({
@@ -57,7 +64,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.productSubscription) this.productSubscription.unsubscribe()
-
-        this.dTypesubscription.unsubscribe()
+        if (this.dTypesubscription) this.dTypesubscription.unsubscribe()
     }
 }

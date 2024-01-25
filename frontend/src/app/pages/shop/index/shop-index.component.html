@@ -1,4 +1,3 @@
-<loader></loader>
 <section class="filter-area flex column">
   <img src="{{ backgroundImage }}" alt="Background">
   <h4>Shop</h4>
@@ -8,5 +7,6 @@
     <span>Add product</span>
   </a>
 </section>
+<loader />
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
   [products]="products$ | async" />
