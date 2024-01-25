@@ -66,6 +66,7 @@ export class CartComponent implements OnInit, OnDestroy {
     const updatedCartItem = { ...cartItem }
 
     if (action === '+' && updatedCartItem.amount) {
+      if(updatedCartItem.amount !== updatedCartItem.stock )
       updatedCartItem.amount++
     } else if (action === '-' && updatedCartItem.amount && updatedCartItem.amount > 1) {
       updatedCartItem.amount--

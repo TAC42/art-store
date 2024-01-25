@@ -22,7 +22,6 @@ export class ProductResolver implements Resolve<Product | null> {
 
     return this.store.select(selectProductByName).pipe(
       filter((product): product is Product => !!product),
-      delay(500),
       tap((product) => {
         console.log('product in resolver: ', product)
       }),

@@ -5,7 +5,7 @@
   grid-template-rows: 62px 0 0 auto 1fr auto;
   position: relative;
 
-  >* {
+  > * {
     grid-column: 2;
 
     &.full {
@@ -33,7 +33,14 @@
   grid-row: 2 / 5;
 }
 
-.loader-contents {
-  margin: 3em auto;
-  width: 25vw;
+loader {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  .loader-contents {
+    margin: 3em auto;
+    width: 25vw;
+  }
 }

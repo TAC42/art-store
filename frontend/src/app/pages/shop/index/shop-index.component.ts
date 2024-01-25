@@ -30,7 +30,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'shop' }
   backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
-  
+
   ngOnInit(): void {
     this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
       this.isLoading = isLoading
@@ -57,10 +57,16 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   onAddToCart(product: Product) {
     this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
       const newProduct: Product = { ...product, amount: 1 }
-      console.log('updatedUser: ', updatedUser)
-      const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
-      console.log('This is the product to add:', newProduct)
-      this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+
+      const isProductAlreadyInCart = updatedUser.cart.some(cartProduct => cartProduct.name === newProduct.name)
+
+      if (!isProductAlreadyInCart) {
+        const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
+        console.log('This is the product to add:', newProduct)
+        this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+      } else {
+        console.log(`Product ${newProduct.name} is already in the cart.`)
+      }
     })
   }
 

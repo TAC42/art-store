@@ -45,7 +45,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             .pipe(map(data => data['product']))
             .subscribe({
                 next: (product: Product) => {
-                    this.product = product;
+                    this.product = product
 
                     if (product && product._id) {
                         this.shopDbService.getRandomProducts(product.type, product._id)
@@ -69,7 +69,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
                 error: (error) => {
                     console.error('Error fetching product:', error)
                     this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-                    this.loaderService.setIsLoading(false);
+                    this.loaderService.setIsLoading(false)
                 }
             })
     }
