@@ -1,11 +1,11 @@
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
 import { Injectable, inject } from '@angular/core'
-import { Store } from '@ngrx/store'
+import { Store, select } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
 import { selectProductByName } from '../store/shop.selectors'
 import { Observable } from 'rxjs'
-import { take, tap, filter, map, delay } from 'rxjs/operators'
+import { take, tap, filter, distinctUntilChanged } from 'rxjs/operators'
 import { Product } from '../models/shop'
 
 @Injectable({
@@ -20,11 +20,11 @@ export class ProductResolver implements Resolve<Product | null> {
 
     this.store.dispatch(LOAD_PRODUCT_BY_NAME({ name }))
 
-    return this.store.select(selectProductByName).pipe(
-      delay(500),
-      filter((product): product is Product => !!product),
-      tap((product) => console.log('product in resolver: ', product)),
-      map((product) => product || null),
+    return this.store.pipe(
+      select(selectProductByName),
+      filter(product => product !== null && product.name === name),
+      distinctUntilChanged((prev, curr) => prev?.name === curr?.name),
+      tap(product => console.log('Product in resolver:', product)),
       take(1)
     )
   }
