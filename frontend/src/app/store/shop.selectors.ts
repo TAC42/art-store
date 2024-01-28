@@ -8,14 +8,17 @@ export const selectProducts = createSelector(
   selectShopState,
   (state: ShopState) => state.products)
 
+// handling of product in details
 export const selectProductByName = createSelector(
   selectShopState,
   (state: ShopState) => state.selectedProduct)
 
+// handling of product filtering
 export const selectFilterBy = createSelector(
   selectShopState,
   (state: ShopState) => state.filterBy)
 
+// handling of shop loading
 export const selectIsLoading = createSelector(
   selectShopState,
   (state: ShopState) => state.isLoading)

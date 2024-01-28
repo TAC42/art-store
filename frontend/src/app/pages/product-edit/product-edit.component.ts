@@ -4,7 +4,7 @@ import { Product } from '../../models/shop'
 import { Observable, Subject, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
 import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
-import { SAVE_PRODUCT, SET_PRODUCT_BY_NAME } from '../../store/shop.actions'
+import { SAVE_PRODUCT } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 
@@ -126,7 +126,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroySubject$.next()
-    // this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
   }
 
   onBack = () => {
