@@ -6,7 +6,7 @@
   <article class="preview-body grid">
     <div class="name">{{ product.name }}</div>
 
-    <div class="admin-btns flex column">
+    <div *ngIf="(loggedinUser$ | async)?.isAdmin" class="admin-btns flex column">
       <button (click)="onRemoveProduct($event)" class="remove-btn">
         <svg-render svgName="trashIcon" />
       </button>
