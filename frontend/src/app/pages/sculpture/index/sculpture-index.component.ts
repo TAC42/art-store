@@ -19,7 +19,7 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   private router = inject(Router)
   private activatedRoute = inject(ActivatedRoute)
-  private mService = inject(ModalService)
+  private modService = inject(ModalService)
   private comService = inject(CommunicationService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
@@ -28,22 +28,22 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
 
   ngOnInit(): void {
-    this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
-      this.isLoading = isLoading
-    })
     this.comService.removeProduct$.subscribe((productId: string) => {
       this.onRemoveProduct(productId)
     })
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
+    this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
+      this.isLoading = isLoading
+    })
   }
 
   onRemoveProductModal(productId: string): void {
-    this.mService.openModal(`confirm`, productId)
+    this.modService.openModal(`confirm`, productId)
   }
 
   onOpenCart(): void {
-    this.mService.openModal('cart')
+    this.modService.openModal('cart')
   }
 
   onRemoveProduct(productId: string) {

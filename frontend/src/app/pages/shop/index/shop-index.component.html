@@ -7,6 +7,5 @@
     <span>Add product</span>
   </a>
 </section>
-<!-- <loader /> -->
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
   [products]="products$ | async" />
