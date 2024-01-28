@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { map, mergeMap, tap, withLatestFrom, catchError, switchMap, finalize } from 'rxjs/operators'
-import { EMPTY, of } from 'rxjs'
+import { map, mergeMap, tap, withLatestFrom, catchError, switchMap } from 'rxjs/operators'
+import { of } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
@@ -9,7 +9,6 @@ import {
   PRODUCT_BY_NAME_LOADED, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
   LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED
 } from './shop.actions'
-import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
 import { selectFilterBy } from './shop.selectors'
@@ -20,7 +19,6 @@ import { ShopFilter } from '../models/shop'
 export class ShopEffects {
   private actions$ = inject(Actions)
   private shopDbService = inject(ShopDbService)
-  private loaderService = inject(LoaderService)
   private activatedRoute = inject(ActivatedRoute)
   private store = inject(Store<AppState>)
 
@@ -36,13 +34,11 @@ export class ShopEffects {
           map(products => PRODUCTS_LOADED({ products })),
           catchError(error => {
             console.error('Error loading products:', error)
-            return EMPTY
+            return of(SET_LOADING_STATE({ isLoading: false }))
           })
         )
       ),
-      finalize(() => {
-        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-      })
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
     )
   )
 
@@ -74,16 +70,17 @@ export class ShopEffects {
 
       mergeMap(action =>
         this.shopDbService.getByName(action.name).pipe(
-          map(product => PRODUCT_BY_NAME_LOADED({ product })),
+          map(product => {
+            console.log('Product loaded:', product)
+            return PRODUCT_BY_NAME_LOADED({ product })
+          }),
           catchError(error => {
             console.error('Error loading product by name:', error)
-            return EMPTY
+            return of(SET_LOADING_STATE({ isLoading: false }))
           }),
         )
       ),
-      finalize(() => {
-        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-      })
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
     )
   )
 
@@ -92,16 +89,13 @@ export class ShopEffects {
       ofType(SAVE_PRODUCT),
       tap(({ product }) => {
         this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
-        this.loaderService.setIsLoading(true)
         this.shopDbService.save(product).subscribe(
           () => {
             this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-            this.loaderService.setIsLoading(false)
           },
           (error) => {
             console.error('Error saving product:', error)
             this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-            this.loaderService.setIsLoading(false)
           }
         )
       })
@@ -137,11 +131,11 @@ export class ShopEffects {
           map(randomProducts => RANDOM_PRODUCTS_LOADED({ randomProducts })),
           catchError(error => {
             console.error('Error loading random products:', error)
-            return EMPTY
+            return of(SET_LOADING_STATE({ isLoading: false }))
           })
         )
       ),
-      finalize(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
     )
   )
 }

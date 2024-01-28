@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, map, mergeMap, tap } from 'rxjs/operators'
-import { EMPTY } from 'rxjs'
+import { EMPTY, of } from 'rxjs'
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
 import { showSuccessMsg, showErrorMsg, EventBusService } from '../services/event-bus.service'
@@ -9,7 +9,6 @@ import {
     LOAD_USER, LOAD_USERS, LOGIN, LOGOUT, SET_LOADING_STATE,
     SET_LOGGEDIN_USER, SET_USER, SET_USERS, SIGNUP, UPDATE_USER
 } from './user.actions'
-import { LoaderService } from '../services/loader.service'
 import { AppState } from './app.state'
 import { Store } from '@ngrx/store'
 
@@ -17,37 +16,42 @@ import { Store } from '@ngrx/store'
 export class UserEffects {
     private actions$ = inject(Actions)
     private userService = inject(UserService)
-    private loaderService = inject(LoaderService)
     private eBusService = inject(EventBusService)
     private store = inject(Store<AppState>)
 
     loadUsers$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LOAD_USERS),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
             mergeMap(() =>
                 this.userService.query().pipe(
                     map((users: User[]) => SET_USERS({ users })),
                     catchError((error) => {
                         console.error('Error loading users:', error)
-                        return EMPTY
+                        return of(SET_LOADING_STATE({ isLoading: false }))
                     })
                 )
-            )
+            ),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))),
         )
     )
 
     loadUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LOAD_USER),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
             mergeMap((action) =>
                 this.userService.getById(action.userId).pipe(
                     map((user: User) => SET_USER({ user })),
                     catchError((error) => {
                         console.error(`Error loading user ${action.userId}:`, error)
-                        return EMPTY
+                        return of(SET_LOADING_STATE({ isLoading: false }))
                     })
                 )
-            )
+            ),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
         )
     )
 
@@ -105,26 +109,19 @@ export class UserEffects {
     updateUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(UPDATE_USER),
-            tap(() => {
-                this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
-                this.loaderService.setIsLoading(true)
-            }),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
             mergeMap(action =>
                 this.userService.save(action.updatedUser).pipe(
                     map(user => SET_LOGGEDIN_USER({ user })),
                     tap(user => console.log('saved user in effects:', user)),
-                    tap(() => {
-                        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-                        this.loaderService.setIsLoading(false)
-                    }),
                     catchError(error => {
                         console.error('Error loading User:', error)
-                        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-                        this.loaderService.setIsLoading(false)
-                        return EMPTY
+                        return of(SET_LOADING_STATE({ isLoading: false }))
                     })
                 )
-            )
+            ),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true })))
         )
     )
 }
