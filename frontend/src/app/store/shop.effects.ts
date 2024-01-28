@@ -1,12 +1,13 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { map, mergeMap, tap, withLatestFrom, catchError, switchMap } from 'rxjs/operators'
+import { map, mergeMap, tap, withLatestFrom, catchError, switchMap, finalize } from 'rxjs/operators'
 import { EMPTY, of } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
-  SET_PRODUCT_BY_NAME, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY
+  SET_PRODUCT_BY_NAME, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
+  LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED
 } from './shop.actions'
 import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
@@ -134,6 +135,22 @@ export class ShopEffects {
       })
     )
   )
+
+  // handling of random products in details
+  loadRandomProducts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_RANDOM_PRODUCTS),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+      mergeMap(({ productType, excludeProductId }) =>
+        this.shopDbService.getRandomProducts(productType, excludeProductId).pipe(
+          map(randomProducts => RANDOM_PRODUCTS_LOADED({ randomProducts })),
+          catchError(error => {
+            console.error('Error loading random products:', error)
+            return EMPTY
+          })
+        )
+      ),
+      finalize(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+    )
+  )
 }
-
-

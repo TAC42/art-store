@@ -3,6 +3,7 @@ import { ShopState } from './shop.reducers'
 
 export const selectShopState = createFeatureSelector<ShopState>('shop')
 
+// handling of all products in index
 export const selectProducts = createSelector(
   selectShopState,
   (state: ShopState) => state.products)
@@ -18,3 +19,9 @@ export const selectFilterBy = createSelector(
 export const selectIsLoading = createSelector(
   selectShopState,
   (state: ShopState) => state.isLoading)
+
+// handling of random products in details
+export const selectRandomProducts = createSelector(
+  selectShopState,
+  (state: ShopState) => state.randomProducts
+)

@@ -40,3 +40,14 @@ export const PRODUCT_REMOVED_SUCCESSFULLY = createAction(
   '[Shop] Product Removed Successfully',
   props<{ productId: string }>()
 )
+
+// handling of random products
+export const LOAD_RANDOM_PRODUCTS = createAction(
+  '[Shop] Load Random Products',
+  props<{ productType: string, excludeProductId: string }>()
+)
+
+export const RANDOM_PRODUCTS_LOADED = createAction(
+  '[Shop] Random Products Loaded',
+  props<{ randomProducts: Product[] }>()
+)

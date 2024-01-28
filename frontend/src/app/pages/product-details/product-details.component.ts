@@ -3,11 +3,10 @@ import { Subscription, map } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
-import { ShopDbService } from '../../services/shop-db.service'
 import { AppState } from '../../store/app.state'
 import { Store } from '@ngrx/store'
-import { SET_LOADING_STATE } from '../../store/shop.actions'
-import { LoaderService } from '../../services/loader.service'
+import { LOAD_RANDOM_PRODUCTS } from '../../store/shop.actions'
+import { selectRandomProducts } from '../../store/shop.selectors'
 
 @Component({
     selector: 'product-details',
@@ -23,8 +22,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private router = inject(Router)
     private route = inject(ActivatedRoute)
     private dTypeService = inject(DeviceTypeService)
-    private shopDbService = inject(ShopDbService)
-    private loaderService = inject(LoaderService)
 
     deviceType: string = 'mini-tablet'
     private dTypesubscription!: Subscription
@@ -37,10 +34,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
             (type) => this.deviceType = type
         )
+        this.fetchProductData()
+    }
 
-        this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
-        this.loaderService.setIsLoading(true)
-
+    fetchProductData(): void {
         this.productSubscription = this.route.data
             .pipe(map(data => data['product']))
             .subscribe({
@@ -48,33 +45,18 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
                     this.product = product
 
                     if (product && product._id) {
-                        this.shopDbService.getRandomProducts(product.type, product._id)
-                            .subscribe({
-                                next: (products: Product[]) => {
-                                    this.randomProducts = products
-                                },
-                                error: (error) => {
-                                    console.error('Error fetching random products:', error)
-                                },
-                                complete: () => {
-                                    this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-                                    this.loaderService.setIsLoading(false)
-                                }
-                            })
-                    } else {
-                        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-                        this.loaderService.setIsLoading(false)
+                        this.store.dispatch(LOAD_RANDOM_PRODUCTS({
+                            productType: product.type,
+                            excludeProductId: product._id
+                        }))
                     }
                 },
-                error: (error) => {
-                    console.error('Error fetching product:', error)
-                    this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-                    this.loaderService.setIsLoading(false)
-                }
+                error: (error) => console.error('Error fetching product:', error)
             })
+        this.store.select(selectRandomProducts).subscribe(randomProducts => {
+            this.randomProducts = randomProducts
+        })
     }
-
-
 
     onBack(): void {
         this.router.navigateByUrl(`/${encodeURIComponent(this.product?.type || 'shop')}`)
