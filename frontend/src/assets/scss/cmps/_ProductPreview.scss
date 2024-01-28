@@ -6,7 +6,8 @@ product-preview {
 
   .preview-contents {
     grid-template-columns: repeat(6, 1fr);
-    min-height: 120px;
+    min-height: 150px;
+    max-height: 150px;
 
     &:hover {
       text-decoration: none;
@@ -27,7 +28,6 @@ product-preview {
     }
 
     .preview-body {
-      position: relative;
       grid-column: 4 / -1;
       padding: 0.75em 1em 1em 1em;
       grid-template-columns: 1fr 48px;
@@ -67,12 +67,12 @@ product-preview {
         }
       }
 
-      .out-of-stock{
+      .out-of-stock {
         align-self: end;
         text-transform: capitalize;
         color: $mnrclr5;
-        
       }
+
       .price {
         align-self: end;
         text-align: right;
@@ -91,7 +91,6 @@ product-preview {
           width: 32px;
         }
       }
-
     }
   }
 }
