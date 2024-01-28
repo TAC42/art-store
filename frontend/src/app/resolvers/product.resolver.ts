@@ -5,7 +5,7 @@ import { AppState } from '../store/app.state'
 import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
 import { selectProductByName } from '../store/shop.selectors'
 import { Observable } from 'rxjs'
-import { take, tap, filter, delay, map } from 'rxjs/operators'
+import { take, tap, filter, map } from 'rxjs/operators'
 import { Product } from '../models/shop'
 
 @Injectable({
@@ -22,9 +22,7 @@ export class ProductResolver implements Resolve<Product | null> {
 
     return this.store.select(selectProductByName).pipe(
       filter((product): product is Product => !!product),
-      tap((product) => {
-        console.log('product in resolver: ', product)
-      }),
+      tap((product) => console.log('product in resolver: ', product)),
       map((product) => product || null),
       take(1)
     )

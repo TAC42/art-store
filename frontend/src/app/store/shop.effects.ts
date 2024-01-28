@@ -6,13 +6,13 @@ import { ShopDbService } from '../services/shop-db.service'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
-  SET_PRODUCT_BY_NAME, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
+  PRODUCT_BY_NAME_LOADED, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
   LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED
 } from './shop.actions'
 import { LoaderService } from '../services/loader.service'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
-import { selectFilterBy, selectIsLoading } from './shop.selectors'
+import { selectFilterBy } from './shop.selectors'
 import { ActivatedRoute } from '@angular/router'
 import { ShopFilter } from '../models/shop'
 
@@ -24,28 +24,25 @@ export class ShopEffects {
   private activatedRoute = inject(ActivatedRoute)
   private store = inject(Store<AppState>)
 
+  // handling of all products in index
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_PRODUCTS),
-      withLatestFrom(
-        this.store.pipe(select(selectFilterBy)),
-        this.store.pipe(select(selectIsLoading))
-      ),
-      tap(([action, filterBy, isLoading]) => {
-        if (!isLoading) {
-          this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
-          this.loaderService.setIsLoading(true)
-        }
-      }),
-      mergeMap(([action, filterBy]) =>
+      withLatestFrom(this.store.pipe(select(selectFilterBy))),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
+      mergeMap(([, filterBy]) =>
         this.shopDbService.query(filterBy).pipe(
-          map((products) => PRODUCTS_LOADED({ products })),
-          tap(() => {
-            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-            this.loaderService.setIsLoading(false)
+          map(products => PRODUCTS_LOADED({ products })),
+          catchError(error => {
+            console.error('Error loading products:', error)
+            return EMPTY
           })
         )
-      )
+      ),
+      finalize(() => {
+        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+      })
     )
   )
 
@@ -69,30 +66,24 @@ export class ShopEffects {
     return filterFromParams
   }
 
+  // handling of product in details
   loadProductByName$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_PRODUCT_BY_NAME),
-      tap(() => {
-        this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
-        this.loaderService.setIsLoading(true)
-        this.store.dispatch(SET_PRODUCT_BY_NAME({ product: null }))
-      }),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
       mergeMap(action =>
         this.shopDbService.getByName(action.name).pipe(
-          map(product => SET_PRODUCT_BY_NAME({ product })),
-          tap(product => console.log('Loaded product:', product.product)),
-          tap(() => {
-            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-            this.loaderService.setIsLoading(false)
-          }),
+          map(product => PRODUCT_BY_NAME_LOADED({ product })),
           catchError(error => {
             console.error('Error loading product by name:', error)
-            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-            this.loaderService.setIsLoading(false)
             return EMPTY
-          })
+          }),
         )
-      )
+      ),
+      finalize(() => {
+        this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+      })
     )
   )
 

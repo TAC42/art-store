@@ -5,7 +5,7 @@ product-preview {
   position: relative;
 
   .preview-contents {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     min-height: 150px;
     max-height: 150px;
 
@@ -15,7 +15,7 @@ product-preview {
 
     .prod-img {
       background: $scdclr3;
-      grid-column: 1 / 4;
+      grid-column: 1;
       max-height: 150px;
 
       img {
@@ -28,7 +28,7 @@ product-preview {
     }
 
     .preview-body {
-      grid-column: 4 / -1;
+      grid-column: 2 / -1;
       padding: 0.75em 1em 1em 1em;
       grid-template-columns: 1fr 48px;
       grid-template-rows: 1fr 36px;
