@@ -13,13 +13,14 @@ import { SculptureComponent } from './pages/sculpture/sculpture.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
 import { ArtwareComponent } from './pages/artware/artware.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
+import { AdminGuard } from './guards/admin.guard'
 
 const routes: Routes = [
   {
     path: 'shop', component: ShopComponent, children: [
       { path: '', component: ShopIndexComponent },
-      { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
-      { path: 'edit', component: ProductEditComponent },
+      { path: 'edit/:name', component: ProductEditComponent, canActivate: [AdminGuard],  resolve: { product: ProductResolver } },
+      { path: 'edit', component: ProductEditComponent , canActivate: [AdminGuard]},
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
