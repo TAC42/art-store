@@ -7,7 +7,7 @@ import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
   PRODUCT_BY_NAME_LOADED, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
-  LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED
+  LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED
 } from './shop.actions'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
@@ -84,40 +84,41 @@ export class ShopEffects {
     )
   )
 
+  // handling of product saving
   saveProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SAVE_PRODUCT),
-      tap(({ product }) => {
-        this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))
-        this.shopDbService.save(product).subscribe(
-          () => {
-            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-          },
-          (error) => {
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
+      mergeMap(({ product }) =>
+        this.shopDbService.save(product).pipe(
+          map(() => PRODUCT_SAVED({ product })),
+          catchError(error => {
             console.error('Error saving product:', error)
-            this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
-          }
+            return of(SET_LOADING_STATE({ isLoading: false }))
+          }),
         )
-      })
-    ),
-    { dispatch: false }
+      ),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))),
+    )
   )
 
+  // handling of product deletion
   removeProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(REMOVE_PRODUCT),
-      switchMap(({ productId }) => {
-        return this.shopDbService.remove(productId).pipe(
-          switchMap(() => [
-            SET_LOADING_STATE({ isLoading: false }),
-            PRODUCT_REMOVED_SUCCESSFULLY({ productId })
-          ]),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+      
+      mergeMap(({ productId }) =>
+        this.shopDbService.remove(productId).pipe(
+          map(() => PRODUCT_REMOVED_SUCCESSFULLY({ productId })),
           catchError(error => {
             console.error('Error removing product:', error)
             return of(SET_LOADING_STATE({ isLoading: false }))
-          })
+          }),
         )
-      })
+      ),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
     )
   )
 

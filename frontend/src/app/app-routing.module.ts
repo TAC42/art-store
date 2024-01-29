@@ -19,27 +19,23 @@ const routes: Routes = [
   {
     path: 'shop', component: ShopComponent, children: [
       { path: '', component: ShopIndexComponent },
-      { path: 'edit/:name', component: ProductEditComponent, canActivate: [AdminGuard],  resolve: { product: ProductResolver } },
-      { path: 'edit', component: ProductEditComponent , canActivate: [AdminGuard]},
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
   {
     path: 'sculpture', component: SculptureComponent, children: [
       { path: '', component: SculptureIndexComponent },
-      { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
-      { path: 'edit', component: ProductEditComponent },
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
   {
     path: 'artware', component: ArtwareComponent, children: [
       { path: '', component: ArtwareIndexComponent },
-      { path: 'edit/:name', component: ProductEditComponent, resolve: { product: ProductResolver } },
-      { path: 'edit', component: ProductEditComponent },
       { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
+  { path: 'edit/:name', component: ProductEditComponent, canActivate: [AdminGuard], resolve: { product: ProductResolver } },
+  { path: 'edit', component: ProductEditComponent, canActivate: [AdminGuard] },
   {
     path: 'about', component: AboutComponent, children: [
       { path: '', redirectTo: 'introduction', pathMatch: 'full' },

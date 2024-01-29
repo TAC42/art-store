@@ -4,7 +4,8 @@ import { Product, ShopFilter } from '../models/shop'
 // handling of shop loading
 export const SET_LOADING_STATE = createAction(
   '[Shop] Set Loading State',
-  props<{ isLoading: boolean }>())
+  props<{ isLoading: boolean }>()
+)
 
 // handling of all products in index
 export const LOAD_PRODUCTS = createAction(
@@ -26,6 +27,16 @@ export const PRODUCT_BY_NAME_LOADED = createAction(
   props<{ product: Product | null }>()
 )
 
+// handling of random products in details
+export const LOAD_RANDOM_PRODUCTS = createAction(
+  '[Shop] Load Random Products',
+  props<{ productType: string, excludeProductId: string }>()
+)
+export const RANDOM_PRODUCTS_LOADED = createAction(
+  '[Shop] Random Products Loaded',
+  props<{ randomProducts: Product[] }>()
+)
+
 // handling of product filtering
 export const LOAD_FILTER = createAction(
   '[Shop] Load Filter',
@@ -36,12 +47,17 @@ export const FILTER_UPDATED = createAction(
   props<{ updatedFilter: Partial<ShopFilter> }>()
 )
 
+// handling of product saving
 export const SAVE_PRODUCT = createAction(
   '[Shop] Save Product',
   props<{ product: Product }>()
 )
+export const PRODUCT_SAVED = createAction(
+  '[Shop] Product Saved',
+  props<{ product: Product }>()
+)
 
-// handling of product removal
+// handling of product deletion
 export const REMOVE_PRODUCT = createAction(
   '[Shop] Remove Product',
   props<{ productId: string }>()
@@ -49,14 +65,4 @@ export const REMOVE_PRODUCT = createAction(
 export const PRODUCT_REMOVED_SUCCESSFULLY = createAction(
   '[Shop] Product Removed Successfully',
   props<{ productId: string }>()
-)
-
-// handling of random products in details
-export const LOAD_RANDOM_PRODUCTS = createAction(
-  '[Shop] Load Random Products',
-  props<{ productType: string, excludeProductId: string }>()
-)
-export const RANDOM_PRODUCTS_LOADED = createAction(
-  '[Shop] Random Products Loaded',
-  props<{ randomProducts: Product[] }>()
 )

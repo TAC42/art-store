@@ -36,6 +36,6 @@ export class ProductPreviewComponent {
   onEditProduct(event: MouseEvent) {
     event.preventDefault()
     event.stopPropagation()
-    this.router.navigateByUrl(`/shop/edit/${encodeURIComponent(this.product.name)}`)
+    this.router.navigateByUrl(`/edit/${encodeURIComponent(this.product.name)}`)
   }
 }
