@@ -25,9 +25,7 @@
                 <svg-render
                   (click)="changeAmount(cartItem, '+')"
                   svgName="addIcon"
-                  [attr.disabled]="
-                    cartItem.amount === cartItem.stock ? true : null
-                  "
+                  [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }"
                 ></svg-render>
               </span>
             </div>

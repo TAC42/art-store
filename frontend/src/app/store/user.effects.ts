@@ -121,7 +121,7 @@ export class UserEffects {
                     })
                 )
             ),
-            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true })))
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
         )
     )
 }

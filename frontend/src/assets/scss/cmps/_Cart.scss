@@ -88,15 +88,22 @@
                 fill: $prmclr2;
                 background-color: $mnrclr9;
                 border-radius: 50%;
-                padding: 0 .25em;
+                padding: 0 0.25em;
                 transition: all 0.9s ease-in-out;
-                &:hover{
+                &:hover {
                   fill: $mnrclr9;
                   background-color: $prmclr2;
                 }
+                &.no-more {
+                  background-color: red;
+                  &:hover {
+                    fill: $prmclr2;
+                  }
+                }
               }
-              .amount{
-                color:$mnrclr8;
+
+              .amount {
+                color: $mnrclr8;
                 font-family: "nh-bold";
               }
             }
