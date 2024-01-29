@@ -28,31 +28,5 @@ artware-index {
             z-index: -1;
             filter: brightness(50%);
         }
-
-        .edit-link {
-            margin: 0 auto;
-            align-items: center;
-            gap: 0.5em;
-            color: $scdclr3;
-            font-family: 'nh-bold';
-            transition: all 0.3s ease-in-out;
-            font-size: 1.25em;
-
-            svg-render {
-                width: 1.5em;
-                height: 1.5em;
-                fill: $scdclr3;
-                transition: all 0.3s ease-in-out;
-            }
-
-            &:hover {
-                text-decoration: none;
-                color: $prmclr3;
-
-                svg-render {
-                    fill: $prmclr3;
-                }
-            }
-        }
     }
 }

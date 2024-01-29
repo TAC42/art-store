@@ -2,10 +2,6 @@
   <img src="{{ backgroundImage }}" alt="Background">
   <h4>Shop</h4>
   <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
-  <a *ngIf="(loggedinUser$ | async)?.isAdmin" class="edit-link flex row" routerLink="/shop/edit">
-    <svg-render svgName="addIcon" />
-    <span>Add product</span>
-  </a>
 </section>
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
   [products]="products$ | async" />

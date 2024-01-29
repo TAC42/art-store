@@ -29,9 +29,14 @@
             <a (click)="closeMenu()" routerLink="/shop" routerLinkActive="active">Shop</a>
         </div>
 
+        <div class="link-area" *ngIf="(loggedinUser$ | async)?.isAdmin">
+            <a (click)="closeMenu()" routerLink="/edit" routerLinkActive="active">Add Product</a>
+        </div>
+
         <div class="link-area" *ngIf="loggedinUser$ | async as loggedinUser">
-            <span *ngIf="!loggedinUser?._id" (click)="openLogin($event)">Login</span>
-            <span *ngIf="loggedinUser?._id" (click)="exitAccount($event)">Logout</span>
+            <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
+                {{ loggedinUser._id ? 'Logout' : 'Login' }}
+            </span>
         </div>
     </section>
 </main>

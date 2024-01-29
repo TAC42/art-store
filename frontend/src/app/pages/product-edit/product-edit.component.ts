@@ -15,6 +15,7 @@ import { AppState } from '../../store/app.state'
 
 export class ProductEditComponent implements OnInit, OnDestroy {
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
+  @HostBinding('class.full') fullClass = true
 
   private route = inject(ActivatedRoute)
   private router = inject(Router)
