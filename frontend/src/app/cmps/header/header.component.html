@@ -1,7 +1,7 @@
-<header class="header-contents w-h-100 layout-row" [ngClass]="{ 'z-50': searchState }" (clickOutside)="closeMenu()">
-  <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex row">
+<header class="header-contents w-h-100 layout-row" [ngClass]="{ 'z-50': searchState }" (clickOutside)="onCloseSearch()">
+  <section *ngIf="deviceType !== 'desktop'" class="mobile-view flex row">
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
-      <ng-container *ngIf="!searchState; else elseTemplate">
+      <ng-container *ngIf="!searchState; else searchOff">
         <span class="flex" (click)="openAsideMenu($event)">
           <svg-render svgName="burgerMenuIcon" />
         </span>
@@ -13,40 +13,55 @@
         </div>
       </ng-container>
 
-      <ng-template #elseTemplate>
+      <span class="search flex" (click)="onOpenSearch()">
+        <svg-render svgName="searchIcon" />
+      </span>
+
+      <ng-template #searchOff>
         <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
         <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
       </ng-template>
+    </section>
+  </section>
+
+  <section *ngIf="deviceType === 'desktop'" class="desktop-view flex row">
+    <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
+      <ng-container *ngIf="!searchState; else searchOff">
+        <ng-container *ngIf="loggedinUser$ | async as loggedinUser">
+          <img *ngIf="loggedinUser.imgUrl" [src]="loggedinUser.imgUrl" alt="User Image">
+        </ng-container>
+
+        <div>
+          <a routerLink="/about" routerLinkActive="active">About</a>
+        </div>
+
+        <div>
+          <a routerLink="/sculpture" routerLinkActive="active">Sculptures</a>
+        </div>
+
+        <div>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <h1>oricarlin</h1>
+          </a>
+        </div>
+
+        <div>
+          <a routerLink="/artware" routerLinkActive="active">Artware</a>
+        </div>
+
+        <div>
+          <a routerLink="/shop" routerLinkActive="active">Shop</a>
+        </div>
+      </ng-container>
 
       <span class="search flex" (click)="onOpenSearch()">
         <svg-render svgName="searchIcon" />
       </span>
-    </section>
-  </section>
 
-  <section *ngIf="deviceType === 'tablet' || deviceType === 'desktop'" class="desktop-view flex row">
-    <section class="links flex row">
-      <div>
-        <a routerLink="/about" routerLinkActive="active">About</a>
-      </div>
-
-      <div>
-        <a routerLink="/sculpture" routerLinkActive="active">Sculptures</a>
-      </div>
-
-      <div>
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <h1>oricarlin</h1>
-        </a>
-      </div>
-
-      <div>
-        <a routerLink="/artware" routerLinkActive="active">Artware</a>
-      </div>
-
-      <div>
-        <a routerLink="/shop" routerLinkActive="active">Shop</a>
-      </div>
+      <ng-template #searchOff>
+        <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
+        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
+      </ng-template>
     </section>
   </section>
 </header>

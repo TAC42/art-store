@@ -1,9 +1,13 @@
 import { Component, inject, HostBinding, OnInit } from '@angular/core'
-import { Subscription } from 'rxjs'
+import { EMPTY, Observable, Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
 import { DimmerService } from '../../services/dimmer.service'
 import { ModalService } from '../../services/modal.service'
+import { User } from '../../models/user'
+import { Store, select } from '@ngrx/store'
+import { AppState } from '../../store/app.state'
+import { selectLoggedinUser } from '../../store/user.selectors'
 
 @Component({
   selector: 'app-header',
@@ -11,14 +15,13 @@ import { ModalService } from '../../services/modal.service'
 })
 
 export class HeaderComponent implements OnInit {
-  @HostBinding('class.z-50') get zIndex() {
-    return this.searchState
-  }
+  @HostBinding('class.z-50') get zIndex() { return this.searchState }
 
   private router = inject(Router)
   private dimService = inject(DimmerService)
   private dTypeService = inject(DeviceTypeService)
-  public mService = inject(ModalService)
+  private store = inject(Store<AppState>)
+  public modService = inject(ModalService)
 
   searchState: boolean = false
   searchValue: string = ''
@@ -26,8 +29,11 @@ export class HeaderComponent implements OnInit {
 
   dimSubscription: Subscription | undefined
   dTypesubscription: Subscription | undefined
+  loggedinUser$: Observable<User> = EMPTY
 
   ngOnInit(): void {
+    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
+
     this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
       (type) => this.deviceType = type)
     this.dimSubscription = this.dimService.dimmerSubject.subscribe((active: boolean) => {
@@ -37,7 +43,7 @@ export class HeaderComponent implements OnInit {
 
   openAsideMenu(event: MouseEvent) {
     event.stopPropagation()
-    this.mService.openModal('aside-menu')
+    this.modService.openModal('aside-menu')
   }
 
   onOpenSearch() {
@@ -52,6 +58,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  onCloseSearch() {
+    this.searchState = false
+  }
+
   onSearchInput(event: Event) {
     const target = event.target as HTMLInputElement
     this.searchValue = target.value
@@ -60,9 +70,5 @@ export class HeaderComponent implements OnInit {
   onClearFilter(event: Event) {
     event.stopPropagation()
     this.searchValue = ''
-  }
-
-  closeMenu() {
-    this.searchState = false
   }
 }

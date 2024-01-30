@@ -100,7 +100,7 @@ export class UserService {
       username: '',
       fullName: '',
       email: '',
-      imgUrl: '',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704381304/PlaceholderImages/evddzhxtr6kropnslvdb.png',
       password: '',
       cart: [],
       createdAt: 0,
