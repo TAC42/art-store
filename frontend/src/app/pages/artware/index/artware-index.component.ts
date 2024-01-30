@@ -25,7 +25,7 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'artware' }
-  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
+  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1706644779/ibir2pid5kftim9u7fvu.png'
 
   ngOnInit(): void {
     this.comService.removeProduct$.subscribe((productId: string) => {

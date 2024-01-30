@@ -3,4 +3,9 @@
     <h4>Sculptures</h4>
     <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
 </section>
+<p class="page-info-text">
+    Our Sculptures Page is a dedicated space for those who appreciate pottery as an art form that reaches into three
+    dimensions. Here, form, function, and fantasy converge to create sculptural pieces that are both mesmerizing and
+    thought-provoking. Each sculpture is a unique exploration of shape, texture, and the endless possibilities of clay.
+</p>
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />

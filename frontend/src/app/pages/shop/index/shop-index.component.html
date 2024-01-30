@@ -3,5 +3,11 @@
   <h4>Shop</h4>
   <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
 </section>
+<p class="page-info-text">
+  Dive into the world of exquisite pottery where every piece tells a story. Our collection ranges from functional
+  kitchenware to decorative pieces, all designed to add a touch of elegance to your home. Crafted with care by skilled
+  artisans, our pottery is not just items but heirlooms in the making. Explore our diverse range, find your favorites,
+  and bring a piece of art into your everyday life.
+</p>
 <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
   [products]="products$ | async" />
