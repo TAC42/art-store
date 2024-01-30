@@ -1,1 +1,13 @@
-<p>user-dropdown works!</p>
+<main class="dropdown-wrapper flex" *ngIf="modService.isModalOpen('user-dropdown')">
+    <section class="dropdown-contents flex column" (clickOutside)="closeDropdown()">
+        <div class="action-area" *ngIf="(loggedinUser$ | async)?.isAdmin">
+            <span (click)="navigateTo('/edit')">Add Product</span>
+        </div>
+
+        <div class="action-area" *ngIf="loggedinUser$ | async as loggedinUser">
+            <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
+                {{ loggedinUser._id ? 'Logout' : 'Login' }}
+            </span>
+        </div>
+    </section>
+</main>

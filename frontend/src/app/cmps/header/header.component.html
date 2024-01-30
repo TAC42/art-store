@@ -28,7 +28,7 @@
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else searchOff">
         <ng-container *ngIf="loggedinUser$ | async as loggedinUser">
-          <img *ngIf="loggedinUser.imgUrl" [src]="loggedinUser.imgUrl" alt="User Image">
+          <img *ngIf="loggedinUser.imgUrl" [src]="loggedinUser.imgUrl" alt="User Image" (click)="openDropdown($event)">
         </ng-container>
 
         <div>

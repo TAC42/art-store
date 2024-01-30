@@ -46,6 +46,11 @@ export class HeaderComponent implements OnInit {
     this.modService.openModal('aside-menu')
   }
 
+  openDropdown(event: MouseEvent) {
+    event.stopPropagation()
+    this.modService.openModal('user-dropdown')
+  }
+
   onOpenSearch() {
     const currentUrl = this.router.url
     if (currentUrl.startsWith('/shop')) return
