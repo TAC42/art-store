@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Product, ShopFilter } from '../models/shop'
+import { Product, ShopFilter, Cart } from '../models/shop'
 
 // handling of shop loading
 export const SET_LOADING_STATE = createAction(
@@ -27,6 +27,15 @@ export const PRODUCT_BY_NAME_LOADED = createAction(
   props<{ product: Product | null }>()
 )
 
+// handling of product in details
+export const LOAD_CART = createAction(
+  '[Shop] Load Product By Name',
+  props<{ userCart: Product[] }>()
+)
+export const CART_LOADED = createAction(
+  '[Shop] Product By Name Loaded',
+  props<{ cart: Product[]}>()
+)
 // handling of random products in details
 export const LOAD_RANDOM_PRODUCTS = createAction(
   '[Shop] Load Random Products',

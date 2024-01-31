@@ -1,7 +1,7 @@
 <section class="filter-area flex column">
   <img src="{{ backgroundImage }}" alt="Background">
   <h4>Shop</h4>
-  <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
+  <shop-filter [filterBy]="filterBy"  [loggedinUser]="loggedinUser$ | async" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
 </section>
 <p class="page-info-text">
   Dive into the world of exquisite pottery where every piece tells a story. Our collection ranges from functional

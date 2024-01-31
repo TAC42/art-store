@@ -8,7 +8,7 @@
       <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
     </div>
-    <ng-container *ngIf="cart.length > 0; else sorry">
+    <ng-container *ngIf="cart$ | async as cart; else sorry">
       <main class="cart-main grid">
         <section class="cart-list grid">
           <article class="cart-item grid" *ngFor="let cartItem of cart">
@@ -33,7 +33,7 @@
         </section>
 
         <section class="check-out" *ngIf="cart.length > 0">
-          <ng-container *ngIf="orderSummary as orderSummary">
+          <ng-container *ngIf="orderSummary$ | async as orderSummary">
             <div class="subtotal flex">
               <span>Subtotal</span>
               <span>

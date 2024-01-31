@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
+import { User } from '../../models/user'
 
 @Component({
   selector: 'shop-filter',
@@ -11,6 +12,7 @@ export class ShopFilterComponent implements OnInit {
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }
+  @Input() loggedinUser!: User | null; 
   @Output() onSetFilter = new EventEmitter<string>()
   @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false
@@ -54,6 +56,8 @@ private _filterBy!: ShopFilter
 
   onCartOpen(event: Event) {
     event.stopPropagation()
-    this.onOpenCart.emit()
+    if(this.loggedinUser) this.onOpenCart.emit()
+    else console.log('NO USER LOGGED IN!');
+    
   }
 }

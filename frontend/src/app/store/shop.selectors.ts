@@ -21,6 +21,12 @@ export const selectProductByName = createSelector(
   (state: ShopState) => state.selectedProduct
 )
 
+// handling of product in details
+export const selectCart = createSelector(
+  selectShopState,
+  (state: ShopState) => state.cart
+)
+
 // handling of product filtering
 export const selectFilterBy = createSelector(
   selectShopState,

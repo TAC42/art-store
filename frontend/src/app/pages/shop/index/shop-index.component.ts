@@ -56,16 +56,18 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   onAddToCart(product: Product) {
     this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-      const newProduct: Product = { ...product, amount: 1 }
+      if (updatedUser) {
+        const newProduct: Product = { ...product, amount: 1 }
 
-      const isProductAlreadyInCart = updatedUser.cart.some(cartProduct => cartProduct.name === newProduct.name)
+        const isProductAlreadyInCart = updatedUser.cart.some(cartProduct => cartProduct.name === newProduct.name)
 
-      if (!isProductAlreadyInCart) {
-        const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
-        console.log('This is the product to add:', newProduct)
-        this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
-      } else {
-        console.log(`Product ${newProduct.name} is already in the cart.`)
+        if (!isProductAlreadyInCart) {
+          const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
+          console.log('This is the product to add:', newProduct)
+          this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+        } else {
+          console.log(`Product ${newProduct.name} is already in the cart.`)
+        }
       }
     })
   }

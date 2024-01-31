@@ -1,19 +1,19 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { map, mergeMap, tap, withLatestFrom, catchError, switchMap } from 'rxjs/operators'
-import { of } from 'rxjs'
+import { map, mergeMap, tap, withLatestFrom, catchError, switchMap, toArray, filter } from 'rxjs/operators'
+import { forkJoin, from, of } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
   PRODUCT_BY_NAME_LOADED, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
-  LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED
+  LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, LOAD_CART, CART_LOADED
 } from './shop.actions'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
 import { selectFilterBy } from './shop.selectors'
 import { ActivatedRoute } from '@angular/router'
-import { ShopFilter } from '../models/shop'
+import { Cart, Product, ShopFilter } from '../models/shop'
 
 @Injectable()
 export class ShopEffects {
@@ -108,7 +108,7 @@ export class ShopEffects {
     this.actions$.pipe(
       ofType(REMOVE_PRODUCT),
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
-      
+
       mergeMap(({ productId }) =>
         this.shopDbService.remove(productId).pipe(
           map(() => PRODUCT_REMOVED_SUCCESSFULLY({ productId })),
@@ -139,4 +139,40 @@ export class ShopEffects {
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
     )
   )
+
+
+
+  loadCart$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LOAD_CART),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
+      mergeMap(({ userCart }) => {
+        const requests = userCart.map(cartItem => {
+          console.log('in LOAD_CART_EFFECT: ', cartItem)
+          return this.shopDbService.getByName(cartItem.name).pipe(
+            map((product) => ({ ...product, amount: cartItem.amount })),
+            catchError(() => of({ error: true } as const))
+          )
+        }
+        )
+
+        return forkJoin(requests).pipe(
+          mergeMap((results) => {
+            const validProducts: Product[] = results
+              .map(result => result as Product)
+
+            return of(CART_LOADED({ cart: validProducts }))
+          }),
+          catchError((error) => {
+            console.error('Error loading cart: ', error)
+            return of(SET_LOADING_STATE({ isLoading: false }))
+          })
+        )
+      }),
+      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+    )
+  )
+
 }
+

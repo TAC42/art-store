@@ -21,7 +21,7 @@ export interface MiniProduct {
   url: string
 }
 
-export interface cart {
+export interface Cart {
   amount: number
   name: string
 }

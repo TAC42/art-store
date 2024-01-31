@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store'
 import {
   PRODUCTS_LOADED, PRODUCT_BY_NAME_LOADED, FILTER_UPDATED,
   LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT,
-  PRODUCT_REMOVED_SUCCESSFULLY, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED
+  PRODUCT_REMOVED_SUCCESSFULLY, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, CART_LOADED
 } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'
 
@@ -10,6 +10,7 @@ export interface ShopState {
   products: Product[]
   selectedProduct: Product | null
   randomProducts: Product[]
+  cart: Product[]
   filterBy: ShopFilter
   isLoading: boolean
 }
@@ -19,6 +20,7 @@ export const initialState: ShopState = {
   selectedProduct: null,
   randomProducts: [],
   filterBy: { search: '' },
+  cart: [],
   isLoading: false,
 }
 
@@ -31,6 +33,10 @@ export const shopReducer = createReducer(
   // handling of products in index
   on(PRODUCTS_LOADED, (state, { products }) => ({
     ...state, products: products,
+  })),
+  // handling of products in index
+  on(CART_LOADED, (state, { cart }) => ({
+    ...state, cart,
   })),
   // handling of random products in details
   on(RANDOM_PRODUCTS_LOADED, (state, { randomProducts }) => ({
