@@ -1,4 +1,4 @@
-<a class="preview-contents grid" [routerLink]="['/shop/details',product.name]">
+<!-- <a class="preview-contents grid" [routerLink]="['/', product.type, 'details',product.name]">
   <article class="prod-img">
     <img [src]="product.imgUrls[0]" [alt]="product.name" />
   </article>
@@ -10,7 +10,7 @@
       <button (click)="onRemoveProduct($event)" class="remove-btn">
         <svg-render svgName="trashIcon" />
       </button>
-      
+
       <button (click)="onEditProduct($event)" class="edit-btn">
         <svg-render svgName="edit" />
       </button>
@@ -29,4 +29,32 @@
 
     <div *ngIf="product.type === 'shop'" class="price">${{ product.price }}</div>
   </article>
+</a> -->
+
+<a class="preview-contents flex column" [routerLink]="['/', product.type, 'details',product.name]">
+  <article class="product-body grid w-h-100">
+    <img [src]="product.imgUrls[0]" [alt]="product.name" />
+
+    <div *ngIf="(loggedinUser$ | async)?.isAdmin" class="admin-options flex row">
+      <button (click)="onRemoveProduct($event)" class="remove-btn">
+        <svg-render svgName="trashIcon" />
+      </button>
+
+      <button (click)="onEditProduct($event)" class="edit-btn">
+        <svg-render svgName="edit" />
+      </button>
+    </div>
+
+    <button *ngIf="product.type === 'shop' && product.stock > 0" (click)="onAddCart($event)"
+      class="add-to-cart flex row">
+      <span>Add</span>
+      <svg-render svgName="shoppingCart" />
+    </button>
+
+    <div *ngIf="product.type === 'shop'" class="price">${{ product.price }}</div>
+  </article>
+
+  <div class="name">{{ product.name }}</div>
+
+  <div *ngIf="product.stock <= 0" class="out-of-stock">out of stock</div>
 </a>

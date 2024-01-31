@@ -16,6 +16,7 @@ export class ProductPreviewComponent {
   @Input() product!: Product
   @Output() remove = new EventEmitter()
   @Output() add = new EventEmitter()
+  
   private router = inject(Router)
   private store = inject(Store<AppState>)
 

@@ -51,7 +51,8 @@ export class HeaderComponent implements OnInit {
     this.modService.openModal('user-dropdown')
   }
 
-  onOpenSearch() {
+  onOpenSearch(event: MouseEvent) {
+    event.stopPropagation()
     const currentUrl = this.router.url
     if (currentUrl.startsWith('/shop')) return
 

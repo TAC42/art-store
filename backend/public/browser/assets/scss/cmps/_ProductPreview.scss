@@ -1,58 +1,144 @@
 product-preview {
-  border-radius: 0.5em;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), -2px 2px 5px rgba(0, 0, 0, 0.15),
     0 2px 5px rgba(0, 0, 0, 0.15), 0 -2px 5px rgba(0, 0, 0, 0.15);
-  position: relative;
 
+  // .preview-contents {
+  //   grid-template-columns: repeat(2, 1fr);
+
+  //   .prod-img {
+  //     background: $scdclr3;
+  //     grid-column: 1;
+  //     height: 250px;
+
+  //     img {
+  //       border-radius: 0.5em 0 0 0.5em;
+  //       height: 100%;
+  //       width: 100%;
+  //       aspect-ratio: 16 / 9;
+  //       object-fit: cover;
+  //     }
+  //   }
+
+  //   .preview-body {
+  //     grid-column: 2 / -1;
+  //     padding: 0.75em 1em 1em 1em;
+  //     grid-template-columns: 1fr 48px;
+  //     grid-template-rows: 1fr 36px;
+
+  //     .name {
+  //       display: block;
+  //       overflow: hidden;
+  //       text-overflow: ellipsis;
+  //       line-height: 1.2;
+  //       text-transform: capitalize;
+  //     }
+
+  //     .add-to-cart {
+  //       border-radius: 0.5em;
+  //       gap: 0.25em;
+  //       border: 1px solid $prmclr1;
+  //       padding: 0.5em 0.75em;
+  //       font-size: 0.9em;
+  //       transition: all 0.3s ease-in-out;
+  //       grid-row: 2;
+  //       justify-self: start;
+
+  //       svg-render {
+  //         width: 1em;
+  //         transition: all 0.3s ease-in-out;
+  //       }
+
+  //       &:hover {
+  //         background: $prmclr1;
+  //         color: $prmclr3;
+
+  //         svg-render {
+  //           fill: $prmclr3;
+  //           transform: translateX(5px);
+  //         }
+  //       }
+  //     }
+
+  //     .out-of-stock {
+  //       align-self: end;
+  //       text-transform: capitalize;
+  //       color: $mnrclr5;
+  //     }
+
+  //     .price {
+  //       align-self: end;
+  //       text-align: right;
+  //       grid-column: 2;
+  //       grid-row: 2;
+  //       margin-inline-end: 0.25em;
+  //     }
+
+  //     .admin-btns {
+  //       gap: 0.5em;
+  //       grid-column: 2;
+  //       justify-self: end;
+
+  //       button {
+  //         height: 32px;
+  //         width: 32px;
+  //       }
+  //     }
+  //   }
+
+  //   &:hover {
+  //     text-decoration: none;
+  //   }
+  // }
   .preview-contents {
-    grid-template-columns: repeat(2, 1fr);
-    min-height: 150px;
-    max-height: 150px;
+    padding-bottom: 0.5em;
+    height: 250px;
+    gap: 0.5em;
 
-    &:hover {
-      text-decoration: none;
-    }
-
-    .prod-img {
-      background: $scdclr3;
-      grid-column: 1;
-      max-height: 150px;
+    .product-body {
+      position: relative;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr 48px;
+      padding: 0.5em;
 
       img {
-        border-radius: 0.5em 0 0 0.5em;
-        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        aspect-ratio: 16 / 9;
+        height: 100%;
         object-fit: cover;
+        z-index: -1;
       }
-    }
 
-    .preview-body {
-      grid-column: 2 / -1;
-      padding: 0.75em 1em 1em 1em;
-      grid-template-columns: 1fr 48px;
-      grid-template-rows: 1fr 36px;
+      .admin-options {
+        gap: 1em;
+        grid-column: 1 / -1;
+        grid-row: 1;
+        justify-self: end;
 
-      .name {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.2;
-        text-transform: capitalize;
+        button {
+          height: 32px;
+          width: 32px;
+        }
       }
 
       .add-to-cart {
         border-radius: 0.5em;
         gap: 0.25em;
+        background: $prmclr3;
         border: 1px solid $prmclr1;
         padding: 0.5em 0.75em;
-        font-size: 0.9em;
+        font-size: 1em;
         transition: all 0.3s ease-in-out;
+        grid-column: 1 / 2;
         grid-row: 2;
-        justify-self: start;
+        height: 38px;
+        align-self: end;
+        width: fit-content;
 
         svg-render {
-          width: 1em;
+          width: 16px;
+          height: 18px;
           transition: all 0.3s ease-in-out;
         }
 
@@ -67,30 +153,29 @@ product-preview {
         }
       }
 
-      .out-of-stock {
-        align-self: end;
-        text-transform: capitalize;
-        color: $mnrclr5;
-      }
-
       .price {
-        align-self: end;
-        text-align: right;
-        grid-column: 2;
+        grid-column: 4 / -1;
         grid-row: 2;
-        margin-inline-end: 0.25em;
-      }
-
-      .admin-btns {
-        gap: 0.5em;
-        grid-column: 2;
+        align-self: end;
         justify-self: end;
-
-        button {
-          height: 32px;
-          width: 32px;
-        }
+        padding: 0.25em 0.5em;
+        background: rgba(0, 0, 0, 0.5);
+        color: $prmclr3;
+        border-radius: 0.5em;
       }
+    }
+
+    .name {
+      padding: 0 0.5em 0 0.5em;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.6;
+      text-transform: capitalize;
+    }
+
+    &:hover {
+      text-decoration: none;
     }
   }
 }

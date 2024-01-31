@@ -1,13 +1,36 @@
 shop-list {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
   width: 100%;
   // opacity: 0;
-  transition: all 0.7s ease-in-out;
+  transition: all 0.5s ease-in-out;
 
   &.show {
     opacity: 1;
     transform: translateY(0%);
+  }
+
+  @media(min-width: 200px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media(min-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media(min-width: 700px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media(min-width: 950px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media(min-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media(min-width: 1550px) {
+    grid-template-columns: repeat(6, 1fr);
   }
 
   .sorry {

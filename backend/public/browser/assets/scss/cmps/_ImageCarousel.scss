@@ -30,13 +30,12 @@ product-carousel {
 
             .product-name {
                 position: absolute;
-                bottom: 0;
+                top: 0;
                 left: 0;
                 right: 0;
                 height: 50px;
                 font-size: 1.5em;
                 color: $prmclr3;
-                text-align: left;
                 padding: 0.2em 1em;
                 line-height: 1.6;
                 opacity: 0;
