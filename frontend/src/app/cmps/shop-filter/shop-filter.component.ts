@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { User } from '../../models/user'
+import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'shop-filter',
@@ -12,19 +13,20 @@ export class ShopFilterComponent implements OnInit {
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }
-  @Input() loggedinUser!: User | null; 
+  @Input() loggedinUser!: User | null;
   @Output() onSetFilter = new EventEmitter<string>()
   @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false
 
-get filterBy(): ShopFilter {
-  return this._filterBy
-}
+  get filterBy(): ShopFilter {
+    return this._filterBy
+  }
 
-private _filterBy!: ShopFilter
+  private _filterBy!: ShopFilter
 
 
   private filterSubject: Subject<string> = new Subject<string>()
+  private modService = inject(ModalService)
 
   constructor() {
     this.filterSubject
@@ -56,8 +58,8 @@ private _filterBy!: ShopFilter
 
   onCartOpen(event: Event) {
     event.stopPropagation()
-    if(this.loggedinUser) this.onOpenCart.emit()
-    else console.log('NO USER LOGGED IN!');
-    
+    if (this.loggedinUser?._id) this.onOpenCart.emit()
+    else this.modService.openModal('login')
+
   }
 }

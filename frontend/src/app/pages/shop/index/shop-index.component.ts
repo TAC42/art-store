@@ -47,10 +47,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   onOpenCart(): void {
-    this.loggedinUser$.subscribe((user) => {
-      if (user._id) this.modService.openModal('cart')
-      else this.modService.openModal('login')
-    })
+    this.modService.openModal('cart')
   }
 
   onRemoveProduct(productId: string) {

@@ -39,7 +39,6 @@ export class CartComponent implements OnInit, OnDestroy {
   private modalSubscription: Subscription | undefined
   cartState: string = 'hidden'
   loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
-  private cartRefresh$ = new Subject<void>()
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
     filter(cart => !!cart) // Ensure cart is not null or undefined
   )
@@ -66,25 +65,14 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loggedinUser$.subscribe((user) => {
-      // const userCart = user.cart.map((cartItem) => ({
-      //   name: cartItem.name,
-      //   amount: cartItem.amount
-      // } as Cart));
-      
-      console.log('User in NGONINIT: ',user);
-      
-      // Load and update the product details in the cart asynchronously
       if(user.cart.length){
         this.store.dispatch(LOAD_CART({ userCart: user.cart }))
-        this.cartRefresh$.next()
       }
       else{
         this.store.dispatch(CART_LOADED({ cart: [] }))
       }
     })
     
-
-
     this.modalSubscription = this.modService.onModalStateChange('cart').subscribe(isOpen => {
       console.log('Modal State Change:', isOpen)
       if (isOpen) {
@@ -113,6 +101,8 @@ export class CartComponent implements OnInit, OnDestroy {
         updatedCartItem.amount--
       } else if (action === '-' && updatedCartItem.amount === 1) {
         // Remove the cartItem when amount becomes zero
+        console.log('I AM HERE IN REMOVE CARTITEM: ',cartItem);
+        
         const newCart: Product[] = cart.filter(product => product.name !== updatedCartItem.name)
         this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
           const newUser: User = { ...updatedUser, cart: newCart }
