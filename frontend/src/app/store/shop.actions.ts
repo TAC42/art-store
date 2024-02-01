@@ -29,11 +29,11 @@ export const PRODUCT_BY_NAME_LOADED = createAction(
 
 // handling of product in details
 export const LOAD_CART = createAction(
-  '[Shop] Load Product By Name',
+  '[Shop] Load Cart',
   props<{ userCart: Product[] }>()
 )
 export const CART_LOADED = createAction(
-  '[Shop] Product By Name Loaded',
+  '[Shop] Cart Loaded',
   props<{ cart: Product[]}>()
 )
 // handling of random products in details
