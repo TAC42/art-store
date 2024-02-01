@@ -1,36 +1,3 @@
-<!-- <a class="preview-contents grid" [routerLink]="['/', product.type, 'details',product.name]">
-  <article class="prod-img">
-    <img [src]="product.imgUrls[0]" [alt]="product.name" />
-  </article>
-
-  <article class="preview-body grid">
-    <div class="name">{{ product.name }}</div>
-
-    <div *ngIf="(loggedinUser$ | async)?.isAdmin" class="admin-btns flex column">
-      <button (click)="onRemoveProduct($event)" class="remove-btn">
-        <svg-render svgName="trashIcon" />
-      </button>
-
-      <button (click)="onEditProduct($event)" class="edit-btn">
-        <svg-render svgName="edit" />
-      </button>
-    </div>
-
-    <ng-container *ngIf="product.stock > 0; else outOfStock">
-      <button *ngIf="product.type === 'shop'" (click)="onAddCart($event)" class="add-to-cart flex row">
-        <span>Add</span>
-        <svg-render svgName="shoppingCart" />
-      </button>
-    </ng-container>
-
-    <ng-template #outOfStock>
-      <div class="out-of-stock">out of stock</div>
-    </ng-template>
-
-    <div *ngIf="product.type === 'shop'" class="price">${{ product.price }}</div>
-  </article>
-</a> -->
-
 <a class="preview-contents flex column" [routerLink]="['/', product.type, 'details',product.name]">
   <article class="product-body grid w-h-100">
     <img [src]="product.imgUrls[0]" [alt]="product.name" />
@@ -56,5 +23,14 @@
 
   <div class="name">{{ product.name }}</div>
 
-  <div *ngIf="product.stock <= 0" class="out-of-stock">out of stock</div>
+  <div *ngIf="product.type === 'shop'" class="stock-status">
+    <ng-container [ngSwitch]="true">
+      <span *ngSwitchCase="product.stock > 0 && product.stock <= 5">
+        only {{product.stock}} left
+      </span>
+      <span *ngSwitchCase="product.stock <= 0">
+        out of stock
+      </span>
+    </ng-container>
+  </div>
 </a>

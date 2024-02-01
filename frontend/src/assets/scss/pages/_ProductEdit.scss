@@ -23,7 +23,8 @@ product-edit {
   .product-edit-contents {
     text-align: center;
     margin-block-end: 1em;
-    width: fit-content;
+    width: 100%;
+    max-width: 600px;
 
     form {
       gap: 1em;

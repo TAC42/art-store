@@ -1,98 +1,12 @@
 product-preview {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), -2px 2px 5px rgba(0, 0, 0, 0.15),
     0 2px 5px rgba(0, 0, 0, 0.15), 0 -2px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5em;
 
-  // .preview-contents {
-  //   grid-template-columns: repeat(2, 1fr);
-
-  //   .prod-img {
-  //     background: $scdclr3;
-  //     grid-column: 1;
-  //     height: 250px;
-
-  //     img {
-  //       border-radius: 0.5em 0 0 0.5em;
-  //       height: 100%;
-  //       width: 100%;
-  //       aspect-ratio: 16 / 9;
-  //       object-fit: cover;
-  //     }
-  //   }
-
-  //   .preview-body {
-  //     grid-column: 2 / -1;
-  //     padding: 0.75em 1em 1em 1em;
-  //     grid-template-columns: 1fr 48px;
-  //     grid-template-rows: 1fr 36px;
-
-  //     .name {
-  //       display: block;
-  //       overflow: hidden;
-  //       text-overflow: ellipsis;
-  //       line-height: 1.2;
-  //       text-transform: capitalize;
-  //     }
-
-  //     .add-to-cart {
-  //       border-radius: 0.5em;
-  //       gap: 0.25em;
-  //       border: 1px solid $prmclr1;
-  //       padding: 0.5em 0.75em;
-  //       font-size: 0.9em;
-  //       transition: all 0.3s ease-in-out;
-  //       grid-row: 2;
-  //       justify-self: start;
-
-  //       svg-render {
-  //         width: 1em;
-  //         transition: all 0.3s ease-in-out;
-  //       }
-
-  //       &:hover {
-  //         background: $prmclr1;
-  //         color: $prmclr3;
-
-  //         svg-render {
-  //           fill: $prmclr3;
-  //           transform: translateX(5px);
-  //         }
-  //       }
-  //     }
-
-  //     .out-of-stock {
-  //       align-self: end;
-  //       text-transform: capitalize;
-  //       color: $mnrclr5;
-  //     }
-
-  //     .price {
-  //       align-self: end;
-  //       text-align: right;
-  //       grid-column: 2;
-  //       grid-row: 2;
-  //       margin-inline-end: 0.25em;
-  //     }
-
-  //     .admin-btns {
-  //       gap: 0.5em;
-  //       grid-column: 2;
-  //       justify-self: end;
-
-  //       button {
-  //         height: 32px;
-  //         width: 32px;
-  //       }
-  //     }
-  //   }
-
-  //   &:hover {
-  //     text-decoration: none;
-  //   }
-  // }
   .preview-contents {
     padding-bottom: 0.5em;
     height: 250px;
-    gap: 0.5em;
+    gap: 0.25em;
 
     .product-body {
       position: relative;
@@ -108,17 +22,44 @@ product-preview {
         height: 100%;
         object-fit: cover;
         z-index: -1;
+        border-radius: 0.5em 0.5em 0 0;
       }
 
       .admin-options {
-        gap: 1em;
         grid-column: 1 / -1;
         grid-row: 1;
         justify-self: end;
+        background: $prmclr3;
+        opacity: 0.5;
+        border-radius: 0.5em;
+        height: fit-content;
+        transition: all 0.3s ease-in-out;
 
         button {
-          height: 32px;
-          width: 32px;
+          height: 36px;
+          width: 36px;
+          transition: all 0.3s ease-in-out;
+
+          &:first-child {
+            border-right: 1px solid $prmclr1;
+            border-radius: 0.5em 0 0 0.5em;
+          }
+
+          &:last-child {
+            border-radius: 0 0.5em 0.5em 0;
+          }
+
+          svg-render {
+            transition: all 0.3s ease-in-out;
+          }
+
+          &:hover {
+            background: $prmclr1;
+
+            svg-render {
+              fill: $prmclr3;
+            }
+          }
         }
       }
 
@@ -129,6 +70,7 @@ product-preview {
         border: 1px solid $prmclr1;
         padding: 0.5em 0.75em;
         font-size: 1em;
+        opacity: 0.5;
         transition: all 0.3s ease-in-out;
         grid-column: 1 / 2;
         grid-row: 2;
@@ -162,20 +104,44 @@ product-preview {
         background: rgba(0, 0, 0, 0.5);
         color: $prmclr3;
         border-radius: 0.5em;
+        opacity: 0.5;
+        transition: all 0.3s ease-in-out;
       }
     }
 
     .name {
-      padding: 0 0.5em 0 0.5em;
+      padding: 0 0.5em;
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       line-height: 1.6;
       text-transform: capitalize;
+      min-height: 24px;
+    }
+
+    .stock-status {
+      padding: 0 0.5em;
+      text-transform: capitalize;
+      line-height: 1.6;
+
+      span {
+        color: $scdclr1;
+        letter-spacing: 0.05em;
+        font-size: 15px;
+      }
     }
 
     &:hover {
       text-decoration: none;
+
+      .product-body {
+
+        .add-to-cart,
+        .price,
+        .admin-options {
+          opacity: 1;
+        }
+      }
     }
   }
 }
