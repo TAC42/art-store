@@ -32,6 +32,8 @@ export class ShopDbService {
   }
   
   getByName(productName: string): Observable<Product | null> {
+    console.log('productName: ',productName);
+    
     return this.httpService.get<Product>(`${BASE_URL}${productName}`).pipe(
       catchError((error) => {
         console.error('Error fetching product by name:', error)

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { map, mergeMap, tap, withLatestFrom, catchError, switchMap, toArray, filter } from 'rxjs/operators'
+import { map, mergeMap, tap, withLatestFrom, catchError, switchMap, toArray, filter, take } from 'rxjs/operators'
 import { forkJoin, from, of } from 'rxjs'
 import { ShopDbService } from '../services/shop-db.service'
 import {
@@ -11,7 +11,7 @@ import {
 } from './shop.actions'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
-import { selectFilterBy } from './shop.selectors'
+import { selectFilterBy, selectProducts } from './shop.selectors'
 import { ActivatedRoute } from '@angular/router'
 import { Cart, Product, ShopFilter } from '../models/shop'
 
@@ -142,37 +142,74 @@ export class ShopEffects {
 
 
 
+  // loadCart$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(LOAD_CART),
+  //     tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
+  //     mergeMap(({ userCart }) => {
+  //       const requests = userCart.map(cartItem => {
+  //         if (cartItem.name) {  // Add a check for undefined name
+  //           console.log('in LOAD_CART_EFFECT: ', cartItem);
+  //           return this.shopDbService.getByName(cartItem.name).pipe(
+  //             take(1),
+  //             map((product) => ({ ...product, amount: cartItem.amount })),
+  //             catchError(() => of({ error: true } as const))
+  //           );
+  //         } else {
+  //           console.error('Product name is undefined for cart item:', cartItem);
+  //           return of({ error: true } as const);
+  //         }
+  //       });
+
+  //       return forkJoin(requests).pipe(
+  //         mergeMap((results) => {
+  //           const validProducts: Product[] = results
+  //             .map(result => result as Product)
+
+  //           return of(CART_LOADED({ cart: validProducts }))
+  //         }),
+  //         catchError((error) => {
+  //           console.error('Error loading cart: ', error)
+  //           return of(SET_LOADING_STATE({ isLoading: false }))
+  //         })
+  //       )
+  //     }),
+  //     tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+  //   )
+  // )
+
   loadCart$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(LOAD_CART),
-      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+  this.actions$.pipe(
+    ofType(LOAD_CART),
+    tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
-      mergeMap(({ userCart }) => {
-        const requests = userCart.map(cartItem => {
-          console.log('in LOAD_CART_EFFECT: ', cartItem)
-          return this.shopDbService.getByName(cartItem.name).pipe(
-            map((product) => ({ ...product, amount: cartItem.amount })),
-            catchError(() => of({ error: true } as const))
-          )
-        }
-        )
+    mergeMap(({ userCart }) => {
+      return this.store.pipe(
+        select(selectProducts),
+        take(1),
+        mergeMap((products) => {
+          // Filter the products based on the names in userCart
+          const cartProducts: Product[] = userCart
+            .filter(cartItem => !!cartItem.name)
+            .map(cartItem => {
+              const foundProduct = products.find(product => product.name === cartItem.name)
+              return foundProduct ? { ...foundProduct, amount: cartItem.amount } : null
+            })
+            .filter(product => !!product) as Product[]
 
-        return forkJoin(requests).pipe(
-          mergeMap((results) => {
-            const validProducts: Product[] = results
-              .map(result => result as Product)
-
-            return of(CART_LOADED({ cart: validProducts }))
-          }),
-          catchError((error) => {
-            console.error('Error loading cart: ', error)
-            return of(SET_LOADING_STATE({ isLoading: false }))
-          })
-        )
-      }),
-      tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
-    )
+          return of(CART_LOADED({ cart: cartProducts }))
+        }),
+        catchError((error) => {
+          console.error('Error loading cart from store: ', error)
+          return of(SET_LOADING_STATE({ isLoading: false }))
+        })
+      )
+    }),
+    tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
   )
+)
+
 
 }
 

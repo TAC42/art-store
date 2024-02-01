@@ -71,9 +71,10 @@ export class CartComponent implements OnInit, OnDestroy {
       //   amount: cartItem.amount
       // } as Cart));
       
-    
+      console.log('User in NGONINIT: ',user);
+      
       // Load and update the product details in the cart asynchronously
-      if(user){
+      if(user.cart.length){
         this.store.dispatch(LOAD_CART({ userCart: user.cart }))
         this.cartRefresh$.next()
       }
