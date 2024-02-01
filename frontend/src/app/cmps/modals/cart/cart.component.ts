@@ -10,7 +10,7 @@ import { CommunicationService } from '../../../services/communication.service'
 import { Cart, Product } from '../../../models/shop'
 import { OrderService } from '../../../services/order.service'
 import { UPDATE_USER } from '../../../store/user.actions'
-import { LOAD_CART, LOAD_PRODUCT_BY_NAME } from '../../../store/shop.actions'
+import { CART_LOADED, LOAD_CART, LOAD_PRODUCT_BY_NAME } from '../../../store/shop.actions'
 import { selectCart, selectProductByName } from '../../../store/shop.selectors'
 
 
@@ -77,6 +77,9 @@ export class CartComponent implements OnInit, OnDestroy {
       if(user.cart.length){
         this.store.dispatch(LOAD_CART({ userCart: user.cart }))
         this.cartRefresh$.next()
+      }
+      else{
+        this.store.dispatch(CART_LOADED({ cart: [] }))
       }
     })
     
