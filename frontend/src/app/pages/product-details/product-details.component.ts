@@ -32,16 +32,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private dTypesubscription!: Subscription
 
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
-    loggedinUser: User | null = null
     randomProducts: Product[] = []
     private productSubscription!: Subscription
     product: Product | null = null
 
     ngOnInit(): void {
-        this.loggedinUser$.subscribe(user => {
-            this.loggedinUser = user
-          })
-
         this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
             (type) => this.deviceType = type
         )
@@ -73,8 +68,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl(`/${encodeURIComponent(this.product?.type || 'shop')}`)
     }
 
-    onOpenCart(): void {
-        if (this.loggedinUser?._id) this.modService.openModal('cart')
+    onOpenCart(user: User): void {
+        if (user._id) this.modService.openModal('cart')
         else this.modService.openModal('login')
     }
 

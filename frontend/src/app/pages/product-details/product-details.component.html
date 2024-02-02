@@ -4,7 +4,7 @@
             <button (click)="onBack()" title="Return to previous page?">
                 <svg-render svgName="leftArrowIcon" />
             </button>
-            <button (click)="onOpenCart()" title="Buy product?">
+            <button *ngIf="loggedinUser$ | async as user"(click)="onOpenCart(user)" title="Buy product?">
                 <svg-render svgName="shoppingCart" />
             </button>
         </section>
