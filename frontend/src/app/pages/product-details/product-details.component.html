@@ -1,10 +1,10 @@
 <main class="product-details-contents w-h-100 flex column">
     <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
-        <section class="actions flex row">
+        <section class="actions flex row" >
             <button (click)="onBack()" title="Return to previous page?">
                 <svg-render svgName="leftArrowIcon" />
             </button>
-            <button title="Buy product?">
+            <button (click)="onOpenCart()" title="Buy product?">
                 <svg-render svgName="shoppingCart" />
             </button>
         </section>
@@ -20,7 +20,7 @@
             <p> {{product.description}}</p>
         </section>
 
-        <button class="buy-product flex row" title="Buy product?">
+        <button class="buy-product flex row"  (click)="onAddToCart(product)" title="Buy product?">
             <span>Add to Cart</span>
             <svg-render svgName="shoppingCart" />
         </button>

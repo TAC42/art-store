@@ -56,7 +56,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   onAddToCart(product: Product) {
     this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-      if (updatedUser) {
+      if (updatedUser._id) {
         const newProduct: Product = { ...product, amount: 1 }
 
         const isProductAlreadyInCart = updatedUser.cart.some(cartProduct => cartProduct.name === newProduct.name)
@@ -68,6 +68,8 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
         } else {
           console.log(`Product ${newProduct.name} is already in the cart.`)
         }
+      } else {
+        this.modService.openModal('login')
       }
     })
   }
