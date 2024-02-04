@@ -1,10 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, Input, inject } from '@angular/core'
 import { EMPTY, Observable } from 'rxjs'
 import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
-import { Store, select } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
-import { selectLoggedinUser } from '../../../store/user.selectors'
 import { Router } from '@angular/router'
 import { LOGOUT } from '../../../store/user.actions'
 
@@ -13,16 +12,12 @@ import { LOGOUT } from '../../../store/user.actions'
   templateUrl: './user-dropdown.component.html'
 })
 
-export class UserDropdownComponent implements OnInit {
+export class UserDropdownComponent {
+  @Input() loggedinUser$: Observable<User> = EMPTY
+
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
   private router = inject(Router)
-
-  loggedinUser$: Observable<User> = EMPTY
-
-  ngOnInit(): void {
-    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
-  }
 
   openLogin(event: MouseEvent) {
     event.stopPropagation()

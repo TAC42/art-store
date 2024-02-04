@@ -1,6 +1,6 @@
-<app-header class="full" />
-<user-dropdown />
-<aside-menu [loggedinUser$]="loggedinUser$"/>
+<app-header class="full" [loggedinUser$]="loggedinUser$" />
+<user-dropdown [loggedinUser$]="loggedinUser$" />
+<aside-menu [loggedinUser$]="loggedinUser$" />
 <login-modal />
 <confirm-modal />
 <cart />

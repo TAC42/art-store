@@ -1,13 +1,10 @@
-import { Component, inject, HostBinding, OnInit } from '@angular/core'
+import { Component, inject, HostBinding, OnInit, Input } from '@angular/core'
 import { EMPTY, Observable, Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
 import { DimmerService } from '../../services/dimmer.service'
 import { ModalService } from '../../services/modal.service'
 import { User } from '../../models/user'
-import { Store, select } from '@ngrx/store'
-import { AppState } from '../../store/app.state'
-import { selectLoggedinUser } from '../../store/user.selectors'
 
 @Component({
   selector: 'app-header',
@@ -15,12 +12,13 @@ import { selectLoggedinUser } from '../../store/user.selectors'
 })
 
 export class HeaderComponent implements OnInit {
+  @Input() loggedinUser$: Observable<User> = EMPTY
+
   @HostBinding('class.z-50') get zIndex() { return this.searchState }
 
   private router = inject(Router)
   private dimService = inject(DimmerService)
   private dTypeService = inject(DeviceTypeService)
-  private store = inject(Store<AppState>)
   public modService = inject(ModalService)
 
   searchState: boolean = false
@@ -29,11 +27,8 @@ export class HeaderComponent implements OnInit {
 
   dimSubscription: Subscription | undefined
   dTypesubscription: Subscription | undefined
-  loggedinUser$: Observable<User> = EMPTY
 
   ngOnInit(): void {
-    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
-
     this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
       (type) => this.deviceType = type)
     this.dimSubscription = this.dimService.dimmerSubject.subscribe((active: boolean) => {
