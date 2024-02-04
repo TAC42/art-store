@@ -83,11 +83,13 @@ export class UserEffects {
             ofType(LOGIN),
             mergeMap((action) =>
                 this.userService.login(action.credentials).pipe(
-                    tap((user: User) => showSuccessMsg('Login Successful', `Welcome back ${user.username}!`, this.eBusService)),
+                    tap((user: User) => showSuccessMsg('Login Successful!',
+                        `Welcome back ${user.username}!`, this.eBusService)),
                     map((user: User) => SET_LOGGEDIN_USER({ user })),
                     catchError((error) => {
                         console.error(`Error fetching logged-in user: `, error)
-                        showErrorMsg('Signup Failed', 'Incorrect password / username', this.eBusService)
+                        showErrorMsg('Signup Failed',
+                            'Incorrect password / username', this.eBusService)
                         return EMPTY
                     })
                 )
@@ -100,11 +102,13 @@ export class UserEffects {
             ofType(SIGNUP),
             mergeMap((action) =>
                 this.userService.signup(action.credentials).pipe(
-                    tap((user: User) => showSuccessMsg('Signup Successful', `Welcome ${user.username}!`, this.eBusService)),
+                    tap((user: User) => showSuccessMsg('Signup Successful!',
+                        `Welcome ${user.username}!`, this.eBusService)),
                     map((user: User) => SET_LOGGEDIN_USER({ user })),
                     catchError((error) => {
                         console.error(`Error fetching signup user: `, error)
-                        showErrorMsg('Signup Failed', 'Please try again later', this.eBusService)
+                        showErrorMsg('Signup Failed',
+                            'Please try again later', this.eBusService)
                         return EMPTY
                     })
                 )
@@ -120,7 +124,8 @@ export class UserEffects {
                     map(() => ({ type: '[User] Logout No Operation' })),
                     catchError((error) => {
                         console.error(`Error logging out user: `, error)
-                        showErrorMsg('Logout Failed', 'This is awkward', this.eBusService)
+                        showErrorMsg('Logout Failed!',
+                            'This is awkward', this.eBusService)
                         return EMPTY
                     })
                 )

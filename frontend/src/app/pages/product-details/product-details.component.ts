@@ -11,6 +11,7 @@ import { User } from '../../models/user'
 import { selectLoggedinUser } from '../../store/user.selectors'
 import { UPDATE_USER } from '../../store/user.actions'
 import { ModalService } from '../../services/modal.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 
 @Component({
     selector: 'product-details',
@@ -27,6 +28,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private route = inject(ActivatedRoute)
     private dTypeService = inject(DeviceTypeService)
     private modService = inject(ModalService)
+    private eBusService = inject(EventBusService)
 
     deviceType: string = 'mini-tablet'
     private dTypesubscription!: Subscription
@@ -43,7 +45,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         )
         this.fetchProductData()
 
-        this.loggedinUser$.subscribe((user)=> {
+        this.loggedinUser$.subscribe((user) => {
             this.loggedinUser = user
         })
     }
@@ -70,12 +72,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     onBack(): void {
-        this.router.navigateByUrl(`/${encodeURIComponent(this.product?.type || 'shop')}`)
+        this.router.navigateByUrl(`/${encodeURIComponent(
+            this.product?.type || 'shop')}`)
     }
 
     onOpenCart(event: Event): void {
         event.stopPropagation()
-        console.log('USER IN OPEN CART: ',this.loggedinUser)
         if (this.loggedinUser) this.modService.openModal('cart')
         else this.modService.openModal('login')
     }
@@ -85,22 +87,26 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             console.error('Cannot add null product to cart.')
             return
         }
-        this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-            if (updatedUser._id) {
-                const newProduct: Product = { ...product, amount: 1 }
+        this.loggedinUser$.pipe(take(1)).subscribe(
+            updatedUser => {
+                if (updatedUser._id) {
+                    const newProduct: Product = { ...product, amount: 1 }
 
-                const isProductAlreadyInCart = updatedUser.cart.some(cartProduct => cartProduct.name === newProduct.name)
+                    const isProductAlreadyInCart = updatedUser.cart.some(
+                        cartProduct => cartProduct.name === newProduct.name)
 
-                if (!isProductAlreadyInCart) {
-                    const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
-                    this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
-                } else {
-                    console.log(`Product ${newProduct.name} is already in the cart.`)
-                }
-            } else {
-                this.modService.openModal('login')
-            }
-        })
+                    if (!isProductAlreadyInCart) {
+                        const newUser: User = {
+                            ...updatedUser,
+                            cart: [...updatedUser.cart, newProduct]
+                        }
+                        this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+                        showSuccessMsg('Product Added!',
+                            'Product has been added to the cart', this.eBusService)
+                    } else showErrorMsg('Cannot Add!',
+                        'Product already included in the cart', this.eBusService)
+                } else this.modService.openModal('login')
+            })
     }
 
     ngOnDestroy(): void {

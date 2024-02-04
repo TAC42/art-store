@@ -28,14 +28,14 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
 
   ngOnInit(): void {
-    this.comService.removeProduct$.subscribe((productId: string) => {
-      this.onRemoveProduct(productId)
-    })
+    this.comService.removeProduct$.subscribe(
+      (productId: string) => { this.onRemoveProduct(productId) })
+
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
-    this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
-      this.isLoading = isLoading
-    })
+
+    this.store.select(selectIsLoading).subscribe(
+      (isLoading: boolean) => { this.isLoading = isLoading })
   }
 
   onRemoveProductModal(productId: string): void {

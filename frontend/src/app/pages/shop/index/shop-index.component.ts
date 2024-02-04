@@ -12,6 +12,7 @@ import { ModalService } from '../../../services/modal.service'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { User } from '../../../models/user'
 import { selectLoggedinUser } from '../../../store/user.selectors'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 
 @Component({
   selector: 'shop-index',
@@ -24,6 +25,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private activatedRoute = inject(ActivatedRoute)
   private modService = inject(ModalService)
   private comService = inject(CommunicationService)
+  private eBusService = inject(EventBusService)
 
   products$: Observable<Product[]> = this.store.select(selectProducts)
   loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
@@ -32,14 +34,14 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
   ngOnInit(): void {
-    this.comService.removeProduct$.subscribe((productId: string) => {
-      this.onRemoveProduct(productId)
-    })
+    this.comService.removeProduct$.subscribe(
+      (productId: string) => { this.onRemoveProduct(productId) })
+
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
-    this.store.select(selectIsLoading).subscribe((isLoading: boolean) => {
-      this.isLoading = isLoading
-    })
+
+    this.store.select(selectIsLoading).subscribe(
+      (isLoading: boolean) => { this.isLoading = isLoading })
   }
 
   onRemoveProductModal(productId: string): void {
@@ -63,14 +65,12 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
         if (!isProductAlreadyInCart) {
           const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
-          console.log('This is the product to add:', newProduct)
           this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
-        } else {
-          console.log(`Product ${newProduct.name} is already in the cart.`)
-        }
-      } else {
-        this.modService.openModal('login')
-      }
+          showSuccessMsg('Product Added!',
+            'Product has been added to the cart', this.eBusService)
+        } else showErrorMsg('Cannot Add!',
+          'Product already included in the cart', this.eBusService)
+      } else this.modService.openModal('login')
     })
   }
 

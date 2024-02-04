@@ -16,7 +16,7 @@ export class ProductPreviewComponent {
   @Input() product!: Product
   @Output() remove = new EventEmitter()
   @Output() add = new EventEmitter()
-  
+
   private router = inject(Router)
   private store = inject(Store<AppState>)
 
@@ -28,15 +28,15 @@ export class ProductPreviewComponent {
     this.remove.emit(this.product._id)
   }
 
-  onAddCart(event: Event) {
-    event.preventDefault()
-    event.stopPropagation()
-    this.add.emit(this.product)
-  }
-
   onEditProduct(event: MouseEvent) {
     event.preventDefault()
     event.stopPropagation()
     this.router.navigateByUrl(`/edit/${encodeURIComponent(this.product.name)}`)
+  }
+
+  onAddCart(event: Event) {
+    event.preventDefault()
+    event.stopPropagation()
+    this.add.emit(this.product)
   }
 }
