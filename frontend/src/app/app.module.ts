@@ -44,7 +44,8 @@ import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
 import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component';
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component';
-import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown.component'
+import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown.component';
+import { PaymentComponent } from './pages/payment/payment.component'
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown
     ProductCarouselComponent,
     UserAuthModalComponent,
     UserDropdownComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

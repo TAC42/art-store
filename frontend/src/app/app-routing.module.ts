@@ -14,6 +14,7 @@ import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index
 import { ArtwareComponent } from './pages/artware/artware.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
 import { AdminGuard } from './guards/admin.guard'
+import { PaymentComponent } from './pages/payment/payment.component'
 
 const routes: Routes = [
   {
@@ -42,6 +43,9 @@ const routes: Routes = [
       { path: 'introduction', component: IntroductionComponent },
       { path: 'contact', component: ContactComponent }
     ]
+  },
+  {
+    path: 'payment', component: PaymentComponent, //canActivate: [AdminGuard], //resolve: { product: ProductResolver }
   },
   { path: '', component: HomeComponent },
 ]

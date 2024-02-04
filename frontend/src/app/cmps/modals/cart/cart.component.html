@@ -40,7 +40,7 @@
             >Grand Total
             {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}</span
             > -->
-            <button class="check-out-btn flex">
+            <button class="check-out-btn flex" (click)="onPayment()">
               <svg-render svgName="shoppingCart" />
               <span> Checkout </span>
               <svg-render svgName="shoppingCart" />

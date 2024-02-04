@@ -10,6 +10,7 @@ import { OrderService } from '../../../services/order.service'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { CART_LOADED, LOAD_CART } from '../../../store/shop.actions'
 import { selectCart } from '../../../store/shop.selectors'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'cart',
@@ -34,6 +35,7 @@ export class CartComponent implements OnInit, OnDestroy {
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
   private oService = inject(OrderService)
+  private router = inject(Router)
 
   private modalSubscription: Subscription | undefined
   cartState: string = 'hidden'
@@ -114,6 +116,13 @@ export class CartComponent implements OnInit, OnDestroy {
         this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
       })
     })
+  }
+
+  onPayment() {    
+    this.router.navigate(['/payment'])
+    setTimeout(() => {
+      this.modService.closeModal('cart')
+    }, 600)
   }
 
   ngOnDestroy() {
