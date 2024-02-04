@@ -19,6 +19,8 @@ export class ModalService {
   }
 
   closeModal(id: string) {
+    console.log('CLOSE MODAL ACTIVATED!');
+    
     this.modals[id] = { isOpen: false }
     if (this.modalSubjects[id]) {
       this.modalSubjects[id].next(false)

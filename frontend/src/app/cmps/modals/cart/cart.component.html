@@ -1,8 +1,8 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
   <section
-    (clickOutside)="closeCart()"
-    [@slideInOut]="cartState"
-    class="shopping-cart flex column"
+  (clickOutside)="closeCart()"
+  [@slideInOut]="cartState"
+  class="shopping-cart flex column"
   >
     <div class="cart-header flex row">
       <h1 class="title">Your Cart</h1>

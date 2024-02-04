@@ -32,6 +32,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     private dTypesubscription!: Subscription
 
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
+    loggedinUser: User | null = null
     randomProducts: Product[] = []
     private productSubscription!: Subscription
     product: Product | null = null
@@ -41,6 +42,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
             (type) => this.deviceType = type
         )
         this.fetchProductData()
+
+        this.loggedinUser$.subscribe((user)=> {
+            this.loggedinUser = user
+        })
     }
 
     fetchProductData(): void {
@@ -68,8 +73,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl(`/${encodeURIComponent(this.product?.type || 'shop')}`)
     }
 
-    onOpenCart(user: User): void {
-        if (user._id) this.modService.openModal('cart')
+    onOpenCart(event: Event): void {
+        event.stopPropagation()
+        console.log('USER IN OPEN CART: ',this.loggedinUser)
+        if (this.loggedinUser) this.modService.openModal('cart')
         else this.modService.openModal('login')
     }
 
