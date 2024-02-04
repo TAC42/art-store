@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
 import { trigger, style, animate, transition, state } from '@angular/animations'
 import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
-import { Store, select } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
-import { selectLoggedinUser } from '../../../store/user.selectors'
 import { EMPTY, Observable, Subscription } from 'rxjs'
 import { LOGOUT } from '../../../store/user.actions'
 import { Router } from '@angular/router'
@@ -27,17 +26,16 @@ import { Router } from '@angular/router'
 })
 
 export class AsideMenuComponent implements OnInit, OnDestroy {
+  @Input() loggedinUser$: Observable<User> = EMPTY
+
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
   private router = inject(Router)
 
   private modalSubscription: Subscription | undefined
-  loggedinUser$: Observable<User> = EMPTY
   menuState: string = 'hidden'
 
   ngOnInit() {
-    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
-
     this.modalSubscription = this.modService.onModalStateChange('aside-menu').subscribe(
       isOpen => {
         if (isOpen) setTimeout(() => this.menuState = 'visible', 60)

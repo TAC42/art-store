@@ -26,13 +26,6 @@ export const userReducer = createReducer(
 
     on(UserActions.SET_USER, (state, { user }) => ({ ...state, user })),
 
-    // on(UserActions.UPDATE_USER, (state, { updatedUser }) => ({
-    //     ...state,
-    //     users: state.users.map((user) =>
-    //         user._id === updatedUser._id ? updatedUser : user
-    //     ),
-    // })),
-
     on(UserActions.SET_LOGGEDIN_USER, (state, { user }) => ({ ...state, loggedinUser: user })),
 
     on(UserActions.REMOVE_USER, (state, { userId }) => ({

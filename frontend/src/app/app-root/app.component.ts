@@ -1,13 +1,13 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
-import { SET_LOGGEDIN_USER, LOGOUT } from '../store/user.actions'
+import { CHECK_SESSION } from '../store/user.actions'
 import { DimmerService } from '../services/dimmer.service'
-import { filter, Subscription } from 'rxjs'
+import { EMPTY, filter, Observable, Subscription } from 'rxjs'
 import { NavigationEnd, Router } from '@angular/router'
 import { ModalService } from '../services/modal.service'
 import { selectLoggedinUser } from '../store/user.selectors'
-import { UserService } from '../services/user.service'
+import { User } from '../models/user'
 
 @Component({
   selector: 'app-root',
@@ -20,35 +20,33 @@ export class AppComponent implements OnInit, OnDestroy {
   private dimService = inject(DimmerService)
   public modService = inject(ModalService)
 
-  dimmer: boolean = false
-  dimSubscription: Subscription | undefined
+  public dimmer: boolean = false
+  private dimSubscription: Subscription | undefined
   private routerEvSubscription: Subscription | undefined
   private userSubscription: Subscription | undefined
 
+  loggedinUser$: Observable<User> = EMPTY
+
   ngOnInit() {
     // user session check
-    const loggedinUser = UserService.getLoggedinUser()
-    if (loggedinUser) {
-      this.store.dispatch(SET_LOGGEDIN_USER({ user: loggedinUser }))
-    } else this.store.dispatch(LOGOUT())
+    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
+    this.store.dispatch(CHECK_SESSION())
 
-    this.userSubscription = this.store.pipe(select(selectLoggedinUser)).subscribe(user => {
-      if (user && user.createdAt !== 0 && !user.isVerified) {
-        this.modService.openModal('user-auth')
-      }
-    })
-
-    // dimmer management
-    this.dimSubscription = this.dimService.dimmerSubject.subscribe((active: boolean) => {
-      this.dimmer = active
-    })
+    this.userSubscription = this.store.pipe(select(selectLoggedinUser)).subscribe(
+      user => {
+        if (user && user.createdAt !== 0 && !user.isVerified) {
+          this.modService.openModal('user-auth')
+        }
+      })
 
     // scroll to top management
     this.routerEvSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      window.scrollTo(0, 0)
-    })
+    ).subscribe(() => window.scrollTo(0, 0))
+
+    // dimmer management
+    this.dimSubscription = this.dimService.dimmerSubject.subscribe(
+      (active: boolean) => this.dimmer = active)
   }
 
   onCloseDimmer(event: Event) {

@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { catchError, map, mergeMap, tap } from 'rxjs/operators'
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators'
 import { EMPTY, of } from 'rxjs'
 import { UserService } from '../services/user.service'
 import { User } from '../models/user'
 import { showSuccessMsg, showErrorMsg, EventBusService } from '../services/event-bus.service'
 import {
+    CHECK_SESSION,
     LOAD_USER, LOAD_USERS, LOGIN, LOGOUT, SET_LOADING_STATE,
     SET_LOGGEDIN_USER, SET_USER, SET_USERS, SIGNUP, UPDATE_USER
 } from './user.actions'
@@ -52,6 +53,25 @@ export class UserEffects {
                 )
             ),
             tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+        )
+    )
+
+    checkSession$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CHECK_SESSION),
+            switchMap(() =>
+                of(UserService.getLoggedinUser()).pipe(
+                    map(loggedinUser => {
+                        if (loggedinUser) {
+                            return SET_LOGGEDIN_USER({ user: loggedinUser })
+                        } else return LOGOUT()
+                    }),
+                    catchError(error => {
+                        console.error('Error checking session:', error)
+                        return EMPTY
+                    })
+                )
+            )
         )
     )
 
