@@ -1,7 +1,8 @@
 <main class="product-details-contents w-h-100 flex column">
-    <section *ngIf="deviceType === 'mini-tablet' || deviceType === 'mobile'" class="mobile-view flex column">
-        <section class="actions flex row" >
-            <button (click)="onBack()" title="Return to previous page?">
+    <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
+        class="mobile-view flex column">
+        <section class="actions flex row">
+            <button (click)="onBack($event)" title="Return to previous page?">
                 <svg-render svgName="leftArrowIcon" />
             </button>
             <button (click)="onOpenCart($event)" title="Buy product?">
@@ -9,24 +10,65 @@
             </button>
         </section>
 
-        <section *ngIf="product" class="product-area flex column">
-            <div class="image-container flex column">
-                <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
-                <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image" />
-                <span class="price-tag flex">${{product.price}}</span>
-            </div>
+        <ng-container *ngIf="product$ | async as product">
+            <section *ngIf="product" class="product-area flex column">
+                <div class="image-container flex column">
+                    <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
+                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image">
+                    <span class="price-tag flex">${{ product.price }}</span>
+                </div>
 
-            <h2> {{product.name}} </h2>
-            <p> {{product.description}}</p>
-        </section>
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+            </section>
 
-        <button class="buy-product flex row"  (click)="onAddToCart(product)" title="Buy product?">
-            <span>Add to Cart</span>
-            <svg-render svgName="shoppingCart" />
-        </button>
+            <button class="buy-product flex row" (click)="onAddToCart($event, product)" title="Buy product?">
+                <span>Add to Cart</span>
+                <svg-render svgName="shoppingCart" />
+            </button>
+        </ng-container>
 
         <h3>Related Products</h3>
-        <section *ngIf="randomProducts.length" class="other-products-area grid">
+        <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area grid">
+            <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
+                class="other-product-area flex column">
+                <img [src]="randomProduct.imgUrls[0]" alt="Random Product Image">
+                <p>{{ randomProduct.name }}</p>
+            </a>
+        </section>
+    </section>
+
+    <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
+        class="desktop-view flex column">
+        <section class="actions flex row">
+            <button (click)="onBack($event)" title="Return to previous page?">
+                <svg-render svgName="leftArrowIcon" />
+            </button>
+            <button (click)="onOpenCart($event)" title="Buy product?">
+                <svg-render svgName="shoppingCart" />
+            </button>
+        </section>
+
+        <ng-container *ngIf="product$ | async as product">
+            <section *ngIf="product" class="product-area flex column">
+                <div class="image-container flex column">
+                    <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
+                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image">
+                    <span class="price-tag flex">${{ product.price }}</span>
+                </div>
+
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+            </section>
+
+            <button class="buy-product flex row" (click)="onAddToCart($event, product)" title="Buy product?">
+                <span>Add to Cart</span>
+                <svg-render svgName="shoppingCart" />
+            </button>
+        </ng-container>
+
+        <h3>Related Products</h3>
+        <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area grid">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column">
                 <img [src]="randomProduct.imgUrls[0]" alt="Random Product Image">
