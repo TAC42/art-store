@@ -60,14 +60,15 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch({ type: '[Shop] Load Products' })
 
-    this.activatedRoute.queryParams.subscribe((params) => {
-      const updatedParams = { ...params, search: newFilter.search }
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: updatedParams,
-        queryParamsHandling: 'merge',
+    this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        const updatedParams = { ...params, search: newFilter.search }
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams: updatedParams,
+          queryParamsHandling: 'merge',
+        })
       })
-    })
   }
 
   ngOnDestroy(): void {

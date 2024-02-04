@@ -57,21 +57,26 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   onAddToCart(product: Product) {
-    this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
-      if (updatedUser._id) {
-        const newProduct: Product = { ...product, amount: 1 }
+    this.loggedinUser$.pipe(take(1)).subscribe(
+      updatedUser => {
+        if (updatedUser._id) {
+          const newProduct: Product = { ...product, amount: 1 }
 
-        const isProductAlreadyInCart = updatedUser.cart.some(cartProduct => cartProduct.name === newProduct.name)
+          const isProductAlreadyInCart = updatedUser.cart.some(
+            cartProduct => cartProduct.name === newProduct.name)
 
-        if (!isProductAlreadyInCart) {
-          const newUser: User = { ...updatedUser, cart: [...updatedUser.cart, newProduct] }
-          this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
-          showSuccessMsg('Product Added!',
-            'Product has been added to the cart', this.eBusService)
-        } else showErrorMsg('Cannot Add!',
-          'Product already included in the cart', this.eBusService)
-      } else this.modService.openModal('login')
-    })
+          if (!isProductAlreadyInCart) {
+            const newUser: User = {
+              ...updatedUser,
+              cart: [...updatedUser.cart, newProduct]
+            }
+            this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+            showSuccessMsg('Product Added!',
+              'Product has been added to the cart', this.eBusService)
+          } else showErrorMsg('Cannot Add!',
+            'Product already included in the cart', this.eBusService)
+        } else this.modService.openModal('login')
+      })
   }
 
   onSetFilter(newFilterValue: string): void {
@@ -84,14 +89,15 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch({ type: '[Shop] Load Products' })
 
-    this.activatedRoute.queryParams.subscribe((params) => {
-      const updatedParams = { ...params, search: newFilter.search }
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: updatedParams,
-        queryParamsHandling: 'merge',
+    this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        const updatedParams = { ...params, search: newFilter.search }
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams: updatedParams,
+          queryParamsHandling: 'merge',
+        })
       })
-    })
   }
 
   ngOnDestroy(): void {

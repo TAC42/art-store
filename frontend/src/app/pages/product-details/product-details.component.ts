@@ -41,13 +41,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
-            (type) => this.deviceType = type
-        )
+            (type) => this.deviceType = type)
         this.fetchProductData()
 
-        this.loggedinUser$.subscribe((user) => {
-            this.loggedinUser = user
-        })
+        this.loggedinUser$.subscribe(
+            (user) => { this.loggedinUser = user })
     }
 
     fetchProductData(): void {

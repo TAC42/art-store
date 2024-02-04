@@ -35,9 +35,10 @@ export class ContactComponent implements OnInit {
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
   ngOnInit() {
-    this.dTypeService.deviceType$.subscribe(deviceType => {
-      this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
-    })
+    this.dTypeService.deviceType$.subscribe(
+      deviceType => {
+        this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
+      })
     this.initializeForm()
   }
 
