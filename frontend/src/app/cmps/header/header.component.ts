@@ -1,4 +1,4 @@
-import { Component, inject, HostBinding, OnInit, Input } from '@angular/core'
+import { Component, inject, HostBinding, OnInit, Input, OnDestroy } from '@angular/core'
 import { EMPTY, Observable, Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
@@ -11,7 +11,7 @@ import { User } from '../../models/user'
   templateUrl: './header.component.html'
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Input() loggedinUser$: Observable<User> = EMPTY
 
   @HostBinding('class.z-50') get zIndex() { return this.searchState }
@@ -23,17 +23,13 @@ export class HeaderComponent implements OnInit {
 
   searchState: boolean = false
   searchValue: string = ''
-  deviceType: string = 'mini-tablet'
+  deviceType$: Observable<string> = this.dTypeService.deviceType$
 
-  dimSubscription: Subscription | undefined
-  dTypesubscription: Subscription | undefined
+  private dimSubscription: Subscription | undefined
 
   ngOnInit(): void {
-    this.dTypesubscription = this.dTypeService.deviceType$.subscribe(
-      (type) => this.deviceType = type)
-    this.dimSubscription = this.dimService.dimmerSubject.subscribe((active: boolean) => {
-      this.searchState = active
-    })
+    this.dimSubscription = this.dimService.dimmerSubject.subscribe(
+      (active: boolean) => { this.searchState = active })
   }
 
   openAsideMenu(event: MouseEvent) {
@@ -71,5 +67,9 @@ export class HeaderComponent implements OnInit {
   onClearFilter(event: Event) {
     event.stopPropagation()
     this.searchValue = ''
+  }
+
+  ngOnDestroy() {
+    if (this.dimSubscription) this.dimSubscription.unsubscribe()
   }
 }
