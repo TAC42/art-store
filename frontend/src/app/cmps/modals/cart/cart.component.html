@@ -1,9 +1,5 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
-  <section
-  (clickOutside)="closeCart()"
-  [@slideInOut]="cartState"
-  class="shopping-cart flex column"
-  >
+  <section (clickOutside)="closeCart()" [@slideInOut]="cartState" class="shopping-cart flex column">
     <div class="cart-header flex row">
       <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
@@ -17,16 +13,10 @@
               <span class="name">{{ cartItem.name }}</span>
               <span class="price">${{ cartItem.price }}</span>
               <span class="quantity flex">
-                <svg-render
-                  (click)="changeAmount(cartItem, '-')"
-                  svgName="minusIcon"
-                ></svg-render>
+                <svg-render (click)="changeAmount(cartItem, '-')" svgName="minusIcon"></svg-render>
                 <span class="amount">{{ cartItem.amount }}</span>
-                <svg-render
-                  (click)="changeAmount(cartItem, '+')"
-                  svgName="addIcon"
-                  [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }"
-                ></svg-render>
+                <svg-render (click)="changeAmount(cartItem, '+')" svgName="addIcon"
+                  [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }"></svg-render>
               </span>
             </div>
           </article>
@@ -37,8 +27,7 @@
             <div class="subtotal flex">
               <span>Subtotal</span>
               <span>
-                {{ orderSummary.total | currency : "USD" : "symbol" }}</span
-              >
+                {{ orderSummary.total | currency : "USD" : "symbol" }}</span>
             </div>
             <!-- <span
             >Taxes {{ orderSummary.taxes | currency : "USD" : "symbol" }}</span

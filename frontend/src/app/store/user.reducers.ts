@@ -22,20 +22,34 @@ const initialState: UserState = {
 
 export const userReducer = createReducer(
     initialState,
-    on(UserActions.SET_USERS, (state, { users }) => ({ ...state, users })),
-
-    on(UserActions.SET_USER, (state, { user }) => ({ ...state, user })),
-
-    on(UserActions.SET_LOGGEDIN_USER, (state, { user }) => ({ ...state, loggedinUser: user })),
-
-    on(UserActions.REMOVE_USER, (state, { userId }) => ({
-        ...state,
-        users: state.users.filter((user) => user._id !== userId),
+    // handling of user loading
+    on(UserActions.SET_LOADING_STATE, (state, { isLoading }) => ({
+        ...state, isLoading
     })),
-
-    on(UserActions.SET_LOADING_STATE, (state, { isLoading }) => ({ ...state, isLoading })),
-
+    // handling of user session
+    on(UserActions.SET_LOGGEDIN_USER, (state, { user }) => ({
+        ...state, loggedinUser: user
+    })),
     on(UserActions.LOGOUT, (state) => ({
         ...state, loggedinUser: defaultUser,
+    })),
+    // handling of users in index
+    on(UserActions.SET_USERS, (state, { users }) => ({
+        ...state, users
+    })),
+    // handling of user in details
+    on(UserActions.SET_USER, (state, { user }) => ({
+        ...state, user
+    })),
+    // handling of user updating
+    on(UserActions.UPDATE_USER, (state, { updatedUser }) => ({
+        ...state,
+        users: state.users.map(user =>
+            user._id === updatedUser._id ? updatedUser : user
+        )
+    })),
+    // handling of user deletion
+    on(UserActions.REMOVE_USER, (state, { userId }) => ({
+        ...state, users: state.users.filter((user) => user._id !== userId),
     })),
 )

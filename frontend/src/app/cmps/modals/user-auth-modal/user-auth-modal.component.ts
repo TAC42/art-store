@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
 import { ModalService } from '../../../services/modal.service'
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
-import { Store, select } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
-import { selectLoggedinUser } from '../../../store/user.selectors'
 import { EMPTY, Observable, Subscription, debounceTime, filter, take } from 'rxjs'
 import { User } from '../../../models/user'
 import { UtilityService } from '../../../services/utility.service'
@@ -16,13 +15,14 @@ import { LOGOUT, UPDATE_USER } from '../../../store/user.actions'
 })
 
 export class UserAuthModalComponent implements OnInit, OnDestroy {
+  @Input() loggedinUser$: Observable<User> = EMPTY
+
   public modService = inject(ModalService)
   private utilService = inject(UtilityService)
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
 
-  loggedinUser$: Observable<User> = EMPTY
   private userSubscription?: Subscription
 
   verifyForm!: FormGroup
@@ -35,20 +35,19 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   private authModalTimer?: number
 
   ngOnInit() {
-    this.loggedinUser$ = this.store.pipe(select(selectLoggedinUser))
+    this.userSubscription = this.loggedinUser$.subscribe(
+      user => {
+        if (!user || user._id === '') return
+        if (this.modService.isModalOpen('user-auth')) {
+          this.initializeForm()
+          this.authModalTimer = setTimeout(() => {
+            showErrorMsg('Authentication Timeout', 'Please log back in to retry!', this.eBusService)
+            this.store.dispatch(LOGOUT())
 
-    this.userSubscription = this.loggedinUser$.subscribe(user => {
-      if (!user || user._id === '') return
-      if (this.modService.isModalOpen('user-auth')) {
-        this.initializeForm()
-        this.authModalTimer = setTimeout(() => {
-          showErrorMsg('Authentication Timeout', 'Please log back in to retry!', this.eBusService)
-          this.store.dispatch(LOGOUT())
-
-          setTimeout(() => window.location.reload(), 2000)
-        }, 300000) as unknown as number
-      } else clearTimeout(this.authModalTimer)
-    })
+            setTimeout(() => window.location.reload(), 2000)
+          }, 300000) as unknown as number
+        } else clearTimeout(this.authModalTimer)
+      })
   }
 
   initializeForm(): void {
@@ -62,26 +61,27 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   }
 
   sendCode() {
-    this.loggedinUser$.pipe(take(1)).subscribe(user => {
-      if (user && user._id && !user.isVerified) {
-        // Generate and send code
-        this.verificationCode = this.utilService.generateRandomCode()
-        const verifyFormData = {
-          code: this.verificationCode,
-          email: user.email,
-          username: user.username
+    this.loggedinUser$.pipe(take(1)).subscribe(
+      user => {
+        if (user && user._id && !user.isVerified) {
+          // Generate and send code
+          this.verificationCode = this.utilService.generateRandomCode()
+          const verifyFormData = {
+            code: this.verificationCode,
+            email: user.email,
+            username: user.username
+          }
+          this.utilService.sendVerificationMail(verifyFormData).subscribe({
+            next: () => {
+              this.codeSent = true
+              this.message = 'We\'ve sent the code to your email address, please insert it below.'
+              this.resendAvailable = false
+              this.startResendTimer()
+            },
+            error: (error) => console.error('Failed to send mail:', error)
+          })
         }
-        this.utilService.sendVerificationMail(verifyFormData).subscribe({
-          next: () => {
-            this.codeSent = true
-            this.message = 'We\'ve sent the code to your email address, please insert it below.'
-            this.resendAvailable = false
-            this.startResendTimer()
-          },
-          error: (error) => console.error('Failed to send mail:', error)
-        })
-      }
-    })
+      })
   }
 
   startResendTimer() {

@@ -1,12 +1,10 @@
 <main class="modal-wrapper flex" *ngIf="isModalOpen">
-
     <section (clickOutside)="closeModal()" class="confirm-modal flex column">
+        <span>Proceeding any further will result in the permanent loss of the product.</span>
         <span>Are you sure?</span>
         <div class="btns grid">
-            <button (click)="onAnswer($event,true)">Yes</button>
-            <button (click)="onAnswer($event,false)">No</button>
+            <button (click)="onAnswer($event, true)">Yes</button>
+            <button (click)="onAnswer($event, false)">No</button>
         </div>
-
-
     </section>
 </main>

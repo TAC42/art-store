@@ -3,8 +3,8 @@
 <aside-menu [loggedinUser$]="loggedinUser$" />
 <login-modal />
 <confirm-modal />
-<cart />
-<user-auth-modal />
+<cart [loggedinUser$]="loggedinUser$" />
+<user-auth-modal [loggedinUser$]="loggedinUser$" />
 <loader />
 <router-outlet />
 <user-msg />

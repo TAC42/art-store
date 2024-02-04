@@ -20,6 +20,7 @@ export class UserEffects {
     private eBusService = inject(EventBusService)
     private store = inject(Store<AppState>)
 
+    // handling of of all users in index
     loadUsers$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LOAD_USERS),
@@ -38,6 +39,7 @@ export class UserEffects {
         )
     )
 
+    // handling of user in details
     loadUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LOAD_USER),
@@ -56,6 +58,7 @@ export class UserEffects {
         )
     )
 
+    // handling of user session
     checkSession$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CHECK_SESSION),
@@ -74,7 +77,7 @@ export class UserEffects {
             )
         )
     )
-
+    // login scenario
     login$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LOGIN),
@@ -91,7 +94,7 @@ export class UserEffects {
             )
         )
     )
-
+    // signup scenario
     signup$ = createEffect(() =>
         this.actions$.pipe(
             ofType(SIGNUP),
@@ -108,7 +111,7 @@ export class UserEffects {
             )
         )
     )
-
+    // logout scenario
     logout$ = createEffect(() =>
         this.actions$.pipe(
             ofType(LOGOUT),
@@ -126,6 +129,7 @@ export class UserEffects {
         { dispatch: false }
     )
 
+    // handling of user updating
     updateUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(UPDATE_USER),

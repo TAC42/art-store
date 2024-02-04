@@ -7,16 +7,15 @@ import { CommunicationService } from '../../../services/communication.service';
   templateUrl: './confirm-modal.component.html'
 })
 export class ConfirmModalComponent implements OnInit {
-  private mService = inject(ModalService)
+  private modService = inject(ModalService)
   private communicationService = inject(CommunicationService)
 
-  modalSubscription: any
   isModalOpen: boolean = false
+  private modalSubscription: any
 
   ngOnInit(): void {
-    this.modalSubscription = this.mService.onModalStateChange('confirm').subscribe((isOpen: boolean) => {
-      this.isModalOpen = isOpen
-    })
+    this.modalSubscription = this.modService.onModalStateChange('confirm').subscribe(
+      (isOpen: boolean) => this.isModalOpen = isOpen)
   }
 
   ngOnDestroy(): void {
@@ -26,7 +25,7 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   getProductToRemove(): string | undefined {
-    return this.mService.getProductId('confirm')
+    return this.modService.getProductId('confirm')
   }
 
   toggleModal() {
@@ -38,12 +37,12 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   onAnswer(event: Event, answer: boolean) {
+    event.stopPropagation()
     const productId = this.getProductToRemove()
 
     if (answer && productId) {
       this.communicationService.emitRemoveProduct(productId)
     }
-
-    this.mService.closeModal('confirm')
+    this.modService.closeModal('confirm')
   }
 }
