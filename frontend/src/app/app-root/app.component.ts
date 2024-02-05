@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.userSubscription = this.store.pipe(select(selectLoggedinUser)).subscribe(
       user => {
-        if (user && user.createdAt !== 0 && !user.isVerified) {
+        if (user.createdAt !== 0 && !user.isVerified) {
           this.modService.openModal('user-auth')
         }
       })

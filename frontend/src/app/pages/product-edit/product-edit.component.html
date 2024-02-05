@@ -1,5 +1,5 @@
 <main class="product-edit-contents flex column layout-row w-h-100">
-  <button (click)="onBack()" class="back-btn">
+  <button (click)="onBack($event)" class="back-btn">
     <svg-render svgName="leftArrowIcon" />
   </button>
   <form class="flex column" [formGroup]="editForm" (ngSubmit)="onSaveProduct()">

@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
-import { Observable, Subject, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
+import { Observable, Subscription, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
 import { ShopDbService } from '../../services/shop-db.service'
 import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 import { SAVE_PRODUCT } from '../../store/shop.actions'
@@ -23,7 +23,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   private sDbService = inject(ShopDbService)
 
-  destroySubject$ = new Subject<void>()
+  private productSubscription: Subscription | undefined
+
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
   defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
@@ -41,12 +42,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       description: [this.product.description || '', [Validators.required]],
       stock: [this.product.stock || '', Validators.required],
       type: [this.product.type || '', [Validators.required]],
-      imgUrls: this.fBuilder.array(this.product.imgUrls?.map(url => this.fBuilder.control(url)) || [])
+      imgUrls: this.fBuilder.array(this.product.imgUrls?.map(
+        url => this.fBuilder.control(url)) || [])
     })
   }
 
   fetchProductData(): void {
-    this.route.data
+    this.productSubscription = this.route.data
       .pipe(
         map(data => data['product']),
         filter(product => !!product)
@@ -102,7 +104,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   addNewImageUploader(): void {
     const imgUrlsArray = this.editForm.get('imgUrls') as FormArray
-    if (imgUrlsArray.length < 5) imgUrlsArray.push(this.fBuilder.control(this.defaultImgUrl))
+    if (imgUrlsArray.length < 5) imgUrlsArray.push(
+      this.fBuilder.control(this.defaultImgUrl))
   }
 
   removeImageUploader(index: number): void {
@@ -119,14 +122,17 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   onSaveProduct() {
     const productToSave = { ...this.product, ...this.editForm.value }
     this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
-    this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
+    this.router.navigateByUrl(`/${encodeURIComponent(
+      this.product.type || 'shop')}`)
   }
 
   ngOnDestroy(): void {
-    this.destroySubject$.next()
+    if (this.productSubscription) this.productSubscription.unsubscribe()
   }
 
-  onBack = () => {
-    this.router.navigateByUrl(`/${encodeURIComponent(this.product.type)}`)
+  onBack(event: Event): void {
+    event.stopPropagation()
+    this.router.navigateByUrl(`/${encodeURIComponent(
+      this.product?.type || 'shop')}`)
   }
 }

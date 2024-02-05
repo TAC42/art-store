@@ -11,7 +11,7 @@
         </section>
 
         <ng-container *ngIf="product$ | async as product">
-            <section *ngIf="product" class="product-area flex column">
+            <section class="product-area flex column">
                 <div class="image-container flex column">
                     <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
                     <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image">
@@ -19,12 +19,31 @@
                 </div>
 
                 <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
+
+                <div class="details-area">
+                    <p class="description">{{ product.description }}</p>
+                    <h4>Dimensions</h4>
+                    <p>{{ product.description }}</p>
+                    <h4>Delivery</h4>
+                    <p>
+                        3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
+                        soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
+                    </p>
+
+                    <p *ngIf="product.stock <= 0" class="unavailable">
+                        This product is currently out of stock, for further information and the
+                        option to order it in the near future, please press inquire.</p>
+                </div>
             </section>
 
-            <button class="buy-product flex row" (click)="onAddToCart($event, product)" title="Buy product?">
+            <button *ngIf="product.stock > 0" class="action-btn flex row" (click)="onAddToCart($event, product)"
+                title="Buy product?">
                 <span>Add to Cart</span>
                 <svg-render svgName="shoppingCart" />
+            </button>
+
+            <button *ngIf="product.stock <= 0" class="action-btn flex row" title="Contact us!">
+                <a href="/about/contact">Inquire</a>
             </button>
         </ng-container>
 
