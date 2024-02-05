@@ -22,22 +22,22 @@ export class HomeComponent {
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
       productName: 'Tower Plate',
-      url: '/shop/details/Tower Plate'
+      url: '/artware/details/Tower Plate'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/ibyk1mbjlblc3hrymhpi.png',
       productName: 'Ancient Cup',
-      url: '/shop/details/Ancient Cup'
+      url: '/artware/details/Ancient Cup'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/nlejntudcw8gsdfw1owo.png',
       productName: 'Casual Brew',
-      url: '/shop/details/Casual Brew'
+      url: '/artware/details/Casual Brew'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/spwj3lmccf44ke56d53p.png',
       productName: 'Elegant Vase',
-      url: '/shop/details/Elegant Vase'
+      url: '/artware/details/Elegant Vase'
     },
   ]
 
