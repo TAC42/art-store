@@ -45,6 +45,49 @@
         customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
     </div>
 
+    <div class="input-area flex column" [class.error]="isFieldInvalid('dimensions')">
+      <label for="dimensions" class="flex row">
+        <div class="label-info flex row">
+          <svg-render svgName="dimensions" />
+          <span>Dimensions*</span>
+        </div>
+        <span *ngIf="isFieldInvalid('dimensions')">
+          {{ getErrorMessage('dimensions') }}
+        </span>
+      </label>
+      <input id="dimensions" type="text" formControlName="dimensions" placeholder="Please enter product dimensions..."
+        customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="'/ .,'" />
+    </div>
+
+    <div class="input-area flex column" [class.error]="isFieldInvalid('materials')">
+      <label for="materials" class="flex row">
+        <div class="label-info flex row">
+          <svg-render svgName="materials" />
+          <span>Materials*</span>
+        </div>
+        <span *ngIf="isFieldInvalid('materials')">
+          {{ getErrorMessage('materials') }}
+        </span>
+      </label>
+      <input id="materials" type="text" formControlName="materials"
+        placeholder="The materials that make your product..." customValidator [minLength]=3 [maxLength]=24
+        [allowedSpecialChars]="'/ .,()'" />
+    </div>
+
+    <div class="input-area flex column" [class.error]="isFieldInvalid('finishedAt')">
+      <label for="finishedAt" class="flex row">
+        <div class="label-info flex row">
+          <svg-render svgName="calendar" />
+          <span>Publish Date*</span>
+        </div>
+        <span *ngIf="isFieldInvalid('finishedAt')">
+          {{ getErrorMessage('finishedAt') }}
+        </span>
+      </label>
+      <input id="finishedAt" type="text" formControlName="finishedAt" placeholder="When your product was finished..."
+        customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
+    </div>
+
     <div class="input-area flex column">
       <label for="stock" class="flex row">
         <div class="label-info flex row">

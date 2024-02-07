@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit {
   private fBuilder = inject(FormBuilder)
 
   contactForm!: FormGroup
-  specialChars = "'. ?$%#!*&:,()\"'"
+  specialChars = "'. ?$%#!*:,()\"'"
 
   contactImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/r0vaet9gmlapbshf6hb1.png',

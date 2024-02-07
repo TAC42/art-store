@@ -29,7 +29,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   editForm!: FormGroup
   product: Product = ShopDbService.getDefaultProduct()
   defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
-  specialChars: string = ".' $%#,!*&/:\""
+  specialChars: string = "'. ?$%#!*:,()\"'"
 
   ngOnInit(): void {
     this.initializeForm()
