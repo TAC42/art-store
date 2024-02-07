@@ -5,7 +5,7 @@ export interface Product {
   description: string
   dimensions: string
   materials: string
-  finishedAt: string
+  publishDate: string
   stock: number
   type: string
   createdAt: number

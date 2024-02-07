@@ -74,17 +74,17 @@
         [allowedSpecialChars]="'/ .,()'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('finishedAt')">
-      <label for="finishedAt" class="flex row">
+    <div class="input-area flex column" [class.error]="isFieldInvalid('publishDate')">
+      <label for="publishDate" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="calendar" />
           <span>Publish Date*</span>
         </div>
-        <span *ngIf="isFieldInvalid('finishedAt')">
-          {{ getErrorMessage('finishedAt') }}
+        <span *ngIf="isFieldInvalid('publishDate')">
+          {{ getErrorMessage('publishDate') }}
         </span>
       </label>
-      <input id="finishedAt" type="text" formControlName="finishedAt" placeholder="When your product was finished..."
+      <input id="publishDate" type="text" formControlName="publishDate" placeholder="When your product was finished..."
         customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
     </div>
 

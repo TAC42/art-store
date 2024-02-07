@@ -87,7 +87,7 @@ export class ShopDbService {
       description: '',
       dimensions: '5 x 5 x 5 inch',
       materials: 'ceramic',
-      finishedAt: '2024',
+      publishDate: '2024',
       stock: 1,
       type: 'shop',
       createdAt: currentTimestamp

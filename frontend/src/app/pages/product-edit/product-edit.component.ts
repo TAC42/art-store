@@ -43,7 +43,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       description: [this.product.description || '', [Validators.required]],
       dimensions: [this.product.dimensions || '', [Validators.required]],
       materials: [this.product.materials || '', [Validators.required]],
-      finishedAt: [this.product.finishedAt || '', [Validators.required]],
+      publishDate: [this.product.publishDate || '', [Validators.required]],
       stock: [this.product.stock || '', Validators.required],
       type: [this.product.type || '', [Validators.required]],
       imgUrls: this.fBuilder.array(this.product.imgUrls?.map(
