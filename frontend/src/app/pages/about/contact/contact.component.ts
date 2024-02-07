@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../../services/utility.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
+  @ViewChild('nameInput') nameInput!: ElementRef
 
   private utilService = inject(UtilityService)
   private dTypeService = inject(DeviceTypeService)
@@ -49,6 +50,7 @@ export class ContactComponent implements OnInit {
       title: ['', Validators.required],
       message: ['', Validators.required]
     })
+    setTimeout(() => this.nameInput?.nativeElement.focus(), 0)
   }
 
   isFieldInvalid(fieldName: string): boolean {

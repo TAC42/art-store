@@ -38,9 +38,7 @@ export class UserMsgComponent implements OnInit, OnDestroy {
       this.msg = newMsg
       this.isVisible = true
 
-      setTimeout(() => {
-        this.msgState = 'visible'
-      }, 50)
+      setTimeout(() => this.msgState = 'visible', 50)
 
       setTimeout(() => {
         this.msgState = 'hidden'

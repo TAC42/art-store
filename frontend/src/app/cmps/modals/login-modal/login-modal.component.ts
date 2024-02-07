@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ModalService } from '../../../services/modal.service'
 import { UserCredentials, UserSignup } from '../../../models/user'
@@ -13,6 +13,8 @@ import { UtilityService } from '../../../services/utility.service'
 })
 
 export class LoginModalComponent implements OnInit {
+  @ViewChild('firstNameInput') firstNameInput!: ElementRef
+
   public modService = inject(ModalService)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
@@ -47,6 +49,7 @@ export class LoginModalComponent implements OnInit {
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode
+    setTimeout(() => this.firstNameInput?.nativeElement.focus(), 0)
   }
 
   closeLoginModal() {

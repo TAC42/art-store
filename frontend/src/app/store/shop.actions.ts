@@ -34,8 +34,9 @@ export const LOAD_CART = createAction(
 )
 export const CART_LOADED = createAction(
   '[Shop] Cart Loaded',
-  props<{ cart: Product[]}>()
+  props<{ cart: Product[] }>()
 )
+
 // handling of random products in details
 export const LOAD_RANDOM_PRODUCTS = createAction(
   '[Shop] Load Random Products',

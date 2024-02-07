@@ -3,7 +3,7 @@ import { ModalService } from '../../../services/modal.service'
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
-import { EMPTY, Observable, Subscription, debounceTime, filter, take } from 'rxjs'
+import { Observable, Subscription, debounceTime, filter, take } from 'rxjs'
 import { User } from '../../../models/user'
 import { UtilityService } from '../../../services/utility.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
@@ -15,7 +15,7 @@ import { LOGOUT, UPDATE_USER } from '../../../store/user.actions'
 })
 
 export class UserAuthModalComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$: Observable<User> = EMPTY
+  @Input() loggedinUser$!: Observable<User>
 
   public modService = inject(ModalService)
   private utilService = inject(UtilityService)
@@ -42,8 +42,8 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
           this.initializeForm()
           this.authModalTimer = setTimeout(() => {
             showErrorMsg('Authentication Timeout', 'Please log back in to retry!', this.eBusService)
-            this.store.dispatch(LOGOUT())
 
+            this.store.dispatch(LOGOUT())
             setTimeout(() => window.location.reload(), 2000)
           }, 300000) as unknown as number
         } else clearTimeout(this.authModalTimer)

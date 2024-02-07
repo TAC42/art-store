@@ -30,10 +30,10 @@ export class ShopDbService {
       })
     )
   }
-  
+
   getByName(productName: string): Observable<Product | null> {
-    console.log('productName: ',productName);
-    
+    console.log('productName: ', productName);
+
     return this.httpService.get<Product>(`${BASE_URL}${productName}`).pipe(
       catchError((error) => {
         console.error('Error fetching product by name:', error)
@@ -85,6 +85,9 @@ export class ShopDbService {
       imgUrls: ['https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'],
       price: 0,
       description: '',
+      dimensions: '5 x 5 x 5 inch',
+      materials: 'ceramic',
+      finishedAt: '2024',
       stock: 1,
       type: 'shop',
       createdAt: currentTimestamp

@@ -3,6 +3,9 @@ export interface Product {
   imgUrls: string[]
   price: number
   description: string
+  dimensions: string
+  materials: string
+  finishedAt: string
   stock: number
   type: string
   createdAt: number

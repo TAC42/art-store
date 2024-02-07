@@ -30,7 +30,7 @@ import { Router } from '@angular/router'
 })
 
 export class CartComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$: Observable<User> = EMPTY
+  @Input() loggedinUser$!: Observable<User>
 
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
@@ -81,9 +81,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   closeCart() {
     this.cartState = 'hidden'
-    setTimeout(() => {
-      this.modService.closeModal('cart')
-    }, 600)
+    setTimeout(() => this.modService.closeModal('cart'), 600)
   }
 
   changeAmount(cartItem: Product, action: string) {
@@ -105,9 +103,7 @@ export class CartComponent implements OnInit, OnDestroy {
           this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
         })
         return
-      } else {
-        return
-      }
+      } else return
 
       // Update the user's cart for any other changes
       const newCart: Product[] = cart.map(product => (product.name === updatedCartItem.name ? updatedCartItem : product))
@@ -118,11 +114,9 @@ export class CartComponent implements OnInit, OnDestroy {
     })
   }
 
-  onPayment() {    
+  onPayment() {
     this.router.navigate(['/payment'])
-    setTimeout(() => {
-      this.modService.closeModal('cart')
-    }, 600)
+    setTimeout(() => this.modService.closeModal('cart'), 600)
   }
 
   ngOnDestroy() {

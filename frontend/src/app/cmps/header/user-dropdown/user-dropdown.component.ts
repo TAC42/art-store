@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core'
-import { EMPTY, Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
@@ -13,7 +13,7 @@ import { LOGOUT } from '../../../store/user.actions'
 })
 
 export class UserDropdownComponent {
-  @Input() loggedinUser$: Observable<User> = EMPTY
+  @Input() loggedinUser$!: Observable<User>
 
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)

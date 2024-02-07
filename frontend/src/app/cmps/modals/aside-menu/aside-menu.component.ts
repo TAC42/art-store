@@ -4,7 +4,7 @@ import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
-import { EMPTY, Observable, Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { LOGOUT } from '../../../store/user.actions'
 import { Router } from '@angular/router'
 
@@ -26,7 +26,7 @@ import { Router } from '@angular/router'
 })
 
 export class AsideMenuComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$: Observable<User> = EMPTY
+  @Input() loggedinUser$!: Observable<User>
 
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
@@ -45,9 +45,7 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
 
   closeMenu() {
     this.menuState = 'hidden'
-    setTimeout(() => {
-      this.modService.closeModal('aside-menu')
-    }, 600)
+    setTimeout(() => this.modService.closeModal('aside-menu'), 600)
   }
 
   openLogin(event: MouseEvent) {
@@ -64,8 +62,6 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.modalSubscription) {
-      this.modalSubscription.unsubscribe()
-    }
+    if (this.modalSubscription) this.modalSubscription.unsubscribe()
   }
 }

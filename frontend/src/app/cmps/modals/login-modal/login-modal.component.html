@@ -10,7 +10,7 @@
                         </div>
                         <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
                     </label>
-                    <input id="username" type="text" formControlName="username" placeholder="Your username..."
+                    <input id="username" type="text" autofocus formControlName="username" placeholder="Your username..."
                         customValidator [minLength]=3 [maxLength]=24>
                 </div>
 
@@ -36,8 +36,9 @@
                         </div>
                         <span *ngIf="isFieldInvalid('firstName')">{{ getErrorMessage('firstName') }}</span>
                     </label>
-                    <input id="firstName" type="text" formControlName="firstName" placeholder="Your first name..."
-                        customValidator [minLength]=3 [maxLength]=24 [allowedSpecialChars]="',.'">
+                    <input id="firstName" type="text" #firstNameInput formControlName="firstName"
+                        placeholder="Your first name..." customValidator [minLength]=3 [maxLength]=24
+                        [allowedSpecialChars]="',.'">
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('lastName')">

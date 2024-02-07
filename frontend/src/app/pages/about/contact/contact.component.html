@@ -19,7 +19,7 @@
                     </div>
                     <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
                 </label>
-                <input id="name" type="text" formControlName="name" placeholder="John Doe..." customValidator
+                <input id="name" type="text" #nameInput formControlName="name" placeholder="John Doe..." customValidator
                     [minLength]=1 [maxLength]=48 [allowedSpecialChars]="'. '">
             </div>
 

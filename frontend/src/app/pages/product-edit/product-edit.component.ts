@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
 import { Observable, Subscription, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
@@ -16,6 +16,7 @@ import { AppState } from '../../store/app.state'
 export class ProductEditComponent implements OnInit, OnDestroy {
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.full') fullClass = true
+  @ViewChild('nameInput') nameInput!: ElementRef
 
   private route = inject(ActivatedRoute)
   private router = inject(Router)
@@ -40,11 +41,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       name: [this.product.name || '', [Validators.required], this.nameValidator()],
       price: [this.product.price || '', [Validators.required]],
       description: [this.product.description || '', [Validators.required]],
+      dimensions: [this.product.dimensions || '', [Validators.required]],
+      materials: [this.product.materials || '', [Validators.required]],
+      finishedAt: [this.product.finishedAt || '', [Validators.required]],
       stock: [this.product.stock || '', Validators.required],
       type: [this.product.type || '', [Validators.required]],
       imgUrls: this.fBuilder.array(this.product.imgUrls?.map(
         url => this.fBuilder.control(url)) || [])
     })
+    setTimeout(() => this.nameInput?.nativeElement.focus(), 0)
   }
 
   fetchProductData(): void {
