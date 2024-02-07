@@ -1,6 +1,7 @@
 <main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')">
     <section class="user-auth-modal flex column" *ngIf="verifyForm">
         <span>{{ message }}</span>
+        <span *ngIf="codeSent">If you do not see the code in your inbox, please check your Spam folder.</span>
 
         <button (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
             [class.disabled]="!resendAvailable && codeSent">

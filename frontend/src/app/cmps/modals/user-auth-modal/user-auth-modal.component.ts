@@ -120,20 +120,17 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.verifyForm.value.code === this.verificationCode) {
-      this.loggedinUser$.pipe(take(1)).subscribe(user => {
-        if (user && user._id) {
+      this.loggedinUser$.pipe(take(1)).subscribe(
+        user => {
           const updatedUser: User = { ...user, isVerified: true }
           this.store.dispatch(UPDATE_USER({ updatedUser }))
           showSuccessMsg('User Verified!', 'You may login back!',
             this.eBusService)
-        }
-      })
+        })
       this.store.dispatch(LOGOUT())
       setTimeout(() => window.location.reload(), 2000)
-    } else {
-      showErrorMsg('Verification Failed!', 'Please try again later',
-        this.eBusService)
-    }
+    } else showErrorMsg('Verification Failed!',
+      'Please try again later', this.eBusService)
   }
 
   ngOnDestroy() {
