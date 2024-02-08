@@ -66,6 +66,8 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loggedinUser$.subscribe((user) => {
       if (user.cart.length) {
+        console.log('THIS IS CART TRUE IN CART',user);
+        
         this.store.dispatch(LOAD_CART({ userCart: user.cart }))
       }
       else this.store.dispatch(CART_LOADED({ cart: [] }))

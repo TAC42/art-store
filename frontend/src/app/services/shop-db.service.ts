@@ -23,7 +23,7 @@ export class ShopDbService {
   }
 
   getById(productId: string): Observable<any> {
-    return this.httpService.get<Product>(`${BASE_URL}${productId}`).pipe(
+    return this.httpService.get<Product>(`${BASE_URL}id/${productId}`).pipe(
       catchError((error) => {
         console.error('Error fetching product by id:', error)
         return throwError(() => new Error('Error fetching product by id'))
