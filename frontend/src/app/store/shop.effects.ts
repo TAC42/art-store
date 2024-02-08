@@ -149,9 +149,9 @@ export class ShopEffects {
 
       mergeMap(({ userCart }) => {
         const requests = userCart.map(cartItem => {
-          if (cartItem.name) {  // Add a check for undefined name
-            console.log('in LOAD_CART_EFFECT: ', cartItem);
-            return this.shopDbService.getByName(cartItem.name).pipe(
+          if (cartItem._id) {  
+            console.log('in LOAD_CART_EFFECT: ', cartItem)
+            return this.shopDbService.getById(cartItem._id).pipe(
               take(1),
               map((product) => ({ ...product, amount: cartItem.amount })),
               catchError(() => of({ error: true } as const))
