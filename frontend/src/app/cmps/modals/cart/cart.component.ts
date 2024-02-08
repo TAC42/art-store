@@ -5,7 +5,7 @@ import { User } from '../../../models/user'
 import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
-import { Product } from '../../../models/shop'
+import { Cart, Product } from '../../../models/shop'
 import { OrderService } from '../../../services/order.service'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { CART_LOADED, LOAD_CART } from '../../../store/shop.actions'
@@ -66,8 +66,8 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loggedinUser$.subscribe((user) => {
       if (user.cart.length) {
-        console.log('THIS IS CART TRUE IN CART',user);
-        
+        console.log('THIS IS CART TRUE IN CART', user);
+
         this.store.dispatch(LOAD_CART({ userCart: user.cart }))
       }
       else this.store.dispatch(CART_LOADED({ cart: [] }))
@@ -99,7 +99,9 @@ export class CartComponent implements OnInit, OnDestroy {
         // Remove the cartItem when amount becomes zero
         console.log('I AM HERE IN REMOVE CARTITEM: ', cartItem);
 
-        const newCart: Product[] = cart.filter(product => product.name !== updatedCartItem.name)
+        const newCart: Cart[] = cart
+          .filter(product => product.name !== updatedCartItem.name)
+          .map((cartItem) => ({ amount: cartItem.amount, _id: cartItem._id }))
         this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
           const newUser: User = { ...updatedUser, cart: newCart }
           this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
@@ -108,7 +110,9 @@ export class CartComponent implements OnInit, OnDestroy {
       } else return
 
       // Update the user's cart for any other changes
-      const newCart: Product[] = cart.map(product => (product.name === updatedCartItem.name ? updatedCartItem : product))
+      const newCart: Cart[] = cart
+        .map(product => (product.name === updatedCartItem.name ? updatedCartItem : product))
+        .map((cartItem) => ({ amount: cartItem.amount, _id: cartItem._id }))
       this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
         const newUser: User = { ...updatedUser, cart: newCart }
         this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
