@@ -21,46 +21,46 @@ export class HomeComponent {
   artwareProducts: MiniProduct[] = [
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
-      productName: 'Tower Plate',
-      url: '/artware/details/Tower Plate'
+      productName: 'tower plate',
+      url: '/artware/details/tower plate'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/ibyk1mbjlblc3hrymhpi.png',
-      productName: 'Ancient Cup',
-      url: '/artware/details/Ancient Cup'
+      productName: 'ancient cup',
+      url: '/artware/details/ancient cup'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/nlejntudcw8gsdfw1owo.png',
-      productName: 'Casual Brew',
-      url: '/artware/details/Casual Brew'
+      productName: 'casual brew',
+      url: '/artware/details/casual brew'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/spwj3lmccf44ke56d53p.png',
-      productName: 'Elegant Vase',
-      url: '/artware/details/Elegant Vase'
+      productName: 'elegant vase',
+      url: '/artware/details/elegant vase'
     },
   ]
 
   shopProducts: MiniProduct[] = [
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',
-      productName: 'Metallic Green Mug',
-      url: '/shop/details/Metallic Green Mug'
+      productName: 'dark green mug',
+      url: '/shop/details/dark green mug'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/fekcvwmimrtm9wghntnr.png',
-      productName: 'Black Mug',
-      url: '/shop/details/Black Mug'
+      productName: 'black mug',
+      url: '/shop/details/black mug'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/vc8dzka5spwt0jwkfgmy.png',
-      productName: 'Blue Mug',
-      url: '/shop/details/Blue Mug'
+      productName: 'blue mug',
+      url: '/shop/details/blue mug'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/sr7vuhhliiq6mnwnbdqv.png',
-      productName: 'Green Mug',
-      url: '/shop/details/Green Mug'
+      productName: 'green mug',
+      url: '/shop/details/green mug'
     },
   ]
 
