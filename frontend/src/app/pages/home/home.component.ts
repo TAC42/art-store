@@ -21,22 +21,22 @@ export class HomeComponent {
   artwareProducts: MiniProduct[] = [
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
-      productName: 'tower plate',
+      name: 'tower plate',
       url: '/artware/details/tower plate'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/ibyk1mbjlblc3hrymhpi.png',
-      productName: 'ancient cup',
+      name: 'ancient cup',
       url: '/artware/details/ancient cup'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/nlejntudcw8gsdfw1owo.png',
-      productName: 'casual brew',
+      name: 'casual brew',
       url: '/artware/details/casual brew'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/spwj3lmccf44ke56d53p.png',
-      productName: 'elegant vase',
+      name: 'elegant vase',
       url: '/artware/details/elegant vase'
     },
   ]
@@ -44,22 +44,22 @@ export class HomeComponent {
   shopProducts: MiniProduct[] = [
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',
-      productName: 'dark green mug',
+      name: 'dark green mug',
       url: '/shop/details/dark green mug'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/fekcvwmimrtm9wghntnr.png',
-      productName: 'black mug',
+      name: 'black mug',
       url: '/shop/details/black mug'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/vc8dzka5spwt0jwkfgmy.png',
-      productName: 'blue mug',
+      name: 'blue mug',
       url: '/shop/details/blue mug'
     },
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/sr7vuhhliiq6mnwnbdqv.png',
-      productName: 'green mug',
+      name: 'green mug',
       url: '/shop/details/green mug'
     },
   ]

@@ -32,7 +32,9 @@ export class ProductDetailsComponent implements OnInit {
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
-    product$: Observable<Product> = this.route.data.pipe(map(data => data['product']))
+    product$: Observable<Product> = this.route.data.pipe(
+        map(data => data['product'])
+    )
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
 
     ngOnInit(): void {
@@ -70,23 +72,23 @@ export class ProductDetailsComponent implements OnInit {
 
         this.loggedinUser$.pipe(take(1)).subscribe(
             updatedUser => {
-              if (updatedUser._id) {
-                const newCartItem: Cart = { _id: product._id, amount: 1 }
-      
-                const isProductAlreadyInCart = updatedUser.cart.some(
-                  cartProduct => cartProduct._id === newCartItem._id)
-      
-                if (!isProductAlreadyInCart) {
-                  const newUser: User = {
-                    ...updatedUser,
-                    cart: [...updatedUser.cart, newCartItem]
-                  }
-                  this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
-                  showSuccessMsg('Product Added!',
-                    'Product has been added to the cart', this.eBusService)
-                } else showErrorMsg('Cannot Add!',
-                  'Product already included in the cart', this.eBusService)
-              } else this.modService.openModal('login')
+                if (updatedUser._id) {
+                    const newCartItem: Cart = { _id: product._id, amount: 1 }
+
+                    const isProductAlreadyInCart = updatedUser.cart.some(
+                        cartProduct => cartProduct._id === newCartItem._id)
+
+                    if (!isProductAlreadyInCart) {
+                        const newUser: User = {
+                            ...updatedUser,
+                            cart: [...updatedUser.cart, newCartItem]
+                        }
+                        this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+                        showSuccessMsg('Product Added!',
+                            'Product has been added to the cart', this.eBusService)
+                    } else showErrorMsg('Cannot Add!',
+                        'Product already included in the cart', this.eBusService)
+                } else this.modService.openModal('login')
             })
     }
 }

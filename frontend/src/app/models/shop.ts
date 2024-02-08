@@ -20,7 +20,7 @@ export interface ShopFilter {
 
 export interface MiniProduct {
   imgUrl: string
-  productName: string
+  name: string
   url: string
 }
 

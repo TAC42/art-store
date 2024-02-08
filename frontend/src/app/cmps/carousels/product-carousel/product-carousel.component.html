@@ -1,8 +1,8 @@
 <div class="carousel-container flex" customSwipe (swipeLeft)="previousImage()" (swipeRight)="nextImage()">
     <a *ngFor="let product of products; let i = index" [ngStyle]="getSlideStyle(i)" [href]="product.url"
         class="carousel-slide">
-        <img [src]="product.imgUrl" [alt]="product.productName">
-        <span class="product-name">{{ product.productName }}</span>
+        <img [src]="product.imgUrl" [alt]="product.name">
+        <span class="product-name">{{ product.name }}</span>
     </a>
 
     <div class="carousel-dots flex row">

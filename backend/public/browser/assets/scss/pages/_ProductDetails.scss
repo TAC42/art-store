@@ -1,6 +1,7 @@
 product-details {
     .product-details-contents {
         color: $prmclr1;
+        margin-block-end: 2em;
 
         .mobile-view {
             .actions {
@@ -109,6 +110,7 @@ product-details {
                 padding: 0.5em 1em;
                 width: 100%;
                 text-align: center;
+                font-family: 'nh-bold';
             }
 
             .action-btn {
@@ -126,10 +128,6 @@ product-details {
                     font-family: 'nh-bold';
                     color: $prmclr1;
                     transition: all 0.3s ease-in-out;
-                }
-
-                a {
-                    padding: 0.2em 0.75em;
                 }
 
                 svg-render {
@@ -162,6 +160,7 @@ product-details {
                 padding: 0.5em 1em;
                 text-align: center;
                 gap: 1em;
+                grid-template-columns: repeat(2, 1fr);
 
                 .other-product-area {
                     min-height: 180px;
@@ -169,8 +168,7 @@ product-details {
                     cursor: pointer;
 
                     img {
-                        height: 100%;
-                        max-height: 160px;
+                        height: 170px;
                         object-fit: cover;
                         transition: all 0.5s ease;
                     }
@@ -180,17 +178,20 @@ product-details {
                         text-transform: capitalize;
                     }
 
+                    &:last-child {
+                        grid-column: 1 / -1;
+                        justify-self: center;
+                    }
+
                     &:hover {
+                        text-decoration: none;
+
                         img {
                             filter: brightness(.85);
                         }
-
-                        text-decoration: none;
                     }
                 }
             }
         }
-
-        margin-block-end: 2em;
     }
 }

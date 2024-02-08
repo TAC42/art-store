@@ -140,26 +140,26 @@ product-edit {
 
 product-details {
     .product-details-contents {
-        .mobile-view {
-            @media(max-width: 480px) {
-                .other-products-area {
-                    grid-template-columns: repeat(2, 1fr);
+        // .mobile-view {
+        //     @media(max-width: 480px) {
+        //         .other-products-area {
+        //             grid-template-columns: repeat(2, 1fr);
 
-                    .other-product-area {
-                        &:nth-child(3) {
-                            grid-column: 1 / -1;
-                            margin: auto;
-                        }
-                    }
-                }
-            }
+        //             .other-product-area {
+        //                 &:nth-child(3) {
+        //                     grid-column: 1 / -1;
+        //                     margin: auto;
+        //                 }
+        //             }
+        //         }
+        //     }
 
-            @media(min-width: 481px) {
-                .other-products-area {
-                    grid-template-columns: repeat(3, 1fr);
-                }
-            }
-        }
+        //     @media(min-width: 481px) {
+        //         .other-products-area {
+        //             grid-template-columns: repeat(3, 1fr);
+        //         }
+        //     }
+        // }
     }
 }
 
