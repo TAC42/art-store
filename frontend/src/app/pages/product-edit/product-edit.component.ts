@@ -125,8 +125,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   onSaveProduct() {
-    const productToSave = { ...this.product, ...this.editForm.value }
+    const formValues = { ...this.editForm.value }
+    formValues.name = formValues.name.toLowerCase()
+
+    const productToSave = { ...this.product, ...formValues }
     this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
+
     this.router.navigateByUrl(`/${encodeURIComponent(
       this.product.type || 'shop')}`)
   }
