@@ -30,7 +30,7 @@ export const PRODUCT_BY_NAME_LOADED = createAction(
 // handling of product in details
 export const LOAD_CART = createAction(
   '[Shop] Load Cart',
-  props<{ userCart: Product[] }>()
+  props<{ userCart: Cart[] }>()
 )
 export const CART_LOADED = createAction(
   '[Shop] Cart Loaded',

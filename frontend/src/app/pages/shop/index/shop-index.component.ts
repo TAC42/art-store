@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { Observable, take } from 'rxjs'
 import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
-import { Product } from '../../../models/shop'
+import { Cart, Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -60,15 +60,15 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.loggedinUser$.pipe(take(1)).subscribe(
       updatedUser => {
         if (updatedUser._id) {
-          const newProduct: Product = { ...product, amount: 1 }
+          const newCartItem: Cart = { _id: product._id, amount: 1 }
 
           const isProductAlreadyInCart = updatedUser.cart.some(
-            cartProduct => cartProduct.name === newProduct.name)
+            cartProduct => cartProduct._id === newCartItem._id)
 
           if (!isProductAlreadyInCart) {
             const newUser: User = {
               ...updatedUser,
-              cart: [...updatedUser.cart, newProduct]
+              cart: [...updatedUser.cart, newCartItem]
             }
             this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
             showSuccessMsg('Product Added!',

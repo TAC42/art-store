@@ -25,6 +25,6 @@ export interface MiniProduct {
 }
 
 export interface Cart {
-  amount: number
-  name: string
+  amount?: number
+  _id?: string
 }
