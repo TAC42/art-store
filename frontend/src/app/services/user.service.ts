@@ -23,7 +23,7 @@ export class UserService {
   }
 
   getById(userId: string): Observable<User> {
-    return this.httpService.get<User>(BASE_URL + userId).pipe(
+    return this.httpService.get<User>(`${BASE_URL}by-id/${userId}`).pipe(
       catchError((error) => {
         console.error('Error fetching user by ID:', error)
         return throwError(() => new Error('Error fetching user'))
@@ -32,13 +32,13 @@ export class UserService {
   }
 
   remove(userId: string): Observable<any> {
-    return this.httpService.delete(`${BASE_URL}${userId}`)
+    return this.httpService.delete(`${BASE_URL}delete/${userId}`)
   }
 
   save(user: User): Observable<User> {
     if (user) {
-      return this.httpService.put<User>(`${BASE_URL}${user._id}`, user)
-    } else return this.httpService.post<User>(BASE_URL, user)
+      return this.httpService.put<User>(`${BASE_URL}update/${user._id}`, user)
+    } else return this.httpService.post<User>(`${BASE_URL}add`, user)
   }
 
   login(userCred: UserCredentials): Observable<User> {

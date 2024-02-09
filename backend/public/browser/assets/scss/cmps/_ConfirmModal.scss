@@ -7,7 +7,7 @@ confirm-modal {
     background: $prmclr2;
     z-index: 15;
     padding: 1em;
-    width: 15em;
+    max-width: 300px;
     border-radius: 0.5em;
     -webkit-user-select: none;
     user-select: none;
@@ -22,7 +22,7 @@ confirm-modal {
 
     .btns {
       grid-auto-flow: column;
-      gap: 1em;
+      gap: 5em;
 
       button {
         background-color: $scdclr4;

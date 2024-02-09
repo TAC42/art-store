@@ -9,7 +9,7 @@ export const userRoutes = express.Router()
 // userRoutes.use(requireAuth) // Uncomment if you want to require auth for all user routes
 
 userRoutes.get('/', log, getUsers)
-userRoutes.get('/:id', getUser)
-userRoutes.put('/:id', updateUser)
-userRoutes.post('/', addUser)
-userRoutes.delete('/:id', removeUser)
+userRoutes.get('/by-id/:id', getUser)
+userRoutes.post('/add/', addUser)
+userRoutes.put('/update/:id', updateUser)
+userRoutes.delete('/delete/:id', removeUser)

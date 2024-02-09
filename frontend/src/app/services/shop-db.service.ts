@@ -23,7 +23,7 @@ export class ShopDbService {
   }
 
   getById(productId: string): Observable<any> {
-    return this.httpService.get<Product>(`${BASE_URL}id/${productId}`).pipe(
+    return this.httpService.get<Product>(`${BASE_URL}by-id/${productId}`).pipe(
       catchError((error) => {
         console.error('Error fetching product by id:', error)
         return throwError(() => new Error('Error fetching product by id'))
@@ -32,9 +32,7 @@ export class ShopDbService {
   }
 
   getByName(productName: string): Observable<Product | null> {
-    console.log('productName: ', productName);
-
-    return this.httpService.get<Product>(`${BASE_URL}${productName}`).pipe(
+    return this.httpService.get<Product>(`${BASE_URL}by-name/${productName}`).pipe(
       catchError((error) => {
         console.error('Error fetching product by name:', error)
         return throwError(() => new Error('Error fetching product by name'))
@@ -52,7 +50,7 @@ export class ShopDbService {
   }
 
   getRandomProducts(type: string, excludeProductId: string): Observable<Product[]> {
-    const url = `${BASE_URL}random?type=${encodeURIComponent(type)}&excludeProductId=${encodeURIComponent(excludeProductId)}`
+    const url = `${BASE_URL}query/random?type=${encodeURIComponent(type)}&excludeProductId=${encodeURIComponent(excludeProductId)}`
     return this.httpService.get<Product[]>(url).pipe(
       catchError((error) => {
         console.error('Error fetching random products:', error)
@@ -62,13 +60,13 @@ export class ShopDbService {
   }
 
   remove(productId: string): Observable<any> {
-    return this.httpService.delete(`${BASE_URL}${productId}`)
+    return this.httpService.delete(`${BASE_URL}delete/${productId}`)
   }
 
   save(product: Product): Observable<Product> {
     if (product._id) {
-      return this.httpService.put<Product>(`${BASE_URL}${product._id}`, product)
-    } else return this.httpService.post<Product>(BASE_URL, product)
+      return this.httpService.put<Product>(`${BASE_URL}update/${product._id}`, product)
+    } else return this.httpService.post<Product>(`${BASE_URL}add`, product)
   }
 
   getDefaultFilter(): ShopFilter {
