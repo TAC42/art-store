@@ -122,8 +122,7 @@ product-details {
                 padding: 0.5em 1.5em;
                 transition: all 0.3s ease-in-out;
 
-                span,
-                a {
+                span {
                     font-size: 16px;
                     font-family: 'nh-bold';
                     color: $prmclr1;
@@ -140,11 +139,16 @@ product-details {
                     }
                 }
 
+                &:not(:has(svg-render)) {
+                    span {
+                        padding: 0.2em 0.75em;
+                    }
+                }
+
                 &:hover {
                     background: $prmclr1;
 
-                    span,
-                    a {
+                    span {
                         color: $prmclr3;
                         text-decoration: none;
                     }
@@ -181,6 +185,182 @@ product-details {
                     &:last-child {
                         grid-column: 1 / -1;
                         justify-self: center;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+
+                        img {
+                            filter: brightness(.85);
+                        }
+                    }
+                }
+            }
+        }
+
+        .desktop-view {
+            .actions {
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                padding: 0.5em 2em;
+
+                button {
+                    width: 42px;
+                    height: 42px;
+
+                    svg {
+                        fill: $scdclr2;
+                        transition: fill 0.3s ease-in-out;
+
+                        &:hover {
+                            fill: $prmclr1;
+                        }
+                    }
+                }
+            }
+
+            .product-area {
+                text-align: center;
+                margin-block-end: 1em;
+                padding: 0 2em;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1em;
+
+                .image-container {
+                    grid-column: 1 / 2;
+                    align-self: center;
+
+                    img {
+                        min-height: 400px;
+                        max-height: 400px;
+                        object-fit: cover;
+                        cursor: pointer;
+                    }
+                }
+
+                .details-area {
+                    margin-block-start: 1em;
+                    font-family: 'sabon';
+                    font-size: 16px;
+                    text-align: left;
+                    grid-column: 2 / -1;
+
+                    h2 {
+                        width: 100%;
+                        font-family: 'nh-bold';
+                        text-transform: capitalize;
+                        font-size: 26px;
+                    }
+
+                    h4 {
+                        width: 100%;
+                        color: $scdclr2;
+                        font-weight: bold;
+                        letter-spacing: 0.15px;
+                    }
+
+                    p {
+                        width: 100%;
+                        color: $scdclr2;
+                        letter-spacing: 0.15px;
+                        padding: 0.5em 0;
+
+                        a {
+                            color: $prmclr1;
+                        }
+                    }
+
+                    .description,
+                    .price {
+                        color: $prmclr1;
+                        font-size: 18px;
+                        margin-block-end: 0.5em;
+                    }
+
+                    .unavailable {
+                        color: $prmclr1;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            h3 {
+                padding: 0.5em 1em;
+                width: 100%;
+                text-align: center;
+                font-family: 'nh-bold';
+            }
+
+            .action-btn {
+                border-radius: 0.5em;
+                gap: 0.25em;
+                margin: 1em auto;
+                border: 1px solid $prmclr1;
+                align-items: center;
+                padding: 0.5em 1.5em;
+                transition: all 0.3s ease-in-out;
+                grid-column: 2 / -1;
+
+                span {
+                    font-size: 16px;
+                    font-family: 'nh-bold';
+                    color: $prmclr1;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                svg-render {
+                    width: 32px;
+                    height: 32px;
+
+                    svg {
+                        transition: all 0.3s ease-in-out;
+                        fill: $scdclr2;
+                    }
+                }
+
+                &:not(:has(svg-render)) {
+                    span {
+                        padding: 0.2em 0.75em;
+                    }
+                }
+
+                &:hover {
+                    background: $prmclr1;
+
+                    span {
+                        color: $prmclr3;
+                        text-decoration: none;
+                    }
+
+                    svg {
+                        fill: $prmclr3;
+                        transform: translateX(5px);
+                    }
+                }
+            }
+
+            .other-products-area {
+                padding: 0.5em 2em;
+                text-align: center;
+                gap: 1em;
+                grid-template-columns: repeat(3, 1fr);
+
+                .other-product-area {
+                    min-height: 180px;
+                    gap: 0.25em;
+                    cursor: pointer;
+
+                    img {
+                        height: 170px;
+                        object-fit: cover;
+                        transition: all 0.5s ease;
+                    }
+
+                    p {
+                        font-family: 'nh-bold';
+                        text-transform: capitalize;
                     }
 
                     &:hover {

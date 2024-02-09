@@ -66,6 +66,11 @@ export class ProductDetailsComponent implements OnInit {
             })
     }
 
+    onInquire(event: Event): void {
+        event.stopPropagation()
+        this.router.navigateByUrl('/about/contact')
+    }
+
     onAddToCart(event: Event, product: Product): void {
         event.stopPropagation()
         if (!product) return
