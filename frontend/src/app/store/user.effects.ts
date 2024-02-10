@@ -142,8 +142,10 @@ export class UserEffects {
 
             mergeMap(action =>
                 this.userService.save(action.updatedUser).pipe(
+                    tap((user: User) => {
+                      this.userService.setLoggedinUser(user) 
+                    }),
                     map(user => SET_LOGGEDIN_USER({ user })),
-                    tap(user => console.log('saved user in effects:', user)),
                     catchError(error => {
                         console.error('Error loading User:', error)
                         return of(SET_LOADING_STATE({ isLoading: false }))

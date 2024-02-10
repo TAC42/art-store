@@ -44,7 +44,7 @@ export class UserService {
   login(userCred: UserCredentials): Observable<User> {
     return this.httpService.post<User>('auth/login', userCred).pipe(
       tap((user) => {
-        this._setLoggedinUser(user)
+        this.setLoggedinUser(user)
       }),
       catchError((error) => {
         console.error('Error during login:', error)
@@ -57,7 +57,7 @@ export class UserService {
     return this.httpService.post<User>('auth/signup', signupData).pipe(
       tap((newUser) => {
         console.log('Registered user:', newUser.fullName)
-        this._setLoggedinUser(newUser)
+        this.setLoggedinUser(newUser)
       }),
       catchError((error) => {
         console.error('Error during signup:', error)
@@ -81,7 +81,7 @@ export class UserService {
     return user ? JSON.parse(user) : null
   }
 
-  _setLoggedinUser(user: User): void {
+  setLoggedinUser(user: User): void {
     const userForSession = {
       _id: user._id,
       username: user.username,
