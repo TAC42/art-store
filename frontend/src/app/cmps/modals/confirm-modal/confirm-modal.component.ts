@@ -25,7 +25,7 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   getProductToRemove(): string | undefined {
-    return this.modService.getProductId('confirm')
+    return this.modService.getModalParam('confirm')
   }
 
   toggleModal() {

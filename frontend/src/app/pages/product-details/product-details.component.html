@@ -13,8 +13,10 @@
         <ng-container *ngIf="product$ | async as product">
             <section class="product-area flex column">
                 <div class="image-container flex column">
-                    <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
-                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image">
+                    <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
+                        (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
+                        (click)="onImageClick($event, product.imgUrls[0])">
                     <span class="price-tag flex">${{ product.price }}.00</span>
                 </div>
 
@@ -70,8 +72,10 @@
         <ng-container *ngIf="product$ | async as product">
             <section class="product-area grid">
                 <div class="image-container flex column">
-                    <app-image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls" />
-                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image">
+                    <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
+                        (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
+                        (click)="onImageClick($event, product.imgUrls[0])">
                 </div>
 
                 <div class="details-area">

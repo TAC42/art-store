@@ -9,8 +9,8 @@ export class ModalService {
   private modals: { [key: string]: any } = {}
   private modalSubjects: { [key: string]: Subject<boolean> } = {}
 
-  openModal(id: string, productId?: string) {
-    this.modals[id] = { isOpen: true, productId }
+  openModal(id: string, param?: string) {
+    this.modals[id] = { isOpen: true, param }
     if (!this.modalSubjects[id]) {
       this.modalSubjects[id] = new Subject<boolean>()
     }
@@ -30,8 +30,8 @@ export class ModalService {
     return !!this.modals[id]?.isOpen
   }
 
-  getProductId(id: string): string | undefined {
-    return this.modals[id]?.productId
+  getModalParam(id: string): string | undefined {
+    return this.modals[id]?.param
   }
 
   onModalStateChange(id: string): Subject<boolean> {

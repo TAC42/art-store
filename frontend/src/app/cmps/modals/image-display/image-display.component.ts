@@ -9,8 +9,13 @@ import { ModalService } from '../../../services/modal.service'
 export class ImageDisplayComponent {
   public modService = inject(ModalService)
 
+  public imageUrl: string = ''
 
-  closeImageDisplayModal() {
-    this.modService.closeModal('login')
+  getImageUrl(): string {
+    return this.modService.getModalParam('image-display') || ''
+  }
+
+  closeImageDisplayModal(): void {
+    this.modService.closeModal('image-display')
   }
 }

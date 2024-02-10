@@ -24,12 +24,6 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    if (this.autoSwitchSubscription) {
-      this.autoSwitchSubscription.unsubscribe()
-    }
-  }
-
   nextImage(): void {
     this.currentIndex = (this.currentIndex + 1) % this.products.length
     this.currentIndexSignal.set(this.currentIndex)
@@ -51,13 +45,17 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   getSlideStyle(index: number): object {
     let offset = (index - this.currentIndex) * 100
 
-    if (this.currentIndex === 0 && index === this.products.length - 1) {
-      offset = -100
-    } else if (this.currentIndex === this.products.length - 1 && index === 0) {
-      offset = 100
-    }
+    if (this.currentIndex === 0 &&
+      index === this.products.length - 1) offset = -100
+
+    else if (this.currentIndex === this.products.length - 1 &&
+      index === 0) offset = 100
 
     const opacity = index === this.currentIndex ? 1 : 0
     return { 'transform': `translateX(${offset}%)`, 'opacity': opacity }
+  }
+
+  ngOnDestroy() {
+    if (this.autoSwitchSubscription) this.autoSwitchSubscription.unsubscribe()
   }
 }

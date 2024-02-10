@@ -1,5 +1,8 @@
-<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('image-display')">
+<main class="modal-wrapper flex justify-center align-center" *ngIf="modService.isModalOpen('image-display')">
     <section class="image-display flex column" (clickOutside)="closeImageDisplayModal()">
-
+        <img [src]="getImageUrl()" alt="Full Size Image">
+        <button class="flex" (click)="closeImageDisplayModal()">
+            <svg-render svgName="removeIcon" />
+        </button>
     </section>
 </main>

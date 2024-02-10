@@ -66,6 +66,11 @@ export class ProductDetailsComponent implements OnInit {
             })
     }
 
+    onImageClick(event: Event, imageUrl: string): void {
+        event.stopPropagation()
+        this.modService.openModal('image-display', imageUrl)
+    }
+
     onInquire(event: Event): void {
         event.stopPropagation()
         this.router.navigateByUrl('/about/contact')

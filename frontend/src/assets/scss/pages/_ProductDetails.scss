@@ -20,11 +20,13 @@ product-details {
                     width: 42px;
                     height: 42px;
 
-                    svg {
+                    svg-render {
                         fill: $scdclr2;
                         transition: fill 0.3s ease-in-out;
+                    }
 
-                        &:hover {
+                    &:hover {
+                        svg-render {
                             fill: $prmclr1;
                         }
                     }
@@ -43,6 +45,7 @@ product-details {
                         max-height: 400px;
                         object-fit: cover;
                         cursor: pointer;
+                        transition: all 0.5s ease-in-out;
                     }
 
                     .price-tag {
@@ -56,6 +59,12 @@ product-details {
                         border-radius: 0.5em;
                         justify-content: center;
                         align-items: center;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(0.75);
+                        }
                     }
                 }
 
@@ -174,7 +183,7 @@ product-details {
                     img {
                         height: 170px;
                         object-fit: cover;
-                        transition: all 0.5s ease;
+                        transition: all 0.5s ease-in-out;
                     }
 
                     p {
@@ -209,11 +218,13 @@ product-details {
                     width: 42px;
                     height: 42px;
 
-                    svg {
+                    svg-render {
                         fill: $scdclr2;
                         transition: fill 0.3s ease-in-out;
+                    }
 
-                        &:hover {
+                    &:hover {
+                        svg-render {
                             fill: $prmclr1;
                         }
                     }
@@ -236,6 +247,13 @@ product-details {
                         max-height: 400px;
                         object-fit: cover;
                         cursor: pointer;
+                        transition: all 0.5s ease-in-out;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(0.75);
+                        }
                     }
                 }
 
@@ -355,7 +373,7 @@ product-details {
                     img {
                         height: 200px;
                         object-fit: cover;
-                        transition: all 0.5s ease;
+                        transition: all 0.5s ease-in-out;
                     }
 
                     p {
