@@ -1,0 +1,14 @@
+.modal-wrapper {
+    .image-display {
+        position: absolute;
+        top: 10%;
+        background: $prmclr2;
+        width: 100%;
+        max-width: 350px;
+        height: fit-content;
+        z-index: 15;
+        padding: 1em;
+        border-radius: 0.5em;
+        user-select: none;
+    }
+}

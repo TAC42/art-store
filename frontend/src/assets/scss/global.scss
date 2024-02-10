@@ -27,14 +27,17 @@
 @import "cmps/ShopFilter";
 @import "cmps/ShopList";
 @import "cmps/ProductPreview";
-@import "cmps/AsideMenu";
 @import "cmps/ImageCarousel";
 @import "cmps/AppFooter";
-@import "cmps/LoginModal";
-@import "cmps/UserMsg";
 @import "cmps/ImageUploader";
-@import "cmps/ConfirmModal";
-@import "cmps/Cart";
-@import "cmps/UserMsg";
-@import "cmps/UserAuthModal";
-@import "cmps/UserDropdown";
+
+// modals
+@import "cmps/modals/Cart";
+@import "cmps/modals/UserMsg";
+@import "cmps/modals/UserAuthModal";
+@import "cmps/modals/UserDropdown";
+@import "cmps/modals/LoginModal";
+@import "cmps/modals/UserMsg";
+@import "cmps/modals/AsideMenu";
+@import "cmps/modals/ConfirmModal";
+@import "cmps/modals/ImageDisplay";
