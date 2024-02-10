@@ -14,7 +14,7 @@ export class OrderService {
     const deliveryFeeRate = 0.12 // Delivery fee rate (12%)
 
     // Calculate total, taxes, and grand total
-    const total = cartItems.reduce((acc, cartItem) => acc + cartItem.price, 0)
+    const total = cartItems.reduce((acc, cartItem) => acc + cartItem.price*(cartItem.amount || 1), 0)
     const taxes = total * nyTaxRate
     const deliveryFee = total * deliveryFeeRate
     const grandTotal = total + taxes + deliveryFee
