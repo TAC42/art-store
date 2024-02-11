@@ -38,23 +38,20 @@ export class ProductDetailsComponent implements OnInit {
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
 
     ngOnInit(): void {
-        this.product$.subscribe(product => {
-            if (product && product._id) {
-                this.store.dispatch(LOAD_RANDOM_PRODUCTS({
-                    productType: product.type,
-                    excludeProductId: product._id
-                }))
-            }
-        })
+        this.product$.subscribe(
+            product => {
+                if (product && product._id) {
+                    this.store.dispatch(LOAD_RANDOM_PRODUCTS({
+                        productType: product.type,
+                        excludeProductId: product._id
+                    }))
+                }
+            })
     }
 
     onBack(event: Event): void {
         event.stopPropagation()
-        this.product$.pipe(take(1)).subscribe(
-            product => {
-                this.router.navigateByUrl(`/${encodeURIComponent(
-                    product?.type || 'shop')}`)
-            })
+        this.router.navigateByUrl(`/${encodeURIComponent('shop')}`)
     }
 
     onOpenCart(event: Event): void {
@@ -66,14 +63,14 @@ export class ProductDetailsComponent implements OnInit {
             })
     }
 
-    onImageClick(event: Event, imageUrl: string): void {
-        event.stopPropagation()
-        this.modService.openModal('image-display', imageUrl)
-    }
-
     onInquire(event: Event): void {
         event.stopPropagation()
         this.router.navigateByUrl('/about/contact')
+    }
+
+    onImageClick(event: Event, imageUrl: string): void {
+        event.stopPropagation()
+        this.modService.openModal('image-display', imageUrl)
     }
 
     onAddToCart(event: Event, product: Product): void {

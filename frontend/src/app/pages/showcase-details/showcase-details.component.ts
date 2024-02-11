@@ -24,27 +24,6 @@ export class ShowcaseDetailsComponent {
   product$: Observable<Product> = this.route.data.pipe(
       map(data => data['product'])
   )
-  // randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
-
-  // ngOnInit(): void {
-  //     this.product$.subscribe(product => {
-  //         if (product && product._id) {
-  //             this.store.dispatch(LOAD_RANDOM_PRODUCTS({
-  //                 productType: product.type,
-  //                 excludeProductId: product._id
-  //             }))
-  //         }
-  //     })
-  // }
-
-  onBack(event: Event): void {
-      event.stopPropagation()
-      this.product$.pipe(take(1)).subscribe(
-          product => {
-              this.router.navigateByUrl(`/${encodeURIComponent(
-                  product?.type || 'artware')}`)
-          })
-  }
 
   onImageClick(event: Event, imageUrl: string): void {
       event.stopPropagation()

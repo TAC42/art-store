@@ -3,9 +3,11 @@
         class="mobile-view flex column">
         <ng-container *ngIf="product$ | async as product">
             <h2>Collection</h2>
-            <a [routerLink]="['/' + product.type]">
+            <a class="flex row" [routerLink]="['/' + product.type]">
+                <svg-render svgName="leftArrowIcon" />
                 <span>back to results</span>
             </a>
+
             <section class="product-area flex column">
                 <div class="image-container flex column">
                     <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
@@ -34,9 +36,11 @@
         class="desktop-view flex column">
         <ng-container *ngIf="product$ | async as product">
             <h2>Ori Carlin Collection</h2>
-            <a [routerLink]="['/' + product.type]">
+            <a class="flex row" [routerLink]="['/' + product.type]">
+                <svg-render svgName="leftArrowIcon" />
                 <span>back to results</span>
             </a>
+
             <section class="product-area grid">
                 <div class="image-container flex column">
                     <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"

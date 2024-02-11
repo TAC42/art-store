@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../../services/utility.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { ModalService } from '../../../services/modal.service'
 
 @Component({
   selector: 'app-contact',
@@ -19,6 +20,7 @@ export class ContactComponent implements OnInit {
   private dTypeService = inject(DeviceTypeService)
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
+  private modService = inject(ModalService)
 
   contactForm!: FormGroup
   specialChars = "'. ?$%#!*:,()\"'"
@@ -86,8 +88,8 @@ export class ContactComponent implements OnInit {
         next: () => {
           showSuccessMsg('Email Sent!',
             'Thank you for contacting!', this.eBusService)
+          // reset of form & recaptcha token
           this.contactForm.reset()
-          // reset of recaptcha token
           this.isCaptchaResolved = false
           this.captchaResponse = null
         },
@@ -98,5 +100,10 @@ export class ContactComponent implements OnInit {
         }
       })
     }
+  }
+
+  onImageClick(event: Event, imageUrl: string): void {
+    event.stopPropagation()
+    this.modService.openModal('image-display', imageUrl)
   }
 }

@@ -141,11 +141,8 @@ product-details {
                 svg-render {
                     width: 32px;
                     height: 32px;
-
-                    svg {
-                        transition: all 0.3s ease-in-out;
-                        fill: $scdclr2;
-                    }
+                    transition: all 0.3s ease-in-out;
+                    fill: $prmclr1;
                 }
 
                 &:not(:has(svg-render)) {
@@ -162,7 +159,7 @@ product-details {
                         text-decoration: none;
                     }
 
-                    svg {
+                    svg-render {
                         fill: $prmclr3;
                         transform: translateX(5px);
                     }
@@ -331,11 +328,8 @@ product-details {
                 svg-render {
                     width: 32px;
                     height: 32px;
-
-                    svg {
-                        transition: all 0.3s ease-in-out;
-                        fill: $scdclr2;
-                    }
+                    transition: all 0.3s ease-in-out;
+                    fill: $prmclr1;
                 }
 
                 &:not(:has(svg-render)) {
@@ -352,7 +346,7 @@ product-details {
                         text-decoration: none;
                     }
 
-                    svg {
+                    svg-render {
                         fill: $prmclr3;
                         transform: translateX(5px);
                     }
