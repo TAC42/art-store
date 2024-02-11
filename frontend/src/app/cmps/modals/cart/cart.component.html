@@ -1,61 +1,75 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
-  <section (clickOutside)="closeCart()" [@slideInOut]="cartState" class="shopping-cart flex column">
+  <section
+    (clickOutside)="closeCart()"
+    [@slideInOut]="cartState"
+    class="shopping-cart flex column"
+  >
     <div class="cart-header flex row">
       <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
     </div>
-    <ng-container *ngIf="cart$ | async as cart; else sorry">
-      <main class="cart-main grid">
-        <section class="cart-list grid">
-          <article class="cart-item grid" *ngFor="let cartItem of cart">
-            <img [src]="cartItem.imgUrls[0]" [alt]="cartItem.name" />
-            <div class="cart-item-body flex">
-              <span class="name">{{ cartItem.name }}</span>
-              <span class="price">${{ cartItem.price }}</span>
-              <span class="quantity flex">
-                <svg-render (click)="changeAmount(cartItem, '-')" svgName="minusIcon"></svg-render>
-                <span class="amount">{{ cartItem.amount }}</span>
-                <svg-render (click)="changeAmount(cartItem, '+')" svgName="addIcon"
-                  [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }"></svg-render>
-              </span>
-            </div>
-          </article>
-        </section>
+    <ng-container *ngIf="cart$ | async as cart">
+      <ng-container *ngIf="cart.length; else sorry">
+        <main class="cart-main grid">
+          <section class="cart-list grid">
+            <article class="cart-item grid" *ngFor="let cartItem of cart">
+              <img [src]="cartItem.imgUrls[0]" [alt]="cartItem.name" />
+              <div class="cart-item-body flex">
+                <span class="name">{{ cartItem.name }}</span>
+                <span class="price">${{ cartItem.price }}</span>
+                <span class="quantity flex">
+                  <svg-render
+                    (click)="changeAmount(cartItem, '-')"
+                    svgName="minusIcon"
+                  ></svg-render>
+                  <span class="amount">{{ cartItem.amount }}</span>
+                  <svg-render
+                    (click)="changeAmount(cartItem, '+')"
+                    svgName="addIcon"
+                    [ngClass]="{
+                      'no-more': cartItem.amount === cartItem.stock
+                    }"
+                  ></svg-render>
+                </span>
+              </div>
+            </article>
+          </section>
 
-        <section class="check-out" *ngIf="cart.length > 0">
-          <ng-container *ngIf="orderSummary$ | async as orderSummary">
-            <div class="subtotal flex">
-              <span>Subtotal</span>
-              <span>
-                {{ orderSummary.total | currency : "USD" : "symbol" }}</span>
-            </div>
-            <!-- <span
+          <section class="check-out" *ngIf="cart.length > 0">
+            <ng-container *ngIf="orderSummary$ | async as orderSummary">
+              <div class="subtotal flex">
+                <span>Subtotal</span>
+                <span>
+                  {{ orderSummary.total | currency : "USD" : "symbol" }}</span
+                >
+              </div>
+              <!-- <span
             >Taxes {{ orderSummary.taxes | currency : "USD" : "symbol" }}</span
             > -->
-            <!-- <span
+              <!-- <span
             >Delivery
             {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }}</span
             > -->
-            <!-- <span
+              <!-- <span
             >Grand Total
             {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}</span
             > -->
-            <button class="check-out-btn flex" (click)="onPayment()">
-              <svg-render svgName="shoppingCart" />
-              <span> Checkout </span>
-              <svg-render svgName="shoppingCart" />
-            </button>
-          </ng-container>
+              <button class="check-out-btn flex" (click)="onPayment()">
+                <svg-render svgName="shoppingCart" />
+                <span> Checkout </span>
+                <svg-render svgName="shoppingCart" />
+              </button>
+            </ng-container>
+          </section>
+        </main>
+      </ng-container>
+      <ng-template #sorry>
+        <section class="sorry flex column">
+          <h3>Oops, Your cart is empty!</h3>
+          <svg-render svgName="sorryRobot" />
+          <h3>We're sure you can find a product that suits you!</h3>
         </section>
-      </main>
+      </ng-template>
     </ng-container>
-
-    <ng-template #sorry>
-      <section class="sorry flex column">
-        <h3>Oops, Your cart is empty!</h3>
-        <svg-render svgName="sorryRobot" />
-        <h3>We're sure you can find a product that suits you!</h3>
-      </section>
-    </ng-template>
   </section>
 </main>
