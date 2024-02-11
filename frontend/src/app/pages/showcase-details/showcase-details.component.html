@@ -1,0 +1,63 @@
+<main class="showcase-details-contents w-h-100 flex column">
+    <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
+        class="mobile-view flex column">
+        <ng-container *ngIf="product$ | async as product">
+            <h2>Collection</h2>
+            <a [routerLink]="['/' + product.type]">
+                <span>back to results</span>
+            </a>
+            <section class="product-area flex column">
+                <div class="image-container flex column">
+                    <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
+                        (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
+                        (click)="onImageClick($event, product.imgUrls[0])">
+                </div>
+
+                <div class="details-area">
+                    <h4>{{ product.name }}</h4>
+
+                    <p style="text-transform: capitalize;">{{product.publishDate}}</p>
+                    <p style="text-transform: capitalize;">{{product.materials}}</p>
+                    <p class="description">{{ product.description }}</p>
+
+                    <p class="notice">Dear user, for special requests regarding this item, please press inquire.</p>
+                    <button class="flex" (click)="onInquire($event)" title="Contact us!">
+                        <span>Inquire</span>
+                    </button>
+                </div>
+            </section>
+        </ng-container>
+    </section>
+
+    <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
+        class="desktop-view flex column">
+        <ng-container *ngIf="product$ | async as product">
+            <h2>Ori Carlin Collection</h2>
+            <a [routerLink]="['/' + product.type]">
+                <span>back to results</span>
+            </a>
+            <section class="product-area grid">
+                <div class="image-container flex column">
+                    <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
+                        (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
+                        (click)="onImageClick($event, product.imgUrls[0])">
+                </div>
+
+                <div class="details-area">
+                    <h4>{{ product.name }}</h4>
+
+                    <p style="text-transform: capitalize;">{{product.publishDate}}</p>
+                    <p style="text-transform: capitalize;">{{product.materials}}</p>
+                    <p class="description">{{ product.description }}</p>
+
+                    <p class="notice">Dear user, for special requests regarding this item, please press inquire.</p>
+                    <button class="flex" (click)="onInquire($event)" title="Contact us!">
+                        <span>Inquire</span>
+                    </button>
+                </div>
+            </section>
+        </ng-container>
+    </section>
+</main>

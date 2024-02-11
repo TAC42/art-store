@@ -7,6 +7,7 @@ import { ContactComponent } from './pages/about/contact/contact.component'
 import { ShopComponent } from './pages/shop/shop.component'
 import { ProductEditComponent } from './pages/product-edit/product-edit.component'
 import { ProductDetailsComponent } from './pages/product-details/product-details.component'
+import { ShowcaseDetailsComponent } from './pages/showcase-details/showcase-details.component'
 import { ProductResolver } from './resolvers/product.resolver'
 import { ShopIndexComponent } from './pages/shop/index/shop-index.component'
 import { SculptureComponent } from './pages/sculpture/sculpture.component'
@@ -26,13 +27,13 @@ const routes: Routes = [
   {
     path: 'sculpture', component: SculptureComponent, children: [
       { path: '', component: SculptureIndexComponent },
-      { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
+      { path: 'details/:name', runGuardsAndResolvers: 'always', component: ShowcaseDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
   {
     path: 'artware', component: ArtwareComponent, children: [
       { path: '', component: ArtwareIndexComponent },
-      { path: 'details/:name', runGuardsAndResolvers: 'always', component: ProductDetailsComponent, resolve: { product: ProductResolver } },
+      { path: 'details/:name', runGuardsAndResolvers: 'always', component: ShowcaseDetailsComponent, resolve: { product: ProductResolver } },
     ]
   },
   { path: 'edit/:name', component: ProductEditComponent, canActivate: [AdminGuard], resolve: { product: ProductResolver } },

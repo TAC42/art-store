@@ -1,0 +1,229 @@
+showcase-details {
+    .showcase-details-contents {
+        color: $prmclr1;
+        margin-block-end: 2em;
+
+        .mobile-view {
+            gap: 1em;
+
+            h2 {
+                padding: 0.25em 0em;
+                border-bottom: 1px solid $scdclr3;
+                text-align: center;
+                letter-spacing: 0.5px;
+                font-size: 21px;
+            }
+
+            a {
+                padding: 0 1em;
+                width: fit-content;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: $scdclr2;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    text-decoration: none;
+                    color: $prmclr1;
+                }
+            }
+
+            .product-area {
+                text-align: left;
+                margin-block-end: 1em;
+
+                .image-container {
+                    img {
+                        height: fit-content;
+                        min-height: 400px;
+                        max-height: 400px;
+                        object-fit: cover;
+                        cursor: pointer;
+                        transition: all 0.5s ease-in-out;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(0.75);
+                        }
+                    }
+                }
+
+                .details-area {
+                    margin-block-start: 1em;
+                    font-family: 'sabon';
+                    padding: 0 1em;
+
+                    h4 {
+                        width: 100%;
+                        font-family: 'nh-bold';
+                        text-transform: capitalize;
+                        font-size: 26px;
+                        margin-block-end: 0.5em;
+                    }
+
+                    p {
+                        width: 100%;
+                        color: $scdclr2;
+                        letter-spacing: 0.15px;
+                        font-size: 18px;
+                        margin-block-end: 1em;
+                    }
+
+                    .description {
+                        color: $prmclr1;
+                        font-size: 20px;
+                        margin-block-end: 1.5em;
+                    }
+
+                    .notice {
+                        color: $prmclr1;
+                        font-weight: bold;
+                        margin-block-end: 1em;
+                    }
+
+                    button {
+                        border-radius: 0.5em;
+                        margin: 1em auto;
+                        border: 1px solid $prmclr1;
+                        padding: 0.5em 1.5em;
+                        transition: all 0.3s ease-in-out;
+
+                        span {
+                            font-size: 16px;
+                            font-family: 'nh-bold';
+                            color: $prmclr1;
+                            transition: all 0.3s ease-in-out;
+                            padding: 0.2em 0.75em;
+                        }
+
+                        &:hover {
+                            background: $prmclr1;
+
+                            span {
+                                color: $prmclr3;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .desktop-view {
+            gap: 1em;
+
+            h2 {
+                padding: 0.25em 0em;
+                border-bottom: 1px solid $scdclr3;
+                text-align: center;
+                letter-spacing: 0.75px;
+                font-size: 21px;
+            }
+
+            a {
+                padding: 0 2em;
+                width: fit-content;
+                text-transform: uppercase;
+                letter-spacing: 1.25px;
+                color: $scdclr2;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    text-decoration: none;
+                    color: $prmclr1;
+                }
+            }
+
+            .product-area {
+                text-align: left;
+                margin-block-end: 1em;
+                padding: 0 2em;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1em;
+
+                .image-container {
+                    grid-column: 1 / 2;
+                    align-self: center;
+
+                    img {
+                        height: fit-content;
+                        min-height: 400px;
+                        max-height: 400px;
+                        object-fit: cover;
+                        cursor: pointer;
+                        transition: all 0.5s ease-in-out;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(0.75);
+                        }
+                    }
+                }
+
+                .details-area {
+                    margin-block-start: 1em;
+                    font-family: 'sabon';
+                    grid-column: 2 / -1;
+                    padding: 0 2em;
+
+                    h4 {
+                        width: 100%;
+                        font-family: 'nh-bold';
+                        text-transform: capitalize;
+                        font-size: 26px;
+                        margin-block-end: 0.5em;
+                    }
+
+                    p {
+                        width: 100%;
+                        color: $scdclr2;
+                        letter-spacing: 0.15px;
+                        font-size: 16px;
+                        margin-block-end: 1em;
+                    }
+
+                    .description {
+                        color: $prmclr1;
+                        font-size: 18px;
+                        margin-block-end: 1.5em;
+                    }
+
+                    .notice {
+                        color: $prmclr1;
+                        font-size: 16px;
+                        font-weight: bold;
+                        margin-block-end: 1em;
+                    }
+
+                    button {
+                        border-radius: 0.5em;
+                        margin: 1em auto;
+                        border: 1px solid $prmclr1;
+                        padding: 0.5em 1.5em;
+                        transition: all 0.3s ease-in-out;
+                        grid-column: 2 / -1;
+
+                        span {
+                            font-size: 16px;
+                            font-family: 'nh-bold';
+                            color: $prmclr1;
+                            transition: all 0.3s ease-in-out;
+                            padding: 0.2em 0.75em;
+                        }
+
+                        &:hover {
+                            background: $prmclr1;
+
+                            span {
+                                color: $prmclr3;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

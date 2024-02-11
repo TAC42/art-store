@@ -46,7 +46,8 @@ import { ProductCarouselComponent } from './cmps/carousels/product-carousel/prod
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component';
 import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown.component';
 import { PaymentComponent } from './pages/payment/payment.component';
-import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
+import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component';
+import { ShowcaseDetailsComponent } from './pages/showcase-details/showcase-details.component'
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ImageDisplayComponent } from './cmps/modals/image-display/image-display
     UserDropdownComponent,
     PaymentComponent,
     ImageDisplayComponent,
+    ShowcaseDetailsComponent,
   ],
   imports: [
     BrowserModule,
