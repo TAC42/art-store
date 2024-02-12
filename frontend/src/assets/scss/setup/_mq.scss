@@ -138,6 +138,116 @@ product-edit {
     }
 }
 
+product-details {
+    .product-details-contents {
+        .mobile-view {
+            @media(max-width: 400px) {
+                .product-area {
+                    .image-container {
+                        image-carousel {
+                            .carousel-container {
+                                min-height: 400px;
+                            }
+                        }
+
+                        img {
+                            min-height: 400px;
+                            max-height: 400px;
+                        }
+                    }
+                }
+            }
+
+            @media(min-width:401px) {
+                .product-area {
+                    .image-container {
+                        image-carousel {
+                            .carousel-container {
+                                min-height: 500px;
+                            }
+                        }
+
+                        img {
+                            min-height: 500px;
+                            max-height: 500px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .desktop-view {
+            @media(max-width: 1200px) {
+                .product-area {
+                    .image-container {
+                        image-carousel {
+                            .carousel-container {
+                                min-height: 500px;
+                            }
+                        }
+
+                        img {
+                            min-height: 500px;
+                            max-height: 500px;
+                        }
+                    }
+                }
+            }
+
+            @media(max-width: 900px) {
+                .product-area {
+                    .image-container {
+                        image-carousel {
+                            .carousel-container {
+                                min-height: 300px;
+                            }
+                        }
+
+                        img {
+                            min-height: 300px;
+                            max-height: 300px;
+                        }
+                    }
+                }
+            }
+
+            @media(min-width:901px) {
+                .product-area {
+                    .image-container {
+                        image-carousel {
+                            .carousel-container {
+                                min-height: 400px;
+                            }
+                        }
+
+                        img {
+                            min-height: 400px;
+                            max-height: 400px;
+                        }
+                    }
+                }
+            }
+
+            @media(min-width:1201px) {
+                .product-area {
+                    .image-container {
+                        image-carousel {
+                            .carousel-container {
+                                min-height: 600px;
+                            }
+                        }
+
+                        img {
+                            min-height: 600px;
+                            max-height: 600px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 app-footer {
     .footer-contents {
         @media(max-width: 600px) {
