@@ -1,1 +1,42 @@
-<p>payment works!</p>
+<h1 class="b">Checkout</h1>
+<main class="payment-main">
+  <section
+    class="order-summary"
+    [ngClass]="{ b: optionState === 'order' }"
+    (click)="setSelection('order')"
+  >
+    <article class="heading">
+      <span class="pending">1</span>
+      <span class="title">Order summary</span>
+    </article>
+    <article *ngIf="optionState === 'order'">
+      <span>this is order-summary</span>
+    </article>
+  </section>
+  <section
+    class="personal-info"
+    [ngClass]="{ b: optionState === 'personal' }"
+    (click)="setSelection('personal')"
+  >
+    <article class="heading">
+      <span class="pending">2</span>
+      <span class="title">Personal info</span>
+    </article>
+    <article *ngIf="optionState === 'personal'">
+      <span>this is personal-info</span>
+    </article>
+  </section>
+  <section
+    class="payment-method"
+    [ngClass]="{ b: optionState === 'payment' }"
+    (click)="setSelection('payment')"
+  >
+    <article class="heading">
+      <span class="pending">3</span>
+      <span class="title">Payment method</span>
+    </article>
+    <article *ngIf="optionState === 'payment'">
+      <span>Choose a payment method.</span>
+    </article>
+  </section>
+</main>
