@@ -16,7 +16,15 @@ product-details {
                 background: white;
                 border-bottom: 1px solid $scdclr3;
 
-                button {
+                h2 {
+                    letter-spacing: 0.5px;
+                    font-size: 26px;
+                    text-transform: capitalize;
+                    font-family: 'nh-bold';
+                }
+
+                button,
+                a {
                     width: 42px;
                     height: 42px;
 
@@ -36,13 +44,12 @@ product-details {
             .product-area {
                 text-align: center;
                 margin-block-end: 1em;
+                border-bottom: 1px solid $scdclr3;
 
                 .image-container {
                     position: relative;
 
                     img {
-                        min-height: 400px;
-                        max-height: 400px;
                         object-fit: cover;
                         cursor: pointer;
                         transition: all 0.5s ease-in-out;
@@ -68,20 +75,20 @@ product-details {
                     }
                 }
 
-                h2 {
-                    padding: 0.25em 1em;
-                    border-top: 1px solid $scdclr3;
-                    border-bottom: 1px solid $scdclr3;
-                    width: 100%;
-                    font-family: 'nh-bold';
-                    text-transform: capitalize;
-                    font-size: 26px;
-                }
-
                 .details-area {
-                    margin-block-start: 1em;
                     font-family: 'sabon';
                     font-size: 16px;
+
+                    h2 {
+                        margin-block-end: 1em;
+                        padding: 0.25em 1em;
+                        border-top: 1px solid $scdclr3;
+                        border-bottom: 1px solid $scdclr3;
+                        width: 100%;
+                        font-family: 'nh-bold';
+                        text-transform: capitalize;
+                        font-size: 26px;
+                    }
 
                     h4 {
                         width: 100%;
@@ -112,6 +119,50 @@ product-details {
                         font-size: 16px;
                         font-weight: bold;
                     }
+
+                    .action-btn {
+                        border-radius: 0.5em;
+                        gap: 0.25em;
+                        margin: 1em auto;
+                        border: 1px solid $prmclr1;
+                        align-items: center;
+                        padding: 0.5em 1.5em;
+                        transition: all 0.3s ease-in-out;
+
+                        span {
+                            font-size: 16px;
+                            font-family: 'nh-bold';
+                            color: $prmclr1;
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        svg-render {
+                            width: 32px;
+                            height: 32px;
+                            transition: all 0.3s ease-in-out;
+                            fill: $prmclr1;
+                        }
+
+                        &:not(:has(svg-render)) {
+                            span {
+                                padding: 0.2em 0.75em;
+                            }
+                        }
+
+                        &:hover {
+                            background: $prmclr1;
+
+                            span {
+                                color: $prmclr3;
+                                text-decoration: none;
+                            }
+
+                            svg-render {
+                                fill: $prmclr3;
+                                transform: translateX(5px);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -120,50 +171,7 @@ product-details {
                 width: 100%;
                 text-align: center;
                 font-family: 'nh-bold';
-            }
-
-            .action-btn {
-                border-radius: 0.5em;
-                gap: 0.25em;
-                margin: 1em auto;
-                border: 1px solid $prmclr1;
-                align-items: center;
-                padding: 0.5em 1.5em;
-                transition: all 0.3s ease-in-out;
-
-                span {
-                    font-size: 16px;
-                    font-family: 'nh-bold';
-                    color: $prmclr1;
-                    transition: all 0.3s ease-in-out;
-                }
-
-                svg-render {
-                    width: 32px;
-                    height: 32px;
-                    transition: all 0.3s ease-in-out;
-                    fill: $prmclr1;
-                }
-
-                &:not(:has(svg-render)) {
-                    span {
-                        padding: 0.2em 0.75em;
-                    }
-                }
-
-                &:hover {
-                    background: $prmclr1;
-
-                    span {
-                        color: $prmclr3;
-                        text-decoration: none;
-                    }
-
-                    svg-render {
-                        fill: $prmclr3;
-                        transform: translateX(5px);
-                    }
-                }
+                text-transform: capitalize;
             }
 
             .other-products-area {
@@ -180,6 +188,7 @@ product-details {
                     img {
                         height: 170px;
                         object-fit: cover;
+                        aspect-ratio: 1 / 1;
                         transition: all 0.5s ease-in-out;
                     }
 
@@ -210,8 +219,16 @@ product-details {
                 align-items: center;
                 width: 100%;
                 padding: 0.5em 2em;
+                border-bottom: 1px solid $scdclr3;
 
-                button {
+                h2 {
+                    letter-spacing: 0.75px;
+                    font-size: 24px;
+                    text-transform: capitalize;
+                }
+
+                button,
+                a {
                     width: 42px;
                     height: 42px;
 
@@ -230,18 +247,17 @@ product-details {
 
             .product-area {
                 text-align: center;
-                margin-block-end: 1em;
-                padding: 0 2em;
+                padding: 1em 2em;
                 grid-template-columns: repeat(2, 1fr);
+                border-bottom: 1px solid $scdclr3;
                 gap: 1em;
 
                 .image-container {
                     grid-column: 1 / 2;
-                    align-self: center;
+                    height: fit-content;
+                    margin-block-start: 1em;
 
                     img {
-                        min-height: 400px;
-                        max-height: 400px;
                         object-fit: cover;
                         cursor: pointer;
                         transition: all 0.5s ease-in-out;
@@ -255,11 +271,12 @@ product-details {
                 }
 
                 .details-area {
-                    margin-block-start: 1em;
                     font-family: 'sabon';
                     font-size: 16px;
                     text-align: left;
                     grid-column: 2 / -1;
+                    padding: 0 2em;
+                    margin-block-start: 1em;
 
                     h2 {
                         width: 100%;
@@ -298,6 +315,51 @@ product-details {
                         font-size: 16px;
                         font-weight: bold;
                     }
+
+                    .action-btn {
+                        border-radius: 0.5em;
+                        gap: 0.25em;
+                        margin: 2em auto;
+                        border: 1px solid $prmclr1;
+                        align-items: center;
+                        padding: 0.5em 1.5em;
+                        transition: all 0.3s ease-in-out;
+                        grid-column: 2 / -1;
+
+                        span {
+                            font-size: 16px;
+                            font-family: 'nh-bold';
+                            color: $prmclr1;
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        svg-render {
+                            width: 32px;
+                            height: 32px;
+                            transition: all 0.3s ease-in-out;
+                            fill: $prmclr1;
+                        }
+
+                        &:not(:has(svg-render)) {
+                            span {
+                                padding: 0.2em 0.75em;
+                            }
+                        }
+
+                        &:hover {
+                            background: $prmclr1;
+
+                            span {
+                                color: $prmclr3;
+                                text-decoration: none;
+                            }
+
+                            svg-render {
+                                fill: $prmclr3;
+                                transform: translateX(5px);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -306,51 +368,8 @@ product-details {
                 width: 100%;
                 text-align: center;
                 font-family: 'nh-bold';
-            }
-
-            .action-btn {
-                border-radius: 0.5em;
-                gap: 0.25em;
-                margin: 1em auto;
-                border: 1px solid $prmclr1;
-                align-items: center;
-                padding: 0.5em 1.5em;
-                transition: all 0.3s ease-in-out;
-                grid-column: 2 / -1;
-
-                span {
-                    font-size: 16px;
-                    font-family: 'nh-bold';
-                    color: $prmclr1;
-                    transition: all 0.3s ease-in-out;
-                }
-
-                svg-render {
-                    width: 32px;
-                    height: 32px;
-                    transition: all 0.3s ease-in-out;
-                    fill: $prmclr1;
-                }
-
-                &:not(:has(svg-render)) {
-                    span {
-                        padding: 0.2em 0.75em;
-                    }
-                }
-
-                &:hover {
-                    background: $prmclr1;
-
-                    span {
-                        color: $prmclr3;
-                        text-decoration: none;
-                    }
-
-                    svg-render {
-                        fill: $prmclr3;
-                        transform: translateX(5px);
-                    }
-                }
+                text-transform: capitalize;
+                margin-block-start: 1em;
             }
 
             .other-products-area {
@@ -358,6 +377,7 @@ product-details {
                 text-align: center;
                 gap: 1em;
                 grid-template-columns: repeat(3, 1fr);
+                margin: 0 auto;
 
                 .other-product-area {
                     min-height: 210px;
@@ -365,8 +385,9 @@ product-details {
                     cursor: pointer;
 
                     img {
-                        height: 200px;
+                        height: 300px;
                         object-fit: cover;
+                        aspect-ratio: 1 / 1;
                         transition: all 0.5s ease-in-out;
                     }
 

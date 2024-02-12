@@ -7,11 +7,19 @@ showcase-details {
             gap: 1em;
 
             h2 {
-                padding: 0.25em 0em;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 62px;
+                z-index: 11;
+                padding: 0.5em 0em;
+                background: white;
                 border-bottom: 1px solid $scdclr3;
                 text-align: center;
                 letter-spacing: 0.5px;
-                font-size: 21px;
+                font-size: 26px;
+                font-family: 'nh-bold';
+                text-transform: capitalize;
             }
 
             a {
@@ -22,6 +30,7 @@ showcase-details {
                 color: $scdclr2;
                 align-items: center;
                 gap: 0.5em;
+                margin-block-start: 1em;
                 transition: all 0.3s ease-in-out;
 
                 svg-render {
@@ -138,6 +147,7 @@ showcase-details {
                 text-align: center;
                 letter-spacing: 0.75px;
                 font-size: 21px;
+                text-transform: capitalize;
             }
 
             a {

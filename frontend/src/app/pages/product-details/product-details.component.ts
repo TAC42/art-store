@@ -49,11 +49,6 @@ export class ProductDetailsComponent implements OnInit {
             })
     }
 
-    onBack(event: Event): void {
-        event.stopPropagation()
-        this.router.navigateByUrl(`/${encodeURIComponent('shop')}`)
-    }
-
     onOpenCart(event: Event): void {
         event.stopPropagation()
         this.loggedinUser$.pipe(take(1)).subscribe(

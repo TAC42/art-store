@@ -2,8 +2,8 @@
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
         class="mobile-view flex column">
         <ng-container *ngIf="product$ | async as product">
-            <h2>Collection</h2>
-            <a class="flex row" [routerLink]="['/' + product.type]">
+            <h2>collection</h2>
+            <a class="flex row" [routerLink]="['/' + product.type]" title="Exit details page?">
                 <svg-render svgName="leftArrowIcon" />
                 <span>back to results</span>
             </a>
@@ -35,7 +35,7 @@
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column">
         <ng-container *ngIf="product$ | async as product">
-            <h2>Ori Carlin Collection</h2>
+            <h2>collection</h2>
             <a class="flex row" [routerLink]="['/' + product.type]">
                 <svg-render svgName="leftArrowIcon" />
                 <span>back to results</span>

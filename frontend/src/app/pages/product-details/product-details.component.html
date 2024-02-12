@@ -2,9 +2,10 @@
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
         class="mobile-view flex column">
         <section class="actions flex row">
-            <button (click)="onBack($event)" title="Exit details page?">
+            <a [routerLink]="['/shop']" title="Exit details page?">
                 <svg-render svgName="leftArrowIcon" />
-            </button>
+            </a>
+            <h2>shop</h2>
             <button (click)="onOpenCart($event)" title="Open your cart?">
                 <svg-render svgName="shoppingCart" />
             </button>
@@ -20,9 +21,9 @@
                     <span class="price-tag flex">${{ product.price }}.00</span>
                 </div>
 
-                <h2>{{ product.name }}</h2>
-
                 <div class="details-area">
+                    <h2>{{ product.name }}</h2>
+
                     <p class="description">{{ product.description }}</p>
                     <h4>Dimensions</h4>
                     <p>{{ product.dimensions }}</p>
@@ -38,17 +39,17 @@
                         This product is currently out of stock, for further information and the
                         option to order it in the near future, please press inquire.
                     </p>
+
+                    <button class="action-btn flex row" [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
+                        (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
+                        <span>{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
+                        <svg-render *ngIf="product.stock > 0" svgName="shoppingCart" />
+                    </button>
                 </div>
             </section>
-
-            <button class="action-btn flex row" [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
-                (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
-                <span>{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
-                <svg-render *ngIf="product.stock > 0" svgName="shoppingCart" />
-            </button>
         </ng-container>
 
-        <h3>Related Products</h3>
+        <h3>related products</h3>
         <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area grid">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column">
@@ -61,9 +62,10 @@
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column">
         <section class="actions flex row">
-            <button (click)="onBack($event)" title="Exit details page?">
+            <a [routerLink]="['/shop']" title="Exit details page?">
                 <svg-render svgName="leftArrowIcon" />
-            </button>
+            </a>
+            <h2>shop</h2>
             <button (click)="onOpenCart($event)" title="Open your cart?">
                 <svg-render svgName="shoppingCart" />
             </button>
@@ -80,6 +82,7 @@
 
                 <div class="details-area">
                     <h2>{{ product.name }}</h2>
+
                     <p class="price">${{product.price}}.00</p>
                     <p class="description">{{ product.description }}</p>
                     <h4>Dimensions</h4>
@@ -96,17 +99,17 @@
                         This product is currently out of stock, for further information and the
                         option to order it in the near future, please press inquire.
                     </p>
-                </div>
 
-                <button class="action-btn flex row" [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
-                    (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
-                    <span>{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
-                    <svg-render *ngIf="product.stock > 0" svgName="shoppingCart" />
-                </button>
+                    <button class="action-btn flex row" [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
+                        (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
+                        <span>{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
+                        <svg-render *ngIf="product.stock > 0" svgName="shoppingCart" />
+                    </button>
+                </div>
             </section>
         </ng-container>
 
-        <h3>Related Products</h3>
+        <h3>related products</h3>
         <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area grid">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column">
