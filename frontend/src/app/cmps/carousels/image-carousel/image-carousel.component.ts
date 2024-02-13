@@ -18,9 +18,8 @@ export class ImageCarouselComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.autoSwitch) {
-      this.autoSwitchSubscription = interval(10000).subscribe(() => {
-        this.nextImage()
-      })
+      this.autoSwitchSubscription = interval(10000).subscribe(
+        () => this.nextImage())
     }
   }
 
