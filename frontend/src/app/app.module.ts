@@ -25,7 +25,7 @@ import { AsideMenuComponent } from './cmps/modals/aside-menu/aside-menu.componen
 import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
 import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
 import { ImageCarouselComponent } from './cmps/carousels/image-carousel/image-carousel.component'
-import { ProductDetailsComponent } from './pages/product-details/product-details.component'
+import { ProductDetailsComponent } from './pages/details/product/product-details.component'
 import { ProductEditComponent } from './pages/product-edit/product-edit.component'
 import { reducers } from './store/app.state'
 import { LoaderComponent } from './cmps/loader/loader.component'
@@ -47,7 +47,7 @@ import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-
 import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
-import { ShowcaseDetailsComponent } from './pages/showcase-details/showcase-details.component'
+import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
 
 @NgModule({

@@ -1,0 +1,96 @@
+random-product-carousel {
+    overflow: hidden;
+
+    .carousel-container {
+        padding: 0.5em 1em;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: -20px;
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 10%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        &::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+        }
+
+        &::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+        }
+
+        button {
+            position: absolute;
+            top: 40%;
+            background: $prmclr2;
+            padding: 0.5em;
+            z-index: 3;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: all 0.3s ease-in-out;
+
+            &:first-of-type {
+                left: 0.25em;
+            }
+
+            &:last-of-type {
+                right: 0.25em;
+            }
+
+            svg-render {
+                width: 24px;
+                height: 24px;
+            }
+
+            &:hover {
+                background: $scdclr4;
+            }
+        }
+
+        .other-products-area {
+            gap: 1em;
+            overflow-x: auto;
+            padding: 1em 0;
+
+            .other-product-area {
+                flex: 0 0 auto;
+                align-items: center;
+                gap: 0.25em;
+                cursor: pointer;
+                user-select: none;
+
+                img {
+                    height: 200px;
+                    width: 200px;
+                    object-fit: cover;
+                    transition: all 0.5s ease-in-out;
+                }
+
+                p {
+                    font-family: 'nh-bold';
+                    text-transform: capitalize;
+                }
+
+                &:hover {
+                    text-decoration: none;
+
+                    img {
+                        filter: brightness(.75);
+                    }
+                }
+            }
+        }
+    }
+}
