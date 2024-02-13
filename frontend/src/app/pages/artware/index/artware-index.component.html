@@ -3,10 +3,13 @@
     <h4>Artware</h4>
     <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
 </section>
-<p class="page-info-text">
-    Step into a world where pottery transcends its traditional bounds to become a canvas for artistic expression. Our
-    Artware Collection is a celebration of creativity, showcasing pieces that are as much art as they are pottery. Each
-    piece in this collection is a testament to the imagination and skill of its creator, offering something truly unique
-    for the discerning collector.
-</p>
-<shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
+
+<div class="page-info-text">
+    <p class="layout-row">
+        Step into a world where pottery transcends its traditional bounds to become a canvas for artistic expression.
+        Our Artware Collection is a celebration of creativity, showcasing pieces that are as much art as they are
+        pottery. Each piece in this collection is a testament to the imagination and skill of Ori Carlin.
+    </p>
+</div>
+
+<shop-list [isLoading]=" (isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />

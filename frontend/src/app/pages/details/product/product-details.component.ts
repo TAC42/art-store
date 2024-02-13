@@ -21,7 +21,6 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
 export class ProductDetailsComponent implements OnInit {
     @HostBinding('class.full') fullClass = true
     @HostBinding('class.w-h-100') fullWidthHeightClass = true
-    @HostBinding('class.layout-row') layoutRowClass = true
 
     private store = inject(Store<AppState>)
     private router = inject(Router)

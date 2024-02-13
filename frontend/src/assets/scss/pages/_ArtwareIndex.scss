@@ -1,38 +1,55 @@
-artware-index {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-    .filter-area {
-        position: relative;
-        text-align: center;
-        gap: 2em;
-        height: 325px;
-
-        h4 {
-            margin: 2em auto 1em auto;
-            font-size: 2em;
-            user-select: none;
-            color: $scdclr3;
-            font-family: 'nh-bold';
-            letter-spacing: 1px;
+artware-wrapper {
+    .artware-page-contents {
+        h2 {
+            padding: 0.25em 0em;
+            border-bottom: 1px solid $scdclr3;
+            text-align: center;
+            letter-spacing: 0.75px;
+            font-size: 24px;
+            text-transform: capitalize;
         }
 
-        img {
-            position: absolute;
-            top: 0;
-            left: 0;
+        artware-index {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: brightness(50%);
-        }
-    }
 
-    .page-info-text {
-        font-size: 18px;
-        font-family: 'sabon';
-        color: $prmclr1;
+            .filter-area {
+                position: relative;
+                text-align: center;
+                gap: 2em;
+                height: 325px;
+
+                h4 {
+                    margin: 2em auto 1em auto;
+                    font-size: 2em;
+                    user-select: none;
+                    color: $scdclr3;
+                    font-family: 'nh-bold';
+                    letter-spacing: 1px;
+                }
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    z-index: -1;
+                    filter: brightness(50%);
+                }
+            }
+
+            .page-info-text {
+                background: $prmclr2;
+
+                p {
+                    font-size: 18px;
+                    font-family: 'sabon';
+                    color: $prmclr1;
+                }
+            }
+        }
     }
 }

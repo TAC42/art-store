@@ -55,18 +55,20 @@
 
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column">
-        <section class="actions flex row">
-            <a [routerLink]="['/shop']" title="Exit details page?">
-                <svg-render svgName="leftArrowIcon" />
-            </a>
-            <h2>shop</h2>
-            <button (click)="onOpenCart($event)" title="Open your cart?">
-                <svg-render svgName="shoppingCart" />
-            </button>
+        <section class="actions-wrapper">
+            <div class="actions flex row layout-row">
+                <a [routerLink]="['/shop']" title="Exit details page?">
+                    <svg-render svgName="leftArrowIcon" />
+                </a>
+                <h2>shop</h2>
+                <button (click)="onOpenCart($event)" title="Open your cart?">
+                    <svg-render svgName="shoppingCart" />
+                </button>
+            </div>
         </section>
 
         <ng-container *ngIf="product$ | async as product">
-            <section class="product-area grid">
+            <section class="product-area grid layout-row">
                 <div class="image-container flex column">
                     <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
                         (imageClick)="onImageClick($event.event, $event.imageUrl)" />

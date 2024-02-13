@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, HostBinding } from '@angular/core'
 import { Product } from '../../models/shop'
 
 @Component({
@@ -7,6 +7,8 @@ import { Product } from '../../models/shop'
 })
 
 export class ShopListComponent implements OnInit, OnChanges {
+  @HostBinding('class.layout-row') layoutRowClass = true
+
   @Input() products!: Product[] | null
   @Input() isLoading!: boolean
   @Output() remove = new EventEmitter<string>()

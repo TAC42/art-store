@@ -23,9 +23,9 @@ app-aside-menu {
     }
 }
 
-app-shop,
-app-artware,
-app-sculpture {
+shop-wrapper,
+artware-wrapper,
+sculpture-wrapper {
 
     shop-index,
     artware-index,
@@ -41,12 +41,14 @@ app-sculpture {
         }
 
         .page-info-text {
-            @media(max-width: 600px) {
-                padding: 1em 1em 0 1em;
-            }
+            p {
+                @media(max-width: 600px) {
+                    padding: 1em 1em 0 1em;
+                }
 
-            @media(min-width: 601px) {
-                padding: 1.5em 2em 0 2em;
+                @media(min-width: 601px) {
+                    padding: 1.5em 2em 0 2em;
+                }
             }
         }
 
@@ -138,8 +140,11 @@ product-edit {
     }
 }
 
-product-details {
-    .product-details-contents {
+product-details,
+showcase-details {
+
+    .product-details-contents,
+    .showcase-details-contents {
         .mobile-view {
             @media(max-width: 400px) {
                 .product-area {

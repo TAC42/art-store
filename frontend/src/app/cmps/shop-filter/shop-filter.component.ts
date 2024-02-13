@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core'
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, inject } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { User } from '../../models/user'
@@ -10,10 +10,13 @@ import { ModalService } from '../../services/modal.service'
 })
 
 export class ShopFilterComponent implements OnInit {
+  @HostBinding('class.layout-row') layoutRowClass = true
+
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }
-  @Input() loggedinUser!: User | null;
+  @Input() loggedinUser!: User | null
+  
   @Output() onSetFilter = new EventEmitter<string>()
   @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false
@@ -21,9 +24,7 @@ export class ShopFilterComponent implements OnInit {
   get filterBy(): ShopFilter {
     return this._filterBy
   }
-
   private _filterBy!: ShopFilter
-
 
   private filterSubject: Subject<string> = new Subject<string>()
   private modService = inject(ModalService)
@@ -60,6 +61,5 @@ export class ShopFilterComponent implements OnInit {
     event.stopPropagation()
     if (this.loggedinUser?._id) this.onOpenCart.emit()
     else this.modService.openModal('login')
-
   }
 }

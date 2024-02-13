@@ -1,13 +1,17 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component, HostBinding, inject } from '@angular/core'
+import { DeviceTypeService } from '../../services/device-type.service'
+import { Observable } from 'rxjs'
 
 @Component({
-  selector: 'app-sculpture',
+  selector: 'sculpture-wrapper',
   templateUrl: './sculpture.component.html'
 })
 
 export class SculptureComponent {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.layout-row') layoutRowClass = true
 
+  private dTypeService = inject(DeviceTypeService)
+
+  deviceType$: Observable<string> = this.dTypeService.deviceType$
 }

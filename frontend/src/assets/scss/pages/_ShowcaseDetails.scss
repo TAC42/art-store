@@ -56,15 +56,7 @@ showcase-details {
                 margin-block-end: 1em;
 
                 .image-container {
-                    image-carousel {
-                        .carousel-container {
-                            min-height: 400px;
-                        }
-                    }
-
                     img {
-                        min-height: 400px;
-                        max-height: 400px;
                         object-fit: cover;
                         cursor: pointer;
                         transition: all 0.5s ease-in-out;
@@ -139,16 +131,8 @@ showcase-details {
         }
 
         .desktop-view {
+            margin-block-start: 1em;
             gap: 1em;
-
-            h2 {
-                padding: 0.25em 0em;
-                border-bottom: 1px solid $scdclr3;
-                text-align: center;
-                letter-spacing: 0.75px;
-                font-size: 24px;
-                text-transform: capitalize;
-            }
 
             a {
                 padding: 0 2em;
@@ -189,16 +173,9 @@ showcase-details {
                     grid-column: 1 / 2;
                     align-self: center;
 
-                    image-carousel {
-                        .carousel-container {
-                            min-height: 600px;
-                        }
-                    }
-
                     img {
-                        min-height: 350px;
-                        height: fit-content;
-                        max-height: 600px;
+                        object-fit: cover;
+                        cursor: pointer;
                         transition: all 0.5s ease-in-out;
                     }
 
@@ -214,6 +191,7 @@ showcase-details {
                     font-family: 'sabon';
                     grid-column: 2 / -1;
                     padding: 0 2em;
+                    max-width: 600px;
 
                     h4 {
                         width: 100%;

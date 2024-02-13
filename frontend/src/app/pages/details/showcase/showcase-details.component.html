@@ -35,7 +35,6 @@
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column">
         <ng-container *ngIf="product$ | async as product">
-            <h2>collection</h2>
             <a class="flex row" [routerLink]="['/' + product.type]">
                 <svg-render svgName="leftArrowIcon" />
                 <span>back to results</span>
