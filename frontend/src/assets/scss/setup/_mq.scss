@@ -1,10 +1,11 @@
 app-header {
     .header-contents {
-        @media(max-width: 600px) {}
+        @media(max-width: 600px) {
 
-        .desktop-view,
-        .mobile-view {
-            padding: .5em 1em;
+            .desktop-view,
+            .mobile-view {
+                padding: .5em 1em;
+            }
         }
 
         @media(min-width: 601px) {
@@ -37,18 +38,6 @@ sculpture-wrapper {
 
             @media(min-width: 601px) {
                 padding: 0 2em;
-            }
-        }
-
-        .page-info-text {
-            p {
-                @media(max-width: 600px) {
-                    padding: 1em 1em 0 1em;
-                }
-
-                @media(min-width: 601px) {
-                    padding: 1.5em 2em 0 2em;
-                }
             }
         }
 

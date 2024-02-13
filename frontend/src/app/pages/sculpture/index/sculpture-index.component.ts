@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
 import { Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
@@ -9,6 +9,7 @@ import { ShopFilter } from '../../../models/shop'
 import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
 import { CommunicationService } from '../../../services/communication.service'
 import { ModalService } from '../../../services/modal.service'
+import { DeviceTypeService } from '../../../services/device-type.service'
 
 @Component({
   selector: 'sculpture-index',
@@ -21,21 +22,25 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   private activatedRoute = inject(ActivatedRoute)
   private modService = inject(ModalService)
   private comService = inject(CommunicationService)
+  private dTypeService = inject(DeviceTypeService)
 
+  private removeProductSubscription: Subscription | undefined
+  private isLoadingSubscription: Subscription | undefined
+
+  deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
   isLoading: boolean = false
   filterBy: ShopFilter = { search: '', type: 'sculpture' }
   backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
 
   ngOnInit(): void {
-    this.comService.removeProduct$.subscribe(
-      (productId: string) => { this.onRemoveProduct(productId) })
+    this.removeProductSubscription = this.comService.removeProduct$.subscribe(
+      productId => this.onRemoveProduct(productId))
+    this.isLoadingSubscription = this.store.select(selectIsLoading).subscribe(
+      isLoading => this.isLoading = isLoading)
 
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
-
-    this.store.select(selectIsLoading).subscribe(
-      (isLoading: boolean) => { this.isLoading = isLoading })
   }
 
   onRemoveProductModal(productId: string): void {
@@ -72,6 +77,7 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    if (this.removeProductSubscription) this.removeProductSubscription.unsubscribe()
+    if (this.isLoadingSubscription) this.isLoadingSubscription.unsubscribe()
   }
 }

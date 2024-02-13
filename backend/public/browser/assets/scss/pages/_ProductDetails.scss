@@ -176,42 +176,43 @@ product-details {
         }
 
         .desktop-view {
-            .actions {
-                justify-content: space-between;
-                align-items: center;
+            .actions-wrapper {
                 width: 100%;
-                padding: 0.5em 2em;
                 border-bottom: 1px solid $scdclr3;
 
-                h2 {
-                    letter-spacing: 0.75px;
-                    font-size: 26px;
-                    text-transform: capitalize;
-                }
+                .actions {
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0.5em 2em;
 
-                button,
-                a {
-                    width: 42px;
-                    height: 42px;
-
-                    svg-render {
-                        fill: $scdclr2;
-                        transition: fill 0.3s ease-in-out;
+                    h2 {
+                        letter-spacing: 0.75px;
+                        font-size: 26px;
+                        text-transform: capitalize;
                     }
 
-                    &:hover {
+                    button,
+                    a {
+                        width: 42px;
+                        height: 42px;
+
                         svg-render {
-                            fill: $prmclr1;
+                            fill: $scdclr2;
+                            transition: fill 0.3s ease-in-out;
+                        }
+
+                        &:hover {
+                            svg-render {
+                                fill: $prmclr1;
+                            }
                         }
                     }
                 }
             }
 
             .product-area {
-                text-align: center;
                 padding: 1em 2em;
                 grid-template-columns: repeat(2, 1fr);
-                border-bottom: 1px solid $scdclr3;
                 gap: 1em;
 
                 .image-container {
@@ -237,6 +238,7 @@ product-details {
                     font-size: 16px;
                     text-align: left;
                     grid-column: 2 / -1;
+                    max-width: 600px;
                     padding: 0 2em;
                     margin-block-start: 1em;
 
@@ -331,6 +333,7 @@ product-details {
                 text-align: center;
                 font-family: 'nh-bold';
                 text-transform: capitalize;
+                border-top: 1px solid $scdclr3;
                 margin-block-start: 1em;
             }
 

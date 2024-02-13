@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output, inject } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { User } from '../../models/user'
@@ -10,8 +10,6 @@ import { ModalService } from '../../services/modal.service'
 })
 
 export class ShopFilterComponent implements OnInit {
-  @HostBinding('class.layout-row') layoutRowClass = true
-
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }

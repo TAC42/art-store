@@ -4,6 +4,8 @@ shop-filter {
   grid-template-columns: 1fr 56px auto;
   align-items: center;
   width: 100%;
+  margin: 0 auto;
+  max-width: 600px;
 
   input {
     padding: 0.5em;
@@ -40,7 +42,7 @@ shop-filter {
     width: 24px;
     height: 24px;
     fill: $prmclr2;
-    
+
     span {
       background: $scdclr1;
       padding: 1.2em 1em 6px 1em;

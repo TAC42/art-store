@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { Observable, take } from 'rxjs'
+import { Observable, Subscription, take } from 'rxjs'
 import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
 import { Cart, Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
@@ -13,6 +13,7 @@ import { UPDATE_USER } from '../../../store/user.actions'
 import { User } from '../../../models/user'
 import { selectLoggedinUser } from '../../../store/user.selectors'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { DeviceTypeService } from '../../../services/device-type.service'
 
 @Component({
   selector: 'shop-index',
@@ -26,7 +27,12 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private modService = inject(ModalService)
   private comService = inject(CommunicationService)
   private eBusService = inject(EventBusService)
+  private dTypeService = inject(DeviceTypeService)
 
+  private removeProductSubscription: Subscription | undefined
+  private isLoadingSubscription: Subscription | undefined
+
+  deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
   loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   isLoading: boolean = false
@@ -34,14 +40,13 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
   ngOnInit(): void {
-    this.comService.removeProduct$.subscribe(
-      (productId: string) => { this.onRemoveProduct(productId) })
+    this.removeProductSubscription = this.comService.removeProduct$.subscribe(
+      productId => this.onRemoveProduct(productId))
+    this.isLoadingSubscription = this.store.select(selectIsLoading).subscribe(
+      isLoading => this.isLoading = isLoading)
 
     this.store.dispatch(LOAD_FILTER({ filterBy: this.filterBy }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: this.filterBy }))
-
-    this.store.select(selectIsLoading).subscribe(
-      (isLoading: boolean) => { this.isLoading = isLoading })
   }
 
   onRemoveProductModal(productId: string): void {
@@ -101,6 +106,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    if (this.removeProductSubscription) this.removeProductSubscription.unsubscribe()
+    if (this.isLoadingSubscription) this.isLoadingSubscription.unsubscribe()
   }
 }
