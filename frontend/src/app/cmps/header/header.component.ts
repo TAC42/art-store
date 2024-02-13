@@ -1,5 +1,5 @@
 import { Component, inject, HostBinding, OnInit, Input, OnDestroy } from '@angular/core'
-import { EMPTY, Observable, Subscription } from 'rxjs'
+import { Observable, Subscription } from 'rxjs'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
 import { DimmerService } from '../../services/dimmer.service'
@@ -12,7 +12,7 @@ import { User } from '../../models/user'
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$: Observable<User> = EMPTY
+  @Input() loggedinUser$!: Observable<User>
 
   @HostBinding('class.z-50') get zIndex() { return this.searchState }
 

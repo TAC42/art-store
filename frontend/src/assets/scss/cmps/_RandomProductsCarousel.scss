@@ -1,0 +1,30 @@
+.other-products-area {
+    padding: 0.5em 1em;
+    text-align: center;
+    gap: 1em;
+
+    .other-product-area {
+        gap: 0.25em;
+        cursor: pointer;
+
+        img {
+            max-height: 200px;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            transition: all 0.5s ease-in-out;
+        }
+
+        p {
+            font-family: 'nh-bold';
+            text-transform: capitalize;
+        }
+
+        &:hover {
+            text-decoration: none;
+
+            img {
+                filter: brightness(.85);
+            }
+        }
+    }
+}
