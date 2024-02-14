@@ -31,7 +31,7 @@ sculpture-wrapper {
     shop-index,
     artware-index,
     sculpture-index {
-        shop-filter {
+        product-filter {
             @media(max-width: 600px) {
                 padding: 0 1em;
             }
@@ -41,7 +41,7 @@ sculpture-wrapper {
             }
         }
 
-        shop-list {
+        product-list {
             @media(max-width: 600px) {
                 padding: 1.5em 1em;
                 gap: 1em;

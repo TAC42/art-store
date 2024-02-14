@@ -35,11 +35,15 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
   loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
-  isLoading: boolean = false
-  filterBy: ShopFilter = { search: '', type: 'shop' }
-  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
+
+  public isShopPage: boolean = false
+  public isLoading: boolean = false
+  public filterBy: ShopFilter = { search: '', type: 'shop' }
+  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
   ngOnInit(): void {
+    this.isShopPage = this.router.url.startsWith('/shop')
+
     this.removeProductSubscription = this.comService.removeProduct$.subscribe(
       productId => this.onRemoveProduct(productId))
     this.isLoadingSubscription = this.store.select(selectIsLoading).subscribe(

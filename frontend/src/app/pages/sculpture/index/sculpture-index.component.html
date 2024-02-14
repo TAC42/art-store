@@ -3,7 +3,7 @@
     <section class="filter-area flex column">
         <img class="background-image" src="{{ backgroundImage }}" alt="Background">
         <h4>Sculptures</h4>
-        <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
+        <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
     </section>
 
     <div class="page-info-text">
@@ -15,7 +15,7 @@
         </p>
     </div>
 
-    <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
+    <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
 </section>
 
 <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
@@ -24,7 +24,7 @@
 
     <section class="filter-area flex column">
         <h4>Sculptures</h4>
-        <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
+        <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
     </section>
 
     <div class="page-info-text">
@@ -36,5 +36,5 @@
         </p>
     </div>
 
-    <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
+    <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
 </section>

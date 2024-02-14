@@ -1,25 +1,9 @@
-<!-- <section class="filter-area flex column">
-    <img src="{{ backgroundImage }}" alt="Background">
-    <h4>Artware</h4>
-    <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
-</section>
-
-<div class="page-info-text">
-    <p class="layout-row">
-        Step into a world where pottery transcends its traditional bounds to become a canvas for artistic expression.
-        Our Artware Collection is a celebration of creativity, showcasing pieces that are as much art as they are
-        pottery. Each piece in this collection is a testament to the imagination and skill of Ori Carlin.
-    </p>
-</div>
-
-<shop-list [isLoading]=" (isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" /> -->
-
 <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
     class="mobile-view flex column">
     <section class="filter-area flex column">
         <img class="background-image" src="{{ backgroundImage }}" alt="Background">
         <h4>Artware</h4>
-        <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
+        <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
     </section>
 
     <div class="page-info-text">
@@ -30,7 +14,7 @@
         </p>
     </div>
 
-    <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
+    <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
 </section>
 
 <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
@@ -39,7 +23,7 @@
 
     <section class="filter-area flex column">
         <h4>Artware</h4>
-        <shop-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
+        <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
     </section>
 
     <div class="page-info-text">
@@ -50,5 +34,5 @@
         </p>
     </div>
 
-    <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
+    <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" [products]="products$ | async" />
 </section>

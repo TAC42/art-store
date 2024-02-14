@@ -1,0 +1,11 @@
+<ng-container *ngIf="(!isLoading && (products && products.length === 0)); else productList">
+  <div class="sorry flex column">
+    <h1>Oops, looks like you have no art available!</h1>
+    <svg-render svgName="sorryRobot" />
+  </div>
+</ng-container>
+
+<ng-template #productList>
+  <product-preview (remove)="remove.emit($event)" (add)="add.emit($event)" *ngFor="let product of products"
+    [product]="product" />
+</ng-template>

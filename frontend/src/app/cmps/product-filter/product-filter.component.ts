@@ -5,11 +5,11 @@ import { User } from '../../models/user'
 import { ModalService } from '../../services/modal.service'
 
 @Component({
-  selector: 'shop-filter',
-  templateUrl: './shop-filter.component.html'
+  selector: 'product-filter',
+  templateUrl: './product-filter.component.html'
 })
 
-export class ShopFilterComponent implements OnInit {
+export class ProductFilterComponent implements OnInit {
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }

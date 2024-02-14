@@ -20,9 +20,9 @@ import { ContactComponent } from './pages/about/contact/contact.component'
 import { IntroductionComponent } from './pages/about/introduction/introduction.component'
 import { SvgRenderComponent } from './cmps/svg-render-component/svg-render-component'
 import { ShopComponent } from './pages/shop/shop.component'
-import { ShopListComponent } from './cmps/shop-list/shop-list.component'
+import { ProductListComponent } from './cmps/product-list/product-list.component'
 import { AsideMenuComponent } from './cmps/modals/aside-menu/aside-menu.component'
-import { ShopFilterComponent } from './cmps/shop-filter/shop-filter.component'
+import { ProductFilterComponent } from './cmps/product-filter/product-filter.component'
 import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
 import { ImageCarouselComponent } from './cmps/carousels/image-carousel/image-carousel.component'
 import { ProductDetailsComponent } from './pages/details/product/product-details.component'
@@ -58,10 +58,10 @@ import { RandomProductCarouselComponent } from './cmps/carousels/random-product-
     AboutComponent,
     SvgRenderComponent,
     ShopComponent,
-    ShopListComponent,
+    ProductListComponent,
     AsideMenuComponent,
     ClickOutsideDirective,
-    ShopFilterComponent,
+    ProductFilterComponent,
     ProductPreviewComponent,
     ImageCarouselComponent,
     ProductDetailsComponent,

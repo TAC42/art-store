@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChange
 import { Product } from '../../models/shop'
 
 @Component({
-  selector: 'shop-list',
-  templateUrl: './shop-list.component.html'
+  selector: 'product-list',
+  templateUrl: './product-list.component.html'
 })
 
-export class ShopListComponent implements OnInit, OnChanges {
+export class ProductListComponent implements OnInit, OnChanges {
   @HostBinding('class.layout-row') layoutRowClass = true
 
   @Input() products!: Product[] | null

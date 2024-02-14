@@ -3,7 +3,7 @@
   <section class="filter-area flex column">
     <img class="background-image" src="{{ backgroundImage }}" alt="Background">
     <h4>Shop</h4>
-    <shop-filter [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async" (onSetFilter)="onSetFilter($event)"
+    <product-filter [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async" (onSetFilter)="onSetFilter($event)"
       (onOpenCart)="onOpenCart()" />
   </section>
 
@@ -16,7 +16,7 @@
     </p>
   </div>
 
-  <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
+  <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
     [products]="products$ | async" />
 </section>
 
@@ -26,7 +26,7 @@
 
   <section class="filter-area flex column">
     <h4>Shop</h4>
-    <shop-filter [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async" (onSetFilter)="onSetFilter($event)"
+    <product-filter [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async" (onSetFilter)="onSetFilter($event)"
       (onOpenCart)="onOpenCart()" />
   </section>
 
@@ -39,6 +39,6 @@
     </p>
   </div>
 
-  <shop-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
+  <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
     [products]="products$ | async" />
 </section>
