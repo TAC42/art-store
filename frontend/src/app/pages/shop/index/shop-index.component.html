@@ -16,8 +16,8 @@
     </p>
   </div>
 
-  <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
-    [products]="products$ | async" />
+  <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
+    (add)="onAddToCart($event)" [products]="products$ | async" />
 </section>
 
 <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
@@ -39,6 +39,6 @@
     </p>
   </div>
 
-  <product-list [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)" (add)="onAddToCart($event)"
-    [products]="products$ | async" />
+  <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
+    (add)="onAddToCart($event)" [products]="products$ | async" />
 </section>

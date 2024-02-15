@@ -9,6 +9,7 @@ import { Product } from '../../models/shop'
 export class ProductListComponent implements OnInit, OnChanges {
   @HostBinding('class.layout-row') layoutRowClass = true
 
+  @Input() isShopPage!: boolean
   @Input() products!: Product[] | null
   @Input() isLoading!: boolean
   @Output() remove = new EventEmitter<string>()

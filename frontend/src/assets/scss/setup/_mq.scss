@@ -42,14 +42,30 @@ sculpture-wrapper {
         }
 
         product-list {
-            @media(max-width: 600px) {
-                padding: 1.5em 1em;
-                gap: 1em;
-            }
+            .list-contents {
+                @media(max-width: 600px) {
+                    padding: 1.5em 1em 0 1.5em;
 
-            @media(min-width: 601px) {
-                padding: 2em 2em;
-                gap: 1.5em;
+                    &.grid-layout {
+                        gap: 1em;
+                    }
+
+                    &.masonry-layout {
+                        column-gap: 1em;
+                    }
+                }
+
+                @media(min-width: 601px) {
+                    padding: 2em 2em 0 2em;
+
+                    &.grid-layout {
+                        gap: 1.5em;
+                    }
+
+                    &.masonry-layout {
+                        column-gap: 1.5em;
+                    }
+                }
             }
         }
     }

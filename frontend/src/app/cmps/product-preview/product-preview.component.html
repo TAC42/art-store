@@ -1,5 +1,6 @@
-<a class="preview-contents flex column" [routerLink]="['/', product.type, 'details',product.name]">
-  <article class="product-body grid w-h-100">
+<a class="preview-contents flex column" [ngClass]="{'masonry-item': !isShopPage}"
+  [routerLink]="['/', product.type, 'details',product.name]">
+  <article class="product-body flex">
     <img [src]="product.imgUrls[0]" [alt]="product.name"
       [style.filter]="product.type !== 'shop' || (product.type === 'shop' && product.stock > 0) ? 'opacity(1)' : 'opacity(0.5)'" />
 

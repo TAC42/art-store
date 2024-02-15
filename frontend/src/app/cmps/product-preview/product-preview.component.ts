@@ -13,6 +13,7 @@ import { AppState } from '../../store/app.state'
 })
 
 export class ProductPreviewComponent {
+  @Input() isShopPage!: boolean
   @Input() product!: Product
   @Output() remove = new EventEmitter()
   @Output() add = new EventEmitter()
