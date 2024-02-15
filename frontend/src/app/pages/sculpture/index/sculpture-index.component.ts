@@ -29,11 +29,15 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
-  isLoading: boolean = false
-  filterBy: ShopFilter = { search: '', type: 'sculpture' }
-  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
+
+  public isShopPage: boolean = false
+  public isLoading: boolean = false
+  public filterBy: ShopFilter = { search: '', type: 'sculpture' }
+  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
 
   ngOnInit(): void {
+    this.isShopPage = this.router.url.startsWith('/shop')
+
     this.removeProductSubscription = this.comService.removeProduct$.subscribe(
       productId => this.onRemoveProduct(productId))
     this.isLoadingSubscription = this.store.select(selectIsLoading).subscribe(

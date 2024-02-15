@@ -29,11 +29,15 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
-  isLoading: boolean = false
-  filterBy: ShopFilter = { search: '', type: 'artware' }
-  backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1706644779/ibir2pid5kftim9u7fvu.png'
+
+  public isShopPage: boolean = false
+  public isLoading: boolean = false
+  public filterBy: ShopFilter = { search: '', type: 'artware' }
+  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1706644779/ibir2pid5kftim9u7fvu.png'
 
   ngOnInit(): void {
+    this.isShopPage = this.router.url.startsWith('/shop')
+
     this.removeProductSubscription = this.comService.removeProduct$.subscribe(
       productId => this.onRemoveProduct(productId))
     this.isLoadingSubscription = this.store.select(selectIsLoading).subscribe(
