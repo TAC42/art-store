@@ -13,6 +13,9 @@ product-preview {
 
     &.masonry-item {
       max-height: 600px;
+      text-align: center;
+      padding-bottom: 0.5em;
+      gap: 0.5em;
     }
 
     .product-body {
