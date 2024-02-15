@@ -2,7 +2,7 @@
 <main class="payment-main">
   <section
     class="order-summary"
-    [ngClass]="{ b: optionState === 'order' }"
+    [ngClass]="{ selected: optionState === 'order' }"
     (click)="setSelection('order')"
   >
     <article class="heading">
@@ -15,7 +15,7 @@
   </section>
   <section
     class="personal-info"
-    [ngClass]="{ b: optionState === 'personal' }"
+    [ngClass]="{ selected: optionState === 'personal' }"
     (click)="setSelection('personal')"
   >
     <article class="heading">
@@ -28,15 +28,42 @@
   </section>
   <section
     class="payment-method"
-    [ngClass]="{ b: optionState === 'payment' }"
+    [ngClass]="{ selected: optionState === 'payment' }"
     (click)="setSelection('payment')"
   >
     <article class="heading">
       <span class="pending">3</span>
       <span class="title">Payment method</span>
     </article>
-    <article *ngIf="optionState === 'payment'">
-      <span>Choose a payment method.</span>
+    <article *ngIf="optionState === 'payment'" class="methods">
+      <form [formGroup]="paymentForm">
+        <span class="desc">Choose a payment method.</span>
+        <div class="option">
+          <input
+            type="radio"
+            id="venmo"
+            formControlName="paymentMethod"
+            value="venmo"
+          />
+          <label for="venmo">Venmo</label>
+        </div>
+        <div class="option">
+          <input
+            type="radio"
+            id="paypal"
+            formControlName="paymentMethod"
+            value="payPal"
+          />
+          <label for="paypal">PayPal</label>
+        </div>
+      </form>
     </article>
+  </section>
+  <section class="terms"></section>
+  <section class="pay-btn">
+    <button>
+      <svg-render svgName="lock" /> Pay with
+      <span class="pay-type">{{ payType }}</span>
+    </button>
   </section>
 </main>
