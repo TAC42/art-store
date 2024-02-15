@@ -22,8 +22,164 @@
       <span class="pending">2</span>
       <span class="title">Personal info</span>
     </article>
-    <article *ngIf="optionState === 'personal'">
-      <span>this is personal-info</span>
+    <article *ngIf="optionState === 'personal'" class="personal">
+      <form [formGroup]="paymentForm">
+        <span class="desc">*Required fields.</span>
+        <div class="info-heading">
+          <svg-render svgName="personIcon" /><span>About you</span>
+        </div>
+
+        <label class="flex row">
+          <div class="label-info flex row">
+            <span>*First</span>
+          </div>
+          <input
+            id="first"
+            type="text"
+            #nameInput
+            formControlName="first"
+            placeholder="John..."
+            customValidator
+            [minLength]="1"
+            [maxLength]="48"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('first')">{{
+            getErrorMessage("name")
+          }}</span>
+        </label>
+
+        <label class="flex row">
+            <span class="label-info flex row">*Last</span>
+          <input
+            id="last"
+            type="text"
+            #nameInput
+            formControlName="last"
+            placeholder="Doe..."
+            customValidator
+            [minLength]="1"
+            [maxLength]="48"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('last')">{{
+            getErrorMessage("name")
+          }}</span>
+        </label>
+
+        <div class="info-heading">
+          <svg-render svgName="email" /><span>Contact information</span>
+        </div>
+
+        <label class="flex row">
+          <span class="label-info flex row">*Email</span>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="john@gmail.com..."
+            customValidator
+            [minLength]="6"
+            [maxLength]="48"
+            [allowedSpecialChars]="'@.'"
+          />
+          <span *ngIf="isFieldInvalid('last')">{{
+            getErrorMessage("email")
+          }}</span>
+        </label>
+
+        <label class="flex row">
+            <span class="label-info flex row">*Phone</span>
+          <input
+            id="phone"
+            type="text"
+            #nameInput
+            formControlName="phone"
+            placeholder="XXX-XXX-XXXX"
+            customValidator
+            [length]="10"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('last')">{{
+            getErrorMessage("name")
+          }}</span>
+        </label>
+
+        <div class="info-heading">
+          <svg-render svgName="homeIcon" /><span>Address</span>
+        </div>
+
+        <label class="flex row">
+            <span class="label-info flex row">*Street and number</span>
+          <input
+            id="street"
+            type="text"
+            #nameInput
+            formControlName="street"
+            placeholder="1 Example drive..."
+            customValidator
+            [minLength]="1"
+            [maxLength]="48"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('street')">{{
+            getErrorMessage("street")
+          }}</span>
+        </label>
+
+        <label class="flex row">
+            <span class="label-info flex row">*City</span>
+          <input
+            id="city"
+            type="text"
+            #nameInput
+            formControlName="city"
+            placeholder="New York..."
+            customValidator
+            [minLength]="1"
+            [maxLength]="48"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('city')">{{
+            getErrorMessage("city")
+          }}</span>
+        </label>
+
+        <label class="flex row">
+            <span class="label-info flex row">*State</span>
+          <input
+            id="state"
+            type="text"
+            #nameInput
+            formControlName="state"
+            placeholder="NY..."
+            customValidator
+            [length]="2"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('state')">{{
+            getErrorMessage("state")
+          }}</span>
+        </label>
+
+        <label class="flex row">
+            <span class="label-info flex row">*Zip code</span>
+          <input
+            id="zip"
+            type="text"
+            #nameInput
+            formControlName="zip"
+            placeholder="12345..."
+            customValidator
+            [length]="5"
+            [allowedSpecialChars]="'. '"
+          />
+          <span *ngIf="isFieldInvalid('zip')">{{
+            getErrorMessage("zip")
+          }}</span>
+        </label>
+
+      </form>
     </article>
   </section>
   <section
@@ -38,7 +194,7 @@
     <article *ngIf="optionState === 'payment'" class="methods">
       <form [formGroup]="paymentForm">
         <span class="desc">Choose a payment method.</span>
-        <div class="option">
+        <div class="option" [ngClass]="{ selected: payType === 'venmo' }">
           <input
             type="radio"
             id="venmo"
@@ -46,15 +202,17 @@
             value="venmo"
           />
           <label for="venmo">Venmo</label>
+          <svg-render svgName="venmo" />
         </div>
-        <div class="option">
+        <div class="option" [ngClass]="{ selected: payType === 'paypal' }">
           <input
             type="radio"
             id="paypal"
             formControlName="paymentMethod"
-            value="payPal"
+            value="paypal"
           />
           <label for="paypal">PayPal</label>
+          <svg-render svgName="paypal" />
         </div>
       </form>
     </article>
