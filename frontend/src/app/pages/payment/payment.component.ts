@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
   selector: 'payment',
@@ -12,6 +13,9 @@ export class PaymentComponent implements OnInit{
   @ViewChild('nameInput') nameInput!: ElementRef
 
   private fb = inject(FormBuilder)
+  private uService = inject(UtilityService)
+
+  usStates = this.uService.getStates()
 
   optionState: string = ''
   payType: string = 'venmo'
