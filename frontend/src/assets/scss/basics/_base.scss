@@ -14,7 +14,7 @@ body {
   font-family: "nh-medium";
 }
 
-body>div:last-child {
+body > div:last-child {
   position: absolute !important;
   bottom: 0 !important;
   left: 0 !important;
@@ -91,4 +91,43 @@ li {
 router-outlet {
   height: fit-content;
   width: 100%;
+}
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+input[type="radio"] + label {
+  cursor: pointer;
+  position: relative;
+  transform: all .3s ease-in-out;
+}
+
+input[type="radio"] + label::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid $prmclr1;
+  border-radius: 50%;
+  margin: 0.5em 0.5em 0 0;
+  align-self: end;
+}
+
+input[type="radio"]:checked + label::before {
+  border-color: #287681;
+}
+
+input[type="radio"]:checked + label::after  {
+  content: "";
+  position: absolute;
+  top: 56%;
+  left: 13%;
+  transform: translate(-50%, -50%);
+  width: 0.6em;
+  height: 0.6em;
+  background-color: #287681;
+  border-radius: 50%; 
 }

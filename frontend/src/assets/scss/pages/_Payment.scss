@@ -11,24 +11,80 @@ payment {
     section {
       .heading {
         display: flex;
-        gap: .5em;
+        gap: 0.25em;
         font-size: 1.25em;
         align-content: center;
         background-color: #f2f2f2;
         color: #646464;
-        padding: 1em;
-        
-        .pending{
-            background-color: $prmclr2;
-            width: 1.25em;
-            padding: .1em;
-            border-radius: 50%;
-            text-align: center;
+        padding: 0.75em;
+        // transform: all .3s ease-in-out;
+
+        .pending {
+          background-color: $prmclr2;
+          width: 1.25em;
+          padding: 0.1em;
+          border-radius: 50%;
+          text-align: center;
         }
         .title {
-            align-self: center;
+          align-self: center;
         }
+      }
+      &:hover,
+      &.selected {
+        .heading {
+          font-family: "nh-bold";
+          background-color: #e6eeee;
+        }
+      }
+      .methods {
+        display: grid;
+        grid-auto-flow: row;
+        gap: 1em;
+        padding: 0.75em;
 
+        .desc {
+          font-size: 1em;
+          color: #787878;
+        }
+      }
+      .option {
+        display: flex;
+        align-items: center;
+        padding: 1em;
+        border: 1px #f3f3f3 solid;
+        border-radius: 0.25em;
+        font-size: 1.25em;
+        font-family: "nh-bold";
+      }
+    }
+    .pay-btn {
+      width: 100%;
+      padding: 1em;
+
+
+      button {
+        display: flex;
+        gap: 0.25em;
+        justify-content: center;
+        width: 100%;
+        padding: 0.5em;
+        font-size: 1.5em;
+        color: $prmclr2;
+        background-color: #0c3640;
+        border-radius: 1em;
+        svg-render {
+          width: 1em;
+          height: 1em;
+          svg {
+            path {
+              fill: $prmclr2;
+            }
+          }
+        }
+        .pay-type {
+          text-transform: capitalize;
+        }
       }
     }
   }
