@@ -9,7 +9,6 @@ import { NG_VALIDATORS, Validator, AbstractControl, ValidationErrors } from '@an
 export class CustomValidatorDirective implements Validator {
   @Input() maxLength: number = 1000
   @Input() minLength: number = 0
-  @Input() length: number = 10
   @Input() allowedSpecialChars: string = ''
 
   validate(control: AbstractControl): ValidationErrors | null {
@@ -22,10 +21,6 @@ export class CustomValidatorDirective implements Validator {
     if (value && value.length > this.maxLength) {
       return { 'maxLength': { 'requiredLength': this.maxLength, 'actualLength': value.length } }
     } // length max limit check
-
-    if (value && value.length !== this.length) {
-      return { 'length': { 'requiredLength': this.length, 'actualLength': value.length } }
-    } // length check
 
     if (value && !new RegExp(`^[${this.allowedSpecialChars}a-zA-Z0-9\\s]*$`).test(value)) {
       return { 'invalidCharacters': true }

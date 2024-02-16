@@ -1,36 +1,34 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UtilityService } from '../../services/utility.service';
+import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { UtilityService } from '../../services/utility.service'
 
 @Component({
   selector: 'payment',
   templateUrl: './payment.component.html'
 })
-export class PaymentComponent implements OnInit{
+export class PaymentComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
   @ViewChild('nameInput') nameInput!: ElementRef
 
   private fb = inject(FormBuilder)
-  private uService = inject(UtilityService)
+  private utilService = inject(UtilityService)
 
-  usStates = this.uService.getStates()
+  usStates = this.utilService.getStates()
 
   optionState: string = ''
   payType: string = 'venmo'
-  
-  paymentForm: FormGroup;
+
+  paymentForm: FormGroup
   personalForm!: FormGroup
-  
+
   constructor() {
     this.paymentForm = this.fb.group({
       paymentMethod: ['venmo']
     })
-
-    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
-      this.payType = value
-    })
+    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(
+      value => this.payType = value)
   }
 
   ngOnInit() {
@@ -68,7 +66,7 @@ export class PaymentComponent implements OnInit{
     return ''
   }
 
-  setSelection(option: string){
+  setSelection(option: string) {
     this.optionState = option
   }
 }
