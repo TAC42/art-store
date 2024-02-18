@@ -14,7 +14,7 @@
         </span>
       </label>
       <input id="name" type="text" #nameInput formControlName="name" placeholder="Please enter product name..."
-        customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. $%:'" />
+        customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. -/:'" />
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('price')">
@@ -28,7 +28,7 @@
         </span>
       </label>
       <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." customValidator
-        [minLength]=1 [maxLength]=3 min="0" max="999" />
+        [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('description')">
@@ -71,7 +71,7 @@
       </label>
       <input id="materials" type="text" formControlName="materials"
         placeholder="The materials that make your product..." customValidator [minLength]=3 [maxLength]=24
-        [allowedSpecialChars]="'/ .,()'" />
+        [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
     </div>
 
     <div class="input-area flex column" [class.error]="isFieldInvalid('publishDate')">
@@ -96,7 +96,7 @@
         </div>
       </label>
       <input id="stock" type="number" formControlName="stock" placeholder="Please enter stock amount..." customValidator
-        [minLength]=1 [maxLength]=3 min="0" max="999" />
+        [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
     <div class="input-area flex column">
