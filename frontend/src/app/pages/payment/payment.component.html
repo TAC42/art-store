@@ -27,14 +27,14 @@
           <span class="label-info flex row">*First name</span>
           <input id="first_name" type="text" #nameInput formControlName="first_name" placeholder="John..." customValidator
             [minLength]="1" [maxLength]="48" [allowedSpecialChars]="'. '" />
-          <span *ngIf="isFieldInvalid('first_name')">
+          <span class="error" *ngIf="isFieldInvalid('first_name')">
             {{ getErrorMessage("first_name") }}
           </span>
         </label>
 
         <label class="flex column">
           <span class="label-info flex row">*Last name</span>
-          <input id="last_name" type="text"  formControlName="last_name" placeholder="Doe..." customValidator
+          <input id="last_name" type="text" formControlName="last_name" placeholder="Doe..." customValidator
             [minLength]="1" [maxLength]="48" [allowedSpecialChars]="'. '" />
           <span *ngIf="isFieldInvalid('last_name')">
             {{ getErrorMessage("last_name") }}
