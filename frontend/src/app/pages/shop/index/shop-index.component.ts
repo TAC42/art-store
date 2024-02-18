@@ -32,9 +32,9 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private removeProductSubscription: Subscription | undefined
   private isLoadingSubscription: Subscription | undefined
 
+  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
-  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
 
   public isShopPage: boolean = false
   public isLoading: boolean = false
