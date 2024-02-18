@@ -20,7 +20,7 @@ export class PaymentComponent implements OnInit {
   optionState: string = ''
   payType: string = 'venmo'
 
-  paymentForm: FormGroup
+  paymentForm!: FormGroup
   personalForm!: FormGroup
 
   constructor() {
@@ -36,9 +36,9 @@ export class PaymentComponent implements OnInit {
   }
 
   initializeForm(): void {
-    this.personalForm = this.fb.group({
-      first: ['', Validators.required],
-      last: ['', Validators.required],
+    this.paymentForm = this.fb.group({
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       street: ['', Validators.required],
@@ -50,17 +50,16 @@ export class PaymentComponent implements OnInit {
   }
 
   isFieldInvalid(fieldName: string): boolean {
-    const field = this.personalForm.get(fieldName)
+    const field = this.paymentForm.get(fieldName)
     return field ? field.invalid && (field.dirty || field.touched) : false
   }
 
   getErrorMessage(fieldName: string): string {
-    const field = this.personalForm.get(fieldName)
+    const field = this.paymentForm.get(fieldName)
     if (field?.errors?.['required']) return `${fieldName} is required`
     if (field?.errors?.['email']) return 'Invalid email format'
     if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
     if (field?.errors?.['maxLength']) return `Maximum length reached`
-    if (field?.errors?.['length']) return `Phone needs 10 digits`
     if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
 
     return ''
