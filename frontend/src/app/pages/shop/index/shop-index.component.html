@@ -5,16 +5,16 @@
     <h4>Shop</h4>
     <product-filter [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async" (onSetFilter)="onSetFilter($event)"
       (onOpenCart)="onOpenCart()" />
-  </section>
 
-  <div class="page-info-text">
-    <p class="layout-row">
-      Dive into the world of exquisite pottery where every piece tells a story. Our collection ranges from functional
-      kitchenware to decorative pieces, all designed to add a touch of elegance to your home. Crafted with care by
-      Ori Carlin, our pottery is not just items but heirlooms in the making. Explore our diverse range,
-      find your favorites, and bring a piece of art into your everyday life.
-    </p>
-  </div>
+    <div class="page-info-text">
+      <p class="layout-row">
+        Dive into the world of exquisite pottery where every piece tells a story. Our collection ranges from functional
+        kitchenware to decorative pieces, all designed to add a touch of elegance to your home. Crafted with care by
+        Ori Carlin, our pottery is not just items but heirlooms in the making. Explore our diverse range,
+        find your favorites, and bring a piece of art into your everyday life.
+      </p>
+    </div>
+  </section>
 
   <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
     (add)="onAddToCart($event)" [products]="products$ | async" [loggedinUser$]="loggedinUser$" />

@@ -4,15 +4,16 @@
         <img class="background-image" src="{{ backgroundImage }}" alt="Background">
         <h4>Artware</h4>
         <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
-    </section>
 
-    <div class="page-info-text">
-        <p class="layout-row">
-            Step into a world where pottery transcends its traditional bounds to become a canvas for artistic
-            expression. Our Artware Collection is a celebration of creativity, showcasing pieces that are as much art as
-            they are pottery. Each piece in this collection is a testament to the imagination and skill of Ori Carlin.
-        </p>
-    </div>
+        <div class="page-info-text">
+            <p class="layout-row">
+                Step into a world where pottery transcends its traditional bounds to become a canvas for artistic
+                expression. Our Artware Collection is a celebration of creativity, showcasing pieces that are as much
+                art as they are pottery. Each piece in this collection is a testament to the imagination and skill of
+                Ori Carlin.
+            </p>
+        </div>
+    </section>
 
     <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
         [products]="products$ | async" [loggedinUser$]="loggedinUser$" />

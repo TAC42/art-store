@@ -3,8 +3,6 @@ product-list {
   height: 100%;
 
   .list-contents {
-    margin-bottom: 3em;
-
     &.grid-layout {
       display: grid;
 
@@ -16,7 +14,7 @@ product-list {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      @media(min-width: 900px) {
+      @media(min-width: 901px) {
         grid-template-columns: repeat(3, 1fr);
       }
 
@@ -39,7 +37,7 @@ product-list {
         column-count: 2;
       }
 
-      @media(min-width: 900px) {
+      @media(min-width: 901px) {
         column-count: 3;
       }
 
