@@ -91,6 +91,13 @@ payment {
               background-color: $prmclr2;
               padding: 0 0.5em;
             }
+            &.error {
+
+              input,
+              select{
+                border: 2px solid $mnrclr5;
+              }
+            }
           }
         }
       }

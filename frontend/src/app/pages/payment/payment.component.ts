@@ -36,7 +36,7 @@ export class PaymentComponent implements OnInit {
   }
 
   initializeForm(): void {
-    this.paymentForm = this.fb.group({
+    this.personalForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -46,26 +46,28 @@ export class PaymentComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     })
-    setTimeout(() => this.nameInput?.nativeElement.focus(), 0)
   }
 
   isFieldInvalid(fieldName: string): boolean {
-    const field = this.paymentForm.get(fieldName)
+    const field = this.personalForm.get(fieldName)
     return field ? field.invalid && (field.dirty || field.touched) : false
   }
 
   getErrorMessage(fieldName: string): string {
-    const field = this.paymentForm.get(fieldName)
+    const field = this.personalForm.get(fieldName)
     if (field?.errors?.['required']) return `${fieldName} is required`
     if (field?.errors?.['email']) return 'Invalid email format'
     if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
     if (field?.errors?.['maxLength']) return `Maximum length reached`
     if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
+    if (field?.errors?.['noNumbersAllowed']) return 'Numbers are not allowed'
+    if (field?.errors?.['noLettersAllowed']) return 'Letters are not allowed'
 
     return ''
   }
 
   setSelection(option: string) {
     this.optionState = option
+   if (option === 'personal') setTimeout(() => this.nameInput?.nativeElement.focus(), 1000)
   }
 }
