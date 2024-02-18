@@ -8,7 +8,9 @@
                             <svg-render svgName="personIcon" />
                             <span>Username</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
+                        <span *ngIf="isFieldInvalid('username')">
+                            {{ getErrorMessage('username') }}
+                        </span>
                     </label>
                     <input id="username" type="text" autofocus formControlName="username" placeholder="Your username..."
                         customValidator [minLength]=3 [maxLength]=24>
@@ -20,7 +22,9 @@
                             <svg-render svgName="lockIcon" />
                             <span>Password</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
+                        <span *ngIf="isFieldInvalid('password')">
+                            {{ getErrorMessage('password') }}
+                        </span>
                     </label>
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
                         customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
@@ -34,11 +38,13 @@
                             <svg-render svgName="idIcon" />
                             <span>First Name</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('firstName')">{{ getErrorMessage('firstName') }}</span>
+                        <span *ngIf="isFieldInvalid('firstName')">
+                            {{ getErrorMessage('firstName') }}
+                        </span>
                     </label>
                     <input id="firstName" type="text" #firstNameInput formControlName="firstName"
                         placeholder="Your first name..." customValidator [minLength]=3 [maxLength]=24
-                        [allowedSpecialChars]="',.'">
+                        [allowNumbers]="false" [allowedSpecialChars]="',.'">
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('lastName')">
@@ -47,10 +53,13 @@
                             <svg-render svgName="idIcon" />
                             <span>Last Name</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('lastName')">{{ getErrorMessage('lastName') }}</span>
+                        <span *ngIf="isFieldInvalid('lastName')">
+                            {{ getErrorMessage('lastName') }}
+                        </span>
                     </label>
                     <input id="lastName" type="text" formControlName="lastName" placeholder="Your last name..."
-                        customValidator [minLength]=3 [maxLength]=24 [allowedSpecialChars]="',.'">
+                        customValidator [minLength]=3 [maxLength]=24 [allowNumbers]="false"
+                        [allowedSpecialChars]="',.'">
                 </div>
 
                 <div class="input-area flex column" [class.error]="isFieldInvalid('username')">
@@ -59,7 +68,9 @@
                             <svg-render svgName="personIcon" />
                             <span>Username</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('username')">{{ getErrorMessage('username') }}</span>
+                        <span *ngIf="isFieldInvalid('username')">
+                            {{ getErrorMessage('username') }}
+                        </span>
                     </label>
                     <input id="username" type="text" formControlName="username" placeholder="Your username..."
                         customValidator [minLength]=3 [maxLength]=24>
@@ -71,7 +82,9 @@
                             <svg-render svgName="emailIcon" />
                             <span>Email</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
+                        <span *ngIf="isFieldInvalid('email')">
+                            {{ getErrorMessage('email') }}
+                        </span>
                     </label>
                     <input id="email" type="email" formControlName="email" placeholder="Your email..." customValidator
                         [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
@@ -83,7 +96,9 @@
                             <svg-render svgName="lockIcon" />
                             <span>Password</span>
                         </div>
-                        <span *ngIf="isFieldInvalid('password')">{{ getErrorMessage('password') }}</span>
+                        <span *ngIf="isFieldInvalid('password')">
+                            {{ getErrorMessage('password') }}
+                        </span>
                     </label>
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
                         customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">

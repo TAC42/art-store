@@ -18,10 +18,12 @@
                         <svg-render svgName="personIcon" />
                         <span>Name*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('name')">{{ getErrorMessage('name') }}</span>
+                    <span *ngIf="isFieldInvalid('name')">
+                        {{ getErrorMessage('name') }}
+                    </span>
                 </label>
                 <input id="name" type="text" #nameInput formControlName="name" placeholder="John Doe..." customValidator
-                    [minLength]=1 [maxLength]=48 [allowedSpecialChars]="'. '">
+                    [minLength]=1 [maxLength]=48 [allowNumbers]="false" [allowedSpecialChars]="'. '">
             </div>
 
             <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
@@ -30,7 +32,9 @@
                         <svg-render svgName="emailIcon" />
                         <span>Email*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('email')">{{ getErrorMessage('email') }}</span>
+                    <span *ngIf="isFieldInvalid('email')">
+                        {{ getErrorMessage('email') }}
+                    </span>
                 </label>
                 <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
                     [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
@@ -42,7 +46,9 @@
                         <svg-render svgName="titleIcon" />
                         <span>Title*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('title')">{{ getErrorMessage('title') }}</span>
+                    <span *ngIf="isFieldInvalid('title')">
+                        {{ getErrorMessage('title') }}
+                    </span>
                 </label>
                 <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question..."
                     [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :?&!$'">
@@ -54,7 +60,9 @@
                         <svg-render svgName="descriptionIcon" />
                         <span>Description*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('message')">{{ getErrorMessage('message') }}</span>
+                    <span *ngIf="isFieldInvalid('message')">
+                        {{ getErrorMessage('message') }}
+                    </span>
                 </label>
                 <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator
                     [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>

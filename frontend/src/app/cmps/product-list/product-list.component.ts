@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, HostBinding } from '@angular/core'
 import { Product } from '../../models/shop'
+import { Observable } from 'rxjs'
+import { User } from '../../models/user'
 
 @Component({
   selector: 'product-list',
@@ -11,6 +13,7 @@ export class ProductListComponent implements OnInit, OnChanges {
 
   @Input() isShopPage!: boolean
   @Input() products!: Product[] | null
+  @Input() loggedinUser$!: Observable<User>
   @Input() isLoading!: boolean
   @Output() remove = new EventEmitter<string>()
   @Output() add = new EventEmitter<Product>()

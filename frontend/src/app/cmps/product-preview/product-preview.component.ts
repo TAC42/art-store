@@ -3,9 +3,6 @@ import { Product } from '../../models/shop'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { User } from '../../models/user'
-import { selectLoggedinUser } from '../../store/user.selectors'
-import { Store } from '@ngrx/store'
-import { AppState } from '../../store/app.state'
 
 @Component({
   selector: 'product-preview',
@@ -15,13 +12,11 @@ import { AppState } from '../../store/app.state'
 export class ProductPreviewComponent {
   @Input() isShopPage!: boolean
   @Input() product!: Product
+  @Input() loggedinUser$!: Observable<User>
   @Output() remove = new EventEmitter()
   @Output() add = new EventEmitter()
 
   private router = inject(Router)
-  private store = inject(Store<AppState>)
-
-  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
 
   onRemoveProduct(event: Event) {
     event.preventDefault()

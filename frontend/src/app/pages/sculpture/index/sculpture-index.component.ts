@@ -10,6 +10,8 @@ import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../.
 import { CommunicationService } from '../../../services/communication.service'
 import { ModalService } from '../../../services/modal.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
+import { User } from '../../../models/user'
+import { selectLoggedinUser } from '../../../store/user.selectors'
 
 @Component({
   selector: 'sculpture-index',
@@ -27,6 +29,7 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   private removeProductSubscription: Subscription | undefined
   private isLoadingSubscription: Subscription | undefined
 
+  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
 

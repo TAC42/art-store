@@ -95,8 +95,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   getErrorMessage(fieldName: string): string {
     const field = this.editForm.get(fieldName)
     if (field?.errors?.['required']) return `${fieldName} is required!`
-    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} characters required`
+    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} min characters required`
     if (field?.errors?.['maxLength']) return `Maximum length reached`
+    if (field?.errors?.['noNumbersAllowed']) return 'Numbers are not allowed'
+    if (field?.errors?.['noLettersAllowed']) return 'Letters are not allowed'
     if (field?.errors?.['invalidCharacters']) return `Invalid characters used!`
     if (field?.errors?.['nameTaken']) return 'This name is already in use!'
 
