@@ -32,7 +32,7 @@ export class PaymentComponent implements OnInit {
   usStates = this.utilService.getStates()
 
   user: User | null = null
-  optionState: string = ''
+  optionState: string = 'order'
   payType: string = 'venmo'
 
   paymentForm!: FormGroup
