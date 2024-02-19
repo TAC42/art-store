@@ -17,7 +17,6 @@ payment {
         background-color: #f2f2f2;
         color: #646464;
         padding: 0.75em;
-        // transform: all .3s ease-in-out;
 
         .pending {
           background-color: $prmclr2;
@@ -37,6 +36,144 @@ payment {
           background-color: #e6eeee;
         }
       }
+
+      .order {
+        padding: 0 1em;
+        .summary-list {
+          .summary-item {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: .75em 0;
+            font-size: 1.25em;
+            color: #5f5f5f;
+            &:not(:first-child) {
+              border-top: 1px solid #9f9f9f;
+            }
+            .image {
+              grid-column: 1 / 2;
+              position: relative;
+              img {
+                object-fit: cover;
+                aspect-ratio: 1/1;
+              }
+              .amount {
+                position: absolute;
+                top: -0.5em;
+                right: -0.5em;
+                width: 1.25em;
+                height: 1.25em;
+                background-color: $prmclr2;
+                border-radius: 50%;
+                border: 1px #787878 solid;
+                text-align: center;
+              }
+            }
+            .item-info {
+              grid-column: 2 / 5;
+              padding: 0.25em 1em;
+              display: grid;
+              align-items: space-between;
+              .name {
+                text-transform: capitalize;
+                text-decoration: underline;
+              }
+              .desc {
+                font-size: 1rem;
+                max-height: 2.6em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+              }
+            }
+            .price {
+              grid-column: 5 / -1;
+              justify-self: end;
+              color: $prmclr1;
+              padding: 0.25em;
+            }
+          }
+        }
+        .check-out {
+          gap: 1em;
+          padding: .5em 1em 0 1em;
+          border-top: 2px dashed #787878;
+          .info {
+            justify-content: space-between;
+            font-size: 1.25em;
+            span {
+              &:first-child {
+                text-transform: capitalize;
+              }
+            }
+          }
+        }
+      }
+
+      .personal {
+        padding: 1em;
+        .desc {
+          font-size: 1em;
+          color: #787878;
+        }
+        form {
+          display: grid;
+          gap: 1.25em;
+
+          .info-heading {
+            margin-block-start: 1em;
+            display: flex;
+            gap: 0.5em;
+            align-items: center;
+            font-family: "nh-bold";
+            font-size: 1.25em;
+            svg-render {
+              display: inline-block;
+              width: 1.25em;
+              height: 1.25em;
+            }
+          }
+
+          label {
+            position: relative;
+            .label-info {
+              position: absolute;
+              top: -0.5em;
+              left: 1em;
+              padding: 0 0.5em;
+              background-color: $prmclr2;
+              color: #787878;
+            }
+            input,
+            select {
+              width: 100%;
+              font-size: 1.25em;
+              padding: 1em;
+              border-color: #9f9f9f;
+              outline: none;
+              border-radius: 0.5em;
+              &:focus-visible {
+                border-color: #5f5f5f;
+              }
+            }
+            .error {
+              position: absolute;
+              top: -0.5em;
+              right: 1em;
+              color: $mnrclr5;
+              background-color: $prmclr2;
+              padding: 0 0.5em;
+            }
+            &.error {
+              input,
+              select {
+                border: 2px solid $mnrclr5;
+              }
+            }
+          }
+        }
+      }
       .methods {
         display: grid;
         grid-auto-flow: row;
@@ -47,21 +184,34 @@ payment {
           font-size: 1em;
           color: #787878;
         }
-      }
-      .option {
-        display: flex;
-        align-items: center;
-        padding: 1em;
-        border: 1px #f3f3f3 solid;
-        border-radius: 0.25em;
-        font-size: 1.25em;
-        font-family: "nh-bold";
+        form {
+          display: grid;
+          gap: 1em;
+          .option {
+            display: flex;
+            padding: 0.5em;
+            border: 1px #f3f3f3 solid;
+            border-radius: 0.25em;
+            font-size: 1.25em;
+            font-family: "nh-bold";
+
+            svg-render {
+              width: 1.75em;
+              height: 1.75em;
+              margin-left: auto;
+            }
+
+            &.selected {
+              border-color: #aee0e0;
+              background-color: #f7fcfc;
+            }
+          }
+        }
       }
     }
     .pay-btn {
       width: 100%;
       padding: 1em;
-
 
       button {
         display: flex;

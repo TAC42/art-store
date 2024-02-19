@@ -74,10 +74,35 @@ sculpture-wrapper {
 
 app-home {
     .home-page-contents {
-        @media(max-width: 600px) {}
+        @media(max-width: 600px) {
+            .teasers {
+                grid-template-columns: 1fr;
+            }
+
+            .carousels {
+                grid-template-columns: 1fr;
+
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 400px;
+
+                        img {
+                            min-height: 400px;
+                            max-height: 400px;
+                        }
+                    }
+                }
+            }
+        }
 
         @media(min-width: 601px) {
+            .teasers {
+                grid-template-columns: 1fr 1fr;
+            }
+
             .carousels {
+                grid-template-columns: 1fr 1fr;
+
                 .gallery-carousel {
                     .carousel-container {
                         min-height: 200px;
@@ -115,6 +140,21 @@ app-home {
                         img {
                             min-height: 400px;
                             max-height: 400px;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media(min-width: 1201px) {
+            .carousels {
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 500px;
+
+                        img {
+                            min-height: 500px;
+                            max-height: 500px;
                         }
                     }
                 }

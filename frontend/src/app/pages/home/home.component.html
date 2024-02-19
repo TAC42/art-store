@@ -1,39 +1,5 @@
 <main class="home-page-contents w-h-100 flex column">
-  <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
-    class="mobile-view layout-row flex column">
-    <img [src]="loneImg3" class="background-image" alt="Artwork">
-
-    <section class="teasers grid">
-      <div class="teaser-area flex column" (click)="navigateTo('/about/introduction')">
-        <img [src]="loneImg1" alt="About">
-        <p>biography</p>
-        <h2>Introduction to Ori Carlin</h2>
-      </div>
-
-      <div class="teaser-area flex column" (click)="navigateTo('/sculpture/details/stairway to the sky')">
-        <img [src]="loneImg2" alt="Artwork">
-        <p>one of my finest</p>
-        <h2>The Endless Staircase</h2>
-      </div>
-    </section>
-
-    <section class="carousels flex column">
-      <article class="gallery-carousel flex column">
-        <product-carousel [products]="artwareProducts" />
-        <p>meet our artware</p>
-        <h2>Where Creativity And Use Come Together</h2>
-      </article>
-
-      <article class="gallery-carousel flex column">
-        <product-carousel [products]="shopProducts" />
-        <p>our latest products</p>
-        <h2>Available Now For You to Order!</h2>
-      </article>
-    </section>
-  </section>
-
-  <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
-    class="desktop-view layout-row flex column">
+  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column">
     <img [src]="loneImg3" class="background-image" alt="Artwork">
 
     <section class="teasers grid">
@@ -51,6 +17,38 @@
     </section>
 
     <section class="carousels grid">
+      <article class="gallery-carousel flex column">
+        <product-carousel [products]="artwareProducts" />
+        <p>meet our artware</p>
+        <h2>Where Creativity And Use Come Together</h2>
+      </article>
+
+      <article class="gallery-carousel flex column">
+        <product-carousel [products]="shopProducts" />
+        <p>our latest products</p>
+        <h2>Available Now For You to Order!</h2>
+      </article>
+    </section>
+  </section>
+
+  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view layout-row grid">
+    <img [src]="loneImg3" class="background-image" alt="Artwork">
+
+    <section class="teasers flex column">
+      <div class="teaser-area flex column" (click)="navigateTo('/about/introduction')">
+        <img [src]="loneImg1" alt="About">
+        <p>biography</p>
+        <h2>Introduction to Ori Carlin</h2>
+      </div>
+
+      <div class="teaser-area flex column" (click)="navigateTo('/sculpture/details/stairway to the sky')">
+        <img [src]="loneImg2" alt="Artwork">
+        <p>one of my finest</p>
+        <h2>The Endless Staircase</h2>
+      </div>
+    </section>
+
+    <section class="carousels flex column">
       <article class="gallery-carousel flex column">
         <product-carousel [products]="artwareProducts" />
         <p>meet our artware</p>

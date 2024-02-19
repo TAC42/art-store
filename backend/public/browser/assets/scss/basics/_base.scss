@@ -102,7 +102,7 @@ input[type="radio"] {
 input[type="radio"] + label {
   cursor: pointer;
   position: relative;
-  transform: all .3s ease-in-out;
+  transform: all 0.3s ease-in-out;
 }
 
 input[type="radio"] + label::before {
@@ -112,22 +112,22 @@ input[type="radio"] + label::before {
   height: 1em;
   border: 2px solid $prmclr1;
   border-radius: 50%;
-  margin: 0.5em 0.5em 0 0;
-  align-self: end;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
 }
 
 input[type="radio"]:checked + label::before {
   border-color: #287681;
 }
 
-input[type="radio"]:checked + label::after  {
+input[type="radio"]:checked + label::after {
   content: "";
   position: absolute;
-  top: 56%;
+  top: 40%;
   left: 13%;
   transform: translate(-50%, -50%);
   width: 0.6em;
   height: 0.6em;
   background-color: #287681;
-  border-radius: 50%; 
+  border-radius: 50%;
 }

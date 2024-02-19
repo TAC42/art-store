@@ -44,7 +44,8 @@ sculpture-wrapper {
         product-list {
             .list-contents {
                 @media(max-width: 600px) {
-                    padding: 1.5em 1em 0 1.5em;
+                    background: $prmclr1;
+                    padding: 1.5em 1em 3em 1em;
 
                     &.grid-layout {
                         gap: 1em;
@@ -56,7 +57,7 @@ sculpture-wrapper {
                 }
 
                 @media(min-width: 601px) {
-                    padding: 2em 2em 0 2em;
+                    padding: 2em 2em 3em 2em;
 
                     &.grid-layout {
                         gap: 1.5em;
@@ -76,22 +77,87 @@ app-home {
         @media(max-width: 600px) {
             .teasers {
                 grid-template-columns: 1fr;
-                padding: 0 1em 1em 1em;
             }
 
-            .gallery-carousel {
-                padding: 0 1em;
+            .carousels {
+                grid-template-columns: 1fr;
+
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 400px;
+
+                        img {
+                            min-height: 400px;
+                            max-height: 400px;
+                        }
+                    }
+                }
             }
         }
 
         @media(min-width: 601px) {
             .teasers {
                 grid-template-columns: 1fr 1fr;
-                padding: 0 2em 1em 2em;
             }
 
-            .gallery-carousel {
-                padding: 0 2em;
+            .carousels {
+                grid-template-columns: 1fr 1fr;
+
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 200px;
+
+                        img {
+                            min-height: 200px;
+                            max-height: 200px;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media(min-width: 701px) {
+            .carousels {
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 300px;
+
+                        img {
+                            min-height: 300px;
+                            max-height: 300px;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media(min-width: 801px) {
+            .carousels {
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 400px;
+
+                        img {
+                            min-height: 400px;
+                            max-height: 400px;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media(min-width: 1201px) {
+            .carousels {
+                .gallery-carousel {
+                    .carousel-container {
+                        min-height: 500px;
+
+                        img {
+                            min-height: 500px;
+                            max-height: 500px;
+                        }
+                    }
+                }
             }
         }
     }
