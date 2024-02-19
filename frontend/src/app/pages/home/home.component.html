@@ -1,35 +1,77 @@
 <main class="home-page-contents w-h-100 flex column">
-  <section class="introduction">
-    <img [src]="loneImg3" alt="Artwork">
-    <div class="text-overlay">
-      <p>Welcome visitors, to our beloved site, where you can discover the arts and crafts of our skilled artist, Ori
-        Carlin!</p>
-    </div>
+  <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
+    class="mobile-view flex column">
+    <section class="introduction">
+      <img [src]="loneImg3" alt="Artwork">
+      <div class="text-overlay">
+        <p>Welcome visitors, to our beloved site, where you can discover the arts and crafts of our skilled artist, Ori
+          Carlin!</p>
+      </div>
+    </section>
+
+    <section class="teasers grid">
+      <div class="teaser-area flex column" (click)="navigateTo('/about/introduction')">
+        <img [src]="loneImg1" alt="About">
+        <p>BIOGRAPHY</p>
+        <h2>Introduction to Ori Carlin</h2>
+      </div>
+
+      <div class="teaser-area flex column" (click)="navigateTo('/sculpture/details/stairway to the sky')">
+        <img [src]="loneImg2" alt="Artwork">
+        <p>ONE OF MY FINEST</p>
+        <h2>The Endless Staircase</h2>
+      </div>
+    </section>
+
+    <article class="gallery-carousel flex column">
+      <p>OUR ARTWARE</p>
+      <h2>Where Creativity And Use Come Together</h2>
+      <product-carousel [products]="artwareProducts" />
+    </article>
+
+    <article class="gallery-carousel flex column">
+      <p>OUR LATEST PRODUCTS</p>
+      <h2>Available Now For You to Order!</h2>
+      <product-carousel [products]="shopProducts" />
+    </article>
   </section>
 
-  <section class="teasers grid">
-    <div class="teaser-area flex column" (click)="navigateTo('/about/introduction')">
-      <img [src]="loneImg1" alt="About">
-      <p>BIOGRAPHY</p>
-      <h2>Introduction to Ori Carlin</h2>
-    </div>
+  <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
+    class="desktop-view flex column">
+    <section class="introduction">
+      <img [src]="loneImg3" alt="Artwork">
+      <div class="text-overlay">
+        <p>Welcome visitors, to our beloved site, where you can discover the arts and crafts of our skilled artist, Ori
+          Carlin!</p>
+      </div>
+    </section>
 
-    <div class="teaser-area flex column" (click)="navigateTo('/sculpture/details/stairway to the sky')">
-      <img [src]="loneImg2" alt="Artwork">
-      <p>ONE OF MY FINEST</p>
-      <h2>The Endless Staircase</h2>
-    </div>
-  </section>
+    <section class="teasers grid">
+      <div class="teaser-area flex column" (click)="navigateTo('/about/introduction')">
+        <img [src]="loneImg1" alt="About">
+        <p>BIOGRAPHY</p>
+        <h2>Introduction to Ori Carlin</h2>
+      </div>
 
-  <section class="gallery-carousel flex column">
-    <p>OUR ARTWARE</p>
-    <h2>Where Creativity And Use Come Together</h2>
-    <product-carousel [products]="artwareProducts" />
-  </section>
+      <div class="teaser-area flex column" (click)="navigateTo('/sculpture/details/stairway to the sky')">
+        <img [src]="loneImg2" alt="Artwork">
+        <p>ONE OF MY FINEST</p>
+        <h2>The Endless Staircase</h2>
+      </div>
+    </section>
 
-  <section class="gallery-carousel flex column">
-    <p>OUR LATEST PRODUCTS</p>
-    <h2>Available Now For You to Order!</h2>
-    <product-carousel [products]="shopProducts" />
+    <section class="carousels grid">
+      <article class="gallery-carousel flex column">
+        <p>OUR ARTWARE</p>
+        <h2>Where Creativity And Use Come Together</h2>
+        <product-carousel [products]="artwareProducts" />
+      </article>
+
+      <article class="gallery-carousel flex column">
+        <p>OUR LATEST PRODUCTS</p>
+        <h2>Available Now For You to Order!</h2>
+        <product-carousel [products]="shopProducts" />
+      </article>
+    </section>
   </section>
 </main>

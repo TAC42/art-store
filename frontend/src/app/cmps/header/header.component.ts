@@ -45,7 +45,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onOpenSearch(event: MouseEvent) {
     event.stopPropagation()
     const currentUrl = this.router.url
-    if (currentUrl.startsWith('/shop')) return
+    if (currentUrl.startsWith('/shop') ||
+      currentUrl.startsWith('/artware') ||
+      currentUrl.startsWith('/sculpture')) return
 
     if (!this.searchState) this.dimService.setDimmerActive(true)
     else this.dimService.setDimmerActive(false)

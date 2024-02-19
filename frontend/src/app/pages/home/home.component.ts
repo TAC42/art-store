@@ -1,6 +1,8 @@
 import { Component, HostBinding, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { MiniProduct } from '../../models/shop'
+import { DeviceTypeService } from '../../services/device-type.service'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,10 @@ export class HomeComponent {
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
 
+  private dTypeService = inject(DeviceTypeService)
   private router = inject(Router)
+
+  deviceType$: Observable<string> = this.dTypeService.deviceType$
 
   loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
   loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'

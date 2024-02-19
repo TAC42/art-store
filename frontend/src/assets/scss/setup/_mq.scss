@@ -76,7 +76,6 @@ app-home {
     .home-page-contents {
         @media(max-width: 600px) {
             .teasers {
-                grid-template-columns: 1fr;
                 padding: 0 1em 1em 1em;
             }
 
@@ -87,7 +86,6 @@ app-home {
 
         @media(min-width: 601px) {
             .teasers {
-                grid-template-columns: 1fr 1fr;
                 padding: 0 2em 1em 2em;
             }
 
