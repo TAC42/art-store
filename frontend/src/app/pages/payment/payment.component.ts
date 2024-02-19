@@ -1,6 +1,14 @@
 import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../services/utility.service'
+import { Observable, Subscription, catchError, filter, map, of, startWith, switchMap } from 'rxjs'
+import { User } from '../../models/user'
+import { ActivatedRoute } from '@angular/router'
+import { Product } from '../../models/shop'
+import { AppState } from '../../store/app.state'
+import { Store } from '@ngrx/store'
+import { selectCart } from '../../store/shop.selectors'
+import { OrderService } from '../../services/order.service'
 
 @Component({
   selector: 'payment',
@@ -14,9 +22,16 @@ export class PaymentComponent implements OnInit {
 
   private fb = inject(FormBuilder)
   private utilService = inject(UtilityService)
+  private route = inject(ActivatedRoute)
+  private store = inject(Store<AppState>)
+  private oService = inject(OrderService)
 
+  cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
+    filter(cart => !!cart) 
+  )
   usStates = this.utilService.getStates()
 
+  user: User | null = null
   optionState: string = ''
   payType: string = 'venmo'
 
@@ -33,6 +48,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm()
+    this.fetchUserData()
   }
 
   initializeForm(): void {
@@ -46,6 +62,30 @@ export class PaymentComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     })
+  }
+
+  fetchUserData(): void {
+    this.user = this.route.snapshot.data['user']
+  }
+
+  get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
+    return this.cart$.pipe(
+      switchMap(cart => {
+        if (cart) {
+          // Ensure cart is not null or undefined
+          return of(this.oService.calculateOrderSummary(cart))
+        } else {
+          // Return a default value if cart is null or undefined
+          return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
+        }
+      }),
+      startWith({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
+      catchError(error => {
+        console.error('Error calculating order summary: ', error)
+        // Return a default value in case of an error
+        return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
+      })
+    )
   }
 
   isFieldInvalid(fieldName: string): boolean {
@@ -68,6 +108,8 @@ export class PaymentComponent implements OnInit {
 
   setSelection(option: string) {
     this.optionState = option
-   if (option === 'personal') setTimeout(() => this.nameInput?.nativeElement.focus(), 1000)
+    if (option === 'personal') setTimeout(() => this.nameInput?.nativeElement.focus(), 1000)
   }
+
+
 }

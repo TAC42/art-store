@@ -37,6 +37,67 @@ payment {
           background-color: #e6eeee;
         }
       }
+
+      .order {
+        .summary-list {
+          padding: 1em;
+          .summary-item {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 1em 0;
+            font-size: 1.25em;
+            color: #5f5f5f;
+            &:not(:first-child) {
+              border-top: 1px solid #9f9f9f;
+            }
+            .image {
+              grid-column: 1 / 2;
+              position: relative;
+              img {
+                object-fit: cover;
+                aspect-ratio: 1/1;
+              }
+              .amount {
+                position: absolute;
+                top: -0.5em;
+                right: -0.5em;
+                width: 1.25em;
+                height: 1.25em;
+                background-color: $prmclr2;
+                border-radius: 50%;
+                border: 1px #787878 solid;
+                text-align: center;
+              }
+            }
+            .item-info {
+              grid-column: 2 / 5;
+              padding: 0.25em 1em;
+              display: grid;
+              align-items: space-between;
+              .name {
+                text-transform: capitalize;
+                text-decoration: underline;
+              }
+              .desc {
+                font-size: 1rem;
+                max-height: 2.6em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+              }
+            }
+            .price {
+              grid-column: 5 / -1;
+              justify-self: end;
+              color: $prmclr1;
+              padding: 0.25em;
+            }
+          }
+        }
+      }
+
       .personal {
         padding: 1em;
         .desc {
@@ -84,7 +145,7 @@ payment {
               }
             }
             .error {
-              position:absolute;
+              position: absolute;
               top: -0.5em;
               right: 1em;
               color: $mnrclr5;
@@ -92,9 +153,8 @@ payment {
               padding: 0 0.5em;
             }
             &.error {
-
               input,
-              select{
+              select {
                 border: 2px solid $mnrclr5;
               }
             }

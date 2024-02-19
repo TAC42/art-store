@@ -23,12 +23,8 @@ export class PaymentResolver implements Resolve<User | null> {
         const hasItemsInCart = loggedinUser.cart
 
         if (isLoggedIn && hasItemsInCart.length) {
-          console.log('THIS IS when the condition is true and there is a cart and user: ',isLoggedIn,hasItemsInCart);
-
-          return loggedinUser;
+          return loggedinUser 
         } else {
-          console.log('THIS IS NO CART',isLoggedIn,hasItemsInCart);
-          
           this.router.navigate(['/shop'])
           return null
         }
