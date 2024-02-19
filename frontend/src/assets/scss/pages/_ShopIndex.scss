@@ -11,7 +11,7 @@ shop-wrapper {
                     position: relative;
                     text-align: center;
                     gap: 2em;
-                    height: 325px;
+                    height: fit-content;
 
                     h4 {
                         margin: 3em auto 1em auto;
@@ -32,16 +32,16 @@ shop-wrapper {
                         z-index: -1;
                         filter: brightness(50%);
                     }
-                }
 
-                .page-info-text {
-                    background: $prmclr2;
+                    .page-info-text {
+                        background: #4846462b;
 
-                    p {
-                        font-size: 18px;
-                        font-family: 'sabon';
-                        color: $prmclr1;
-                        padding: 1em 1em 0 1em;
+                        p {
+                            font-size: 16px;
+                            font-family: 'sabon';
+                            color: $prmclr3;
+                            padding: 1em;
+                        }
                     }
                 }
             }
@@ -77,12 +77,12 @@ shop-wrapper {
                 }
 
                 .page-info-text {
-                    background: $prmclr2;
+                    background: #4846462b;
 
                     p {
                         font-size: 18px;
                         font-family: 'sabon';
-                        color: $prmclr1;
+                        color: $prmclr3;
                         padding: 0.75em 2em 0.75em 2em;
                     }
                 }
