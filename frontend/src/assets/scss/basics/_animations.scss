@@ -252,3 +252,17 @@
         transform: translateY(0) translateX(4em);
     }
 }
+
+@keyframes backgroundFadeInOut {
+
+    0%,
+    100% {
+        background: #f2f2f2e0;
+        color: #333230;
+    }
+
+    50% {
+        background: #333230e0;
+        color: #f2f2f2;
+    }
+}
