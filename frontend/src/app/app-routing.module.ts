@@ -16,6 +16,7 @@ import { ArtwareComponent } from './pages/artware/artware.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
 import { AdminGuard } from './guards/admin.guard'
 import { PaymentComponent } from './pages/payment/payment.component'
+import { PaymentResolver } from './resolvers/payment.resolver'
 
 const routes: Routes = [
   {
@@ -46,7 +47,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'payment', component: PaymentComponent, //canActivate: [AdminGuard], //resolve: { product: ProductResolver }
+    path: 'payment', component: PaymentComponent, resolve: { product: PaymentResolver }
   },
   { path: '', component: HomeComponent },
 ]
