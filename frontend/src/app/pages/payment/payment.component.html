@@ -20,17 +20,46 @@
               </div>
               <div class="item-info">
                 <span class="name">{{ summaryItem.name }}</span>
-                <span class="desc">{{summaryItem.description}}</span>
+                <span class="desc">{{ summaryItem.description }}</span>
               </div>
-              <span class="price">${{ summaryItem.price }}</span>
+              <span class="price">{{
+                summaryItem.price | currency : "USD" : "symbol"
+              }}</span>
             </article>
+          </section>
+          <section class="check-out grid">
+            <ng-container *ngIf="orderSummary$ | async as orderSummary">
+              <div class="info flex">
+                <span>subtotal</span>
+                <span>
+                  {{ orderSummary.total | currency : "USD" : "symbol" }}</span
+                >
+              </div>
+              <div class="info flex">
+                <span>taxes</span>
+                <span>{{
+                  orderSummary.taxes | currency : "USD" : "symbol"
+                }}</span>
+              </div>
+              <div class="info flex">
+                <span>delivery</span>
+                <span>{{
+                  orderSummary.deliveryFee | currency : "USD" : "symbol"
+                }}</span>
+              </div>
+              <div class="info flex">
+                <span>grand total</span>
+                <span>{{
+                  orderSummary.grandTotal | currency : "USD" : "symbol"
+                }}</span>
+              </div>
+            </ng-container>
           </section>
         </ng-container>
         <ng-template #sorry>
           <section class="sorry flex column">
-            <h3>Oops, Your cart is empty!</h3>
             <svg-render svgName="sorryRobot" />
-            <h3>We're sure you can find a product that suits you!</h3>
+            <h3>There was an error with your order summary!</h3>
           </section>
         </ng-template>
       </ng-container>
