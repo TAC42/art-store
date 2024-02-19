@@ -47,7 +47,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'payment', component: PaymentComponent, resolve: { product: PaymentResolver }
+    path: 'payment', component: PaymentComponent, resolve: { user: PaymentResolver }
   },
   { path: '', component: HomeComponent },
 ]

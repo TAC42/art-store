@@ -43,17 +43,6 @@
                   {{ orderSummary.total | currency : "USD" : "symbol" }}</span
                 >
               </div>
-              <!-- <span
-            >Taxes {{ orderSummary.taxes | currency : "USD" : "symbol" }}</span
-            > -->
-              <!-- <span
-            >Delivery
-            {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }}</span
-            > -->
-              <!-- <span
-            >Grand Total
-            {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}</span
-            > -->
               <button class="check-out-btn flex" (click)="onPayment()">
                 <svg-render svgName="shoppingCart" />
                 <span> Checkout </span>
