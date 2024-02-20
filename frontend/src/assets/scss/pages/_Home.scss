@@ -20,44 +20,12 @@ app-home {
             animation: backgroundFadeInOut 30s infinite;
 
             .teasers {
-                gap: 1em;
+                gap: 2em;
                 margin-block-end: 1em;
 
                 .teaser-area {
                     cursor: pointer;
                     height: fit-content;
-
-                    p {
-                        color: $scdclr2;
-                        font-size: 14px;
-                        letter-spacing: 0.1em;
-                        text-transform: uppercase;
-                        font-family: 'nh-bold';
-                    }
-
-                    h2 {
-                        color: $prmclr1;
-                        font-size: 21px;
-                    }
-
-                    img {
-                        transition: all 0.5s ease;
-                        margin-block-end: 1em;
-                    }
-
-                    &:hover {
-                        img {
-                            filter: brightness(.75);
-                        }
-                    }
-                }
-            }
-
-            .carousels {
-                gap: 1em;
-
-                .gallery-carousel {
-                    position: relative;
 
                     p {
                         color: $scdclr2;
@@ -72,12 +40,72 @@ app-home {
                         color: $prmclr1;
                         font-size: 21px;
                     }
+
+                    img {
+                        transition: all 0.5s ease-in-out;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(.75);
+                        }
+                    }
+                }
+            }
+
+            .carousels {
+                gap: 2em;
+
+                .gallery-carousel,
+                .contact {
+                    position: relative;
+
+                    .lone-img {
+                        aspect-ratio: 1 / 1;
+                        width: 100%;
+                    }
+
+                    .text-area {
+                        p {
+                            color: $scdclr2;
+                            font-size: 14px;
+                            letter-spacing: 0.1em;
+                            text-transform: uppercase;
+                            font-family: 'nh-bold';
+                            margin-block-start: 1em;
+                        }
+
+                        h2 {
+                            color: $prmclr1;
+                            font-size: 21px;
+                            margin-block-end: 1em;
+                        }
+
+                        button {
+                            margin: 0 auto;
+                            width: fit-content;
+                            padding: 0.75em 1.5em;
+                            background: $prmclr3;
+                            color: $prmclr1;
+                            border: 1px solid $prmclr1;
+                            text-transform: capitalize;
+                            transition: all 0.5s ease-in-out;
+                            letter-spacing: 0.05em;
+                            font-size: 16px;
+
+                            &:hover {
+                                background: $prmclr1;
+                                color: $prmclr3;
+                                text-decoration: none;
+                            }
+                        }
+                    }
                 }
             }
         }
 
         .desktop-view {
-            gap: 1em;
+            gap: 2em;
             text-align: center;
             padding: 2em;
             animation: backgroundFadeInOut 30s infinite;
@@ -98,6 +126,7 @@ app-home {
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
                         font-family: 'nh-bold';
+                        margin-block-start: 1em;
                     }
 
                     h2 {
@@ -105,8 +134,7 @@ app-home {
                     }
 
                     img {
-                        transition: all 0.5s ease;
-                        margin-block-end: 1em;
+                        transition: all 0.5s ease-in-out;
                     }
 
                     &:hover {
@@ -120,26 +148,55 @@ app-home {
             .carousels {
                 gap: 3em;
 
-                .gallery-carousel {
-                    gap: 0.5em;
+                .gallery-carousel,
+                .contact {
                     position: relative;
 
-                    p {
-                        color: $scdclr2;
-                        font-size: 14px;
-                        letter-spacing: 0.1em;
-                        text-transform: uppercase;
-                        font-family: 'nh-bold';
-                        margin-block-start: 1em;
+                    .lone-img {
+                        aspect-ratio: 1 / 1;
+                        width: 100%;
                     }
 
-                    h2 {
-                        font-size: 21px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-box-orient: vertical;
-                        -webkit-line-clamp: 2;
+                    .text-area {
+                        margin: auto 0;
+
+                        p {
+                            color: $scdclr2;
+                            font-size: 14px;
+                            letter-spacing: 0.1em;
+                            text-transform: uppercase;
+                            font-family: 'nh-bold';
+                            margin-block-start: 1em;
+                        }
+
+                        h2 {
+                            font-size: 21px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 2;
+                            margin-block-end: 1em;
+                        }
+
+                        button {
+                            margin: 0 auto;
+                            width: fit-content;
+                            padding: 0.75em 1.5em;
+                            background: $prmclr3;
+                            color: $prmclr1;
+                            border: 1px solid $prmclr1;
+                            text-transform: capitalize;
+                            transition: all 0.5s ease-in-out;
+                            letter-spacing: 0.05em;
+                            font-size: 18px;
+
+                            &:hover {
+                                background: $prmclr1;
+                                color: $prmclr3;
+                                text-decoration: none;
+                            }
+                        }
                     }
                 }
             }

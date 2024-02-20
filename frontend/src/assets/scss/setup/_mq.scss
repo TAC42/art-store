@@ -88,7 +88,6 @@ app-home {
 
                         img {
                             min-height: 400px;
-                            max-height: 400px;
                         }
                     }
                 }
@@ -109,7 +108,6 @@ app-home {
 
                         img {
                             min-height: 200px;
-                            max-height: 200px;
                         }
                     }
                 }
@@ -124,7 +122,6 @@ app-home {
 
                         img {
                             min-height: 300px;
-                            max-height: 300px;
                         }
                     }
                 }
@@ -139,8 +136,23 @@ app-home {
 
                         img {
                             min-height: 400px;
-                            max-height: 400px;
                         }
+                    }
+                }
+            }
+        }
+
+        @media(min-width: 901px) {
+            .carousels {
+
+                .gallery-carousel,
+                .contact {
+                    grid-template-columns: 1fr;
+                    gap: 0.5em;
+
+                    product-carousel,
+                    .text-area {
+                        grid-column: 1;
                     }
                 }
             }
@@ -148,16 +160,33 @@ app-home {
 
         @media(min-width: 1201px) {
             .carousels {
-                .gallery-carousel {
-                    .carousel-container {
-                        min-height: 500px;
 
-                        img {
-                            min-height: 500px;
-                            max-height: 500px;
+                .gallery-carousel,
+                .contact {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1em;
+
+                    product-carousel {
+                        grid-column: 1;
+
+                        .carousel-container {
+                            min-height: 350px;
+
+                            img {
+                                min-height: 350px;
+                            }
                         }
                     }
+
+                    .text-area {
+                        grid-column: 2;
+                    }
                 }
+            }
+
+            .teasers {
+                max-height: 1026px;
+                overflow-y: auto;
             }
         }
     }
