@@ -49,6 +49,7 @@ import { PaymentComponent } from './pages/payment/payment.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { RandomProductCarouselComponent } from './cmps/carousels/random-product-
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ShopEffects, UserEffects]),
     RecaptchaFormsModule,
-    RecaptchaModule
+    RecaptchaModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

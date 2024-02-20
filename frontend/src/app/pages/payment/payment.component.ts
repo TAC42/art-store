@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
+import { ChangeDetectorRef, Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../services/utility.service'
 import { Observable, Subscription, catchError, filter, map, of, startWith, switchMap } from 'rxjs'
@@ -25,6 +25,7 @@ export class PaymentComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private store = inject(Store<AppState>)
   private oService = inject(OrderService)
+  private changeDetector = inject(ChangeDetectorRef)
 
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
     filter(cart => !!cart) 
@@ -32,7 +33,7 @@ export class PaymentComponent implements OnInit {
   usStates = this.utilService.getStates()
 
   user: User | null = null
-  optionState: string = ''
+  optionState: string = 'order'
   payType: string = 'venmo'
 
   paymentForm!: FormGroup
@@ -107,8 +108,12 @@ export class PaymentComponent implements OnInit {
   }
 
   setSelection(option: string) {
+    if(this.optionState === option) return
+    
     this.optionState = option
     if (option === 'personal') setTimeout(() => this.nameInput?.nativeElement.focus(), 1000)
+
+    this.changeDetector.detectChanges()
   }
 
 
