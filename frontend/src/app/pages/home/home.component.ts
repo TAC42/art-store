@@ -12,7 +12,6 @@ import { Observable } from 'rxjs'
 export class HomeComponent {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.layout-row') layoutRowClass = true
 
   private dTypeService = inject(DeviceTypeService)
   private router = inject(Router)

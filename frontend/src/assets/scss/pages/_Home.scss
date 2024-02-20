@@ -1,65 +1,43 @@
 app-home {
     .home-page-contents {
+        position: relative;
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(50%);
+        }
+
         .mobile-view {
             gap: 1em;
             text-align: center;
-            margin-block-end: 1em;
-
-            .introduction {
-                position: relative;
-
-                img {
-                    max-height: 450px;
-                    width: 100%;
-                    transition: all 0.5s ease;
-                }
-
-                .text-overlay {
-                    position: absolute;
-                    top: 5%;
-                    left: 0%;
-                    color: $prmclr3;
-                    width: 100%;
-                    padding: 0 1em;
-                    transition: all 0.3s ease-in-out;
-                    opacity: 0;
-
-                    p {
-                        font-size: 27px;
-                    }
-                }
-
-                &:hover {
-                    img {
-                        filter: brightness(.65);
-                    }
-
-                    .text-overlay {
-                        opacity: 1;
-                    }
-                }
-            }
+            padding: 1em;
+            animation: backgroundFadeInOut 30s infinite;
 
             .teasers {
                 gap: 1em;
-                grid-template-columns: 1fr;
+                margin-block-end: 1em;
 
                 .teaser-area {
-                    gap: 0.5em;
                     cursor: pointer;
                     height: fit-content;
 
                     p {
                         color: $scdclr2;
                         font-size: 14px;
-                        padding: 0 1em;
-                        letter-spacing: 0.05em;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        font-family: 'nh-bold';
                     }
 
                     h2 {
                         color: $prmclr1;
                         font-size: 21px;
-                        padding: 0 1em;
                     }
 
                     img {
@@ -69,101 +47,7 @@ app-home {
 
                     &:hover {
                         img {
-                            filter: brightness(.85);
-                        }
-                    }
-                }
-            }
-
-            .gallery-carousel {
-                position: relative;
-
-                p {
-                    color: $scdclr2;
-                    font-size: 14px;
-                    padding: 0 1em;
-                    letter-spacing: 0.05em;
-                }
-
-                h2 {
-                    color: $prmclr1;
-                    font-size: 21px;
-                    padding: 0 1em;
-                    margin-block-end: 0.5em;
-                }
-            }
-        }
-
-        .desktop-view {
-            gap: 1em;
-            text-align: center;
-            margin-block-end: 1em;
-
-            .introduction {
-                position: relative;
-
-                img {
-                    max-height: 450px;
-                    width: 100%;
-                    transition: all 0.5s ease;
-                }
-
-                .text-overlay {
-                    position: absolute;
-                    top: 5%;
-                    left: 0%;
-                    color: $prmclr3;
-                    width: 100%;
-                    padding: 0 1em;
-                    transition: all 0.3s ease-in-out;
-                    opacity: 0;
-
-                    p {
-                        font-size: 27px;
-                    }
-                }
-
-                &:hover {
-                    img {
-                        filter: brightness(.65);
-                    }
-
-                    .text-overlay {
-                        opacity: 1;
-                    }
-                }
-            }
-
-            .teasers {
-                gap: 1em;
-                grid-template-columns: 1fr 1fr;
-
-                .teaser-area {
-                    gap: 0.5em;
-                    cursor: pointer;
-                    height: fit-content;
-
-                    p {
-                        color: $scdclr2;
-                        font-size: 14px;
-                        padding: 0 1em;
-                        letter-spacing: 0.05em;
-                    }
-
-                    h2 {
-                        color: $prmclr1;
-                        font-size: 21px;
-                        padding: 0 1em;
-                    }
-
-                    img {
-                        transition: all 0.5s ease;
-                        margin-block-end: 1em;
-                    }
-
-                    &:hover {
-                        img {
-                            filter: brightness(.85);
+                            filter: brightness(.75);
                         }
                     }
                 }
@@ -171,7 +55,6 @@ app-home {
 
             .carousels {
                 gap: 1em;
-                grid-template-columns: 1fr 1fr;
 
                 .gallery-carousel {
                     position: relative;
@@ -179,20 +62,84 @@ app-home {
                     p {
                         color: $scdclr2;
                         font-size: 14px;
-                        padding: 0 1em;
-                        letter-spacing: 0.05em;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        font-family: 'nh-bold';
+                        margin-block-start: 1em;
                     }
 
                     h2 {
                         color: $prmclr1;
+                        font-size: 21px;
+                    }
+                }
+            }
+        }
+
+        .desktop-view {
+            gap: 1em;
+            text-align: center;
+            padding: 2em;
+            animation: backgroundFadeInOut 30s infinite;
+            grid-template-columns: 1fr 1fr;
+
+            .teasers {
+                gap: 3em;
+                margin-block-end: 1em;
+
+                .teaser-area {
+                    gap: 0.5em;
+                    cursor: pointer;
+                    height: fit-content;
+
+                    p {
+                        color: $scdclr2;
+                        font-size: 14px;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        font-family: 'nh-bold';
+                    }
+
+                    h2 {
+                        font-size: 21px;
+                    }
+
+                    img {
+                        transition: all 0.5s ease;
+                        margin-block-end: 1em;
+                    }
+
+                    &:hover {
+                        img {
+                            filter: brightness(.75);
+                        }
+                    }
+                }
+            }
+
+            .carousels {
+                gap: 3em;
+
+                .gallery-carousel {
+                    gap: 0.5em;
+                    position: relative;
+
+                    p {
+                        color: $scdclr2;
+                        font-size: 14px;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        font-family: 'nh-bold';
+                        margin-block-start: 1em;
+                    }
+
+                    h2 {
                         font-size: 21px;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         -webkit-line-clamp: 2;
-                        padding: 0 1em;
-                        margin-block-end: 0.5em;
                     }
                 }
             }
