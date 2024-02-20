@@ -10,6 +10,9 @@ payment {
     gap: 1em;
     .selector {
       padding: 0 1.5em 0 0;
+      mat-expansion-panel-header{
+        padding: 0;
+      }
       .heading {
         display: flex;
         gap: 0.25em;

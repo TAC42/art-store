@@ -3,7 +3,7 @@
   <mat-expansion-panel
     class="selector"
     [expanded]="optionState === 'order'"
-    (expandedChange)="setSelection('order')"
+    (click)="setSelection('order')"
   >
     <mat-expansion-panel-header>
       <mat-panel-title class="heading">
@@ -11,7 +11,7 @@
         <span class="title">Order summary</span>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="order">
+    <section class="order">
       <ng-container *ngIf="cart$ | async as cart">
         <ng-container *ngIf="cart.length; else sorry">
           <section class="summary-list grid">
@@ -65,13 +65,13 @@
           </section>
         </ng-template>
       </ng-container>
-    </div>
+    </section>
   </mat-expansion-panel>
 
   <mat-expansion-panel
     class="selector"
     [expanded]="optionState === 'personal'"
-    (expandedChange)="setSelection('personal')"
+    (click)="setSelection('personal')"
   >
     <mat-expansion-panel-header>
       <mat-panel-title class="heading">
@@ -79,7 +79,7 @@
         <span class="title">Personal info</span>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="personal">
+    <section class="personal">
       <!-- <article *ngIf="optionState === 'personal'" class="personal"> -->
       <form [formGroup]="personalForm">
         <span class="desc">*Required fields.</span>
@@ -234,12 +234,12 @@
         </label>
       </form>
       <!-- </article> -->
-    </div>
+    </section>
   </mat-expansion-panel>
   <mat-expansion-panel
     class="selector"
     [expanded]="optionState === 'payment'"
-    (expandedChange)="setSelection('payment')"
+    (click)="setSelection('payment')"
   >
     <mat-expansion-panel-header>
       <mat-panel-title class="heading">
@@ -247,7 +247,7 @@
         <span class="title">Payment method</span>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="methods">
+    <section class="methods">
       <form [formGroup]="paymentForm">
         <span class="desc">Choose a payment method.</span>
         <div class="option" [ngClass]="{ selected: payType === 'venmo' }">
@@ -271,7 +271,7 @@
           <svg-render svgName="paypal" />
         </div>
       </form>
-    </div>
+    </section>
   </mat-expansion-panel>
 
   <section class="terms"></section>
