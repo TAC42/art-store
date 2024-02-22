@@ -211,6 +211,10 @@ app-introduction {
         .contact-page-contents,
         .introduction-page-contents {
             grid-template-columns: 1fr;
+
+            .form-area {
+                margin: 1em auto 1em auto;
+            }
         }
     }
 
@@ -255,6 +259,10 @@ app-introduction {
             .introduction-text,
             .form-area {
                 grid-column: 2 / -1;
+            }
+
+            .form-area {
+                margin: 1em 0 1em 2em;
             }
         }
     }
