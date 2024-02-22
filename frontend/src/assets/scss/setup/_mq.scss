@@ -223,7 +223,6 @@ app-introduction {
         .contact-page-contents,
         .introduction-page-contents {
 
-            .contact-text,
             .introduction-text {
                 padding: 0 2em;
             }
@@ -259,10 +258,6 @@ app-introduction {
             .introduction-text,
             .form-area {
                 grid-column: 2 / -1;
-            }
-
-            .form-area {
-                margin: 1em 0 1em 2em;
             }
         }
     }
@@ -313,6 +308,14 @@ app-introduction {
                         min-height: 700px;
                     }
                 }
+            }
+
+            .form-area {
+                margin: 1em 0 1em 2em;
+            }
+
+            .contact-text {
+                padding: 0 2em;
             }
         }
     }
