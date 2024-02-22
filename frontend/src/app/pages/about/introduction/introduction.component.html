@@ -1,10 +1,14 @@
-<main class="introduction-page-contents w-h-100 flex column">
+<main class="introduction-page-contents w-h-100 grid">
     <section class="gallery-carousel flex column">
         <image-carousel [imageUrls]="aboutImageUrls" [autoSwitch]="true"
             (imageClick)="onImageClick($event.event, $event.imageUrl)" />
     </section>
 
     <section class="introduction-text flex column">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni repudiandae explicabo quasi cum temporibus
+            dolor dolorum, autem minus corrupti? Quis eos nesciunt vel dolorem? Corrupti consequuntur minima error et
+            nam!</p>
+
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni repudiandae explicabo quasi cum temporibus
             dolor dolorum, autem minus corrupti? Quis eos nesciunt vel dolorem? Corrupti consequuntur minima error et
             nam!</p>
