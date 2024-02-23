@@ -1,4 +1,4 @@
-<app-header class="full" [loggedinUser$]="loggedinUser$" />
+<app-header *ngIf="!hideFooterHeader" class="full" [loggedinUser$]="loggedinUser$" />
 <user-dropdown [loggedinUser$]="loggedinUser$" />
 <aside-menu [loggedinUser$]="loggedinUser$" />
 <login-modal />
@@ -9,5 +9,5 @@
 <loader />
 <router-outlet />
 <user-msg />
-<app-footer class="full" />
+<app-footer *ngIf="!hideFooterHeader" class="full" />
 <div *ngIf="dimmer" (click)="onCloseDimmer($event)" class="modal-wrapper"></div>
