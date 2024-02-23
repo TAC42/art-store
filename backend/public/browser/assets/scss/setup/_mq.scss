@@ -88,7 +88,6 @@ app-home {
 
                         img {
                             min-height: 400px;
-                            max-height: 400px;
                         }
                     }
                 }
@@ -109,7 +108,6 @@ app-home {
 
                         img {
                             min-height: 200px;
-                            max-height: 200px;
                         }
                     }
                 }
@@ -124,7 +122,6 @@ app-home {
 
                         img {
                             min-height: 300px;
-                            max-height: 300px;
                         }
                     }
                 }
@@ -139,8 +136,23 @@ app-home {
 
                         img {
                             min-height: 400px;
-                            max-height: 400px;
                         }
+                    }
+                }
+            }
+        }
+
+        @media(min-width: 901px) {
+            .carousels {
+
+                .gallery-carousel,
+                .contact {
+                    grid-template-columns: 1fr;
+                    gap: 0.5em;
+
+                    product-carousel,
+                    .text-area {
+                        grid-column: 1;
                     }
                 }
             }
@@ -148,45 +160,163 @@ app-home {
 
         @media(min-width: 1201px) {
             .carousels {
-                .gallery-carousel {
-                    .carousel-container {
-                        min-height: 500px;
 
-                        img {
-                            min-height: 500px;
-                            max-height: 500px;
+                .gallery-carousel,
+                .contact {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1em;
+
+                    product-carousel {
+                        grid-column: 1;
+
+                        .carousel-container {
+                            min-height: 350px;
+
+                            img {
+                                min-height: 350px;
+                            }
                         }
                     }
+
+                    .text-area {
+                        grid-column: 2;
+                    }
                 }
+            }
+
+            .teasers {
+                max-height: 1026px;
+                overflow-y: auto;
             }
         }
     }
 }
 
+app-contact,
 app-introduction {
     @media(max-width: 600px) {
-        .introduction-text {
-            padding: 0 1em;
+
+        .contact-page-contents,
+        .introduction-page-contents {
+
+            .contact-text,
+            .introduction-text {
+                padding: 0 1em;
+            }
+        }
+    }
+
+    @media(max-width: 900px) {
+
+        .contact-page-contents,
+        .introduction-page-contents {
+            grid-template-columns: 1fr;
+
+            .form-area {
+                margin: 1em auto 1em auto;
+            }
         }
     }
 
     @media(min-width: 601px) {
-        .introduction-text {
-            padding: 0 2em;
+
+        .contact-page-contents,
+        .introduction-page-contents {
+
+            .introduction-text {
+                padding: 0 2em;
+            }
+
+            .form-area {
+                border-radius: 1em;
+            }
         }
     }
-}
 
-app-contact {
-    @media(max-width: 600px) {
-        .contact-text {
-            padding: 0 1em;
+    @media(min-width: 901px) {
+
+        .contact-page-contents,
+        .introduction-page-contents {
+            grid-template-columns: 1fr 1fr;
+            padding: 0 2em;
+
+            .gallery-carousel {
+                grid-column: 1 / 2;
+                align-self: center;
+                grid-row: span 2;
+
+                .carousel-container {
+                    min-height: 400px;
+
+                    img {
+                        min-height: 400px;
+                    }
+                }
+            }
+
+            .contact-text,
+            .introduction-text,
+            .form-area {
+                grid-column: 2 / -1;
+            }
         }
     }
 
-    @media(min-width: 601px) {
-        .contact-text {
-            padding: 0 2em;
+    @media(min-width: 1001px) {
+
+        .contact-page-contents,
+        .introduction-page-contents {
+            .gallery-carousel {
+                .carousel-container {
+                    min-height: 450px;
+
+                    img {
+                        min-height: 450px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media(min-width: 1201px) {
+
+        .contact-page-contents,
+        .introduction-page-contents {
+            .gallery-carousel {
+                align-self: start;
+
+                .carousel-container {
+                    min-height: 550px;
+
+                    img {
+                        min-height: 550px;
+                    }
+                }
+            }
+        }
+    }
+
+    @media(min-width: 1401px) {
+
+        .contact-page-contents,
+        .introduction-page-contents {
+            .gallery-carousel {
+                .carousel-container {
+                    min-height: 700px;
+
+                    img {
+                        min-height: 700px;
+                    }
+                }
+            }
+
+            .form-area {
+                margin: 1em 0 1em 2em;
+            }
+
+            .contact-text {
+                padding: 0 2em;
+            }
         }
     }
 }

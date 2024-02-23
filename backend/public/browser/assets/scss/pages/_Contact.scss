@@ -2,7 +2,7 @@ app-contact {
   .contact-page-contents {
     gap: 1em;
     text-align: center;
-    margin-block-end: 1em;
+    padding-bottom: 1em;
 
     .gallery-carousel {
       position: relative;
@@ -41,13 +41,13 @@ app-contact {
           $scdclr5,
           $scdclr2 );
       user-select: none;
+      width: 100%;
+      max-width: 600px;
 
       form {
         gap: 1em;
         padding: 1em;
         align-items: center;
-        max-width: 600px;
-        margin: 0 auto;
 
         .input-area {
           width: 100%;
