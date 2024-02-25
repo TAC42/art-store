@@ -46,10 +46,15 @@ export class AppComponent implements OnInit, OnDestroy {
         const navigationEndEvent = event as NavigationEnd
         const url = navigationEndEvent.urlAfterRedirects || navigationEndEvent.url
 
-        const hideHeaderFooterUrls = ['/payment']
+        const hideHeaderFooterUrls = ['/payment','/shop/details']
         const shouldHideHeaderFooter = hideHeaderFooterUrls.some(
           urlToHide => url.startsWith(urlToHide))
-        if (shouldHideHeaderFooter) this.hideFooterHeader = true
+        if (shouldHideHeaderFooter) {
+          if(!shouldHideHeaderFooter) console.log('wrong device type');
+           // add device type logic 
+          else this.hideFooterHeader = true
+        }
+
         else this.hideFooterHeader = false
 
         window.scrollTo(0, 0)
