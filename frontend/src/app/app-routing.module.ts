@@ -17,6 +17,9 @@ import { ArtwareIndexComponent } from './pages/artware/index/artware-index.compo
 import { AdminGuard } from './guards/admin.guard'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { PaymentResolver } from './resolvers/payment.resolver'
+import { DashboardComponent } from './pages/dashboard/dashboard.component'
+import { UserGuard } from './guards/user.guard'
+import { ProfileComponent } from './pages/profile/profile.component'
 
 const routes: Routes = [
   {
@@ -48,6 +51,12 @@ const routes: Routes = [
   },
   {
     path: 'payment', component: PaymentComponent, resolve: { user: PaymentResolver }
+  },
+  {
+    path: 'profile', component: ProfileComponent, canActivate: [UserGuard] 
+  },
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [AdminGuard]
   },
   { path: '', component: HomeComponent },
 ]

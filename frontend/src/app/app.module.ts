@@ -50,6 +50,8 @@ import { ImageDisplayComponent } from './cmps/modals/image-display/image-display
 import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ImageDisplayComponent,
     ShowcaseDetailsComponent,
     RandomProductCarouselComponent,
+    ProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

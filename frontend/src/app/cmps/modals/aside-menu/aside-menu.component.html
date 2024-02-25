@@ -33,6 +33,14 @@
             <a (click)="closeMenu()" routerLink="/edit" routerLinkActive="active">Add Product</a>
         </div>
 
+        <div class="link-area" *ngIf="(loggedinUser$ | async)?.isAdmin">
+            <a (click)="closeMenu()" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        </div>
+
+        <div class="link-area" *ngIf="(loggedinUser$ | async)?._id">
+            <a (click)="closeMenu()" routerLink="/profile" routerLinkActive="active">Profile</a>
+        </div>
+
         <div class="link-area" *ngIf="loggedinUser$ | async as loggedinUser">
             <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
                 {{ loggedinUser._id ? 'Logout' : 'Login' }}
