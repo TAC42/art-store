@@ -42,11 +42,11 @@ random-product-carousel {
             transition: all 0.3s ease-in-out;
 
             &:first-of-type {
-                left: 0.25em;
+                left: 0.5em;
             }
 
             &:last-of-type {
-                right: 0.25em;
+                right: 0.5em;
             }
 
             svg-render {
@@ -63,6 +63,7 @@ random-product-carousel {
             gap: 1em;
             overflow-x: auto;
             padding: 1em 0;
+            margin: 0 0.5em;
 
             .other-product-area {
                 flex: 0 0 auto;

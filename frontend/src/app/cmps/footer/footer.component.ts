@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { Observable } from 'rxjs'
-import { DeviceTypeService } from '../../services/device-type.service'
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +7,5 @@ import { DeviceTypeService } from '../../services/device-type.service'
 })
 
 export class FooterComponent {
-  private dTypeService = inject(DeviceTypeService)
-
-  deviceType$: Observable<string> = this.dTypeService.deviceType$
+  @Input() deviceType$!: Observable<string>
 }

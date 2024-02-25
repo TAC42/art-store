@@ -1,6 +1,5 @@
 import { Component, inject, HostBinding, OnInit, Input, OnDestroy } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
-import { DeviceTypeService } from '../../services/device-type.service'
 import { Router } from '@angular/router'
 import { DimmerService } from '../../services/dimmer.service'
 import { ModalService } from '../../services/modal.service'
@@ -12,18 +11,17 @@ import { User } from '../../models/user'
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
+  @Input() deviceType$!: Observable<string>
   @Input() loggedinUser$!: Observable<User>
 
   @HostBinding('class.z-50') get zIndex() { return this.searchState }
 
   private router = inject(Router)
   private dimService = inject(DimmerService)
-  private dTypeService = inject(DeviceTypeService)
   public modService = inject(ModalService)
 
   searchState: boolean = false
   searchValue: string = ''
-  deviceType$: Observable<string> = this.dTypeService.deviceType$
 
   private dimSubscription: Subscription | undefined
 
