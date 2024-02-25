@@ -3,7 +3,7 @@ import { log } from '../../middlewares/logger.middleware.js'
 import {
     getOrders, getOrderById, addOrder,
     updateOrder, removeOrder
-} from './product.controller.js'
+} from './order.controller.js'
 
 export const orderRoutes = express.Router()
 
