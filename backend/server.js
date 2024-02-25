@@ -41,11 +41,13 @@ import { userRoutes } from './api/user/user.routes.js'
 import { authRoutes } from './api/auth/auth.routes.js'
 import { utilRoutes } from './api/utility/utility.routes.js'
 import { setupSocketAPI } from './services/socket.service.js'
+import { orderRoutes } from './api/order/order.routes.js'
 
 app.use('/api/product', productRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/utility', utilRoutes)
+app.use('/api/order', orderRoutes)
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'public', 'browser', 'index.html'))
