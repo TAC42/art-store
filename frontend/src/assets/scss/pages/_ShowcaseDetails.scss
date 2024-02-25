@@ -6,47 +6,39 @@ showcase-details {
         .mobile-view {
             gap: 1em;
 
-            h2 {
+            .actions {
+                justify-content: space-between;
+                align-items: center;
                 position: fixed;
                 top: 0;
                 width: 100%;
                 height: 62px;
                 z-index: 11;
-                padding: 0.5em 0em;
+                padding: 0.5em 1em;
                 background: white;
                 border-bottom: 1px solid $scdclr3;
-                text-align: center;
-                letter-spacing: 0.5px;
-                font-size: 26px;
-                font-family: 'nh-bold';
-                text-transform: capitalize;
-            }
 
-            a {
-                padding: 0 1em;
-                width: fit-content;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                color: $scdclr2;
-                align-items: center;
-                gap: 0.5em;
-                margin-block-start: 1em;
-                transition: all 0.3s ease-in-out;
-
-                svg-render {
-                    width: 24px;
-                    height: 24px;
-
-                    transition: all 0.3s ease-in-out;
-                    fill: $scdclr2;
+                h3 {
+                    letter-spacing: 0.5px;
+                    font-size: 26px;
+                    text-transform: capitalize;
+                    font-family: 'nh-bold';
                 }
 
-                &:hover {
-                    text-decoration: none;
-                    color: $prmclr1;
+                button,
+                a {
+                    width: 42px;
+                    height: 42px;
 
                     svg-render {
-                        fill: $prmclr1;
+                        fill: $scdclr2;
+                        transition: fill 0.3s ease-in-out;
+                    }
+
+                    &:hover {
+                        svg-render {
+                            fill: $prmclr1;
+                        }
                     }
                 }
             }

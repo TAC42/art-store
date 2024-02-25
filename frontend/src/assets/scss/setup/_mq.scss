@@ -223,8 +223,9 @@ app-introduction {
         .contact-page-contents,
         .introduction-page-contents {
 
-            .introduction-text {
-                padding: 0 2em;
+            .introduction-text,
+            .contact-text {
+                margin-block-start: 1em;
             }
 
             .form-area {
@@ -284,6 +285,7 @@ app-introduction {
         .introduction-page-contents {
             .gallery-carousel {
                 align-self: start;
+                margin-block-start: 1em;
 
                 .carousel-container {
                     min-height: 550px;
@@ -314,7 +316,8 @@ app-introduction {
                 margin: 1em 0 1em 2em;
             }
 
-            .contact-text {
+            .contact-text,
+            .introduction-text {
                 padding: 0 2em;
             }
         }
