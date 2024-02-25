@@ -38,26 +38,22 @@ export class AppComponent implements OnInit, OnDestroy {
           this.modService.openModal('user-auth')
         }
       })
-
     // scroll to top management
-    this.routerEvSubscription = this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd)
-    ).subscribe((event) => {
-      const navigationEndEvent = event as NavigationEnd
-      const url = navigationEndEvent.urlAfterRedirects || navigationEndEvent.url
-      console.log('this is the url: ',url);
-      
-      const hideHeaderFooterUrls = ['/payment']
-      const shouldHideHeaderFooter = hideHeaderFooterUrls.some(urlToHide => url.startsWith(urlToHide))
-      if (shouldHideHeaderFooter) {
-        this.hideFooterHeader = true
-      } else {
-        this.hideFooterHeader = false
-      }
+    this.routerEvSubscription = this.router.events.pipe(filter(
+      (event) => event instanceof NavigationEnd)
+    ).subscribe(
+      (event) => {
+        const navigationEndEvent = event as NavigationEnd
+        const url = navigationEndEvent.urlAfterRedirects || navigationEndEvent.url
 
-      window.scrollTo(0, 0);
-    });
+        const hideHeaderFooterUrls = ['/payment']
+        const shouldHideHeaderFooter = hideHeaderFooterUrls.some(
+          urlToHide => url.startsWith(urlToHide))
+        if (shouldHideHeaderFooter) this.hideFooterHeader = true
+        else this.hideFooterHeader = false
 
+        window.scrollTo(0, 0)
+      })
     // dimmer management
     this.dimSubscription = this.dimService.dimmerSubject.subscribe(
       (active: boolean) => this.dimmer = active)
