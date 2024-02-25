@@ -2,11 +2,15 @@
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
         class="mobile-view flex column">
         <ng-container *ngIf="product$ | async as product">
-            <h2>collection</h2>
-            <a class="flex row" [routerLink]="['/' + product.type]" title="Exit details page?">
-                <svg-render svgName="leftArrowIcon" />
-                <span>back to results</span>
-            </a>
+            <section class="actions flex row">
+                <a [routerLink]="['/' + product.type]" title="Exit details page?">
+                    <svg-render svgName="leftArrowIcon" />
+                </a>
+                <h3>collection</h3>
+                <button (click)="onInquire($event)" title="Contact artist?">
+                    <svg-render svgName="emailIcon" />
+                </button>
+            </section>
 
             <section class="product-area flex column">
                 <div class="image-container flex column">

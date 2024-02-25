@@ -4,7 +4,7 @@ import { AppState } from '../store/app.state'
 import { CHECK_SESSION } from '../store/user.actions'
 import { DimmerService } from '../services/dimmer.service'
 import { combineLatest, filter, map, Observable, Subscription } from 'rxjs'
-import { NavigationEnd, Router, RouterEvent } from '@angular/router'
+import { NavigationEnd, Router } from '@angular/router'
 import { ModalService } from '../services/modal.service'
 import { selectLoggedinUser } from '../store/user.selectors'
 import { User } from '../models/user'
@@ -47,13 +47,16 @@ export class AppComponent implements OnInit, OnDestroy {
             || (event as NavigationEnd).url, deviceType
         }))
       ).subscribe(({ url, deviceType }) => {
-        const hideHeaderFooterUrls = ['/payment', '/shop/details']
+        const hideHeaderFooterUrls = ['/payment', '/shop/details', '/artware/details', '/sculpture/details']
+        const mobileSensitiveUrls = ['/shop/details', '/artware/details', '/sculpture/details']
         const isMobile = deviceType === 'mobile' || deviceType === 'mini-tablet'
 
         // check if a certain url requires hiding of header & footer, and if specifically on mobile
         this.hideFooterHeader = hideHeaderFooterUrls.some(urlToHide => {
-          if (url.startsWith(urlToHide)) return urlToHide !== '/shop/details' || isMobile
-
+          if (url.startsWith(urlToHide)) {
+            if (mobileSensitiveUrls.includes(urlToHide)) return isMobile
+            return true
+          }
           return false
         })
         window.scrollTo(0, 0) // scroll to top of the page

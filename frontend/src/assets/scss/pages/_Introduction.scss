@@ -1,11 +1,12 @@
 app-about {
     .about-page-contents {
         .about-nav {
-            margin-block: 1em 1em;
             width: 100%;
             justify-content: center;
             align-items: center;
             gap: 2em;
+            border-bottom: 1px solid $scdclr3;
+            padding: 0.5em 0em;
 
             a {
                 transition: all 0.3s;
