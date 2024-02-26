@@ -27,18 +27,20 @@ export class ImageUploaderComponent {
   }
 
   // Check if image is either too heavy or wrong format
-  validateFile(file: File): { isValid: boolean, errorMessage?: string } {
+  validateFile(file: File): { isValid: boolean, errorHeader?: string, errorMessage?: string } {
     const fileSize = file.size / 1024 / 1024
     const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png']
 
     if (fileSize > 2) return {
       isValid: false,
+      errorHeader: 'Too Big!',
       errorMessage: 'File size exceeds 2 MB!'
     }
 
     if (!allowedFormats.includes(file.type)) return {
       isValid: false,
-      errorMessage: 'Invalid format. Only JPG, JPEG, and PNG are allowed!'
+      errorHeader: 'Invalid format!',
+      errorMessage: 'Only JPG, JPEG, and PNG are allowed!'
     }
     return { isValid: true }
   }
@@ -51,7 +53,7 @@ export class ImageUploaderComponent {
     const validation = this.validateFile(file)
 
     if (!validation.isValid) {
-      showErrorMsg('Upload Failed!', validation.errorMessage!, this.eBusService)
+      showErrorMsg(validation.errorHeader!, validation.errorMessage!, this.eBusService)
       return
     }
 

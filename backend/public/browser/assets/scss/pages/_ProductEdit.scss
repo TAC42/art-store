@@ -6,11 +6,11 @@ product-edit {
       $scdclr5,
       $scdclr2 );
 
-  .back-btn {
+  a {
     margin: 0.5em 1em;
     width: 36px;
 
-    svg {
+    svg-render {
       fill: $scdclr2;
       transition: fill 0.3s ease-in-out;
 
