@@ -13,8 +13,16 @@ import { CustomValidatorDirective } from './directives/custom-validator.directiv
 import { SwipeDirective } from './directives/swipe.directive'
 
 import { AppComponent } from './app-root/app.component'
-import { HomeComponent } from './pages/home/home.component'
+import { LoaderComponent } from './cmps/loader/loader.component'
+import { UserMsgComponent } from './cmps/modals/user-msg/user-msg.component'
+import { ShopEffects } from './store/shop.effects'
+import { UserEffects } from './store/user.effects'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { reducers } from './store/app.state'
 import { HeaderComponent } from './cmps/header/header.component'
+import { FooterComponent } from './cmps/footer/footer.component'
+
+import { HomeComponent } from './pages/home/home.component'
 import { AboutComponent } from './pages/about/about.component'
 import { ContactComponent } from './pages/about/contact/contact.component'
 import { IntroductionComponent } from './pages/about/introduction/introduction.component'
@@ -24,17 +32,11 @@ import { ProductListComponent } from './cmps/product-list/product-list.component
 import { AsideMenuComponent } from './cmps/modals/aside-menu/aside-menu.component'
 import { ProductFilterComponent } from './cmps/product-filter/product-filter.component'
 import { ProductPreviewComponent } from './cmps/product-preview/product-preview.component'
-import { ImageCarouselComponent } from './cmps/carousels/image-carousel/image-carousel.component'
+import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component'
 import { ProductDetailsComponent } from './pages/details/product/product-details.component'
 import { ProductEditComponent } from './pages/product-edit/product-edit.component'
-import { reducers } from './store/app.state'
-import { LoaderComponent } from './cmps/loader/loader.component'
-import { ShopEffects } from './store/shop.effects'
-import { UserEffects } from './store/user.effects'
 import { ShopIndexComponent } from './pages/shop/index/shop-index.component'
-import { FooterComponent } from './cmps/footer/footer.component'
 import { LoginModalComponent } from './cmps/modals/login-modal/login-modal.component'
-import { UserMsgComponent } from './cmps/modals/user-msg/user-msg.component'
 import { SculptureComponent } from './pages/sculpture/sculpture.component'
 import { ArtwareComponent } from './pages/artware/artware.component'
 import { ConfirmModalComponent } from './cmps/modals/confirm-modal/confirm-modal.component'
@@ -42,16 +44,14 @@ import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.com
 import { CartComponent } from './cmps/modals/cart/cart.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
-import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component'
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
 import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
-import { MatExpansionModule } from '@angular/material/expansion';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component'
+import { DashboardComponent } from './pages/dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -66,7 +66,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ClickOutsideDirective,
     ProductFilterComponent,
     ProductPreviewComponent,
-    ImageCarouselComponent,
+    ProductCarouselComponent,
     ProductDetailsComponent,
     ProductEditComponent,
     LoaderComponent,
@@ -85,7 +85,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     SwipeDirective,
     SculptureIndexComponent,
     ArtwareIndexComponent,
-    ProductCarouselComponent,
     UserAuthModalComponent,
     UserDropdownComponent,
     PaymentComponent,

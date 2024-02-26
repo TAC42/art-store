@@ -1,13 +1,20 @@
 <div class="carousel-container flex" customSwipe (swipeLeft)="previousImage()" (swipeRight)="nextImage()">
-    <a *ngFor="let product of products; let i = index" [ngStyle]="getSlideStyle(i)" [href]="product.url"
-        class="carousel-slide">
-        <img [src]="product.imgUrl" [alt]="product.name">
-        <span class="product-name">{{ product.name }}</span>
-    </a>
+    <div class="carousel-slide" *ngFor="let item of carouselItems; let i = index" [ngStyle]="getSlideStyle(i)">
+        <ng-container *ngIf="item.type === 'image'">
+            <img [src]="item.imgUrl" [alt]="'Image ' + (i + 1)" (click)="onItemClicked($event, item)">
+        </ng-container>
+
+        <ng-container *ngIf="item.type === 'product'">
+            <a [href]="item.url">
+                <img [src]="item.imgUrl" [alt]="item.name">
+                <span>{{ item.name }}</span>
+            </a>
+        </ng-container>
+    </div>
 
     <div class="carousel-dots flex row">
-        <span *ngFor="let url of products; let i = index" class="dot" [ngClass]="{'active': currentIndexSignal() === i}"
-            (click)="goToSlide(i)">
+        <span class="dot" *ngFor="let url of carouselItems; let i = index"
+            [ngClass]="{'active': currentIndexSignal() === i}" (click)="goToSlide(i)">
         </span>
     </div>
 

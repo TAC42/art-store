@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { HttpService } from './http.service'
+import { CarouselItem, MiniProduct } from '../models/shop'
 
 const BASE_URL = 'utility/'
 
@@ -100,6 +101,28 @@ export class UtilityService {
   }
 
   getStates() {
-    return this.usStates;
+    return this.usStates
+  }
+
+  // convertToCarouselItem(imgUrls: string[]): CarouselItem[] {
+  //   return imgUrls.map(imgUrl => ({
+  //     type: 'image',
+  //     imgUrl: imgUrl
+  //   }))
+  // }
+  convertToCarouselItem(items: (string | MiniProduct)[], type: 'image' | 'product' = 'image'): CarouselItem[] {
+    return items.map(item => {
+      if (type === 'image' && typeof item === 'string') {
+        return { type: 'image', imgUrl: item }
+      } else if (type === 'product' && typeof item !== 'string') {
+        return {
+          type: 'product',
+          imgUrl: item.imgUrl,
+          name: item.name,
+          url: item.url
+        }
+      }
+      throw new Error('Invalid item type or item format')
+    })
   }
 }

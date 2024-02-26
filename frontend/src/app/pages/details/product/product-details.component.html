@@ -14,7 +14,7 @@
         <ng-container *ngIf="product$ | async as product">
             <section class="product-area flex column">
                 <div class="image-container flex column">
-                    <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
+                    <product-carousel *ngIf="product.imgUrls.length > 1" [carouselItems]="carouselItems"
                         (imageClick)="onImageClick($event.event, $event.imageUrl)" />
                     <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
                         (click)="onImageClick($event, product.imgUrls[0])">
@@ -70,7 +70,7 @@
         <ng-container *ngIf="product$ | async as product">
             <section class="product-area grid layout-row">
                 <div class="image-container flex column">
-                    <image-carousel *ngIf="product.imgUrls.length > 1" [imageUrls]="product.imgUrls"
+                    <product-carousel *ngIf="product.imgUrls.length > 1" [carouselItems]="carouselItems"
                         (imageClick)="onImageClick($event.event, $event.imageUrl)" />
                     <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
                         (click)="onImageClick($event, product.imgUrls[0])">

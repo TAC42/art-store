@@ -1,19 +1,21 @@
-import { Component, HostBinding, inject } from '@angular/core'
+import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { Router } from '@angular/router'
-import { MiniProduct } from '../../models/shop'
+import { CarouselItem, MiniProduct } from '../../models/shop'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { Observable } from 'rxjs'
+import { UtilityService } from '../../services/utility.service'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
 
   private dTypeService = inject(DeviceTypeService)
+  private utilService = inject(UtilityService)
   private router = inject(Router)
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
@@ -23,6 +25,8 @@ export class HomeComponent {
   loneImg3: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/fjq1w6fb8ozzau1mfd6n.png'
   loneImg4: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1708431099/ContactandAbout/mgkgkobyzk5zg8z4nyb6.jpg'
 
+  artwareCarouselItems: CarouselItem[] = []
+  shopCarouselItems: CarouselItem[] = []
   artwareProducts: MiniProduct[] = [
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
@@ -45,7 +49,6 @@ export class HomeComponent {
       url: '/artware/details/elegant vase'
     },
   ]
-
   shopProducts: MiniProduct[] = [
     {
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',
@@ -68,6 +71,11 @@ export class HomeComponent {
       url: '/shop/details/green mug'
     },
   ]
+
+  ngOnInit() {
+    this.artwareCarouselItems = this.utilService.convertToCarouselItem(this.artwareProducts, 'product')
+    this.shopCarouselItems = this.utilService.convertToCarouselItem(this.shopProducts, 'product')
+  }
 
   navigateTo(url: string) {
     this.router.navigate([url])
