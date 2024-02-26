@@ -51,7 +51,8 @@ import { ImageDisplayComponent } from './cmps/modals/image-display/image-display
 import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
 import { ProfileComponent } from './pages/profile/profile.component'
-import { DashboardComponent } from './pages/dashboard/dashboard.component'
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component'
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component'
     RandomProductCarouselComponent,
     ProfileComponent,
     DashboardComponent,
+    EditPreviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
-<main class="product-edit-contents flex column layout-row w-h-100">
-  <a [routerLink]="['/shop']" title="Exit details page?">
-    <svg-render svgName="leftArrowIcon" />
-  </a>
-
+<main class="product-edit-contents grid layout-row w-h-100">
   <form class="flex column" [formGroup]="editForm" (ngSubmit)="onSaveProduct()">
+    <a [routerLink]="['/shop']" title="Exit details page?">
+      <svg-render svgName="leftArrowIcon" />
+    </a>
+
     <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
       <label for="name" class="flex row">
         <div class="label-info flex row">
@@ -151,4 +151,6 @@
       </button>
     </div>
   </form>
+
+  <edit-preview />
 </main>

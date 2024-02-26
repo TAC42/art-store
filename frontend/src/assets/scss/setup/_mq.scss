@@ -326,6 +326,14 @@ app-introduction {
 
 product-edit {
     .product-edit-contents {
+        @media(max-width: 600px) {
+            padding: 0 1em;
+        }
+
+        @media(min-width: 601px) {
+            padding: 0 2em;
+        }
+
         form {
             .input-area {
                 @media(max-width: 400px) {
