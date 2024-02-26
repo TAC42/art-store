@@ -4,6 +4,7 @@ import { UtilityService } from '../../../services/utility.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 import { ModalService } from '../../../services/modal.service'
+import { CarouselItem } from '../../../models/shop'
 
 @Component({
   selector: 'app-contact',
@@ -25,6 +26,7 @@ export class ContactComponent implements OnInit {
   contactForm!: FormGroup
   specialChars = "'. ?$%#!*:,()\"'"
 
+  carouselItems: CarouselItem[] = []
   contactImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/r0vaet9gmlapbshf6hb1.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/pqiuffqnaa7gmznrsnmy.png',
@@ -43,6 +45,7 @@ export class ContactComponent implements OnInit {
         this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
       })
     this.initializeForm()
+    this.carouselItems = this.utilService.convertToCarouselItem(this.contactImageUrls)
   }
 
   initializeForm(): void {

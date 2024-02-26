@@ -2,7 +2,7 @@ import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { Observable, map, take } from 'rxjs'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Cart, Product } from '../../../models/shop'
+import { CarouselItem, Cart, Product } from '../../../models/shop'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { LOAD_RANDOM_PRODUCTS } from '../../../store/shop.actions'
@@ -12,6 +12,7 @@ import { selectLoggedinUser } from '../../../store/user.selectors'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { UtilityService } from '../../../services/utility.service'
 
 @Component({
     selector: 'product-details',
@@ -28,24 +29,26 @@ export class ProductDetailsComponent implements OnInit {
     private dTypeService = inject(DeviceTypeService)
     private modService = inject(ModalService)
     private eBusService = inject(EventBusService)
+    private utilService = inject(UtilityService)
+
+    carouselItems: CarouselItem[] = []
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
     product$: Observable<Product> = this.route.data.pipe(
-        map(data => data['product'])
-    )
+        map(data => data['product']))
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
 
     ngOnInit(): void {
-        this.product$.subscribe(
-            product => {
-                if (product && product._id) {
-                    this.store.dispatch(LOAD_RANDOM_PRODUCTS({
-                        productType: product.type,
-                        excludeProductId: product._id
-                    }))
-                }
-            })
+        this.product$.subscribe(product => {
+            if (product && product._id) {
+                this.store.dispatch(LOAD_RANDOM_PRODUCTS({
+                    productType: product.type,
+                    excludeProductId: product._id
+                }))
+            }
+            this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
+        })
     }
 
     onOpenCart(event: Event): void {

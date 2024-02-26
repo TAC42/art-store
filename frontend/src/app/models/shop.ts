@@ -24,6 +24,13 @@ export interface MiniProduct {
   url: string
 }
 
+export interface CarouselItem {
+  type: 'image' | 'product'
+  imgUrl: string
+  url?: string
+  name?: string
+}
+
 export interface Cart {
   amount?: number
   _id?: string

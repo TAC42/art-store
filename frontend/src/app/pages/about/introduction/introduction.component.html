@@ -1,6 +1,6 @@
 <main class="introduction-page-contents w-h-100 grid">
     <section class="gallery-carousel flex column">
-        <image-carousel [imageUrls]="aboutImageUrls" [autoSwitch]="true"
+        <product-carousel [carouselItems]="carouselItems" [autoSwitch]="true"
             (imageClick)="onImageClick($event.event, $event.imageUrl)" />
     </section>
 
