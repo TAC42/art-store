@@ -26,10 +26,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   private productSubscription: Subscription | undefined
 
-  editForm!: FormGroup
-  product: Product = ShopDbService.getDefaultProduct()
-  defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
-  specialChars: string = "'. ?$%#!*:,()\"'"
+  public editForm!: FormGroup
+  public product: Product = ShopDbService.getDefaultProduct()
+  public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
+  public specialChars: string = "'. ?$%#!*:,()\"'"
 
   ngOnInit(): void {
     this.initializeForm()
@@ -53,22 +53,20 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   fetchProductData(): void {
-    this.productSubscription = this.route.data
-      .pipe(
-        map(data => data['product']),
-        filter(product => !!product)
-      )
-      .subscribe(product => {
-        this.product = product
-        this.initializeForm()
-      })
+    this.productSubscription = this.route.data.pipe(
+      map(data => data['product']),
+      filter(product => !!product)).subscribe(
+        product => {
+          this.product = product
+          this.initializeForm()
+        })
   }
 
   nameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.valueChanges || control.value === this.product.name) {
-        return of(null)
-      }
+      if (!control.valueChanges ||
+        control.value === this.product.name) return of(null)
+
       return control.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
@@ -139,11 +137,5 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.productSubscription) this.productSubscription.unsubscribe()
-  }
-
-  onBack(event: Event): void {
-    event.stopPropagation()
-    this.router.navigateByUrl(`/${encodeURIComponent(
-      this.product?.type || 'shop')}`)
   }
 }

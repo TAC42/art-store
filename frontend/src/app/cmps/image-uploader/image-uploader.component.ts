@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { UploadService } from '../../services/upload.service'
+import { EventBusService, showErrorMsg } from '../../services/event-bus.service'
 
 @Component({
-  selector: 'app-image-uploader',
+  selector: 'image-uploader',
   templateUrl: './image-uploader.component.html'
 })
 
@@ -12,7 +13,8 @@ export class ImageUploaderComponent {
   @Input() productType: string = ''
   @Output() onUploaded = new EventEmitter<{ url: string, index: number }>()
 
-  public uService = inject(UploadService)
+  private eBusService = inject(EventBusService)
+  private upService = inject(UploadService)
 
   imgUrl: string = ''
   isUploading: boolean = false
@@ -24,17 +26,43 @@ export class ImageUploaderComponent {
     this.inputId = `imgUpload-${this.index}`
   }
 
+  // Check if image is either too heavy or wrong format
+  validateFile(file: File): { isValid: boolean, errorMessage?: string } {
+    const fileSize = file.size / 1024 / 1024
+    const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png']
+
+    if (fileSize > 2) return {
+      isValid: false,
+      errorMessage: 'File size exceeds 2 MB!'
+    }
+
+    if (!allowedFormats.includes(file.type)) return {
+      isValid: false,
+      errorMessage: 'Invalid format. Only JPG, JPEG, and PNG are allowed!'
+    }
+    return { isValid: true }
+  }
+
   async uploadImg(event: Event): Promise<void> {
     const fileInput = event.target as HTMLInputElement
     if (!fileInput.files?.length) return
 
+    const file = fileInput.files[0]
+    const validation = this.validateFile(file)
+
+    if (!validation.isValid) {
+      showErrorMsg('Upload Failed!', validation.errorMessage!, this.eBusService)
+      return
+    }
+
     this.isUploading = true
     try {
-      const data = await this.uService.uploadImg(fileInput.files[0], this.productType)
+      const data = await this.upService.uploadImg(file, this.productType)
       this.imgUrl = data.secure_url
       this.onUploaded.emit({ url: this.imgUrl, index: this.index })
     } catch (error) {
       console.error('Upload failed', error)
+      showErrorMsg('Upload Failed!', 'Sorry! Try to upload the image again...', this.eBusService)
     } finally {
       this.isUploading = false
     }
