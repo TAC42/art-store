@@ -1,3 +1,8 @@
 <main class="preview-contents flex column">
-    <p>edit preview</p>
+    <h2>{{ name }}</h2>
+    <img *ngIf="imgUrl" [src]="imgUrl" alt="Product Image">
+    <p>Price: {{ price }}</p>
+    <p>Description: {{ description }}</p>
+    <p>Materials: {{ materials }}</p>
+    <p>Dimensions: {{ dimensions }}</p>
 </main>
