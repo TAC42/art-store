@@ -116,5 +116,11 @@ export class PaymentComponent implements OnInit {
     this.changeDetector.detectChanges()
   }
 
+  onSubmitPurchase() {
+    console.log('THE ON SUBMIT WORKED!');
+    
+    
+  }
+
 
 }

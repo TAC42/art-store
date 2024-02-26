@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import {
   PRODUCTS_LOADED, PRODUCT_BY_NAME_LOADED, FILTER_UPDATED,
-  LOAD_FILTER, SET_LOADING_STATE, SAVE_PRODUCT,
+  LOAD_FILTER, SET_LOADING_STATE,
   PRODUCT_REMOVED_SUCCESSFULLY, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, CART_LOADED
 } from './shop.actions'
 import { Product, ShopFilter } from '../models/shop'

@@ -10,3 +10,8 @@ export interface Order {
   _id?: string
 }
 
+export interface OrderFilter {
+  id?: string
+}
+
+

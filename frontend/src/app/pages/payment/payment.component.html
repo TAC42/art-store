@@ -277,7 +277,11 @@
   <section class="terms"></section>
 
   <section class="pay-btn">
-    <button>
+    <button
+      [disabled]="!paymentForm.valid || !personalForm.valid"
+      (click)="onSubmitPurchase()"
+      [class.disabled]="!paymentForm.valid || !personalForm.valid"
+    >
       <svg-render svgName="lock" /> Pay with
       <span class="pay-type">{{ payType }}</span>
     </button>
