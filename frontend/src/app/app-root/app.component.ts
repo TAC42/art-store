@@ -47,8 +47,8 @@ export class AppComponent implements OnInit, OnDestroy {
             || (event as NavigationEnd).url, deviceType
         }))
       ).subscribe(({ url, deviceType }) => {
-        const hideHeaderFooterUrls = ['/payment', '/shop/details', '/artware/details', '/sculpture/details']
-        const mobileSensitiveUrls = ['/shop/details', '/artware/details', '/sculpture/details']
+        const hideHeaderFooterUrls = ['/payment', '/edit', '/shop/details', '/artware/details', '/sculpture/details']
+        const mobileSensitiveUrls = ['/shop/details', '/edit', '/artware/details', '/sculpture/details']
         const isMobile = deviceType === 'mobile' || deviceType === 'mini-tablet'
 
         // check if a certain url requires hiding of header & footer, and if specifically on mobile

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core'
+import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core'
 import { CarouselItem } from '../../models/shop'
 import { UtilityService } from '../../services/utility.service'
 import { ModalService } from '../../services/modal.service'
@@ -26,6 +26,15 @@ export class EditPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.carouselItems = this.utilService.convertToCarouselItem(this.imgUrls)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['imgUrls']) {
+      const change = changes['imgUrls']
+      if (change.currentValue !== change.previousValue) {
+        this.carouselItems = this.utilService.convertToCarouselItem(this.imgUrls)
+      }
+    }
   }
 
   onImageClick(event: Event, imageUrl: string): void {
