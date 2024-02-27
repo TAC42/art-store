@@ -1,8 +1,63 @@
 <main class="preview-contents flex column">
-    <h2>{{ name }}</h2>
-    <img *ngIf="imgUrl" [src]="imgUrl" alt="Product Image">
-    <p>Price: {{ price }}</p>
-    <p>Description: {{ description }}</p>
-    <p>Materials: {{ materials }}</p>
-    <p>Dimensions: {{ dimensions }}</p>
+    <span class="title">your results</span>
+    <div *ngIf="type === 'shop'" class="shop-type flex column">
+        <section class="product-area flex column">
+            <div class="image-container flex column">
+                <product-carousel *ngIf="imgUrls.length > 1" [carouselItems]="carouselItems"
+                    (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                <img *ngIf="imgUrls.length === 1" [src]="imgUrls[0]" alt="Product Image"
+                    (click)="onImageClick($event, imgUrls[0])">
+                <span class="price-tag flex">${{ price }}.00</span>
+            </div>
+
+            <div class="details-area">
+                <h2>{{ name }}</h2>
+
+                <p class="description">{{ description }}</p>
+                <h4>Dimensions</h4>
+                <p>{{ dimensions }}</p>
+                <h4>Materials</h4>
+                <p style="text-transform: capitalize;">{{materials}}</p>
+                <h4>Delivery</h4>
+                <p>
+                    3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
+                    soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
+                </p>
+
+                <p *ngIf="stock <= 0" class="unavailable">
+                    This product is currently out of stock, for further information and the
+                    option to order it in the near future, please press inquire.
+                </p>
+
+                <button class="action-btn flex row" [title]="stock > 0 ? 'Buy product?' : 'Contact us!'">
+                    <span>{{ stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
+                    <svg-render *ngIf="stock > 0" svgName="shoppingCart" />
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <div *ngIf="type !== 'shop'" class="showcase-type flex column">
+        <section class="product-area flex column">
+            <div class="image-container flex column">
+                <product-carousel *ngIf="imgUrls.length > 1" [carouselItems]="carouselItems"
+                    (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                <img *ngIf="imgUrls.length === 1" [src]="imgUrls[0]" alt="Product Image"
+                    (click)="onImageClick($event, imgUrls[0])">
+            </div>
+
+            <div class="details-area">
+                <h4>{{ name }}</h4>
+
+                <p style="text-transform: capitalize;">{{publishDate}}</p>
+                <p style="text-transform: capitalize;">{{materials}}</p>
+                <p class="description">{{ description }}</p>
+
+                <p class="notice">Dear user, for special requests regarding this item, please press inquire.</p>
+                <button class="flex" title="Contact us!">
+                    <span>Inquire</span>
+                </button>
+            </div>
+        </section>
+    </div>
 </main>

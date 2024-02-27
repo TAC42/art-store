@@ -38,16 +38,16 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   initializeForm(): void {
     this.editForm = this.fBuilder.group({
-      name: [this.product.name || '', [Validators.required], this.nameValidator()],
-      price: [this.product.price || '', [Validators.required]],
-      description: [this.product.description || '', [Validators.required]],
-      dimensions: [this.product.dimensions || '', [Validators.required]],
-      materials: [this.product.materials || '', [Validators.required]],
-      publishDate: [this.product.publishDate || '', [Validators.required]],
-      stock: [this.product.stock || '', Validators.required],
-      type: [this.product.type || '', [Validators.required]],
+      name: [this.product.name, [Validators.required], this.nameValidator()],
+      price: [this.product.price, [Validators.required]],
+      description: [this.product.description, [Validators.required]],
+      dimensions: [this.product.dimensions, [Validators.required]],
+      materials: [this.product.materials, [Validators.required]],
+      publishDate: [this.product.publishDate, [Validators.required]],
+      stock: [this.product.stock, Validators.required],
+      type: [this.product.type, [Validators.required]],
       imgUrls: this.fBuilder.array(this.product.imgUrls?.map(
-        url => this.fBuilder.control(url)) || [])
+        url => this.fBuilder.control(url)))
     })
     setTimeout(() => this.nameInput?.nativeElement.focus(), 0)
   }

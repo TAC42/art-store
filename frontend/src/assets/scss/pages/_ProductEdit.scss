@@ -8,6 +8,7 @@ product-edit {
 
   .product-edit-contents {
     text-align: center;
+    gap: 1em;
     margin-block-end: 1em;
     width: 100%;
 
@@ -30,7 +31,7 @@ product-edit {
       gap: 1em;
       padding-bottom: 1em;
       align-items: center;
-      max-width: 600px;
+      max-width: 900px;
       margin-block-start: 0.5em;
 
       .input-area {

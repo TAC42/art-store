@@ -6,31 +6,32 @@ product-edit {
       $scdclr5,
       $scdclr2 );
 
-  a {
-    margin: 0.5em 1em;
-    width: 36px;
-
-    svg-render {
-      fill: $scdclr2;
-      transition: fill 0.3s ease-in-out;
-
-      &:hover {
-        fill: $prmclr1;
-      }
-    }
-  }
-
   .product-edit-contents {
     text-align: center;
+    gap: 1em;
     margin-block-end: 1em;
     width: 100%;
-    max-width: 600px;
+
+    a {
+      align-self: start;
+      margin: 0.5em 0;
+      width: 36px;
+
+      svg-render {
+        fill: $scdclr2;
+        transition: fill 0.3s ease-in-out;
+
+        &:hover {
+          fill: $prmclr1;
+        }
+      }
+    }
 
     form {
       gap: 1em;
-      padding: 0 1em 1em 1em;
+      padding-bottom: 1em;
       align-items: center;
-      max-width: 600px;
+      max-width: 900px;
       margin-block-start: 0.5em;
 
       .input-area {

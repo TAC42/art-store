@@ -152,7 +152,9 @@
     </div>
   </form>
 
-  <edit-preview [name]="editForm.get('name')?.value" [imgUrl]="editForm.get('imgUrls')?.value[0]"
-    [price]="editForm.get('price')?.value" [description]="editForm.get('description')?.value"
-    [materials]="editForm.get('materials')?.value" [dimensions]="editForm.get('dimensions')?.value" />
+  <edit-preview [name]="editForm.get('name')?.value" [type]="editForm.get('type')?.value"
+    [imgUrls]="editForm.get('imgUrls')?.value" [price]="editForm.get('price')?.value"
+    [stock]="editForm.get('stock')?.value" [publishDate]="editForm.get('publishDate')?.value"
+    [description]="editForm.get('description')?.value" [materials]="editForm.get('materials')?.value"
+    [dimensions]="editForm.get('dimensions')?.value" />
 </main>
