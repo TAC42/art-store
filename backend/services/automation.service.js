@@ -1,35 +1,55 @@
 import { productService } from "../api/product/product.service.js"
-import { utilService } from "./util.service.js"
+import { userService } from "../api/user/user.service.js"
 import { loggerService } from "./logger.service.js"
 
-// export function setupOrphanedImageCheck() {
-//     loggerService.info('Orphaned image check will commence in 5 mins')
-//     setInterval(async () => {
-//         try {
-//             loggerService.info('Starting automated check for orphaned images...')
-//             await productService.checkRedundantProductImages()
-//             loggerService.info('Automated check for orphaned images completed.')
-//         } catch (err) {
-//             loggerService.error('Automated check for orphaned images failed:', err)
-//         }
-//     }, 300000) // 300000 milliseconds = 5 minutes
-// }
+export const automationService = {
+    setupOrphanedImageCheck,
+    setupUnverifiedUsersCheck
+}
 
-// export function setupOrphanedImageCheck() {
-//     // Assuming Jerusalem is UTC+2 (adjust for daylight saving as necessary)
-//     const timezoneOffset = +2 // UTC+2 -> -2 hours from UTC
-
-//     utilService.scheduleTask(
-//         productService.checkRedundantProductImages, // The task function to execute
-//         14, // Hour (14:00)
-//         25, // Minute (14:15)
-//         timezoneOffset // Timezone offset
-//     )
-// }
-
-export function setupOrphanedImageCheck() {
-    utilService.scheduleTask(
+function setupOrphanedImageCheck() {
+    scheduleTask(
         productService.checkRedundantProductImages,
-        18,
-        0)
+        'Orphaned Images Check', 18, 0)
+}
+
+function setupUnverifiedUsersCheck() {
+    scheduleTask(
+        userService.checkNonVerifiedUsers,
+        'Non Verified Users Check', 18, 30)
+}
+
+function scheduleTask(task, taskName, hour, minute) {
+    loggerService.debug('Scheduling task called', taskName)
+
+    const scheduleNextRun = () => {
+        const now = new Date()
+        let targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0)
+        loggerService.info(`Target time: ${targetTime.toLocaleString()}`)
+
+        if (now >= targetTime) {
+            // If the target time for today has passed, schedule for tomorrow
+            loggerService.info('Target time has passed, scheduling for tomorrow')
+            targetTime.setDate(targetTime.getDate() + 1)
+        }
+
+        // Log when the next scheduled task will happen
+        loggerService.info(`Next scheduled task will happen at: ${targetTime.toLocaleString()}`)
+
+        const delay = targetTime.getTime() - now.getTime()
+        loggerService.info(`Expected delay until next task: ${delay} milliseconds`)
+
+        setTimeout(async () => {
+            loggerService.info(`Scheduled task is starting at: ${new Date().toLocaleString()}`)
+            try {
+                await task()
+                loggerService.info('Scheduled task completed.')
+            } catch (err) {
+                loggerService.error('Scheduled task failed:', err)
+            }
+            // Schedule the next run for tomorrow
+            scheduleNextRun()
+        }, delay)
+    }
+    scheduleNextRun()
 }

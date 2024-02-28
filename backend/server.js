@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 import http from 'http'
 
 import { loggerService } from './services/logger.service.js'
-import { setupOrphanedImageCheck } from './services/automation.service.js'
+import { automationService } from './services/automation.service.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -61,5 +61,6 @@ setupSocketAPI(server)
 server.listen(port, () => {
   loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
 
-  setupOrphanedImageCheck()
+  automationService.setupOrphanedImageCheck()
+  automationService.setupUnverifiedUsersCheck()
 })
