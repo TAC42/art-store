@@ -12,6 +12,7 @@ export const productService = {
   getById,
   getByName,
   getRandomProducts,
+  checkRedundantProductImages,
   remove,
   save,
 }
@@ -107,15 +108,11 @@ async function save(product) {
         { _id: id },
         { $set: productToSave }
       )
-      if (response.matchedCount === 0) {
-        throw new Error(`Product with id ${id.toHexString()} was not found`)
-      }
-      //_checkRedundantProductImages()
+      if (response.matchedCount === 0) throw new Error(`Id ${id.toHexString()} not found`)
 
       return { _id: id, ...productToSave }
     } else {
       const response = await collection.insertOne(productToSave)
-      // _checkRedundantProductImages()
 
       return { ...productToSave, _id: response.insertedId }
     }
@@ -134,42 +131,39 @@ function _buildPipeline(filterBy) {
   console.log('FILTERBY: ', filterBy)
   const { search, type } = filterBy
 
-  if (search) {
-    criteria.$match.$or = [
-      { name: { $regex: search, $options: 'i' } },
-      { description: { $regex: search, $options: 'i' } },
-    ]
-  }
+  if (search) criteria.$match.$or = [
+    { name: { $regex: search, $options: 'i' } },
+    { description: { $regex: search, $options: 'i' } }]
 
-  if (type) {
-    criteria.$match.type = { $regex: type, $options: 'i' }
-  }
+  if (type) criteria.$match.type = { $regex: type, $options: 'i' }
 
-  if (Object.keys(criteria.$match).length > 0) {
-    pipeline.push(criteria)
-  }
+  if (Object.keys(criteria.$match).length > 0) pipeline.push(criteria)
+
   return pipeline
 }
 
-async function _checkRedundantProductImages() {
+async function checkRedundantProductImages() {
   try {
+    // fetch all images relevant to product folders from cloudinary
+    const folders = ['Shop', 'Artware', 'Sculpture']
+    const cloudinaryImagePublicIds = await cloudinaryService.getAllCloudinaryImages(folders)
+    // loggerService.info('Found cloud img ids: ', cloudinaryImagePublicIds)
+
+    // seperate between orphaned images and those who do belong to a product
     const productImagePublicIds = await _getAllProductImages()
-    const cloudinaryImagePublicIds =
-      await cloudinaryService.getAllCloudinaryImages('product-images')
-
     const orphanedImages = cloudinaryImagePublicIds.filter(
-      (publicId) => !productImagePublicIds.includes(publicId)
-    )
+      (publicId) => !productImagePublicIds.includes(publicId))
 
-    if (orphanedImages.length === 0) {
-      console.log('No orphaned images found')
-    } else {
-      console.log('Total orphaned images found: ', orphanedImages.length)
-      // for (const publicId of orphanedImages) {
-      //   await cloudinaryService.deleteImageFromCloudinary(publicId)
-      // }
-      console.log('Deletion of orphaned images completed, no more left')
-    }
+    if (orphanedImages.length > 0) {
+      loggerService.info('Orphaned images found: ', orphanedImages)
+      loggerService.info('Total amount found: ', orphanedImages.length)
+
+      for (const publicId of orphanedImages) {
+        await cloudinaryService.deleteImageFromCloudinary(publicId)
+      }
+      loggerService.debug('Deletion of orphaned images completed')
+    } else loggerService.info('No orphaned images found')
+
   } catch (err) {
     loggerService.error('Error checking for redundant images', err)
     throw err
@@ -180,15 +174,22 @@ async function _getAllProductImages() {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
     const products = await collection
-      .find({}, { projection: { imgUrl: 1 } })
-      .toArray()
-    // Extract public IDs from product image URL
-    const productImagePublicIds = products.map((product) =>
-      cloudinaryService.extractPublicIdFromUrl(product.imgUrl)
-    )
-    return productImagePublicIds
+      .find({}, { projection: { imgUrls: 1 } }).toArray()
+
+    // Flatten the array of imgUrls arrays into a single array of URLs
+    const imgUrls = products.reduce((acc, product) => {
+      if (product.imgUrls && product.imgUrls.length) {
+        acc = acc.concat(product.imgUrls)
+      }
+      return acc
+    }, [])
+    // Extract public IDs from each URL in the flattened array
+    const resultImagePublicIds = imgUrls.map((imgUrl) =>
+      cloudinaryService.extractPublicIdFromUrl(imgUrl))
+
+    return resultImagePublicIds
   } catch (err) {
-    loggerService.error('Failed to get product image', err)
+    loggerService.error('Failed to get product images', err)
     throw err
   }
 }

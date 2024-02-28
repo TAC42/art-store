@@ -4,8 +4,10 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
-import { loggerService } from './services/logger.service.js'
 import http from 'http'
+
+import { loggerService } from './services/logger.service.js'
+import { setupOrphanedImageCheck } from './services/automation.service.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -15,7 +17,6 @@ const app = express()
 
 app.use(cookieParser()) // for res.cookies
 app.use(express.json()) // for req.body
-// app.use(express.static('public'))
 
 if (process.env.NODE_ENV === 'production') {
   // Express serve static files on production environment
@@ -59,4 +60,6 @@ setupSocketAPI(server)
 
 server.listen(port, () => {
   loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)
+
+  setupOrphanedImageCheck()
 })
