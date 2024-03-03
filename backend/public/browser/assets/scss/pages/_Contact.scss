@@ -1,4 +1,4 @@
-app-contact {
+contact-page {
   .contact-page-contents {
     gap: 1em;
     text-align: center;
@@ -50,6 +50,7 @@ app-contact {
             span {
               color: $mnrclr2;
               font-size: 15px;
+              text-transform: capitalize;
             }
 
             .label-info {
