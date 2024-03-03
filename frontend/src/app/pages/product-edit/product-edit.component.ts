@@ -1,9 +1,10 @@
-import { Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild, inject } from '@angular/core'
+import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Product } from '../../models/shop'
 import { Observable, Subscription, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
-import { ShopDbService } from '../../services/shop-db.service'
 import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import { ShopDbService } from '../../services/shop-db.service'
+import { FormUtilsService } from '../../services/form-utils.service'
+import { Product } from '../../models/shop'
 import { SAVE_PRODUCT } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -16,16 +17,17 @@ import { AppState } from '../../store/app.state'
 export class ProductEditComponent implements OnInit, OnDestroy {
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.full') fullClass = true
-  @ViewChild('nameInput') nameInput!: ElementRef
 
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   private sDbService = inject(ShopDbService)
+  private formUtilsService = inject(FormUtilsService)
 
   private productSubscription: Subscription | undefined
 
+  public formUtils = this.formUtilsService
   public editForm!: FormGroup
   public product: Product = ShopDbService.getDefaultProduct()
   public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
@@ -49,17 +51,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       imgUrls: this.fBuilder.array(this.product.imgUrls?.map(
         url => this.fBuilder.control(url)))
     })
-    setTimeout(() => this.nameInput?.nativeElement.focus(), 0)
   }
 
   fetchProductData(): void {
     this.productSubscription = this.route.data.pipe(
       map(data => data['product']),
-      filter(product => !!product)).subscribe(
-        product => {
-          this.product = product
-          this.initializeForm()
-        })
+      filter(product => !!product)).subscribe(product => {
+        this.product = product
+        this.initializeForm()
+      })
   }
 
   nameValidator(): AsyncValidatorFn {
@@ -68,10 +68,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         control.value === this.product.name) return of(null)
 
       return control.valueChanges.pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap(value => this.validateName(value)),
-        first()
+        debounceTime(500), distinctUntilChanged(),
+        switchMap(value => this.validateName(value)), first()
       )
     }
   }
@@ -83,24 +81,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       map(response => response.isNameAvailable ? null : { nameTaken: true }),
       catchError(() => of({ error: 'Network or server error' }))
     )
-  }
-
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.editForm.get(fieldName)
-    return field ? field.invalid && (field.dirty || field.touched) : false
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const field = this.editForm.get(fieldName)
-    if (field?.errors?.['required']) return `${fieldName} is required!`
-    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} min characters required`
-    if (field?.errors?.['maxLength']) return `Maximum length reached`
-    if (field?.errors?.['noNumbersAllowed']) return 'Numbers are not allowed'
-    if (field?.errors?.['noLettersAllowed']) return 'Letters are not allowed'
-    if (field?.errors?.['invalidCharacters']) return `Invalid characters used!`
-    if (field?.errors?.['nameTaken']) return 'This name is already in use!'
-
-    return ''
   }
 
   get imgUrlsControls(): AbstractControl[] {

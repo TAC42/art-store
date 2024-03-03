@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ModalService } from '../../../services/modal.service'
-import { UserCredentials, UserSignup } from '../../../models/user'
-import { AppState } from '../../../store/app.state'
-import { Store } from '@ngrx/store'
-import { LOGIN, SIGNUP } from '../../../store/user.actions'
 import { UtilityService } from '../../../services/utility.service'
+import { FormUtilsService } from '../../../services/form-utils.service'
+import { UserCredentials, UserSignup } from '../../../models/user'
+import { Store } from '@ngrx/store'
+import { AppState } from '../../../store/app.state'
+import { LOGIN, SIGNUP } from '../../../store/user.actions'
 
 @Component({
   selector: 'login-modal',
@@ -13,16 +14,16 @@ import { UtilityService } from '../../../services/utility.service'
 })
 
 export class LoginModalComponent implements OnInit {
-  @ViewChild('firstNameInput') firstNameInput!: ElementRef
-
   public modService = inject(ModalService)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   private utilService = inject(UtilityService)
+  private formUtilsService = inject(FormUtilsService)
 
-  loginForm!: FormGroup
-  signupForm!: FormGroup
-  isLoginMode = true
+  public formUtils = this.formUtilsService
+  public loginForm!: FormGroup
+  public signupForm!: FormGroup
+  public isLoginMode = true
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false
@@ -49,37 +50,12 @@ export class LoginModalComponent implements OnInit {
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode
-    setTimeout(() => this.firstNameInput?.nativeElement.focus(), 0)
   }
 
   closeLoginModal() {
     this.modService.closeModal('login')
     this.signupForm.reset()
     this.loginForm.reset()
-  }
-
-  isFieldInvalid(fieldName: string): boolean {
-    const form = this.isLoginMode ? this.loginForm : this.signupForm
-    const field = form.get(fieldName)
-    return field ? field.invalid && (field.dirty || field.touched) : false
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const form = this.isLoginMode ? this.loginForm : this.signupForm
-    const field = form.get(fieldName)
-    if (field?.errors?.['required']) {
-      if (fieldName === 'firstName') return 'first name is required'
-      else if (fieldName === 'lastName') return 'last name is required'
-      else return `${fieldName} is required`
-    }
-    if (field?.errors?.['email']) return 'Invalid email format'
-    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} min characters required`
-    if (field?.errors?.['maxLength']) return `Maximum length reached`
-    if (field?.errors?.['noNumbersAllowed']) return 'Numbers are not allowed'
-    if (field?.errors?.['noLettersAllowed']) return 'Letters are not allowed'
-    if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
-
-    return ''
   }
 
   resolved(captchaResponse: string | null) {
@@ -123,7 +99,6 @@ export class LoginModalComponent implements OnInit {
         this.isCaptchaResolved = false
         this.captchaResponse = null
         this.signupForm.reset()
-        this.modService.openModal('user-auth')
       }
     }
   }

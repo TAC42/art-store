@@ -3,6 +3,7 @@ import { Directive, EventEmitter, HostListener, Output } from '@angular/core'
 @Directive({
   selector: '[customSwipe]'
 })
+
 export class SwipeDirective {
   touchStartX = 0
   touchEndX = 0
@@ -20,9 +21,9 @@ export class SwipeDirective {
 
   @HostListener('touchend') onTouchEnd() {
     if (this.touchStartX - this.touchEndX > 100) {
-      this.swipeLeft.emit()
-    } else if (this.touchEndX - this.touchStartX > 100) {
       this.swipeRight.emit()
+    } else if (this.touchEndX - this.touchStartX > 100) {
+      this.swipeLeft.emit()
     }
   }
 }

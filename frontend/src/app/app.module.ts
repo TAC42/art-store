@@ -52,7 +52,8 @@ import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-deta
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
 import { ProfileComponent } from './pages/profile/profile.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component'
+import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component';
+import { AutofocusDirective } from './directives/auto-focus.directive'
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component
     ProfileComponent,
     DashboardComponent,
     EditPreviewComponent,
+    AutofocusDirective,
   ],
   imports: [
     BrowserModule,

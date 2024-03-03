@@ -73,6 +73,7 @@ export class UtilityService {
     return this.httpService.post<any>(`${BASE_URL}mail/verify`, formData)
   }
 
+  // user validation code generation
   generateRandomCode(): string {
     let code = ''
     for (let i = 0; i < 6; i++) {
@@ -104,12 +105,6 @@ export class UtilityService {
     return this.usStates
   }
 
-  // convertToCarouselItem(imgUrls: string[]): CarouselItem[] {
-  //   return imgUrls.map(imgUrl => ({
-  //     type: 'image',
-  //     imgUrl: imgUrl
-  //   }))
-  // }
   convertToCarouselItem(items: (string | MiniProduct)[], type: 'image' | 'product' = 'image'): CarouselItem[] {
     return items.map(item => {
       if (type === 'image' && typeof item === 'string') {
