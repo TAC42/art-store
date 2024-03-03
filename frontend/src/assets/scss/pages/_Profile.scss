@@ -1,0 +1,67 @@
+profile {
+  .background-image {
+  }
+  .personal-info {
+    position: relative;
+    justify-content: center;
+    gap: .25em;
+    color: $scdclr2;
+    text-align: center;
+    .user-img {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      width: fit-content;
+      padding: 0.5em;
+      background-color: $prmclr2;
+      img {
+        position: relative;
+        width: 125px;
+        border-radius: 50%;
+        border: 1px #a3a1ab solid;
+        &::before {
+          content: "";
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          border: 2px solid $prmclr2;
+          border-radius: 50%;
+        }
+      }
+    }
+    .full-name {
+      margin-block-start: 3em;
+      color: $prmclr1;
+      font-family: "nh-bold";
+      font-size: 1.5em;
+    }
+    .user-name {
+
+    }
+    .member-since {
+      gap: 0.5em;
+      align-items: center;
+      svg-render {
+        width: 1.5em;
+        svg {
+          path {
+            fill: $scdclr2;
+          }
+        }
+      }
+    }
+  }
+  .edit-profile {
+    margin-block-start: 1em;
+    justify-content: center;
+    button{
+        padding: .75em 1.5em;
+        background-color: $scdclr2;
+        color: $prmclr2;
+        border-radius: 1em;
+    }
+  }
+}

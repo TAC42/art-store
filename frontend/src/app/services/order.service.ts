@@ -1,9 +1,9 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core'
 import { HttpService } from './http.service'
-import { Order, OrderFilter } from '../models/order';
-import { Observable, catchError, throwError } from 'rxjs';
-import { Product } from '../models/shop';
-import { UserService } from './user.service';
+import { Order, OrderFilter } from '../models/order'
+import { Observable, catchError, throwError } from 'rxjs'
+import { Product } from '../models/shop'
+import { UserService } from './user.service'
 
 const BASE_URL = 'order/'
 
@@ -34,13 +34,19 @@ export class OrderService {
   }
 
   remove(orderId: string): Observable<any> {
-    return this.httpService.delete(`${BASE_URL}${orderId}`)
+    return this.httpService.delete(`${BASE_URL}${orderId}`).pipe(
+      catchError((error) => {
+        console.error('Error deleting order by id:', error)
+        return throwError(() => new Error('Error deleting order by id'))
+      })
+    )
   }
 
   save(order: Order): Observable<Order> {
     if (order._id) {
-      return this.httpService.put<Order>(`${BASE_URL}update/${order._id}`, order)
-    } else return this.httpService.post<Order>(`${BASE_URL}add`, order)
+      return this.httpService.put<Order>(`${BASE_URL}${order._id}`, order)
+    } else return this.httpService.post<Order>(`${BASE_URL}`, order)
+    
   }
 
   getDefaultFilter(): OrderFilter {
@@ -55,7 +61,8 @@ export class OrderService {
     return {
       summary: [],
       user: UserService.getDefaultUser(),
-      status: '',
+      status: 'pending',
+      payment: '',
       number: 0,
       createdAt: currentTimestamp
     }

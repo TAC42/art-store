@@ -5,6 +5,7 @@ export interface Order {
   summary: Cart[]
   user: User
   status: string
+  payment: string
   createdAt: number
   number: number
   _id?: string

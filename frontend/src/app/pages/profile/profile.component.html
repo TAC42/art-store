@@ -1,1 +1,60 @@
-<p>profile works!</p>
+<section class="background-image">
+  <img src="{{ backgroundImage }}" alt="background-image" />
+</section>
+<section class="personal-info grid" *ngIf="user$ | async as user">
+  <article class="user-img">
+    <img src="{{ user.imgUrl }}" alt="{{ user.fullName }}" />
+  </article>
+  <article class="full-name">{{ user.fullName }}</article>
+  <article class="user-name"><span>&#64;</span>{{ user.username }}</article>
+  <article class="member-since flex">
+    <svg-render svgName="personIcon" /><span
+      >Member since {{ user.createdAt | date : "MMM yyyy" }}</span
+    >
+  </article>
+</section>
+<section class="edit-profile flex">
+  <button>Edit profile</button>
+</section>
+<section class="orders" *ngIf="orders$ | async as orders">
+  <ng-container *ngIf="orders.length; else orderless">
+    <h3>Your Orders</h3>
+    <!-- <article class="order"  *ngFor="let order of orders"></article> -->
+    <mat-expansion-panel
+      class="order"
+      [expanded]="optionState === 'order num'"
+      (click)="setSelection('order num')"
+      *ngFor="let order of orders; let i = index"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="heading">
+          <span class="pending">Order {{ i + 1 }}</span>
+          <span class="title">Order {{ order.number }}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <section class="order-info">
+        <article class="purchased">
+          <span>purchased</span><span>{{ order.createdAt }}</span>
+        </article>
+        <article class="payment">
+          <span>payment</span><span>{{ order.payment }}</span>
+        </article>
+        <article class="summary">
+          <span>summary</span>
+          <ul *ngFor="let item of order.summary">
+            <!-- <li>Product: {{ item.name }}</li>
+            <li>Quantity: {{ item.count }}</li>
+            <li>Price: {{ item.price }}</li> -->
+          </ul>
+        </article>
+        <article class="status">{{ order.status }}</article>
+      </section>
+    </mat-expansion-panel>
+  </ng-container>
+  <ng-template #orderless>
+    <section class="no-orders flex column">
+      <svg-render svgName="sorryRobot" />
+      <h3>You have no orders!</h3>
+    </section>
+  </ng-template>
+</section>
