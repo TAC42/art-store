@@ -121,7 +121,7 @@ async function checkNonVerifiedUsers() {
     }
 
     // log non-verified users
-    loggerService.info(`Found ${nonVerifiedUsers.length} non-verified users. Proceeding to delete.`)
+    loggerService.info(`Found ${nonVerifiedUsers.length} non-verified users.`)
     nonVerifiedUsers.forEach(
       user => loggerService.info(`Non-verified user: ${user.username}`))
 

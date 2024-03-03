@@ -63,5 +63,6 @@
         <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
       </ng-template>
     </section>
+    <header-dropdown [loggedinUser$]="loggedinUser$" />
   </section>
 </header>

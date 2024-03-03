@@ -20,6 +20,7 @@ import { UserEffects } from './store/user.effects'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { reducers } from './store/app.state'
 import { HeaderComponent } from './cmps/header/header.component'
+import { HeaderDropdownComponent } from './cmps/header/header-dropdown/header-dropdown.component'
 import { FooterComponent } from './cmps/footer/footer.component'
 
 import { HomeComponent } from './pages/home/home.component'
@@ -45,13 +46,12 @@ import { CartComponent } from './cmps/modals/cart/cart.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
-import { UserDropdownComponent } from './cmps/header/user-dropdown/user-dropdown.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
 import { ProfileComponent } from './pages/profile/profile.component'
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component'
 
 @NgModule({
@@ -87,7 +87,7 @@ import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component
     SculptureIndexComponent,
     ArtwareIndexComponent,
     UserAuthModalComponent,
-    UserDropdownComponent,
+    HeaderDropdownComponent,
     PaymentComponent,
     ImageDisplayComponent,
     ShowcaseDetailsComponent,

@@ -173,8 +173,8 @@ async function checkRedundantProductImages() {
 async function _getAllProductImages() {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-    const products = await collection
-      .find({}, { projection: { imgUrls: 1 } }).toArray()
+    const products = await collection.find(
+      {}, { projection: { imgUrls: 1 } }).toArray()
 
     // Flatten the array of imgUrls arrays into a single array of URLs
     const imgUrls = products.reduce((acc, product) => {
