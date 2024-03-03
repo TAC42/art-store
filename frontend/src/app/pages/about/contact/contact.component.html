@@ -12,56 +12,56 @@
 
     <section class="form-area">
         <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
+            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'name')">
                 <label for="name" class="flex row">
                     <div class="label-info flex row">
                         <svg-render svgName="personIcon" />
                         <span>Name*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('name')">
-                        {{ getErrorMessage('name') }}
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'name')">
+                        {{ formUtils.getErrorMessage(contactForm, 'name') }}
                     </span>
                 </label>
-                <input id="name" type="text" #nameInput formControlName="name" placeholder="John Doe..." customValidator
-                    [minLength]=1 [maxLength]=48 [allowNumbers]="false" [allowedSpecialChars]="'. '">
+                <input id="name" type="text" formControlName="name" placeholder="John Doe..." customValidator
+                    [minLength]=1 [maxLength]=48 [allowNumbers]="false" [allowedSpecialChars]="'. '" autofocus>
             </div>
 
-            <div class="input-area flex column" [class.error]="isFieldInvalid('email')">
+            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'email')">
                 <label for="email" class="flex row">
                     <div class="label-info flex row">
                         <svg-render svgName="emailIcon" />
                         <span>Email*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('email')">
-                        {{ getErrorMessage('email') }}
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'email')">
+                        {{ formUtils.getErrorMessage(contactForm, 'email') }}
                     </span>
                 </label>
                 <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
                     [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
-            <div class="input-area flex column" [class.error]="isFieldInvalid('title')">
+            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'title')">
                 <label for="title" class="flex row">
                     <div class="label-info flex row">
                         <svg-render svgName="titleIcon" />
                         <span>Title*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('title')">
-                        {{ getErrorMessage('title') }}
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'title')">
+                        {{ formUtils.getErrorMessage(contactForm, 'title') }}
                     </span>
                 </label>
                 <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question..."
                     [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :?&!$'">
             </div>
 
-            <div class="input-area flex column" [class.error]="isFieldInvalid('message')">
+            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'message')">
                 <label for="message" class="flex row">
                     <div class="label-info flex row">
                         <svg-render svgName="descriptionIcon" />
                         <span>Description*</span>
                     </div>
-                    <span *ngIf="isFieldInvalid('message')">
-                        {{ getErrorMessage('message') }}
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'message')">
+                        {{ formUtils.getErrorMessage(contactForm, 'message') }}
                     </span>
                 </label>
                 <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator

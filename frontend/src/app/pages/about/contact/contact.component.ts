@@ -1,13 +1,14 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
+import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../../services/utility.service'
+import { FormUtilsService } from '../../../services/form-utils.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 import { ModalService } from '../../../services/modal.service'
 import { CarouselItem } from '../../../models/shop'
 
 @Component({
-  selector: 'app-contact',
+  selector: 'contact-page',
   templateUrl: './contact.component.html'
 })
 
@@ -15,19 +16,20 @@ export class ContactComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
-  @ViewChild('nameInput') nameInput!: ElementRef
 
-  private utilService = inject(UtilityService)
   private dTypeService = inject(DeviceTypeService)
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
   private modService = inject(ModalService)
+  private utilService = inject(UtilityService)
+  private formUtilsService = inject(FormUtilsService)
 
-  contactForm!: FormGroup
-  specialChars = "'. ?$%#!*:,()\"'"
+  public formUtils = this.formUtilsService
+  public contactForm!: FormGroup
+  public specialChars = "'. ?$%#!*:,/()\"'"
 
-  carouselItems: CarouselItem[] = []
-  contactImageUrls: string[] = [
+  public carouselItems: CarouselItem[] = []
+  public contactImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/r0vaet9gmlapbshf6hb1.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/pqiuffqnaa7gmznrsnmy.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/h9adgfdphiip2xujdm4d.png',
@@ -40,10 +42,9 @@ export class ContactComponent implements OnInit {
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
   ngOnInit() {
-    this.dTypeService.deviceType$.subscribe(
-      deviceType => {
-        this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
-      })
+    this.dTypeService.deviceType$.subscribe(deviceType => {
+      this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
+    })
     this.initializeForm()
     this.carouselItems = this.utilService.convertToCarouselItem(this.contactImageUrls)
   }
@@ -55,25 +56,6 @@ export class ContactComponent implements OnInit {
       title: ['', Validators.required],
       message: ['', Validators.required]
     })
-    setTimeout(() => this.nameInput?.nativeElement.focus(), 0)
-  }
-
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.contactForm.get(fieldName)
-    return field ? field.invalid && (field.dirty || field.touched) : false
-  }
-
-  getErrorMessage(fieldName: string): string {
-    const field = this.contactForm.get(fieldName)
-    if (field?.errors?.['required']) return `${fieldName} is required`
-    if (field?.errors?.['email']) return 'Invalid email format'
-    if (field?.errors?.['minLength']) return `${field.errors['minLength'].requiredLength} min characters required`
-    if (field?.errors?.['maxLength']) return `Maximum length reached`
-    if (field?.errors?.['noNumbersAllowed']) return 'Numbers are not allowed'
-    if (field?.errors?.['noLettersAllowed']) return 'Letters are not allowed'
-    if (field?.errors?.['invalidCharacters']) return `Invalid characters used`
-
-    return ''
   }
 
   resolved(captchaResponse: string | null) {

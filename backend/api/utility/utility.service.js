@@ -1,15 +1,22 @@
-import { loggerService } from '../../services/logger.service.js'
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
 import fetch from 'node-fetch'
+import fs from 'fs'
+import { ObjectId } from 'mongodb'
+
+import { loggerService } from '../../services/logger.service.js'
 
 export const utilityService = {
     sendContactUsMail,
     sendVerificationMail,
-    verifyRecaptcha
+    verifyRecaptcha,
+    readJsonFile,
+    makeId,
+    idToObjectId
 }
 dotenv.config()
 
+// routed functions
 async function sendContactUsMail(name, email, title, message, recaptchaToken) {
     const isCaptchaValid = await verifyRecaptcha(recaptchaToken)
     if (!isCaptchaValid) throw new Error('Invalid reCAPTCHA')
@@ -60,7 +67,7 @@ async function sendVerificationMail(username, email, code) {
                <p>To verify your account, please use the following code:</p>
                <p><b>${code}</b></p>
                <p>If you did not request this, please ignore this email.</p>
-               <p>Thank you,<br>The support team</p>`
+               <p>Thank you,<br>The Ori-Carlin support team</p>`
     }
     try {
         await transporter.sendMail(mailOptions)
@@ -88,4 +95,30 @@ async function verifyRecaptcha(token) {
         loggerService.error('reCAPTCHA verification failed:', data['error-codes'])
         return false
     } else return data.success
+}
+
+// non routed functions
+function readJsonFile(path) {
+    const str = fs.readFileSync(path, 'utf8')
+    const json = JSON.parse(str)
+    return json
+}
+
+function makeId(length = 6) {
+    var txt = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return txt
+}
+
+function idToObjectId(oldId) {
+    let newId = oldId
+    if (typeOf(newId) === 'object') {
+        if (newId.length !== 0) newId = newId.map((aId) => aId = new ObjectId(aId))
+        else newId._id = ObjectId(newId._id)
+
+    } else newId = ObjectId(newId)
+    return newId
 }

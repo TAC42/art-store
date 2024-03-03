@@ -18,8 +18,7 @@ export class CustomValidatorDirective implements Validator {
 
     if (value && value.length < this.minLength) {
       return {
-        'minLength':
-        {
+        'minLength': {
           'requiredLength':
             this.minLength, 'actualLength': value.length
         }
@@ -28,8 +27,7 @@ export class CustomValidatorDirective implements Validator {
 
     if (value && value.length > this.maxLength) {
       return {
-        'maxLength':
-        {
+        'maxLength': {
           'requiredLength':
             this.maxLength, 'actualLength': value.length
         }

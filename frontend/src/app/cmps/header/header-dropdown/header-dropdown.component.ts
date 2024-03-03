@@ -8,11 +8,11 @@ import { Router } from '@angular/router'
 import { LOGOUT } from '../../../store/user.actions'
 
 @Component({
-  selector: 'user-dropdown',
-  templateUrl: './user-dropdown.component.html'
+  selector: 'header-dropdown',
+  templateUrl: './header-dropdown.component.html'
 })
 
-export class UserDropdownComponent {
+export class HeaderDropdownComponent {
   @Input() loggedinUser$!: Observable<User>
 
   private store = inject(Store<AppState>)

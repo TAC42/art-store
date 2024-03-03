@@ -1,7 +1,6 @@
 import express from 'express'
 import { log } from '../../middlewares/logger.middleware.js'
-// import { getUsers, getUserById, removeUser, updateUser, addUser } from './user.controller.js'
-import { getUsers, getUser, removeUser, updateUser, addUser } from './user.db.controller.js'
+import { getUsers, getUser, removeUser, updateUser, addUser } from './user.controller.js'
 
 export const userRoutes = express.Router()
 

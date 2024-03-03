@@ -2,7 +2,7 @@ import Cryptr from 'cryptr'
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 
-import { userService } from '../user/user.db.service.js'
+import { userService } from '../user/user.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
 export const authService = {
@@ -15,7 +15,7 @@ dotenv.config()
 const cryptr = new Cryptr(process.env.DECRYPTION)
 
 async function login(username, password) {
-  loggerService.debug(`auth.service - login with username: ${username}`)
+  loggerService.debug(`auth - login with username: ${username}`)
 
   const user = await userService.getByUsername(username)
   if (!user) throw new Error('Invalid username or password')
@@ -28,14 +28,14 @@ async function login(username, password) {
 }
 
 async function signup(username, password, fullName, email, imgUrl) {
-  loggerService.debug(`auth.service - signup with username: ${username}`)
-
-  const saltRounds = 10
+  loggerService.debug(`auth - signup with username: ${username}`)
 
   if (!username || !password || !fullName) {
     throw new Error('Missing required details')
   }
 
+  // encrypt the user's password in database
+  const saltRounds = 10
   const hash = await bcrypt.hash(password, saltRounds)
 
   return userService.save({

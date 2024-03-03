@@ -5,7 +5,6 @@ import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angu
 })
 
 export class ClickOutsideDirective {
-
   constructor(private el: ElementRef) { }
 
   @Output() clickOutside = new EventEmitter()

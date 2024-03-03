@@ -18,16 +18,20 @@ export const cloudinaryService = {
     extractPublicIdFromUrl
 }
 
-async function getAllCloudinaryImages(folderName) {
+async function getAllCloudinaryImages(folderNames) {
+    let allImages = []
     try {
-        const folderPath = `Giggler/${folderName}`
-        const results = await cloudinary.api.resources({
-            type: 'upload',
-            prefix: folderPath,
-            max_results: 999
-        })
-        // return results.resources.map(resource => resource.url)
-        return results.resources.map(resource => extractPublicIdFromUrl(resource.url))
+        for (const folderName of folderNames) {
+            const folderPath = `${folderName}/`
+            const results = await cloudinary.api.resources({
+                type: 'upload',
+                prefix: folderPath,
+                max_results: 999
+            })
+            allImages = allImages.concat(results.resources.map(
+                resource => extractPublicIdFromUrl(resource.url)))
+        }
+        return allImages
     } catch (err) {
         loggerService.error('Failed to get all Cloudinary images', err)
         throw err
@@ -36,7 +40,9 @@ async function getAllCloudinaryImages(folderName) {
 
 async function deleteImageFromCloudinary(publicId) {
     try {
-        await cloudinary.uploader.destroy(publicId)
+        loggerService.info('Attempting to delete image with ID:', publicId)
+        const result = await cloudinary.uploader.destroy(publicId)
+        loggerService.info('Deletion result:', result)
     } catch (err) {
         loggerService.error('Failed to delete image from Cloudinary', err)
         throw err
@@ -44,12 +50,23 @@ async function deleteImageFromCloudinary(publicId) {
 }
 
 function extractPublicIdFromUrl(imageUrl) {
-    // Split the URL by '/' and get the array of parts
-    const urlParts = imageUrl.split('/')
+    if (!imageUrl) {
+        loggerService.error('Received undefined or null imageUrl')
+        return null
+    }
+    try {
+        const urlParts = imageUrl.split('/')
+        const uploadIndex = urlParts.indexOf('upload')
 
-    const uploadIndex = urlParts.indexOf('upload')
-    const publicIdParts = urlParts.slice(uploadIndex + 2, urlParts.length)
-
-    const publicId = publicIdParts.join('/').split('.')[0]
-    return publicId
+        if (uploadIndex === -1) {
+            loggerService.error(`Invalid imageUrl format: ${imageUrl}`)
+            return null
+        }
+        // Exclude the version number if present
+        const publicId = urlParts.slice(uploadIndex + 2).join('/').split('.')[0]
+        return publicId
+    } catch (error) {
+        loggerService.error(`Error extracting public ID from URL: ${imageUrl}`, error)
+        return null
+    }
 }

@@ -4,70 +4,70 @@
       <svg-render svgName="leftArrowIcon" />
     </a>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('name')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'name')">
       <label for="name" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="productName" />
           <span>Name*</span>
         </div>
-        <span *ngIf="isFieldInvalid('name')">
-          {{ getErrorMessage('name') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'name')">
+          {{ formUtils.getErrorMessage(editForm, 'name') }}
         </span>
       </label>
-      <input id="name" type="text" #nameInput formControlName="name" placeholder="Please enter product name..."
-        customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. -/:'" />
+      <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." customValidator
+        [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. -/:'" autofocus />
     </div>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('price')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'price')">
       <label for="price" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="price" />
           <span>Price*</span>
         </div>
-        <span *ngIf="isFieldInvalid('price')">
-          {{ getErrorMessage('price') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'price')">
+          {{ formUtils.getErrorMessage(editForm, 'price') }}
         </span>
       </label>
       <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." customValidator
         [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('description')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'description')">
       <label for="description" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="descriptionIcon" />
           <span>Description*</span>
         </div>
-        <span *ngIf="isFieldInvalid('description')">
-          {{ getErrorMessage('description') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'description')">
+          {{ formUtils.getErrorMessage(editForm, 'description') }}
         </span>
       </label>
       <textarea id="description" formControlName="description" placeholder="Please enter info regarding your product..."
         customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
     </div>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('dimensions')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'dimensions')">
       <label for="dimensions" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="dimensions" />
           <span>Dimensions*</span>
         </div>
-        <span *ngIf="isFieldInvalid('dimensions')">
-          {{ getErrorMessage('dimensions') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'dimensions')">
+          {{ formUtils.getErrorMessage(editForm, 'dimensions') }}
         </span>
       </label>
       <input id="dimensions" type="text" formControlName="dimensions" placeholder="Please enter product dimensions..."
         customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="'/ .,'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('materials')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'materials')">
       <label for="materials" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="materials" />
           <span>Materials*</span>
         </div>
-        <span *ngIf="isFieldInvalid('materials')">
-          {{ getErrorMessage('materials') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'materials')">
+          {{ formUtils.getErrorMessage(editForm, 'materials') }}
         </span>
       </label>
       <input id="materials" type="text" formControlName="materials"
@@ -75,14 +75,14 @@
         [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="isFieldInvalid('publishDate')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'publishDate')">
       <label for="publishDate" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="calendar" />
           <span>Publish Date*</span>
         </div>
-        <span *ngIf="isFieldInvalid('publishDate')">
-          {{ getErrorMessage('publishDate') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'publishDate')">
+          {{ formUtils.getErrorMessage(editForm, 'publishDate') }}
         </span>
       </label>
       <input id="publishDate" type="text" formControlName="publishDate" placeholder="When your product was finished..."

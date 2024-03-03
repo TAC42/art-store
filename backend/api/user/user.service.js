@@ -11,7 +11,8 @@ export const userService = {
   remove,
   save,
   getById,
-  getByUsername
+  getByUsername,
+  checkNonVerifiedUsers
 }
 
 async function query(filterBy = {}) {
@@ -106,4 +107,29 @@ function _buildCriteria(filterBy) {
   const criteria = {}
   if (filterBy.userId) criteria.userId = filterBy.userId
   return criteria
+}
+
+async function checkNonVerifiedUsers() {
+  try {
+    // fetch unverified users
+    const collection = await dbService.getCollection(USERS_COLLECTION)
+    const nonVerifiedUsers = await collection.find({ isVerified: false }).toArray()
+
+    if (nonVerifiedUsers.length === 0) {
+      loggerService.info('No non-verified users found.')
+      return 0
+    }
+
+    // log non-verified users
+    loggerService.info(`Found ${nonVerifiedUsers.length} non-verified users.`)
+    nonVerifiedUsers.forEach(
+      user => loggerService.info(`Non-verified user: ${user.username}`))
+
+    const { deletedCount } = await collection.deleteMany({ isVerified: false })
+    return deletedCount
+  }
+  catch (err) {
+    loggerService.error('Error while checking and deleting non-verified users', err)
+    throw err
+  }
 }
