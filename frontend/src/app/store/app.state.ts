@@ -4,7 +4,6 @@ import { ActionReducerMap } from '@ngrx/store'
 import { shopReducer } from './shop.reducers'
 import { userReducer } from './user.reducers'
 import { OrderState, orderReducer } from './order.reducers'
-// Import other state interfaces if applicable
 
 export interface AppState {
   shop: ShopState

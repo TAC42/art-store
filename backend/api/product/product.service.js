@@ -35,7 +35,6 @@ async function getById(productId) {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
     const product = await collection.findOne({ _id: new ObjectId(productId) })
-    console.log('found product: ', product)
 
     return product || null
   } catch (err) {
@@ -128,7 +127,6 @@ function _buildPipeline(filterBy) {
   const criteria = {
     $match: {},
   }
-  console.log('FILTERBY: ', filterBy)
   const { search, type } = filterBy
 
   if (search) criteria.$match.$or = [

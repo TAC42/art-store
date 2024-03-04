@@ -58,6 +58,7 @@ export class ShopEffects {
 
       mergeMap(({ order }) =>
         this.orderService.save(order).pipe(
+          tap(() => console.log('Order saved successfully',order)),
           map(() => ORDER_SAVED({ order })),
           catchError(error => {
             console.error('Error saving order:', error)

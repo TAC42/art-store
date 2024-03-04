@@ -29,12 +29,12 @@
       <mat-expansion-panel-header>
         <mat-panel-title class="heading">
           <span class="pending">Order {{ i + 1 }}</span>
-          <span class="title">Order {{ order.number }}</span>
+          <span class="title">Order {{ order.createdAt }}</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <section class="order-info">
         <article class="purchased">
-          <span>purchased</span><span>{{ order.createdAt }}</span>
+          <span>purchased</span><span>{{ order.createdAt | date }}</span>
         </article>
         <article class="payment">
           <span>payment</span><span>{{ order.payment }}</span>

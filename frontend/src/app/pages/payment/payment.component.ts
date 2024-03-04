@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Component, ElementRef, HostBinding, OnInit, ViewChild, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { UtilityService } from '../../services/utility.service'
-import { Observable, Subscription, catchError, filter, map, of, startWith, switchMap } from 'rxjs'
+import { Observable, Subscription, catchError, filter, map, of, startWith, switchMap, take, tap } from 'rxjs'
 import { User } from '../../models/user'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Product } from '../../models/shop'
 import { AppState } from '../../store/app.state'
 import { Store } from '@ngrx/store'
 import { selectCart } from '../../store/shop.selectors'
 import { OrderService } from '../../services/order.service'
+import { SAVE_ORDER } from '../../store/order.actions'
+import { CART_LOADED } from '../../store/shop.actions'
 
 @Component({
   selector: 'payment',
@@ -23,12 +25,13 @@ export class PaymentComponent implements OnInit {
   private fb = inject(FormBuilder)
   private utilService = inject(UtilityService)
   private route = inject(ActivatedRoute)
+  private router = inject(Router)
   private store = inject(Store<AppState>)
   private oService = inject(OrderService)
   private changeDetector = inject(ChangeDetectorRef)
 
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
-    filter(cart => !!cart) 
+    filter(cart => !!cart)
   )
   usStates = this.utilService.getStates()
 
@@ -108,8 +111,8 @@ export class PaymentComponent implements OnInit {
   }
 
   setSelection(option: string) {
-    if(this.optionState === option) return
-    
+    if (this.optionState === option) return
+
     this.optionState = option
     if (option === 'personal') setTimeout(() => this.nameInput?.nativeElement.focus(), 1000)
 
@@ -117,10 +120,38 @@ export class PaymentComponent implements OnInit {
   }
 
   onSubmitPurchase() {
-    console.log('THE ON SUBMIT WORKED!');
-    
-    
+    console.log('THE ON SUBMIT WORKED!')
+    const userData = this.personalForm.value
+  
+    this.cart$.pipe(
+      tap(cart => console.log('this is the cart: ',cart)
+      ),
+      take(1),
+      map(cart => ({
+        summary: cart,
+        user: {
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          email: userData.email,
+          phone: userData.phone,
+          street: userData.street,
+          city: userData.city,
+          state: userData.state,
+          zip: userData.zip
+        },
+        status: 'pending',
+        payment: this.payType,
+        createdAt: Date.now()
+      }))
+    ).subscribe(order => {
+      console.log('this is the order in paymentsubmit: ',order);
+      
+      this.store.dispatch(SAVE_ORDER({ order }))
+      this.store.dispatch(CART_LOADED({ cart: [] }))
+      this.router.navigate(['/profile'])
+    })
   }
-
-
 }
+
+
+

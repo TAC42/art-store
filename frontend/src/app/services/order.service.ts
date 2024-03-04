@@ -43,6 +43,8 @@ export class OrderService {
   }
 
   save(order: Order): Observable<Order> {
+    console.log('order in service: ',order);
+    
     if (order._id) {
       return this.httpService.put<Order>(`${BASE_URL}${order._id}`, order)
     } else return this.httpService.post<Order>(`${BASE_URL}`, order)
@@ -60,10 +62,18 @@ export class OrderService {
 
     return {
       summary: [],
-      user: UserService.getDefaultUser(),
+      user:  {
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+      },
       status: 'pending',
       payment: '',
-      number: 0,
       createdAt: currentTimestamp
     }
   }
