@@ -31,7 +31,8 @@ export class ProductDetailsComponent implements OnInit {
     private eBusService = inject(EventBusService)
     private utilService = inject(UtilityService)
 
-    carouselItems: CarouselItem[] = []
+    public regularUtils = this.utilService
+    public carouselItems: CarouselItem[] = []
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
@@ -63,11 +64,6 @@ export class ProductDetailsComponent implements OnInit {
     onInquire(event: Event): void {
         event.stopPropagation()
         this.router.navigateByUrl('/about/contact')
-    }
-
-    onImageClick(event: Event, imageUrl: string): void {
-        event.stopPropagation()
-        this.modService.openModal('image-display', imageUrl)
     }
 
     onAddToCart(event: Event, product: Product): void {

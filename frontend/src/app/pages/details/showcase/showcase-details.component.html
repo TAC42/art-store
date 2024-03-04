@@ -15,9 +15,9 @@
             <section class="product-area flex column">
                 <div class="image-container flex column">
                     <product-carousel *ngIf="product.imgUrls.length > 1" [carouselItems]="carouselItems"
-                        (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                        (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
                     <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
-                        (click)="onImageClick($event, product.imgUrls[0])">
+                        (click)="regularUtils.onImageClick($event, product.imgUrls[0])">
                 </div>
 
                 <div class="details-area">
@@ -47,9 +47,9 @@
             <section class="product-area grid">
                 <div class="image-container flex column">
                     <product-carousel *ngIf="product.imgUrls.length > 1" [carouselItems]="carouselItems"
-                        (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                        (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
                     <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
-                        (click)="onImageClick($event, product.imgUrls[0])">
+                        (click)="regularUtils.onImageClick($event, product.imgUrls[0])">
                 </div>
 
                 <div class="details-area">
