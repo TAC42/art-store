@@ -27,9 +27,9 @@
       *ngFor="let order of orders; let i = index"
     >
       <mat-expansion-panel-header>
-        <mat-panel-title class="heading">
-          <span class="pending">Order {{ i + 1 }}</span>
-          <span class="title">Order {{ order.createdAt }}</span>
+        <mat-panel-title class="heading flex">
+          <span class="count">{{ i + 1 }}</span>
+          <span class="title">Order #{{ order.createdAt }}</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <section class="order-info">
@@ -42,9 +42,9 @@
         <article class="summary">
           <span>summary</span>
           <ul *ngFor="let item of order.summary">
-            <!-- <li>Product: {{ item.name }}</li>
-            <li>Quantity: {{ item.count }}</li>
-            <li>Price: {{ item.price }}</li> -->
+            <li>Product: {{ item.name }}</li>
+            <li>Quantity: {{ item.amount }}</li>
+            <li>Price: {{ item.price }}</li>
           </ul>
         </article>
         <article class="status">{{ order.status }}</article>

@@ -64,4 +64,21 @@ profile {
         border-radius: 1em;
     }
   }
+  .orders{
+    margin: 1em 0;
+    .order {
+      background-color: #f0f2f5;
+      padding: .5em 0;
+
+      .heading{
+        gap:1em;
+        .count{
+          padding:.25em .5em;
+          background-color: $prmclr2;
+          border-radius: 50%;
+        }
+      }
+
+    }
+  }
 }

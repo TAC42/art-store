@@ -21,21 +21,6 @@ export class OrderEffects {
   private store = inject(Store<AppState>)
 
   // handling of all orders in dashboard
-//   loadOrders$ = createEffect(() =>
-//   this.actions$.pipe(
-//     ofType(LOAD_ORDERS),
-//     mergeMap(({ filterBy }) => {
-//       return this.orderService.query(filterBy).pipe(
-//         map(orders => ORDERS_LOADED({ orders })),
-//         catchError(error => {
-//           console.error('Error loading orders:', error)
-//           return of(SET_LOADING_STATE({ isLoading: false }))
-//         })
-//       );
-//     }),
-//     tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
-//   )
-// )
   loadOrders$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_ORDERS),
@@ -63,7 +48,7 @@ export class OrderEffects {
       })
     )
   )
-  
+
   // handling of order saving
   saveOrder$ = createEffect(() =>
     this.actions$.pipe(
