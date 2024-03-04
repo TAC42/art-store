@@ -14,7 +14,7 @@ import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
   selector: 'profile',
   templateUrl: './profile.component.html'
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
   private store = inject(Store<AppState>)
   private dTypeService = inject(DeviceTypeService)
 
@@ -30,16 +30,20 @@ export class ProfileComponent implements OnInit{
   ngOnInit(): void {
     this.loggedinUser$.subscribe((user: User) => {
       if (user._id) {
+        const filterBy = { id: user._id }
         this.store.dispatch(LOAD_USER({ userId: user._id }))
-        // this.store.dispatch(LOAD_FILTER ({filterBy: user._id}))
-        // this.store.dispatch(LOAD_ORDERS({filterBy: user._id}))
+        this.store.dispatch(LOAD_FILTER({ filterBy }))
+        this.store.dispatch(LOAD_ORDERS({ filterBy }))
+
+        // Subscribe to orders$ and log orders whenever they change
+        this.orders$.subscribe(orders => console.log('Orders:', orders))
       }
     })
 
   }
 
   setSelection(option: string) {
-    if(this.optionState === option) return
+    if (this.optionState === option) return
     this.optionState = option
   }
 

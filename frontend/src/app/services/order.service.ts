@@ -16,6 +16,8 @@ export class OrderService {
   private currentFilter: OrderFilter = this.getDefaultFilter()
 
   query(filterBy: Partial<OrderFilter> = {}): Observable<any> {
+    console.log('orderService query filterBy',filterBy);
+    
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError((error) => {
         console.error('Error querying orders:', error)
@@ -43,12 +45,9 @@ export class OrderService {
   }
 
   save(order: Order): Observable<Order> {
-    console.log('order in service: ',order);
-    
     if (order._id) {
       return this.httpService.put<Order>(`${BASE_URL}${order._id}`, order)
     } else return this.httpService.post<Order>(`${BASE_URL}`, order)
-    
   }
 
   getDefaultFilter(): OrderFilter {
@@ -62,7 +61,7 @@ export class OrderService {
 
     return {
       summary: [],
-      user:  {
+      user: {
         first_name: '',
         last_name: '',
         email: '',
@@ -83,7 +82,7 @@ export class OrderService {
     const deliveryFeeRate = 0.12 // Delivery fee rate (12%)
 
     // Calculate total, taxes, and grand total
-    const total = cartItems.reduce((acc, cartItem) => acc + cartItem.price*(cartItem.amount || 1), 0)
+    const total = cartItems.reduce((acc, cartItem) => acc + cartItem.price * (cartItem.amount || 1), 0)
     const taxes = total * nyTaxRate
     const deliveryFee = total * deliveryFeeRate
     const grandTotal = total + taxes + deliveryFee

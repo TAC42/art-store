@@ -54,6 +54,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component';
 import { AutofocusDirective } from './directives/auto-focus.directive'
+import { OrderEffects } from './store/order.effects'
 
 @NgModule({
   declarations: [
@@ -106,7 +107,7 @@ import { AutofocusDirective } from './directives/auto-focus.directive'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ShopEffects, UserEffects]),
+    EffectsModule.forRoot([ShopEffects, UserEffects,OrderEffects]),
     RecaptchaFormsModule,
     RecaptchaModule,
     MatExpansionModule,

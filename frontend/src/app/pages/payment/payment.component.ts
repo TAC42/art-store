@@ -137,7 +137,8 @@ export class PaymentComponent implements OnInit {
           street: userData.street,
           city: userData.city,
           state: userData.state,
-          zip: userData.zip
+          zip: userData.zip,
+          _id: this.user?._id
         },
         status: 'pending',
         payment: this.payType,

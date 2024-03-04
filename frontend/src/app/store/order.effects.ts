@@ -14,13 +14,28 @@ import { selectFilterBy, selectOrders } from './order.selectors'
 import { ActivatedRoute } from '@angular/router'
 
 @Injectable()
-export class ShopEffects {
+export class OrderEffects {
   private actions$ = inject(Actions)
   private orderService = inject(OrderService)
   private activatedRoute = inject(ActivatedRoute)
   private store = inject(Store<AppState>)
 
   // handling of all orders in dashboard
+//   loadOrders$ = createEffect(() =>
+//   this.actions$.pipe(
+//     ofType(LOAD_ORDERS),
+//     mergeMap(({ filterBy }) => {
+//       return this.orderService.query(filterBy).pipe(
+//         map(orders => ORDERS_LOADED({ orders })),
+//         catchError(error => {
+//           console.error('Error loading orders:', error)
+//           return of(SET_LOADING_STATE({ isLoading: false }))
+//         })
+//       );
+//     }),
+//     tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+//   )
+// )
   loadOrders$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_ORDERS),
@@ -43,13 +58,12 @@ export class ShopEffects {
   loadFilter$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LOAD_FILTER),
-      map((action) => {
-        const filterBy = action.filterBy
+      map(({ filterBy }) => {
         return FILTER_UPDATED({ updatedFilter: filterBy })
       })
     )
   )
-
+  
   // handling of order saving
   saveOrder$ = createEffect(() =>
     this.actions$.pipe(
@@ -58,7 +72,6 @@ export class ShopEffects {
 
       mergeMap(({ order }) =>
         this.orderService.save(order).pipe(
-          tap(() => console.log('Order saved successfully',order)),
           map(() => ORDER_SAVED({ order })),
           catchError(error => {
             console.error('Error saving order:', error)

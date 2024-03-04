@@ -93,22 +93,19 @@ function _buildPipeline(filterBy) {
   const criteria = {
     $match: {},
   }
-  console.log('FILTERBY in Order: ', filterBy)
+
   const { id } = filterBy
 
   if (id) {
     criteria.$match.$or = [
-      { userId: { $regex: id, $options: 'i' } },
+      { 'user._id': id },
     ]
-  }
-
-  if (type) {
-    criteria.$match.type = { $regex: type, $options: 'i' }
   }
 
   if (Object.keys(criteria.$match).length > 0) {
     pipeline.push(criteria)
   }
+  
   return pipeline
 }
 
