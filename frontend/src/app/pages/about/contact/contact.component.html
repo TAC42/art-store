@@ -1,7 +1,7 @@
 <main class="contact-page-contents w-h-100 grid">
     <section class="gallery-carousel flex column">
         <product-carousel [carouselItems]="carouselItems" [autoSwitch]="true"
-            (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+            (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
     </section>
 
     <section class="contact-text flex column">

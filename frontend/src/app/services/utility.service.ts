@@ -1,7 +1,9 @@
+import usStates from '../jsons/us-states.json'
 import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { HttpService } from './http.service'
 import { CarouselItem, MiniProduct } from '../models/shop'
+import { ModalService } from './modal.service'
 
 const BASE_URL = 'utility/'
 
@@ -11,59 +13,7 @@ const BASE_URL = 'utility/'
 
 export class UtilityService {
   private httpService = inject(HttpService)
-
-  usStates = [
-    { name: 'Alabama', abbreviation: 'AL' },
-    { name: 'Alaska', abbreviation: 'AK' },
-    { name: 'Arizona', abbreviation: 'AZ' },
-    { name: 'Arkansas', abbreviation: 'AR' },
-    { name: 'California', abbreviation: 'CA' },
-    { name: 'Colorado', abbreviation: 'CO' },
-    { name: 'Connecticut', abbreviation: 'CT' },
-    { name: 'Delaware', abbreviation: 'DE' },
-    { name: 'Florida', abbreviation: 'FL' },
-    { name: 'Georgia', abbreviation: 'GA' },
-    { name: 'Hawaii', abbreviation: 'HI' },
-    { name: 'Idaho', abbreviation: 'ID' },
-    { name: 'Illinois', abbreviation: 'IL' },
-    { name: 'Indiana', abbreviation: 'IN' },
-    { name: 'Iowa', abbreviation: 'IA' },
-    { name: 'Kansas', abbreviation: 'KS' },
-    { name: 'Kentucky', abbreviation: 'KY' },
-    { name: 'Louisiana', abbreviation: 'LA' },
-    { name: 'Maine', abbreviation: 'ME' },
-    { name: 'Maryland', abbreviation: 'MD' },
-    { name: 'Massachusetts', abbreviation: 'MA' },
-    { name: 'Michigan', abbreviation: 'MI' },
-    { name: 'Minnesota', abbreviation: 'MN' },
-    { name: 'Mississippi', abbreviation: 'MS' },
-    { name: 'Missouri', abbreviation: 'MO' },
-    { name: 'Montana', abbreviation: 'MT' },
-    { name: 'Nebraska', abbreviation: 'NE' },
-    { name: 'Nevada', abbreviation: 'NV' },
-    { name: 'New Hampshire', abbreviation: 'NH' },
-    { name: 'New Jersey', abbreviation: 'NJ' },
-    { name: 'New Mexico', abbreviation: 'NM' },
-    { name: 'New York', abbreviation: 'NY' },
-    { name: 'North Carolina', abbreviation: 'NC' },
-    { name: 'North Dakota', abbreviation: 'ND' },
-    { name: 'Ohio', abbreviation: 'OH' },
-    { name: 'Oklahoma', abbreviation: 'OK' },
-    { name: 'Oregon', abbreviation: 'OR' },
-    { name: 'Pennsylvania', abbreviation: 'PA' },
-    { name: 'Rhode Island', abbreviation: 'RI' },
-    { name: 'South Carolina', abbreviation: 'SC' },
-    { name: 'South Dakota', abbreviation: 'SD' },
-    { name: 'Tennessee', abbreviation: 'TN' },
-    { name: 'Texas', abbreviation: 'TX' },
-    { name: 'Utah', abbreviation: 'UT' },
-    { name: 'Vermont', abbreviation: 'VT' },
-    { name: 'Virginia', abbreviation: 'VA' },
-    { name: 'Washington', abbreviation: 'WA' },
-    { name: 'West Virginia', abbreviation: 'WV' },
-    { name: 'Wisconsin', abbreviation: 'WI' },
-    { name: 'Wyoming', abbreviation: 'WY' }
-  ]
+  private modService = inject(ModalService)
 
   sendContactUsMail(formData: any): Observable<any> {
     return this.httpService.post<any>(`${BASE_URL}mail/contact`, formData)
@@ -71,6 +21,10 @@ export class UtilityService {
 
   sendVerificationMail(formData: any): Observable<any> {
     return this.httpService.post<any>(`${BASE_URL}mail/verify`, formData)
+  }
+
+  getStates() {
+    return usStates // fetch us states from json file
   }
 
   // user validation code generation
@@ -101,10 +55,6 @@ export class UtilityService {
     return color
   }
 
-  getStates() {
-    return this.usStates
-  }
-
   convertToCarouselItem(items: (string | MiniProduct)[], type: 'image' | 'product' = 'image'): CarouselItem[] {
     return items.map(item => {
       if (type === 'image' && typeof item === 'string') {
@@ -119,5 +69,11 @@ export class UtilityService {
       }
       throw new Error('Invalid item type or item format')
     })
+  }
+
+  // open an an image modal showing the image in its maximum size
+  onImageClick(event: Event, imageUrl: string): void {
+    event.stopPropagation()
+    this.modService.openModal('image-display', imageUrl)
   }
 }

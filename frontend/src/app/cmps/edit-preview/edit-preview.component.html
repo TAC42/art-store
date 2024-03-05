@@ -4,9 +4,9 @@
         <section class="product-area flex column">
             <div class="image-container flex column">
                 <product-carousel *ngIf="imgUrls.length > 1" [carouselItems]="carouselItems"
-                    (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                    (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
                 <img *ngIf="imgUrls.length === 1" [src]="imgUrls[0]" alt="Product Image"
-                    (click)="onImageClick($event, imgUrls[0])">
+                    (click)="regularUtils.onImageClick($event, imgUrls[0])">
                 <span class="price-tag flex">${{ price }}.00</span>
             </div>
 
@@ -16,14 +16,15 @@
                 <p class="description">{{ description }}</p>
                 <h4>Dimensions</h4>
                 <p>{{ dimensions }}</p>
+
                 <h4>Materials</h4>
                 <p style="text-transform: capitalize;">{{materials}}</p>
+
                 <h4>Delivery</h4>
                 <p>
                     3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
                     soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
                 </p>
-
                 <p *ngIf="stock <= 0" class="unavailable">
                     This product is currently out of stock, for further information and the
                     option to order it in the near future, please press inquire.
@@ -41,9 +42,9 @@
         <section class="product-area flex column">
             <div class="image-container flex column">
                 <product-carousel *ngIf="imgUrls.length > 1" [carouselItems]="carouselItems"
-                    (imageClick)="onImageClick($event.event, $event.imageUrl)" />
+                    (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
                 <img *ngIf="imgUrls.length === 1" [src]="imgUrls[0]" alt="Product Image"
-                    (click)="onImageClick($event, imgUrls[0])">
+                    (click)="regularUtils.onImageClick($event, imgUrls[0])">
             </div>
 
             <div class="details-area">

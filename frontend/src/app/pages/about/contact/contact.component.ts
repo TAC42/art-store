@@ -4,7 +4,6 @@ import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
-import { ModalService } from '../../../services/modal.service'
 import { CarouselItem } from '../../../models/shop'
 
 @Component({
@@ -20,10 +19,10 @@ export class ContactComponent implements OnInit {
   private dTypeService = inject(DeviceTypeService)
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
-  private modService = inject(ModalService)
   private utilService = inject(UtilityService)
   private formUtilsService = inject(FormUtilsService)
 
+  public regularUtils = this.utilService
   public formUtils = this.formUtilsService
   public contactForm!: FormGroup
   public specialChars = "'. ?$%#!*:,/()\"'"
@@ -87,10 +86,5 @@ export class ContactComponent implements OnInit {
         }
       })
     }
-  }
-
-  onImageClick(event: Event, imageUrl: string): void {
-    event.stopPropagation()
-    this.modService.openModal('image-display', imageUrl)
   }
 }

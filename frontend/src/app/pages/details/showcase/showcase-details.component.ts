@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { Observable, map } from 'rxjs'
 import { CarouselItem, Product } from '../../../models/shop'
 import { DeviceTypeService } from '../../../services/device-type.service'
-import { ModalService } from '../../../services/modal.service'
 import { UtilityService } from '../../../services/utility.service'
 
 @Component({
@@ -19,10 +18,10 @@ export class ShowcaseDetailsComponent implements OnInit {
   private router = inject(Router)
   private route = inject(ActivatedRoute)
   private dTypeService = inject(DeviceTypeService)
-  private modService = inject(ModalService)
   private utilService = inject(UtilityService)
 
-  carouselItems: CarouselItem[] = []
+  public regularUtils = this.utilService
+  public carouselItems: CarouselItem[] = []
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   product$: Observable<Product> = this.route.data.pipe(
@@ -32,11 +31,6 @@ export class ShowcaseDetailsComponent implements OnInit {
     this.product$.subscribe(product => {
       this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
     })
-  }
-
-  onImageClick(event: Event, imageUrl: string): void {
-    event.stopPropagation()
-    this.modService.openModal('image-display', imageUrl)
   }
 
   onInquire(event: Event): void {

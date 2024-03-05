@@ -1,7 +1,6 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { ModalService } from '../../../services/modal.service'
-import { CarouselItem } from '../../../models/shop'
 import { UtilityService } from '../../../services/utility.service'
+import { CarouselItem } from '../../../models/shop'
 
 @Component({
   selector: 'introduction-page',
@@ -13,10 +12,10 @@ export class IntroductionComponent implements OnInit {
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
   @HostBinding('class.layout-row') layoutRowClass = true
 
-  private modService = inject(ModalService)
   private utilService = inject(UtilityService)
 
-  carouselItems: CarouselItem[] = []
+  public regularUtils = this.utilService
+  public carouselItems: CarouselItem[] = []
   aboutImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1707577522/artware/ecwol6n9wyog6jryjxis.jpg',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/zion4h33enmpgxvz0yqa.png',
@@ -26,10 +25,5 @@ export class IntroductionComponent implements OnInit {
 
   ngOnInit() {
     this.carouselItems = this.utilService.convertToCarouselItem(this.aboutImageUrls)
-  }
-
-  onImageClick(event: Event, imageUrl: string): void {
-    event.stopPropagation()
-    this.modService.openModal('image-display', imageUrl)
   }
 }
