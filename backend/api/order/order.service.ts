@@ -69,6 +69,10 @@ async function save(order: Order): Promise<Order> {
 
       return { ...order, _id: id.toHexString() }
     } else {
+      if (typeof order.user._id === 'string') {
+        order.user._id = new ObjectId(order.user._id);
+      }
+
       const result = await collection.insertOne(
         { ...order, _id: undefined })
       return { ...order, _id: result.insertedId.toHexString() }
@@ -82,15 +86,17 @@ async function save(order: Order): Promise<Order> {
 function _buildPipeline(filterBy: FilterBy): object[] {
   const pipeline: object[] = []
 
+  const { id } = filterBy
   const criteria: MatchCriteria = { $match: {} }
 
-  if (filterBy.id) {
-    criteria.$match.$or = [{ 'user._id': new ObjectId(filterBy.id) }]
+  if (id) {
+    criteria.$match.$or = [{ 'user._id': new ObjectId(id) }]
   }
 
   if (Object.keys(criteria.$match).length > 0) {
     pipeline.push(criteria)
   }
+  console.log('this is the pipe: ', pipeline);
 
   return pipeline
 }

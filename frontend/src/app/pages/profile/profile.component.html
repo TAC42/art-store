@@ -18,7 +18,7 @@
 </section>
 <section class="orders" *ngIf="orders$ | async as orders">
   <ng-container *ngIf="orders.length; else orderless">
-    <h3>Your Orders</h3>
+    <h3>Your orders</h3>
     <!-- <article class="order"  *ngFor="let order of orders"></article> -->
     <mat-expansion-panel
       class="order glass"
@@ -60,7 +60,7 @@
             </tbody>
           </table>
         </article>
-        <article class="status flex">
+        <article class="status">
           <span>status:</span>
           <button [ngClass]="getStatusClass(order.status)">
             {{ order.status }}

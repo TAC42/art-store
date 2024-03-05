@@ -29,5 +29,5 @@ export interface OrderUser {
     city: string
     state: string
     zip: string
-    _id?: string
+    _id?: ObjectId
 }

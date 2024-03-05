@@ -78,9 +78,13 @@ profile {
   }
   .orders {
     margin: 1em 0;
+    h3 {
+      font-family: "nh-bold";
+      font-size: 1.25em;
+      color: #767676;
+    }
     .order {
       background-color: #fbfcfe;
-      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
       padding: 0.5em 0;
       border-radius: 0.5em;
       color: #9ba2b4;
@@ -91,9 +95,10 @@ profile {
         font-size: 1.25em;
         border-block-end: solid 2px $prmclr3;
         .count {
-          padding: 0.25em 0.5em;
-          background-color: $prmclr2;
+          padding: 0.4em 0.8em;
+          background-color: #76767614;
           border-radius: 50%;
+          margin-block-end: 0.25em;
         }
       }
       .order-info {
@@ -101,14 +106,13 @@ profile {
         gap: 1em;
 
         article {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           text-transform: capitalize;
-          :first-child {
-          }
           :last-child {
             font-family: "nh-bold";
           }
-          display: flex;
-          gap: 2em;
         }
       }
       .summary {
@@ -120,7 +124,7 @@ profile {
               border: 1px solid #a3a1ab;
               border-bottom: none;
               text-align: center;
-              padding: 0.25em;
+              padding: 0.5em 0.4em;
             }
             &:last-child {
               border-bottom: 1px solid #a3a1ab;
@@ -129,12 +133,15 @@ profile {
         }
       }
       .status {
+        align-items: center;
         button {
           padding: 0.5em 1em;
+          color: $prmclr2;
           border: none;
           border-radius: 0.25em;
           cursor: pointer;
           font-size: 1em;
+          text-transform: capitalize;
           transition: background-color 0.3s ease;
           box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5),
             0 2px 5px rgba(0, 0, 0, 0.1);
@@ -147,22 +154,30 @@ profile {
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8),
               0 2px 5px rgba(0, 0, 0, 0.1);
           }
-          &.pending{
+          &.pending {
             background-color: yellowgreen;
           }
-          &.confirmed{
+          &.confirmed {
             background-color: orange;
           }
-          &.shipped{
+          &.shipped {
             background-color: lightgreen;
           }
-          &.delivered{
+          &.delivered {
             background-color: darkgreen;
           }
-          &.cancelled{
+          &.cancelled {
             background-color: red;
           }
         }
+      }
+    }
+    .no-orders {
+      display: grid;
+      justify-content: center;
+      svg-render {
+        width: 20vw;
+        justify-self: center;
       }
     }
   }
