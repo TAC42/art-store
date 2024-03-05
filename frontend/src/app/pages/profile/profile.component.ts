@@ -47,4 +47,18 @@ export class ProfileComponent implements OnInit {
     this.optionState = option
   }
 
+  getStatusClass(status: string): string {
+    // Define colors for different statuses
+    const statusColors = {
+      pending: 'pending',
+      confirmed:'confirmed',
+      shipped: 'shipped',
+      delivered: 'delivered',
+      cancelled: 'cancelled',
+    }
+  
+    // Get the class corresponding to the status
+    return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
+  }
+
 }
