@@ -1,11 +1,11 @@
-import express from 'express'
+import express, { Router } from 'express'
 import { log } from '../../middlewares/logger.middleware.js'
 import {
     getProducts, getProductById, getProductByName, addProduct,
     updateProduct, removeProduct, getRandomProducts, checkNameAvailable
 } from './product.controller.js'
 
-export const productRoutes = express.Router()
+export const productRoutes: Router = express.Router()
 
 // middleware that is specific to this router
 // router.use(requireAuth)

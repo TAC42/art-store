@@ -2,18 +2,20 @@
   "name": "backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon --ignore \"./data\" server.js",
-    "prod": "set NODE_ENV=production&&node server.js"
+    "start": "nodemon --loader ts-node/esm server.ts",
+    "dev": "nodemon --exec node --loader ts-node/esm server.ts",
+    "build": "tsc",
+    "prod": "NODE_ENV=production node dist/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
-    "cloudinary": "^1.41.0",
+    "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cryptr": "^6.3.0",
@@ -23,8 +25,17 @@
     "mongodb": "^6.2.0",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.8",
-    "nodemon": "^3.0.1",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^4.17.21",
+    "@types/mongodb": "^4.0.7",
+    "@types/node": "^20.11.24",
+    "@types/nodemailer": "^6.4.14",
+    "typescript": "^5.3.3"
+  }
 }

@@ -1,5 +1,4 @@
-import { Cart, Product } from "./shop"
-import { User } from "./user"
+import { Product } from "./shop"
 
 export interface Order {
   summary: Product[]
@@ -25,5 +24,3 @@ export interface OrderUser {
   zip: string
   _id?: string
 }
-
-

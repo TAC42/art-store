@@ -5,7 +5,7 @@ import { HttpService } from './http.service'
 import { CarouselItem, MiniProduct } from '../models/shop'
 import { ModalService } from './modal.service'
 
-const BASE_URL = 'utility/'
+const BASE_URL = 'mail/'
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,11 @@ export class UtilityService {
   private modService = inject(ModalService)
 
   sendContactUsMail(formData: any): Observable<any> {
-    return this.httpService.post<any>(`${BASE_URL}mail/contact`, formData)
+    return this.httpService.post<any>(`${BASE_URL}/contact`, formData)
   }
 
   sendVerificationMail(formData: any): Observable<any> {
-    return this.httpService.post<any>(`${BASE_URL}mail/verify`, formData)
+    return this.httpService.post<any>(`${BASE_URL}/verify`, formData)
   }
 
   getStates() {
