@@ -21,7 +21,7 @@
     <h3>Your Orders</h3>
     <!-- <article class="order"  *ngFor="let order of orders"></article> -->
     <mat-expansion-panel
-      class="order"
+      class="order glass"
       [expanded]="optionState === 'order num'"
       (click)="setSelection('order num')"
       *ngFor="let order of orders; let i = index"
@@ -32,22 +32,40 @@
           <span class="title">Order #{{ order.createdAt }}</span>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <section class="order-info">
+      <section class="order-info grid">
         <article class="purchased">
-          <span>purchased</span><span>{{ order.createdAt | date }}</span>
+          <span>purchased:</span><span>{{ order.createdAt | date }}</span>
         </article>
         <article class="payment">
-          <span>payment</span><span>{{ order.payment }}</span>
+          <span>payment:</span><span>{{ order.payment }}</span>
         </article>
         <article class="summary">
-          <span>summary</span>
-          <ul *ngFor="let item of order.summary">
-            <li>Product: {{ item.name }}</li>
-            <li>Quantity: {{ item.amount }}</li>
-            <li>Price: {{ item.price }}</li>
-          </ul>
+          <span>summary:</span>
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of order.summary">
+                <tr>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.amount }}</td>
+                  <td>{{ item.price | currency : "USD" : "symbol" }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
         </article>
-        <article class="status">{{ order.status }}</article>
+        <article class="status flex">
+          <span>status:</span>
+          <button [ngClass]="getStatusClass(order.status)">
+            {{ order.status }}
+          </button>
+        </article>
       </section>
     </mat-expansion-panel>
   </ng-container>
