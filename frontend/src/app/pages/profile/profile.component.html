@@ -14,7 +14,7 @@
   </article>
 </section>
 <section class="edit-profile flex">
-  <button>Edit profile</button>
+  <button (click)="onOpenUserEdit">Edit profile</button>
 </section>
 <section class="orders" *ngIf="orders$ | async as orders">
   <ng-container *ngIf="orders.length; else orderless">

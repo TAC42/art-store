@@ -1,0 +1,9 @@
+<main class="user-edit" *ngIf="modService.isModalOpen('user-edit')"
+(clickOutside)="closeUserEdit()"
+[@slideInOut]="userEditState"
+>
+    <section class="user-info" *ngIf="user$ | async as user">
+        <article class="img"><img src="user.imgUrl" alt="user.fullName"></article>
+    </section>
+
+</main>

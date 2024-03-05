@@ -9,6 +9,7 @@ import { LOAD_USER } from '../../store/user.actions'
 import { selectOrders } from '../../store/order.selectors'
 import { Order } from '../../models/order'
 import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
+import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'profile',
@@ -17,6 +18,7 @@ import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
 export class ProfileComponent implements OnInit {
   private store = inject(Store<AppState>)
   private dTypeService = inject(DeviceTypeService)
+  public modService = inject(ModalService)
 
   public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
@@ -61,4 +63,7 @@ export class ProfileComponent implements OnInit {
     return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
   }
 
+  onOpenUserEdit(): void {
+    this.modService.openModal('user-edit')
+  }
 }

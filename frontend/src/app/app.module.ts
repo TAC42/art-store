@@ -54,7 +54,8 @@ import { ProfileComponent } from './pages/profile/profile.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component';
 import { AutofocusDirective } from './directives/auto-focus.directive'
-import { OrderEffects } from './store/order.effects'
+import { OrderEffects } from './store/order.effects';
+import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { OrderEffects } from './store/order.effects'
     DashboardComponent,
     EditPreviewComponent,
     AutofocusDirective,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,
