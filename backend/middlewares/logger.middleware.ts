@@ -5,8 +5,3 @@ export async function log(req: Request, res: Response, next: NextFunction): Prom
     loggerService.info('Req was made', req.route?.path)
     next()
 }
-
-// export async function log(req, res, next) {
-//     loggerService.info('Req was made', req.route.path)
-//     next()
-// }

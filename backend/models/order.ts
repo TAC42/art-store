@@ -11,7 +11,7 @@ export interface Order {
 }
 
 export interface FilterBy {
-    id?: string
+    _id?: string | ObjectId
 }
 
 export interface MatchCriteria {
