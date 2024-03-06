@@ -63,7 +63,8 @@ export class ProfileComponent implements OnInit {
     return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
   }
 
-  onOpenUserEdit(): void {
+  onOpenUserEdit(event: Event): void {
+    event.stopPropagation()
     this.modService.openModal('user-edit')
   }
 }

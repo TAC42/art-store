@@ -228,7 +228,7 @@ export class SvgRenderService {
     </svg>`,
 
     venmo: `<svg xmlns="http://www.w3.org/2000/svg" aria-label="Venmo" viewBox="0 0 512 512">
-      <rect width="512" height="512" rx="15%" fill="#3396cd"/>
+      <rect width="64" height="64" rx="15%" fill="#3396cd"/>
       <path d="M381.4 105.3c11 18.1 15.9 36.7 15.9 60.3 0 75.1-64.1 172.7-116.2 241.2H162.3l-47.6-285 104.1-9.9 25.3 202.8c23.5-38.4 52.6-98.7 52.6-139.7 0-22.5-3.9-37.8-9.9-50.4z" fill="#fff"/>
     </svg>`,
 
@@ -239,6 +239,10 @@ export class SvgRenderService {
     homeIcon: `<svg width="64" height="64" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M24 12h-3v12h-6v-9H9v9H3V12H0L12 0z"/>
     </svg>`,
+
+    back: `<svg width="64" height="64" viewBox="-5 0 25 25" xmlns="http://www.w3.org/2000/svg"><path d="M11.546.57.698 10.994l-.09.08c-.363.35-.576.813-.608 1.364l.002.185c.03.49.243.954.664 1.354l-.005-.008 10.885 10.462a2.06 2.06 0 0 0 2.845 0 1.964 1.964 0 0 0 0-2.844l-9.403-9.03 9.403-9.144a1.964 1.964 0 0 0 0-2.844 2.06 2.06 0 0 0-2.845 0" fill="#1C1C1F"/></svg>`,
+    
+    camera: `<svg width="64" height="64" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#333235" d="M11 9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/><path fill="#333235" d="M11 4V1H5v3H0v9h5c.8.6 1.9 1 3 1s2.2-.4 3-1h5V4zM6 2h4v2H6zm2 11c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4m7-7h-2V5h2z"/></svg>`,
   }
 
 
