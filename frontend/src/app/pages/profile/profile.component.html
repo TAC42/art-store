@@ -16,7 +16,7 @@
 <section class="edit-profile flex">
   <button (click)="onOpenUserEdit($event)">Edit profile</button>
 </section>
-<section class="orders" *ngIf="orders$ | async as orders">
+<section class="orders grid" *ngIf="orders$ | async as orders">
   <ng-container *ngIf="orders.length; else orderless">
     <h3>Your orders</h3>
     <!-- <article class="order"  *ngFor="let order of orders"></article> -->
