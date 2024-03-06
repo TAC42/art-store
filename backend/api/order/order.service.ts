@@ -65,17 +65,15 @@ async function save(order: Order): Promise<Order> {
       const result = await collection.updateOne(
         { _id: id }, { $set: { ...order, _id: undefined } })
 
-      if (result.matchedCount === 0) throw new Error(`Order with id ${order._id} was not found`)
+      if (result.matchedCount === 0) throw new Error(`Order ${order._id} was not found`)
 
-      return { ...order, _id: id.toHexString() }
+      return { ...order, _id: id }
     } else {
-      if (typeof order.user._id === 'string') {
-        order.user._id = new ObjectId(order.user._id);
-      }
+      if (typeof order.user._id === 'string') order.user._id = new ObjectId(order.user._id)
 
-      const result = await collection.insertOne(
-        { ...order, _id: undefined })
-      return { ...order, _id: result.insertedId.toHexString() }
+      const result = await collection.insertOne({ ...order, _id: undefined })
+
+      return { ...order, _id: result.insertedId }
     }
   } catch (err) {
     loggerService.error('Failed to save the order', err)
@@ -96,7 +94,7 @@ function _buildPipeline(filterBy: FilterBy): object[] {
   if (Object.keys(criteria.$match).length > 0) {
     pipeline.push(criteria)
   }
-  console.log('this is the pipe: ', pipeline);
+  console.log('this is the pipe: ', pipeline)
 
   return pipeline
 }
