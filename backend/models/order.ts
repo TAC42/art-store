@@ -21,8 +21,8 @@ export interface MatchCriteria {
 }
 
 export interface OrderUser {
-    first_name: string
-    last_name: string
+    firstName: string
+    lastName: string
     email: string
     phone: string
     street: string

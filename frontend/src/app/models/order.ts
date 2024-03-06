@@ -1,26 +1,26 @@
 import { Product } from "./shop"
 
 export interface Order {
+  _id?: string
   summary: Product[]
   user: OrderUser
   status: string
   payment: string
   createdAt: number
-  _id?: string
 }
 
 export interface OrderFilter {
-  id?: string
+  _id?: string
 }
 
 export interface OrderUser {
-  first_name: string
-  last_name: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
   street: string
   city: string
   state: string
   zip: string
-  _id?: string
+  _id: string
 }

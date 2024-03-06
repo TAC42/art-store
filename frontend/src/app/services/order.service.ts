@@ -3,7 +3,6 @@ import { HttpService } from './http.service'
 import { Order, OrderFilter } from '../models/order'
 import { Observable, catchError, throwError } from 'rxjs'
 import { Product } from '../models/shop'
-import { UserService } from './user.service'
 
 const BASE_URL = 'order/'
 
@@ -12,12 +11,10 @@ const BASE_URL = 'order/'
 })
 export class OrderService {
   private httpService = inject(HttpService)
-  private userService = inject(UserService)
-  private currentFilter: OrderFilter = this.getDefaultFilter()
 
   query(filterBy: Partial<OrderFilter> = {}): Observable<any> {
-    console.log('orderService query filterBy',filterBy);
-    
+    console.log('orderService query filterBy', filterBy)
+
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError((error) => {
         console.error('Error querying orders:', error)
@@ -52,7 +49,7 @@ export class OrderService {
 
   getDefaultFilter(): OrderFilter {
     return {
-      id: '',
+      _id: '',
     }
   }
 
@@ -60,16 +57,18 @@ export class OrderService {
     const currentTimestamp = Date.now()
 
     return {
+      _id: '',
       summary: [],
       user: {
-        first_name: '',
-        last_name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
         street: '',
         city: '',
         state: '',
-        zip: ''
+        zip: '',
+        _id: ''
       },
       status: 'pending',
       payment: '',

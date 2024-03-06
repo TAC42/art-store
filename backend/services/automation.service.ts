@@ -8,16 +8,16 @@ export const automationService = {
 }
 
 function setupOrphanedImageCheck(): void {
-    scheduleTask(productService.checkRedundantProductImages,
+    _scheduleTask(productService.checkRedundantProductImages,
         'Orphaned Images Check', 22, 5)
 }
 
 function setupUnverifiedUsersCheck(): void {
-    scheduleTask(userService.checkNonVerifiedUsers,
+    _scheduleTask(userService.checkNonVerifiedUsers,
         'Non Verified Users Check', 22, 6)
 }
 
-function scheduleTask(task: () => Promise<any>, taskName: string, hour: number, minute: number): void {
+function _scheduleTask(task: () => Promise<any>, taskName: string, hour: number, minute: number): void {
     loggerService.debug('Scheduling task called', taskName)
 
     const scheduleNextRun = () => {

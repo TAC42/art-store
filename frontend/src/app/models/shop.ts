@@ -1,4 +1,5 @@
 export interface Product {
+  _id?: string
   name: string
   imgUrls: string[]
   price: number
@@ -10,7 +11,6 @@ export interface Product {
   type: string
   createdAt: number
   amount?: number
-  _id?: string
 }
 
 export interface ShopFilter {
@@ -32,6 +32,6 @@ export interface CarouselItem {
 }
 
 export interface Cart {
-  amount?: number
   _id?: string
+  amount?: number
 }
