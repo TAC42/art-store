@@ -1,16 +1,13 @@
 <h1 class="b">Checkout</h1>
 <main class="payment-main">
-  <mat-expansion-panel
-    class="selector"
-    [expanded]="optionState === 'order'"
-    (click)="setSelection('order')"
-  >
+  <mat-expansion-panel class="selector" [expanded]="optionState === 'order'" (click)="setSelection('order')">
     <mat-expansion-panel-header>
       <mat-panel-title class="heading">
         <span class="pending">1</span>
         <span class="title">Order summary</span>
       </mat-panel-title>
     </mat-expansion-panel-header>
+
     <section class="order">
       <ng-container *ngIf="cart$ | async as cart">
         <ng-container *ngIf="cart.length; else sorry">
@@ -26,7 +23,7 @@
               </div>
               <span class="price">{{
                 summaryItem.price | currency : "USD" : "symbol"
-              }}</span>
+                }}</span>
             </article>
           </section>
           <section class="check-out grid">
@@ -35,25 +32,25 @@
                 <span>subtotal</span>
                 <span>{{
                   orderSummary.total | currency : "USD" : "symbol"
-                }}</span>
+                  }}</span>
               </div>
               <div class="info flex">
                 <span>taxes</span>
                 <span>{{
                   orderSummary.taxes | currency : "USD" : "symbol"
-                }}</span>
+                  }}</span>
               </div>
               <div class="info flex">
                 <span>delivery</span>
                 <span>{{
                   orderSummary.deliveryFee | currency : "USD" : "symbol"
-                }}</span>
+                  }}</span>
               </div>
               <div class="info flex">
                 <span>grand total</span>
                 <span>{{
                   orderSummary.grandTotal | currency : "USD" : "symbol"
-                }}</span>
+                  }}</span>
               </div>
             </ng-container>
           </section>
@@ -68,19 +65,15 @@
     </section>
   </mat-expansion-panel>
 
-  <mat-expansion-panel
-    class="selector"
-    [expanded]="optionState === 'personal'"
-    (click)="setSelection('personal')"
-  >
+  <mat-expansion-panel class="selector" [expanded]="optionState === 'personal'" (click)="setSelection('personal')">
     <mat-expansion-panel-header>
       <mat-panel-title class="heading">
         <span class="pending">2</span>
         <span class="title">Personal info</span>
       </mat-panel-title>
     </mat-expansion-panel-header>
+
     <section class="personal">
-      <!-- <article *ngIf="optionState === 'personal'" class="personal"> -->
       <form [formGroup]="personalForm">
         <span class="desc">*Required fields.</span>
         <div class="info-heading">
@@ -88,40 +81,21 @@
           <span>About you</span>
         </div>
 
-        <label class="flex column" [class.error]="isFieldInvalid('first_name')">
+        <label class="flex column" [class.error]="isFieldInvalid('firstName')">
           <span class="label-info flex row">*First name</span>
-          <input
-            id="first_name"
-            type="text"
-            #nameInput
-            formControlName="first_name"
-            placeholder="John..."
-            customValidator
-            [minLength]="2"
-            [maxLength]="48"
-            [allowNumbers]="false"
-            [allowedSpecialChars]="'. '"
-          />
-          <span class="error" *ngIf="isFieldInvalid('first_name')">
-            {{ getErrorMessage("first_name") }}
+          <input id="firstName" type="text" #nameInput formControlName="firstName" placeholder="John..." customValidator
+            [minLength]="2" [maxLength]="48" [allowNumbers]="false" [allowedSpecialChars]="'. '" autofocus />
+          <span class="error" *ngIf="isFieldInvalid('firstName')">
+            {{ getErrorMessage("firstName") }}
           </span>
         </label>
 
-        <label class="flex column" [class.error]="isFieldInvalid('last_name')">
+        <label class="flex column" [class.error]="isFieldInvalid('lastName')">
           <span class="label-info flex row">*Last name</span>
-          <input
-            id="last_name"
-            type="text"
-            formControlName="last_name"
-            placeholder="Doe..."
-            customValidator
-            [minLength]="2"
-            [maxLength]="48"
-            [allowNumbers]="false"
-            [allowedSpecialChars]="'. '"
-          />
-          <span class="error" *ngIf="isFieldInvalid('last_name')">
-            {{ getErrorMessage("last_name") }}
+          <input id="lastName" type="text" formControlName="lastName" placeholder="Doe..." customValidator
+            [minLength]="2" [maxLength]="48" [allowNumbers]="false" [allowedSpecialChars]="'. '" />
+          <span class="error" *ngIf="isFieldInvalid('lastName')">
+            {{ getErrorMessage("lastName") }}
           </span>
         </label>
 
@@ -131,16 +105,8 @@
 
         <label class="flex column" [class.error]="isFieldInvalid('email')">
           <span class="label-info flex row">*Email</span>
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            placeholder="john@gmail.com..."
-            customValidator
-            [minLength]="6"
-            [maxLength]="48"
-            [allowedSpecialChars]="'@.'"
-          />
+          <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
+            [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'@.'" />
           <span class="error" *ngIf="isFieldInvalid('email')">
             {{ getErrorMessage("email") }}
           </span>
@@ -148,16 +114,8 @@
 
         <label class="flex column" [class.error]="isFieldInvalid('phone')">
           <span class="label-info flex row">*Phone</span>
-          <input
-            id="phone"
-            type="text"
-            formControlName="phone"
-            placeholder="XXX-XXX-XXXX"
-            customValidator
-            [minLength]="10"
-            [maxLength]="10"
-            [allowedSpecialChars]="'. '"
-          />
+          <input id="phone" type="text" formControlName="phone" placeholder="XXX-XXX-XXXX" customValidator
+            [minLength]="10" [maxLength]="10" [allowedSpecialChars]="'. '" />
           <span class="error" *ngIf="isFieldInvalid('phone')">
             {{ getErrorMessage("phone") }}
           </span>
@@ -170,16 +128,8 @@
 
         <label class="flex column" [class.error]="isFieldInvalid('street')">
           <span class="label-info flex row">*Street and number</span>
-          <input
-            id="street"
-            type="text"
-            formControlName="street"
-            placeholder="1 Example drive..."
-            customValidator
-            [minLength]="6"
-            [maxLength]="48"
-            [allowedSpecialChars]="'. '"
-          />
+          <input id="street" type="text" formControlName="street" placeholder="1 Example drive..." customValidator
+            [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'. '" />
           <span class="error" *ngIf="isFieldInvalid('street')">
             {{ getErrorMessage("street") }}
           </span>
@@ -187,16 +137,8 @@
 
         <label class="flex column" [class.error]="isFieldInvalid('city')">
           <span class="label-info flex row">*City</span>
-          <input
-            id="city"
-            type="text"
-            formControlName="city"
-            placeholder="New York..."
-            customValidator
-            [minLength]="3"
-            [maxLength]="48"
-            [allowedSpecialChars]="'. '"
-          />
+          <input id="city" type="text" formControlName="city" placeholder="New York..." customValidator [minLength]="3"
+            [maxLength]="48" [allowedSpecialChars]="'. '" />
           <span class="error" *ngIf="isFieldInvalid('city')">
             {{ getErrorMessage("city") }}
           </span>
@@ -212,22 +154,13 @@
           </select>
           <span class="error" *ngIf="isFieldInvalid('state')">{{
             getErrorMessage("state")
-          }}</span>
+            }}</span>
         </label>
 
         <label class="flex column" [class.error]="isFieldInvalid('zip')">
           <span class="label-info flex row">*Zip code</span>
-          <input
-            id="zip"
-            type="text"
-            #nameInput
-            formControlName="zip"
-            placeholder="12345..."
-            customValidator
-            [minLength]="5"
-            [maxLength]="5"
-            [allowedSpecialChars]="'. '"
-          />
+          <input id="zip" type="text" #nameInput formControlName="zip" placeholder="12345..." customValidator
+            [minLength]="5" [maxLength]="5" [allowedSpecialChars]="'. '" />
           <span class="error" *ngIf="isFieldInvalid('zip')">
             {{ getErrorMessage("zip") }}
           </span>
@@ -236,11 +169,7 @@
       <!-- </article> -->
     </section>
   </mat-expansion-panel>
-  <mat-expansion-panel
-    class="selector"
-    [expanded]="optionState === 'payment'"
-    (click)="setSelection('payment')"
-  >
+  <mat-expansion-panel class="selector" [expanded]="optionState === 'payment'" (click)="setSelection('payment')">
     <mat-expansion-panel-header>
       <mat-panel-title class="heading">
         <span class="pending">3</span>
@@ -251,22 +180,12 @@
       <form [formGroup]="paymentForm">
         <span class="desc">Choose a payment method.</span>
         <div class="option" [ngClass]="{ selected: payType === 'venmo' }">
-          <input
-            type="radio"
-            id="venmo"
-            formControlName="paymentMethod"
-            value="venmo"
-          />
+          <input type="radio" id="venmo" formControlName="paymentMethod" value="venmo" />
           <label for="venmo">Venmo</label>
           <svg-render svgName="venmo" />
         </div>
         <div class="option" [ngClass]="{ selected: payType === 'paypal' }">
-          <input
-            type="radio"
-            id="paypal"
-            formControlName="paymentMethod"
-            value="paypal"
-          />
+          <input type="radio" id="paypal" formControlName="paymentMethod" value="paypal" />
           <label for="paypal">PayPal</label>
           <svg-render svgName="paypal" />
         </div>
@@ -277,11 +196,8 @@
   <section class="terms"></section>
 
   <section class="pay-btn">
-    <button
-      [disabled]="!paymentForm.valid || !personalForm.valid"
-      (click)="onSubmitPurchase()"
-      [class.disabled]="!paymentForm.valid || !personalForm.valid"
-    >
+    <button [disabled]="!paymentForm.valid || !personalForm.valid" (click)="onSubmitPurchase()"
+      [class.disabled]="!paymentForm.valid || !personalForm.valid">
       <svg-render svgName="lock" /> Pay with
       <span class="pay-type">{{ payType }}</span>
     </button>

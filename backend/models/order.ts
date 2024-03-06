@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb"
 import { Product } from "./product.js"
 
 export interface Order {
-    _id?: string
+    _id?: ObjectId
     summary: Product[]
     user: OrderUser
     status: string
@@ -21,8 +21,8 @@ export interface MatchCriteria {
 }
 
 export interface OrderUser {
-    first_name: string
-    last_name: string
+    firstName: string
+    lastName: string
     email: string
     phone: string
     street: string

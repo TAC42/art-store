@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loggedinUser$.subscribe((user: User) => {
       if (user._id) {
-        const filterBy = { id: user._id }
+        const filterBy = { _id: user._id }
         this.store.dispatch(LOAD_USER({ userId: user._id }))
         this.store.dispatch(LOAD_FILTER({ filterBy }))
         this.store.dispatch(LOAD_ORDERS({ filterBy }))
