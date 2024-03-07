@@ -20,7 +20,7 @@ app.use(express.json()) // for req.body
 
 if (process.env.NODE_ENV === 'production') {
   // Express serve static files on production environment
-  app.use(express.static(path.resolve(__dirname, 'public', 'browser')))
+  app.use(express.static(path.resolve(__dirname, '..', 'public', 'browser')))
 } else {
   // Configuring CORS
   const corsOptions = {
