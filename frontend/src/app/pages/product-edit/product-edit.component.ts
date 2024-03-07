@@ -1,7 +1,13 @@
 import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Observable, Subscription, catchError, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import {
+  Observable, Subscription, catchError, debounceTime,
+  distinctUntilChanged, filter, first, map, of, switchMap
+} from 'rxjs'
+import {
+  AbstractControl, AsyncValidatorFn, FormArray, FormBuilder,
+  FormGroup, ValidationErrors, Validators
+} from '@angular/forms'
 import { ShopDbService } from '../../services/shop-db.service'
 import { FormUtilsService } from '../../services/form-utils.service'
 import { Product } from '../../models/shop'
