@@ -7,7 +7,7 @@
     "start": "nodemon --loader ts-node/esm server.ts",
     "dev": "nodemon --exec ts-node --loader ts-node/esm server.ts",
     "build": "tsc",
-    "prod": "NODE_ENV=production node dist/server.js"
+    "prod": "NODE_ENV=production ts-node dist/server.js"
   },
   "keywords": [],
   "author": "",
