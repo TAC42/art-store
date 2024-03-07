@@ -4,7 +4,6 @@
   "type": "module",
   "main": "server.ts",
   "scripts": {
-    "start": "nodemon server.ts",
     "dev": "node --loader ts-node/esm server.ts",
     "build": "tsc",
     "prod": "NODE_ENV=production node dist/server.js"
