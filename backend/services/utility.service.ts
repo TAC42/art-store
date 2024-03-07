@@ -54,5 +54,4 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
         loggerService.error('reCAPTCHA verification failed:', data['error-codes'])
         return false
     } else return data.success
-
 }
