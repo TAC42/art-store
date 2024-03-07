@@ -65,9 +65,8 @@ export class UserEffects {
             switchMap(() =>
                 of(UserService.getLoggedinUser()).pipe(
                     map(loggedinUser => {
-                        if (loggedinUser) {
-                            return SET_LOGGEDIN_USER({ user: loggedinUser })
-                        } else return LOGOUT()
+                        if (loggedinUser) return SET_LOGGEDIN_USER({ user: loggedinUser })
+                        else return LOGOUT()
                     }),
                     catchError(error => {
                         console.error('Error checking session:', error)
@@ -142,9 +141,7 @@ export class UserEffects {
 
             mergeMap(action =>
                 this.userService.save(action.updatedUser).pipe(
-                    tap((user: User) => {
-                      this.userService.setLoggedinUser(user) 
-                    }),
+                    tap((user: User) => this.userService.setLoggedinUser(user)),
                     map(user => SET_LOGGEDIN_USER({ user })),
                     catchError(error => {
                         console.error('Error loading User:', error)

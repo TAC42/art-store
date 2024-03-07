@@ -36,12 +36,8 @@ export class ProfileComponent implements OnInit {
         this.store.dispatch(LOAD_USER({ userId: user._id }))
         this.store.dispatch(LOAD_FILTER({ filterBy }))
         this.store.dispatch(LOAD_ORDERS({ filterBy }))
-
-        // Subscribe to orders$ and log orders whenever they change
-        this.orders$.subscribe(orders => console.log('Orders:', orders))
       }
     })
-
   }
 
   setSelection(option: string) {
@@ -50,15 +46,13 @@ export class ProfileComponent implements OnInit {
   }
 
   getStatusClass(status: string): string {
-    // Define colors for different statuses
     const statusColors = {
       pending: 'pending',
-      confirmed:'confirmed',
+      confirmed: 'confirmed',
       shipped: 'shipped',
       delivered: 'delivered',
       cancelled: 'cancelled',
     }
-  
     // Get the class corresponding to the status
     return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
   }

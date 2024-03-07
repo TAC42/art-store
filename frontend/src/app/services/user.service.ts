@@ -85,7 +85,6 @@ export class UserService {
     const userForSession = {
       _id: user._id,
       username: user.username,
-      email: user.email,
       cart: user.cart,
       imgUrl: user.imgUrl,
       isVerified: user.isVerified,

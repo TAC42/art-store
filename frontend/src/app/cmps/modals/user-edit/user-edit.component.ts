@@ -1,16 +1,15 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { User } from '../../../models/user';
-import { ModalService } from '../../../services/modal.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../store/app.state';
-import { Router } from '@angular/router';
-import { LOAD_USER } from '../../../store/user.actions';
-import { selectUser } from '../../../store/user.selectors';
-import { DeviceTypeService } from '../../../services/device-type.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormUtilsService } from '../../../services/form-utils.service';
+import { Component, Input, OnInit, inject } from '@angular/core'
+import { animate, state, style, transition, trigger } from '@angular/animations'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Observable, Subscription } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { User } from '../../../models/user'
+import { AppState } from '../../../store/app.state'
+import { LOAD_USER } from '../../../store/user.actions'
+import { selectUser } from '../../../store/user.selectors'
+import { DeviceTypeService } from '../../../services/device-type.service'
+import { ModalService } from '../../../services/modal.service'
+import { FormUtilsService } from '../../../services/form-utils.service'
 
 @Component({
   selector: 'user-edit',
@@ -34,11 +33,9 @@ export class UserEditComponent implements OnInit {
 
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
-  private router = inject(Router)
   private dTypeService = inject(DeviceTypeService)
   private formUtilsService = inject(FormUtilsService)
   private fBuilder = inject(FormBuilder)
-
 
   private modalSubscription: Subscription | undefined
 
@@ -85,9 +82,9 @@ export class UserEditComponent implements OnInit {
     setTimeout(() => this.modService.closeModal('user-edit'), 600)
   }
 
-  onSaveUser(){
-    
+  onSaveUser() {
 
-    //this.closeUserEdit()
+
+    this.closeUserEdit()
   }
 }
