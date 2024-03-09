@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, HostBinding } from '@angular/core'
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core'
 import { Product } from '../../models/shop'
 import { Observable } from 'rxjs'
 import { User } from '../../models/user'
@@ -9,8 +9,6 @@ import { User } from '../../models/user'
 })
 
 export class ProductListComponent implements OnInit, OnChanges {
-  @HostBinding('class.layout-row') layoutRowClass = true
-
   @Input() isShopPage!: boolean
   @Input() products!: Product[] | null
   @Input() loggedinUser$!: Observable<User>

@@ -1,56 +1,22 @@
 artware-wrapper {
     .artware-page-contents {
-        h2 {
-            padding: 0.25em 0em;
-            border-bottom: 1px solid $scdclr3;
-            text-align: center;
-            letter-spacing: 0.75px;
-            font-size: 24px;
-            text-transform: capitalize;
-        }
-
         artware-index {
+            background: $prmclr1;
             width: 100%;
             height: 100%;
 
             .mobile-view {
                 position: relative;
+                gap: 1em;
 
                 .filter-area {
-                    position: relative;
-                    text-align: center;
-                    gap: 2em;
-                    height: fit-content;
-
                     h4 {
-                        margin: 3em auto 1em auto;
+                        margin: 1em auto 1em auto;
                         font-size: 2em;
                         user-select: none;
                         color: $scdclr3;
                         font-family: 'nh-bold';
                         letter-spacing: 1px;
-                    }
-
-                    .background-image {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        z-index: -1;
-                        filter: brightness(50%);
-                    }
-
-                    .page-info-text {
-                        background: #4846462b;
-
-                        p {
-                            font-size: 16px;
-                            font-family: 'sabon';
-                            color: $prmclr3;
-                            padding: 1em;
-                        }
                     }
                 }
             }
@@ -58,41 +24,16 @@ artware-wrapper {
             .desktop-view {
                 position: relative;
                 min-height: 900px;
-
-                .background-image {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    z-index: -1;
-                    filter: brightness(40%);
-                }
+                gap: 1em;
 
                 .filter-area {
-                    text-align: center;
-                    gap: 2em;
-                    height: 325px;
-
                     h4 {
-                        margin: 3em auto 2em auto;
+                        margin: 2em auto 1em auto;
                         font-size: 2em;
                         user-select: none;
                         color: $scdclr3;
                         font-family: 'nh-bold';
                         letter-spacing: 1px;
-                    }
-                }
-
-                .page-info-text {
-                    background: #4846462b;
-
-                    p {
-                        font-size: 18px;
-                        font-family: 'sabon';
-                        color: $prmclr3;
-                        padding: 0.75em 2em 0.75em 2em;
                     }
                 }
             }

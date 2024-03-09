@@ -13,8 +13,9 @@ export class ProductFilterComponent implements OnInit {
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }
+  @Input() isShopPage!: boolean
   @Input() loggedinUser!: User | null
-  
+
   @Output() onSetFilter = new EventEmitter<string>()
   @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false

@@ -39,7 +39,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   public isShopPage: boolean = false
   public isLoading: boolean = false
   public filterBy: ShopFilter = { search: '', type: 'shop' }
-  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
   ngOnInit(): void {
     this.isShopPage = this.router.url.startsWith('/shop')
@@ -98,15 +97,14 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch({ type: '[Shop] Load Products' })
 
-    this.activatedRoute.queryParams.subscribe(
-      (params) => {
-        const updatedParams = { ...params, search: newFilter.search }
-        this.router.navigate([], {
-          relativeTo: this.activatedRoute,
-          queryParams: updatedParams,
-          queryParamsHandling: 'merge',
-        })
+    this.activatedRoute.queryParams.subscribe(params => {
+      const updatedParams = { ...params, search: newFilter.search }
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: updatedParams,
+        queryParamsHandling: 'merge',
       })
+    })
   }
 
   ngOnDestroy(): void {
