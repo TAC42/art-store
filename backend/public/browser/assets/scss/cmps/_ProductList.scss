@@ -1,8 +1,12 @@
 product-list {
   width: 100%;
   height: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
 
   .list-contents {
+    margin-block-end: 1em;
+
     &.grid-layout {
       display: grid;
 
@@ -25,7 +29,7 @@ product-list {
 
     &.masonry-layout {
       product-preview {
-        margin-bottom: 1em;
+        margin-bottom: 1.5em;
         break-inside: avoid-column;
       }
 

@@ -1,21 +1,47 @@
 product-preview {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), -2px 2px 5px rgba(0, 0, 0, 0.15),
     0 2px 5px rgba(0, 0, 0, 0.15), 0 -2px 5px rgba(0, 0, 0, 0.15);
-  border-radius: 0.5em;
+  border-radius: 0.75em;
   display: block;
 
   .preview-contents {
     background: $prmclr2;
-    border-radius: 0.5em;
+    border-radius: 0.75em;
     padding-bottom: 0.25em;
     height: fit-content;
     gap: 0.25em;
 
     &.masonry-item {
-      max-height: 600px;
+      max-height: 750px;
+      padding-bottom: 0;
       text-align: center;
-      padding-bottom: 0.5em;
       gap: 0.5em;
+
+      .product-body {
+        img {
+          border-radius: 0.5em;
+        }
+      }
+
+      .name {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 0.25em 0.5em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.6;
+        text-transform: capitalize;
+        font-size: 20px;
+        min-height: 24px;
+        color: $prmclr2;
+        background: $prmclr1;
+        border-radius: 0 0 0.4em 0.4em;
+        opacity: 0.5;
+        transition: all 0.3s ease-in-out;
+      }
     }
 
     .product-body {
@@ -40,8 +66,8 @@ product-preview {
         transition: all 0.3s ease-in-out;
 
         button {
-          height: 36px;
-          width: 36px;
+          height: 42px;
+          width: 42px;
           transition: all 0.3s ease-in-out;
 
           &:first-child {
@@ -76,15 +102,15 @@ product-preview {
         background: $prmclr3;
         border: 1px solid $prmclr1;
         padding: 0.5em 0.75em;
-        font-size: 1em;
+        font-size: 20px;
         opacity: 0.5;
         transition: all 0.3s ease-in-out;
-        height: 38px;
+        height: 42px;
         z-index: 1;
 
         svg-render {
-          width: 16px;
-          height: 18px;
+          width: 23px;
+          height: 20px;
           transition: all 0.3s ease-in-out;
         }
 
@@ -106,6 +132,7 @@ product-preview {
         padding: 0.25em 0.5em;
         background: rgba(0, 0, 0, 0.5);
         color: $prmclr3;
+        font-size: 20px;
         border-radius: 0.5em;
         opacity: 0.5;
         z-index: 1;
@@ -113,14 +140,17 @@ product-preview {
       }
     }
 
-    .name {
-      padding: 0 0.5em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      line-height: 1.6;
-      text-transform: capitalize;
-      min-height: 24px;
+    &:not(.masonry-item) {
+      .name {
+        padding: 0 0.4em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.6;
+        text-transform: capitalize;
+        min-height: 24px;
+        font-size: 20px;
+      }
     }
 
     .stock-status {
@@ -131,7 +161,7 @@ product-preview {
       span {
         color: $scdclr1;
         letter-spacing: 0.05em;
-        font-size: 15px;
+        font-size: 18px;
       }
     }
 
@@ -142,7 +172,8 @@ product-preview {
 
         .add-to-cart,
         .price,
-        .admin-options {
+        .admin-options,
+        .name {
           opacity: 1;
         }
       }
