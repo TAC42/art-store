@@ -27,22 +27,23 @@ app-home {
                     cursor: pointer;
                     height: fit-content;
 
-                    p {
-                        color: $scdclr2;
-                        font-size: 14px;
-                        letter-spacing: 0.1em;
-                        text-transform: uppercase;
-                        font-family: 'nh-bold';
-                        margin-block-start: 1em;
-                    }
-
-                    h2 {
-                        color: $prmclr1;
-                        font-size: 21px;
-                    }
-
                     img {
                         transition: all 0.5s ease-in-out;
+                    }
+
+                    .text-area {
+                        p {
+                            color: $scdclr2;
+                            font-size: 14px;
+                            letter-spacing: 0.1em;
+                            font-family: 'nh-bold';
+                            margin-block-start: 1em;
+                        }
+
+                        h2 {
+                            color: $prmclr1;
+                            font-size: 21px;
+                        }
                     }
 
                     &:hover {
@@ -55,9 +56,9 @@ app-home {
 
             .carousels {
                 gap: 2em;
+                margin-block-end: 1em;
 
-                .gallery-carousel,
-                .contact {
+                .gallery-carousel {
                     position: relative;
 
                     .lone-img {
@@ -66,29 +67,13 @@ app-home {
                     }
 
                     .text-area {
-                        p {
-                            color: $scdclr2;
-                            font-size: 14px;
-                            letter-spacing: 0.1em;
-                            text-transform: uppercase;
-                            font-family: 'nh-bold';
-                            margin-block-start: 1em;
-                        }
-
-                        h2 {
-                            color: $prmclr1;
-                            font-size: 21px;
-                            margin-block-end: 1em;
-                        }
-
                         button {
-                            margin: 0 auto;
+                            margin: 1em auto 0 auto;
                             width: fit-content;
                             padding: 0.75em 1.5em;
                             background: $prmclr3;
                             color: $prmclr1;
                             border: 1px solid $prmclr1;
-                            text-transform: capitalize;
                             transition: all 0.5s ease-in-out;
                             letter-spacing: 0.05em;
                             font-size: 16px;
@@ -108,38 +93,51 @@ app-home {
             gap: 2em;
             text-align: center;
             padding: 2em;
-            animation: backgroundFadeInOut 30s infinite;
             grid-template-columns: 1fr 1fr;
+            animation: backgroundFadeInOut 30s infinite;
 
             .teasers {
                 gap: 3em;
                 margin-block-end: 1em;
 
                 .teaser-area {
-                    gap: 0.5em;
                     cursor: pointer;
                     height: fit-content;
-
-                    p {
-                        color: $scdclr2;
-                        font-size: 14px;
-                        letter-spacing: 0.1em;
-                        text-transform: uppercase;
-                        font-family: 'nh-bold';
-                        margin-block-start: 1em;
-                    }
-
-                    h2 {
-                        font-size: 21px;
-                    }
+                    transition: all 0.5s ease-in-out;
 
                     img {
                         transition: all 0.5s ease-in-out;
                     }
 
+                    .text-area {
+                        p {
+                            color: $scdclr2;
+                            font-size: 14px;
+                            letter-spacing: 0.1em;
+                            font-family: 'nh-bold';
+                            margin-block-start: 1em;
+                            transition: all 0.5s ease-in-out;
+                        }
+
+                        h2 {
+                            font-size: 21px;
+                            transition: all 0.5s ease-in-out;
+                        }
+                    }
+
                     &:hover {
+                        background: $prmclr1;
+
                         img {
                             filter: brightness(.75);
+                        }
+
+                        .text-area {
+
+                            p,
+                            h2 {
+                                color: $prmclr3;
+                            }
                         }
                     }
                 }
@@ -147,9 +145,9 @@ app-home {
 
             .carousels {
                 gap: 3em;
+                margin-block-end: 1em;
 
-                .gallery-carousel,
-                .contact {
+                .gallery-carousel {
                     position: relative;
 
                     .lone-img {
@@ -158,35 +156,13 @@ app-home {
                     }
 
                     .text-area {
-                        margin: auto 0;
-
-                        p {
-                            color: $scdclr2;
-                            font-size: 14px;
-                            letter-spacing: 0.1em;
-                            text-transform: uppercase;
-                            font-family: 'nh-bold';
-                            margin-block-start: 1em;
-                        }
-
-                        h2 {
-                            font-size: 21px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 2;
-                            margin-block-end: 1em;
-                        }
-
                         button {
-                            margin: 0 auto;
+                            margin: 1em auto 0 auto;
                             width: fit-content;
                             padding: 0.75em 1.5em;
                             background: $prmclr3;
                             color: $prmclr1;
                             border: 1px solid $prmclr1;
-                            text-transform: capitalize;
                             transition: all 0.5s ease-in-out;
                             letter-spacing: 0.05em;
                             font-size: 18px;

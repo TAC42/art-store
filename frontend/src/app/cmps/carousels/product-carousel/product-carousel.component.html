@@ -7,7 +7,7 @@
         <ng-container *ngIf="item.type === 'product'">
             <a [href]="item.url">
                 <img [src]="item.imgUrl" [alt]="item.name">
-                <span>{{ item.name }}</span>
+                <span class="product-name">{{ item.name }}</span>
             </a>
         </ng-container>
     </div>

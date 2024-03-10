@@ -5,14 +5,19 @@
     <section class="teasers grid">
       <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
         <img [src]="loneImg1" alt="About">
-        <p>biography</p>
-        <h2>Introduction to Ori Carlin</h2>
+        <div class="text-area flex column">
+          <p>BIOGRAPHY</p>
+          <h2>Introduction to Ori Carlin</h2>
+        </div>
       </div>
 
       <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
         <img [src]="loneImg2" alt="Artwork">
-        <p>one of my finest</p>
-        <h2>The Endless Staircase</h2>
+
+        <div class="text-area flex column">
+          <p>ONE OF MY FINEST</p>
+          <h2>The Endless Staircase</h2>
+        </div>
       </div>
     </section>
 
@@ -21,10 +26,8 @@
         <product-carousel [carouselItems]="artwareCarouselItems" />
 
         <div class="text-area flex column">
-          <p>meet our artware</p>
-          <h2>Where Creativity And Use Come Together</h2>
           <button class="flex" (click)="navigateTo('/artware')" title="Go to artware gallery?">
-            <span>explore artware</span>
+            <span>Explore Ware</span>
           </button>
         </div>
       </article>
@@ -33,22 +36,8 @@
         <product-carousel [carouselItems]="shopCarouselItems" />
 
         <div class="text-area flex column">
-          <p>our latest products</p>
-          <h2>Available Now For You to Order!</h2>
           <button class="flex" (click)="navigateTo('/shop')" title="Go to shop?">
-            <span>visit shop</span>
-          </button>
-        </div>
-      </article>
-
-      <article class="contact grid">
-        <img [src]="loneImg4" class="lone-img" alt="Contact">
-
-        <div class="text-area flex column">
-          <p>contact us!</p>
-          <h2>For Any Questions And Requests</h2>
-          <button class="flex" (click)="navigateTo('/about/contact')" title="Contact us?">
-            <span>contact us!</span>
+            <span>Visit Shop</span>
           </button>
         </div>
       </article>
@@ -59,16 +48,20 @@
     <img [src]="loneImg3" class="background-image" alt="Artwork">
 
     <section class="teasers flex column">
-      <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
-        <img [src]="loneImg1" alt="About">
-        <p>biography</p>
-        <h2>Introduction to Ori Carlin</h2>
-      </div>
-
       <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
         <img [src]="loneImg2" alt="Artwork">
-        <p>one of my finest</p>
-        <h2>The Endless Staircase</h2>
+        <div class="text-area flex column">
+          <p>ONE OF MY FINEST</p>
+          <h2>The Endless Staircase</h2>
+        </div>
+      </div>
+
+      <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
+        <img [src]="loneImg1" alt="About">
+        <div class="text-area flex column">
+          <p>BIOGRAPHY</p>
+          <h2>Introduction to Ori Carlin</h2>
+        </div>
       </div>
     </section>
 
@@ -77,10 +70,8 @@
         <product-carousel [carouselItems]="artwareCarouselItems" />
 
         <div class="text-area flex column">
-          <p>meet our artware</p>
-          <h2>Where Creativity And Use Come Together</h2>
           <button class="flex" (click)="navigateTo('/artware')" title="Go to artware gallery?">
-            <span>explore artware</span>
+            <span>Explore Ware</span>
           </button>
         </div>
       </article>
@@ -89,22 +80,8 @@
         <product-carousel [carouselItems]="shopCarouselItems" />
 
         <div class="text-area flex column">
-          <p>our latest products</p>
-          <h2>Available Now For You to Order!</h2>
           <button class="flex" (click)="navigateTo('/shop')" title="Go to shop?">
-            <span>visit shop</span>
-          </button>
-        </div>
-      </article>
-
-      <article class="contact grid">
-        <img [src]="loneImg4" class="lone-img" alt="Contact">
-
-        <div class="text-area flex column">
-          <p>contact us!</p>
-          <h2>For Any Questions And Requests</h2>
-          <button class="flex" (click)="navigateTo('/about/contact')" title="Contact us?">
-            <span>contact us!</span>
+            <span>Visit Shop</span>
           </button>
         </div>
       </article>
