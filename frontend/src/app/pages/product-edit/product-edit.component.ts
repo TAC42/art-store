@@ -11,7 +11,7 @@ import {
 import { ShopDbService } from '../../services/shop-db.service'
 import { FormUtilsService } from '../../services/form-utils.service'
 import { Product } from '../../models/shop'
-import { SAVE_PRODUCT } from '../../store/shop.actions'
+import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/shop.actions'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 
@@ -120,6 +120,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
     const productToSave = { ...this.product, ...formValues }
     this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
+    this.store.dispatch(PRODUCT_BY_NAME_LOADED({ product: null }))
 
     this.router.navigateByUrl(`/${encodeURIComponent(
       this.product.type || 'shop')}`)

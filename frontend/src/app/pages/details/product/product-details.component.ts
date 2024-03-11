@@ -1,12 +1,12 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { Observable, map, take } from 'rxjs'
+import { Observable, filter, map, take } from 'rxjs'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CarouselItem, Cart, Product } from '../../../models/shop'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { LOAD_RANDOM_PRODUCTS } from '../../../store/shop.actions'
-import { selectRandomProducts } from '../../../store/shop.selectors'
+import { selectProductByName, selectRandomProducts } from '../../../store/shop.selectors'
 import { User } from '../../../models/user'
 import { selectLoggedinUser } from '../../../store/user.selectors'
 import { UPDATE_USER } from '../../../store/user.actions'
@@ -36,6 +36,10 @@ export class ProductDetailsComponent implements OnInit {
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
+    // product$: Observable<Product> = this.store.select(selectProductByName).pipe(
+    //     filter(product => product !== null),
+    //     map(product => product as Product) 
+    //   )
     product$: Observable<Product> = this.route.data.pipe(
         map(data => data['product']))
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
