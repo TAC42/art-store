@@ -5,11 +5,12 @@ import { Observable, Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
-import { LOAD_USER } from '../../../store/user.actions'
+import { LOAD_USER, SET_USER, UPDATE_USER } from '../../../store/user.actions'
 import { selectUser } from '../../../store/user.selectors'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { ModalService } from '../../../services/modal.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'user-edit',
@@ -36,6 +37,7 @@ export class UserEditComponent implements OnInit {
   private dTypeService = inject(DeviceTypeService)
   private formUtilsService = inject(FormUtilsService)
   private fBuilder = inject(FormBuilder)
+  private router = inject(Router)
 
   private modalSubscription: Subscription | undefined
 
@@ -96,7 +98,14 @@ export class UserEditComponent implements OnInit {
   }
 
   onSaveUser() {
-
+    this.user$.subscribe(user => {
+      const formData = this.userEditForm.value
+      const updatedUser = {...user , ...formData }
+      console.log('formData: ',updatedUser)
+      this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
+      // this.store.dispatch(SET_USER({ user: updatedUser }))
+      this.router.navigate(['/profile'])
+    })
 
     this.closeUserEdit()
   }
