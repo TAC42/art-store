@@ -36,10 +36,7 @@ export class ProductDetailsComponent implements OnInit {
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
-    // product$: Observable<Product> = this.store.select(selectProductByName).pipe(
-    //     filter(product => product !== null),
-    //     map(product => product as Product) 
-    //   )
+  
     product$: Observable<Product> = this.route.data.pipe(
         map(data => data['product']))
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
