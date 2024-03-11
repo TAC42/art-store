@@ -8,7 +8,7 @@
       <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
     </div>
-    <ng-container *ngIf="cart$ | async as cart">
+    <ng-container  *ngIf="cart$ | async as cart" > 
       <ng-container *ngIf="cart.length; else sorry">
         <main class="cart-main grid">
           <section class="cart-list grid">
@@ -19,12 +19,12 @@
                 <span class="price">${{ cartItem.price }}</span>
                 <span class="quantity flex">
                   <svg-render
-                    (click)="changeAmount(cartItem, '-')"
+                    (click)="changeAmount(cartItem, '-'); preventCartClosure($event)"
                     svgName="minusIcon"
                   ></svg-render>
                   <span class="amount">{{ cartItem.amount }}</span>
                   <svg-render
-                    (click)="changeAmount(cartItem, '+')"
+                    (click)="changeAmount(cartItem, '+'); preventCartClosure($event)"
                     svgName="addIcon"
                     [ngClass]="{
                       'no-more': cartItem.amount === cartItem.stock
