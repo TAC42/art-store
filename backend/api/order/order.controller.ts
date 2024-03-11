@@ -2,7 +2,8 @@ import { Request, Response } from 'express'
 import { orderService } from './order.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
-export async function getOrders(req: Request<any, any, any, { _id?: string }>, res: Response): Promise<void> {
+export async function getOrders(req: Request<{}, {}, {}, { _id?: string }>,
+  res: Response): Promise<void> {
   try {
     const { _id } = req.query
     let filterBy = { _id }
@@ -16,7 +17,8 @@ export async function getOrders(req: Request<any, any, any, { _id?: string }>, r
   }
 }
 
-export async function getOrderById(req: Request<{ id: string }>, res: Response): Promise<void> {
+export async function getOrderById(req: Request<{ id: string }>,
+  res: Response): Promise<void> {
   try {
     const orderId = req.params.id
     const order = await orderService.getById(orderId)
@@ -33,7 +35,8 @@ export async function getOrderById(req: Request<{ id: string }>, res: Response):
   }
 }
 
-export async function addOrder(req: Request, res: Response): Promise<void> {
+export async function addOrder(req: Request,
+  res: Response): Promise<void> {
   try {
     const order = req.body
     loggerService.debug('Creating order:', order)
@@ -46,7 +49,8 @@ export async function addOrder(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function updateOrder(req: Request, res: Response): Promise<void> {
+export async function updateOrder(req: Request,
+  res: Response): Promise<void> {
   try {
     const order = req.body
     loggerService.debug('Updating order:', order)
@@ -59,7 +63,8 @@ export async function updateOrder(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function removeOrder(req: Request<{ id: string }>, res: Response): Promise<void> {
+export async function removeOrder(req: Request<{ id: string }>,
+  res: Response): Promise<void> {
   try {
     const orderId = req.params.id
     await orderService.remove(orderId)

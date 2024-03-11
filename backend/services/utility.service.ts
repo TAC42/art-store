@@ -28,7 +28,8 @@ function makeId(length: number = 6): string {
     return txt
 }
 
-function idToObjectId(oldId: string | string[] | { _id: string }): ObjectId | ObjectId[] | { _id: ObjectId } {
+function idToObjectId(oldId: string | string[] | { _id: string }):
+    ObjectId | ObjectId[] | { _id: ObjectId } {
     if (Array.isArray(oldId)) return oldId.map(aId => new ObjectId(aId))
 
     else if (typeof oldId === 'object' && oldId !== null) {
@@ -39,7 +40,7 @@ function idToObjectId(oldId: string | string[] | { _id: string }): ObjectId | Ob
     } else return new ObjectId(oldId)
 }
 
-async function verifyRecaptcha(token: string): Promise<boolean> {
+async function verifyRecaptcha(token: string): Promise<void> {
     loggerService.debug('received recaptcha token:', token)
 
     const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
@@ -52,6 +53,6 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
 
     if (!data.success) {
         loggerService.error('reCAPTCHA verification failed:', data['error-codes'])
-        return false
-    } else return data.success
+        throw new Error('Invalid reCAPTCHA')
+    }
 }

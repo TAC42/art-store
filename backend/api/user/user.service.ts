@@ -64,18 +64,18 @@ async function remove(userId: ObjectId): Promise<number> {
 }
 
 async function save(user: User): Promise<User> {
+  const collection = await dbService.getCollection(USERS_COLLECTION)
+
   try {
-    const collection = await dbService.getCollection(USERS_COLLECTION)
-    console.log('user in save backend service: ',user);
-    
     if (user._id) {
-      const id = new ObjectId(user._id.toString());
-      const userToUpdate = { ...user }
-      delete userToUpdate._id
+      const { _id, ...userToUpdate } = user
+      const id = _id instanceof ObjectId ? _id : new ObjectId(_id)
 
-      const result = await collection.updateOne({ _id: id }, { $set: userToUpdate })
-      if (result.matchedCount === 0) throw new Error(`User with id ${id} not found`)
-
+      const result = await collection.updateOne(
+        { _id: id }, { $set: userToUpdate })
+      if (result.matchedCount === 0) {
+        throw new Error(`User with id ${id.toHexString()} not found`)
+      }
       return { ...userToUpdate, _id: id }
     } else {
       const response = await collection.insertOne(user)

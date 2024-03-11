@@ -4,7 +4,8 @@ import { Product, ProductQueryParams } from '../../models/product.js'
 import { productService } from './product.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
-export async function getProducts(req: Request<{}, {}, {}, ProductQueryParams>, res: Response): Promise<void> {
+export async function getProducts(req: Request<{}, {}, {}, ProductQueryParams>,
+  res: Response): Promise<void> {
   try {
     const { search, type } = req.query
     let filterBy = { search, type }
@@ -18,7 +19,8 @@ export async function getProducts(req: Request<{}, {}, {}, ProductQueryParams>, 
   }
 }
 
-export async function getProductById(req: Request<{ id: ObjectId }>, res: Response): Promise<void> {
+export async function getProductById(req: Request<{ id: ObjectId }>,
+  res: Response): Promise<void> {
   try {
     const product = await productService.getById(req.params.id)
     res.json(product)
@@ -28,7 +30,8 @@ export async function getProductById(req: Request<{ id: ObjectId }>, res: Respon
   }
 }
 
-export async function getProductByName(req: Request<{ name: string }>, res: Response): Promise<void> {
+export async function getProductByName(req: Request<{ name: string }>,
+  res: Response): Promise<void> {
   try {
     const product = await productService.getByName(req.params.name)
     res.json(product)
@@ -38,7 +41,8 @@ export async function getProductByName(req: Request<{ name: string }>, res: Resp
   }
 }
 
-export async function checkNameAvailable(req: Request<{ name: string }>, res: Response): Promise<void> {
+export async function checkNameAvailable(req: Request<{ name: string }>,
+  res: Response): Promise<void> {
   try {
     const productName = req.params.name
     const product = await productService.getByName(productName)
@@ -53,7 +57,8 @@ export async function checkNameAvailable(req: Request<{ name: string }>, res: Re
   }
 }
 
-export async function getRandomProducts(req: Request<{ type: string, excludeProductId: ObjectId }>, res: Response): Promise<void> {
+export async function getRandomProducts(req: Request<{ type: string, excludeProductId: ObjectId }>,
+  res: Response): Promise<void> {
   try {
     const type = req.query.type as string
     const excludeProductId = req.query.excludeProductId ? new ObjectId(req.query.excludeProductId as string) : undefined
@@ -69,7 +74,8 @@ export async function getRandomProducts(req: Request<{ type: string, excludeProd
   }
 }
 
-export async function addProduct(req: Request<{}, {}, Product>, res: Response): Promise<void> {
+export async function addProduct(req: Request<{}, {}, Product>,
+  res: Response): Promise<void> {
   try {
     const product = req.body
     loggerService.debug('Creating product: ', product)
@@ -82,7 +88,8 @@ export async function addProduct(req: Request<{}, {}, Product>, res: Response): 
   }
 }
 
-export async function updateProduct(req: Request<{ id: ObjectId }, {}, Product>, res: Response): Promise<void> {
+export async function updateProduct(req: Request<{ id: ObjectId }, {}, Product>,
+  res: Response): Promise<void> {
   try {
     const product = { ...req.body, _id: req.params.id }
     loggerService.debug('Updating product: ', product)
@@ -95,7 +102,8 @@ export async function updateProduct(req: Request<{ id: ObjectId }, {}, Product>,
   }
 }
 
-export async function removeProduct(req: Request<{ id: ObjectId }>, res: Response): Promise<void> {
+export async function removeProduct(req: Request<{ id: ObjectId }>,
+  res: Response): Promise<void> {
   try {
     const productId = req.params.id
     loggerService.debug('Removing product with _id: ', productId)

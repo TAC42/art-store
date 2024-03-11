@@ -9,8 +9,7 @@ export const mailService = {
 }
 
 async function sendContactUsMail(name: string, email: string, title: string, message: string, recaptchaToken: string): Promise<void> {
-    const isCaptchaValid = await utilityService.verifyRecaptcha(recaptchaToken)
-    if (!isCaptchaValid) throw new Error('Invalid reCAPTCHA')
+    await utilityService.verifyRecaptcha(recaptchaToken)
 
     loggerService.debug(`Sending email containing: ${name}, ${email}, ${title}, ${message}`)
     const transporter = nodemailer.createTransport({

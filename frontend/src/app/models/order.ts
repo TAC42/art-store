@@ -9,10 +9,6 @@ export interface Order {
   createdAt: number
 }
 
-export interface OrderFilter {
-  _id?: string
-}
-
 export interface OrderUser {
   firstName: string
   lastName: string
@@ -23,4 +19,8 @@ export interface OrderUser {
   state: string
   zip: string
   _id: string
+}
+
+export interface OrderFilter {
+  _id?: string
 }

@@ -10,16 +10,6 @@ export interface Order {
     createdAt: number
 }
 
-export interface FilterBy {
-    _id?: string | ObjectId
-}
-
-export interface MatchCriteria {
-    $match: {
-        $or?: Array<{ 'user._id': ObjectId }>
-    }
-}
-
 export interface OrderUser {
     firstName: string
     lastName: string
@@ -30,4 +20,14 @@ export interface OrderUser {
     state: string
     zip: string
     _id?: ObjectId
+}
+
+export interface MatchCriteria {
+    $match: {
+        $or?: Array<{ 'user._id': ObjectId }>
+    }
+}
+
+export interface OrderQueryParams {
+    _id?: string | ObjectId
 }

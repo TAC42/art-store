@@ -41,22 +41,6 @@ async function getById(productId: ObjectId): Promise<Product | null> {
   }
 }
 
-// async function getByName(productName: string): Promise<Product | null> {
-//   try {
-//     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-//     const products = await collection.find<Product>(
-//       { name: { $regex: new RegExp(productName, 'i') } }).toArray()
-//     const product = products.length > 0 ? products[0] : null
-
-//     if (product) loggerService.info('found product: ', product)
-//     else loggerService.error('No product found with name:', productName)
-
-//     return product
-//   } catch (err) {
-//     loggerService.error(`Error finding product ${productName}`, err)
-//     throw err
-//   }
-// }
 async function getByName(productName: string): Promise<Product | null> {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
