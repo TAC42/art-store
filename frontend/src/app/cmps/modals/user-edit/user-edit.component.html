@@ -93,8 +93,8 @@
           <button
             class="b glass"
             type="submit"
-            [disabled]="!userEditForm.valid"
-            [class.disabled]="!userEditForm.valid"
+            [disabled]="!userEditForm.valid || isUserDataUnchanged()"
+            [class.disabled]="!userEditForm.valid || isUserDataUnchanged()"
           >
             Save changes
           </button>

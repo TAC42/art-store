@@ -44,6 +44,7 @@ export class UserEditComponent implements OnInit {
   user$: Observable<User> = this.store.select(selectUser)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   userEditState: string = 'hidden'
+  public initialUserData: User | null = null 
 
   ngOnInit(): void {
     this.fetchUserData()
@@ -58,6 +59,7 @@ export class UserEditComponent implements OnInit {
 
   initializeForm(): void {
     this.user$.subscribe(user => {
+      this.initialUserData = user
       this.userEditForm = this.fBuilder.group({
         imgUrl: [user.imgUrl, [Validators.required]],
         fullName: [user.fullName, [Validators.required]],
@@ -66,6 +68,17 @@ export class UserEditComponent implements OnInit {
       })
     })
   }
+
+  isUserDataUnchanged(): boolean {
+    if(!this.initialUserData) return false
+    const formData = this.userEditForm.value
+    return (
+      formData.fullName === this.initialUserData.fullName &&
+      formData.username === this.initialUserData.username &&
+      formData.email === this.initialUserData.email
+    )
+  }
+
 
 
   fetchUserData(): void {
