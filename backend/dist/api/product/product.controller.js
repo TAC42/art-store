@@ -16,13 +16,7 @@ export async function getProducts(req, res) {
 }
 export async function getProductById(req, res) {
     try {
-        const productId = req.params.id;
-        const product = await productService.getById(productId);
-        if (!product) {
-            loggerService.error('Product not found');
-            res.status(404).send('Product not found');
-            return;
-        }
+        const product = await productService.getById(req.params.id);
         res.json(product);
     }
     catch (err) {
@@ -32,13 +26,7 @@ export async function getProductById(req, res) {
 }
 export async function getProductByName(req, res) {
     try {
-        const productName = req.params.name;
-        const product = await productService.getByName(productName);
-        if (!product) {
-            loggerService.error('Product not found');
-            res.status(404).send('Product not found');
-            return;
-        }
+        const product = await productService.getByName(req.params.name);
         res.json(product);
     }
     catch (err) {
@@ -51,9 +39,9 @@ export async function checkNameAvailable(req, res) {
         const productName = req.params.name;
         const product = await productService.getByName(productName);
         if (product)
-            loggerService.error('Product name is not available', product.name);
+            loggerService.error('Product name is not available for: ', product.name);
         else
-            loggerService.info('Product name is available', productName);
+            loggerService.info('Product name is available for: ', productName);
         res.json({ isNameAvailable: !product });
     }
     catch (err) {
@@ -63,19 +51,11 @@ export async function checkNameAvailable(req, res) {
 }
 export async function getRandomProducts(req, res) {
     try {
-        const type = typeof req.query.type === 'string' ? req.query.type : undefined;
-        let excludeProductId;
-        if (typeof req.query.excludeProductId === 'string') {
-            try {
-                excludeProductId = new ObjectId(req.query.excludeProductId);
-            }
-            catch (error) {
-                // If the string is not a valid ObjectId, log the error and optionally handle it
-                loggerService.error('Invalid ObjectId for excludeProductId', error);
-                excludeProductId = undefined; // Or handle the error as appropriate
-            }
-        }
+        const type = req.query.type;
+        const excludeProductId = req.query.excludeProductId ? new ObjectId(req.query.excludeProductId) : undefined;
+        loggerService.info(`Fetching products from ${type}, excluding id: ${excludeProductId}`);
         const products = await productService.getRandomProducts(type, excludeProductId);
+        loggerService.info(`Found relevent products: ${JSON.stringify(products)}`);
         res.json(products);
     }
     catch (err) {
@@ -110,8 +90,9 @@ export async function updateProduct(req, res) {
 export async function removeProduct(req, res) {
     try {
         const productId = req.params.id;
+        loggerService.debug('Removing product with _id: ', productId);
         await productService.remove(productId);
-        res.send({ msg: 'Deleted successfully' });
+        res.status(200).send({ msg: 'Product successfully removed' });
     }
     catch (err) {
         loggerService.error('Failed to remove product', err);

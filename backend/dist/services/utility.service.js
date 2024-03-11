@@ -46,8 +46,6 @@ async function verifyRecaptcha(token) {
     loggerService.debug('reCAPTCHA API response:', data);
     if (!data.success) {
         loggerService.error('reCAPTCHA verification failed:', data['error-codes']);
-        return false;
+        throw new Error('Invalid reCAPTCHA');
     }
-    else
-        return data.success;
 }

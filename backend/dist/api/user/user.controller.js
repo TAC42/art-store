@@ -3,17 +3,17 @@ import { userService } from './user.service.js';
 export async function getUsers(req, res) {
     try {
         const users = await userService.query(req.query);
-        res.send(users);
+        res.json(users);
     }
     catch (err) {
         loggerService.error('Cannot get users', err);
         res.status(500).send({ err: 'Failed to get users' });
     }
 }
-export async function getUser(req, res) {
+export async function getUserById(req, res) {
     try {
         const user = await userService.getById(req.params.id);
-        res.send(user);
+        res.json(user);
     }
     catch (err) {
         loggerService.error('Failed to get user', err);
@@ -23,8 +23,9 @@ export async function getUser(req, res) {
 export async function addUser(req, res) {
     try {
         const user = req.body;
+        loggerService.debug('Creating user:', user);
         const addedUser = await userService.save(user);
-        res.send(addedUser);
+        res.json(addedUser);
     }
     catch (err) {
         loggerService.error('Failed to add user', err);
@@ -34,8 +35,9 @@ export async function addUser(req, res) {
 export async function updateUser(req, res) {
     try {
         const user = { ...req.body, _id: req.params.id };
+        loggerService.debug('Updating user:', user);
         const savedUser = await userService.save(user);
-        res.send(savedUser);
+        res.json(savedUser);
     }
     catch (err) {
         loggerService.error('Failed to update user', err);
@@ -44,8 +46,10 @@ export async function updateUser(req, res) {
 }
 export async function removeUser(req, res) {
     try {
-        await userService.remove(req.params.id);
-        res.send({ msg: 'Deleted successfully' });
+        const userId = req.params.id;
+        loggerService.debug('Removing user with _id: ', userId);
+        await userService.remove(userId);
+        res.status(200).send({ msg: 'User successfully removed' });
     }
     catch (err) {
         loggerService.error('Failed to delete user', err);

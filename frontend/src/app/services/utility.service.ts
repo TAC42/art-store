@@ -37,6 +37,7 @@ export class UtilityService {
     return code
   }
 
+  // restricted color generation
   getRandomMidColor(): string {
     const letters = '3456789ABC'
     let color = '#'
@@ -46,6 +47,7 @@ export class UtilityService {
     return color
   }
 
+  // color generation
   getRandomColor(): string {
     const letters = '0123456789ABCDEF'
     let color = '#'
@@ -55,6 +57,7 @@ export class UtilityService {
     return color
   }
 
+  // return a carousel that enables you to click the images inside the carousel, for full display
   convertToCarouselItem(items: (string | MiniProduct)[], type: 'image' | 'product' = 'image'): CarouselItem[] {
     return items.map(item => {
       if (type === 'image' && typeof item === 'string') {
@@ -75,5 +78,15 @@ export class UtilityService {
   onImageClick(event: Event, imageUrl: string): void {
     event.stopPropagation()
     this.modService.openModal('image-display', imageUrl)
+  }
+
+  // seperate a fullName into 2 seperate strings
+  splitFullName(fullName: string): { firstName: string, lastName: string } {
+    const parts = fullName.trim().split(/\s+/)
+    if (parts.length > 1) return {
+      firstName: parts.slice(0, -1).join(' '),
+      lastName: parts[parts.length - 1]
+    }
+    else return { firstName: fullName, lastName: '' }
   }
 }

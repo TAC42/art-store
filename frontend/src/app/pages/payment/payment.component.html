@@ -15,17 +15,23 @@
             <article class="summary-item grid" *ngFor="let summaryItem of cart">
               <div class="image">
                 <img [src]="summaryItem.imgUrls[0]" [alt]="summaryItem.name" />
-                <span class="amount">{{ summaryItem.amount }}</span>
+                <span class="amount">
+                  {{ summaryItem.amount }}
+                </span>
               </div>
 
               <div class="item-info grid">
-                <span class="name">{{ summaryItem.name }}</span>
-                <span class="desc">{{ summaryItem.description }}</span>
+                <span class="name">
+                  {{ summaryItem.name }}
+                </span>
+                <span class="desc">
+                  {{ summaryItem.description }}
+                </span>
               </div>
 
-              <span class="price">{{
-                summaryItem.price | currency : "USD" : "symbol"
-                }}</span>
+              <span class="price">
+                {{ summaryItem.price | currency : "USD" : "symbol" }}
+              </span>
             </article>
           </section>
 
@@ -33,27 +39,27 @@
             <ng-container *ngIf="orderSummary$ | async as orderSummary">
               <div class="info flex">
                 <span>subtotal</span>
-                <span>{{
-                  orderSummary.total | currency : "USD" : "symbol"
-                  }}</span>
+                <span>
+                  {{ orderSummary.total | currency : "USD" : "symbol" }}
+                </span>
               </div>
               <div class="info flex">
                 <span>taxes</span>
-                <span>{{
-                  orderSummary.taxes | currency : "USD" : "symbol"
-                  }}</span>
+                <span>
+                  {{ orderSummary.taxes | currency : "USD" : "symbol" }}
+                </span>
               </div>
               <div class="info flex">
                 <span>delivery</span>
-                <span>{{
-                  orderSummary.deliveryFee | currency : "USD" : "symbol"
-                  }}</span>
+                <span>
+                  {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }}
+                </span>
               </div>
               <div class="info flex">
                 <span>grand total</span>
-                <span>{{
-                  orderSummary.grandTotal | currency : "USD" : "symbol"
-                  }}</span>
+                <span>
+                  {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}
+                </span>
               </div>
             </ng-container>
           </section>
@@ -88,7 +94,7 @@
         <label class="flex column" [class.error]="formUtils.isFieldInvalid(personalForm, 'firstName')">
           <span class="label-info flex row">*First name</span>
           <input id="firstName" type="text" #nameInput formControlName="firstName" placeholder="John..." customValidator
-            [minLength]="2" [maxLength]="48" [allowNumbers]="false" [allowedSpecialChars]="'. '" autofocus />
+            [minLength]="2" [maxLength]="48" [allowNumbers]="false" [allowedSpecialChars]="'. '" />
           <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'firstName')">
             {{ formUtils.getErrorMessage(personalForm, "firstName") }}
           </span>
@@ -120,7 +126,7 @@
         <label class="flex column" [class.error]="formUtils.isFieldInvalid(personalForm, 'phone')">
           <span class="label-info flex row">*Phone</span>
           <input id="phone" type="text" formControlName="phone" placeholder="XXX-XXX-XXXX" customValidator
-            [minLength]="10" [maxLength]="10" [allowedSpecialChars]="'. '" />
+            [minLength]="10" [maxLength]="10" [allowedSpecialChars]="'. '" autofocus />
           <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'phone')">
             {{ formUtils.getErrorMessage(personalForm, "phone") }}
           </span>

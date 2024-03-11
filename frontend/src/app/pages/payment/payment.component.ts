@@ -12,10 +12,11 @@ import { AppState } from '../../store/app.state'
 import { selectCart } from '../../store/shop.selectors'
 import { SAVE_ORDER } from '../../store/order.actions'
 import { CART_LOADED } from '../../store/shop.actions'
-import { selectLoggedinUser } from '../../store/user.selectors'
+import { selectLoggedinUser, selectUser } from '../../store/user.selectors'
 import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
+import { LOAD_USER } from '../../store/user.actions'
 
 @Component({
   selector: 'payment',
@@ -37,6 +38,7 @@ export class PaymentComponent implements OnInit {
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
     filter(cart => !!cart))
   loggedinUser$: Observable<User> = this.store.pipe(select(selectLoggedinUser))
+  user$: Observable<User> = this.store.select(selectUser)
   public usStates = this.utilService.getStates()
 
   optionState: string = 'order'
@@ -48,6 +50,10 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForms()
+
+    this.loggedinUser$.subscribe((user: User) => {
+      if (user._id) this.store.dispatch(LOAD_USER({ userId: user._id }))
+    })
   }
 
   initializeForms(): void {
@@ -61,15 +67,21 @@ export class PaymentComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     })
-    this.loggedinUser$.subscribe(user => {
-      if (user._id) this.personalForm.get('email')?.setValue(user.email)
+
+    this.user$.subscribe(user => {
+      if (user._id) {
+        this.personalForm.get('email')?.setValue(user.email)
+
+        const { firstName, lastName } = this.utilService.splitFullName(user.fullName)
+        this.personalForm.get('firstName')?.setValue(firstName)
+        this.personalForm.get('lastName')?.setValue(lastName)
+      }
     })
 
     this.paymentForm = this.fb.group({
       paymentMethod: ['venmo']
     })
-    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(
-      value => this.payType = value)
+    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => this.payType = value)
   }
 
   get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
