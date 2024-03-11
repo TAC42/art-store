@@ -40,7 +40,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubscription = this.loggedinUser$.subscribe(user => {
-      if (!user || user._id === '') return
+      if (user._id === '') return
       if (this.modService.isModalOpen('user-auth')) {
         this.initializeForm()
         this.authModalTimer = setTimeout(() => {
@@ -63,7 +63,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
 
   sendCode() {
     this.loggedinUser$.pipe(take(1)).subscribe(user => {
-      if (user && user._id && !user.isVerified) {
+      if (user._id && !user.isVerified) {
         // Generate and send code
         this.verificationCode = this.utilService.generateRandomCode()
         const verifyFormData = {

@@ -75,17 +75,17 @@
         [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'publishDate')">
-      <label for="publishDate" class="flex row">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'dateMade')">
+      <label for="dateMade" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="calendar" />
           <span>Publish Date*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'publishDate')">
-          {{ formUtils.getErrorMessage(editForm, 'publishDate') }}
+        <span *ngIf="formUtils.isFieldInvalid(editForm, 'dateMade')">
+          {{ formUtils.getErrorMessage(editForm, 'dateMade') }}
         </span>
       </label>
-      <input id="publishDate" type="text" formControlName="publishDate" placeholder="When your product was finished..."
+      <input id="dateMade" type="text" formControlName="dateMade" placeholder="When your product was finished..."
         customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
     </div>
 
@@ -154,7 +154,7 @@
 
   <edit-preview [name]="editForm.get('name')?.value" [type]="editForm.get('type')?.value"
     [imgUrls]="editForm.get('imgUrls')?.value" [price]="editForm.get('price')?.value"
-    [stock]="editForm.get('stock')?.value" [publishDate]="editForm.get('publishDate')?.value"
+    [stock]="editForm.get('stock')?.value" [dateMade]="editForm.get('dateMade')?.value"
     [description]="editForm.get('description')?.value" [materials]="editForm.get('materials')?.value"
     [dimensions]="editForm.get('dimensions')?.value" />
 </main>

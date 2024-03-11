@@ -22,8 +22,6 @@ export class HomeComponent implements OnInit {
 
   loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
   loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
-  loneImg3: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/fjq1w6fb8ozzau1mfd6n.png'
-  loneImg4: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1708431099/ContactandAbout/mgkgkobyzk5zg8z4nyb6.jpg'
 
   artwareCarouselItems: CarouselItem[] = []
   shopCarouselItems: CarouselItem[] = []

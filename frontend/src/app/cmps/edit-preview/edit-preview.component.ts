@@ -13,7 +13,7 @@ export class EditPreviewComponent implements OnInit {
   @Input() imgUrls: string[] = []
   @Input() price: string = ''
   @Input() stock: number = 0
-  @Input() publishDate: string = ''
+  @Input() dateMade: string = ''
   @Input() description: string = ''
   @Input() materials: string = ''
   @Input() dimensions: string = ''

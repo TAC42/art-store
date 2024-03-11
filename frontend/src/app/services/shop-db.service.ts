@@ -15,7 +15,7 @@ export class ShopDbService {
 
   query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
     return this.httpService.get(BASE_URL, filterBy).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error querying products:', error)
         return throwError(() => new Error('Error fetching products'))
       })
@@ -24,7 +24,7 @@ export class ShopDbService {
 
   getById(productId: string): Observable<any> {
     return this.httpService.get<Product>(`${BASE_URL}by-id/${productId}`).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error fetching product by id:', error)
         return throwError(() => new Error('Error fetching product by id'))
       })
@@ -33,7 +33,7 @@ export class ShopDbService {
 
   getByName(productName: string): Observable<Product | null> {
     return this.httpService.get<Product>(`${BASE_URL}by-name/${productName}`).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error fetching product by name:', error)
         return throwError(() => new Error('Error fetching product by name'))
       })
@@ -42,7 +42,7 @@ export class ShopDbService {
 
   checkNameAvailable(productName: string): Observable<{ isNameAvailable: boolean }> {
     return this.httpService.get<{ isNameAvailable: boolean }>(`${BASE_URL}check-name/${productName}`).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error checking name availability:', error)
         return throwError(() => new Error('Error checking name availability'))
       })
@@ -52,7 +52,7 @@ export class ShopDbService {
   getRandomProducts(type: string, excludeProductId: string): Observable<Product[]> {
     const url = `${BASE_URL}query/random?type=${encodeURIComponent(type)}&excludeProductId=${encodeURIComponent(excludeProductId)}`
     return this.httpService.get<Product[]>(url).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error fetching random products:', error)
         return throwError(() => new Error('Error fetching random products'));
       })
@@ -85,7 +85,7 @@ export class ShopDbService {
       description: 'This is a product / art item',
       dimensions: '5 x 5 x 5 inch',
       materials: 'ceramic',
-      publishDate: '2024',
+      dateMade: '2024',
       stock: 1,
       type: 'shop',
       createdAt: currentTimestamp

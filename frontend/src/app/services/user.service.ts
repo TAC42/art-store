@@ -15,7 +15,7 @@ export class UserService {
 
   query(): Observable<User[]> {
     return this.httpService.get<User[]>(BASE_URL).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error fetching users:', error)
         return throwError(() => new Error('Error fetching users'))
       })
@@ -24,7 +24,7 @@ export class UserService {
 
   getById(userId: string): Observable<User> {
     return this.httpService.get<User>(`${BASE_URL}by-id/${userId}`).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error fetching user by ID:', error)
         return throwError(() => new Error('Error fetching user'))
       })
@@ -43,10 +43,8 @@ export class UserService {
 
   login(userCred: UserCredentials): Observable<User> {
     return this.httpService.post<User>('auth/login', userCred).pipe(
-      tap((user) => {
-        this.setLoggedinUser(user)
-      }),
-      catchError((error) => {
+      tap(user => this.setLoggedinUser(user)),
+      catchError(error => {
         console.error('Error during login:', error)
         return throwError(() => new Error('Error during login'))
       })
@@ -55,11 +53,11 @@ export class UserService {
 
   signup(signupData: UserSignup): Observable<User> {
     return this.httpService.post<User>('auth/signup', signupData).pipe(
-      tap((newUser) => {
+      tap(newUser => {
         console.log('Registered user:', newUser.fullName)
         this.setLoggedinUser(newUser)
       }),
-      catchError((error) => {
+      catchError(error => {
         console.error('Error during signup:', error)
         return throwError(() => new Error('Error during signup'))
       })
@@ -69,7 +67,7 @@ export class UserService {
   logout(): Observable<any> {
     return this.httpService.post<void>('auth/logout', null).pipe(
       tap(() => sessionStorage.removeItem(SESSION_KEY_LOGGEDIN_USER)),
-      catchError((error) => {
+      catchError(error => {
         console.error('Cannot logout:', error)
         return of({ error: true, message: 'Logout failed. Please try again.' })
       })
@@ -84,7 +82,6 @@ export class UserService {
   setLoggedinUser(user: User): void {
     const userForSession = {
       _id: user._id,
-      username: user.username,
       cart: user.cart,
       imgUrl: user.imgUrl,
       isVerified: user.isVerified,
