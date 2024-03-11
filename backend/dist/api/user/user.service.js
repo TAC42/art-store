@@ -55,14 +55,15 @@ async function remove(userId) {
     }
 }
 async function save(user) {
+    const collection = await dbService.getCollection(USERS_COLLECTION);
     try {
-        const collection = await dbService.getCollection(USERS_COLLECTION);
         if (user._id) {
-            const id = new ObjectId(user._id.toString());
-            const userToUpdate = { ...user, _id: undefined };
+            const { _id, ...userToUpdate } = user;
+            const id = _id instanceof ObjectId ? _id : new ObjectId(_id);
             const result = await collection.updateOne({ _id: id }, { $set: userToUpdate });
-            if (result.matchedCount === 0)
-                throw new Error(`User with id ${id} not found`);
+            if (result.matchedCount === 0) {
+                throw new Error(`User with id ${id.toHexString()} not found`);
+            }
             return { ...userToUpdate, _id: id };
         }
         else {

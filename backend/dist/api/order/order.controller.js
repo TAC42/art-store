@@ -43,7 +43,7 @@ export async function addOrder(req, res) {
 }
 export async function updateOrder(req, res) {
     try {
-        const order = req.body;
+        const order = { ...req.body, _id: req.params.id };
         loggerService.debug('Updating order:', order);
         const updatedOrder = await orderService.save(order);
         res.json(updatedOrder);
@@ -56,8 +56,9 @@ export async function updateOrder(req, res) {
 export async function removeOrder(req, res) {
     try {
         const orderId = req.params.id;
+        loggerService.debug('Removing order with _id: ', orderId);
         await orderService.remove(orderId);
-        res.send({ msg: 'Deleted successfully' });
+        res.status(200).send({ msg: 'Order successfully removed' });
     }
     catch (err) {
         loggerService.error('Failed to remove order', err);

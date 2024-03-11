@@ -5,11 +5,11 @@ export async function sendContactUsMail(req, res) {
     loggerService.debug(`Received contact form data: ${name}, ${email}, ${title}, ${message}, ${recaptchaToken}`);
     try {
         await mailService.sendContactUsMail(name, email, title, message, recaptchaToken);
-        res.status(200).end();
+        res.status(200).send({ msg: 'Mail successfully sent' });
     }
     catch (error) {
         loggerService.error('Failed sending mail: ' + error);
-        res.status(500).json({ error: 'Failed sending mail' });
+        res.status(500).send({ error: 'Failed sending mail' });
     }
 }
 export async function sendVerificationMail(req, res) {
@@ -17,10 +17,10 @@ export async function sendVerificationMail(req, res) {
     loggerService.debug(`Received verify form data: ${username}, ${email}, ${code}`);
     try {
         await mailService.sendVerificationMail(username, email, code);
-        res.status(200).end();
+        res.status(200).send({ msg: 'Mail successfully sent' });
     }
     catch (error) {
         loggerService.error('Failed sending mail: ' + error);
-        res.status(500).json({ error: 'Failed sending mail' });
+        res.status(500).send({ error: 'Failed sending mail' });
     }
 }
