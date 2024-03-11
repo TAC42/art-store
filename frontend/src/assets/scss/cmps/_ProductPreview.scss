@@ -44,6 +44,19 @@ product-preview {
       }
     }
 
+    &:not(.masonry-item) {
+      .name {
+        padding: 0 0.4em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1.6;
+        text-transform: capitalize;
+        min-height: 24px;
+        font-size: 20px;
+      }
+    }
+
     .product-body {
       height: fit-content;
       position: relative;
@@ -103,6 +116,7 @@ product-preview {
         border: 1px solid $prmclr1;
         padding: 0.5em 0.75em;
         font-size: 20px;
+        line-height: 1.1;
         opacity: 0.5;
         transition: all 0.3s ease-in-out;
         height: 42px;
@@ -137,19 +151,6 @@ product-preview {
         opacity: 0.5;
         z-index: 1;
         transition: all 0.3s ease-in-out;
-      }
-    }
-
-    &:not(.masonry-item) {
-      .name {
-        padding: 0 0.4em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: 1.6;
-        text-transform: capitalize;
-        min-height: 24px;
-        font-size: 20px;
       }
     }
 

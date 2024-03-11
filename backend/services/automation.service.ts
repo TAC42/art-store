@@ -39,15 +39,15 @@ function _scheduleTask(task: () => Promise<any>, taskName: string, hour: number,
         loggerService.info(`Expected delay until next task: ${delay} milliseconds`)
 
         setTimeout(async () => {
-            loggerService.info(`Scheduled task is starting at: ${new Date().toLocaleString()}`)
+            loggerService.info(`Scheduled ${taskName} is starting at: ${new Date().toLocaleString()}`)
             try {
                 await task()
-                loggerService.info('Scheduled task completed.')
+                loggerService.info(`Scheduled ${taskName} completed.`)
             } catch (err) {
-                loggerService.error('Scheduled task failed:', err)
+                loggerService.error(`Scheduled ${taskName} failed:`, err)
+                throw err
             }
-            // Schedule the next run for tomorrow
-            scheduleNextRun()
+            scheduleNextRun() // Schedule the next run for tomorrow
         }, delay)
     }
     scheduleNextRun()

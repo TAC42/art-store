@@ -1,7 +1,5 @@
 <main class="home-page-contents w-h-100 flex column">
   <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column">
-    <img [src]="loneImg3" class="background-image" alt="Artwork">
-
     <section class="teasers grid">
       <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
         <img [src]="loneImg1" alt="About">
@@ -44,9 +42,7 @@
     </section>
   </section>
 
-  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view layout-row grid">
-    <img [src]="loneImg3" class="background-image" alt="Artwork">
-
+  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view grid">
     <section class="teasers flex column">
       <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
         <img [src]="loneImg2" alt="Artwork">
