@@ -13,15 +13,15 @@ export interface Product {
   amount?: number
 }
 
-export interface ShopFilter {
-  search?: string
-  type?: string
-}
-
 export interface MiniProduct {
   imgUrl: string
   name: string
   url: string
+}
+
+export interface ShopFilter {
+  search?: string
+  type?: string
 }
 
 export interface CarouselItem {
@@ -33,5 +33,8 @@ export interface CarouselItem {
 
 export interface Cart {
   _id?: string
+  name?: string
+  type?: string
+  price?: number
   amount?: number
 }
