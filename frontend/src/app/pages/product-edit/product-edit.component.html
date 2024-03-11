@@ -79,7 +79,7 @@
       <label for="dateMade" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="calendar" />
-          <span>Publish Date*</span>
+          <span>Date Made*</span>
         </div>
         <span *ngIf="formUtils.isFieldInvalid(editForm, 'dateMade')">
           {{ formUtils.getErrorMessage(editForm, 'dateMade') }}
@@ -110,7 +110,7 @@
       <select formControlName="type" id="type">
         <option value="shop">Shop</option>
         <option value="sculpture">Sculpture</option>
-        <option value="artware">Artware</option>
+        <option value="artware">Ware</option>
       </select>
     </div>
 

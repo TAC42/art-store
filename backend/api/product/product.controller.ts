@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { Request, Response } from 'express'
-import { ProductQueryParams } from '../../models/product.js'
+import { Product, ProductQueryParams } from '../../models/product.js'
 import { productService } from './product.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
@@ -20,14 +20,7 @@ export async function getProducts(req: Request<{}, {}, {}, ProductQueryParams>, 
 
 export async function getProductById(req: Request<{ id: ObjectId }>, res: Response): Promise<void> {
   try {
-    const productId = req.params.id
-    const product = await productService.getById(productId)
-
-    if (!product) {
-      loggerService.error('Product not found')
-      res.status(404).send('Product not found')
-      return
-    }
+    const product = await productService.getById(req.params.id)
     res.json(product)
   } catch (err) {
     loggerService.error('Failed to get product', err)
@@ -37,14 +30,7 @@ export async function getProductById(req: Request<{ id: ObjectId }>, res: Respon
 
 export async function getProductByName(req: Request<{ name: string }>, res: Response): Promise<void> {
   try {
-    const productName = req.params.name
-    const product = await productService.getByName(productName)
-
-    if (!product) {
-      loggerService.error('Product not found')
-      res.status(404).send('Product not found')
-      return
-    }
+    const product = await productService.getByName(req.params.name)
     res.json(product)
   } catch (err) {
     loggerService.error('Failed to get product by name', err)
@@ -57,8 +43,8 @@ export async function checkNameAvailable(req: Request<{ name: string }>, res: Re
     const productName = req.params.name
     const product = await productService.getByName(productName)
 
-    if (product) loggerService.error('Product name is not available', product.name)
-    else loggerService.info('Product name is available', productName)
+    if (product) loggerService.error('Product name is not available for: ', product.name)
+    else loggerService.info('Product name is available for: ', productName)
 
     res.json({ isNameAvailable: !product })
   } catch (err) {
@@ -83,7 +69,7 @@ export async function getRandomProducts(req: Request<{ type: string, excludeProd
   }
 }
 
-export async function addProduct(req: Request, res: Response): Promise<void> {
+export async function addProduct(req: Request<{}, {}, Product>, res: Response): Promise<void> {
   try {
     const product = req.body
     loggerService.debug('Creating product: ', product)
@@ -96,7 +82,7 @@ export async function addProduct(req: Request, res: Response): Promise<void> {
   }
 }
 
-export async function updateProduct(req: Request, res: Response): Promise<void> {
+export async function updateProduct(req: Request<{ id: ObjectId }, {}, Product>, res: Response): Promise<void> {
   try {
     const product = { ...req.body, _id: req.params.id }
     loggerService.debug('Updating product: ', product)
@@ -112,9 +98,10 @@ export async function updateProduct(req: Request, res: Response): Promise<void> 
 export async function removeProduct(req: Request<{ id: ObjectId }>, res: Response): Promise<void> {
   try {
     const productId = req.params.id
+    loggerService.debug('Removing product with _id: ', productId)
     await productService.remove(productId)
 
-    res.send({ msg: 'Deleted successfully' })
+    res.status(200).send({ msg: 'Product successfully removed' })
   } catch (err) {
     loggerService.error('Failed to remove product', err)
     res.status(500).send({ err: 'Failed to remove product' })

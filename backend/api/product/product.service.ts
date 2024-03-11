@@ -41,12 +41,28 @@ async function getById(productId: ObjectId): Promise<Product | null> {
   }
 }
 
+// async function getByName(productName: string): Promise<Product | null> {
+//   try {
+//     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
+//     const products = await collection.find<Product>(
+//       { name: { $regex: new RegExp(productName, 'i') } }).toArray()
+//     const product = products.length > 0 ? products[0] : null
+
+//     if (product) loggerService.info('found product: ', product)
+//     else loggerService.error('No product found with name:', productName)
+
+//     return product
+//   } catch (err) {
+//     loggerService.error(`Error finding product ${productName}`, err)
+//     throw err
+//   }
+// }
 async function getByName(productName: string): Promise<Product | null> {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-    const products = await collection.find<Product>(
-      { name: { $regex: new RegExp(productName, 'i') } }).toArray()
-    const product = products.length > 0 ? products[0] : null
+
+    const product = await collection.findOne<Product>(
+      { name: { $regex: `^${productName}$`, $options: 'i' } })
 
     if (product) loggerService.info('found product: ', product)
     else loggerService.error('No product found with name:', productName)
@@ -73,20 +89,25 @@ async function getRandomProducts(type: string, excludeProductId?: ObjectId): Pro
 }
 
 async function save(product: Product): Promise<Product> {
+  const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
+
   try {
-    const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-
     if (product._id) {
-      const id = new ObjectId(product._id.toString())
-      const productToUpdate = { ...product, _id: undefined }
+      const { _id, ...productToUpdate } = product
+      const id = _id instanceof ObjectId ? _id : new ObjectId(_id)
 
-      const result = await collection.updateOne({ _id: id }, { $set: productToUpdate })
-      if (result.matchedCount === 0) throw new Error(`Product with id ${id} not found`)
+      const result = await collection.updateOne(
+        { _id: id }, { $set: productToUpdate })
 
-      return { ...productToUpdate, _id: id }
+      if (result.matchedCount === 0) {
+        throw new Error(`Product with id ${id.toHexString()} not found`)
+      }
+      return product
     } else {
       const response = await collection.insertOne(product)
-      return { ...product, _id: response.insertedId }
+
+      product._id = response.insertedId
+      return product
     }
   } catch (err) {
     loggerService.error('Failed to save product', err)
