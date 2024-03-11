@@ -67,26 +67,19 @@ export async function checkNameAvailable(req: Request<{ name: string }>, res: Re
   }
 }
 
-export async function getRandomProducts(req: Request, res: Response): Promise<void> {
+export async function getRandomProducts(req: Request<{ type: string, excludeProductId: ObjectId }>, res: Response): Promise<void> {
   try {
-    const type = typeof req.query.type === 'string' ? req.query.type : undefined;
+    const type = req.query.type as string
+    const excludeProductId = req.query.excludeProductId ? new ObjectId(req.query.excludeProductId as string) : undefined
 
-    let excludeProductId: ObjectId | undefined;
-    if (typeof req.query.excludeProductId === 'string') {
-      try {
-        excludeProductId = new ObjectId(req.query.excludeProductId);
-      } catch (error) {
-        // If the string is not a valid ObjectId, log the error and optionally handle it
-        loggerService.error('Invalid ObjectId for excludeProductId', error);
-        excludeProductId = undefined; // Or handle the error as appropriate
-      }
-    }
+    loggerService.info(`Fetching products from ${type}, excluding id: ${excludeProductId}`)
+    const products = await productService.getRandomProducts(type, excludeProductId)
+    loggerService.info(`Found relevent products: ${JSON.stringify(products)}`)
 
-    const products = await productService.getRandomProducts(type, excludeProductId);
-    res.json(products);
+    res.json(products)
   } catch (err) {
-    loggerService.error('Failed to get random products', err);
-    res.status(500).send({ err: 'Failed to get random products' });
+    loggerService.error('Failed to get random products', err)
+    res.status(500).send({ err: 'Failed to get random products' })
   }
 }
 

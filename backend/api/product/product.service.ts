@@ -58,7 +58,7 @@ async function getByName(productName: string): Promise<Product | null> {
   }
 }
 
-async function getRandomProducts(type?: string, excludeProductId?: ObjectId): Promise<Product[]> {
+async function getRandomProducts(type: string, excludeProductId?: ObjectId): Promise<Product[]> {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
     const pipeline = [

@@ -18,25 +18,21 @@ function setupUnverifiedUsersCheck(): void {
 }
 
 function _scheduleTask(task: () => Promise<any>, taskName: string, hour: number, minute: number): void {
-    loggerService.debug('Scheduling task called', taskName)
-
     const scheduleNextRun = () => {
         const now = new Date()
         let targetTime = new Date(now.getFullYear(), now.getMonth(),
             now.getDate(), hour, minute, 0)
-        loggerService.info(`Target time: ${targetTime.toLocaleString()}`)
+        loggerService.info(`Target time: ${targetTime.toLocaleString()} for ${taskName}`)
 
         if (now >= targetTime) {
             // If the target time for today has passed, schedule for tomorrow
-            loggerService.info('Target time has passed, scheduling for tomorrow')
+            loggerService.info(`Target time has passed for ${taskName}, scheduling for tomorrow`)
             targetTime.setDate(targetTime.getDate() + 1)
         }
-
         // Log when the next scheduled task will happen
-        loggerService.info(`Next time will happen at: ${targetTime.toLocaleString()}`)
+        loggerService.info(`Next time ${taskName} will happen at: ${targetTime.toLocaleString()}`)
 
         const delay = targetTime.getTime() - now.getTime()
-        loggerService.info(`Expected delay until next task: ${delay} milliseconds`)
 
         setTimeout(async () => {
             loggerService.info(`Scheduled ${taskName} is starting at: ${new Date().toLocaleString()}`)
