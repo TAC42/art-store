@@ -1,7 +1,6 @@
 import { ObjectId, WithId, Document } from 'mongodb'
 import { Order, OrderQueryParams, MatchCriteria } from '../../models/order.js'
 import { dbService } from '../../services/db.service.js'
-import { utilityService } from '../../services/utility.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
 const ORDERS_COLLECTION = 'order'
@@ -27,7 +26,7 @@ async function query(filterBy: OrderQueryParams = {}): Promise<WithId<Document>[
   }
 }
 
-async function getById(orderId: string): Promise<Order | null> {
+async function getById(orderId: ObjectId): Promise<Order | null> {
   try {
     const collection = await dbService.getCollection(ORDERS_COLLECTION)
     const order = await collection.findOne<Order>(
@@ -77,7 +76,7 @@ async function save(order: Order): Promise<Order> {
   }
 }
 
-async function remove(orderId: string): Promise<number> {
+async function remove(orderId: ObjectId): Promise<number> {
   try {
     const collection = await dbService.getCollection(ORDERS_COLLECTION)
     const { deletedCount } = await collection.deleteOne({

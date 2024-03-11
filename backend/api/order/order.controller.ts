@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
+import { Order } from '../../models/order.js'
 import { orderService } from './order.service.js'
 import { loggerService } from '../../services/logger.service.js'
+import { ObjectId } from 'mongodb'
 
-export async function getOrders(req: Request<{}, {}, {}, { _id?: string }>,
+export async function getOrders(req: Request<{}, {}, {}, { _id?: ObjectId }>,
   res: Response): Promise<void> {
   try {
     const { _id } = req.query
@@ -17,7 +19,7 @@ export async function getOrders(req: Request<{}, {}, {}, { _id?: string }>,
   }
 }
 
-export async function getOrderById(req: Request<{ id: string }>,
+export async function getOrderById(req: Request<{ id: ObjectId }>,
   res: Response): Promise<void> {
   try {
     const orderId = req.params.id
@@ -35,7 +37,7 @@ export async function getOrderById(req: Request<{ id: string }>,
   }
 }
 
-export async function addOrder(req: Request,
+export async function addOrder(req: Request<{}, {}, Order>,
   res: Response): Promise<void> {
   try {
     const order = req.body
@@ -49,10 +51,10 @@ export async function addOrder(req: Request,
   }
 }
 
-export async function updateOrder(req: Request,
+export async function updateOrder(req: Request<{ id: ObjectId }, {}, Order>,
   res: Response): Promise<void> {
   try {
-    const order = req.body
+    const order = { ...req.body, _id: req.params.id }
     loggerService.debug('Updating order:', order)
     const updatedOrder = await orderService.save(order)
 
@@ -63,13 +65,14 @@ export async function updateOrder(req: Request,
   }
 }
 
-export async function removeOrder(req: Request<{ id: string }>,
+export async function removeOrder(req: Request<{ id: ObjectId }>,
   res: Response): Promise<void> {
   try {
     const orderId = req.params.id
+    loggerService.debug('Removing order with _id: ', orderId)
     await orderService.remove(orderId)
 
-    res.send({ msg: 'Deleted successfully' })
+    res.status(200).send({ msg: 'Order successfully removed' })
   } catch (err) {
     loggerService.error('Failed to remove order', err)
     res.status(500).send({ err: 'Failed to remove order' })

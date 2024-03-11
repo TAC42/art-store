@@ -30,6 +30,7 @@ export async function addUser(req: Request<{}, {}, User>,
   res: Response): Promise<void> {
   try {
     const user = req.body
+    loggerService.debug('Creating user:', user)
     const addedUser = await userService.save(user)
 
     res.json(addedUser)
@@ -43,6 +44,7 @@ export async function updateUser(req: Request<{ id: ObjectId }, {}, User>,
   res: Response): Promise<void> {
   try {
     const user = { ...req.body, _id: req.params.id }
+    loggerService.debug('Updating user:', user)
     const savedUser = await userService.save(user)
 
     res.json(savedUser)
