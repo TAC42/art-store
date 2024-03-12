@@ -60,6 +60,16 @@
             </tbody>
           </table>
         </article>
+        <article class="cost">
+          <span>cost:</span>
+          <ul>
+            <li>subtotal: <span>{{ (orderSummary$ | async)?.total | currency : "USD" : "symbol" }}</span></li>
+            <li>taxes: <span>{{ (orderSummary$ | async)?.taxes | currency : "USD" : "symbol" }}</span></li>
+            <li>delivery fee: <span>{{ (orderSummary$ | async)?.deliveryFee | currency : "USD" : "symbol" }}</span></li>
+            <li>grand total: <span>{{ (orderSummary$ | async)?.grandTotal | currency : "USD" : "symbol" }}</span></li>
+          </ul>
+        </article>
+        
         <article class="status">
           <span>status:</span>
           <button [ngClass]="getStatusClass(order.status)">

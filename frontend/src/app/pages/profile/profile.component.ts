@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, catchError, combineLatest, map, of, switchMap } from 'rxjs'
 import { User } from '../../models/user'
 import { selectLoggedinUser, selectUser } from '../../store/user.selectors'
 import { Store } from '@ngrx/store'
@@ -10,6 +10,7 @@ import { selectOrders } from '../../store/order.selectors'
 import { Order } from '../../models/order'
 import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
 import { ModalService } from '../../services/modal.service'
+import { OrderService } from '../../services/order.service'
 
 @Component({
   selector: 'profile',
@@ -19,6 +20,7 @@ export class ProfileComponent implements OnInit {
   private store = inject(Store<AppState>)
   private dTypeService = inject(DeviceTypeService)
   public modService = inject(ModalService)
+  private oService = inject(OrderService)
 
   public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
@@ -53,9 +55,36 @@ export class ProfileComponent implements OnInit {
       delivered: 'delivered',
       cancelled: 'cancelled',
     }
-    // Get the class corresponding to the status
     return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
   }
+
+  get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
+    return this.orders$.pipe(
+      map(orders => {
+        let total = 0
+        let taxes = 0
+        let deliveryFee = 0
+        let grandTotal = 0
+  
+        orders.forEach(order => {
+          order.summary.forEach(item => {
+            total += item.price * (item.amount || 1)
+          })
+        })
+  
+        // Calculate taxes, delivery fee, and grand total based on the totals
+        const nyTaxRate = 0.0875; // NY State tax rate (8.75%)
+        const deliveryFeeRate = 0.12; // Delivery fee rate (12%)
+        
+        taxes = total * nyTaxRate
+        deliveryFee = total * deliveryFeeRate
+        grandTotal = total + taxes + deliveryFee
+  
+        return { total, taxes, deliveryFee, grandTotal }
+      })
+    )
+  }
+  
 
   onOpenUserEdit(event: Event): void {
     event.stopPropagation()
