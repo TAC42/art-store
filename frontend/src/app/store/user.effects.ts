@@ -2,16 +2,16 @@ import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators'
 import { EMPTY, of } from 'rxjs'
-import { UserService } from '../services/user.service'
-import { User } from '../models/user'
-import { showSuccessMsg, showErrorMsg, EventBusService } from '../services/event-bus.service'
+import { Store } from '@ngrx/store'
+import { AppState } from './app.state'
 import {
     CHECK_SESSION,
     LOAD_USER, LOAD_USERS, LOGIN, LOGOUT, SET_LOADING_STATE,
     SET_LOGGEDIN_USER, SET_USER, SET_USERS, SIGNUP, UPDATE_USER
 } from './user.actions'
-import { AppState } from './app.state'
-import { Store } from '@ngrx/store'
+import { User } from '../models/user'
+import { UserService } from '../services/user.service'
+import { showSuccessMsg, showErrorMsg, EventBusService } from '../services/event-bus.service'
 
 @Injectable()
 
@@ -73,12 +73,12 @@ export class UserEffects {
     login$ = createEffect(() =>
         this.actions$.pipe(ofType(LOGIN),
             mergeMap(action => this.userService.login(action.credentials).pipe(
-                tap((user: User) => showSuccessMsg('Login Successful!',
+                tap(user => showSuccessMsg('Login Successful!',
                     `Welcome back ${user.username}!`, this.eBusService)),
-                map((user: User) => SET_LOGGEDIN_USER({ user })),
+                map(user => SET_LOGGEDIN_USER({ user })),
                 catchError((error) => {
                     console.error(`Error fetching logged-in user: `, error)
-                    showErrorMsg('Signup Failed',
+                    showErrorMsg('Login Failed!',
                         'Incorrect password / username', this.eBusService)
                     return EMPTY
                 })
@@ -90,13 +90,13 @@ export class UserEffects {
     signup$ = createEffect(() =>
         this.actions$.pipe(ofType(SIGNUP),
             mergeMap(action => this.userService.signup(action.credentials).pipe(
-                tap((user: User) => showSuccessMsg('Signup Successful!',
+                tap(user => showSuccessMsg('Signup Successful!',
                     `Welcome ${user.username}!`, this.eBusService)),
-                map((user: User) => SET_LOGGEDIN_USER({ user })),
+                map(user => SET_LOGGEDIN_USER({ user })),
                 catchError((error) => {
                     console.error(`Error fetching signup user: `, error)
-                    showErrorMsg('Signup Failed',
-                        'Please try again later', this.eBusService)
+                    showErrorMsg('Signup Failed!',
+                        'Please try again later.', this.eBusService)
                     return EMPTY
                 })
             ))
@@ -111,7 +111,7 @@ export class UserEffects {
                 catchError((error) => {
                     console.error(`Error logging out user: `, error)
                     showErrorMsg('Logout Failed!',
-                        'This is awkward', this.eBusService)
+                        'This is awkward...', this.eBusService)
                     return EMPTY
                 })
             ))
@@ -125,10 +125,16 @@ export class UserEffects {
             tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
             mergeMap(action => this.userService.save(action.updatedUser).pipe(
-                tap((user: User) => this.userService.setLoggedinUser(user)),
+                tap((user: User) => {
+                    this.userService.setLoggedinUser(user)
+                    showSuccessMsg('User Changes Saved!',
+                        `Enjoy the new you ${user.username}!`, this.eBusService)
+                }),
                 map(user => SET_LOGGEDIN_USER({ user })),
                 catchError(error => {
                     console.error('Error loading User:', error)
+                    showErrorMsg('Failed To Edit!',
+                        'Sorry, please try again later.', this.eBusService)
                     return of(SET_LOADING_STATE({ isLoading: false }))
                 })
             )),

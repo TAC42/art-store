@@ -11,12 +11,14 @@ import {
 } from './order.actions'
 import { selectFilterBy } from './order.selectors'
 import { OrderService } from '../services/order.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 @Injectable()
 
 export class OrderEffects {
   private actions$ = inject(Actions)
   private orderService = inject(OrderService)
+  private eBusService = inject(EventBusService)
   private store = inject(Store<AppState>)
 
   // handling of all orders in dashboard
@@ -51,8 +53,12 @@ export class OrderEffects {
 
       mergeMap(({ order }) => this.orderService.save(order).pipe(
         map(() => ORDER_SAVED({ order })),
+        tap(() => showSuccessMsg('Order Sent!',
+          `Thank you for buying from Ori Carlin!`, this.eBusService)),
         catchError(error => {
           console.error('Error saving order:', error)
+          showErrorMsg('Order Failed!',
+            'Please try again, or contact support.', this.eBusService)
           return of(SET_LOADING_STATE({ isLoading: false }))
         }),
       )),
@@ -67,8 +73,12 @@ export class OrderEffects {
 
       mergeMap(({ orderId }) => this.orderService.remove(orderId).pipe(
         map(() => ORDER_REMOVED_SUCCESSFULLY({ orderId })),
+        tap(() => showSuccessMsg('Order Removed!',
+          `Order has been removed successfully!`, this.eBusService)),
         catchError(error => {
           console.error('Error removing order:', error)
+          showErrorMsg('Failed To Remove!',
+            'Whoops, try again later.', this.eBusService)
           return of(SET_LOADING_STATE({ isLoading: false }))
         }),
       )),

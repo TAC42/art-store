@@ -14,11 +14,14 @@ import {
 import { Product, ShopFilter } from '../models/shop'
 import { selectFilterBy } from './shop.selectors'
 import { ShopDbService } from '../services/shop-db.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 @Injectable()
+
 export class ShopEffects {
   private actions$ = inject(Actions)
   private shopDbService = inject(ShopDbService)
+  private eBusService = inject(EventBusService)
   private activatedRoute = inject(ActivatedRoute)
   private store = inject(Store<AppState>)
 
@@ -81,9 +84,13 @@ export class ShopEffects {
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
       mergeMap(({ product }) => this.shopDbService.save(product).pipe(
+        tap(product => showSuccessMsg('Product Saved!',
+          `${product.name} was saved successfully!`, this.eBusService)),
         map(() => PRODUCT_SAVED({ product })),
         catchError(error => {
           console.error('Error saving product:', error)
+          showErrorMsg('Failed To Save Product!',
+            'Whoops, try again later.', this.eBusService)
           return of(SET_LOADING_STATE({ isLoading: false }))
         }),
       )),
@@ -97,9 +104,13 @@ export class ShopEffects {
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
       mergeMap(({ productId }) => this.shopDbService.remove(productId).pipe(
+        tap(() => showSuccessMsg('Product Removed!',
+          `Product was removed successfully!`, this.eBusService)),
         map(() => PRODUCT_REMOVED_SUCCESSFULLY({ productId })),
         catchError(error => {
           console.error('Error removing product:', error)
+          showErrorMsg('Failed To Remove Product!',
+            'Whoops, try again later.', this.eBusService)
           return of(SET_LOADING_STATE({ isLoading: false }))
         }),
       )),
@@ -112,8 +123,8 @@ export class ShopEffects {
     this.actions$.pipe(ofType(LOAD_RANDOM_PRODUCTS),
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
-      mergeMap(({ productType, excludeProductId }) =>
-        this.shopDbService.getRandomProducts(productType, excludeProductId).pipe(
+      mergeMap(({ productType, excludeProductId }) => this.shopDbService.getRandomProducts(
+        productType, excludeProductId).pipe(
           map(randomProducts => RANDOM_PRODUCTS_LOADED({ randomProducts })),
           catchError(error => {
             console.error('Error loading random products:', error)
@@ -132,20 +143,16 @@ export class ShopEffects {
       mergeMap(({ userCart }) => {
         const requests = userCart.map(cartItem => {
           if (cartItem._id) {
-            console.log('in LOAD_CART_EFFECT: ', cartItem)
             return this.shopDbService.getById(cartItem._id).pipe(
               take(1),
               map((product: Product) => ({ ...product, amount: cartItem.amount })),
               catchError(() => of({ error: true } as const))
             )
-          } else {
-            console.error('Product name is undefined for cart item:', cartItem)
-            return of({ error: true } as const)
-          }
+          } else return of({ error: true } as const)
         })
 
         return forkJoin(requests).pipe(
-          mergeMap((results) => {
+          mergeMap(results => {
             const validProducts: Product[] = results.map(
               result => result as Product)
             return of(CART_LOADED({ cart: validProducts }))

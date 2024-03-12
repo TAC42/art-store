@@ -34,7 +34,7 @@ export class PaymentComponent implements OnInit {
   private utilService = inject(UtilityService)
   private router = inject(Router)
   private store = inject(Store<AppState>)
-  private oService = inject(OrderService)
+  private orderService = inject(OrderService)
   private modService = inject(ModalService)
 
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
@@ -79,7 +79,6 @@ export class PaymentComponent implements OnInit {
         this.personalForm.get('lastName')?.setValue(lastName)
       }
     })
-
     this.paymentForm = this.fb.group({
       paymentMethod: ['venmo']
     })
@@ -89,7 +88,8 @@ export class PaymentComponent implements OnInit {
   get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
     return this.cart$.pipe(
       switchMap(cart => {
-        if (cart) return of(this.oService.calculateOrderSummary(cart))
+        console.log('cart status: ', cart)
+        if (cart) return of(this.orderService.calculateOrderSummary(cart))
         else return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
       }),
       startWith({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
@@ -103,6 +103,11 @@ export class PaymentComponent implements OnInit {
   setSelection(option: string) {
     if (this.optionState === option) return
     this.optionState = option
+  }
+
+  closePayment() {
+    this.router.navigateByUrl('/shop')
+    setTimeout(() => this.modService.openModal('cart'), 800)
   }
 
   onSubmitPurchase() {
@@ -132,10 +137,5 @@ export class PaymentComponent implements OnInit {
         return EMPTY
       })
     ).subscribe()
-  }
-
-  closePayment() {
-    this.router.navigateByUrl('/shop')
-    setTimeout(() => this.modService.openModal('cart'), 600)
   }
 }
