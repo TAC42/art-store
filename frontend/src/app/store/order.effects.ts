@@ -54,7 +54,7 @@ export class OrderEffects {
       mergeMap(({ order }) => this.orderService.save(order).pipe(
         map(() => ORDER_SAVED({ order })),
         tap(() => showSuccessMsg('Order Sent!',
-          `Thank you for buying from Ori Carlin!`, this.eBusService)),
+          `Thank you for the purchase!`, this.eBusService)),
         catchError(error => {
           console.error('Error saving order:', error)
           showErrorMsg('Order Failed!',

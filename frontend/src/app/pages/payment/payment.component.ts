@@ -110,13 +110,50 @@ export class PaymentComponent implements OnInit {
     setTimeout(() => this.modService.openModal('cart'), 800)
   }
 
+  // onSubmitPurchase() {
+  //   const userData = this.personalForm.value
+  //   combineLatest([this.cart$, this.loggedinUser$]).pipe(
+  //     take(1),
+  //     map(([cart, user]) => {
+  //       return {
+  //         summary: cart,
+  //         user: {
+  //           ...userData,
+  //           _id: user._id
+  //         },
+  //         status: 'pending',
+  //         payment: this.payType,
+  //         createdAt: Date.now()
+  //       }
+  //     }),
+  //     tap(order => {
+  //       console.log('this is the order in paymentsubmit: ', order)
+  //       this.store.dispatch(SAVE_ORDER({ order }))
+  //       this.store.dispatch(CART_LOADED({ cart: [] }))
+  //       this.router.navigate(['/profile'])
+  //     }),
+  //     catchError(error => {
+  //       console.error('Error creating order: ', error)
+  //       return EMPTY
+  //     })
+  //   ).subscribe()
+  // }
   onSubmitPurchase() {
-    const userData = this.personalForm.value
+    const userData = this.personalForm.value;
+
     combineLatest([this.cart$, this.loggedinUser$]).pipe(
       take(1),
       map(([cart, user]) => {
+        // Transform the cart items to include only the specified properties
+        const summary = cart.map(({ name, price, _id, amount }) => ({
+          name,
+          price,
+          _id,
+          amount
+        }));
+
         return {
-          summary: cart,
+          summary, // Use the transformed summary for the order
           user: {
             ...userData,
             _id: user._id
@@ -124,18 +161,19 @@ export class PaymentComponent implements OnInit {
           status: 'pending',
           payment: this.payType,
           createdAt: Date.now()
-        }
+        };
       }),
       tap(order => {
-        console.log('this is the order in paymentsubmit: ', order)
-        this.store.dispatch(SAVE_ORDER({ order }))
-        this.store.dispatch(CART_LOADED({ cart: [] }))
-        this.router.navigate(['/profile'])
+        console.log('this is the order in paymentsubmit: ', order);
+        this.store.dispatch(SAVE_ORDER({ order }));
+        this.store.dispatch(CART_LOADED({ cart: [] }));
+        this.router.navigate(['/profile']);
       }),
       catchError(error => {
-        console.error('Error creating order: ', error)
-        return EMPTY
+        console.error('Error creating order: ', error);
+        return EMPTY;
       })
-    ).subscribe()
+    ).subscribe();
   }
+
 }

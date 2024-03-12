@@ -1,8 +1,8 @@
-import { Product } from "./shop"
+import { Cart, Product } from "./shop"
 
 export interface Order {
   _id?: string
-  summary: Product[]
+  summary: Cart[]
   user: OrderUser
   status: string
   payment: string
