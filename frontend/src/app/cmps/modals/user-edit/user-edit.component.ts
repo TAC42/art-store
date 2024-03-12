@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Observable, Subscription } from 'rxjs'
+import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
@@ -37,7 +37,6 @@ export class UserEditComponent implements OnInit {
   private dTypeService = inject(DeviceTypeService)
   private formUtilsService = inject(FormUtilsService)
   private fBuilder = inject(FormBuilder)
-  private router = inject(Router)
 
   private modalSubscription: Subscription | undefined
 
@@ -98,13 +97,11 @@ export class UserEditComponent implements OnInit {
   }
 
   onSaveUser() {
-    this.user$.subscribe(user => {
+    this.user$.pipe(take(1)).subscribe(user => {
       const formData = this.userEditForm.value
       const updatedUser = {...user , ...formData }
       console.log('formData: ',updatedUser)
       this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
-      // this.store.dispatch(SET_USER({ user: updatedUser }))
-      this.router.navigate(['/profile'])
     })
 
     this.closeUserEdit()
