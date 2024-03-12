@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { Observable, map } from 'rxjs'
+import { Observable } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../models/user'
 import { selectLoggedinUser, selectUser } from '../../store/user.selectors'
@@ -55,32 +55,6 @@ export class ProfileComponent implements OnInit {
       cancelled: 'cancelled',
     }
     return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
-  }
-
-  get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
-    return this.orders$.pipe(
-      map(orders => {
-        let total = 0
-        let taxes = 0
-        let deliveryFee = 0
-        let grandTotal = 0
-
-        orders.forEach(order => {
-          order.summary.forEach(item => {
-            total += item.price! * (item.amount || 1)
-          })
-        })
-        // Calculate taxes, delivery fee, and grand total based on the totals
-        const nyTaxRate = 0.0875; // NY State tax rate (8.75%)
-        const deliveryFeeRate = 0.12; // Delivery fee rate (12%)
-
-        taxes = total * nyTaxRate
-        deliveryFee = total * deliveryFeeRate
-        grandTotal = total + taxes + deliveryFee
-
-        return { total, taxes, deliveryFee, grandTotal }
-      })
-    )
   }
 
   onOpenUserEdit(event: Event): void {

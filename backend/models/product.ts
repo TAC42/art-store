@@ -15,6 +15,13 @@ export interface Product {
     amount?: number
 }
 
+export interface Cart {
+    _id?: ObjectId
+    name?: string
+    price?: number
+    amount?: number
+}
+
 export interface MatchCriteria {
     $match: {
         $or?: Array<{ name: { $regex: RegExp } } |

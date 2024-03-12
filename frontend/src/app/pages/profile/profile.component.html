@@ -1,44 +1,64 @@
 <section class="background-image">
   <img src="{{ backgroundImage }}" alt="background-image" />
 </section>
+
 <section class="personal-info grid" *ngIf="user$ | async as user">
   <article class="user-img">
     <img src="{{ user.imgUrl }}" alt="{{ user.fullName }}" />
   </article>
-  <article class="full-name">{{ user.fullName }}</article>
-  <article class="user-name"><span>&#64;</span>{{ user.username }}</article>
+
+  <article class="full-name">
+    {{ user.fullName }}
+  </article>
+
+  <article class="user-name">
+    <span>&#64;</span>
+    {{ user.username }}
+  </article>
+
   <article class="member-since flex">
-    <svg-render svgName="personIcon" /><span
-      >Member since {{ user.createdAt | date : "MMM yyyy" }}</span
-    >
+    <svg-render svgName="personIcon" />
+    <span>
+      Member since {{ user.createdAt | date : "MMM yyyy" }}
+    </span>
   </article>
 </section>
+
 <section class="edit-profile flex">
   <button (click)="onOpenUserEdit($event)">Edit profile</button>
 </section>
+
 <section class="orders grid" *ngIf="orders$ | async as orders">
   <ng-container *ngIf="orders.length; else orderless">
     <h3>Your orders</h3>
-    <!-- <article class="order"  *ngFor="let order of orders"></article> -->
-    <mat-expansion-panel
-      class="order glass"
-      [expanded]="optionState === 'order num'"
-      (click)="setSelection('order num')"
-      *ngFor="let order of orders; let i = index"
-    >
+    <mat-expansion-panel class="order glass" [expanded]="optionState === 'order num'"
+      (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title class="heading flex">
-          <span class="count">{{ i + 1 }}</span>
-          <span class="title">Order #{{ order.createdAt }}</span>
+          <span class="count">
+            {{ i + 1 }}
+          </span>
+          <span class="title">
+            Order #{{ order.createdAt }}
+          </span>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
       <section class="order-info grid">
         <article class="purchased">
-          <span>purchased:</span><span>{{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
+          <span>purchased:</span>
+          <span>
+            {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}
+          </span>
         </article>
+
         <article class="payment">
-          <span>payment:</span><span>{{ order.payment }}</span>
+          <span>payment:</span>
+          <span>
+            {{ order.payment }}
+          </span>
         </article>
+
         <article class="summary">
           <span>summary:</span>
           <table>
@@ -63,13 +83,21 @@
         <article class="cost">
           <span>cost:</span>
           <ul>
-            <li>subtotal: <span>{{ (orderSummary$ | async)?.total | currency : "USD" : "symbol" }}</span></li>
-            <li>taxes: <span>{{ (orderSummary$ | async)?.taxes | currency : "USD" : "symbol" }}</span></li>
-            <li>delivery fee: <span>{{ (orderSummary$ | async)?.deliveryFee | currency : "USD" : "symbol" }}</span></li>
-            <li>grand total: <span>{{ (orderSummary$ | async)?.grandTotal | currency : "USD" : "symbol" }}</span></li>
+            <li>subtotal:
+              <span>{{ order.expenses.total | currency : "USD" : "symbol" }}</span>
+            </li>
+            <li>taxes:
+              <span>{{ order.expenses.taxes | currency : "USD" : "symbol" }}</span>
+            </li>
+            <li>delivery fee:
+              <span>{{ order.expenses.deliveryFee | currency : "USD" : "symbol" }}</span>
+            </li>
+            <li>grand total:
+              <span>{{ order.expenses.grandTotal| currency : "USD" : "symbol" }}</span>
+            </li>
           </ul>
         </article>
-        
+
         <article class="status">
           <span>status:</span>
           <button [ngClass]="getStatusClass(order.status)">

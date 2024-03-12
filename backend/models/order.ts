@@ -1,12 +1,13 @@
 import { ObjectId } from "mongodb"
-import { Product } from "./product.js"
+import { Cart } from "./product.js"
 
 export interface Order {
     _id?: ObjectId
-    summary: Product[]
+    summary?: Cart[]
     user: OrderUser
     status: string
     payment: string
+    expenses: OrderExpenses
     createdAt: number
 }
 
@@ -20,6 +21,13 @@ export interface OrderUser {
     state: string
     zip: string
     _id?: ObjectId
+}
+
+export interface OrderExpenses {
+    total: number
+    taxes: number
+    deliveryFee: number
+    grandTotal: number
 }
 
 export interface MatchCriteria {

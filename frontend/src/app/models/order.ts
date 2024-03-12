@@ -1,4 +1,4 @@
-import { Cart, Product } from "./shop"
+import { Cart } from "./shop"
 
 export interface Order {
   _id?: string
@@ -6,6 +6,7 @@ export interface Order {
   user: OrderUser
   status: string
   payment: string
+  expenses: OrderExpenses
   createdAt: number
 }
 
@@ -19,6 +20,13 @@ export interface OrderUser {
   state: string
   zip: string
   _id: string
+}
+
+export interface OrderExpenses {
+  total: number
+  taxes: number
+  deliveryFee: number
+  grandTotal: number
 }
 
 export interface OrderFilter {

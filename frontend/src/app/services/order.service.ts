@@ -58,6 +58,7 @@ export class OrderService {
       _id: '',
       summary: [],
       user: {
+        _id: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -65,11 +66,16 @@ export class OrderService {
         street: '',
         city: '',
         state: '',
-        zip: '',
-        _id: ''
+        zip: ''
       },
       status: 'pending',
       payment: '',
+      expenses: {
+        total: 0,
+        taxes: 0,
+        deliveryFee: 0,
+        grandTotal: 0,
+      },
       createdAt: Date.now()
     }
   }
@@ -78,11 +84,14 @@ export class OrderService {
     const summary = cart.map(({ name, price, _id, amount }) => ({
       name, price, _id, amount
     }))
+    const expenses = this.calculateOrderSummary(cart)
+
     return {
       summary,
       user: { ...userData, _id: user._id },
       status: 'pending',
       payment: payType,
+      expenses,
       createdAt: Date.now()
     }
   }
