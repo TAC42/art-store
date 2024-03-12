@@ -17,6 +17,7 @@ import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
 import { LOAD_USER } from '../../store/user.actions'
+import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'payment',
@@ -34,6 +35,7 @@ export class PaymentComponent implements OnInit {
   private router = inject(Router)
   private store = inject(Store<AppState>)
   private oService = inject(OrderService)
+  private modService = inject(ModalService)
 
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
     filter(cart => !!cart))
@@ -105,7 +107,6 @@ export class PaymentComponent implements OnInit {
 
   onSubmitPurchase() {
     const userData = this.personalForm.value
-
     combineLatest([this.cart$, this.loggedinUser$]).pipe(
       take(1),
       map(([cart, user]) => {
@@ -131,5 +132,10 @@ export class PaymentComponent implements OnInit {
         return EMPTY
       })
     ).subscribe()
+  }
+
+  closePayment() {
+    this.router.navigateByUrl('/shop')
+    setTimeout(() => this.modService.openModal('cart'), 600)
   }
 }

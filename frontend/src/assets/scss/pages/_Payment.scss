@@ -4,11 +4,33 @@ payment {
   left: 0;
   background-color: $prmclr2;
 
-  h1 {
-    font-size: 1.5em;
-    color: #202020;
-    font-family: "nh-bold";
-    padding: 0.5em;
+  .payment-header {
+    position: relative;
+
+    .title {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      font-family: "nunito";
+      font-size: 1.75em;
+      color: $prmclr1;
+      letter-spacing: 0.05em;
+    }
+
+    .back {
+      position: absolute;
+      cursor: pointer;
+      width: 3em;
+      height: 3em;
+      padding: .75em;
+      svg-render {
+        svg {
+          path {
+            fill: $prmclr1;
+          }
+        }
+      }
+    }
   }
 
   .payment-main {
@@ -70,7 +92,7 @@ payment {
               img {
                 object-fit: cover;
                 aspect-ratio: 1/1;
-                border-radius: .5em;
+                border-radius: 0.5em;
               }
 
               .amount {
@@ -206,7 +228,6 @@ payment {
             }
 
             &.error {
-
               input,
               select {
                 border: 2px solid $mnrclr5;
@@ -253,11 +274,13 @@ payment {
     .pay-btn {
       width: 100%;
       padding: 1em;
+      justify-content: center;
 
       button {
         gap: 0.25em;
         justify-content: center;
         width: 100%;
+        max-width: 14em;
         padding: 0.5em;
         font-size: 1.5em;
         color: $prmclr2;
