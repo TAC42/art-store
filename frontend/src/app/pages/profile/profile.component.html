@@ -34,7 +34,7 @@
       </mat-expansion-panel-header>
       <section class="order-info grid">
         <article class="purchased">
-          <span>purchased:</span><span>{{ order.createdAt | date }}</span>
+          <span>purchased:</span><span>{{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
         </article>
         <article class="payment">
           <span>payment:</span><span>{{ order.payment }}</span>
