@@ -1,12 +1,12 @@
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
 import { Injectable, inject } from '@angular/core'
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
+import { Observable } from 'rxjs'
+import { take, tap, filter, distinctUntilChanged } from 'rxjs/operators'
 import { Store, select } from '@ngrx/store'
 import { AppState } from '../store/app.state'
+import { Product } from '../models/shop'
 import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
 import { selectProductByName } from '../store/shop.selectors'
-import { Observable } from 'rxjs'
-import { take, tap, filter, distinctUntilChanged, switchMap, delay } from 'rxjs/operators'
-import { Product } from '../models/shop'
 
 @Injectable({
   providedIn: 'root'

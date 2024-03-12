@@ -2,7 +2,7 @@ import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {
   EMPTY, Observable, catchError, combineLatest, filter,
-  map, of, startWith, switchMap, take, tap
+  map, of, switchMap, take, tap
 } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store, select } from '@ngrx/store'
@@ -88,11 +88,9 @@ export class PaymentComponent implements OnInit {
   get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
     return this.cart$.pipe(
       switchMap(cart => {
-        console.log('cart status: ', cart)
         if (cart) return of(this.orderService.calculateOrderSummary(cart))
         else return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
       }),
-      startWith({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
       catchError(error => {
         console.error('Error calculating order summary: ', error)
         return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
@@ -110,70 +108,22 @@ export class PaymentComponent implements OnInit {
     setTimeout(() => this.modService.openModal('cart'), 800)
   }
 
-  // onSubmitPurchase() {
-  //   const userData = this.personalForm.value
-  //   combineLatest([this.cart$, this.loggedinUser$]).pipe(
-  //     take(1),
-  //     map(([cart, user]) => {
-  //       return {
-  //         summary: cart,
-  //         user: {
-  //           ...userData,
-  //           _id: user._id
-  //         },
-  //         status: 'pending',
-  //         payment: this.payType,
-  //         createdAt: Date.now()
-  //       }
-  //     }),
-  //     tap(order => {
-  //       console.log('this is the order in paymentsubmit: ', order)
-  //       this.store.dispatch(SAVE_ORDER({ order }))
-  //       this.store.dispatch(CART_LOADED({ cart: [] }))
-  //       this.router.navigate(['/profile'])
-  //     }),
-  //     catchError(error => {
-  //       console.error('Error creating order: ', error)
-  //       return EMPTY
-  //     })
-  //   ).subscribe()
-  // }
   onSubmitPurchase() {
-    const userData = this.personalForm.value;
+    const userData = this.personalForm.value
 
-    combineLatest([this.cart$, this.loggedinUser$]).pipe(
+    combineLatest([this.cart$, this.user$]).pipe(
       take(1),
-      map(([cart, user]) => {
-        // Transform the cart items to include only the specified properties
-        const summary = cart.map(({ name, price, _id, amount }) => ({
-          name,
-          price,
-          _id,
-          amount
-        }));
-
-        return {
-          summary, // Use the transformed summary for the order
-          user: {
-            ...userData,
-            _id: user._id
-          },
-          status: 'pending',
-          payment: this.payType,
-          createdAt: Date.now()
-        };
-      }),
+      map(([cart, user]) => this.orderService.createOrder(
+        cart, user, userData, this.payType)),
       tap(order => {
-        console.log('this is the order in paymentsubmit: ', order);
-        this.store.dispatch(SAVE_ORDER({ order }));
-        this.store.dispatch(CART_LOADED({ cart: [] }));
-        this.router.navigate(['/profile']);
+        this.store.dispatch(SAVE_ORDER({ order }))
+        this.store.dispatch(CART_LOADED({ cart: [] }))
+        this.router.navigate(['/profile'])
       }),
       catchError(error => {
-        console.error('Error creating order: ', error);
-        return EMPTY;
+        console.error('Error creating order: ', error)
+        return EMPTY
       })
-    ).subscribe();
+    ).subscribe()
   }
-
 }

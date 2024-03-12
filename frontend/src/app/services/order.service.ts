@@ -1,22 +1,22 @@
 import { Injectable, inject } from '@angular/core'
 import { HttpService } from './http.service'
-import { Order, OrderFilter } from '../models/order'
 import { Observable, catchError, throwError } from 'rxjs'
+import { Order, OrderFilter } from '../models/order'
 import { Product } from '../models/shop'
+import { User } from '../models/user'
 
 const BASE_URL = 'order/'
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class OrderService {
   private httpService = inject(HttpService)
 
   query(filterBy: Partial<OrderFilter> = {}): Observable<any> {
-    console.log('orderService query filterBy', filterBy)
-
     return this.httpService.get(BASE_URL, filterBy).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error querying orders:', error)
         return throwError(() => new Error('Error fetching orders'))
       })
@@ -25,7 +25,7 @@ export class OrderService {
 
   getById(orderId: string): Observable<any> {
     return this.httpService.get<Order>(`${BASE_URL}${orderId}`).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error fetching order by id:', error)
         return throwError(() => new Error('Error fetching order by id'))
       })
@@ -34,7 +34,7 @@ export class OrderService {
 
   remove(orderId: string): Observable<any> {
     return this.httpService.delete(`${BASE_URL}${orderId}`).pipe(
-      catchError((error) => {
+      catchError(error => {
         console.error('Error deleting order by id:', error)
         return throwError(() => new Error('Error deleting order by id'))
       })
@@ -53,9 +53,7 @@ export class OrderService {
     }
   }
 
-  static getDefaultProduct(): Order {
-    const currentTimestamp = Date.now()
-
+  static getDefaultOrder(): Order {
     return {
       _id: '',
       summary: [],
@@ -72,7 +70,20 @@ export class OrderService {
       },
       status: 'pending',
       payment: '',
-      createdAt: currentTimestamp
+      createdAt: Date.now()
+    }
+  }
+
+  createOrder(cart: Product[], user: User, userData: any, payType: string): any {
+    const summary = cart.map(({ name, price, _id, amount }) => ({
+      name, price, _id, amount
+    }))
+    return {
+      summary,
+      user: { ...userData, _id: user._id },
+      status: 'pending',
+      payment: payType,
+      createdAt: Date.now()
     }
   }
 

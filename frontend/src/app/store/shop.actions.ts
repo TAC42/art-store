@@ -27,7 +27,7 @@ export const PRODUCT_BY_NAME_LOADED = createAction(
   props<{ product: Product | null }>()
 )
 
-// handling of product in details
+// handling of user's products cart
 export const LOAD_CART = createAction(
   '[Shop] Load Cart',
   props<{ userCart: Cart[] }>()
