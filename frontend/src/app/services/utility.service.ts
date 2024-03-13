@@ -1,8 +1,9 @@
 import usStates from '../jsons/us-states.json'
 import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
-import { HttpService } from './http.service'
 import { CarouselItem, MiniProduct } from '../models/shop'
+import { Order } from '../models/order'
+import { HttpService } from './http.service'
 import { ModalService } from './modal.service'
 
 const BASE_URL = 'mail/'
@@ -21,6 +22,10 @@ export class UtilityService {
 
   sendVerificationMail(formData: any): Observable<any> {
     return this.httpService.post<any>(`${BASE_URL}/verify`, formData)
+  }
+
+  sendInvoiceMails(orderDetails: Order): Observable<any> {
+    return this.httpService.post<any>(`${BASE_URL}/invoice`, orderDetails)
   }
 
   getStates() {

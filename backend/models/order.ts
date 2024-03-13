@@ -3,7 +3,7 @@ import { Cart } from "./product.js"
 
 export interface Order {
     _id?: ObjectId
-    summary?: Cart[]
+    summary: Cart[]
     user: OrderUser
     status: string
     payment: string

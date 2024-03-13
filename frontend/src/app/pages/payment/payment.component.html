@@ -20,23 +20,15 @@
             <article class="summary-item grid" *ngFor="let summaryItem of cart">
               <div class="image">
                 <img [src]="summaryItem.imgUrls[0]" [alt]="summaryItem.name" />
-                <span class="amount">
-                  {{ summaryItem.amount }}
-                </span>
+                <span class="amount"> {{ summaryItem.amount }} </span>
               </div>
 
               <div class="item-info grid">
-                <span class="name">
-                  {{ summaryItem.name }}
-                </span>
-                <span class="desc">
-                  {{ summaryItem.description }}
-                </span>
+                <span class="name"> {{ summaryItem.name }} </span>
+                <span class="desc"> {{ summaryItem.description }} </span>
               </div>
 
-              <span class="price">
-                {{ summaryItem.price | currency : "USD" : "symbol" }}
-              </span>
+              <span class="price"> {{ summaryItem.price | currency : "USD" : "symbol" }} </span>
             </article>
           </section>
 
@@ -44,27 +36,19 @@
             <ng-container *ngIf="orderSummary$ | async as orderSummary">
               <div class="info flex">
                 <span>subtotal</span>
-                <span>
-                  {{ orderSummary.total | currency : "USD" : "symbol" }}
-                </span>
+                <span> {{ orderSummary.total | currency : "USD" : "symbol" }} </span>
               </div>
               <div class="info flex">
                 <span>taxes</span>
-                <span>
-                  {{ orderSummary.taxes | currency : "USD" : "symbol" }}
-                </span>
+                <span> {{ orderSummary.taxes | currency : "USD" : "symbol" }} </span>
               </div>
               <div class="info flex">
                 <span>delivery</span>
-                <span>
-                  {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }}
-                </span>
+                <span> {{ orderSummary.deliveryFee | currency : "USD" : "symbol" }} </span>
               </div>
               <div class="info flex">
                 <span>grand total</span>
-                <span>
-                  {{ orderSummary.grandTotal | currency : "USD" : "symbol" }}
-                </span>
+                <span> {{ orderSummary.grandTotal | currency : "USD" : "symbol" }} </span>
               </div>
             </ng-container>
           </section>
@@ -168,8 +152,8 @@
               {{ state.name }}
             </option>
           </select>
-          <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'state')">{{
-            formUtils.getErrorMessage(personalForm, "state") }}
+          <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'state')">
+            {{ formUtils.getErrorMessage(personalForm, "state") }}
           </span>
         </label>
 
@@ -218,9 +202,7 @@
     <button class="flex" [disabled]="!paymentForm.valid || !personalForm.valid" (click)="onSubmitPurchase()"
       [class.disabled]="!paymentForm.valid || !personalForm.valid">
       <svg-render svgName="lock" />
-      <span class="pay-type">
-        Pay with {{ payType }}
-      </span>
+      <span class="pay-type"> Pay with {{ payType }} </span>
     </button>
   </section>
 </main>

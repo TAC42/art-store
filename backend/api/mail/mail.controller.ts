@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { ContactUsRequestBody, VerificationMailRequestBody } from '../../models/utility.js'
+import { Order } from '../../models/order.js'
 import { loggerService } from '../../services/logger.service.js'
 import { mailService } from './mail.service.js'
 
@@ -24,6 +25,21 @@ export async function sendVerificationMail(req: Request<VerificationMailRequestB
 
     try {
         await mailService.sendVerificationMail(username, email, code)
+        res.status(200).send({ msg: 'Mail successfully sent' })
+    } catch (error) {
+        loggerService.error('Failed sending mail: ' + error)
+        res.status(500).send({ error: 'Failed sending mail' })
+    }
+}
+
+export async function sendInvoices(req: Request<Order>,
+    res: Response): Promise<void> {
+    const orderDetails = req.body
+    loggerService.debug(`Received order form data: ${orderDetails}`)
+
+    try {
+        await mailService.sendCustomerInvoice(orderDetails)
+        await mailService.sendArtistInvoice(orderDetails)
         res.status(200).send({ msg: 'Mail successfully sent' })
     } catch (error) {
         loggerService.error('Failed sending mail: ' + error)

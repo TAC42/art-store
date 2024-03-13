@@ -12,6 +12,7 @@ import {
 import { selectFilterBy } from './order.selectors'
 import { OrderService } from '../services/order.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { UtilityService } from '../services/utility.service'
 
 @Injectable()
 
@@ -19,6 +20,7 @@ export class OrderEffects {
   private actions$ = inject(Actions)
   private orderService = inject(OrderService)
   private eBusService = inject(EventBusService)
+  private utilService = inject(UtilityService)
   private store = inject(Store<AppState>)
 
   // handling of all orders in dashboard
@@ -53,8 +55,13 @@ export class OrderEffects {
 
       mergeMap(({ order }) => this.orderService.save(order).pipe(
         map(() => ORDER_SAVED({ order })),
-        tap(() => showSuccessMsg('Order Sent!',
-          `Thank you for the purchase!`, this.eBusService)),
+        // tap(() => showSuccessMsg('Order Sent!',
+        //   `Thank you for the purchase!`, this.eBusService)),
+        tap(() => {
+          this.utilService.sendInvoiceMails(order).subscribe()
+          showSuccessMsg('Order Sent!',
+            `Thank you for the purchase!`, this.eBusService)
+        }),
         catchError(error => {
           console.error('Error saving order:', error)
           showErrorMsg('Order Failed!',
