@@ -15,18 +15,6 @@ profile {
       width: fit-content;
       padding: 0.5em;
       background-color: $prmclr2;
-      // &::before {
-      //   content: "";
-      //   position: absolute;
-      //   top: 0;
-      //   left: 50%;
-      //   transform: translateX(-50%) rotate(45deg);
-      //   width: calc(100% + 3em);
-      //   height: calc(100% + 3em);
-      //   background-color: $prmclr2;
-      //   border-radius: 50%;
-      //   z-index: 0;
-      // }
 
       img {
         position: relative;
@@ -131,6 +119,14 @@ profile {
               border-bottom: 1px solid #a3a1ab;
             }
           }
+        }
+      }
+      .cost{
+        li{
+          display:grid;
+          grid-auto-flow: column;
+          gap: 1em;
+          justify-content: space-between;
         }
       }
       .status {

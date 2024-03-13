@@ -24,3 +24,16 @@ export async function sendVerificationMail(req, res) {
         res.status(500).send({ error: 'Failed sending mail' });
     }
 }
+export async function sendInvoices(req, res) {
+    const orderDetails = req.body;
+    loggerService.debug(`Received order form data: ${JSON.stringify(orderDetails)}`);
+    try {
+        await mailService.sendCustomerInvoice(orderDetails);
+        await mailService.sendArtistInvoice(orderDetails);
+        res.status(200).send({ msg: 'Mail successfully sent' });
+    }
+    catch (error) {
+        loggerService.error('Failed sending mail: ' + error);
+        res.status(500).send({ error: 'Failed sending mail' });
+    }
+}

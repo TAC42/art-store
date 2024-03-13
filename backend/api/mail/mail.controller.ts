@@ -35,7 +35,7 @@ export async function sendVerificationMail(req: Request<VerificationMailRequestB
 export async function sendInvoices(req: Request<Order>,
     res: Response): Promise<void> {
     const orderDetails = req.body
-    loggerService.debug(`Received order form data: ${orderDetails}`)
+    loggerService.debug(`Received order form data: ${JSON.stringify(orderDetails)}`)
 
     try {
         await mailService.sendCustomerInvoice(orderDetails)
