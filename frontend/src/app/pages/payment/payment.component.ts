@@ -2,7 +2,7 @@ import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {
   EMPTY, Observable, catchError, combineLatest, filter,
-  map, of, switchMap, take, tap
+  map, of, take, tap
 } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store, select } from '@ngrx/store'
@@ -17,7 +17,6 @@ import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
 import { LOAD_USER } from '../../store/user.actions'
-import { ModalService } from '../../services/modal.service'
 
 @Component({
   selector: 'payment',
@@ -35,14 +34,13 @@ export class PaymentComponent implements OnInit {
   private router = inject(Router)
   private store = inject(Store<AppState>)
   private orderService = inject(OrderService)
-  private modService = inject(ModalService)
 
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
     filter(cart => !!cart))
   loggedinUser$: Observable<User> = this.store.pipe(select(selectLoggedinUser))
   user$: Observable<User> = this.store.select(selectUser)
-  public usStates = this.utilService.getStates()
 
+  public usStates = this.utilService.getStates()
   optionState: string = 'order'
   payType: string = 'venmo'
 
@@ -69,7 +67,6 @@ export class PaymentComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required]
     })
-
     this.user$.subscribe(user => {
       if (user._id) {
         this.personalForm.get('email')?.setValue(user.email)
@@ -79,18 +76,13 @@ export class PaymentComponent implements OnInit {
         this.personalForm.get('lastName')?.setValue(lastName)
       }
     })
-    this.paymentForm = this.fb.group({
-      paymentMethod: ['venmo']
-    })
+    this.paymentForm = this.fb.group({ paymentMethod: ['venmo'] })
     this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => this.payType = value)
   }
 
   get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
     return this.cart$.pipe(
-      switchMap(cart => {
-        if (cart) return of(this.orderService.calculateOrderSummary(cart))
-        else return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
-      }),
+      map(cart => this.orderService.calculateOrderSummary(cart)),
       catchError(error => {
         console.error('Error calculating order summary: ', error)
         return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
@@ -98,17 +90,11 @@ export class PaymentComponent implements OnInit {
     )
   }
 
-  setSelection(option: string) {
-    if (this.optionState === option) return
-    this.optionState = option
+  setSelection(option: string): void {
+    this.optionState === option || (this.optionState = option)
   }
 
-  closePayment() {
-    this.router.navigateByUrl('/shop')
-    setTimeout(() => this.modService.openModal('cart'), 800)
-  }
-
-  onSubmitPurchase() {
+  onSubmitPurchase(): void {
     const userData = this.personalForm.value
 
     combineLatest([this.cart$, this.user$]).pipe(

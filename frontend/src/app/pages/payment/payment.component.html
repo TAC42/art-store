@@ -1,7 +1,7 @@
 <section class="payment-header flex">
-  <button class="back" (click)="closePayment()">
+  <a class="back" [routerLink]="['/shop']" title="Back to shop?">
     <svg-render svgName="back" />
-  </button>
+  </a>
   <h1 class="title flex b">Checkout</h1>
 </section>
 <main class="payment-main grid">

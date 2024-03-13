@@ -53,33 +53,6 @@ export class OrderService {
     }
   }
 
-  static getDefaultOrder(): Order {
-    return {
-      _id: '',
-      summary: [],
-      user: {
-        _id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
-      },
-      status: 'pending',
-      payment: '',
-      expenses: {
-        total: 0,
-        taxes: 0,
-        deliveryFee: 0,
-        grandTotal: 0,
-      },
-      createdAt: Date.now()
-    }
-  }
-
   createOrder(cart: Product[], user: User, userData: any, payType: string): any {
     const summary = cart.map(({ name, price, _id, amount }) => ({
       name, price, _id, amount
