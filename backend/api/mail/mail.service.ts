@@ -56,7 +56,8 @@ async function sendCustomerInvoice(orderDetails: Order): Promise<void> {
         to: orderDetails.user.email,
         subject: `Your Ori Carlin purchase #${orderDetails.createdAt}`,
         text: `Hello ${orderDetails.user.firstName},
-        Thank you for your purchase. Below are the details of your order:        
+        Thank you for shopping with us.
+        We'll send you a confirmation when your order ships.
         Invoice: #${orderDetails.createdAt}
         Date issued: ${invoiceDate}
         Purchased products:
@@ -64,12 +65,12 @@ async function sendCustomerInvoice(orderDetails: Order): Promise<void> {
         Expenses:
         ${expensesText}
         Payment method: ${orderDetails.payment}.
-        This message is intended as your receipt, in case you wish to request a refund.        
-        This message was auto-generated. For questions regarding the order, please contact us through the site.
-        Thank you, The Support Team`,
+        This is your order confirmation, for any questions, please contact us through the site.
+        Thank you, The Ori Carlin Team`,
         html: `
             <p>Hello ${orderDetails.user.firstName},</p>
-            <p>Thank you for your purchase. Below are the details of your order:</p>
+            <p>Thank you for shopping with us.</p>
+            <p>We'll send you a confirmation when your order ships.</p>
             <hr>
             <p>Invoice: #${orderDetails.createdAt}</p>
             <p>Date issued ${invoiceDate},</p>
@@ -89,10 +90,8 @@ async function sendCustomerInvoice(orderDetails: Order): Promise<void> {
             </table>
             <p>Payment method: ${orderDetails.payment}</p>
             <br>
-            <p>This message is intended as your receipt, in case you wish to request a refund.</p>
-            <br>
-            <p>This message was auto-generated, for questions regarding the order, please contact us through the site.</p>
-            <p>Thank you,<br>The Support Team</p>`,
+            <p>This is your order confirmation, for any questions, please contact us through the <a href="https://www.oricarlin.com">site</a>.</p>
+            <p>Thank you,<br>The Ori Carlin Team</p>`,
     }
     await _sendEmail(mailOptions)
 }
@@ -106,7 +105,7 @@ async function sendArtistInvoice(orderDetails: Order): Promise<void> {
         to: 'valerykuvshinuv@gmail.com',
         subject: `New Order Received: #${orderDetails.createdAt}`,
         text: `Dear Ori Carlin,
-        You've got a new order! Here are its details:
+        You've got a new order, from ${orderDetails.user.firstName} ${orderDetails.user.lastName}!
         Invoice: #${orderDetails.createdAt}
         Date issued: #${invoiceDate}
         Products sold:
@@ -114,10 +113,10 @@ async function sendArtistInvoice(orderDetails: Order): Promise<void> {
         Profits:
         ${expensesText}
         This email was auto-generated. Please keep it, incase of a refund request from the customer.
-        Have an inspirational day`,
+        Have an inspirational day!`,
         html: `
             <p>Dear Ori Carlin,</p>
-            <p>You've got a new order! Here are its details:</p>
+            <p>You've got a new order, from ${orderDetails.user.firstName} ${orderDetails.user.lastName}!</p>
             <hr>
             <p>Invoice: #${orderDetails.createdAt}</p>
             <p>Date issued: ${invoiceDate}</p>
@@ -138,7 +137,7 @@ async function sendArtistInvoice(orderDetails: Order): Promise<void> {
             <p>Payment method: ${orderDetails.payment}</p>
             <br>
             <p>This email was auto-generated. Please keep it, incase of a refund request from the customer.</p>
-            <p>Have an inspirational day</p>`,
+            <p>Have an inspirational day!</p>`,
     }
     await _sendEmail(mailOptions)
 }

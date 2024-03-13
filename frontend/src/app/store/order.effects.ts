@@ -55,8 +55,6 @@ export class OrderEffects {
 
       mergeMap(({ order }) => this.orderService.save(order).pipe(
         map(() => ORDER_SAVED({ order })),
-        // tap(() => showSuccessMsg('Order Sent!',
-        //   `Thank you for the purchase!`, this.eBusService)),
         tap(() => {
           this.utilService.sendInvoiceMails(order).subscribe()
           showSuccessMsg('Order Sent!',
