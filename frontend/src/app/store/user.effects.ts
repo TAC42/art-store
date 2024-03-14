@@ -125,16 +125,12 @@ export class UserEffects {
             tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
             mergeMap(action => this.userService.save(action.updatedUser).pipe(
-                tap((user: User) => {
-                    this.userService.setLoggedinUser(user)
-                    showSuccessMsg('User Changes Saved!',
-                        `Enjoy the new you ${user.username}!`, this.eBusService)
-                }),
+                tap(user => this.userService.setLoggedinUser(user)),
                 map(user => SET_LOGGEDIN_USER({ user })),
                 catchError(error => {
                     console.error('Error loading User:', error)
-                    showErrorMsg('Failed To Edit!',
-                        'Sorry, please try again later.', this.eBusService)
+                    showErrorMsg('User Edit Failed!',
+                        'User changes did not get saved, sorry.', this.eBusService)
                     return of(SET_LOADING_STATE({ isLoading: false }))
                 })
             )),

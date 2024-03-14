@@ -36,11 +36,10 @@ export class AsideMenuComponent implements OnInit, OnDestroy {
   menuState: string = 'hidden'
 
   ngOnInit() {
-    this.modalSubscription = this.modService.onModalStateChange('aside-menu').subscribe(
-      isOpen => {
-        if (isOpen) setTimeout(() => this.menuState = 'visible', 60)
-        else this.menuState = 'hidden'
-      })
+    this.modalSubscription = this.modService.onModalStateChange('aside-menu').subscribe(isOpen => {
+      if (isOpen) setTimeout(() => this.menuState = 'visible', 60)
+      else this.menuState = 'hidden'
+    })
   }
 
   closeMenu() {

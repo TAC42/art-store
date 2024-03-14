@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core'
-import { HttpService } from './http.service'
-import { Observable, catchError, throwError } from 'rxjs'
+import { Observable, catchError, map, of, startWith, throwError } from 'rxjs'
 import { Order, OrderFilter } from '../models/order'
 import { Product } from '../models/shop'
 import { User } from '../models/user'
+import { HttpService } from './http.service'
 
 const BASE_URL = 'order/'
 
@@ -54,10 +54,9 @@ export class OrderService {
   }
 
   createOrder(cart: Product[], user: User, userData: any, payType: string): any {
-    const summary = cart.map(({ name, price, _id, amount }) => ({
-      name, price, _id, amount
-    }))
-    const expenses = this.calculateOrderSummary(cart)
+    const summary = cart.map(({ name, price, _id, amount }) =>
+      ({ name, price, _id, amount }))
+    const expenses = this._calculateOrderSummary(cart)
 
     return {
       summary,
@@ -69,7 +68,19 @@ export class OrderService {
     }
   }
 
-  calculateOrderSummary(cartItems: Product[]): { total: number, taxes: number, deliveryFee: number, grandTotal: number } {
+  getOrderSummary$(cart$: Observable<Product[]>): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
+    return cart$.pipe(
+      map(cart => cart ? this._calculateOrderSummary(cart) :
+        { total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
+      startWith({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
+      catchError(error => {
+        console.error('Error calculating order summary: ', error);
+        return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
+      })
+    )
+  }
+
+  _calculateOrderSummary(cartItems: Product[]): { total: number, taxes: number, deliveryFee: number, grandTotal: number } {
     const nyTaxRate = 0.0875 // NY State tax rate (8.75%)
     const deliveryFeeRate = 0.12 // Delivery fee rate (12%)
 

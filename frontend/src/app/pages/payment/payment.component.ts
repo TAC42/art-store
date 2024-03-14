@@ -1,8 +1,7 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {
-  EMPTY, Observable, catchError, combineLatest, filter,
-  map, of, take, tap
+  EMPTY, Observable, catchError, combineLatest, filter, map, take, tap
 } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store, select } from '@ngrx/store'
@@ -39,6 +38,7 @@ export class PaymentComponent implements OnInit {
     filter(cart => !!cart))
   loggedinUser$: Observable<User> = this.store.pipe(select(selectLoggedinUser))
   user$: Observable<User> = this.store.select(selectUser)
+  orderSummary$!: Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }>
 
   public usStates = this.utilService.getStates()
   optionState: string = 'order'
@@ -54,6 +54,7 @@ export class PaymentComponent implements OnInit {
     this.loggedinUser$.subscribe((user: User) => {
       if (user._id) this.store.dispatch(LOAD_USER({ userId: user._id }))
     })
+    this.orderSummary$ = this.orderService.getOrderSummary$(this.cart$)
   }
 
   initializeForms(): void {
@@ -78,16 +79,6 @@ export class PaymentComponent implements OnInit {
     })
     this.paymentForm = this.fb.group({ paymentMethod: ['venmo'] })
     this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => this.payType = value)
-  }
-
-  get orderSummary$(): Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }> {
-    return this.cart$.pipe(
-      map(cart => this.orderService.calculateOrderSummary(cart)),
-      catchError(error => {
-        console.error('Error calculating order summary: ', error)
-        return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
-      })
-    )
   }
 
   setSelection(option: string): void {
