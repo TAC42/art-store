@@ -12,7 +12,7 @@ import { User } from '../../models/user'
 
 export class HeaderComponent implements OnInit, OnDestroy {
   @Input() deviceType$!: Observable<string>
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
 
   @HostBinding('class.z-50') get zIndex() { return this.searchState }
 

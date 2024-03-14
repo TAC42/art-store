@@ -31,7 +31,7 @@ export const userReducer = createReducer(
         ...state, loggedinUser: user
     })),
     on(UserActions.LOGOUT, (state) => ({
-        ...state, loggedinUser: defaultUser,
+        ...state, loggedinUser: defaultUser, user: defaultUser,
     })),
     // handling of users in index
     on(UserActions.SET_USERS, (state, { users }) => ({

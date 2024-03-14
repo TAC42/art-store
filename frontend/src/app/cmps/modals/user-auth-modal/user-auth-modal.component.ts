@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
-import { Observable, Subscription, debounceTime, filter, take } from 'rxjs'
+import { Observable, debounceTime, filter, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { User } from '../../../models/user'
@@ -16,7 +16,7 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
 })
 
 export class UserAuthModalComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
 
   public modService = inject(ModalService)
   private utilService = inject(UtilityService)
@@ -24,8 +24,6 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
-
-  private userSubscription?: Subscription
 
   public formUtils = this.formUtilsService
   public verifyForm!: FormGroup
@@ -39,8 +37,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   private authModalTimer?: number
 
   ngOnInit() {
-    this.userSubscription = this.loggedinUser$.subscribe(user => {
-      if (user._id === '') return
+    this.user$.subscribe(() => {
       if (this.modService.isModalOpen('user-auth')) {
         this.initializeForm()
         this.authModalTimer = setTimeout(() => {
@@ -56,13 +53,13 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
     this.verifyForm = this.fBuilder.group({
       code: ['', [Validators.required, this.codeValidator.bind(this)]]
     })
-    this.verifyForm.valueChanges.pipe(
-      filter(() => this.verifyForm.valid), debounceTime(500)
-    ).subscribe(() => this.onSubmit())
+    this.verifyForm.valueChanges.pipe(filter(() =>
+      this.verifyForm.valid), debounceTime(500)).subscribe(() =>
+        this.onSubmit())
   }
 
   sendCode() {
-    this.loggedinUser$.pipe(take(1)).subscribe(user => {
+    this.user$.pipe(take(1)).subscribe(user => {
       if (user._id && !user.isVerified) {
         // Generate and send code
         this.verificationCode = this.utilService.generateRandomCode()
@@ -104,10 +101,10 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.verifyForm.value.code === this.verificationCode) {
-      this.loggedinUser$.pipe(take(1)).subscribe(user => {
+      this.user$.pipe(take(1)).subscribe(user => {
         const updatedUser: User = { ...user, isVerified: true }
         this.store.dispatch(UPDATE_USER({ updatedUser }))
-        showSuccessMsg('User Verified!', 'A quick refresh, and you are set!',
+        showSuccessMsg('User Verified!', 'Thank you for the cooperation!',
           this.eBusService)
       })
       setTimeout(() => window.location.reload(), 2000)
@@ -116,7 +113,6 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.userSubscription) this.userSubscription.unsubscribe()
     if (this.resendCodeTimer) clearInterval(this.resendCodeTimer)
     if (this.authModalTimer) clearTimeout(this.authModalTimer)
   }

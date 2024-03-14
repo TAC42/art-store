@@ -82,8 +82,6 @@ export class UserService {
   setLoggedinUser(user: User): void {
     const userForSession = {
       _id: user._id,
-      cart: user.cart,
-      imgUrl: user.imgUrl,
       isVerified: user.isVerified,
       isAdmin: user.isAdmin
     }

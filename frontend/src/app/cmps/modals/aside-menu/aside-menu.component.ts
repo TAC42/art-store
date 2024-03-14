@@ -26,7 +26,7 @@ import { Router } from '@angular/router'
 })
 
 export class AsideMenuComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
 
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)

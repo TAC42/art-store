@@ -1,11 +1,11 @@
-<app-header class="full" *ngIf="!hideFooterHeader" [loggedinUser$]="loggedinUser$" [deviceType$]="deviceType$" />
-<aside-menu [loggedinUser$]="loggedinUser$" />
+<app-header class="full" *ngIf="!hideFooterHeader" [user$]="user$" [deviceType$]="deviceType$" />
+<aside-menu [user$]="user$" />
 <login-modal />
 <confirm-modal />
-<cart [loggedinUser$]="loggedinUser$" />
+<cart [user$]="user$" />
 <image-display />
-<user-auth-modal [loggedinUser$]="loggedinUser$" />
-<user-edit [loggedinUser$]="loggedinUser$" />
+<user-auth-modal [user$]="user$" />
+<user-edit [user$]="user$" [deviceType$]="deviceType$" />
 <loader />
 <router-outlet />
 <user-msg />

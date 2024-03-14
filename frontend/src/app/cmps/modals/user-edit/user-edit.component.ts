@@ -5,12 +5,9 @@ import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
-import { LOAD_USER, SET_USER, UPDATE_USER } from '../../../store/user.actions'
-import { selectUser } from '../../../store/user.selectors'
-import { DeviceTypeService } from '../../../services/device-type.service'
+import { UPDATE_USER } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'user-edit',
@@ -30,11 +27,11 @@ import { Router } from '@angular/router'
 })
 
 export class UserEditComponent implements OnInit {
-  @Input() loggedinUser$!: Observable<User>
+  @Input() deviceType$!: Observable<string>
+  @Input() user$!: Observable<User>
 
   public modService = inject(ModalService)
   private store = inject(Store<AppState>)
-  private dTypeService = inject(DeviceTypeService)
   private formUtilsService = inject(FormUtilsService)
   private fBuilder = inject(FormBuilder)
 
@@ -42,20 +39,15 @@ export class UserEditComponent implements OnInit {
 
   public formUtils = this.formUtilsService
   public userEditForm!: FormGroup
-  user$: Observable<User> = this.store.select(selectUser)
-  deviceType$: Observable<string> = this.dTypeService.deviceType$
-  userEditState: string = 'hidden'
-  public initialUserData: User | null = null 
+  public userEditState: string = 'hidden'
+  public initialUserData: User | null = null
 
   ngOnInit(): void {
-    this.fetchUserData()
     this.initializeForm()
-    this.modalSubscription = this.modService.onModalStateChange('user-edit').subscribe(
-      isOpen => {
-        console.log('Modal State Change:', isOpen)
-        if (isOpen) setTimeout(() => this.userEditState = 'visible', 60)
-        else this.userEditState = 'hidden'
-      })
+    this.modalSubscription = this.modService.onModalStateChange('user-edit').subscribe(isOpen => {
+      if (isOpen) setTimeout(() => this.userEditState = 'visible', 60)
+      else this.userEditState = 'hidden'
+    })
   }
 
   initializeForm(): void {
@@ -71,24 +63,13 @@ export class UserEditComponent implements OnInit {
   }
 
   isUserDataUnchanged(): boolean {
-    if(!this.initialUserData) return false
+    if (!this.initialUserData) return false
     const formData = this.userEditForm.value
     return (
       formData.fullName === this.initialUserData.fullName &&
       formData.username === this.initialUserData.username &&
       formData.email === this.initialUserData.email
     )
-  }
-
-
-
-  fetchUserData(): void {
-    this.loggedinUser$.subscribe((user: User) => {
-      if (user._id) {
-        this.store.dispatch(LOAD_USER({ userId: user._id }))
-      }
-    })
-
   }
 
   closeUserEdit() {
@@ -99,11 +80,13 @@ export class UserEditComponent implements OnInit {
   onSaveUser() {
     this.user$.pipe(take(1)).subscribe(user => {
       const formData = this.userEditForm.value
-      const updatedUser = {...user , ...formData }
-      console.log('formData: ',updatedUser)
+      const updatedUser = { ...user, ...formData }
       this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
     })
-
     this.closeUserEdit()
+  }
+
+  ngOnDestroy() {
+    if (this.modalSubscription) this.modalSubscription.unsubscribe()
   }
 }

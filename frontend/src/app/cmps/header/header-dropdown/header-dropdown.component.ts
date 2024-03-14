@@ -13,7 +13,7 @@ import { LOGOUT } from '../../../store/user.actions'
 })
 
 export class HeaderDropdownComponent {
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
 
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)

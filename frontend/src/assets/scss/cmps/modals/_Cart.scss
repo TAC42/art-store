@@ -59,12 +59,11 @@
           }
 
           .cart-item-body {
+            padding: 0 0.75em;
             grid-column: 3 / -1;
-            display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, auto);
             gap: 1em;
-            padding: 0 0.75em;
 
             .name {
               grid-column: 1 / 3;
@@ -84,7 +83,6 @@
             .quantity {
               grid-column: 3 / -1;
               grid-row: 3 / -1;
-              display: flex;
               align-items: center;
               gap: 0.5em;
               color: $mnrclr8;
@@ -100,12 +98,16 @@
                 padding: 0 0.25em;
                 cursor: pointer;
                 transition: all 0.9s ease-in-out;
+
                 &:hover {
                   fill: $mnrclr9;
                   background-color: $prmclr2;
                 }
+
                 &.no-more {
+                  pointer-events: none;
                   background-color: red;
+
                   &:hover {
                     fill: $prmclr2;
                   }

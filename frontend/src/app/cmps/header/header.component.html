@@ -27,7 +27,7 @@
   <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view flex row">
     <section class="links flex row" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else searchOff">
-        <ng-container *ngIf="loggedinUser$ | async as loggedinUser">
+        <ng-container *ngIf="user$ | async as loggedinUser">
           <img *ngIf="loggedinUser.imgUrl" [src]="loggedinUser.imgUrl" alt="User Image" (click)="openDropdown($event)">
         </ng-container>
 
@@ -63,6 +63,6 @@
         <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
       </ng-template>
     </section>
-    <header-dropdown [loggedinUser$]="loggedinUser$" />
+    <header-dropdown [user$]="user$" />
   </section>
 </header>

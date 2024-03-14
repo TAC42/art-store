@@ -1,17 +1,16 @@
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
-import { Observable, Subscription, catchError, of, startWith, switchMap, take } from 'rxjs'
+import { Observable, Subscription, take } from 'rxjs'
 import { User } from '../../../models/user'
 import { ModalService } from '../../../services/modal.service'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { Cart, Product } from '../../../models/shop'
 import { OrderService } from '../../../services/order.service'
-import { LOAD_USER, UPDATE_USER } from '../../../store/user.actions'
+import { UPDATE_USER } from '../../../store/user.actions'
 import { CART_LOADED, LOAD_CART } from '../../../store/shop.actions'
 import { selectCart } from '../../../store/shop.selectors'
 import { Router } from '@angular/router'
-import { selectUser } from '../../../store/user.selectors'
 import { EventBusService, showSuccessMsg } from '../../../services/event-bus.service'
 
 @Component({
@@ -32,7 +31,7 @@ import { EventBusService, showSuccessMsg } from '../../../services/event-bus.ser
 })
 
 export class CartComponent implements OnInit, OnDestroy {
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
 
   private store = inject(Store<AppState>)
   private router = inject(Router)
@@ -42,14 +41,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
   private modalSubscription: Subscription | undefined
   cartState: string = 'hidden'
-  user$: Observable<User> = this.store.select(selectUser)
   cart$: Observable<Product[]> = this.store.select(selectCart)
   orderSummary$!: Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }>
 
   ngOnInit(): void {
-    this.loggedinUser$.subscribe(user => {
-      if (user._id) this.store.dispatch(LOAD_USER({ userId: user._id }))
-
+    this.user$.subscribe(user => {
       if (user.cart.length) {
         this.store.dispatch(LOAD_CART({ userCart: user.cart }))
       } else this.store.dispatch(CART_LOADED({ cart: [] }))
@@ -108,8 +104,6 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.modalSubscription) {
-      this.modalSubscription.unsubscribe()
-    }
+    if (this.modalSubscription) this.modalSubscription.unsubscribe()
   }
 }
