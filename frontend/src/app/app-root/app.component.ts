@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public dimmer: boolean = false
   public hideFooterHeader: boolean = false
+
   private dimSubscription: Subscription | undefined
   private routerEvSubscription: Subscription | undefined
 
@@ -32,10 +33,9 @@ export class AppComponent implements OnInit, OnDestroy {
   user$: Observable<User> = this.store.select(selectUser)
 
   ngOnInit() {
-    // user session check
-    this.store.dispatch(CHECK_SESSION())
+    this.store.dispatch(CHECK_SESSION()) // user session check
 
-    this.loggedinUser$.subscribe((user: User) => {
+    this.loggedinUser$.subscribe(user => {
       if (user._id) {
         this.store.dispatch(LOAD_USER({ userId: user._id }))
         if (!user.isVerified) this.modService.openModal('user-auth')

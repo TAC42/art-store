@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Observable, Subscription } from 'rxjs'
-import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
-import { Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Product } from '../../../models/shop'
 import { ShopFilter } from '../../../models/shop'
+import { User } from '../../../models/user'
 import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
+import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
+import { selectUser } from '../../../store/user.selectors'
 import { CommunicationService } from '../../../services/communication.service'
 import { ModalService } from '../../../services/modal.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
-import { User } from '../../../models/user'
-import { selectLoggedinUser } from '../../../store/user.selectors'
 
 @Component({
   selector: 'artware-index',
@@ -29,7 +29,7 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
   private removeProductSubscription: Subscription | undefined
   private isLoadingSubscription: Subscription | undefined
 
-  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
+  user$: Observable<User> = this.store.select(selectUser)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
 

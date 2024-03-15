@@ -2,22 +2,22 @@
   class="mobile-view flex column">
   <section class="filter-area flex column">
     <h4>Shop</h4>
-    <product-filter [isShopPage]="isShopPage" [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async"
+    <product-filter [isShopPage]="isShopPage" [filterBy]="filterBy" [loggedinUser]="user$ | async"
       (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
   </section>
 
   <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
-    (add)="onAddToCart($event)" [products]="products$ | async" [loggedinUser$]="loggedinUser$" />
+    (add)="onAddToCart($event)" [products]="products$ | async" [user$]="user$" />
 </section>
 
 <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
   class="desktop-view flex column">
   <section class="filter-area flex column">
     <h4>Shop</h4>
-    <product-filter [isShopPage]="isShopPage" [filterBy]="filterBy" [loggedinUser]="loggedinUser$ | async"
+    <product-filter [isShopPage]="isShopPage" [filterBy]="filterBy" [loggedinUser]="user$ | async"
       (onSetFilter)="onSetFilter($event)" (onOpenCart)="onOpenCart()" />
   </section>
 
   <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
-    (add)="onAddToCart($event)" [products]="products$ | async" [loggedinUser$]="loggedinUser$" />
+    (add)="onAddToCart($event)" [products]="products$ | async" [user$]="user$" />
 </section>

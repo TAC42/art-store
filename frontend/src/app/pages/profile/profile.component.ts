@@ -2,9 +2,8 @@ import { Component, OnInit, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../models/user'
-import { selectLoggedinUser, selectUser } from '../../store/user.selectors'
+import { selectUser } from '../../store/user.selectors'
 import { AppState } from '../../store/app.state'
-import { LOAD_USER } from '../../store/user.actions'
 import { selectOrders } from '../../store/order.selectors'
 import { Order } from '../../models/order'
 import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
@@ -23,7 +22,6 @@ export class ProfileComponent implements OnInit {
 
   public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
 
-  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   user$: Observable<User> = this.store.select(selectUser)
   orders$: Observable<Order[]> = this.store.select(selectOrders)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
@@ -31,10 +29,9 @@ export class ProfileComponent implements OnInit {
   optionState: string = 'order1'
 
   ngOnInit(): void {
-    this.loggedinUser$.subscribe((user: User) => {
+    this.user$.subscribe(user => {
       if (user._id) {
         const filterBy = { _id: user._id }
-        this.store.dispatch(LOAD_USER({ userId: user._id }))
         this.store.dispatch(LOAD_FILTER({ filterBy }))
         this.store.dispatch(LOAD_ORDERS({ filterBy }))
       }
@@ -54,7 +51,8 @@ export class ProfileComponent implements OnInit {
       delivered: 'delivered',
       cancelled: 'cancelled',
     }
-    return statusColors[status.toLowerCase() as 'pending' | 'shipped' | 'delivered'] || 'gray'
+    return statusColors[status.toLowerCase() as 'pending' |
+      'shipped' | 'delivered'] || 'gray'
   }
 
   onOpenUserEdit(event: Event): void {

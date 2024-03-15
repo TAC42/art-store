@@ -11,7 +11,7 @@ import { User } from '../../models/user'
 export class ProductListComponent implements OnInit, OnChanges {
   @Input() isShopPage!: boolean
   @Input() products!: Product[] | null
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
   @Input() isLoading!: boolean
   @Output() remove = new EventEmitter<string>()
   @Output() add = new EventEmitter<Product>()

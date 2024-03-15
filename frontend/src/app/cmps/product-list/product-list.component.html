@@ -9,7 +9,7 @@
   <ng-template #productList>
     <div *ngFor="let product of products">
       <product-preview [isShopPage]="isShopPage" (remove)="remove.emit($event)" (add)="add.emit($event)"
-        [product]="product" [loggedinUser$]="loggedinUser$" />
+        [product]="product" [user$]="user$" />
     </div>
   </ng-template>
 </div>

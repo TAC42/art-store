@@ -5,8 +5,7 @@ import { EMPTY, of } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from './app.state'
 import {
-    CHECK_SESSION,
-    LOAD_USER, LOAD_USERS, LOGIN, LOGOUT, SET_LOADING_STATE,
+    CHECK_SESSION, LOAD_USER, LOAD_USERS, LOGIN, LOGOUT, SET_LOADING_STATE,
     SET_LOGGEDIN_USER, SET_USER, SET_USERS, SIGNUP, UPDATE_USER
 } from './user.actions'
 import { User } from '../models/user'
@@ -43,6 +42,7 @@ export class UserEffects {
             tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
             mergeMap(action => this.userService.getById(action.userId).pipe(
+                tap(user => console.log('User loaded: ', user)),
                 map((user: User) => SET_USER({ user })),
                 catchError((error) => {
                     console.error(`Error loading user ${action.userId}:`, error)

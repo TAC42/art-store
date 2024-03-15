@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { ModalService } from '../../../services/modal.service'
 import { CommunicationService } from '../../../services/communication.service';
 
@@ -6,22 +6,17 @@ import { CommunicationService } from '../../../services/communication.service';
   selector: 'confirm-modal',
   templateUrl: './confirm-modal.component.html'
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent implements OnInit, OnDestroy {
   private modService = inject(ModalService)
-  private communicationService = inject(CommunicationService)
+  private commService = inject(CommunicationService)
 
-  isModalOpen: boolean = false
+  public isModalOpen: boolean = false
+
   private modalSubscription: any
 
   ngOnInit(): void {
     this.modalSubscription = this.modService.onModalStateChange('confirm').subscribe(
       (isOpen: boolean) => this.isModalOpen = isOpen)
-  }
-
-  ngOnDestroy(): void {
-    if (this.modalSubscription) {
-      this.modalSubscription.unsubscribe()
-    }
   }
 
   getProductToRemove(): string | undefined {
@@ -41,8 +36,12 @@ export class ConfirmModalComponent implements OnInit {
     const productId = this.getProductToRemove()
 
     if (answer && productId) {
-      this.communicationService.emitRemoveProduct(productId)
+      this.commService.emitRemoveProduct(productId)
     }
     this.modService.closeModal('confirm')
+  }
+
+  ngOnDestroy(): void {
+    if (this.modalSubscription) this.modalSubscription.unsubscribe()
   }
 }

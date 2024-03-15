@@ -12,7 +12,7 @@ import { User } from '../../models/user'
 export class ProductPreviewComponent {
   @Input() isShopPage!: boolean
   @Input() product!: Product
-  @Input() loggedinUser$!: Observable<User>
+  @Input() user$!: Observable<User>
   @Output() remove = new EventEmitter()
   @Output() add = new EventEmitter()
 

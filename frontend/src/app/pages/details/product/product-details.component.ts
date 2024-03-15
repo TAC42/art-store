@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store'
 import { LOAD_RANDOM_PRODUCTS } from '../../../store/shop.actions'
 import { selectProductByName, selectRandomProducts } from '../../../store/shop.selectors'
 import { User } from '../../../models/user'
-import { selectLoggedinUser } from '../../../store/user.selectors'
+import { selectLoggedinUser, selectUser } from '../../../store/user.selectors'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
@@ -35,7 +35,7 @@ export class ProductDetailsComponent implements OnInit {
     public carouselItems: CarouselItem[] = []
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
-    loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
+    user$: Observable<User> = this.store.select(selectUser)
 
     product$: Observable<Product> = this.route.data.pipe(
         map(data => data['product']))
@@ -55,7 +55,7 @@ export class ProductDetailsComponent implements OnInit {
 
     onOpenCart(event: Event): void {
         event.stopPropagation()
-        this.loggedinUser$.pipe(take(1)).subscribe(user => {
+        this.user$.pipe(take(1)).subscribe(user => {
             if (user?._id) this.modService.openModal('cart')
             else this.modService.openModal('login')
         })
@@ -70,7 +70,7 @@ export class ProductDetailsComponent implements OnInit {
         event.stopPropagation()
         if (!product) return
 
-        this.loggedinUser$.pipe(take(1)).subscribe(updatedUser => {
+        this.user$.pipe(take(1)).subscribe(updatedUser => {
             if (updatedUser._id) {
                 const newCartItem: Cart = { _id: product._id, amount: 1 }
 

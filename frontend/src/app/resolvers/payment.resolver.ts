@@ -1,34 +1,31 @@
 import { Injectable, inject } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router'
 import { Observable } from 'rxjs'
-import { take, map } from 'rxjs/operators'
-import { User } from '../models/user'
-import { selectLoggedinUser } from '../store/user.selectors'
+import { take, tap, filter } from 'rxjs/operators'
+import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
-import { Store, select } from '@ngrx/store'
+import { User } from '../models/user'
+import { selectUser } from '../store/user.selectors'
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PaymentResolver implements Resolve<User | null> {
   private store = inject(Store<AppState>)
   private router = inject(Router)
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User | null> {
-    return this.store.pipe(
-      select(selectLoggedinUser),
-      take(1), 
-      map(loggedinUser => {
-        const isLoggedIn = loggedinUser._id 
-        const hasItemsInCart = loggedinUser.cart
+  user$: Observable<User> = this.store.select(selectUser)
 
-        if (isLoggedIn && hasItemsInCart.length) {
-          return loggedinUser 
-        } else {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    Observable<User | null> {
+    return this.user$.pipe(
+      take(1),
+      tap(user => {
+        if (!(user._id && user.cart.length))
           this.router.navigate(['/shop'])
-          return null
-        }
-      })
+      }),
+      filter(user => !!user._id && user.cart.length > 0)
     )
   }
 }

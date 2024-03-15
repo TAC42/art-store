@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Observable, Subscription, take } from 'rxjs'
-import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
-import { Cart, Product } from '../../../models/shop'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Cart, Product } from '../../../models/shop'
 import { ShopFilter } from '../../../models/shop'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
-import { CommunicationService } from '../../../services/communication.service'
-import { ModalService } from '../../../services/modal.service'
-import { UPDATE_USER } from '../../../store/user.actions'
 import { User } from '../../../models/user'
-import { selectLoggedinUser } from '../../../store/user.selectors'
+import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
+import { UPDATE_USER } from '../../../store/user.actions'
+import { selectUser } from '../../../store/user.selectors'
+import { ModalService } from '../../../services/modal.service'
+import { CommunicationService } from '../../../services/communication.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 
@@ -32,7 +32,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private removeProductSubscription: Subscription | undefined
   private isLoadingSubscription: Subscription | undefined
 
-  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
+  user$: Observable<User> = this.store.select(selectUser)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   products$: Observable<Product[]> = this.store.select(selectProducts)
 
@@ -65,26 +65,25 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   onAddToCart(product: Product) {
-    this.loggedinUser$.pipe(take(1)).subscribe(
-      updatedUser => {
-        if (updatedUser._id) {
-          const newCartItem: Cart = { _id: product._id, amount: 1 }
+    this.user$.pipe(take(1)).subscribe(updatedUser => {
+      if (updatedUser._id) {
+        const newCartItem: Cart = { _id: product._id, amount: 1 }
 
-          const isProductAlreadyInCart = updatedUser.cart.some(
-            cartProduct => cartProduct._id === newCartItem._id)
+        const isProductAlreadyInCart = updatedUser.cart.some(
+          cartProduct => cartProduct._id === newCartItem._id)
 
-          if (!isProductAlreadyInCart) {
-            const newUser: User = {
-              ...updatedUser,
-              cart: [...updatedUser.cart, newCartItem]
-            }
-            this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
-            showSuccessMsg('Product Added!',
-              'Product has been added to the cart', this.eBusService)
-          } else showErrorMsg('Cannot Add!',
-            'Product already included in the cart', this.eBusService)
-        } else this.modService.openModal('login')
-      })
+        if (!isProductAlreadyInCart) {
+          const newUser: User = {
+            ...updatedUser,
+            cart: [...updatedUser.cart, newCartItem]
+          }
+          this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+          showSuccessMsg('Product Added!',
+            'Product has been added to the cart', this.eBusService)
+        } else showErrorMsg('Cannot Add!',
+          'Product already included in the cart', this.eBusService)
+      } else this.modService.openModal('login')
+    })
   }
 
   onSetFilter(newFilterValue: string): void {

@@ -1,8 +1,6 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import {
-  EMPTY, Observable, catchError, combineLatest, filter, map, take, tap
-} from 'rxjs'
+import { EMPTY, Observable, catchError, combineLatest, filter, map, take, tap } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store, select } from '@ngrx/store'
 import { User } from '../../models/user'
@@ -11,11 +9,10 @@ import { AppState } from '../../store/app.state'
 import { selectCart } from '../../store/shop.selectors'
 import { SAVE_ORDER } from '../../store/order.actions'
 import { CART_LOADED } from '../../store/shop.actions'
-import { selectLoggedinUser, selectUser } from '../../store/user.selectors'
+import { selectUser } from '../../store/user.selectors'
 import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
-import { LOAD_USER } from '../../store/user.actions'
 
 @Component({
   selector: 'payment',
@@ -36,7 +33,6 @@ export class PaymentComponent implements OnInit {
 
   cart$: Observable<Product[]> = this.store.select(selectCart).pipe(
     filter(cart => !!cart))
-  loggedinUser$: Observable<User> = this.store.pipe(select(selectLoggedinUser))
   user$: Observable<User> = this.store.select(selectUser)
   orderSummary$!: Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }>
 
@@ -50,10 +46,6 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForms()
-
-    this.loggedinUser$.subscribe((user: User) => {
-      if (user._id) this.store.dispatch(LOAD_USER({ userId: user._id }))
-    })
     this.orderSummary$ = this.orderService.getOrderSummary$(this.cart$)
   }
 
