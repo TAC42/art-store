@@ -6,6 +6,8 @@ payment {
 
   .payment-header {
     position: relative;
+    padding: 0.5em 1em;
+    align-items: center;
 
     .title {
       width: 100%;
@@ -20,9 +22,9 @@ payment {
     .back {
       position: absolute;
       cursor: pointer;
-      width: 3em;
-      height: 3em;
-      padding: .75em;
+      width: 24px;
+      height: 24px;
+
       svg-render {
         svg {
           path {
@@ -228,6 +230,7 @@ payment {
             }
 
             &.error {
+
               input,
               select {
                 border: 2px solid $mnrclr5;
@@ -284,17 +287,24 @@ payment {
         padding: 0.5em;
         font-size: 1.5em;
         color: $prmclr2;
-        background-color: #0c3640;
+        background: #0c3640;
         border-radius: 1em;
+        transition: all 0.5s ease-in-out;
 
         svg-render {
           width: 1em;
           height: 1em;
+          transition: all 0.5s ease-in-out;
+          fill: $prmclr2;
+        }
 
-          svg {
-            path {
-              fill: $prmclr2;
-            }
+        &.disabled {
+          color: $prmclr1;
+          opacity: 0.5;
+          pointer-events: none;
+
+          svg-render {
+            fill: $prmclr1;
           }
         }
 

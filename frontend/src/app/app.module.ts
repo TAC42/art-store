@@ -109,7 +109,7 @@ import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ShopEffects, UserEffects,OrderEffects]),
+    EffectsModule.forRoot([ShopEffects, UserEffects, OrderEffects]),
     RecaptchaFormsModule,
     RecaptchaModule,
     MatExpansionModule,

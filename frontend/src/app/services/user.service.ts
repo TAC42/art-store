@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
-import { HttpService } from './http.service'
 import { Observable, throwError, catchError, tap, of } from 'rxjs'
 import { User, UserCredentials, UserSignup } from '../models/user'
+import { HttpService } from './http.service'
 
 const SESSION_KEY_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'user/'

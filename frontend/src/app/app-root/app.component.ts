@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private routerEvSubscription: Subscription | undefined
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
-  loggedinUser$: Observable<User> = this.store.pipe(select(selectLoggedinUser))
+  loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
   user$: Observable<User> = this.store.select(selectUser)
 
   ngOnInit() {
