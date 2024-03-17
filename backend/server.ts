@@ -26,9 +26,9 @@ if (process.env.NODE_ENV === 'production') {
   const corsOptions = {
     origin: [
       'http://oricarlin.onrender.com',
-      'https://oricarlin.com',
-      'https://main--oricarlin.netlify.app',
-      'https://oricarlin.netlify.app',
+      'http://oricarlin.com',
+      'http://main--oricarlin.netlify.app',
+      'http://oricarlin.netlify.app',
       'http://127.0.0.1:4200',
       'http://localhost:4200',
       'http://127.0.0.1:3030',
