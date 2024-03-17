@@ -1,10 +1,10 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import { NavigationEnd, Router } from '@angular/router'
-import { select, Store } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { combineLatest, filter, map, Observable, Subscription } from 'rxjs'
 import { AppState } from '../store/app.state'
-import { CHECK_SESSION, LOAD_USER } from '../store/user.actions'
 import { User } from '../models/user'
+import { CHECK_SESSION, LOAD_USER } from '../store/user.actions'
 import { selectLoggedinUser, selectUser } from '../store/user.selectors'
 import { ModalService } from '../services/modal.service'
 import { DimmerService } from '../services/dimmer.service'
@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private dimSubscription: Subscription | undefined
   private routerEvSubscription: Subscription | undefined
+  private sessionSubscription: Subscription | undefined
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
   loggedinUser$: Observable<User> = this.store.select(selectLoggedinUser)
@@ -35,11 +36,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.store.dispatch(CHECK_SESSION()) // user session check
 
-    this.loggedinUser$.subscribe(user => {
-      if (user._id) {
-        this.store.dispatch(LOAD_USER({ userId: user._id }))
-        if (!user.isVerified) this.modService.openModal('user-auth')
-      }
+    this.sessionSubscription = this.loggedinUser$.subscribe(sessionUser => {
+      if (sessionUser._id) this.store.dispatch(LOAD_USER({ userId: sessionUser._id }))
+    })
+    this.user$.subscribe(fullUser => {
+      if (fullUser._id && !fullUser.isVerified) this.modService.openModal('user-auth')
     })
     // scroll to top & Header and Footer display management
     this.routerEvSubscription = combineLatest([
@@ -76,5 +77,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.dimSubscription) this.dimSubscription.unsubscribe()
     if (this.routerEvSubscription) this.routerEvSubscription.unsubscribe()
+    if (this.sessionSubscription) this.sessionSubscription.unsubscribe()
   }
 }

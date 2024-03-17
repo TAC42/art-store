@@ -24,7 +24,6 @@ export class ProductResolver implements Resolve<Product | null> {
       select(selectProductByName),
       filter(product => product !== null && product.name === name),
       distinctUntilChanged((prev, curr) => prev?.name === curr?.name),
-      tap(product => console.log('Product in resolver:', product)),
       take(1)
     )
   }

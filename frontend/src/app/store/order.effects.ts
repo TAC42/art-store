@@ -4,6 +4,7 @@ import { map, mergeMap, tap, withLatestFrom, catchError } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 import { AppState } from './app.state'
+import { Order } from '../models/order'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_ORDERS, ORDERS_LOADED,
   SAVE_ORDER, SET_LOADING_STATE, REMOVE_ORDER, ORDER_REMOVED_SUCCESSFULLY,
@@ -30,7 +31,7 @@ export class OrderEffects {
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
       mergeMap(([{ }, filterBy]) => this.orderService.query(filterBy).pipe(
-        map(orders => ORDERS_LOADED({ orders })),
+        map((orders: Order[]) => ORDERS_LOADED({ orders })),
         catchError(error => {
           console.error('Error loading orders:', error)
           return of(SET_LOADING_STATE({ isLoading: false }))
@@ -42,9 +43,7 @@ export class OrderEffects {
 
   loadFilter$ = createEffect(() =>
     this.actions$.pipe(ofType(LOAD_FILTER),
-      map(({ filterBy }) => {
-        return FILTER_UPDATED({ updatedFilter: filterBy })
-      })
+      map(({ filterBy }) => { return FILTER_UPDATED({ updatedFilter: filterBy }) })
     )
   )
 

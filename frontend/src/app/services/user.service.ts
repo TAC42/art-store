@@ -80,10 +80,7 @@ export class UserService {
   }
 
   setLoggedinUser(user: User): void {
-    const userForSession = {
-      _id: user._id,
-      isVerified: user.isVerified
-    }
+    const userForSession = { _id: user._id }
     sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
   }
 

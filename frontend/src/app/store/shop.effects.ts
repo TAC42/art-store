@@ -5,13 +5,13 @@ import { forkJoin, of } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
 import { AppState } from './app.state'
+import { Product, ShopFilter } from '../models/shop'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
   PRODUCT_BY_NAME_LOADED, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
   LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, LOAD_CART, CART_LOADED
 } from './shop.actions'
-import { Product, ShopFilter } from '../models/shop'
 import { selectFilterBy } from './shop.selectors'
 import { ShopDbService } from '../services/shop-db.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -32,7 +32,7 @@ export class ShopEffects {
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
       mergeMap(([{ }, filterBy]) => this.shopDbService.query(filterBy).pipe(
-        map(products => PRODUCTS_LOADED({ products })),
+        map((products: Product[]) => PRODUCTS_LOADED({ products })),
         catchError(error => {
           console.error('Error loading products:', error)
           return of(SET_LOADING_STATE({ isLoading: false }))
@@ -65,10 +65,7 @@ export class ShopEffects {
       tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
 
       mergeMap(action => this.shopDbService.getByName(action.name).pipe(
-        map(product => {
-          console.log('Product loaded:', product)
-          return PRODUCT_BY_NAME_LOADED({ product })
-        }),
+        map(product => { return PRODUCT_BY_NAME_LOADED({ product }) }),
         catchError(error => {
           console.error('Error loading product by name:', error)
           return of(SET_LOADING_STATE({ isLoading: false }))
@@ -150,7 +147,6 @@ export class ShopEffects {
             )
           } else return of({ error: true } as const)
         })
-
         return forkJoin(requests).pipe(
           mergeMap(results => {
             const validProducts: Product[] = results.map(

@@ -15,7 +15,6 @@ export class ModalService {
       this.modalSubjects[id] = new Subject<boolean>()
     }
     this.modalSubjects[id].next(true)
-    console.log(`Modal ${id} opened`, this.modals)
   }
 
   closeModal(id: string) {
@@ -23,7 +22,6 @@ export class ModalService {
     if (this.modalSubjects[id]) {
       this.modalSubjects[id].next(false)
     }
-    console.log(`Modal ${id} closed`, this.modals)
   }
 
   isModalOpen(id: string): boolean {
