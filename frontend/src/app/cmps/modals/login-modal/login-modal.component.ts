@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ModalService } from '../../../services/modal.service'
-import { UtilityService } from '../../../services/utility.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
 import { UserCredentials, UserSignup } from '../../../models/user'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { LOGIN, SIGNUP } from '../../../store/user.actions'
+import { ModalService } from '../../../services/modal.service'
+import { UtilityService } from '../../../services/utility.service'
+import { FormUtilsService } from '../../../services/form-utils.service'
 
 @Component({
   selector: 'login-modal',

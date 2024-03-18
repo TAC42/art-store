@@ -6,6 +6,12 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import http from 'http'
 
+import { productRoutes } from './api/product/product.controller.js'
+import { userRoutes } from './api/user/user.controller.js'
+import { authRoutes } from './api/auth/auth.controller.js'
+import { mailRoutes } from './api/mail/mail.controller.js'
+import { orderRoutes } from './api/order/order.controller.js'
+
 import { loggerService } from './services/logger.service.js'
 import { automationService } from './services/automation.service.js'
 
@@ -22,7 +28,6 @@ if (process.env.NODE_ENV === 'production') {
   // Express serve static files on production environment
   app.use(express.static(path.resolve(__dirname, '..', 'public', 'browser')))
 } else {
-  // Configuring CORS
   const corsOptions = {
     origin: [
       'http://oricarlin.onrender.com',
@@ -33,16 +38,9 @@ if (process.env.NODE_ENV === 'production') {
       'http://localhost:3030'
     ],
     credentials: true,
-  }
+  } // Configuring CORS
   app.use(cors(corsOptions))
 }
-
-import { productRoutes } from './api/product/product.routes.js'
-import { userRoutes } from './api/user/user.routes.js'
-import { authRoutes } from './api/auth/auth.routes.js'
-import { mailRoutes } from './api/mail/mail.routes.js'
-import { orderRoutes } from './api/order/order.routes.js'
-// import { setupSocketAPI } from './services/socket.service.js'
 
 app.use('/api/product', productRoutes)
 app.use('/api/user', userRoutes)
@@ -56,7 +54,6 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 3030
 const server = http.createServer(app)
-// setupSocketAPI(server)
 
 server.listen(port, () => {
   loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)

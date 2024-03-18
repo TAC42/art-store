@@ -1,7 +1,22 @@
+import express from 'express';
+import { log } from '../../middlewares/logger.middleware.js';
+// product routes
+export const productRoutes = express.Router();
+// middleware that is specific to this router
+// router.use(requireAuth)
+productRoutes.get('/', log, _getProducts);
+productRoutes.get('/query/random', _getRandomProducts);
+productRoutes.get('/check-name/:name', _checkNameAvailable);
+productRoutes.get('/by-name/:name', _getProductByName);
+productRoutes.get('/by-id/:id', _getProductById);
+productRoutes.post('/add/', _addProduct);
+productRoutes.put('/update/:id', _updateProduct);
+productRoutes.delete('/delete/:id', _removeProduct);
+// product controller functions
 import { ObjectId } from 'mongodb';
 import { productService } from './product.service.js';
 import { loggerService } from '../../services/logger.service.js';
-export async function getProducts(req, res) {
+async function _getProducts(req, res) {
     try {
         const { search, type } = req.query;
         let filterBy = { search, type };
@@ -14,7 +29,7 @@ export async function getProducts(req, res) {
         res.status(500).send({ err: 'Failed to get products' });
     }
 }
-export async function getProductById(req, res) {
+async function _getProductById(req, res) {
     try {
         const product = await productService.getById(req.params.id);
         res.json(product);
@@ -24,7 +39,7 @@ export async function getProductById(req, res) {
         res.status(500).send({ err: 'Failed to get product' });
     }
 }
-export async function getProductByName(req, res) {
+async function _getProductByName(req, res) {
     try {
         const product = await productService.getByName(req.params.name);
         res.json(product);
@@ -34,7 +49,7 @@ export async function getProductByName(req, res) {
         res.status(500).send({ err: 'Failed to get product by name' });
     }
 }
-export async function checkNameAvailable(req, res) {
+async function _checkNameAvailable(req, res) {
     try {
         const productName = req.params.name;
         const product = await productService.getByName(productName);
@@ -49,7 +64,7 @@ export async function checkNameAvailable(req, res) {
         res.status(500).send({ err: 'Error with checking availability of name' });
     }
 }
-export async function getRandomProducts(req, res) {
+async function _getRandomProducts(req, res) {
     try {
         const type = req.query.type;
         const excludeProductId = req.query.excludeProductId ? new ObjectId(req.query.excludeProductId) : undefined;
@@ -63,7 +78,7 @@ export async function getRandomProducts(req, res) {
         res.status(500).send({ err: 'Failed to get random products' });
     }
 }
-export async function addProduct(req, res) {
+async function _addProduct(req, res) {
     try {
         const product = req.body;
         loggerService.debug('Creating product: ', product);
@@ -75,7 +90,7 @@ export async function addProduct(req, res) {
         res.status(500).send({ err: 'Failed to add product' });
     }
 }
-export async function updateProduct(req, res) {
+async function _updateProduct(req, res) {
     try {
         const product = { ...req.body, _id: req.params.id };
         loggerService.debug('Updating product: ', product);
@@ -87,7 +102,7 @@ export async function updateProduct(req, res) {
         res.status(500).send({ err: 'Failed to update product' });
     }
 }
-export async function removeProduct(req, res) {
+async function _removeProduct(req, res) {
     try {
         const productId = req.params.id;
         loggerService.debug('Removing product with _id: ', productId);

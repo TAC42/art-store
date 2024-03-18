@@ -1,6 +1,17 @@
+import express from 'express';
+import { log } from '../../middlewares/logger.middleware.js';
+// user routes
+export const userRoutes = express.Router();
+// middleware that is specific to this router
+// userRoutes.use(requireAuth) // Uncomment if you want to require auth for all user routes
+userRoutes.get('/', log, _getUsers);
+userRoutes.get('/by-id/:id', _getUserById);
+userRoutes.post('/add/', _addUser);
+userRoutes.put('/update/:id', _updateUser);
+userRoutes.delete('/delete/:id', _removeUser);
 import { loggerService } from '../../services/logger.service.js';
 import { userService } from './user.service.js';
-export async function getUsers(req, res) {
+async function _getUsers(req, res) {
     try {
         const users = await userService.query(req.query);
         res.json(users);
@@ -10,7 +21,7 @@ export async function getUsers(req, res) {
         res.status(500).send({ err: 'Failed to get users' });
     }
 }
-export async function getUserById(req, res) {
+async function _getUserById(req, res) {
     try {
         const user = await userService.getById(req.params.id);
         res.json(user);
@@ -20,7 +31,7 @@ export async function getUserById(req, res) {
         res.status(500).send({ err: 'Failed to get user' });
     }
 }
-export async function addUser(req, res) {
+async function _addUser(req, res) {
     try {
         const user = req.body;
         loggerService.debug('Creating user:', user);
@@ -32,7 +43,7 @@ export async function addUser(req, res) {
         res.status(500).send({ err: 'Failed to add user' });
     }
 }
-export async function updateUser(req, res) {
+async function _updateUser(req, res) {
     try {
         const user = { ...req.body, _id: req.params.id };
         loggerService.debug('Updating user:', user);
@@ -44,7 +55,7 @@ export async function updateUser(req, res) {
         res.status(500).send({ err: 'Failed to update user' });
     }
 }
-export async function removeUser(req, res) {
+async function _removeUser(req, res) {
     try {
         const userId = req.params.id;
         loggerService.debug('Removing user with _id: ', userId);

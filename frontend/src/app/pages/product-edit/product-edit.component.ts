@@ -1,19 +1,19 @@
 import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import {
-  Observable, Subscription, catchError, debounceTime,
-  distinctUntilChanged, filter, first, map, of, switchMap
-} from 'rxjs'
-import {
   AbstractControl, AsyncValidatorFn, FormArray, FormBuilder,
   FormGroup, ValidationErrors, Validators
 } from '@angular/forms'
+import {
+  Observable, Subscription, catchError, debounceTime,
+  distinctUntilChanged, filter, first, map, of, switchMap
+} from 'rxjs'
+import { Store } from '@ngrx/store'
+import { Product } from '../../models/shop'
+import { AppState } from '../../store/app.state'
+import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/shop.actions'
 import { ShopDbService } from '../../services/shop-db.service'
 import { FormUtilsService } from '../../services/form-utils.service'
-import { Product } from '../../models/shop'
-import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/shop.actions'
-import { Store } from '@ngrx/store'
-import { AppState } from '../../store/app.state'
 
 @Component({
   selector: 'product-edit',

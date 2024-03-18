@@ -1,80 +1,92 @@
-import { Request, Response } from 'express'
+import express, { Router, Request, Response } from 'express'
+import { log } from '../../middlewares/logger.middleware.js'
+
+// order routes
+export const orderRoutes: Router = express.Router()
+
+orderRoutes.get('/', log, _getOrders)
+orderRoutes.get('/:id', _getOrderById)
+orderRoutes.post('/', _addOrder)
+orderRoutes.put('/:id', _updateOrder)
+orderRoutes.delete('/:id', _removeOrder)
+
+// order controller functions
 import { Order } from '../../models/order.js'
 import { orderService } from './order.service.js'
 import { loggerService } from '../../services/logger.service.js'
 import { ObjectId } from 'mongodb'
 
-export async function getOrders(req: Request<{}, {}, {}, { _id?: ObjectId }>,
-  res: Response): Promise<void> {
-  try {
-    const { _id } = req.query
-    let filterBy = { _id }
+async function _getOrders(req: Request<{}, {}, {}, { _id?: ObjectId }>,
+    res: Response): Promise<void> {
+    try {
+        const { _id } = req.query
+        let filterBy = { _id }
 
-    loggerService.debug('Getting Orders for id:', filterBy)
-    const orders = await orderService.query(filterBy)
-    res.json(orders)
-  } catch (err) {
-    loggerService.error('Failed to get orders', err)
-    res.status(500).send({ err: 'Failed to get orders' })
-  }
-}
-
-export async function getOrderById(req: Request<{ id: ObjectId }>,
-  res: Response): Promise<void> {
-  try {
-    const orderId = req.params.id
-    const order = await orderService.getById(orderId)
-
-    if (!order) {
-      loggerService.error('Order not found for id:', orderId)
-      res.status(404).send('Order not found')
-      return
+        loggerService.debug('Getting Orders for id:', filterBy)
+        const orders = await orderService.query(filterBy)
+        res.json(orders)
+    } catch (err) {
+        loggerService.error('Failed to get orders', err)
+        res.status(500).send({ err: 'Failed to get orders' })
     }
-    res.json(order)
-  } catch (err) {
-    loggerService.error(`Failed to get order for id: ${req.params.id}`, err)
-    res.status(500).send({ err: 'Failed to get order' })
-  }
 }
 
-export async function addOrder(req: Request<{}, {}, Order>,
-  res: Response): Promise<void> {
-  try {
-    const order = req.body
-    loggerService.debug('Creating order:', order)
-    const addedOrder = await orderService.save(order)
+async function _getOrderById(req: Request<{ id: ObjectId }>,
+    res: Response): Promise<void> {
+    try {
+        const orderId = req.params.id
+        const order = await orderService.getById(orderId)
 
-    res.json(addedOrder)
-  } catch (err) {
-    loggerService.error('Failed to add order', err)
-    res.status(500).send({ err: 'Failed to add order' })
-  }
+        if (!order) {
+            loggerService.error('Order not found for id:', orderId)
+            res.status(404).send('Order not found')
+            return
+        }
+        res.json(order)
+    } catch (err) {
+        loggerService.error(`Failed to get order for id: ${req.params.id}`, err)
+        res.status(500).send({ err: 'Failed to get order' })
+    }
 }
 
-export async function updateOrder(req: Request<{ id: ObjectId }, {}, Order>,
-  res: Response): Promise<void> {
-  try {
-    const order = { ...req.body, _id: req.params.id }
-    loggerService.debug('Updating order:', order)
-    const updatedOrder = await orderService.save(order)
+async function _addOrder(req: Request<{}, {}, Order>,
+    res: Response): Promise<void> {
+    try {
+        const order = req.body
+        loggerService.debug('Creating order:', order)
+        const addedOrder = await orderService.save(order)
 
-    res.json(updatedOrder)
-  } catch (err) {
-    loggerService.error('Failed to update order', err)
-    res.status(500).send({ err: 'Failed to update order' })
-  }
+        res.json(addedOrder)
+    } catch (err) {
+        loggerService.error('Failed to add order', err)
+        res.status(500).send({ err: 'Failed to add order' })
+    }
 }
 
-export async function removeOrder(req: Request<{ id: ObjectId }>,
-  res: Response): Promise<void> {
-  try {
-    const orderId = req.params.id
-    loggerService.debug('Removing order with _id: ', orderId)
-    await orderService.remove(orderId)
+async function _updateOrder(req: Request<{ id: ObjectId }, {}, Order>,
+    res: Response): Promise<void> {
+    try {
+        const order = { ...req.body, _id: req.params.id }
+        loggerService.debug('Updating order:', order)
+        const updatedOrder = await orderService.save(order)
 
-    res.status(200).send({ msg: 'Order successfully removed' })
-  } catch (err) {
-    loggerService.error('Failed to remove order', err)
-    res.status(500).send({ err: 'Failed to remove order' })
-  }
+        res.json(updatedOrder)
+    } catch (err) {
+        loggerService.error('Failed to update order', err)
+        res.status(500).send({ err: 'Failed to update order' })
+    }
+}
+
+async function _removeOrder(req: Request<{ id: ObjectId }>,
+    res: Response): Promise<void> {
+    try {
+        const orderId = req.params.id
+        loggerService.debug('Removing order with _id: ', orderId)
+        await orderService.remove(orderId)
+
+        res.status(200).send({ msg: 'Order successfully removed' })
+    } catch (err) {
+        loggerService.error('Failed to remove order', err)
+        res.status(500).send({ err: 'Failed to remove order' })
+    }
 }

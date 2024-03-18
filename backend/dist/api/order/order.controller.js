@@ -1,6 +1,15 @@
+import express from 'express';
+import { log } from '../../middlewares/logger.middleware.js';
+// order routes
+export const orderRoutes = express.Router();
+orderRoutes.get('/', log, _getOrders);
+orderRoutes.get('/:id', _getOrderById);
+orderRoutes.post('/', _addOrder);
+orderRoutes.put('/:id', _updateOrder);
+orderRoutes.delete('/:id', _removeOrder);
 import { orderService } from './order.service.js';
 import { loggerService } from '../../services/logger.service.js';
-export async function getOrders(req, res) {
+async function _getOrders(req, res) {
     try {
         const { _id } = req.query;
         let filterBy = { _id };
@@ -13,7 +22,7 @@ export async function getOrders(req, res) {
         res.status(500).send({ err: 'Failed to get orders' });
     }
 }
-export async function getOrderById(req, res) {
+async function _getOrderById(req, res) {
     try {
         const orderId = req.params.id;
         const order = await orderService.getById(orderId);
@@ -29,7 +38,7 @@ export async function getOrderById(req, res) {
         res.status(500).send({ err: 'Failed to get order' });
     }
 }
-export async function addOrder(req, res) {
+async function _addOrder(req, res) {
     try {
         const order = req.body;
         loggerService.debug('Creating order:', order);
@@ -41,7 +50,7 @@ export async function addOrder(req, res) {
         res.status(500).send({ err: 'Failed to add order' });
     }
 }
-export async function updateOrder(req, res) {
+async function _updateOrder(req, res) {
     try {
         const order = { ...req.body, _id: req.params.id };
         loggerService.debug('Updating order:', order);
@@ -53,7 +62,7 @@ export async function updateOrder(req, res) {
         res.status(500).send({ err: 'Failed to update order' });
     }
 }
-export async function removeOrder(req, res) {
+async function _removeOrder(req, res) {
     try {
         const orderId = req.params.id;
         loggerService.debug('Removing order with _id: ', orderId);

@@ -1,10 +1,20 @@
-import { Request, Response } from 'express'
+import express, { Router, Request, Response } from 'express'
+
+// auth routes
+export const authRoutes: Router = express.Router()
+
+authRoutes.post('/login', _login)
+authRoutes.post('/signup', _signup)
+authRoutes.post('/logout', _logout)
+
+// auth controller functions
 import { LoginRequestBody, SignupRequestBody } from '../../models/user.js'
 import { authService } from './auth.service.js'
 import { loggerService } from '../../services/logger.service.js'
 import { utilityService } from '../../services/utility.service.js'
 
-export async function login(req: Request<LoginRequestBody>, res: Response): Promise<void> {
+async function _login(req: Request<LoginRequestBody>,
+  res: Response): Promise<void> {
   const { username, password, recaptchaToken } = req.body
 
   try {
@@ -24,7 +34,8 @@ export async function login(req: Request<LoginRequestBody>, res: Response): Prom
   }
 }
 
-export async function signup(req: Request<SignupRequestBody>, res: Response): Promise<void> {
+async function _signup(req: Request<SignupRequestBody>,
+  res: Response): Promise<void> {
   const { username, password, fullName, email, imgUrl, recaptchaToken } = req.body
 
   try {
@@ -47,9 +58,10 @@ export async function signup(req: Request<SignupRequestBody>, res: Response): Pr
   }
 }
 
-export async function logout(req: Request,
+async function _logout(req: Request,
   res: Response): Promise<void> {
   try {
+    loggerService.info('A user has logged out')
     res.clearCookie('loginToken')
     res.status(200).send({ msg: 'Logged out successfully' })
   } catch (err) {

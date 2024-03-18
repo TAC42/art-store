@@ -1,10 +1,25 @@
+import express, { Router, Request, Response } from 'express'
+import { log } from '../../middlewares/logger.middleware.js'
+
+// user routes
+export const userRoutes: Router = express.Router()
+
+// middleware that is specific to this router
+// userRoutes.use(requireAuth) // Uncomment if you want to require auth for all user routes
+
+userRoutes.get('/', log, _getUsers)
+userRoutes.get('/by-id/:id', _getUserById)
+userRoutes.post('/add/', _addUser)
+userRoutes.put('/update/:id', _updateUser)
+userRoutes.delete('/delete/:id', _removeUser)
+
+// user controller functions
 import { ObjectId } from 'mongodb'
-import { Request, Response } from 'express'
 import { User, UserQueryParams } from '../../models/user.js'
 import { loggerService } from '../../services/logger.service.js'
 import { userService } from './user.service.js'
 
-export async function getUsers(req: Request<{}, {}, {}, UserQueryParams>,
+async function _getUsers(req: Request<{}, {}, {}, UserQueryParams>,
   res: Response): Promise<void> {
   try {
     const users = await userService.query(req.query)
@@ -15,7 +30,7 @@ export async function getUsers(req: Request<{}, {}, {}, UserQueryParams>,
   }
 }
 
-export async function getUserById(req: Request<{ id: ObjectId }>,
+async function _getUserById(req: Request<{ id: ObjectId }>,
   res: Response): Promise<void> {
   try {
     const user = await userService.getById(req.params.id)
@@ -26,7 +41,7 @@ export async function getUserById(req: Request<{ id: ObjectId }>,
   }
 }
 
-export async function addUser(req: Request<{}, {}, User>,
+async function _addUser(req: Request<{}, {}, User>,
   res: Response): Promise<void> {
   try {
     const user = req.body
@@ -40,7 +55,7 @@ export async function addUser(req: Request<{}, {}, User>,
   }
 }
 
-export async function updateUser(req: Request<{ id: ObjectId }, {}, User>,
+async function _updateUser(req: Request<{ id: ObjectId }, {}, User>,
   res: Response): Promise<void> {
   try {
     const user = { ...req.body, _id: req.params.id }
@@ -54,7 +69,7 @@ export async function updateUser(req: Request<{ id: ObjectId }, {}, User>,
   }
 }
 
-export async function removeUser(req: Request<{ id: ObjectId }>,
+async function _removeUser(req: Request<{ id: ObjectId }>,
   res: Response): Promise<void> {
   try {
     const userId = req.params.id

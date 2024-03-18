@@ -1,7 +1,13 @@
+import express from 'express';
+// auth routes
+export const authRoutes = express.Router();
+authRoutes.post('/login', _login);
+authRoutes.post('/signup', _signup);
+authRoutes.post('/logout', _logout);
 import { authService } from './auth.service.js';
 import { loggerService } from '../../services/logger.service.js';
 import { utilityService } from '../../services/utility.service.js';
-export async function login(req, res) {
+async function _login(req, res) {
     const { username, password, recaptchaToken } = req.body;
     try {
         await utilityService.verifyRecaptcha(recaptchaToken);
@@ -20,7 +26,7 @@ export async function login(req, res) {
             res.status(500).send({ err: 'Failed to Login' });
     }
 }
-export async function signup(req, res) {
+async function _signup(req, res) {
     const { username, password, fullName, email, imgUrl, recaptchaToken } = req.body;
     try {
         await utilityService.verifyRecaptcha(recaptchaToken);
@@ -41,8 +47,9 @@ export async function signup(req, res) {
             res.status(500).send({ err: 'Failed to Signup' });
     }
 }
-export async function logout(req, res) {
+async function _logout(req, res) {
     try {
+        loggerService.info('A user has logged out');
         res.clearCookie('loginToken');
         res.status(200).send({ msg: 'Logged out successfully' });
     }
