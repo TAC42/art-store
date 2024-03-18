@@ -1,8 +1,7 @@
 import express from 'express';
-import { log } from '../../middlewares/logger.middleware.js';
 // order routes
 export const orderRoutes = express.Router();
-orderRoutes.get('/', log, _getOrders);
+orderRoutes.get('/', _getOrders);
 orderRoutes.get('/:id', _getOrderById);
 orderRoutes.post('/', _addOrder);
 orderRoutes.put('/:id', _updateOrder);
@@ -13,7 +12,7 @@ async function _getOrders(req, res) {
     try {
         const { _id } = req.query;
         let filterBy = { _id };
-        loggerService.debug('Getting Orders for id:', filterBy);
+        loggerService.debug('Getting Orders for user id:', filterBy);
         const orders = await orderService.query(filterBy);
         res.json(orders);
     }

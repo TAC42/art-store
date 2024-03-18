@@ -1,5 +1,4 @@
 import express, { Router, Request, Response } from 'express'
-import { log } from '../../middlewares/logger.middleware.js'
 
 // product routes
 export const productRoutes: Router = express.Router()
@@ -7,7 +6,7 @@ export const productRoutes: Router = express.Router()
 // middleware that is specific to this router
 // router.use(requireAuth)
 
-productRoutes.get('/', log, _getProducts)
+productRoutes.get('/', _getProducts)
 productRoutes.get('/query/random', _getRandomProducts)
 productRoutes.get('/check-name/:name', _checkNameAvailable)
 productRoutes.get('/by-name/:name', _getProductByName)
@@ -28,7 +27,7 @@ async function _getProducts(req: Request<{}, {}, {}, ProductQueryParams>,
         const { search, type } = req.query
         let filterBy = { search, type }
 
-        loggerService.debug('Getting Products', filterBy)
+        loggerService.debug('Filtering products by: ', filterBy)
         const products = await productService.query(filterBy)
         res.json(products)
     } catch (err) {

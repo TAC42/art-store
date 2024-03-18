@@ -1,5 +1,4 @@
 import express, { Router, Request, Response } from 'express'
-import { log } from '../../middlewares/logger.middleware.js'
 
 // user routes
 export const userRoutes: Router = express.Router()
@@ -7,7 +6,7 @@ export const userRoutes: Router = express.Router()
 // middleware that is specific to this router
 // userRoutes.use(requireAuth) // Uncomment if you want to require auth for all user routes
 
-userRoutes.get('/', log, _getUsers)
+userRoutes.get('/', _getUsers)
 userRoutes.get('/by-id/:id', _getUserById)
 userRoutes.post('/add/', _addUser)
 userRoutes.put('/update/:id', _updateUser)

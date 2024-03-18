@@ -1,10 +1,9 @@
 import express, { Router, Request, Response } from 'express'
-import { log } from '../../middlewares/logger.middleware.js'
 
 // order routes
 export const orderRoutes: Router = express.Router()
 
-orderRoutes.get('/', log, _getOrders)
+orderRoutes.get('/', _getOrders)
 orderRoutes.get('/:id', _getOrderById)
 orderRoutes.post('/', _addOrder)
 orderRoutes.put('/:id', _updateOrder)
@@ -22,7 +21,7 @@ async function _getOrders(req: Request<{}, {}, {}, { _id?: ObjectId }>,
         const { _id } = req.query
         let filterBy = { _id }
 
-        loggerService.debug('Getting Orders for id:', filterBy)
+        loggerService.debug('Getting Orders for user id:', filterBy)
         const orders = await orderService.query(filterBy)
         res.json(orders)
     } catch (err) {
