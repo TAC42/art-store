@@ -65,8 +65,8 @@
         </article>
 
         <article class="form-action flex">
-          <button class="b glass" type="submit" [disabled]="!userEditForm.valid || isUserDataUnchanged()"
-            [class.disabled]="!userEditForm.valid || isUserDataUnchanged()">
+          <button class="b glass" type="submit" [disabled]="!userEditForm.valid || isFormUnchanged()"
+            [class.disabled]="!userEditForm.valid || isFormUnchanged()">
             Save changes
           </button>
         </article>

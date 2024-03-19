@@ -1,4 +1,8 @@
 import express, { Router, Request, Response } from 'express'
+import { ContactUsRequestBody, VerificationMailRequestBody } from '../../models/utility.js'
+import { Order } from '../../models/order.js'
+import { loggerService } from '../../services/logger.service.js'
+import { mailService } from './mail.service.js'
 
 // mail routes
 export const mailRoutes: Router = express.Router()
@@ -8,11 +12,6 @@ mailRoutes.post('/verify', _sendVerificationMail)
 mailRoutes.post('/invoice', _sendInvoices)
 
 // mail controller functions
-import { ContactUsRequestBody, VerificationMailRequestBody } from '../../models/utility.js'
-import { Order } from '../../models/order.js'
-import { loggerService } from '../../services/logger.service.js'
-import { mailService } from './mail.service.js'
-
 async function _sendContactUsMail(req: Request<ContactUsRequestBody>,
     res: Response): Promise<void> {
     const { name, email, title, message, recaptchaToken } = req.body

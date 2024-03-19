@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core'
-import { FormGroup } from '@angular/forms'
+import { Injectable, inject } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FormUtilsService {
+  private fBuilder = inject(FormBuilder)
+
   // general use
   isFieldInvalid(form: FormGroup, fieldName: string): boolean {
     const field = form.get(fieldName)
@@ -21,9 +23,7 @@ export class FormUtilsService {
 
     if (field.errors['email']) return 'Invalid email format'
 
-    if (field.errors['minLength']) {
-      return `${field.errors['minLength'].requiredLength} min characters required`
-    }
+    if (field.errors['minLength']) return `${field.errors['minLength'].requiredLength} min characters required`
 
     if (field.errors['maxLength']) return `Maximum length reached`
 
@@ -33,7 +33,11 @@ export class FormUtilsService {
 
     if (field.errors['invalidCharacters']) return `Invalid characters used`
 
-    if (field.errors['nameTaken']) return 'This name is already in use'
+    if (field.errors['nameTaken']) return 'This name is already in use elsewhere'
+
+    if (field.errors['usernameTaken']) return 'This username is already taken'
+
+    if (field.errors['emailTaken']) return 'This email is already taken'
 
     if (field.errors['codeMismatch']) return 'The code does not match'
 
@@ -46,5 +50,23 @@ export class FormUtilsService {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     })
     return words.join(' ')
+  }
+
+  // handling of image uploaders count and upload of images
+  addNewImageUploader(form: FormGroup, defaultImgUrl: string): void {
+    const imgUrlsArray = form.get('imgUrls') as FormArray
+    if (imgUrlsArray.length < 5) imgUrlsArray.push(this.fBuilder.control(defaultImgUrl))
+  }
+
+  removeImageUploader(form: FormGroup, index: number): void {
+    const imgUrlsArray = form.get('imgUrls') as FormArray
+    if (imgUrlsArray.length > index) imgUrlsArray.removeAt(index)
+  }
+
+  handleImageUpload(form: FormGroup, event: { url: string, index: number }): void {
+    const imgUrlsArray = form.get('imgUrls') as FormArray
+    const { url, index } = event
+    if (index < imgUrlsArray.length) imgUrlsArray.at(index).setValue(url)
+    else imgUrlsArray.push(this.fBuilder.control(url))
   }
 }

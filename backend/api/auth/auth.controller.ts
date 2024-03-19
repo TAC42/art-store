@@ -1,4 +1,8 @@
 import express, { Router, Request, Response } from 'express'
+import { LoginRequestBody, SignupRequestBody } from '../../models/user.js'
+import { authService } from './auth.service.js'
+import { loggerService } from '../../services/logger.service.js'
+import { utilityService } from '../../services/utility.service.js'
 
 // auth routes
 export const authRoutes: Router = express.Router()
@@ -8,11 +12,6 @@ authRoutes.post('/signup', _signup)
 authRoutes.post('/logout', _logout)
 
 // auth controller functions
-import { LoginRequestBody, SignupRequestBody } from '../../models/user.js'
-import { authService } from './auth.service.js'
-import { loggerService } from '../../services/logger.service.js'
-import { utilityService } from '../../services/utility.service.js'
-
 async function _login(req: Request<LoginRequestBody>,
   res: Response): Promise<void> {
   const { username, password, recaptchaToken } = req.body

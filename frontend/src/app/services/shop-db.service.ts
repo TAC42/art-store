@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core'
-import { Observable, throwError, catchError } from 'rxjs'
-import { HttpService } from './http.service'
+import { ValidationErrors } from '@angular/forms'
+import { Observable, throwError, catchError, map, of } from 'rxjs'
 import { Product, ShopFilter } from '../models/shop'
+import { HttpService } from './http.service'
 
 const BASE_URL = 'product/'
 
@@ -11,7 +12,8 @@ const BASE_URL = 'product/'
 
 export class ShopDbService {
   private httpService = inject(HttpService)
-  private currentFilter: ShopFilter = this.getDefaultFilter()
+
+  currentFilter: ShopFilter = { search: '' }
 
   query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
     return this.httpService.get(BASE_URL, filterBy).pipe(
@@ -40,21 +42,13 @@ export class ShopDbService {
     )
   }
 
-  checkNameAvailable(productName: string): Observable<{ isNameAvailable: boolean }> {
-    return this.httpService.get<{ isNameAvailable: boolean }>(`${BASE_URL}check-name/${productName}`).pipe(
-      catchError(error => {
-        console.error('Error checking name availability:', error)
-        return throwError(() => new Error('Error checking name availability'))
-      })
-    )
-  }
-
   getRandomProducts(type: string, excludeProductId: string): Observable<Product[]> {
-    const url = `${BASE_URL}query/random?type=${encodeURIComponent(type)}&excludeProductId=${encodeURIComponent(excludeProductId)}`
+    const url = `${BASE_URL}query/random?type=${encodeURIComponent(
+      type)}&excludeProductId=${encodeURIComponent(excludeProductId)}`
     return this.httpService.get<Product[]>(url).pipe(
       catchError(error => {
         console.error('Error fetching random products:', error)
-        return throwError(() => new Error('Error fetching random products'));
+        return throwError(() => new Error('Error fetching random products'))
       })
     )
   }
@@ -69,10 +63,17 @@ export class ShopDbService {
     } else return this.httpService.post<Product>(`${BASE_URL}add`, product)
   }
 
-  getDefaultFilter(): ShopFilter {
-    return {
-      search: '',
-    }
+  validateProductName(productName: string): Observable<ValidationErrors | null> {
+    if (!productName) return of(null)
+
+    return this.httpService.get<{ isAvailable: boolean }>(
+      `${BASE_URL}check-name/${productName}`).pipe(
+        map(response => response.isAvailable ? null : { nameTaken: true }),
+        catchError(error => {
+          console.error('Error checking name availability:', error)
+          return of({ error: 'Network or server error' })
+        })
+      )
   }
 
   static getDefaultProduct(): Product {
@@ -92,20 +93,8 @@ export class ShopDbService {
     }
   }
 
-  setFilter(filter: ShopFilter): void {
-    this.currentFilter = filter
-  }
-
-  getCurrentFilter(): ShopFilter {
-    return this.currentFilter
-  }
-
-  escapeRegExp(string: string): string {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  }
-
   getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
-    const newFilterBy: ShopFilter = this.getDefaultFilter()
+    const newFilterBy: ShopFilter = { search: '' }
     let isNewRefresh = false
 
     searchParams.forEach((value, key) => {
@@ -117,5 +106,9 @@ export class ShopDbService {
     if (isNewRefresh) this.setFilter({ ...newFilterBy })
 
     return newFilterBy
+  }
+
+  setFilter(filter: ShopFilter): void {
+    this.currentFilter = filter
   }
 }

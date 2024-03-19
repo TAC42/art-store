@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core'
-import { Observable, throwError, catchError, tap, of } from 'rxjs'
+import { ValidationErrors } from '@angular/forms'
+import { Observable, throwError, catchError, tap, of, map } from 'rxjs'
 import { User, UserCredentials, UserSignup } from '../models/user'
 import { HttpService } from './http.service'
 
@@ -82,6 +83,32 @@ export class UserService {
   setLoggedinUser(user: User): void {
     const userForSession = { _id: user._id }
     sessionStorage.setItem(SESSION_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
+  }
+
+  validateUsername(username: string): Observable<ValidationErrors | null> {
+    if (!username) return of(null)
+
+    return this.httpService.get<{ isAvailable: boolean }>(
+      `${BASE_URL}check-username/${username}`).pipe(
+        map(response => response.isAvailable ? null : { usernameTaken: true }),
+        catchError(error => {
+          console.error('Error checking username availability:', error)
+          return of({ error: 'Network or server error' })
+        })
+      )
+  }
+
+  validateEmail(email: string): Observable<ValidationErrors | null> {
+    if (!email) return of(null)
+
+    return this.httpService.get<{ isAvailable: boolean }>(
+      `${BASE_URL}check-email/${email}`).pipe(
+        map(response => response.isAvailable ? null : { emailTaken: true }), // Note the change to 'emailTaken'
+        catchError(error => {
+          console.error('Error checking email availability:', error)
+          return of({ error: 'Network or server error' })
+        })
+      )
   }
 
   static getDefaultUser(): User {

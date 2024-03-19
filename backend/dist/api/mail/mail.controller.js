@@ -1,11 +1,12 @@
 import express from 'express';
+import { loggerService } from '../../services/logger.service.js';
+import { mailService } from './mail.service.js';
 // mail routes
 export const mailRoutes = express.Router();
 mailRoutes.post('/contact', _sendContactUsMail);
 mailRoutes.post('/verify', _sendVerificationMail);
 mailRoutes.post('/invoice', _sendInvoices);
-import { loggerService } from '../../services/logger.service.js';
-import { mailService } from './mail.service.js';
+// mail controller functions
 async function _sendContactUsMail(req, res) {
     const { name, email, title, message, recaptchaToken } = req.body;
     loggerService.debug(`Received contact form data: ${name}, ${email}, ${title}, ${message}, ${recaptchaToken}`);

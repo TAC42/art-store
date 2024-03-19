@@ -125,17 +125,17 @@
       <div class="upload-area grid" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="editForm.get('type')?.value"
-            (onUploaded)="handleImageUpload($event, i)" />
+            (onUploaded)="handleImgUpload({url: $event.url, index: i})" />
         </div>
 
         <div class="amount-management grid">
-          <button class="flex column" type="button" (click)="addNewImageUploader()"
+          <button class="flex column" type="button" (click)="addNewImgUploader()"
             [disabled]="imgUrlsControls.length >= 5" [class.disabled]="imgUrlsControls.length >= 5">
             <svg-render svgName="addIcon" />
             <span>Add</span>
           </button>
 
-          <button class="flex column" type="button" (click)="removeImageUploader(imgUrlsControls.length - 1)"
+          <button class="flex column" type="button" (click)="removeImgUploader(imgUrlsControls.length - 1)"
             [disabled]="imgUrlsControls.length <= 1" [class.disabled]="imgUrlsControls.length <= 1">
             <svg-render svgName="removeIcon" />
             <span>Remove</span>

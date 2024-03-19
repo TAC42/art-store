@@ -11,6 +11,7 @@ export const userService = {
   save,
   getById,
   getByUsername,
+  getByEmail,
   checkNonVerifiedUsers,
 }
 
@@ -47,6 +48,18 @@ async function getByUsername(username: string): Promise<User | null> {
     return user
   } catch (err) {
     loggerService.error(`Error with finding user named: ${username}`, err)
+    throw err
+  }
+}
+
+async function getByEmail(email: string): Promise<User | null> {
+  try {
+    const collection = await dbService.getCollection(USERS_COLLECTION)
+    const user = await collection.findOne({ email })
+
+    return user
+  } catch (err) {
+    loggerService.error(`Error with finding user with email: ${email}`, err)
     throw err
   }
 }

@@ -1,4 +1,7 @@
 import express from 'express';
+import { ObjectId } from 'mongodb';
+import { productService } from './product.service.js';
+import { loggerService } from '../../services/logger.service.js';
 // product routes
 export const productRoutes = express.Router();
 // middleware that is specific to this router
@@ -12,9 +15,6 @@ productRoutes.post('/add/', _addProduct);
 productRoutes.put('/update/:id', _updateProduct);
 productRoutes.delete('/delete/:id', _removeProduct);
 // product controller functions
-import { ObjectId } from 'mongodb';
-import { productService } from './product.service.js';
-import { loggerService } from '../../services/logger.service.js';
 async function _getProducts(req, res) {
     try {
         const { search, type } = req.query;
@@ -53,10 +53,10 @@ async function _checkNameAvailable(req, res) {
         const productName = req.params.name;
         const product = await productService.getByName(productName);
         if (product)
-            loggerService.error('Product name is not available for: ', product.name);
+            loggerService.error('This product name is not available: ', product.name);
         else
-            loggerService.info('Product name is available for: ', productName);
-        res.json({ isNameAvailable: !product });
+            loggerService.info('This product name is available: ', productName);
+        res.json({ isAvailable: !product });
     }
     catch (err) {
         loggerService.error('Error with checking availability of name', err);
