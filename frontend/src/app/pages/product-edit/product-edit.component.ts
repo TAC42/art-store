@@ -28,10 +28,11 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private productSubscription: Subscription | undefined
 
   public formUtils = this.formUtilsService
-  public editForm!: FormGroup
+  public productEditForm!: FormGroup
   public product: Product = ShopDbService.getDefaultProduct()
   public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
-  public specialChars: string = "'. ?$%#!*:,()\"'"
+  public specialChars: string = "'. ?$%#!*:,/()\"'"
+  public initialFormData: Product | null = null
 
   ngOnInit(): void {
     this.initializeForm()
@@ -39,7 +40,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   initializeForm(): void {
-    this.editForm = this.fBuilder.group({
+    this.productEditForm = this.fBuilder.group({
       name: [this.product.name, [Validators.required], this.productNameValidator()],
       price: [this.product.price, [Validators.required]],
       description: [this.product.description, [Validators.required]],
@@ -58,6 +59,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       map(data => data['product']),
       filter(product => !!product)).subscribe(product => {
         this.product = product
+        this.initialFormData = product
         this.initializeForm()
       })
   }
@@ -65,7 +67,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   productNameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (!control.valueChanges ||
-        control.value === this.product.name) return of(null)
+        control.value === this.initialFormData?.name) return of(null)
 
       return control.valueChanges.pipe(
         debounceTime(500), distinctUntilChanged(), switchMap(value =>
@@ -75,23 +77,23 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   get imgUrlsControls(): AbstractControl[] {
-    return (this.editForm.get('imgUrls') as FormArray).controls
+    return (this.productEditForm.get('imgUrls') as FormArray).controls
   }
 
   addNewImgUploader(): void {
-    this.formUtils.addNewImageUploader(this.editForm, this.defaultImgUrl)
+    this.formUtils.addNewImageUploader(this.productEditForm, this.defaultImgUrl)
   }
 
   removeImgUploader(index: number): void {
-    this.formUtils.removeImageUploader(this.editForm, index)
+    this.formUtils.removeImageUploader(this.productEditForm, index)
   }
 
   handleImgUpload(event: { url: string, index: number }): void {
-    this.formUtils.handleImageUpload(this.editForm, event)
+    this.formUtils.handleImageUpload(this.productEditForm, event)
   }
 
   onSaveProduct() {
-    const formValues = { ...this.editForm.value }
+    const formValues = { ...this.productEditForm.value }
     formValues.name = formValues.name.toLowerCase()
 
     const productToSave = { ...this.product, ...formValues }

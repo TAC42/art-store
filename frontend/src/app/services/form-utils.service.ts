@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { UtilityService } from './utility.service'
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
 
 export class FormUtilsService {
   private fBuilder = inject(FormBuilder)
+  private utilService = inject(UtilityService)
 
   // general use
   isFieldInvalid(form: FormGroup, fieldName: string): boolean {
@@ -50,6 +52,21 @@ export class FormUtilsService {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     })
     return words.join(' ')
+  }
+
+  // Check if form has changed before bothering to allow saving changes
+  isFormUnchanged<T>(form: FormGroup, initialData: T | null): boolean {
+    if (!initialData) return false
+
+    const formData = form.value
+    const initialDataObject = initialData as { [key: string]: any }
+
+    const relevantInitialData = Object.keys(formData).reduce(
+      (obj: { [key: string]: any }, key) => {
+        if (key in initialDataObject) obj[key] = initialDataObject[key]
+        return obj
+      }, {})
+    return this.utilService.deepEqual(formData, relevantInitialData)
   }
 
   // handling of image uploaders count and upload of images

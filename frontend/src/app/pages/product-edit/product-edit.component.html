@@ -1,73 +1,73 @@
 <main class="product-edit-contents grid layout-row w-h-100">
-  <form class="flex column" [formGroup]="editForm" (ngSubmit)="onSaveProduct()">
+  <form class="flex column" [formGroup]="productEditForm" (ngSubmit)="onSaveProduct()">
     <a [routerLink]="['/shop']" title="Exit details page?">
       <svg-render svgName="leftArrowIcon" />
     </a>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'name')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'name')">
       <label for="name" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="productName" />
           <span>Name*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'name')">
-          {{ formUtils.getErrorMessage(editForm, 'name') }}
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'name')">
+          {{ formUtils.getErrorMessage(productEditForm, 'name') }}
         </span>
       </label>
       <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." customValidator
         [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. -/:'" autofocus />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'price')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'price')">
       <label for="price" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="price" />
           <span>Price*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'price')">
-          {{ formUtils.getErrorMessage(editForm, 'price') }}
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'price')">
+          {{ formUtils.getErrorMessage(productEditForm, 'price') }}
         </span>
       </label>
       <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." customValidator
         [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'description')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'description')">
       <label for="description" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="descriptionIcon" />
           <span>Description*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'description')">
-          {{ formUtils.getErrorMessage(editForm, 'description') }}
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'description')">
+          {{ formUtils.getErrorMessage(productEditForm, 'description') }}
         </span>
       </label>
       <textarea id="description" formControlName="description" placeholder="Please enter info regarding your product..."
         customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'dimensions')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
       <label for="dimensions" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="dimensions" />
           <span>Dimensions*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'dimensions')">
-          {{ formUtils.getErrorMessage(editForm, 'dimensions') }}
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
+          {{ formUtils.getErrorMessage(productEditForm, 'dimensions') }}
         </span>
       </label>
       <input id="dimensions" type="text" formControlName="dimensions" placeholder="Please enter product dimensions..."
         customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="'/ .,'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'materials')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'materials')">
       <label for="materials" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="materials" />
           <span>Materials*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'materials')">
-          {{ formUtils.getErrorMessage(editForm, 'materials') }}
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'materials')">
+          {{ formUtils.getErrorMessage(productEditForm, 'materials') }}
         </span>
       </label>
       <input id="materials" type="text" formControlName="materials"
@@ -75,14 +75,14 @@
         [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(editForm, 'dateMade')">
+    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
       <label for="dateMade" class="flex row">
         <div class="label-info flex row">
           <svg-render svgName="calendar" />
           <span>Date Made*</span>
         </div>
-        <span *ngIf="formUtils.isFieldInvalid(editForm, 'dateMade')">
-          {{ formUtils.getErrorMessage(editForm, 'dateMade') }}
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
+          {{ formUtils.getErrorMessage(productEditForm, 'dateMade') }}
         </span>
       </label>
       <input id="dateMade" type="text" formControlName="dateMade" placeholder="When your product was finished..."
@@ -124,7 +124,7 @@
 
       <div class="upload-area grid" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
-          <image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="editForm.get('type')?.value"
+          <image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="productEditForm.get('type')?.value"
             (onUploaded)="handleImgUpload({url: $event.url, index: i})" />
         </div>
 
@@ -145,16 +145,18 @@
     </div>
 
     <div class="form-actions flex row">
-      <button class="flex row" type="submit" [disabled]="!editForm.valid" [class.disabled]="!editForm.valid">
+      <button class="flex row" type="submit"
+        [disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)"
+        [class.disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)">
         <span>Submit</span>
         <svg-render svgName="paperPlaneIcon" />
       </button>
     </div>
   </form>
 
-  <edit-preview [name]="editForm.get('name')?.value" [type]="editForm.get('type')?.value"
-    [imgUrls]="editForm.get('imgUrls')?.value" [price]="editForm.get('price')?.value"
-    [stock]="editForm.get('stock')?.value" [dateMade]="editForm.get('dateMade')?.value"
-    [description]="editForm.get('description')?.value" [materials]="editForm.get('materials')?.value"
-    [dimensions]="editForm.get('dimensions')?.value" />
+  <edit-preview [name]="productEditForm.get('name')?.value" [type]="productEditForm.get('type')?.value"
+    [imgUrls]="productEditForm.get('imgUrls')?.value" [price]="productEditForm.get('price')?.value"
+    [stock]="productEditForm.get('stock')?.value" [dateMade]="productEditForm.get('dateMade')?.value"
+    [description]="productEditForm.get('description')?.value" [materials]="productEditForm.get('materials')?.value"
+    [dimensions]="productEditForm.get('dimensions')?.value" />
 </main>

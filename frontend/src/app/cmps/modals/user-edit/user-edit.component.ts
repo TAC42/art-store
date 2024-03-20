@@ -64,20 +64,10 @@ export class UserEditComponent implements OnInit {
     })
   }
 
-  isFormUnchanged(): boolean {
-    if (!this.initialFormData) return false
-    const formData = this.userEditForm.value
-
-    return Object.keys(formData).every(key => {
-      const initialValue = this.initialFormData ?
-        this.initialFormData[key as keyof User] : undefined
-      return formData[key] === initialValue
-    })
-  }
-
   usernameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.valueChanges || control.value === this.initialFormData?.username) return of(null)
+      if (!control.valueChanges ||
+        control.value === this.initialFormData?.username) return of(null)
 
       return control.valueChanges.pipe(
         debounceTime(500), distinctUntilChanged(), switchMap(value =>
@@ -88,7 +78,8 @@ export class UserEditComponent implements OnInit {
 
   emailValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.valueChanges || control.value === this.initialFormData?.email) return of(null)
+      if (!control.valueChanges ||
+        control.value === this.initialFormData?.email) return of(null)
 
       return control.valueChanges.pipe(
         debounceTime(500), distinctUntilChanged(), switchMap(value =>

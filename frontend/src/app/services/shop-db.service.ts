@@ -83,7 +83,7 @@ export class ShopDbService {
       name: 'something',
       imgUrls: ['https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'],
       price: 0,
-      description: 'This is a product / art item',
+      description: 'This is a product / art item, intended for sale / showcase!',
       dimensions: '5 x 5 x 5 inch',
       materials: 'ceramic',
       dateMade: '2024',

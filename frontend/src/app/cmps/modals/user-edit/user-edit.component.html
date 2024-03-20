@@ -16,13 +16,6 @@
               <svg-render svgName="camera" />
             </div>
           </label>
-
-          <!-- <image-uploader
-            [index]="0"
-            [defaultImgUrl]="control.value"
-            [productType]="editForm.get('type')?.value"
-            (onUploaded)="handleImageUpload($event, 0)"
-          /> -->
         </article>
 
         <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
@@ -65,9 +58,10 @@
         </article>
 
         <article class="form-action flex">
-          <button class="b glass" type="submit" [disabled]="!userEditForm.valid || isFormUnchanged()"
-            [class.disabled]="!userEditForm.valid || isFormUnchanged()">
-            Save changes
+          <button class="b glass" type="submit"
+            [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
+            [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
+            <span>Save changes</span>
           </button>
         </article>
       </form>
