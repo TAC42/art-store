@@ -8,6 +8,8 @@ export const authService = {
     login,
     getLoginToken,
     validateToken,
+    checkPassword,
+    hashPassword
 };
 dotenv.config();
 const cryptr = new Cryptr(process.env.DECRYPTION);
@@ -23,11 +25,9 @@ async function login(username, password) {
 }
 async function signup(username, password, fullName, email, imgUrl) {
     loggerService.debug(`auth - signup with username: ${username}`);
-    if (!username || !password || !fullName) {
+    if (!username || !password || !fullName)
         throw new Error('Missing required details');
-    }
-    const saltRounds = 10;
-    const hash = await bcrypt.hash(password, saltRounds);
+    const hash = await hashPassword(password);
     return userService.save({
         username,
         password: hash,
@@ -40,12 +40,21 @@ async function signup(username, password, fullName, email, imgUrl) {
         isVerified: false,
     });
 }
+async function checkPassword(password) {
+    const isPasswordHashed = /^[$]2[aby][$]/.test(password);
+    if (!isPasswordHashed)
+        return await hashPassword(password);
+    return password;
+}
+async function hashPassword(password) {
+    const saltRounds = 10;
+    const hash = await bcrypt.hash(password, saltRounds);
+    return hash;
+}
 function getLoginToken(user) {
     const userInfo = {
         _id: user._id,
         username: user.username,
-        cart: user.cart || [],
-        imgUrl: user.imgUrl,
     };
     return cryptr.encrypt(JSON.stringify(userInfo));
 }

@@ -50,9 +50,8 @@ async function save(order) {
                 new ObjectId(order._id) : order._id;
             const { _id, ...orderToUpdate } = order;
             const result = await collection.updateOne({ _id: id }, { $set: orderToUpdate });
-            if (result.matchedCount === 0) {
+            if (result.matchedCount === 0)
                 throw new Error(`Order with id ${id.toHexString()} not found`);
-            }
             return { ...orderToUpdate, _id: id };
         }
         else {

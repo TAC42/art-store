@@ -5,66 +5,72 @@
       <button class="back" (click)="closeUserEdit()">
         <svg-render svgName="back" />
       </button>
-      <article class="title flex">Profile edit</article>
+      <h2 class="flex">Profile Edit</h2>
     </section>
-    <section class="edit-body grid">
-      <form class="flex column" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
-        <article class="img input-area flex">
-          <label for="imgUrl">
-            <div class="label-info">
-              <img [src]="user.imgUrl" [alt]="user.fullName" />
-              <svg-render svgName="camera" />
-            </div>
-          </label>
-        </article>
 
-        <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
-          <label for="fullName" class="flex row">
-            <div class="label-info flex row">
-              <span>Full name</span>
-            </div>
-            <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'fullName')">
-              {{ formUtils.getErrorMessage(userEditForm, "fullName") }}
-            </span>
-          </label>
-          <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
-            customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'. -/:'" autofocus />
-        </article>
+    <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
+      <article class="img input-area flex">
+        <label for="imgUrl">
+          <div class="label-info">
+            <img [src]="user.imgUrl" [alt]="user.fullName" />
+            <svg-render svgName="camera" />
+          </div>
+        </label>
+      </article>
 
-        <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
-          <label for="username" class="flex row">
-            <div class="label-info flex row">
-              <span>User name</span>
-            </div>
-            <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'username')">
-              {{ formUtils.getErrorMessage(userEditForm, "username") }}
-            </span>
-          </label>
-          <input id="username" type="text" formControlName="username" placeholder="Please enter your username..."
-            customValidator [minLength]=3 [maxLength]=24>
-        </article>
+      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
+        <label for="fullName" class="flex row">
+          <div class="label-info flex row">
+            <svg-render svgName="idIcon" />
+            <span>Full name</span>
+          </div>
+          <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'fullName')">
+            {{ formUtils.getErrorMessage(userEditForm, "fullName") }}
+          </span>
+        </label>
+        <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
+          customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'. -/:'" autofocus />
+      </article>
 
-        <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
-          <label for="email" class="flex row">
-            <div class="label-info flex row">
-              <span>Email</span>
-            </div>
-            <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'email')">
-              {{ formUtils.getErrorMessage(userEditForm, 'email') }}
-            </span>
-          </label>
-          <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
-            [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
-        </article>
+      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
+        <label for="username" class="flex row">
+          <div class="label-info flex row">
+            <svg-render svgName="personIcon" />
+            <span>Username</span>
+          </div>
+          <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'username')">
+            {{ formUtils.getErrorMessage(userEditForm, "username") }}
+          </span>
+        </label>
+        <input id="username" type="text" formControlName="username" placeholder="Please enter your username..."
+          customValidator [minLength]=3 [maxLength]=24>
+      </article>
 
-        <article class="form-action flex">
-          <button class="b glass" type="submit"
-            [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
-            [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
-            <span>Save changes</span>
-          </button>
-        </article>
-      </form>
-    </section>
+      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
+        <label for="email" class="flex row">
+          <div class="label-info flex row">
+            <svg-render svgName="emailIcon" />
+            <span>Email</span>
+          </div>
+          <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'email')">
+            {{ formUtils.getErrorMessage(userEditForm, 'email') }}
+          </span>
+        </label>
+        <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
+          [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
+      </article>
+
+      <a [routerLink]="['/reset']" title="Reset password?">
+        <span (click)="closeUserEdit()">Edit password?</span>
+      </a>
+
+      <article class="form-action flex">
+        <button class="b glass" type="submit"
+          [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
+          [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
+          <span>Save changes</span>
+        </button>
+      </article>
+    </form>
   </main>
 </div>

@@ -24,6 +24,10 @@ export class UtilityService {
     return this.httpService.post<any>(`${BASE_URL}/verify`, formData)
   }
 
+  sendResetPasswordMail(formData: any): Observable<any> {
+    return this.httpService.post<any>(`${BASE_URL}/reset`, formData)
+  }
+
   sendInvoiceMails(orderDetails: Order): Observable<any> {
     return this.httpService.post<any>(`${BASE_URL}/invoice`, orderDetails)
   }

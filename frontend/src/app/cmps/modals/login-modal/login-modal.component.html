@@ -29,6 +29,10 @@
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
                         customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
                 </div>
+
+                <a [routerLink]="['/reset']" title="Reset password?">
+                    <span (click)="closeLoginModal()">Forgot password?</span>
+                </a>
             </ng-container>
 
             <ng-container *ngIf="!isLoginMode">

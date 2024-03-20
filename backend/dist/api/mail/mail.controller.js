@@ -5,6 +5,7 @@ import { mailService } from './mail.service.js';
 export const mailRoutes = express.Router();
 mailRoutes.post('/contact', _sendContactUsMail);
 mailRoutes.post('/verify', _sendVerificationMail);
+mailRoutes.post('/reset', _sendResetPasswordMail);
 mailRoutes.post('/invoice', _sendInvoices);
 // mail controller functions
 async function _sendContactUsMail(req, res) {
@@ -24,6 +25,18 @@ async function _sendVerificationMail(req, res) {
     loggerService.debug(`Received verify form data: ${username}, ${email}, ${code}`);
     try {
         await mailService.sendVerificationMail(username, email, code);
+        res.status(200).send({ msg: 'Mail successfully sent' });
+    }
+    catch (error) {
+        loggerService.error('Failed sending mail: ' + error);
+        res.status(500).send({ error: 'Failed sending mail' });
+    }
+}
+async function _sendResetPasswordMail(req, res) {
+    const { email, code } = req.body;
+    loggerService.debug(`Received reset password form data: ${email}, ${code}`);
+    try {
+        await mailService.sendResetPasswordMail(email, code);
         res.status(200).send({ msg: 'Mail successfully sent' });
     }
     catch (error) {

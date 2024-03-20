@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { dbService } from '../../services/db.service.js';
+import { authService } from '../../api/auth/auth.service.js';
 import { loggerService } from '../../services/logger.service.js';
 const USERS_COLLECTION = 'user';
 export const userService = {
@@ -72,10 +73,12 @@ async function save(user) {
         if (user._id) {
             const { _id, ...userToUpdate } = user;
             const id = _id instanceof ObjectId ? _id : new ObjectId(_id);
-            const result = await collection.updateOne({ _id: id }, { $set: userToUpdate });
-            if (result.matchedCount === 0) {
-                throw new Error(`User with id ${id.toHexString()} not found`);
+            if (userToUpdate.password) {
+                userToUpdate.password = await authService.checkPassword(userToUpdate.password);
             }
+            const result = await collection.updateOne({ _id: id }, { $set: userToUpdate });
+            if (result.matchedCount === 0)
+                throw new Error(`User with id ${id.toHexString()} not found`);
             return { ...userToUpdate, _id: id };
         }
         else {
