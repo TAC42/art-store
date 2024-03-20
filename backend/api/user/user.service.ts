@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { User, UserQueryParams } from '../../models/user.js'
 import { dbService } from '../../services/db.service.js'
+import { authService } from '../../api/auth/auth.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
 const USERS_COLLECTION = 'user'
@@ -84,11 +85,14 @@ async function save(user: User): Promise<User> {
       const { _id, ...userToUpdate } = user
       const id = _id instanceof ObjectId ? _id : new ObjectId(_id)
 
+      if (userToUpdate.password) {
+        userToUpdate.password = await authService.checkPassword(userToUpdate.password)
+      }
       const result = await collection.updateOne(
         { _id: id }, { $set: userToUpdate })
-      if (result.matchedCount === 0) {
-        throw new Error(`User with id ${id.toHexString()} not found`)
-      }
+
+      if (result.matchedCount === 0) throw new Error(`User with id ${id.toHexString()} not found`)
+
       return { ...userToUpdate, _id: id }
     } else {
       const response = await collection.insertOne(user)

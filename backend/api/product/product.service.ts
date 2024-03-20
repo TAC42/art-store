@@ -83,15 +83,12 @@ async function save(product: Product): Promise<Product> {
       const result = await collection.updateOne(
         { _id: id }, { $set: productToUpdate })
 
-      if (result.matchedCount === 0) {
-        throw new Error(`Product with id ${id.toHexString()} not found`)
-      }
+      if (result.matchedCount === 0) throw new Error(`Product with id ${id.toHexString()} not found`)
+
       return product
     } else {
       const response = await collection.insertOne(product)
-
-      product._id = response.insertedId
-      return product
+      return { ...product, _id: response.insertedId }
     }
   } catch (err) {
     loggerService.error('Failed to save product', err)

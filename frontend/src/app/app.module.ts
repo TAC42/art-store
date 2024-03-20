@@ -36,6 +36,7 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { ProfileComponent } from './pages/profile/profile.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
 
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { UserMsgComponent } from './cmps/modals/user-msg/user-msg.component'
@@ -102,6 +103,7 @@ import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
     RandomProductCarouselComponent,
     EditPreviewComponent,
     UserEditComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate {
         if (loggedInUser?._id) {
           this.store.dispatch(LOAD_USER({ userId: loggedInUser._id }))
           return this.user$.pipe(
-            filter(user => !!user._id),
+            filter(user => !!user._id && user.isVerified),
             take(1),
             map(user => user?.isAdmin ? true : this.router.createUrlTree(['/'])),
           )

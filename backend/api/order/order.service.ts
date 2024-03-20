@@ -62,9 +62,9 @@ async function save(order: Order): Promise<Order> {
 
       const result = await collection.updateOne(
         { _id: id }, { $set: orderToUpdate })
-      if (result.matchedCount === 0) {
-        throw new Error(`Order with id ${id.toHexString()} not found`)
-      }
+
+      if (result.matchedCount === 0) throw new Error(`Order with id ${id.toHexString()} not found`)
+
       return { ...orderToUpdate, _id: id }
     } else {
       const result = await collection.insertOne(order)

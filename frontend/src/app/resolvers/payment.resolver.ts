@@ -25,7 +25,7 @@ export class PaymentResolver implements Resolve<User | null> {
         if (loggedInUser._id) {
           this.store.dispatch(LOAD_USER({ userId: loggedInUser._id }))
           return this.user$.pipe(
-            filter(user => !!user._id && user?.cart.length > 0),
+            filter(user => !!user._id && user.isVerified && user?.cart.length > 0),
             take(1),
             catchError(() => {
               this.router.navigate(['/shop'])
