@@ -33,7 +33,6 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   codeSent: boolean = false
   timer: number = 0
   resendAvailable: boolean = false
-  private resendCodeTimer?: number
   private authModalTimer?: number
 
   ngOnInit() {
@@ -73,25 +72,17 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
             this.codeSent = true
             this.message = 'We\'ve sent the code to your email address, please insert it below.'
             this.resendAvailable = false
-            this.startResendTimer()
+            this.utilService.startResendTimer().subscribe({
+              next: ({ timer, resendAvailable }) => {
+                this.timer = timer
+                this.resendAvailable = resendAvailable
+              }
+            })
           },
           error: (error) => console.error('Failed to send mail:', error)
         })
       }
     })
-  }
-
-  startResendTimer() {
-    if (this.resendCodeTimer) clearInterval(this.resendCodeTimer)
-
-    this.timer = 60
-    this.resendCodeTimer = setInterval(() => {
-      if (this.timer > 0) this.timer--
-      else {
-        this.resendAvailable = true
-        clearInterval(this.resendCodeTimer)
-      }
-    }, 1000) as unknown as number
   }
 
   codeValidator(control: AbstractControl): ValidationErrors | null {
@@ -113,7 +104,6 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.resendCodeTimer) clearInterval(this.resendCodeTimer)
     if (this.authModalTimer) clearTimeout(this.authModalTimer)
   }
 }

@@ -12,6 +12,7 @@ export const userRoutes: Router = express.Router()
 
 userRoutes.get('/', _getUsers)
 userRoutes.get('/by-id/:id', _getUserById)
+userRoutes.get('/by-email/:email', _getUserByEmail)
 userRoutes.get('/check-username/:username', _checkUsernameAvailable)
 userRoutes.get('/check-email/:email', _checkEmailAvailable)
 userRoutes.post('/add/', _addUser)
@@ -34,6 +35,17 @@ async function _getUserById(req: Request<{ id: ObjectId }>,
   res: Response): Promise<void> {
   try {
     const user = await userService.getById(req.params.id)
+    res.json(user)
+  } catch (err) {
+    loggerService.error('Failed to get user', err)
+    res.status(500).send({ err: 'Failed to get user' })
+  }
+}
+
+async function _getUserByEmail(req: Request<{ email: string }>,
+  res: Response): Promise<void> {
+  try {
+    const user = await userService.getByEmail(req.params.email)
     res.json(user)
   } catch (err) {
     loggerService.error('Failed to get user', err)
@@ -91,7 +103,7 @@ async function _updateUser(req: Request<{ id: ObjectId }, {}, User>,
   res: Response): Promise<void> {
   try {
     const user = { ...req.body, _id: req.params.id }
-    loggerService.debug('Updating user:', user)
+    loggerService.debug('Updating user:', user._id)
     const savedUser = await userService.save(user)
 
     res.json(savedUser)

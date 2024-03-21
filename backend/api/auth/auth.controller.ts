@@ -60,7 +60,6 @@ async function _signup(req: Request<SignupRequestBody>,
 async function _logout(req: Request,
   res: Response): Promise<void> {
   try {
-    loggerService.info('A user has logged out')
     res.clearCookie('loginToken')
     res.status(200).send({ msg: 'Logged out successfully' })
   } catch (err) {

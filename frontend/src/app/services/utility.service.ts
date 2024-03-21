@@ -66,6 +66,23 @@ export class UtilityService {
     return color
   }
 
+  // handling of reset timer for resending a code (user auth / reset password)
+  startResendTimer(): Observable<{ timer: number, resendAvailable: boolean }> {
+    return new Observable((observer) => {
+      let timer = 60
+      let resendAvailable = false
+      const resendCodeTimer = setInterval(() => {
+        if (timer > 0) timer--
+        else {
+          resendAvailable = true
+          clearInterval(resendCodeTimer)
+        }
+        observer.next({ timer, resendAvailable })
+      }, 1000)
+      return () => clearInterval(resendCodeTimer)
+    })
+  }
+
   // return a carousel that enables you to click the images inside the carousel, for full display
   convertToCarouselItem(items: (string | MiniProduct)[], type: 'image' | 'product' = 'image'): CarouselItem[] {
     return items.map(item => {

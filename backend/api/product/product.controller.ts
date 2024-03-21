@@ -108,7 +108,7 @@ async function _updateProduct(req: Request<{ id: ObjectId }, {}, Product>,
     res: Response): Promise<void> {
     try {
         const product = { ...req.body, _id: req.params.id }
-        loggerService.debug('Updating product: ', product)
+        loggerService.debug('Updating product: ', product._id)
         const updatedProduct = await productService.save(product)
 
         res.json(updatedProduct)

@@ -32,6 +32,15 @@ export class UserService {
     )
   }
 
+  getByEmail(email: string): Observable<User> {
+    return this.httpService.get<User>(`${BASE_URL}by-email/${email}`).pipe(
+      catchError(error => {
+        console.error('Error fetching user by email:', error)
+        return throwError(() => new Error('Error fetching user'))
+      })
+    )
+  }
+
   remove(userId: string): Observable<any> {
     return this.httpService.delete(`${BASE_URL}delete/${userId}`)
   }
