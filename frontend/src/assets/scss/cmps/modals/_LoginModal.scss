@@ -24,7 +24,7 @@
                 width: fit-content;
                 margin: 0 auto;
                 padding: 0.5em 0.75em;
-                transition: all 0.5s;
+                transition: all 0.5s ease-in-out;
                 background: $prmclr1;
                 color: $prmclr2;
                 border-radius: 0.5em;
@@ -33,7 +33,7 @@
                 position: relative;
 
                 span {
-                    transition: all 0.5s;
+                    transition: all 0.5s ease-in-out;
                     opacity: 1;
                 }
 
@@ -65,7 +65,7 @@
                     border: 3px solid $mnrclr3;
                     border-color: transparent;
                     border-radius: inherit;
-                    transition: all 0.5s;
+                    transition: all 0.5s ease-in-out;
                     z-index: 0;
                 }
             }
@@ -100,6 +100,7 @@
                         svg-render {
                             width: 24px;
                             height: 24px;
+                            fill: $prmclr1;
                         }
                     }
                 }
@@ -107,7 +108,7 @@
                 input {
                     padding: 0.25em 0.5em;
                     width: 100%;
-                    transition: all 0.3s;
+                    transition: all 0.3s ease-in-out;
                     border-radius: 0.5em;
                     border: 1px solid $scdclr4;
                     color: $prmclr1;
@@ -129,12 +130,22 @@
                     }
                 }
             }
+
+            a {
+                color: $prmclr1;
+                transition: all 0.5s ease-in-out;
+
+                &:hover {
+                    text-decoration: none;
+                    color: $prmclr4;
+                }
+            }
         }
 
         .switch {
             background: none;
             color: $scdclr2;
-            transition: all 0.3s;
+            transition: all 0.3s ease-in-out;
             font-size: 15px;
             font-family: 'nh-bold';
 

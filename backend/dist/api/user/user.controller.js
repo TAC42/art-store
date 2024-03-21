@@ -1,15 +1,18 @@
 import express from 'express';
+import { loggerService } from '../../services/logger.service.js';
+import { userService } from './user.service.js';
 // user routes
 export const userRoutes = express.Router();
 // middleware that is specific to this router
 // userRoutes.use(requireAuth) // Uncomment if you want to require auth for all user routes
 userRoutes.get('/', _getUsers);
 userRoutes.get('/by-id/:id', _getUserById);
+userRoutes.get('/check-username/:username', _checkUsernameAvailable);
+userRoutes.get('/check-email/:email', _checkEmailAvailable);
 userRoutes.post('/add/', _addUser);
 userRoutes.put('/update/:id', _updateUser);
 userRoutes.delete('/delete/:id', _removeUser);
-import { loggerService } from '../../services/logger.service.js';
-import { userService } from './user.service.js';
+// user controller functions
 async function _getUsers(req, res) {
     try {
         const users = await userService.query(req.query);
@@ -28,6 +31,36 @@ async function _getUserById(req, res) {
     catch (err) {
         loggerService.error('Failed to get user', err);
         res.status(500).send({ err: 'Failed to get user' });
+    }
+}
+async function _checkUsernameAvailable(req, res) {
+    try {
+        const userName = req.params.username;
+        const user = await userService.getByUsername(userName);
+        if (user)
+            loggerService.error('This username is not available: ', user.username);
+        else
+            loggerService.info('This username is available: ', userName);
+        res.json({ isAvailable: !user });
+    }
+    catch (err) {
+        loggerService.error('Error with checking availability of username', err);
+        res.status(500).send({ err: 'Error with checking availability of username' });
+    }
+}
+async function _checkEmailAvailable(req, res) {
+    try {
+        const userEmail = req.params.email;
+        const user = await userService.getByEmail(userEmail);
+        if (user)
+            loggerService.error('This email is not available: ', user.email);
+        else
+            loggerService.info('This email is available: ', userEmail);
+        res.json({ isAvailable: !user });
+    }
+    catch (err) {
+        loggerService.error('Error with checking availability of email', err);
+        res.status(500).send({ err: 'Error with checking availability of email' });
     }
 }
 async function _addUser(req, res) {

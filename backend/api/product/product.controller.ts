@@ -1,4 +1,8 @@
 import express, { Router, Request, Response } from 'express'
+import { ObjectId } from 'mongodb'
+import { Product, ProductQueryParams } from '../../models/product.js'
+import { productService } from './product.service.js'
+import { loggerService } from '../../services/logger.service.js'
 
 // product routes
 export const productRoutes: Router = express.Router()
@@ -16,11 +20,6 @@ productRoutes.put('/update/:id', _updateProduct)
 productRoutes.delete('/delete/:id', _removeProduct)
 
 // product controller functions
-import { ObjectId } from 'mongodb'
-import { Product, ProductQueryParams } from '../../models/product.js'
-import { productService } from './product.service.js'
-import { loggerService } from '../../services/logger.service.js'
-
 async function _getProducts(req: Request<{}, {}, {}, ProductQueryParams>,
     res: Response): Promise<void> {
     try {
@@ -64,10 +63,10 @@ async function _checkNameAvailable(req: Request<{ name: string }>,
         const productName = req.params.name
         const product = await productService.getByName(productName)
 
-        if (product) loggerService.error('Product name is not available for: ', product.name)
-        else loggerService.info('Product name is available for: ', productName)
+        if (product) loggerService.error('This product name is not available: ', product.name)
+        else loggerService.info('This product name is available: ', productName)
 
-        res.json({ isNameAvailable: !product })
+        res.json({ isAvailable: !product })
     } catch (err) {
         loggerService.error('Error with checking availability of name', err)
         res.status(500).send({ err: 'Error with checking availability of name' })

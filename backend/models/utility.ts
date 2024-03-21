@@ -7,7 +7,7 @@ export interface ContactUsRequestBody {
 }
 
 export interface VerificationMailRequestBody {
-    username: string
+    username?: string
     email: string
     code: string
 }

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
 import { Observable } from 'rxjs'
-import { take, tap, filter, distinctUntilChanged } from 'rxjs/operators'
+import { take, filter, distinctUntilChanged } from 'rxjs/operators'
 import { Store, select } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { Product } from '../models/shop'

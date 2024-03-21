@@ -70,15 +70,13 @@ async function save(product) {
             const { _id, ...productToUpdate } = product;
             const id = _id instanceof ObjectId ? _id : new ObjectId(_id);
             const result = await collection.updateOne({ _id: id }, { $set: productToUpdate });
-            if (result.matchedCount === 0) {
+            if (result.matchedCount === 0)
                 throw new Error(`Product with id ${id.toHexString()} not found`);
-            }
             return product;
         }
         else {
             const response = await collection.insertOne(product);
-            product._id = response.insertedId;
-            return product;
+            return { ...product, _id: response.insertedId };
         }
     }
     catch (err) {

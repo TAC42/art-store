@@ -2,7 +2,7 @@ payment {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: $prmclr2;
+  background: $prmclr2;
 
   .payment-header {
     position: relative;
@@ -26,11 +26,7 @@ payment {
       height: 24px;
 
       svg-render {
-        svg {
-          path {
-            fill: $prmclr1;
-          }
-        }
+        fill: $prmclr1;
       }
     }
   }

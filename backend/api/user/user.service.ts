@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { User, UserQueryParams } from '../../models/user.js'
 import { dbService } from '../../services/db.service.js'
+import { authService } from '../../api/auth/auth.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
 const USERS_COLLECTION = 'user'
@@ -11,6 +12,7 @@ export const userService = {
   save,
   getById,
   getByUsername,
+  getByEmail,
   checkNonVerifiedUsers,
 }
 
@@ -51,6 +53,18 @@ async function getByUsername(username: string): Promise<User | null> {
   }
 }
 
+async function getByEmail(email: string): Promise<User | null> {
+  try {
+    const collection = await dbService.getCollection(USERS_COLLECTION)
+    const user = await collection.findOne({ email })
+
+    return user
+  } catch (err) {
+    loggerService.error(`Error with finding user with email: ${email}`, err)
+    throw err
+  }
+}
+
 async function remove(userId: ObjectId): Promise<number> {
   try {
     const collection = await dbService.getCollection(USERS_COLLECTION)
@@ -71,11 +85,14 @@ async function save(user: User): Promise<User> {
       const { _id, ...userToUpdate } = user
       const id = _id instanceof ObjectId ? _id : new ObjectId(_id)
 
+      if (userToUpdate.password) {
+        userToUpdate.password = await authService.checkPassword(userToUpdate.password)
+      }
       const result = await collection.updateOne(
         { _id: id }, { $set: userToUpdate })
-      if (result.matchedCount === 0) {
-        throw new Error(`User with id ${id.toHexString()} not found`)
-      }
+
+      if (result.matchedCount === 0) throw new Error(`User with id ${id.toHexString()} not found`)
+
       return { ...userToUpdate, _id: id }
     } else {
       const response = await collection.insertOne(user)

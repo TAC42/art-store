@@ -1,4 +1,8 @@
 import express, { Router, Request, Response } from 'express'
+import { Order } from '../../models/order.js'
+import { orderService } from './order.service.js'
+import { loggerService } from '../../services/logger.service.js'
+import { ObjectId } from 'mongodb'
 
 // order routes
 export const orderRoutes: Router = express.Router()
@@ -10,11 +14,6 @@ orderRoutes.put('/:id', _updateOrder)
 orderRoutes.delete('/:id', _removeOrder)
 
 // order controller functions
-import { Order } from '../../models/order.js'
-import { orderService } from './order.service.js'
-import { loggerService } from '../../services/logger.service.js'
-import { ObjectId } from 'mongodb'
-
 async function _getOrders(req: Request<{}, {}, {}, { _id?: ObjectId }>,
     res: Response): Promise<void> {
     try {

@@ -10,6 +10,8 @@ export const authService = {
   login,
   getLoginToken,
   validateToken,
+  checkPassword,
+  hashPassword
 }
 dotenv.config()
 
@@ -30,12 +32,8 @@ async function login(username: string, password: string): Promise<User | null> {
 async function signup(username: string, password: string, fullName: string, email?: string, imgUrl?: string): Promise<User> {
   loggerService.debug(`auth - signup with username: ${username}`)
 
-  if (!username || !password || !fullName) {
-    throw new Error('Missing required details')
-  }
-
-  const saltRounds = 10
-  const hash = await bcrypt.hash(password, saltRounds)
+  if (!username || !password || !fullName) throw new Error('Missing required details')
+  const hash = await hashPassword(password)
 
   return userService.save({
     username,
@@ -50,12 +48,22 @@ async function signup(username: string, password: string, fullName: string, emai
   })
 }
 
+async function checkPassword(password: string): Promise<string> {
+  const isPasswordHashed = /^[$]2[aby][$]/.test(password)
+  if (!isPasswordHashed) return await hashPassword(password)
+  return password
+}
+
+async function hashPassword(password: string): Promise<string> {
+  const saltRounds = 10
+  const hash = await bcrypt.hash(password, saltRounds)
+  return hash
+}
+
 function getLoginToken(user: User): string {
   const userInfo: User = {
     _id: user._id!,
     username: user.username,
-    cart: user.cart || [],
-    imgUrl: user.imgUrl,
   }
   return cryptr.encrypt(JSON.stringify(userInfo))
 }

@@ -1,12 +1,13 @@
 import express from 'express';
+import { authService } from './auth.service.js';
+import { loggerService } from '../../services/logger.service.js';
+import { utilityService } from '../../services/utility.service.js';
 // auth routes
 export const authRoutes = express.Router();
 authRoutes.post('/login', _login);
 authRoutes.post('/signup', _signup);
 authRoutes.post('/logout', _logout);
-import { authService } from './auth.service.js';
-import { loggerService } from '../../services/logger.service.js';
-import { utilityService } from '../../services/utility.service.js';
+// auth controller functions
 async function _login(req, res) {
     const { username, password, recaptchaToken } = req.body;
     try {

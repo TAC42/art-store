@@ -1,4 +1,6 @@
 import express from 'express';
+import { orderService } from './order.service.js';
+import { loggerService } from '../../services/logger.service.js';
 // order routes
 export const orderRoutes = express.Router();
 orderRoutes.get('/', _getOrders);
@@ -6,8 +8,7 @@ orderRoutes.get('/:id', _getOrderById);
 orderRoutes.post('/', _addOrder);
 orderRoutes.put('/:id', _updateOrder);
 orderRoutes.delete('/:id', _removeOrder);
-import { orderService } from './order.service.js';
-import { loggerService } from '../../services/logger.service.js';
+// order controller functions
 async function _getOrders(req, res) {
     try {
         const { _id } = req.query;

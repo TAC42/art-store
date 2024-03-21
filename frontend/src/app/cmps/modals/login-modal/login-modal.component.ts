@@ -1,12 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { UserCredentials, UserSignup } from '../../../models/user'
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import { Observable, debounceTime, distinctUntilChanged, first, of, switchMap } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
+import { UserCredentials, UserSignup } from '../../../models/user'
 import { LOGIN, SIGNUP } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
+import { UserService } from '../../../services/user.service'
 
 @Component({
   selector: 'login-modal',
@@ -18,6 +20,7 @@ export class LoginModalComponent implements OnInit {
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   private utilService = inject(UtilityService)
+  private userService = inject(UserService)
   private formUtilsService = inject(FormUtilsService)
 
   public formUtils = this.formUtilsService
@@ -42,8 +45,8 @@ export class LoginModalComponent implements OnInit {
     this.signupForm = this.fBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required], this.usernameValidator()],
+      email: ['', [Validators.required, Validators.email], this.emailValidator()],
       password: ['', [Validators.required]]
     })
   }
@@ -52,15 +55,37 @@ export class LoginModalComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode
   }
 
-  closeLoginModal() {
-    this.modService.closeModal('login')
-    this.signupForm.reset()
-    this.loginForm.reset()
+  usernameValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges) return of(null)
+
+      return control.valueChanges.pipe(
+        debounceTime(500), distinctUntilChanged(), switchMap(value =>
+          this.userService.validateUsername(value)), first()
+      )
+    }
+  }
+
+  emailValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges) return of(null)
+
+      return control.valueChanges.pipe(
+        debounceTime(500), distinctUntilChanged(), switchMap(value =>
+          this.userService.validateEmail(value)), first()
+      )
+    }
   }
 
   resolved(captchaResponse: string | null) {
     this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
+  }
+
+  closeLoginModal() {
+    this.modService.closeModal('login')
+    this.signupForm.reset()
+    this.loginForm.reset()
   }
 
   onSubmit() {
