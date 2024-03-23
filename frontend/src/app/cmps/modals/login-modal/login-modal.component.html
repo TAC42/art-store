@@ -27,7 +27,7 @@
                         </span>
                     </label>
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
-                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
+                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars">
                 </div>
 
                 <a [routerLink]="['/reset']" title="Reset password?">
@@ -105,7 +105,7 @@
                         </span>
                     </label>
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
-                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="'$#@!&*'">
+                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars">
                 </div>
             </ng-container>
 

@@ -356,8 +356,11 @@ introduction-page {
     }
 }
 
-product-edit {
-    .product-edit-contents {
+product-edit,
+reset-password {
+
+    .product-edit-contents,
+    .reset-password-contents {
         @media(max-width: 400px) {
             form {
                 .upload-area {

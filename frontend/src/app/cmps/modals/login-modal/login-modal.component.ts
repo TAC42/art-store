@@ -27,6 +27,7 @@ export class LoginModalComponent implements OnInit {
   public loginForm!: FormGroup
   public signupForm!: FormGroup
   public isLoginMode = true
+  public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false

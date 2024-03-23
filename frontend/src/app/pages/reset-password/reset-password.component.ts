@@ -22,6 +22,7 @@ export class ResetPasswordComponent implements OnInit {
   public formUtils = this.formUtilsService
   emailForm!: FormGroup
   resetForm!: FormGroup
+  public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
   public message: string = 'Dear user, to reset the password of your account, please insert your email address.'
   resetCode: string = ''
@@ -39,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
     })
     this.resetForm = this.fBuilder.group({
       code: ['', [Validators.required, this.codeValidator.bind(this)]],
-      newPassword: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     })
   }
 
@@ -79,7 +80,7 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmitReset() {
     if (this.resetForm.valid) {
-      const { code, newPassword } = this.resetForm.value
+      const { code, password } = this.resetForm.value
 
       if (code !== this.resetCode) {
         this.message = 'Invalid reset code.'
@@ -88,12 +89,14 @@ export class ResetPasswordComponent implements OnInit {
       }
       this.userService.getByEmail(this.emailForm.value.email).subscribe({
         next: (user: User) => {
-          const updatedUser: User = { ...user, password: newPassword }
+          const updatedUser: User = { ...user, password }
 
           this.userService.save(updatedUser).subscribe({
             next: () => {
+              this.emailForm.reset()
+              this.resetForm.reset()
+              this.codeSent = false
               this.message = 'Your password has been successfully reset.'
-              this.resetForms()
             },
             error: (error) => {
               this.message = 'Failed to reset password. Please try again.'
@@ -107,12 +110,5 @@ export class ResetPasswordComponent implements OnInit {
         },
       })
     }
-  }
-
-  private resetForms(): void {
-    this.emailForm.reset()
-    this.resetForm.reset()
-    this.codeSent = false
-    this.message = 'Dear user, to reset the password of your account, please insert your email address.'
   }
 }
