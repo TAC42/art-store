@@ -62,7 +62,6 @@ export class AppComponent implements OnInit, OnDestroy {
           }
           return false
         })
-        window.scrollTo(0, 0)
       })
     // dimmer management
     this.dimSubscription = this.dimService.dimmerSubject.subscribe(

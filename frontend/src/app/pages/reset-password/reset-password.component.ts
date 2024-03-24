@@ -1,9 +1,14 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
+import { AppState } from '../../store/app.state'
 import { User } from '../../models/user'
+import { LOGOUT } from '../../store/user.actions'
 import { FormUtilsService } from '../../services/form-utils.service'
 import { UtilityService } from '../../services/utility.service'
 import { UserService } from '../../services/user.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 
 @Component({
   selector: 'reset-password',
@@ -15,7 +20,10 @@ export class ResetPasswordComponent implements OnInit {
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
 
   private fBuilder = inject(FormBuilder)
+  private store = inject(Store<AppState>)
+  private router = inject(Router)
   private utilService = inject(UtilityService)
+  private eBusService = inject(EventBusService)
   private userService = inject(UserService)
   private formUtilsService = inject(FormUtilsService)
 
@@ -47,11 +55,10 @@ export class ResetPasswordComponent implements OnInit {
   onSubmitEmail() {
     if (this.emailForm.valid) {
       // Generate and send code
-      const email = this.emailForm.value.email
       this.resetCode = this.utilService.generateRandomCode()
       const resetFormData = {
         code: this.resetCode,
-        email: email,
+        email: this.emailForm.value.email,
       }
       this.utilService.sendResetPasswordMail(resetFormData).subscribe({
         next: () => {
@@ -66,8 +73,9 @@ export class ResetPasswordComponent implements OnInit {
           })
         },
         error: (error) => {
-          this.message = 'Failed to send reset code. Please try again.'
-          console.error('Error sending reset code:', error)
+          showErrorMsg('Email Failed!',
+            'We were\'nt able to send the code!', this.eBusService)
+          console.error('Error sending code:', error)
         },
       })
     }
@@ -81,12 +89,8 @@ export class ResetPasswordComponent implements OnInit {
   onSubmitReset() {
     if (this.resetForm.valid) {
       const { code, password } = this.resetForm.value
+      if (code !== this.resetCode) return
 
-      if (code !== this.resetCode) {
-        this.message = 'Invalid reset code.'
-        console.error('Error verifying reset code: Code does not match')
-        return
-      }
       this.userService.getByEmail(this.emailForm.value.email).subscribe({
         next: (user: User) => {
           const updatedUser: User = { ...user, password }
@@ -96,18 +100,19 @@ export class ResetPasswordComponent implements OnInit {
               this.emailForm.reset()
               this.resetForm.reset()
               this.codeSent = false
-              this.message = 'Your password has been successfully reset.'
+              showSuccessMsg('Password Reset!', 'Please login with the new password.',
+                this.eBusService)
+              this.store.dispatch(LOGOUT())
+              setTimeout(() => this.router.navigate(['/']), 3000)
             },
             error: (error) => {
-              this.message = 'Failed to reset password. Please try again.'
+              showErrorMsg('Reset Failed!',
+                'Please try again later', this.eBusService)
               console.error('Error resetting password:', error)
             },
           })
         },
-        error: (error) => {
-          this.message = 'Failed to find user. Please try again.'
-          console.error('Error fetching user:', error)
-        },
+        error: (error) => console.error('Error fetching user:', error),
       })
     }
   }

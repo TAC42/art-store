@@ -3,6 +3,7 @@
         <span>
             {{ message }}
         </span>
+
         <span *ngIf="codeSent">
             If you do not see the code in your inbox, please check your Spam folder.
         </span>
@@ -25,7 +26,7 @@
                     </span>
                 </label>
                 <input id="code" type="text" formControlName="code" placeholder="XXXXXX" maxlength="6" customValidator
-                    [maxLength]=6 autofocus>
+                    [minLength]=1 [maxLength]=6 [allowLetters]="false" autofocus>
             </div>
         </form>
     </section>

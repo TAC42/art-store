@@ -69,8 +69,8 @@ export class HomeComponent {
     {
       type: 'product',
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/sr7vuhhliiq6mnwnbdqv.png',
-      name: 'green mug',
-      url: '/shop/details/green mug'
+      name: 'makara mug',
+      url: '/shop/details/makara mug'
     },
   ]
 

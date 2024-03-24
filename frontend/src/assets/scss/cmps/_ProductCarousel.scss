@@ -21,7 +21,6 @@ product-carousel {
             img {
                 width: 100%;
                 min-height: 400px;
-                // max-height: 400px;
                 object-fit: cover;
                 transition: all 0.5s ease-in-out;
                 cursor: pointer;
@@ -76,25 +75,14 @@ product-carousel {
 
         button {
             position: absolute;
-            top: 45%;
             background: $prmclr2;
             padding: 0.5em;
             z-index: 10;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
             opacity: 0;
             transition: all 0.3s ease-in-out;
-
-            &:first-of-type {
-                left: 1.5em;
-            }
-
-            &:last-of-type {
-                right: 1.5em;
-            }
 
             svg-render {
                 width: 24px;
@@ -111,7 +99,6 @@ product-carousel {
                 filter: brightness(.75);
             }
 
-            button,
             .product-name {
                 opacity: 1;
             }

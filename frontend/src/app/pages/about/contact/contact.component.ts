@@ -42,7 +42,8 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.dTypeService.deviceType$.subscribe(deviceType => {
-      this.recaptchaSize = deviceType === 'mobile' ? 'compact' : 'normal'
+      if (deviceType === 'desktop' || deviceType === 'tablet') this.recaptchaSize = 'normal'
+      else this.recaptchaSize = 'compact'
     })
     this.initializeForm()
     this.carouselItems = this.utilService.convertToCarouselItem(this.contactImageUrls)

@@ -28,7 +28,6 @@ import { UserService } from '../../../services/user.service'
 })
 
 export class UserEditComponent implements OnInit {
-  @Input() deviceType$!: Observable<string>
   @Input() user$!: Observable<User>
 
   private store = inject(Store<AppState>)

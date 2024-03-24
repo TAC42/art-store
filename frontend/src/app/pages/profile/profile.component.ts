@@ -1,11 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Store } from '@ngrx/store'
-import { User } from '../../models/user'
-import { selectUser } from '../../store/user.selectors'
 import { AppState } from '../../store/app.state'
-import { selectOrders } from '../../store/order.selectors'
+import { User } from '../../models/user'
 import { Order } from '../../models/order'
+import { selectUser } from '../../store/user.selectors'
+import { selectOrders } from '../../store/order.selectors'
 import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
 import { DeviceTypeService } from '../../services/device-type.service'
 import { ModalService } from '../../services/modal.service'
@@ -16,6 +16,9 @@ import { ModalService } from '../../services/modal.service'
 })
 
 export class ProfileComponent implements OnInit {
+  @HostBinding('class.w-h-100') fullWidthHeightClass = true
+  @HostBinding('class.full') fullClass = true
+
   private store = inject(Store<AppState>)
   private dTypeService = inject(DeviceTypeService)
   public modService = inject(ModalService)

@@ -18,12 +18,12 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
 export class UserAuthModalComponent implements OnInit, OnDestroy {
   @Input() user$!: Observable<User>
 
+  private fBuilder = inject(FormBuilder)
+  private store = inject(Store<AppState>)
   public modService = inject(ModalService)
   private utilService = inject(UtilityService)
   private formUtilsService = inject(FormUtilsService)
   private eBusService = inject(EventBusService)
-  private fBuilder = inject(FormBuilder)
-  private store = inject(Store<AppState>)
 
   public formUtils = this.formUtilsService
   public verifyForm!: FormGroup
@@ -95,8 +95,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
       this.user$.pipe(take(1)).subscribe(user => {
         const updatedUser: User = { ...user, isVerified: true }
         this.store.dispatch(UPDATE_USER({ updatedUser }))
-        showSuccessMsg('User Verified!', 'Thank you for the cooperation!',
-          this.eBusService)
+        showSuccessMsg('User Verified!', 'Thank you for the cooperation!', this.eBusService)
       })
       setTimeout(() => window.location.reload(), 2000)
     } else showErrorMsg('Verification Failed!',

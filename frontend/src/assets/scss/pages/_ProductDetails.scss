@@ -218,6 +218,7 @@ product-details {
                 .image-container {
                     grid-column: 1 / 2;
                     height: fit-content;
+                    align-self: center;
                     margin-block-start: 1em;
 
                     img {

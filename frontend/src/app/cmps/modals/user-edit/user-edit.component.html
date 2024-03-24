@@ -29,7 +29,7 @@
           </span>
         </label>
         <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
-          customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'. -/:'" autofocus />
+          customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
       </article>
 
       <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">

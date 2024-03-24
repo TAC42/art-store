@@ -69,7 +69,7 @@ export class UtilityService {
   // handling of reset timer for resending a code (user auth / reset password)
   startResendTimer(): Observable<{ timer: number, resendAvailable: boolean }> {
     return new Observable((observer) => {
-      let timer = 60
+      let timer = 120
       let resendAvailable = false
       const resendCodeTimer = setInterval(() => {
         if (timer > 0) timer--
