@@ -295,12 +295,12 @@ payment {
         }
 
         &.disabled {
-          color: $prmclr1;
+          color: $prmclr4;
           opacity: 0.5;
           pointer-events: none;
 
           svg-render {
-            fill: $prmclr1;
+            fill: $prmclr4;
           }
         }
 
