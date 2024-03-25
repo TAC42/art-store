@@ -127,7 +127,7 @@ sculpture-wrapper {
 }
 
 app-home {
-    .home-page-contents {
+    .page-contents {
         @media(max-width: 600px) {
             .teasers {
                 grid-template-columns: 1fr;
@@ -272,9 +272,7 @@ app-home {
 contact-page,
 introduction-page {
     @media(max-width: 600px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
 
             .contact-text,
             .introduction-text {
@@ -284,9 +282,7 @@ introduction-page {
     }
 
     @media(max-width: 900px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             grid-template-columns: 1fr;
 
             .contact-text,
@@ -301,10 +297,7 @@ introduction-page {
     }
 
     @media(min-width: 601px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
-
+        .page-contents {
             .form-area {
                 border-radius: 1em;
             }
@@ -312,9 +305,7 @@ introduction-page {
     }
 
     @media(min-width: 901px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             grid-template-columns: 1fr 1fr;
             padding: 0 2em;
 
@@ -346,9 +337,7 @@ introduction-page {
     }
 
     @media(min-width: 1001px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             .gallery-carousel {
                 .carousel-container {
                     min-height: 450px;
@@ -362,9 +351,7 @@ introduction-page {
     }
 
     @media(min-width: 1201px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             .gallery-carousel {
                 align-self: start;
                 margin-block-start: 1em;
@@ -381,9 +368,7 @@ introduction-page {
     }
 
     @media(min-width: 1401px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             .gallery-carousel {
                 .carousel-container {
                     min-height: 700px;
@@ -409,8 +394,7 @@ introduction-page {
 product-edit,
 reset-password {
 
-    .product-edit-contents,
-    .reset-password-contents {
+    .page-contents {
         @media(max-width: 400px) {
             form {
                 .upload-area {
@@ -465,8 +449,7 @@ reset-password {
 product-details,
 showcase-details {
 
-    .product-details-contents,
-    .showcase-details-contents {
+    .page-contents {
         .mobile-view {
             @media(max-width: 400px) {
                 .product-area {

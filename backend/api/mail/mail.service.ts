@@ -131,7 +131,7 @@ async function sendArtistInvoice(orderDetails: Order): Promise<void> {
 
     const mailOptions: MailOptions = {
         from: process.env.SENDER_GMAIL_ADDRESS ?? '',
-        to: 'valerykuvshinuv@gmail.com',
+        to: process.env.SENDER_GMAIL_ADDRESS ?? '',
         subject: `New Order Received: #${orderDetails.createdAt}`,
         text: `Dear Ori Carlin,
         You've got a new order, from ${orderDetails.user.firstName} ${orderDetails.user.lastName}!

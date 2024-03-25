@@ -53,7 +53,7 @@ async function _addOrder(req, res) {
 async function _updateOrder(req, res) {
     try {
         const order = { ...req.body, _id: req.params.id };
-        loggerService.debug('Updating order:', order);
+        loggerService.debug('Updating order:', order._id);
         const updatedOrder = await orderService.save(order);
         res.json(updatedOrder);
     }

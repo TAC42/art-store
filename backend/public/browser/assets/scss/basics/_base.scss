@@ -123,7 +123,7 @@ input[type="radio"] {
   &:checked+label::after {
     content: "";
     position: absolute;
-    top: 41%;
+    top: 51%;
     left: 13%;
     transform: translate(-50%, -50%);
     width: 0.6em;

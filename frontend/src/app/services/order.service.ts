@@ -53,7 +53,7 @@ export class OrderService {
     }
   }
 
-  createOrder(cart: Product[], user: User, userData: any, payType: string): any {
+  createOrder(cart: Product[], user: User, userData: any, payType: string): Order {
     const summary = cart.map(({ name, price, _id, amount }) =>
       ({ name, price, _id, amount }))
     const expenses = this._calculateOrderSummary(cart)

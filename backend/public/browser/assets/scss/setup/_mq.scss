@@ -18,9 +18,54 @@ app-header {
     }
 }
 
-app-aside-menu {
-    @media(min-width: 601px) {
-        display: none;
+product-carousel {
+    @media(max-width: 900px) {
+        .carousel-container {
+            button {
+                top: 0;
+                bottom: 0;
+                width: 60px;
+                height: 100%;
+
+                &:first-of-type {
+                    left: 0;
+                }
+
+                &:last-of-type {
+                    right: 0;
+                }
+            }
+
+            &:hover {
+                button {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    @media(min-width: 901px) {
+        .carousel-container {
+            button {
+                top: 45%;
+                width: 40px;
+                height: 40px;
+
+                &:first-of-type {
+                    left: 1.5em;
+                }
+
+                &:last-of-type {
+                    right: 1.5em;
+                }
+            }
+
+            &:hover {
+                button {
+                    opacity: 1;
+                }
+            }
+        }
     }
 }
 
@@ -82,7 +127,7 @@ sculpture-wrapper {
 }
 
 app-home {
-    .home-page-contents {
+    .page-contents {
         @media(max-width: 600px) {
             .teasers {
                 grid-template-columns: 1fr;
@@ -227,9 +272,7 @@ app-home {
 contact-page,
 introduction-page {
     @media(max-width: 600px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
 
             .contact-text,
             .introduction-text {
@@ -239,10 +282,13 @@ introduction-page {
     }
 
     @media(max-width: 900px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             grid-template-columns: 1fr;
+
+            .contact-text,
+            .introduction-text {
+                padding: 0 2em;
+            }
 
             .form-area {
                 margin: 1em auto 1em auto;
@@ -251,15 +297,7 @@ introduction-page {
     }
 
     @media(min-width: 601px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
-
-            .introduction-text,
-            .contact-text {
-                margin-block-start: 1em;
-            }
-
+        .page-contents {
             .form-area {
                 border-radius: 1em;
             }
@@ -267,9 +305,7 @@ introduction-page {
     }
 
     @media(min-width: 901px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             grid-template-columns: 1fr 1fr;
             padding: 0 2em;
 
@@ -292,13 +328,16 @@ introduction-page {
             .form-area {
                 grid-column: 2 / -1;
             }
+
+            .introduction-text,
+            .contact-text {
+                margin-block-start: 1em;
+            }
         }
     }
 
     @media(min-width: 1001px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             .gallery-carousel {
                 .carousel-container {
                     min-height: 450px;
@@ -312,9 +351,7 @@ introduction-page {
     }
 
     @media(min-width: 1201px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             .gallery-carousel {
                 align-self: start;
                 margin-block-start: 1em;
@@ -331,9 +368,7 @@ introduction-page {
     }
 
     @media(min-width: 1401px) {
-
-        .contact-page-contents,
-        .introduction-page-contents {
+        .page-contents {
             .gallery-carousel {
                 .carousel-container {
                     min-height: 700px;
@@ -356,8 +391,10 @@ introduction-page {
     }
 }
 
-product-edit {
-    .product-edit-contents {
+product-edit,
+reset-password {
+
+    .page-contents {
         @media(max-width: 400px) {
             form {
                 .upload-area {
@@ -412,8 +449,7 @@ product-edit {
 product-details,
 showcase-details {
 
-    .product-details-contents,
-    .showcase-details-contents {
+    .page-contents {
         .mobile-view {
             @media(max-width: 400px) {
                 .product-area {

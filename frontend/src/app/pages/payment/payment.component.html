@@ -197,9 +197,11 @@
     </section>
   </mat-expansion-panel>
 
-  <section class="terms"></section>
+  <section class="terms-payment flex column">
+    <p>By clicking "Pay With", you agree to Ori-Carlin website's
+      <a [routerLink]="['/privacy']">privacy policy</a>.
+    </p>
 
-  <section class="pay-btn flex">
     <button class="flex" [disabled]="!paymentForm.valid || !personalForm.valid" (click)="onSubmitPurchase()"
       [class.disabled]="!paymentForm.valid || !personalForm.valid">
       <svg-render svgName="lock" />

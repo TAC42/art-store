@@ -92,7 +92,7 @@ async function _addProduct(req, res) {
 async function _updateProduct(req, res) {
     try {
         const product = { ...req.body, _id: req.params.id };
-        loggerService.debug('Updating product: ', product);
+        loggerService.debug('Updating product: ', product._id);
         const updatedProduct = await productService.save(product);
         res.json(updatedProduct);
     }

@@ -45,8 +45,8 @@ payment {
         gap: 0.25em;
         font-size: 1.25em;
         align-content: center;
-        background-color: #f2f2f2;
-        color: #646464;
+        background-color: $prmclr3;
+        color: $scdclr1;
         padding: 0.75em;
         transition: all 0.3s ease-in-out;
 
@@ -67,7 +67,7 @@ payment {
       &.selected {
         .heading {
           font-family: "nh-bold";
-          background-color: #e6eeee;
+          background-color: $scdclr3;
         }
       }
 
@@ -77,10 +77,10 @@ payment {
             grid-template-columns: repeat(5, 1fr);
             padding: 0.75em 0;
             font-size: 1.25em;
-            color: #5f5f5f;
+            color: $prmclr1;
 
             &:not(:first-child) {
-              border-top: 1px solid #9f9f9f;
+              border-top: 1px solid $scdclr7;
             }
 
             .image {
@@ -101,7 +101,7 @@ payment {
                 height: 1.25em;
                 background-color: $prmclr2;
                 border-radius: 50%;
-                border: 1px #787878 solid;
+                border: 1px $scdclr6 solid;
                 text-align: center;
               }
             }
@@ -144,7 +144,7 @@ payment {
             color: $mnrclr8;
 
             &:first-child {
-              border-top: 3px solid #7878784c;
+              border-top: 3px solid $scdclr4;
               padding-block-start: 1em;
             }
 
@@ -166,14 +166,14 @@ payment {
 
         .desc {
           font-size: 1em;
-          color: #787878;
+          color: $scdclr6;
         }
 
         form {
           gap: 1.25em;
 
           .info-heading {
-            margin-block-start: 1em;
+            margin-block-start: 0.5em;
             gap: 0.5em;
             align-items: center;
             font-family: "nh-bold";
@@ -195,7 +195,7 @@ payment {
               left: 1em;
               padding: 0 0.5em;
               background-color: $prmclr2;
-              color: #787878;
+              color: $scdclr6;
               border-radius: 1em;
             }
 
@@ -204,11 +204,11 @@ payment {
               width: 100%;
               font-size: 1.25em;
               padding: 1em;
-              border-color: #9f9f9f;
+              border-color: $scdclr7;
               border-radius: 0.5em;
 
               &:focus-visible {
-                border-color: #5f5f5f;
+                border-color: $scdclr8;
               }
             }
 
@@ -242,15 +242,16 @@ payment {
 
         .desc {
           font-size: 1em;
-          color: #787878;
+          color: $scdclr6;
         }
 
         form {
           gap: 1em;
 
           .option {
+            align-items: center;
             padding: 0.5em;
-            border: 1px #f3f3f3 solid;
+            border: 1px $scdclr3 solid;
             border-radius: 0.25em;
             font-size: 1.25em;
             font-family: "nh-bold";
@@ -262,18 +263,23 @@ payment {
             }
 
             &.selected {
-              border-color: #aee0e0;
-              background-color: #f7fcfc;
+              border-color: $mnrclr1;
             }
           }
         }
       }
     }
 
-    .pay-btn {
+    .terms-payment {
       width: 100%;
-      padding: 1em;
+      padding: 0 1em 1em 1em;
+      gap: 1em;
       justify-content: center;
+      align-items: center;
+
+      p {
+        color: $prmclr1;
+      }
 
       button {
         gap: 0.25em;
@@ -283,7 +289,7 @@ payment {
         padding: 0.5em;
         font-size: 1.5em;
         color: $prmclr2;
-        background: #0c3640;
+        background: $mnrclr10;
         border-radius: 1em;
         transition: all 0.5s ease-in-out;
 
@@ -295,12 +301,12 @@ payment {
         }
 
         &.disabled {
-          color: $prmclr1;
+          color: $prmclr4;
           opacity: 0.5;
           pointer-events: none;
 
           svg-render {
-            fill: $prmclr1;
+            fill: $prmclr4;
           }
         }
 

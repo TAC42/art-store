@@ -1,15 +1,16 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { EMPTY, Observable, catchError, combineLatest, filter, map, take, tap } from 'rxjs'
+import { EMPTY, Observable, catchError, combineLatest, filter, mergeMap, of, take, tap } from 'rxjs'
 import { Router } from '@angular/router'
-import { Store, select } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { User } from '../../models/user'
 import { Product } from '../../models/shop'
 import { AppState } from '../../store/app.state'
 import { selectCart } from '../../store/shop.selectors'
+import { selectUser } from '../../store/user.selectors'
 import { SAVE_ORDER } from '../../store/order.actions'
 import { CART_LOADED } from '../../store/shop.actions'
-import { selectUser } from '../../store/user.selectors'
+import { UPDATE_USER } from '../../store/user.actions'
 import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
@@ -82,16 +83,22 @@ export class PaymentComponent implements OnInit {
 
     combineLatest([this.cart$, this.user$]).pipe(
       take(1),
-      map(([cart, user]) => this.orderService.createOrder(
-        cart, user, userData, this.payType)),
-      tap(order => {
-        this.store.dispatch(SAVE_ORDER({ order }))
-        this.store.dispatch(CART_LOADED({ cart: [] }))
-        this.router.navigate(['/profile'])
-      }),
-      catchError(error => {
-        console.error('Error creating order: ', error)
-        return EMPTY
+      mergeMap(([cart, user]) => {
+        const order = this.orderService.createOrder(cart, user, userData, this.payType)
+        return of(order).pipe(
+          tap(order => this.store.dispatch(SAVE_ORDER({ order }))),
+          tap(() => {
+            this.store.dispatch(CART_LOADED({ cart: [] }))
+            const updatedUser: User = { ...user, cart: [] }
+            this.store.dispatch(UPDATE_USER({ updatedUser }))
+
+            setTimeout(() => this.router.navigate(['/profile']), 3000)
+          }),
+          catchError(error => {
+            console.error('Error creating order: ', error)
+            return EMPTY
+          })
+        )
       })
     ).subscribe()
   }

@@ -50,7 +50,6 @@ async function _signup(req, res) {
 }
 async function _logout(req, res) {
     try {
-        loggerService.info('A user has logged out');
         res.clearCookie('loginToken');
         res.status(200).send({ msg: 'Logged out successfully' });
     }

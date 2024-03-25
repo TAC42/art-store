@@ -1,4 +1,4 @@
-<main class="home-page-contents w-h-100 flex column">
+<main class="page-contents w-h-100 flex column">
   <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column">
     <section class="teasers grid">
       <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
