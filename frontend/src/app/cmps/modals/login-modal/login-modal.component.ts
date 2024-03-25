@@ -92,18 +92,17 @@ export class LoginModalComponent implements OnInit {
   onSubmit() {
     if (this.isLoginMode) {
       if (this.loginForm.valid && this.isCaptchaResolved) {
-        const { username, password } = this.loginForm.value
-
         const credentials: UserCredentials = {
-          username,
-          password,
+          username: this.loginForm.value.username,
+          password: this.loginForm.value.password,
           recaptchaToken: this.captchaResponse
         }
         this.store.dispatch(LOGIN({ credentials }))
         this.closeLoginModal()
+        // reset of form & recaptcha token
+        this.loginForm.reset()
         this.isCaptchaResolved = false
         this.captchaResponse = null
-        this.loginForm.reset()
       }
     } else {
       if (this.signupForm.valid && this.isCaptchaResolved) {
@@ -122,9 +121,10 @@ export class LoginModalComponent implements OnInit {
         }
         this.store.dispatch(SIGNUP({ credentials }))
         this.closeLoginModal()
+        // reset of form & recaptcha token
+        this.signupForm.reset()
         this.isCaptchaResolved = false
         this.captchaResponse = null
-        this.signupForm.reset()
       }
     }
   }

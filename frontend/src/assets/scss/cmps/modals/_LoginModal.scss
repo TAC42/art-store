@@ -131,13 +131,22 @@
                 }
             }
 
-            a {
+            .reset-pass {
                 color: $prmclr1;
                 transition: all 0.5s ease-in-out;
 
                 &:hover {
                     text-decoration: none;
                     color: $prmclr4;
+                }
+            }
+
+            p {
+                color: $prmclr1;
+                text-align: center;
+
+                a {
+                    color: $scdclr8;
                 }
             }
         }

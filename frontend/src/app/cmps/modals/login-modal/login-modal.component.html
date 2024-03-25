@@ -30,7 +30,7 @@
                         customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars">
                 </div>
 
-                <a [routerLink]="['/reset']" title="Reset password?">
+                <a class="reset-pass" [routerLink]="['/reset']" title="Reset password?">
                     <span (click)="closeLoginModal()">Forgot password?</span>
                 </a>
             </ng-container>
@@ -107,6 +107,10 @@
                     <input id="password" type="password" formControlName="password" placeholder="Your password..."
                         customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars">
                 </div>
+
+                <p>By signing up, you agree to Ori-Carlin website's
+                    <a [routerLink]="['/privacy']">privacy policy</a>.
+                </p>
             </ng-container>
 
             <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />

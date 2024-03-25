@@ -1,10 +1,11 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Observable } from 'rxjs'
+import { CarouselItem } from '../../../models/shop'
 import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
-import { CarouselItem } from '../../../models/shop'
 
 @Component({
   selector: 'contact-page',
@@ -34,6 +35,7 @@ export class ContactComponent implements OnInit {
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/h9adgfdphiip2xujdm4d.png',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/kuglbewtdm4pc7sr2dct.png'
   ]
+  deviceType$: Observable<string> = this.dTypeService.deviceType$
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false
@@ -41,9 +43,9 @@ export class ContactComponent implements OnInit {
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
   ngOnInit() {
-    this.dTypeService.deviceType$.subscribe(deviceType => {
-      if (deviceType === 'desktop' || deviceType === 'tablet') this.recaptchaSize = 'normal'
-      else this.recaptchaSize = 'compact'
+    this.deviceType$.subscribe(deviceType => {
+      if (deviceType === 'mobile') this.recaptchaSize = 'compact'
+      else this.recaptchaSize = 'normal'
     })
     this.initializeForm()
     this.carouselItems = this.utilService.convertToCarouselItem(this.contactImageUrls)
@@ -65,12 +67,10 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     if (this.contactForm.valid && this.isCaptchaResolved) {
-      // Add the recaptcha response to the form, to be sent to backend
       const formDataWithCaptcha = {
         ...this.contactForm.value,
         recaptchaToken: this.captchaResponse
       }
-
       this.utilService.sendContactUsMail(formDataWithCaptcha).subscribe({
         next: () => {
           showSuccessMsg('Email Sent!',

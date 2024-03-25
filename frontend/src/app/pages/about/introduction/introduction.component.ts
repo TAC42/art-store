@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { UtilityService } from '../../../services/utility.service'
 import { CarouselItem } from '../../../models/shop'
+import { UtilityService } from '../../../services/utility.service'
 
 @Component({
   selector: 'introduction-page',

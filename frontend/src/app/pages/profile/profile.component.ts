@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   private dTypeService = inject(DeviceTypeService)
   public modService = inject(ModalService)
 
-  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705581236/u5qpc2zretuthgb3n5ox.png'
+  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1706644779/ibir2pid5kftim9u7fvu.png'
 
   user$: Observable<User> = this.store.select(selectUser)
   orders$: Observable<Order[]> = this.store.select(selectOrders)
