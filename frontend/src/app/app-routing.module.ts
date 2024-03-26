@@ -11,18 +11,19 @@ import { AboutComponent } from './pages/about/about.component'
 import { IntroductionComponent } from './pages/about/introduction/introduction.component'
 import { ContactComponent } from './pages/about/contact/contact.component'
 import { ShopComponent } from './pages/shop/shop.component'
-import { ProductEditComponent } from './pages/product-edit/product-edit.component'
-import { ProductDetailsComponent } from './pages/details/product/product-details.component'
-import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { ShopIndexComponent } from './pages/shop/index/shop-index.component'
 import { SculptureComponent } from './pages/sculpture/sculpture.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
 import { ArtwareComponent } from './pages/artware/artware.component'
 import { ArtwareIndexComponent } from './pages/artware/index/artware-index.component'
+import { ProductEditComponent } from './pages/product-edit/product-edit.component'
+import { ProductDetailsComponent } from './pages/details/product/product-details.component'
+import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-details.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { ProfileComponent } from './pages/profile/profile.component'
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component'
 
 const routes: Routes = [
   {
@@ -63,6 +64,9 @@ const routes: Routes = [
   },
   {
     path: 'reset', component: ResetPasswordComponent
+  },
+  {
+    path: 'privacy', component: PrivacyPolicyComponent
   },
   { path: '', component: HomeComponent },
 ]

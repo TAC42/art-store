@@ -73,12 +73,12 @@ export class ContactComponent implements OnInit {
       }
       this.utilService.sendContactUsMail(formDataWithCaptcha).subscribe({
         next: () => {
-          showSuccessMsg('Email Sent!',
-            'Thank you for contacting!', this.eBusService)
           // reset of form & recaptcha token
           this.contactForm.reset()
           this.isCaptchaResolved = false
           this.captchaResponse = null
+          showSuccessMsg('Email Sent!',
+            'Thank you for contacting!', this.eBusService)
         },
         error: (error) => {
           console.error(error)

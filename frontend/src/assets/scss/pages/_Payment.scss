@@ -1,9 +1,4 @@
 payment {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: $prmclr2;
-
   .page-contents {
     .payment-header {
       position: relative;
@@ -280,6 +275,7 @@ payment {
 
         p {
           color: $prmclr1;
+          text-align: center;
 
           a {
             color: $scdclr8;
