@@ -546,3 +546,23 @@ app-footer {
         }
     }
 }
+
+.modal-wrapper {
+    .shopping-cart {
+        .cart-main {
+            .cart-list {
+                @media (max-width: 600px) {
+                    gap: 0.5em;
+                }
+
+                @media (max-width: 300px) {
+                    gap: 0;
+                }
+
+                @media(min-width: 601px) {
+                    gap: 1.5em;
+                }
+            }
+        }
+    }
+}

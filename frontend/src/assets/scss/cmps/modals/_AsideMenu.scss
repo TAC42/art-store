@@ -1,8 +1,7 @@
 .modal-wrapper {
     .aside-menu {
         background: $prmclr2;
-        min-width: 275px;
-        height: 100vh;
+        max-width: 275px;
         z-index: 15;
         padding: 0.5em 1em;
 
@@ -41,7 +40,6 @@
 
                 &:hover {
                     color: $scdclr1;
-                    text-decoration: none;
                 }
             }
 

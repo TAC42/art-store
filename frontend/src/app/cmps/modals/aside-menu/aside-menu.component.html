@@ -1,9 +1,9 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('aside-menu')">
-    <section [@slideInOut]="menuState" (clickOutside)="closeMenu()" class="aside-menu flex column">
+    <section class="aside-menu w-h-100 flex column" [@slideInOut]="menuState" (clickOutside)="closeMenu()">
         <div class="logo-container flex row">
             <h1>oricarlin</h1>
             <ng-container *ngIf="user$ | async as loggedinUser">
-                <img *ngIf="loggedinUser._id" [src]="loggedinUser.imgUrl" alt="User Image">
+                <img *ngIf="loggedinUser._id" [src]="loggedinUser.imgUrl[0]" alt="User Image">
             </ng-container>
         </div>
 

@@ -1,5 +1,5 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
-  <section (clickOutside)="closeCart()" [@slideInOut]="cartState" class="shopping-cart flex column">
+  <section class="shopping-cart w-h-100 flex column" (clickOutside)="closeCart()" [@slideInOut]="cartState">
     <div class="cart-header flex row">
       <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />

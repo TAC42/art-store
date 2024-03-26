@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
 import { Observable, Subscription, debounceTime, distinctUntilChanged, first, of, switchMap, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
@@ -55,7 +55,8 @@ export class UserEditComponent implements OnInit {
     this.user$.subscribe(user => {
       this.initialFormData = user
       this.userEditForm = this.fBuilder.group({
-        imgUrl: [user.imgUrl, [Validators.required]],
+        imgUrl: this.fBuilder.array(user.imgUrl?.map(
+          url => this.fBuilder.control(url))),
         fullName: [user.fullName, [Validators.required]],
         username: [user.username, [Validators.required], this.usernameValidator()],
         email: [user.email, [Validators.required, Validators.email], this.emailValidator()],
@@ -87,9 +88,12 @@ export class UserEditComponent implements OnInit {
     }
   }
 
-  closeUserEdit() {
-    this.userEditState = 'hidden'
-    setTimeout(() => this.modService.closeModal('user-edit'), 600)
+  get imgUrlsControls(): AbstractControl[] {
+    return (this.userEditForm.get('imgUrl') as FormArray).controls
+  }
+
+  handleImgUpload(event: { url: string, index: number, controlName: string }): void {
+    this.formUtils.handleImageUpload(this.userEditForm, event)
   }
 
   onSaveUser() {
@@ -99,6 +103,11 @@ export class UserEditComponent implements OnInit {
       this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
     })
     this.closeUserEdit()
+  }
+
+  closeUserEdit() {
+    this.userEditState = 'hidden'
+    setTimeout(() => this.modService.closeModal('user-edit'), 600)
   }
 
   ngOnDestroy() {

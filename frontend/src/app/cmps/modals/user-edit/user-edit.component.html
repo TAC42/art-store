@@ -1,5 +1,5 @@
-<div class="modal-wrapper flex" *ngIf="modService.isModalOpen('user-edit')">
-  <main class="profile-edit" *ngIf="user$ | async as user" (clickOutside)="closeUserEdit()"
+<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('user-edit')">
+  <section class="profile-edit w-h-100" *ngIf="user$ | async as user" (clickOutside)="closeUserEdit()"
     [@slideInOut]="userEditState">
     <section class="header flex">
       <button class="back" (click)="closeUserEdit()">
@@ -9,13 +9,12 @@
     </section>
 
     <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
-      <article class="img input-area flex">
-        <label for="imgUrl">
-          <div class="label-info">
-            <img [src]="user.imgUrl" [alt]="user.fullName" />
-            <svg-render svgName="camera" />
-          </div>
-        </label>
+      <article class="upload-area grid" formArrayName="imgUrl">
+        <div *ngFor="let control of imgUrlsControls; let i = index">
+          <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="'user'"
+            (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrl'})" />
+          <svg-render svgName="camera" />
+        </div>
       </article>
 
       <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
@@ -65,12 +64,12 @@
       </a>
 
       <article class="form-action flex">
-        <button class="b glass" type="submit"
+        <button class="glass" type="submit"
           [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
           [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
           <span>Save changes</span>
         </button>
       </article>
     </form>
-  </main>
-</div>
+  </section>
+</main>

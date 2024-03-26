@@ -70,19 +70,20 @@ export class FormUtilsService {
   }
 
   // handling of image uploaders count and upload of images
-  addNewImageUploader(form: FormGroup, defaultImgUrl: string): void {
-    const imgUrlsArray = form.get('imgUrls') as FormArray
+  addNewImageUploader(form: FormGroup, defaultImgUrl: string, controlName: string): void {
+    const imgUrlsArray = form.get(controlName) as FormArray
     if (imgUrlsArray.length < 5) imgUrlsArray.push(this.fBuilder.control(defaultImgUrl))
   }
 
-  removeImageUploader(form: FormGroup, index: number): void {
-    const imgUrlsArray = form.get('imgUrls') as FormArray
+  removeImageUploader(form: FormGroup, index: number, controlName: string): void {
+    const imgUrlsArray = form.get(controlName) as FormArray
     if (imgUrlsArray.length > index) imgUrlsArray.removeAt(index)
   }
 
-  handleImageUpload(form: FormGroup, event: { url: string, index: number }): void {
-    const imgUrlsArray = form.get('imgUrls') as FormArray
-    const { url, index } = event
+  handleImageUpload(form: FormGroup, event: { url: string, index: number, controlName: string }): void {
+    const { url, index, controlName } = event
+
+    const imgUrlsArray = form.get(controlName) as FormArray
     if (index < imgUrlsArray.length) imgUrlsArray.at(index).setValue(url)
     else imgUrlsArray.push(this.fBuilder.control(url))
   }

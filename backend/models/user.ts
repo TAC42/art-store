@@ -18,7 +18,7 @@ export interface User {
     password?: string
     fullName?: string
     email?: string
-    imgUrl?: string
+    imgUrl?: string[]
     cart?: any[]
     createdAt?: number
     isAdmin?: boolean

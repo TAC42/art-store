@@ -98,18 +98,18 @@ export class LoginModalComponent implements OnInit {
           recaptchaToken: this.captchaResponse
         }
         this.store.dispatch(LOGIN({ credentials }))
-        this.closeLoginModal()
         // reset of form & recaptcha token
         this.loginForm.reset()
         this.isCaptchaResolved = false
         this.captchaResponse = null
+        this.closeLoginModal()
       }
     } else {
       if (this.signupForm.valid && this.isCaptchaResolved) {
         const { firstName, lastName, username, email, password } = this.signupForm.value
 
         const randColor = this.utilService.getRandomMidColor().substring(1)
-        let imgUrl = `https://placehold.co/${100}/${randColor}/ffffff?text=${firstName[0].toUpperCase()}`
+        let imgUrl = [`https://placehold.co/${100}/${randColor}/ffffff?text=${firstName[0].toUpperCase()}`]
 
         const credentials: UserSignup = {
           fullName: `${firstName} ${lastName}`,

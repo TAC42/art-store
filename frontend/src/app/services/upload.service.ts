@@ -9,9 +9,9 @@ export class UploadService {
   private readonly UPLOAD_PRESET = "kgcvd0si"
   private readonly UPLOAD_URL = `https://api.cloudinary.com/v1_1/${this.CLOUD_NAME}/image/upload`
 
-  async uploadImg(file: File, productType: string): Promise<any> {
+  async uploadImg(file: File, folderName: string): Promise<any> {
     try {
-      const folderPath = productType
+      const folderPath = folderName
       const formData = new FormData()
       formData.append('upload_preset', this.UPLOAD_PRESET)
       formData.append('file', file)

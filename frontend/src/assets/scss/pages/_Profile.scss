@@ -42,7 +42,9 @@ profile {
           background-color: $prmclr2;
 
           img {
+            object-fit: cover;
             width: 125px;
+            height: 125px;
             border-radius: 50%;
             border: 2px $scdclr6 solid;
 
@@ -206,7 +208,9 @@ profile {
         border-radius: 4em;
 
         img {
-          width: 125px;
+          object-fit: cover;
+          width: 150px;
+          height: 150px;
           border-radius: 50%;
           border: 2px $scdclr6 solid;
         }

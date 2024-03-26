@@ -10,7 +10,7 @@ import { EventBusService, showErrorMsg } from '../../services/event-bus.service'
 export class ImageUploaderComponent {
   @Input() index: number = 0
   @Input() defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
-  @Input() productType: string = ''
+  @Input() folderName: string = ''
   @Output() onUploaded = new EventEmitter<{ url: string, index: number }>()
 
   private eBusService = inject(EventBusService)
@@ -59,7 +59,7 @@ export class ImageUploaderComponent {
 
     this.isUploading = true
     try {
-      const data = await this.upService.uploadImg(file, this.productType)
+      const data = await this.upService.uploadImg(file, this.folderName)
       this.imgUrl = data.secure_url
       this.onUploaded.emit({ url: this.imgUrl, index: this.index })
     } catch (error) {

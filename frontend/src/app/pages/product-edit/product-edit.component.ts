@@ -81,14 +81,14 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   addNewImgUploader(): void {
-    this.formUtils.addNewImageUploader(this.productEditForm, this.defaultImgUrl)
+    this.formUtils.addNewImageUploader(this.productEditForm, this.defaultImgUrl, 'imgUrls')
   }
 
   removeImgUploader(index: number): void {
-    this.formUtils.removeImageUploader(this.productEditForm, index)
+    this.formUtils.removeImageUploader(this.productEditForm, index, 'imgUrls')
   }
 
-  handleImgUpload(event: { url: string, index: number }): void {
+  handleImgUpload(event: { url: string, index: number, controlName: string }): void {
     this.formUtils.handleImageUpload(this.productEditForm, event)
   }
 

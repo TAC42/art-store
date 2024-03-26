@@ -124,8 +124,8 @@
 
       <div class="upload-area grid" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
-          <image-uploader [index]="i" [defaultImgUrl]="control.value" [productType]="productEditForm.get('type')?.value"
-            (onUploaded)="handleImgUpload({url: $event.url, index: i})" />
+          <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="productEditForm.get('type')?.value"
+            (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrls'})" />
         </div>
 
         <div class="amount-management grid">
