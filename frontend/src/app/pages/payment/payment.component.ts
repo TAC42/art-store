@@ -23,7 +23,6 @@ import { FormUtilsService } from '../../services/form-utils.service'
 export class PaymentComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.layout-row') layoutRowClass = true
 
   private fb = inject(FormBuilder)
   private formUtilsService = inject(FormUtilsService)

@@ -94,26 +94,46 @@ export class ResetPasswordComponent implements OnInit {
       this.userService.getByEmail(this.emailForm.value.email).subscribe({
         next: (user: User) => {
           const updatedUser: User = { ...user, password }
-
-          this.userService.save(updatedUser).subscribe({
-            next: () => {
-              this.emailForm.reset()
-              this.resetForm.reset()
-              this.codeSent = false
-              showSuccessMsg('Password Reset!', 'Please login with the new password.',
-                this.eBusService)
-              this.store.dispatch(LOGOUT())
-              setTimeout(() => this.router.navigate(['/']), 3000)
-            },
-            error: (error) => {
-              showErrorMsg('Reset Failed!',
-                'Please try again later', this.eBusService)
-              console.error('Error resetting password:', error)
-            },
-          })
+          this.updatePassword(updatedUser)
         },
         error: (error) => console.error('Error fetching user:', error),
       })
     }
+  }
+
+  private updatePassword(updatedUser: User): void {
+    this.userService.save(updatedUser).subscribe({
+      next: () => this.notifyUser(updatedUser),
+      error: (error) => {
+        showErrorMsg('Reset Failed!', 'Please try again later...', this.eBusService)
+        console.error('Error resetting password:', error)
+      },
+    })
+  }
+
+  private notifyUser(updatedUser: User): void {
+    const updateMailData = {
+      username: updatedUser.username,
+      email: updatedUser.email
+    }
+    this.utilService.sendPasswordUpdateMail(updateMailData).subscribe({
+      next: () => {
+        showSuccessMsg('Password Reset!', 'Please login with the new password', this.eBusService)
+        this.resetState()
+      },
+      error: (error) => {
+        console.error('Error sending password update notification email:', error)
+        showErrorMsg('Email Failed!', 'Password was reset without an update email!', this.eBusService)
+        this.resetState()
+      }
+    })
+  }
+
+  private resetState(): void {
+    this.emailForm.reset()
+    this.resetForm.reset()
+    this.codeSent = false
+    this.store.dispatch(LOGOUT())
+    setTimeout(() => this.router.navigate(['/']), 3000)
   }
 }

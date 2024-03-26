@@ -9,7 +9,7 @@ export interface ContactUsRequestBody {
 export interface VerificationMailRequestBody {
     username?: string
     email: string
-    code: string
+    code?: string
 }
 
 export interface RecaptchaResponse {

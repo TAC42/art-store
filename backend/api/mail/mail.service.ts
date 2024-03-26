@@ -8,6 +8,7 @@ export const mailService = {
     sendContactUsMail,
     sendVerificationMail,
     sendResetPasswordMail,
+    sendPasswordUpdateMail,
     sendCustomerInvoice,
     sendArtistInvoice
 }
@@ -71,6 +72,26 @@ async function sendResetPasswordMail(email: string, code: string): Promise<void>
             <p>Do not give this code to anyone!</p>
             <hr>
             <p>If you did not request a password reset, please ignore this email or contact us through the site.</p>
+            <p>Thank you,<br>The Ori Carlin Team</p>`,
+    }
+    await _sendEmail(mailOptions)
+}
+
+async function sendPasswordUpdateMail(username: string, email: string): Promise<void> {
+    loggerService.debug(`Sending password update email containing: ${username}, ${email}`)
+    const mailOptions: MailOptions = {
+        from: process.env.SENDER_GMAIL_ADDRESS ?? '',
+        to: email,
+        subject: `Account Password updated at Ori-Carlin`,
+        text: `Dear ${username}, we noticed that your account's password has changed recently.
+        We sent you this email to be sure, that you were the one who made the change.
+        If you did not perform this action, do not hesitate and contact us ASAP!`,
+        html: `
+            <p>Dear ${username},</p>
+            <p>We noticed that your account's password has changed recently.</p>
+            <p>We sent you this email to be sure, that you were the one who made the change.</p>
+            <hr>
+            <p>If you did not perform this action, do not hesitate and contact us ASAP!</p>
             <p>Thank you,<br>The Ori Carlin Team</p>`,
     }
     await _sendEmail(mailOptions)

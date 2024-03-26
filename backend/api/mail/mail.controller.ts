@@ -10,6 +10,7 @@ export const mailRoutes: Router = express.Router()
 mailRoutes.post('/contact', _sendContactUsMail)
 mailRoutes.post('/verify', _sendVerificationMail)
 mailRoutes.post('/reset', _sendResetPasswordMail)
+mailRoutes.post('/reset-update', _sendPasswordUpdateMail)
 mailRoutes.post('/invoice', _sendInvoices)
 
 // mail controller functions
@@ -48,6 +49,20 @@ async function _sendResetPasswordMail(req: Request<VerificationMailRequestBody>,
 
     try {
         await mailService.sendResetPasswordMail(email, code)
+        res.status(200).send({ msg: 'Mail successfully sent' })
+    } catch (error) {
+        loggerService.error('Failed sending mail: ' + error)
+        res.status(500).send({ error: 'Failed sending mail' })
+    }
+}
+
+async function _sendPasswordUpdateMail(req: Request<VerificationMailRequestBody>,
+    res: Response): Promise<void> {
+    const { username, email } = req.body
+    loggerService.debug(`Received password update form data: ${username}, ${email}`)
+
+    try {
+        await mailService.sendPasswordUpdateMail(username, email)
         res.status(200).send({ msg: 'Mail successfully sent' })
     } catch (error) {
         loggerService.error('Failed sending mail: ' + error)
