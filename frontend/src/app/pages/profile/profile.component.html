@@ -25,6 +25,7 @@
 
       <section class="edit-profile flex">
         <button (click)="onOpenUserEdit($event)">Edit profile</button>
+        <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       </section>
     </article>
 
@@ -141,6 +142,8 @@
       <section class="edit-profile flex">
         <button (click)="onOpenUserEdit($event)">Edit profile</button>
       </section>
+
+      <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
     </article>
 
     <section class="orders layout-row grid" *ngIf="orders$ | async as orders">

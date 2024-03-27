@@ -8,6 +8,10 @@
             <span (click)="navigateTo('/profile')">Profile</span>
         </div>
 
+        <div class="action-area" *ngIf="(user$ | async)?.isAdmin">
+            <span (click)="navigateTo('/dashboard')">Dashboard</span>
+        </div>
+
         <div class="action-area" *ngIf="user$ | async as loggedinUser">
             <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
                 {{ loggedinUser._id ? 'Logout' : 'Login' }}

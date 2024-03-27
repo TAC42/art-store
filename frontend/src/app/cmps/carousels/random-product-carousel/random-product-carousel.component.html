@@ -1,7 +1,5 @@
 <div class="carousel-container flex">
-    <button (click)="scrollLeft($event)" class="flex">
-        <svg-render svgName="leftArrowIcon" />
-    </button>
+    <button (click)="scrollLeft($event)" class="flex"> </button>
 
     <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area flex row" #carouselRef>
         <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
@@ -11,7 +9,5 @@
         </a>
     </section>
 
-    <button (click)="scrollRight($event)" class="flex">
-        <svg-render svgName="rightArrowIcon" />
-    </button>
+    <button (click)="scrollRight($event)" class="flex"> </button>
 </div>

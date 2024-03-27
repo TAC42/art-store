@@ -22,7 +22,6 @@ export class ImageUploaderComponent {
 
   ngOnChanges(): void {
     this.imgUrl = this.defaultImgUrl
-    console.log("imgUrl set to:", this.imgUrl)
     this.inputId = `imgUpload-${this.index}`
   }
 

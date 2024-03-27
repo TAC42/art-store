@@ -18,55 +18,6 @@ app-header {
     }
 }
 
-product-carousel {
-    .carousel-container {
-        @media(max-width: 900px) {
-            button {
-                top: 0;
-                bottom: 0;
-                width: 60px;
-                height: 100%;
-
-                &:first-of-type {
-                    left: 0;
-                }
-
-                &:last-of-type {
-                    right: 0;
-                }
-            }
-
-            &:hover {
-                button {
-                    opacity: 0;
-                }
-            }
-        }
-
-        @media(min-width: 901px) {
-            button {
-                top: 45%;
-                width: 40px;
-                height: 40px;
-
-                &:first-of-type {
-                    left: 1.5em;
-                }
-
-                &:last-of-type {
-                    right: 1.5em;
-                }
-            }
-
-            &:hover {
-                button {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-}
-
 shop-wrapper,
 artware-wrapper,
 sculpture-wrapper {
@@ -542,6 +493,55 @@ app-footer {
 
             @media(min-width: 601px) {
                 padding: 1em 2em;
+            }
+        }
+    }
+}
+
+product-carousel {
+    .carousel-container {
+        @media(max-width: 900px) {
+            button {
+                top: 0;
+                bottom: 0;
+                width: 60px;
+                height: 100%;
+
+                &:first-of-type {
+                    left: 0;
+                }
+
+                &:last-of-type {
+                    right: 0;
+                }
+            }
+
+            &:hover {
+                button {
+                    opacity: 0;
+                }
+            }
+        }
+
+        @media(min-width: 901px) {
+            button {
+                top: 45%;
+                width: 40px;
+                height: 40px;
+
+                &:first-of-type {
+                    left: 1.5em;
+                }
+
+                &:last-of-type {
+                    right: 1.5em;
+                }
+            }
+
+            &:hover {
+                button {
+                    opacity: 1;
+                }
             }
         }
     }

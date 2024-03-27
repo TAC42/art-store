@@ -71,6 +71,8 @@ export class UserEffects {
     // login scenario
     login$ = createEffect(() =>
         this.actions$.pipe(ofType(LOGIN),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
             mergeMap(action => this.userService.login(action.credentials).pipe(
                 tap(user => showSuccessMsg('Login Successful!',
                     `Welcome back ${user.username}!`, this.eBusService)),
@@ -81,13 +83,16 @@ export class UserEffects {
                         'Incorrect password / username', this.eBusService)
                     return EMPTY
                 })
-            ))
+            )),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
         )
     )
 
     // signup scenario
     signup$ = createEffect(() =>
         this.actions$.pipe(ofType(SIGNUP),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
             mergeMap(action => this.userService.signup(action.credentials).pipe(
                 tap(user => showSuccessMsg('Signup Successful!',
                     `Welcome ${user.username}!`, this.eBusService)),
@@ -98,13 +103,16 @@ export class UserEffects {
                         'Please try again later.', this.eBusService)
                     return EMPTY
                 })
-            ))
+            )),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
         )
     )
 
     // logout scenario
     logout$ = createEffect(() =>
         this.actions$.pipe(ofType(LOGOUT),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: true }))),
+
             mergeMap(() => this.userService.logout().pipe(
                 map(() => ({ type: '[User] Logout No Operation' })),
                 catchError((error) => {
@@ -113,7 +121,8 @@ export class UserEffects {
                         'This is awkward...', this.eBusService)
                     return EMPTY
                 })
-            ))
+            )),
+            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
         ),
         { dispatch: false }
     )
