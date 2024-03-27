@@ -14,6 +14,7 @@ import { loggerService } from './services/logger.service.js';
 import { automationService } from './services/automation.service.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+console.log('__dirname: ',__dirname);
 dotenv.config();
 const app = express();
 app.use(cookieParser()); // for res.cookies
