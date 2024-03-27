@@ -43,7 +43,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/mail', mailRoutes);
 app.use('/api/order', orderRoutes);
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'browser', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', 'public', 'browser', 'index.html'));
 });
 const port = process.env.PORT || 3030;
 const server = http.createServer(app);
