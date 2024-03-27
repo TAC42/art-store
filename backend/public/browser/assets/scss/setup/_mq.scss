@@ -18,57 +18,6 @@ app-header {
     }
 }
 
-product-carousel {
-    @media(max-width: 900px) {
-        .carousel-container {
-            button {
-                top: 0;
-                bottom: 0;
-                width: 60px;
-                height: 100%;
-
-                &:first-of-type {
-                    left: 0;
-                }
-
-                &:last-of-type {
-                    right: 0;
-                }
-            }
-
-            &:hover {
-                button {
-                    opacity: 0;
-                }
-            }
-        }
-    }
-
-    @media(min-width: 901px) {
-        .carousel-container {
-            button {
-                top: 45%;
-                width: 40px;
-                height: 40px;
-
-                &:first-of-type {
-                    left: 1.5em;
-                }
-
-                &:last-of-type {
-                    right: 1.5em;
-                }
-            }
-
-            &:hover {
-                button {
-                    opacity: 1;
-                }
-            }
-        }
-    }
-}
-
 shop-wrapper,
 artware-wrapper,
 sculpture-wrapper {
@@ -271,18 +220,17 @@ app-home {
 
 contact-page,
 introduction-page {
-    @media(max-width: 600px) {
-        .page-contents {
+
+    .page-contents {
+        @media(max-width: 600px) {
 
             .contact-text,
             .introduction-text {
                 padding: 0 1em;
             }
         }
-    }
 
-    @media(max-width: 900px) {
-        .page-contents {
+        @media(max-width: 900px) {
             grid-template-columns: 1fr;
 
             .contact-text,
@@ -291,21 +239,17 @@ introduction-page {
             }
 
             .form-area {
-                margin: 1em auto 1em auto;
+                margin: 1em auto;
             }
         }
-    }
 
-    @media(min-width: 601px) {
-        .page-contents {
+        @media(min-width: 601px) {
             .form-area {
                 border-radius: 1em;
             }
         }
-    }
 
-    @media(min-width: 901px) {
-        .page-contents {
+        @media(min-width: 901px) {
             grid-template-columns: 1fr 1fr;
             padding: 0 2em;
 
@@ -334,10 +278,8 @@ introduction-page {
                 margin-block-start: 1em;
             }
         }
-    }
 
-    @media(min-width: 1001px) {
-        .page-contents {
+        @media(min-width: 1001px) {
             .gallery-carousel {
                 .carousel-container {
                     min-height: 450px;
@@ -348,10 +290,8 @@ introduction-page {
                 }
             }
         }
-    }
 
-    @media(min-width: 1201px) {
-        .page-contents {
+        @media(min-width: 1201px) {
             .gallery-carousel {
                 align-self: start;
                 margin-block-start: 1em;
@@ -365,10 +305,8 @@ introduction-page {
                 }
             }
         }
-    }
 
-    @media(min-width: 1401px) {
-        .page-contents {
+        @media(min-width: 1401px) {
             .gallery-carousel {
                 .carousel-container {
                     min-height: 700px;
@@ -392,7 +330,8 @@ introduction-page {
 }
 
 product-edit,
-reset-password {
+reset-password,
+privacy-policy {
 
     .page-contents {
         @media(max-width: 400px) {
@@ -451,9 +390,9 @@ showcase-details {
 
     .page-contents {
         .mobile-view {
-            @media(max-width: 400px) {
-                .product-area {
-                    .image-container {
+            .product-area {
+                .image-container {
+                    @media(max-width: 400px) {
                         product-carousel {
                             .carousel-container {
                                 min-height: 400px;
@@ -465,12 +404,8 @@ showcase-details {
                             max-height: 400px;
                         }
                     }
-                }
-            }
 
-            @media(min-width:401px) {
-                .product-area {
-                    .image-container {
+                    @media(min-width:401px) {
                         product-carousel {
                             .carousel-container {
                                 min-height: 500px;
@@ -487,9 +422,9 @@ showcase-details {
         }
 
         .desktop-view {
-            @media(max-width: 1200px) {
-                .product-area {
-                    .image-container {
+            .product-area {
+                .image-container {
+                    @media(max-width: 1200px) {
                         product-carousel {
                             .carousel-container {
                                 min-height: 500px;
@@ -501,12 +436,8 @@ showcase-details {
                             max-height: 500px;
                         }
                     }
-                }
-            }
 
-            @media(max-width: 900px) {
-                .product-area {
-                    .image-container {
+                    @media(max-width: 900px) {
                         product-carousel {
                             .carousel-container {
                                 min-height: 300px;
@@ -518,12 +449,8 @@ showcase-details {
                             max-height: 300px;
                         }
                     }
-                }
-            }
 
-            @media(min-width:901px) {
-                .product-area {
-                    .image-container {
+                    @media(min-width:901px) {
                         product-carousel {
                             .carousel-container {
                                 min-height: 400px;
@@ -535,12 +462,8 @@ showcase-details {
                             max-height: 400px;
                         }
                     }
-                }
-            }
 
-            @media(min-width:1201px) {
-                .product-area {
-                    .image-container {
+                    @media(min-width:1201px) {
                         product-carousel {
                             .carousel-container {
                                 min-height: 600px;
@@ -560,19 +483,85 @@ showcase-details {
 
 app-footer {
     .footer-contents {
-        @media(max-width: 600px) {
 
-            .desktop-view,
-            .mobile-view {
+        .desktop-view,
+        .mobile-view {
+
+            @media(max-width: 600px) {
                 padding: 1em;
+            }
+
+            @media(min-width: 601px) {
+                padding: 1em 2em;
+            }
+        }
+    }
+}
+
+product-carousel {
+    .carousel-container {
+        @media(max-width: 900px) {
+            button {
+                top: 0;
+                bottom: 0;
+                width: 60px;
+                height: 100%;
+
+                &:first-of-type {
+                    left: 0;
+                }
+
+                &:last-of-type {
+                    right: 0;
+                }
+            }
+
+            &:hover {
+                button {
+                    opacity: 0;
+                }
             }
         }
 
-        @media(min-width: 601px) {
+        @media(min-width: 901px) {
+            button {
+                top: 45%;
+                width: 40px;
+                height: 40px;
 
-            .desktop-view,
-            .mobile-view {
-                padding: 1em 2em;
+                &:first-of-type {
+                    left: 1.5em;
+                }
+
+                &:last-of-type {
+                    right: 1.5em;
+                }
+            }
+
+            &:hover {
+                button {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.modal-wrapper {
+    .shopping-cart {
+        .cart-main {
+            .cart-list {
+                @media (max-width: 600px) {
+                    gap: 0.5em;
+                }
+
+                @media (max-width: 300px) {
+                    gap: 0;
+                }
+
+                @media(min-width: 601px) {
+                    gap: 1.5em;
+                }
             }
         }
     }

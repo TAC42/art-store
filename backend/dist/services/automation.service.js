@@ -1,15 +1,20 @@
-import { productService } from "../api/product/product.service.js";
 import { userService } from "../api/user/user.service.js";
+import { cloudinaryService } from "./cloudinary.service.js";
 import { loggerService } from "./logger.service.js";
+const USERS_COLLECTION = 'user';
+const PRODUCTS_COLLECTION = 'product';
 export const automationService = {
     setupOrphanedImageCheck,
     setupUnverifiedUsersCheck
 };
 function setupOrphanedImageCheck() {
-    _scheduleTask(productService.checkRedundantProductImages, 'Orphaned Images Check', 22, 5);
+    // Schedule task for checking redundant product images
+    _scheduleTask(() => cloudinaryService.checkOrphanedImages(PRODUCTS_COLLECTION, ['Shop', 'Artware', 'Sculpture']), 'Orphaned Product Images Check', 22, 30);
+    // Schedule task for checking redundant user images
+    _scheduleTask(() => cloudinaryService.checkOrphanedImages(USERS_COLLECTION, ['User']), 'Orphaned User Images Check', 22, 45);
 }
 function setupUnverifiedUsersCheck() {
-    _scheduleTask(userService.checkNonVerifiedUsers, 'Non Verified Users Check', 22, 6);
+    _scheduleTask(userService.checkNonVerifiedUsers, 'Non Verified Users Check', 23, 0);
 }
 function _scheduleTask(task, taskName, hour, minute) {
     const scheduleNextRun = () => {

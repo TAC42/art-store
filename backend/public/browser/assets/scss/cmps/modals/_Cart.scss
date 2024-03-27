@@ -4,9 +4,7 @@
     top: 0;
     right: 0;
     background: $prmclr2;
-    min-width: 275px;
-    max-width: 600px;
-    height: 100vh;
+    max-width: 500px;
     z-index: 15;
     padding: 0.5em 1em;
 
@@ -35,15 +33,6 @@
 
       .cart-list {
         height: fit-content;
-        gap: 1.5em;
-
-        @media screen and (max-width: 500px) {
-          gap: .5em;
-        }
-
-        @media screen and (max-width: 300px) {
-          gap: 0;
-        }
 
         .cart-item {
           max-height: 120px;
