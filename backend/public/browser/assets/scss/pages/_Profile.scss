@@ -1,202 +1,362 @@
 profile {
-  .personal-info {
-    position: relative;
-    justify-content: center;
-    gap: 0.25em;
-    color: $scdclr2;
-    text-align: center;
-
-    .user-img {
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      width: fit-content;
-      padding: 0.5em;
-      background-color: $prmclr2;
-
-      img {
+  .page-contents {
+    .mobile-view {
+      .background {
         position: relative;
-        width: 125px;
-        border-radius: 50%;
-        border: 1px #a3a1ab solid;
 
-        &::before {
-          content: "";
+        img {
+          filter: brightness(25%);
+        }
+
+        &:after {
+          content: '';
           position: absolute;
-          top: -2px;
-          left: -2px;
-          right: -2px;
-          bottom: -2px;
-          border: 2px solid $prmclr2;
-          border-radius: 50%;
+          bottom: 0;
+          left: 50%;
+          right: 50%;
+          transform: translateX(-50%);
+          width: 300px;
+          height: 40px;
+          background: $prmclr1;
+          border-radius: 100% 100% 100% 100% / 100% 100% 0% 0%;
+          margin: 0.25em 0;
         }
       }
-    }
 
-    .full-name {
-      margin-block-start: 3em;
-      color: $prmclr1;
-      font-family: "nh-bold";
-      font-size: 1.5em;
-    }
+      .personal-info {
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.25em;
+        color: $scdclr2;
+        margin-block-start: -6.5em;
 
-    .member-since {
-      gap: 0.5em;
-      align-items: center;
+        .user-img {
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          width: fit-content;
+          padding: 0.5em;
+          background-color: $prmclr2;
 
-      svg-render {
-        width: 1.5em;
+          img {
+            object-fit: cover;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            border: 2px $scdclr6 solid;
 
-        svg {
-          path {
+            &::before {
+              content: "";
+              position: absolute;
+              top: -2px;
+              left: -2px;
+              right: -2px;
+              bottom: -2px;
+              border: 2px solid $prmclr2;
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .full-name {
+          margin-block-start: 6em;
+          color: $prmclr1;
+          font-family: "nh-bold";
+          font-size: 1.5em;
+        }
+
+        .member-since {
+          gap: 0.5em;
+          align-items: center;
+
+          svg-render {
+            width: 1.5em;
             fill: $scdclr2;
           }
         }
-      }
-    }
-  }
 
-  .edit-profile {
-    margin-block-start: 1em;
-    justify-content: center;
+        .edit-profile {
+          justify-content: center;
+          font-size: 16px;
+          gap: 0.5em;
+          margin-block-start: 1em;
 
-    button {
-      padding: 0.75em 1.5em;
-      background-color: $scdclr2;
-      color: $prmclr2;
-      border-radius: 1em;
-    }
-  }
+          button {
+            font-family: 'nh-bold';
+            background-color: $scdclr2;
+            color: $prmclr2;
+            padding: 0.75em 1em;
+            border-radius: 1em;
+          }
 
-  .orders {
-    gap: 1em;
-    margin: 1em 0;
-
-    h3 {
-      font-family: "nh-bold";
-      font-size: 1.25em;
-      color: #767676;
-    }
-
-    .order {
-      background-color: #fbfcfe;
-      padding: 0.5em 0;
-      border-radius: 0.5em;
-      color: #9ba2b4;
-
-      .heading {
-        gap: 1em;
-        font-family: "nh-bold";
-        font-size: 1.25em;
-        border-block-end: solid 2px $prmclr3;
-
-        .count {
-          padding: 0.4em 0.8em;
-          background-color: #76767614;
-          border-radius: 50%;
-          margin-block-end: 0.25em;
+          a {
+            font-family: 'nh-bold';
+            background-color: $scdclr2;
+            color: $prmclr2;
+            font-size: 14px;
+            padding: 0.5em 0.75em;
+            border-radius: 1em;
+          }
         }
       }
 
-      .order-info {
-        padding: 1em 0 0 0;
+      .orders {
         gap: 1em;
+        padding: 0 1em;
+        margin: 1em 0 2em 0;
 
-        article {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          text-transform: capitalize;
+        h3 {
+          font-family: "nh-bold";
+          font-size: 1.25em;
+          color: $scdclr2;
+        }
 
-          :last-child {
+        .order {
+          background: $prmclr2;
+          color: $scdclr7;
+          padding: 0.5em 0;
+          border-radius: 0.5em;
+
+          .heading {
+            gap: 1em;
             font-family: "nh-bold";
-          }
-        }
-      }
+            font-size: 1.25em;
+            border-block-end: solid 2px $prmclr3;
 
-      .summary {
-        gap: 0.5em;
-
-        table {
-          border-collapse: collapse;
-
-          tbody {
-            td {
-              border: 1px solid #a3a1ab;
-              border-bottom: none;
-              text-align: center;
-              padding: 0.5em 0.4em;
-            }
-
-            &:last-child {
-              border-bottom: 1px solid #a3a1ab;
+            .count {
+              padding: 0.4em 0.8em;
+              background: $scdclr3;
+              border-radius: 50%;
+              margin-block-end: 0.25em;
             }
           }
+
+          .order-info {
+            padding: 1em 0 0 0;
+            gap: 1em;
+
+            article {
+              align-items: center;
+              justify-content: space-between;
+
+              :last-child {
+                font-family: "nh-bold";
+              }
+            }
+          }
+
+          .summary {
+            gap: 0.5em;
+
+            table {
+              border-collapse: collapse;
+
+              tbody {
+                td {
+                  border: 1px solid #a3a1ab;
+                  border-bottom: none;
+                  text-align: center;
+                  text-transform: capitalize;
+                  padding: 0.5em 0.4em;
+                }
+
+                &:last-child {
+                  border-bottom: 1px solid #a3a1ab;
+                }
+              }
+            }
+          }
+
+          .cost {
+            li {
+              grid-auto-flow: column;
+              gap: 1em;
+              justify-content: space-between;
+            }
+          }
+
+          .status {
+            align-items: center;
+          }
         }
-      }
 
-      .cost {
-        li {
-          display: grid;
-          grid-auto-flow: column;
-          gap: 1em;
-          justify-content: space-between;
-        }
-      }
+        .no-orders {
+          justify-content: center;
 
-      .status {
-        align-items: center;
-
-        button {
-          padding: 0.5em 1em;
-          color: $prmclr2;
-          border: none;
-          border-radius: 0.25em;
-          cursor: pointer;
-          font-size: 1em;
-          text-transform: capitalize;
-          transition: background-color 0.3s ease;
-          box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5),
-            0 2px 5px rgba(0, 0, 0, 0.1);
-
-          &.active {
-            background-color: $prmclr2;
-            color: #fff;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8),
-              0 2px 5px rgba(0, 0, 0, 0.1);
-          }
-
-          &.pending {
-            background-color: yellowgreen;
-          }
-
-          &.confirmed {
-            background-color: orange;
-          }
-
-          &.shipped {
-            background-color: lightgreen;
-          }
-
-          &.delivered {
-            background-color: darkgreen;
-          }
-
-          &.cancelled {
-            background-color: red;
+          svg-render {
+            width: 20vw;
+            justify-self: center;
           }
         }
       }
     }
 
-    .no-orders {
-      display: grid;
-      justify-content: center;
+    .desktop-view {
+      position: relative;
+      height: 100%;
+      min-height: 900px;
 
-      svg-render {
-        width: 20vw;
-        justify-self: center;
+      .background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        filter: brightness(25%);
+      }
+
+      .personal-info {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.25em;
+        color: $scdclr2;
+        margin: 5em auto 0 auto;
+        background: #ffffffc4;
+        padding: 1em;
+        border-radius: 4em;
+
+        img {
+          object-fit: cover;
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          border: 2px $scdclr6 solid;
+        }
+
+        .full-name {
+          color: $prmclr1;
+          font-family: "nh-bold";
+          font-size: 1.5em;
+        }
+
+        .member-since {
+          gap: 0.5em;
+          align-items: center;
+
+          svg-render {
+            width: 1.5em;
+            fill: $scdclr2;
+          }
+        }
+
+        .edit-profile {
+          justify-content: center;
+          margin-block-start: 1em;
+
+          button {
+            font-family: 'nh-bold';
+            background-color: $scdclr2;
+            color: $prmclr2;
+            font-size: 16px;
+            padding: 0.75em 1em;
+            border-radius: 1em;
+          }
+        }
+
+        a {
+          font-family: 'nh-bold';
+          background-color: $scdclr2;
+          color: $prmclr2;
+          padding: 0.5em 0.75em;
+          border-radius: 1em;
+          margin-block-start: 1em;
+        }
+      }
+
+      .orders {
+        width: 100%;
+        gap: 1em;
+        padding: 0 2em;
+        margin: 1em auto 2em auto;
+
+        h3 {
+          font-family: "nh-bold";
+          font-size: 1.25em;
+          color: $scdclr3;
+        }
+
+        .order {
+          background: $prmclr2;
+          color: $scdclr7;
+          padding: 0.5em 0;
+          border-radius: 0.5em;
+
+          .heading {
+            gap: 1em;
+            font-family: "nh-bold";
+            font-size: 1.25em;
+            border-block-end: solid 2px $prmclr3;
+
+            .count {
+              padding: 0.4em 0.8em;
+              background: $scdclr3;
+              border-radius: 50%;
+              margin-block-end: 0.25em;
+            }
+          }
+
+          .order-info {
+            padding: 1em 0 0 0;
+            gap: 1em;
+
+            article {
+              align-items: center;
+              justify-content: space-between;
+
+              :last-child {
+                font-family: "nh-bold";
+              }
+            }
+          }
+
+          .summary {
+            gap: 0.5em;
+
+            table {
+              border-collapse: collapse;
+
+              tbody {
+                td {
+                  border: 1px solid #a3a1ab;
+                  border-bottom: none;
+                  text-align: center;
+                  text-transform: capitalize;
+                  padding: 0.5em 0.4em;
+                }
+
+                &:last-child {
+                  border-bottom: 1px solid #a3a1ab;
+                }
+              }
+            }
+          }
+
+          .cost {
+            li {
+              grid-auto-flow: column;
+              gap: 1em;
+              justify-content: space-between;
+            }
+          }
+
+          .status {
+            align-items: center;
+          }
+        }
+
+        .no-orders {
+          justify-content: center;
+
+          svg-render {
+            width: 20vw;
+            justify-self: center;
+          }
+        }
       }
     }
   }

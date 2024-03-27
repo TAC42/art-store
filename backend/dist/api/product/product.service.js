@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import { dbService } from "../../services/db.service.js";
 import { loggerService } from "../../services/logger.service.js";
-import { cloudinaryService } from "../../services/cloudinary.service.js";
 const PRODUCTS_COLLECTION = 'product';
 export const productService = {
     query,
@@ -9,8 +8,7 @@ export const productService = {
     getByName,
     save,
     remove,
-    getRandomProducts,
-    checkRedundantProductImages,
+    getRandomProducts
 };
 async function query(filterBy = {}) {
     try {
@@ -111,43 +109,4 @@ function _buildPipeline(filterBy) {
     }
     pipeline.push(criteria);
     return pipeline;
-}
-async function checkRedundantProductImages() {
-    try {
-        const folders = ['Shop', 'Artware', 'Sculpture'];
-        const cloudinaryImagePublicIds = await cloudinaryService.getAllCloudinaryImages(folders);
-        const productImagePublicIds = await _getAllProductImages();
-        const orphanedImages = cloudinaryImagePublicIds.filter((publicId) => !productImagePublicIds.includes(publicId));
-        if (orphanedImages.length > 0) {
-            loggerService.info('Orphaned images found: ', orphanedImages);
-            loggerService.info('Total amount found: ', orphanedImages.length);
-            for (const publicId of orphanedImages) {
-                await cloudinaryService.deleteImageFromCloudinary(publicId);
-            }
-            loggerService.debug('Deletion of orphaned images completed');
-        }
-        else
-            loggerService.info('No orphaned images found');
-    }
-    catch (err) {
-        loggerService.error('Error checking for redundant images', err);
-        throw err;
-    }
-}
-async function _getAllProductImages() {
-    try {
-        const collection = await dbService.getCollection(PRODUCTS_COLLECTION);
-        const products = await collection.find({}, { projection: { imgUrls: 1 } }).toArray();
-        const imgUrls = products.reduce((acc, product) => {
-            if (product.imgUrls)
-                acc.push(...product.imgUrls);
-            return acc;
-        }, []);
-        const resultImagePublicIds = imgUrls.map(imgUrl => cloudinaryService.extractPublicIdFromUrl(imgUrl)).filter((id) => id !== null);
-        return resultImagePublicIds;
-    }
-    catch (err) {
-        loggerService.error('Failed to get product images', err);
-        throw err;
-    }
 }

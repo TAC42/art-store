@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { v2 as cloudinary } from 'cloudinary';
+import { dbService } from './db.service.js';
 import { loggerService } from './logger.service.js';
 dotenv.config();
 cloudinary.config({
@@ -8,11 +9,33 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 export const cloudinaryService = {
-    getAllCloudinaryImages,
-    deleteImageFromCloudinary,
-    extractPublicIdFromUrl,
+    checkOrphanedImages,
+    _getAllCloudinaryImages,
+    _deleteImageFromCloudinary,
+    _extractPublicIdFromUrl,
 };
-async function getAllCloudinaryImages(folderNames) {
+async function checkOrphanedImages(collectionName, folders) {
+    try {
+        const cloudinaryImagePublicIds = await _getAllCloudinaryImages(folders);
+        const storedImagePublicIds = await _getAllPublicIdsFromCollection(collectionName);
+        const orphanImages = cloudinaryImagePublicIds.filter(publicId => !storedImagePublicIds.includes(publicId));
+        if (orphanImages.length > 0) {
+            loggerService.info('Orphaned images found: ', orphanImages);
+            loggerService.info('Total amount found: ', orphanImages.length);
+            for (const publicId of orphanImages) {
+                await _deleteImageFromCloudinary(publicId);
+            }
+            loggerService.debug('Deletion of orphaned images completed');
+        }
+        else
+            loggerService.info('No orphaned images found');
+    }
+    catch (err) {
+        loggerService.error('Error checking for redundant images', err);
+        throw err;
+    }
+}
+async function _getAllCloudinaryImages(folderNames) {
     let allImages = [];
     try {
         for (const folderName of folderNames) {
@@ -22,7 +45,7 @@ async function getAllCloudinaryImages(folderNames) {
                 prefix: folderPath,
                 max_results: 999,
             });
-            allImages = allImages.concat(results.resources.map((resource) => extractPublicIdFromUrl(resource.url)));
+            allImages = allImages.concat(results.resources.map((resource) => _extractPublicIdFromUrl(resource.url)));
         }
         return allImages;
     }
@@ -31,7 +54,24 @@ async function getAllCloudinaryImages(folderNames) {
         throw err;
     }
 }
-async function deleteImageFromCloudinary(publicId) {
+async function _getAllPublicIdsFromCollection(collectionName) {
+    try {
+        const collection = await dbService.getCollection(collectionName);
+        const items = await collection.find({}, { projection: { imgUrls: 1 } }).toArray();
+        const imgUrls = items.reduce((acc, item) => {
+            if (item.imgUrls)
+                acc.push(...item.imgUrls);
+            return acc;
+        }, []);
+        const resultImagePublicIds = imgUrls.map(imgUrl => _extractPublicIdFromUrl(imgUrl)).filter((id) => id !== null);
+        return resultImagePublicIds;
+    }
+    catch (err) {
+        loggerService.error(`Failed to get images from ${collectionName}`, err);
+        throw err;
+    }
+}
+async function _deleteImageFromCloudinary(publicId) {
     try {
         loggerService.info('Attempting to delete image with ID:', publicId);
         const result = await cloudinary.uploader.destroy(publicId);
@@ -42,7 +82,7 @@ async function deleteImageFromCloudinary(publicId) {
         throw err;
     }
 }
-function extractPublicIdFromUrl(imageUrl) {
+function _extractPublicIdFromUrl(imageUrl) {
     if (!imageUrl) {
         loggerService.error('Received undefined or null imageUrl');
         return null;

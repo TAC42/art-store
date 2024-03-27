@@ -1,15 +1,15 @@
 .modal-wrapper {
     .login-modal {
         position: fixed;
+        overflow-y: auto;
+        user-select: none;
         top: 5%;
         background: $prmclr2;
-        width: 100%;
         max-width: 350px;
-        height: fit-content;
+        max-height: 600px;
         z-index: 15;
         padding: 1em;
         border-radius: 0.5em;
-        user-select: none;
 
         form {
             align-items: center;
@@ -131,13 +131,22 @@
                 }
             }
 
-            a {
+            .reset-pass {
                 color: $prmclr1;
                 transition: all 0.5s ease-in-out;
 
                 &:hover {
                     text-decoration: none;
                     color: $prmclr4;
+                }
+            }
+
+            p {
+                color: $prmclr1;
+                text-align: center;
+
+                a {
+                    color: $scdclr8;
                 }
             }
         }

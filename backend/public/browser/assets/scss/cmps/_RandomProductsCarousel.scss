@@ -30,15 +30,16 @@ random-product-carousel {
 
         button {
             position: absolute;
-            top: 40%;
-            background: $prmclr2;
-            padding: 0.5em;
-            z-index: 3;
-            border-radius: 50%;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            background: $prmclr2;
+            top: 0;
+            bottom: 0;
+            z-index: 3;
+            padding: 0.5em;
+            width: 50px;
+            height: 100%;
+            opacity: 0.25;
             transition: all 0.3s ease-in-out;
 
             &:first-of-type {
@@ -49,13 +50,8 @@ random-product-carousel {
                 right: 0.5em;
             }
 
-            svg-render {
-                width: 24px;
-                height: 24px;
-            }
-
             &:hover {
-                background: $scdclr4;
+                opacity: 0.75;
             }
         }
 
@@ -85,8 +81,6 @@ random-product-carousel {
                 }
 
                 &:hover {
-                    text-decoration: none;
-
                     img {
                         filter: brightness(.75);
                     }
