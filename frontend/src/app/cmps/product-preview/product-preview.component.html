@@ -1,8 +1,10 @@
-<a class="preview-contents flex column" [ngClass]="{'masonry-item': !isShopPage}"
+<a class="preview-contents w-h-100 flex column" [ngClass]="{'masonry-item': !isShopPage}"
   [routerLink]="['/', product.type, 'details',product.name]">
   <article class="product-body flex">
-    <img [src]="product.imgUrls[0]" [alt]="product.name"
-      [style.filter]="product.type !== 'shop' || (product.type === 'shop' && product.stock > 0) ? 'opacity(1)' : 'opacity(0.5)'" />
+    <img class="w-h-100" [src]="lowResImageUrl" [alt]="product.name" loading="lazy" #lowResImage>
+    <img class="w-h-100" [src]="highResImageUrl" [alt]="product.name" (load)="onImageLoad($event, lowResImage)"
+      style="display:none;" [style.filter]="product.type !== 'shop' || 
+      (product.type === 'shop' && product.stock > 0) ? 'opacity(1)' : 'opacity(0.5)'">
 
     <div *ngIf="(user$ | async)?.isAdmin" class="admin-options flex row">
       <button (click)="onRemoveProduct($event)" class="remove-btn">

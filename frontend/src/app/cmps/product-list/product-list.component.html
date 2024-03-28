@@ -9,7 +9,8 @@
   <ng-template #productList>
     <div *ngFor="let product of products">
       <product-preview [isShopPage]="isShopPage" (remove)="remove.emit($event)" (add)="add.emit($event)"
-        [product]="product" [user$]="user$" />
+        [product]="product" [user$]="user$" [lowResImageUrl]="imageUtils.getLowResImageUrl(product.imgUrls[0])"
+        [highResImageUrl]="imageUtils.getHighResImageUrl(product.imgUrls[0])" />
     </div>
   </ng-template>
 </div>

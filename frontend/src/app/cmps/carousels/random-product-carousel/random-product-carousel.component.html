@@ -4,7 +4,7 @@
     <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area flex row" #carouselRef>
         <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
             class="other-product-area flex column">
-            <img [src]="randomProduct.imgUrls[0]" alt="Random Product Image">
+            <img [src]="randomProduct.imgUrls[0]" alt="Random Product Image" loading="lazy">
             <p>{{ randomProduct.name }}</p>
         </a>
     </section>

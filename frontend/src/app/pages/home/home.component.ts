@@ -1,25 +1,29 @@
-import { Component, HostBinding, inject } from '@angular/core'
+import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../models/shop'
 import { DeviceTypeService } from '../../services/device-type.service'
+import { ImageLoadService } from '../../services/image-load.service'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
 
-  private dTypeService = inject(DeviceTypeService)
   private router = inject(Router)
+  private dTypeService = inject(DeviceTypeService)
+  private imgLoadService = inject(ImageLoadService)
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
   loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
   loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
+  loneImg1LowRes: string = ''
+  loneImg2LowRes: string = ''
 
   artwareProducts: CarouselItem[] = [
     {
@@ -73,6 +77,27 @@ export class HomeComponent {
       url: '/shop/details/makara mug'
     },
   ]
+
+  ngOnInit(): void {
+    this.loneImg1LowRes = this.imgLoadService.getLowResImageUrl(this.loneImg1)
+    this.loneImg2LowRes = this.imgLoadService.getLowResImageUrl(this.loneImg2)
+    this._preloadTeaserImages()
+  }
+
+  private _preloadTeaserImages(): void {
+    [this.loneImg1, this.loneImg2].forEach(imgUrl => {
+      const placeholderUrl = this.imgLoadService.getLowResImageUrl(imgUrl)
+      this.imgLoadService.preloadImage(placeholderUrl).subscribe({
+        error: (error) => console.log('Error preloading teaser image', error)
+      })
+    })
+  }
+
+  onTeaserImageLoad(event: Event, lowResImage: HTMLElement): void {
+    const imgElement = event.target as HTMLImageElement
+    imgElement.style.display = 'block'
+    lowResImage.style.display = 'none'
+  }
 
   navigateTo(url: string) {
     this.router.navigate([url])

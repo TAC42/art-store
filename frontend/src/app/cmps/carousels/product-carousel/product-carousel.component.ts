@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy, signal, EventEmitter, Output, inje
 import { interval, Subscription } from 'rxjs'
 import { CarouselItem } from '../../../models/shop'
 import { Router } from '@angular/router'
+import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
   selector: 'product-carousel',
@@ -14,16 +15,15 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   @Output() imageClick = new EventEmitter<{ event: Event, imageUrl: string }>()
 
   private router = inject(Router)
+  private imgLoadService = inject(ImageLoadService)
   currentIndex: number = 0
 
   private autoSwitchSubscription: Subscription | null = null
   public currentIndexSignal = signal(this.currentIndex)
 
-  ngOnInit() {
-    if (this.autoSwitch) {
-      this.autoSwitchSubscription = interval(10000).subscribe(
-        () => this.nextImage())
-    }
+  ngOnInit(): void {
+    if (this.autoSwitch) this.autoSwitchSubscription = interval(
+      10000).subscribe(() => this.nextImage())
   }
 
   nextImage(): void {

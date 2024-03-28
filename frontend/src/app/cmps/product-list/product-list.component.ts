@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core'
-import { Product } from '../../models/shop'
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core'
 import { Observable } from 'rxjs'
+import { Product } from '../../models/shop'
 import { User } from '../../models/user'
+import { ImageLoadService } from '../../services/image-load.service'
 
 @Component({
   selector: 'product-list',
   templateUrl: './product-list.component.html'
 })
 
-export class ProductListComponent implements OnInit, OnChanges {
+export class ProductListComponent implements OnChanges {
   @Input() isShopPage!: boolean
   @Input() products!: Product[] | null
   @Input() user$!: Observable<User>
@@ -16,13 +17,19 @@ export class ProductListComponent implements OnInit, OnChanges {
   @Output() remove = new EventEmitter<string>()
   @Output() add = new EventEmitter<Product>()
 
-  ngOnInit(): void {
-    console.log('OnInit - this.products:', this.products)
-  }
+  private imgLoadService = inject(ImageLoadService)
+  public imageUtils = this.imgLoadService
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['products']) {
-      console.log('OnChanges - this.products:', this.products)
-    }
+    if (changes['products']) this._preloadProductImages()
+  }
+
+  private _preloadProductImages(): void {
+    this.products?.forEach(product => {
+      const placeholderUrl = this.imgLoadService.getLowResImageUrl(product.imgUrls[0])
+      this.imgLoadService.preloadImage(placeholderUrl).subscribe({
+        error: (error) => console.log('Error preloading image', error)
+      })
+    })
   }
 }

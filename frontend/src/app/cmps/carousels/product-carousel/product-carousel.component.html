@@ -1,7 +1,7 @@
 <div class="carousel-container flex" customSwipe (swipeLeft)="previousImage()" (swipeRight)="nextImage()">
     <div class="carousel-slide" *ngFor="let item of carouselItems; let i = index" [ngStyle]="getSlideStyle(i)">
         <ng-container *ngIf="item.type === 'image'">
-            <img [src]="item.imgUrl" [alt]="'Image ' + (i + 1)" (click)="onItemClicked($event, item)">
+            <img [src]="item.imgUrl" [alt]="'Image ' + (i + 1)" (click)="onItemClicked($event, item)" loading="lazy">
         </ng-container>
 
         <ng-container *ngIf="item.type === 'product'">

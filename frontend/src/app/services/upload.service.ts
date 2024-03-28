@@ -22,7 +22,6 @@ export class UploadService {
         body: formData
       })
       const data = await response.json()
-
       return data
     } catch (err) {
       console.error('Failed to upload', err)
