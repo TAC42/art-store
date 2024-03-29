@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { CarouselItem } from '../../../models/shop'
 import { UtilityService } from '../../../services/utility.service'
+import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
   selector: 'introduction-page',
@@ -13,8 +14,10 @@ export class IntroductionComponent implements OnInit {
   @HostBinding('class.layout-row') layoutRowClass = true
 
   private utilService = inject(UtilityService)
+  private imgLoadService = inject(ImageLoadService)
 
   public regularUtils = this.utilService
+
   public carouselItems: CarouselItem[] = []
   aboutImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1707577522/artware/ecwol6n9wyog6jryjxis.jpg',
@@ -23,7 +26,8 @@ export class IntroductionComponent implements OnInit {
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880476/Artware/jloyblpg0ith2jnudq9z.png'
   ]
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.carouselItems = this.utilService.convertToCarouselItem(this.aboutImageUrls)
+    this.imgLoadService.preloadCarouselItems(this.carouselItems)
   }
 }

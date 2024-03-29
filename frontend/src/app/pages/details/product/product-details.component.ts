@@ -13,6 +13,7 @@ import { UPDATE_USER } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 import { UtilityService } from '../../../services/utility.service'
+import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
     selector: 'product-details',
@@ -30,13 +31,14 @@ export class ProductDetailsComponent implements OnInit {
     private modService = inject(ModalService)
     private eBusService = inject(EventBusService)
     private utilService = inject(UtilityService)
+    private imgLoadService = inject(ImageLoadService)
 
     public regularUtils = this.utilService
     public carouselItems: CarouselItem[] = []
+    public loneImgLowRes: string = ''
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     user$: Observable<User> = this.store.select(selectUser)
-
     product$: Observable<Product> = this.route.data.pipe(
         map(data => data['product']))
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
@@ -49,8 +51,21 @@ export class ProductDetailsComponent implements OnInit {
                     excludeProductId: product._id
                 }))
             }
-            this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
+            if (product.imgUrls.length > 1) {
+                this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
+                this.imgLoadService.preloadCarouselItems(this.carouselItems)
+            } else if (product.imgUrls.length === 1) {
+                const loneImgUrl = product.imgUrls[0]
+                this.loneImgLowRes = this.imgLoadService.getLowResImageUrl(loneImgUrl)
+                this.imgLoadService.preloadSingleImage(loneImgUrl)
+            }
         })
+    }
+
+    onImageLoad(event: Event, lowResImage: HTMLElement): void {
+        const imgElement = event.target as HTMLImageElement
+        imgElement.style.display = 'block'
+        lowResImage.style.display = 'none'
     }
 
     onOpenCart(event: Event): void {

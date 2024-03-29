@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, OnDestroy, signal, EventEmitter, Output, inject } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy, EventEmitter, Output, inject } from '@angular/core'
 import { interval, Subscription } from 'rxjs'
 import { CarouselItem } from '../../../models/shop'
 import { Router } from '@angular/router'
-import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
   selector: 'product-carousel',
@@ -15,33 +14,32 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   @Output() imageClick = new EventEmitter<{ event: Event, imageUrl: string }>()
 
   private router = inject(Router)
-  private imgLoadService = inject(ImageLoadService)
-  currentIndex: number = 0
-
   private autoSwitchSubscription: Subscription | null = null
-  public currentIndexSignal = signal(this.currentIndex)
+  public currentIndex: number = 0
 
   ngOnInit(): void {
     if (this.autoSwitch) this.autoSwitchSubscription = interval(
       10000).subscribe(() => this.nextImage())
   }
 
+  onCarouselImageLoad(event: Event, lowResImageElement: HTMLElement): void {
+    const highResImgElement = event.target as HTMLImageElement
+    lowResImageElement.style.display = 'none'
+    highResImgElement.style.display = 'block'
+  }
+
   nextImage(): void {
     this.currentIndex = (this.currentIndex + 1) % this.carouselItems.length
-    this.currentIndexSignal.set(this.currentIndex)
   }
 
   previousImage(): void {
     if (this.currentIndex === 0) {
       this.currentIndex = this.carouselItems.length - 1
     } else this.currentIndex--
-
-    this.currentIndexSignal.set(this.currentIndex)
   }
 
   goToSlide(index: number): void {
     this.currentIndex = index
-    this.currentIndexSignal.set(this.currentIndex)
   }
 
   getSlideStyle(index: number): object {

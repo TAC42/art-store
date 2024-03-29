@@ -23,12 +23,10 @@
     </button>
 
     <div *ngIf="product.type === 'shop' && product.stock!" class="price">${{ product.price }}</div>
-
     <div *ngIf="product.type !== 'shop'" class="name">{{ product.name }}</div>
   </article>
 
   <div *ngIf="product.type === 'shop'" class="name">{{ product.name }}</div>
-
   <div *ngIf="product.type === 'shop'" class="stock-status">
     <ng-container [ngSwitch]="true">
       <span *ngSwitchCase="product.stock > 0 && product.stock <= 5">

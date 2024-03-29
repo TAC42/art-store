@@ -34,7 +34,7 @@ export class LoginModalComponent implements OnInit {
   captchaResponse: string | null = null
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initializeForm()
   }
 

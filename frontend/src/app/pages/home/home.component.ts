@@ -20,12 +20,12 @@ export class HomeComponent implements OnInit {
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
-  loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
-  loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
-  loneImg1LowRes: string = ''
-  loneImg2LowRes: string = ''
+  public loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
+  public loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
+  public loneImg1LowRes: string = ''
+  public loneImg2LowRes: string = ''
 
-  artwareProducts: CarouselItem[] = [
+  public artwareProducts: CarouselItem[] = [
     {
       type: 'product',
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
       url: '/artware/details/elegant vase'
     },
   ]
-  shopProducts: CarouselItem[] = [
+  public shopProducts: CarouselItem[] = [
     {
       type: 'product',
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',
@@ -81,16 +81,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loneImg1LowRes = this.imgLoadService.getLowResImageUrl(this.loneImg1)
     this.loneImg2LowRes = this.imgLoadService.getLowResImageUrl(this.loneImg2)
-    this._preloadTeaserImages()
-  }
 
-  private _preloadTeaserImages(): void {
-    [this.loneImg1, this.loneImg2].forEach(imgUrl => {
-      const placeholderUrl = this.imgLoadService.getLowResImageUrl(imgUrl)
-      this.imgLoadService.preloadImage(placeholderUrl).subscribe({
-        error: (error) => console.log('Error preloading teaser image', error)
-      })
-    })
+    this.imgLoadService.preloadSingleImage(this.loneImg1)
+    this.imgLoadService.preloadSingleImage(this.loneImg2)
+
+    this.imgLoadService.preloadCarouselItems(this.artwareProducts)
+    this.imgLoadService.preloadCarouselItems(this.shopProducts)
   }
 
   onTeaserImageLoad(event: Event, lowResImage: HTMLElement): void {

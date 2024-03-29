@@ -26,10 +26,10 @@ export class ProductListComponent implements OnChanges {
 
   private _preloadProductImages(): void {
     this.products?.forEach(product => {
-      const placeholderUrl = this.imgLoadService.getLowResImageUrl(product.imgUrls[0])
-      this.imgLoadService.preloadImage(placeholderUrl).subscribe({
-        error: (error) => console.log('Error preloading image', error)
-      })
+      if (product.imgUrls && product.imgUrls.length > 0) {
+        const firstImageUrl = product.imgUrls[0]
+        this.imgLoadService.preloadSingleImage(firstImageUrl)
+      }
     })
   }
 }

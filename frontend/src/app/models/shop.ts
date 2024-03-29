@@ -27,6 +27,7 @@ export interface ShopFilter {
 export interface CarouselItem {
   type: 'image' | 'product'
   imgUrl: string
+  lowResImgUrl?: string
   url?: string
   name?: string
 }

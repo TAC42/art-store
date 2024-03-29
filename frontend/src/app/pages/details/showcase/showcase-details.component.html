@@ -14,10 +14,17 @@
 
             <section class="product-area flex column">
                 <div class="image-container flex column">
-                    <product-carousel *ngIf="product.imgUrls.length > 1" [carouselItems]="carouselItems"
-                        (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
-                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
-                        (click)="regularUtils.onImageClick($event, product.imgUrls[0])">
+                    <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
+                        <product-carousel [carouselItems]="carouselItems"
+                            (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
+                    </ng-container>
+
+                    <ng-template #singleImage>
+                        <img [src]="loneImgLowRes" [alt]="product.name" class="w-h-100" loading="lazy" #lowResImage>
+                        <img [src]="product.imgUrls[0]" [alt]="product.name" class="w-h-100"
+                            (load)="onImageLoad($event, lowResImage)"
+                            (click)="regularUtils.onImageClick($event, product.imgUrls[0])" style="display:none;">
+                    </ng-template>
                 </div>
 
                 <div class="details-area">
@@ -46,10 +53,17 @@
 
             <section class="product-area grid">
                 <div class="image-container flex column">
-                    <product-carousel *ngIf="product.imgUrls.length > 1" [carouselItems]="carouselItems"
-                        (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
-                    <img *ngIf="product.imgUrls.length === 1" [src]="product.imgUrls[0]" alt="Product Image"
-                        (click)="regularUtils.onImageClick($event, product.imgUrls[0])">
+                    <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
+                        <product-carousel [carouselItems]="carouselItems"
+                            (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
+                    </ng-container>
+
+                    <ng-template #singleImage>
+                        <img [src]="loneImgLowRes" [alt]="product.name" class="w-h-100" loading="lazy" #lowResImage>
+                        <img [src]="product.imgUrls[0]" [alt]="product.name" class="w-h-100"
+                            (load)="onImageLoad($event, lowResImage)"
+                            (click)="regularUtils.onImageClick($event, product.imgUrls[0])" style="display:none;">
+                    </ng-template>
                 </div>
 
                 <div class="details-area">

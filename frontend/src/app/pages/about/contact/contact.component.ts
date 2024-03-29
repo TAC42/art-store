@@ -6,6 +6,7 @@ import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
   selector: 'contact-page',
@@ -15,13 +16,13 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
 export class ContactComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.layout-row') layoutRowClass = true
 
-  private dTypeService = inject(DeviceTypeService)
-  private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
   private utilService = inject(UtilityService)
   private formUtilsService = inject(FormUtilsService)
+  private imgLoadService = inject(ImageLoadService)
+  private dTypeService = inject(DeviceTypeService)
+  private eBusService = inject(EventBusService)
 
   public regularUtils = this.utilService
   public formUtils = this.formUtilsService
@@ -42,13 +43,14 @@ export class ContactComponent implements OnInit {
   captchaResponse: string | null = null
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.deviceType$.subscribe(deviceType => {
       if (deviceType === 'mobile') this.recaptchaSize = 'compact'
       else this.recaptchaSize = 'normal'
     })
     this.initializeForm()
     this.carouselItems = this.utilService.convertToCarouselItem(this.contactImageUrls)
+    this.imgLoadService.preloadCarouselItems(this.carouselItems)
   }
 
   initializeForm(): void {
@@ -77,13 +79,11 @@ export class ContactComponent implements OnInit {
           this.contactForm.reset()
           this.isCaptchaResolved = false
           this.captchaResponse = null
-          showSuccessMsg('Email Sent!',
-            'Thank you for contacting!', this.eBusService)
+          showSuccessMsg('Email Sent!', 'Thank you for contacting!', this.eBusService)
         },
         error: (error) => {
           console.error(error)
-          showErrorMsg('Email Failed!',
-            'Please try again later...', this.eBusService)
+          showErrorMsg('Email Failed!', 'Please try again later...', this.eBusService)
         }
       })
     }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core'
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { User } from '../../models/user'
@@ -9,7 +9,7 @@ import { ModalService } from '../../services/modal.service'
   templateUrl: './product-filter.component.html'
 })
 
-export class ProductFilterComponent implements OnInit {
+export class ProductFilterComponent {
   @Input() set filterBy(value: ShopFilter) {
     this._filterBy = { ...value }
   }
@@ -35,14 +35,9 @@ export class ProductFilterComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe((value: string) => {
-        console.log('Value: ', value)
         this.onSetFilter.emit(value)
         this.hasValue = true
       })
-  }
-
-  ngOnInit(): void {
-    console.log('filterBy in shopfilter: ', this.filterBy)
   }
 
   onFilterChange(value: string): void {
