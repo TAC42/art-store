@@ -15,6 +15,7 @@ export interface Product {
 
 export interface MiniProduct {
   imgUrl: string
+  lowResImgUrl?: string
   name: string
   url: string
 }

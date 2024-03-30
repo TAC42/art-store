@@ -60,6 +60,10 @@ export class ProductDetailsComponent implements OnInit {
                 this.imgLoadService.preloadSingleImage(loneImgUrl)
             }
         })
+        // this.randomProducts$.subscribe(randomProducts => {
+        //     const imageUrls = randomProducts.map(product => product.imgUrls[0])
+        //     this.imgLoadService.preloadImagesArray(imageUrls)
+        // })
     }
 
     onImageLoad(event: Event, lowResImage: HTMLElement): void {
@@ -94,8 +98,7 @@ export class ProductDetailsComponent implements OnInit {
 
                 if (!isProductAlreadyInCart) {
                     const newUser: User = {
-                        ...updatedUser,
-                        cart: [...updatedUser.cart, newCartItem]
+                        ...updatedUser, cart: [...updatedUser.cart, newCartItem]
                     }
                     this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
                     showSuccessMsg('Product Added!',
