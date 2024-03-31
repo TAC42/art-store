@@ -1,22 +1,20 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, HostBinding, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../models/shop'
 import { DeviceTypeService } from '../../services/device-type.service'
-import { ImageLoadService } from '../../services/image-load.service'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
 
   private router = inject(Router)
   private dTypeService = inject(DeviceTypeService)
-  private imgLoadService = inject(ImageLoadService)
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
@@ -77,23 +75,6 @@ export class HomeComponent implements OnInit {
       url: '/shop/details/makara mug'
     },
   ]
-
-  ngOnInit(): void {
-    this.loneImg1LowRes = this.imgLoadService.getLowResImageUrl(this.loneImg1)
-    this.loneImg2LowRes = this.imgLoadService.getLowResImageUrl(this.loneImg2)
-
-    this.imgLoadService.preloadSingleImage(this.loneImg1)
-    this.imgLoadService.preloadSingleImage(this.loneImg2)
-
-    this.imgLoadService.preloadCarouselItems(this.artwareProducts)
-    this.imgLoadService.preloadCarouselItems(this.shopProducts)
-  }
-
-  onTeaserImageLoad(event: Event, lowResImage: HTMLElement): void {
-    const imgElement = event.target as HTMLImageElement
-    imgElement.style.display = 'block'
-    lowResImage.style.display = 'none'
-  }
 
   navigateTo(url: string) {
     this.router.navigate([url])

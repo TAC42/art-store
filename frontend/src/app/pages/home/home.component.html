@@ -2,8 +2,7 @@
   <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column">
     <section class="teasers grid">
       <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
-        <img class="w-h-100" [src]="loneImg1LowRes" alt="About" loading="lazy" #lowResImage1>
-        <img [src]="loneImg1" alt="About" (load)="onTeaserImageLoad($event, lowResImage1)" style="display:none;">
+        <image-container [imageUrl]="loneImg1" />
 
         <div class="text-area flex column">
           <p>BIOGRAPHY</p>
@@ -12,8 +11,7 @@
       </div>
 
       <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
-        <img class="w-h-100" [src]="loneImg2LowRes" alt="Artwork" loading="lazy" #lowResImage2>
-        <img [src]="loneImg2" alt="Artwork" (load)="onTeaserImageLoad($event, lowResImage2)" style="display:none;">
+        <image-container [imageUrl]="loneImg2" />
 
         <div class="text-area flex column">
           <p>ONE OF MY FINEST</p>
@@ -48,8 +46,7 @@
   <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view grid">
     <section class="teasers flex column">
       <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
-        <img class="w-h-100" [src]="loneImg2LowRes" alt="Artwork" loading="lazy" #lowResImage2>
-        <img [src]="loneImg2" alt="Artwork" (load)="onTeaserImageLoad($event, lowResImage2)" style="display:none;">
+        <image-container [imageUrl]="loneImg2" />
 
         <div class="text-area flex column">
           <p>ONE OF MY FINEST</p>
@@ -58,8 +55,7 @@
       </div>
 
       <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
-        <img class="w-h-100" [src]="loneImg1LowRes" alt="About" loading="lazy" #lowResImage1>
-        <img [src]="loneImg1" alt="About" (load)="onTeaserImageLoad($event, lowResImage1)" style="display:none;">
+        <image-container [imageUrl]="loneImg1" />
 
         <div class="text-area flex column">
           <p>BIOGRAPHY</p>

@@ -29,26 +29,11 @@ export class ImageLoadService {
     return imageUrl
   }
 
-  preloadCarouselItems(items: CarouselItem[]): void {
-    items.forEach(item => {
-      item.lowResImgUrl = this.getLowResImageUrl(item.imgUrl)
-      this.preloadImage(item.lowResImgUrl).subscribe({
-        error: (error) => console.error('Error preloading low-res', error),
-      })
-      this.preloadImage(item.imgUrl).subscribe({
-        error: (error) => console.error('Error preloading high-res', error),
-      })
-    })
-  }
-
   preloadImagesArray(imageUrls: string[]): void {
     imageUrls.forEach(imageUrl => {
       const lowResUrl = this.getLowResImageUrl(imageUrl)
       this.preloadImage(lowResUrl).subscribe({
         error: (error) => console.error('Error preloading low-res', error),
-      })
-      this.preloadImage(imageUrl).subscribe({
-        error: (error) => console.error('Error preloading high-res', error),
       })
     })
   }
@@ -57,9 +42,6 @@ export class ImageLoadService {
     const lowResUrl = this.getLowResImageUrl(imageUrl)
     this.preloadImage(lowResUrl).subscribe({
       error: (error) => console.error('Error preloading low-res', error),
-    })
-    this.preloadImage(imageUrl).subscribe({
-      error: (error) => console.error('Error preloading high-res', error),
     })
   }
 }

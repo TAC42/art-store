@@ -6,7 +6,6 @@ import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
-import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
   selector: 'contact-page',
@@ -20,7 +19,6 @@ export class ContactComponent implements OnInit {
   private fBuilder = inject(FormBuilder)
   private utilService = inject(UtilityService)
   private formUtilsService = inject(FormUtilsService)
-  private imgLoadService = inject(ImageLoadService)
   private dTypeService = inject(DeviceTypeService)
   private eBusService = inject(EventBusService)
 
@@ -50,7 +48,6 @@ export class ContactComponent implements OnInit {
     })
     this.initializeForm()
     this.carouselItems = this.utilService.convertToCarouselItem(this.contactImageUrls)
-    this.imgLoadService.preloadCarouselItems(this.carouselItems)
   }
 
   initializeForm(): void {

@@ -1,0 +1,3 @@
+<img [src]="lowResImgUrl" [alt]="alt" class="w-h-100" loading="lazy" #lowResImage>
+<img [src]="imageUrl" [alt]="alt" class="w-h-100" (load)="onImageLoad($event, lowResImage)" style="display:none;"
+    (click)="onImageClick($event, imageUrl)">

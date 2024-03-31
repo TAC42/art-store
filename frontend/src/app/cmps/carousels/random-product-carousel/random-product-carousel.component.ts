@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core'
+import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core'
 import { Observable, map } from 'rxjs'
 import { MiniProduct, Product } from '../../../models/shop'
 import { ImageLoadService } from '../../../services/image-load.service'
@@ -8,7 +8,7 @@ import { ImageLoadService } from '../../../services/image-load.service'
   templateUrl: './random-product-carousel.component.html'
 })
 
-export class RandomProductCarouselComponent {
+export class RandomProductCarouselComponent implements OnInit {
   @Input() randomProducts$!: Observable<Product[]>
   @ViewChild('carouselRef', { static: false }) carousel!: ElementRef<HTMLDivElement>
 
@@ -23,8 +23,16 @@ export class RandomProductCarouselComponent {
         imgUrl: product.imgUrls[0],
         name: product.name,
         url: `/shop/details/${product.name}`
-      })))
+      }))),
     )
+    this.preloadCarouselItems()
+  }
+
+  preloadCarouselItems(): void {
+    this.CarouselItems$.subscribe(carouselItems => {
+      const imgUrls = carouselItems.map(item => item.imgUrl)
+      this.imgLoadService.preloadImagesArray(imgUrls)
+    })
   }
 
   onImageLoad(event: Event, lowResImageElement: HTMLElement): void {

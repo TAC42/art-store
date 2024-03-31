@@ -59,7 +59,8 @@ import { CartComponent } from './cmps/modals/cart/cart.component'
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component';
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component'
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { ImageContainerComponent } from './cmps/image-container/image-container.component'
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
     UserEditComponent,
     ResetPasswordComponent,
     PrivacyPolicyComponent,
+    ImageContainerComponent,
   ],
   imports: [
     BrowserModule,

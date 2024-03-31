@@ -81,7 +81,8 @@ async function _getRandomProducts(req: Request<{ type: string, excludeProductId:
 
         loggerService.info(`Fetching products from ${type}, excluding id: ${excludeProductId}`)
         const products = await productService.getRandomProducts(type, excludeProductId)
-        loggerService.info(`Found relevent products: ${JSON.stringify(products)}`)
+        loggerService.info(`Found relevant products: ${JSON.stringify(
+            products.map(product => product._id))}`)
 
         res.json(products)
     } catch (err) {

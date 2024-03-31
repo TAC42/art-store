@@ -1,19 +1,18 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { Observable, filter, map, take } from 'rxjs'
+import { Observable, map, take } from 'rxjs'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CarouselItem, Cart, Product } from '../../../models/shop'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { LOAD_RANDOM_PRODUCTS } from '../../../store/shop.actions'
-import { selectProductByName, selectRandomProducts } from '../../../store/shop.selectors'
+import { selectRandomProducts } from '../../../store/shop.selectors'
 import { User } from '../../../models/user'
-import { selectLoggedinUser, selectUser } from '../../../store/user.selectors'
+import { selectUser } from '../../../store/user.selectors'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
 import { UtilityService } from '../../../services/utility.service'
-import { ImageLoadService } from '../../../services/image-load.service'
 
 @Component({
     selector: 'product-details',
@@ -31,11 +30,9 @@ export class ProductDetailsComponent implements OnInit {
     private modService = inject(ModalService)
     private eBusService = inject(EventBusService)
     private utilService = inject(UtilityService)
-    private imgLoadService = inject(ImageLoadService)
 
     public regularUtils = this.utilService
     public carouselItems: CarouselItem[] = []
-    public loneImgLowRes: string = ''
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     user$: Observable<User> = this.store.select(selectUser)
@@ -51,25 +48,9 @@ export class ProductDetailsComponent implements OnInit {
                     excludeProductId: product._id
                 }))
             }
-            if (product.imgUrls.length > 1) {
-                this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
-                this.imgLoadService.preloadCarouselItems(this.carouselItems)
-            } else if (product.imgUrls.length === 1) {
-                const loneImgUrl = product.imgUrls[0]
-                this.loneImgLowRes = this.imgLoadService.getLowResImageUrl(loneImgUrl)
-                this.imgLoadService.preloadSingleImage(loneImgUrl)
-            }
+            if (product.imgUrls.length > 1) this.carouselItems =
+                this.utilService.convertToCarouselItem(product.imgUrls)
         })
-        // this.randomProducts$.subscribe(randomProducts => {
-        //     const imageUrls = randomProducts.map(product => product.imgUrls[0])
-        //     this.imgLoadService.preloadImagesArray(imageUrls)
-        // })
-    }
-
-    onImageLoad(event: Event, lowResImage: HTMLElement): void {
-        const imgElement = event.target as HTMLImageElement
-        imgElement.style.display = 'block'
-        lowResImage.style.display = 'none'
     }
 
     onOpenCart(event: Event): void {

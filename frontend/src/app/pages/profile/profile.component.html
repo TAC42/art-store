@@ -2,25 +2,19 @@
   <section *ngIf="((deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile')"
     class="mobile-view layout-row flex column">
     <div class="background">
-      <img src="{{ backgroundImage }}" alt="background-img" />
+      <image-container [imageUrl]="backgroundImage" />
     </div>
 
     <article class="personal-info flex column" *ngIf="user$ | async as user">
       <article class="user-img">
         <img src="{{ user.imgUrl[0] }}" alt="{{ user.fullName }}" />
       </article>
-      <span class="full-name">
-        {{ user.fullName }}
-      </span>
-      <span class="user-name">
-        &#64;{{ user.username }}
-      </span>
+      <span class="full-name"> {{ user.fullName }} </span>
+      <span class="user-name"> &#64;{{ user.username }} </span>
 
       <div class="member-since flex">
         <svg-render svgName="personIcon" />
-        <span>
-          Member since {{ user.createdAt | date : "MMM yyyy" }}
-        </span>
+        <span> Member since {{ user.createdAt | date : "MMM yyyy" }} </span>
       </div>
 
       <section class="edit-profile flex">
@@ -36,28 +30,20 @@
           (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title class="heading flex">
-              <span class="count">
-                {{ i + 1 }}
-              </span>
-              <span class="title">
-                Order #{{ order.createdAt }}
-              </span>
+              <span class="count"> {{ i + 1 }} </span>
+              <span class="title"> Order #{{ order.createdAt }} </span>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <section class="order-info grid">
             <article class="purchased flex row">
               <span>Purchased:</span>
-              <span>
-                {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}
-              </span>
+              <span> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }} </span>
             </article>
 
             <article class="payment flex row">
               <span>Payment:</span>
-              <span style="text-transform: capitalize;">
-                {{ order.payment }}
-              </span>
+              <span style="text-transform: capitalize;"> {{ order.payment }} </span>
             </article>
 
             <article class="summary flex row">
@@ -120,23 +106,17 @@
 
   <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
     class="desktop-view flex column">
-    <img class="background w-h-100" src="{{ backgroundImage }}" alt="background-img" />
+    <image-container [imageUrl]="backgroundImage" />
 
     <article class="personal-info flex column" *ngIf="user$ | async as user">
       <img src="{{ user.imgUrl[0] }}" alt="{{ user.fullName }}" />
 
-      <span class="full-name">
-        {{ user.fullName }}
-      </span>
-      <span class="user-name">
-        &#64;{{ user.username }}
-      </span>
+      <span class="full-name"> {{ user.fullName }} </span>
+      <span class="user-name"> &#64;{{ user.username }} </span>
 
       <div class="member-since flex">
         <svg-render svgName="personIcon" />
-        <span>
-          Member since {{ user.createdAt | date : "MMM yyyy" }}
-        </span>
+        <span> Member since {{ user.createdAt | date : "MMM yyyy" }} </span>
       </div>
 
       <section class="edit-profile flex">
@@ -153,28 +133,20 @@
           (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title class="heading flex">
-              <span class="count">
-                {{ i + 1 }}
-              </span>
-              <span class="title">
-                Order #{{ order.createdAt }}
-              </span>
+              <span class="count"> {{ i + 1 }} </span>
+              <span class="title"> Order #{{ order.createdAt }} </span>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <section class="order-info grid">
             <article class="purchased flex row">
               <span>Purchased:</span>
-              <span>
-                {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}
-              </span>
+              <span> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }} </span>
             </article>
 
             <article class="payment flex row">
               <span>Payment:</span>
-              <span style="text-transform: capitalize;">
-                {{ order.payment }}
-              </span>
+              <span style="text-transform: capitalize;"> {{ order.payment }} </span>
             </article>
 
             <article class="summary flex row">
