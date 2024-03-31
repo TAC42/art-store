@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy using SSH
-        uses: ./.github/workflows/action.yml
+      - name: Deploy using ssh
+        uses: TAC42/art-store/.github/workflows@main
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
