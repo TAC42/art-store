@@ -26,4 +26,5 @@ jobs:
           cd /usr/local/lsws/Example/html/art-store
           git pull origin main
           git status
+          cd backend
           npm install --only=production
