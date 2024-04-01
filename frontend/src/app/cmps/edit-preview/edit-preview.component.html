@@ -2,11 +2,17 @@
     <span class="title">your results</span>
     <div *ngIf="type === 'shop'" class="shop-type flex column">
         <section class="product-area flex column">
-            <div class="image-container flex column">
-                <product-carousel *ngIf="imgUrls.length > 1" [carouselItems]="carouselItems"
-                    (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
-                <img *ngIf="imgUrls.length === 1" [src]="imgUrls[0]" alt="Product Image"
-                    (click)="regularUtils.onImageClick($event, imgUrls[0])">
+            <div class="media-container flex column">
+                <ng-container *ngIf="imgUrls.length > 1; else singleImage">
+                    <product-carousel [carouselItems]="carouselItems"
+                        (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
+                </ng-container>
+
+                <ng-template #singleImage>
+                    <image-container [imageUrl]="imgUrls[0]"
+                        (imageClick)="regularUtils.onImageClick($event.event, imgUrls[0])" />
+                </ng-template>
+
                 <span class="price-tag flex">${{ price }}.00</span>
             </div>
 
@@ -40,11 +46,16 @@
 
     <div *ngIf="type !== 'shop'" class="showcase-type flex column">
         <section class="product-area flex column">
-            <div class="image-container flex column">
-                <product-carousel *ngIf="imgUrls.length > 1" [carouselItems]="carouselItems"
-                    (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
-                <img *ngIf="imgUrls.length === 1" [src]="imgUrls[0]" alt="Product Image"
-                    (click)="regularUtils.onImageClick($event, imgUrls[0])">
+            <div class="media-container flex column">
+                <ng-container *ngIf="imgUrls.length > 1; else singleImage">
+                    <product-carousel [carouselItems]="carouselItems"
+                        (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
+                </ng-container>
+
+                <ng-template #singleImage>
+                    <image-container [imageUrl]="imgUrls[0]"
+                        (imageClick)="regularUtils.onImageClick($event.event, imgUrls[0])" />
+                </ng-template>
             </div>
 
             <div class="details-area">

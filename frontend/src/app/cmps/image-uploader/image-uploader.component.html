@@ -2,7 +2,7 @@
     <div class="file-upload-container flex column">
         <label for="{{inputId}}" class="flex column">
             <span> {{ getUploadLabel() }} </span>
-            <img *ngIf="imgUrl" [src]="imgUrl" loading="lazy" />
+            <image-container class="w-h-100" [imageUrl]="imgUrl" />
         </label>
         <input type="file" (change)="uploadImg($event)" accept="image/*" [id]="inputId" style="display: none" />
     </div>

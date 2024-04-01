@@ -7,7 +7,7 @@
 
     <article class="personal-info flex column" *ngIf="user$ | async as user">
       <article class="user-img">
-        <img src="{{ user.imgUrl[0] }}" alt="{{ user.fullName }}" />
+        <image-container [imageUrl]="user.imgUrl[0]" />
       </article>
       <span class="full-name"> {{ user.fullName }} </span>
       <span class="user-name"> &#64;{{ user.username }} </span>
@@ -106,10 +106,12 @@
 
   <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
     class="desktop-view flex column">
-    <image-container [imageUrl]="backgroundImage" />
+    <div class="background">
+      <image-container [imageUrl]="backgroundImage" />
+    </div>
 
     <article class="personal-info flex column" *ngIf="user$ | async as user">
-      <img src="{{ user.imgUrl[0] }}" alt="{{ user.fullName }}" />
+      <image-container [imageUrl]="user.imgUrl[0]" />
 
       <span class="full-name"> {{ user.fullName }} </span>
       <span class="user-name"> &#64;{{ user.username }} </span>

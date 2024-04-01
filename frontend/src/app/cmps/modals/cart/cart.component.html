@@ -4,24 +4,21 @@
       <h1 class="title">Your Cart</h1>
       <svg-render class="exit" svgName="exit" (click)="closeCart()" />
     </div>
+
     <ng-container *ngIf="cart$ | async as cart">
       <ng-container *ngIf="cart.length; else sorry">
         <main class="cart-main grid">
           <section class="cart-list grid">
             <article class="cart-item grid" *ngFor="let cartItem of cart">
-              <img [src]="cartItem.imgUrls[0]" [alt]="cartItem.name" />
+              <image-container [imageUrl]="cartItem.imgUrls[0]" />
+
               <div class="cart-item-body grid">
-                <span class="name">
-                  {{ cartItem.name }}
-                </span>
-                <span class="price">
-                  ${{ cartItem.price }}
-                </span>
+                <span class="name"> {{ cartItem.name }} </span>
+                <span class="price"> ${{ cartItem.price }} </span>
+
                 <span class="quantity flex row">
                   <svg-render (click)="changeAmount(cartItem, '-'); preventCartClosure($event)" svgName="minusIcon" />
-                  <span class="amount">
-                    {{ cartItem.amount }}
-                  </span>
+                  <span class="amount"> {{ cartItem.amount }} </span>
                   <svg-render (click)="changeAmount(cartItem, '+'); preventCartClosure($event)" svgName="addIcon"
                     [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }" />
                 </span>
@@ -33,9 +30,7 @@
             <ng-container *ngIf="orderSummary$ | async as orderSummary">
               <div class="subtotal flex">
                 <span>Subtotal</span>
-                <span>
-                  {{ orderSummary.total | currency : "USD" : "symbol" }}
-                </span>
+                <span> {{ orderSummary.total | currency : "USD" : "symbol" }} </span>
               </div>
               <button class="check-out-btn flex" (click)="onPayment()">
                 <svg-render svgName="shoppingCart" />
