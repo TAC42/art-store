@@ -16,7 +16,8 @@
                         customValidator [minLength]=3 [maxLength]=24 autofocus>
                 </div>
 
-                <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(loginForm, 'password')">
+                <div class="input-area flex column" style="position: relative;"
+                    [class.error]="formUtils.isFieldInvalid(loginForm, 'password')">
                     <label for="password" class="flex row">
                         <div class="label-info flex row">
                             <svg-render svgName="lockIcon" />
@@ -26,8 +27,14 @@
                             {{ formUtils.getErrorMessage(loginForm, 'password') }}
                         </span>
                     </label>
-                    <input id="password" type="password" formControlName="password" placeholder="Your password..."
-                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars">
+                    <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                        placeholder="Your password..." customValidator [minLength]=8 [maxLength]=32
+                        [allowedSpecialChars]="allowedSpecialChars" [passwordValidation]="true">
+
+                    <button type="button" (click)="togglePasswordShowing($event)" class="password-toggle">
+                        <svg-render *ngIf="showPassword" svgName="showIcon" />
+                        <svg-render *ngIf="!showPassword" svgName="hideIcon" />
+                    </button>
                 </div>
 
                 <a class="reset-pass" [routerLink]="['/reset']" title="Reset password?">
@@ -94,7 +101,8 @@
                         [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
                 </div>
 
-                <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'password')">
+                <div class="input-area flex column" style="position: relative;"
+                    [class.error]="formUtils.isFieldInvalid(signupForm, 'password')">
                     <label for="password" class="flex row">
                         <div class="label-info flex row">
                             <svg-render svgName="lockIcon" />
@@ -104,8 +112,14 @@
                             {{ formUtils.getErrorMessage(signupForm, 'password') }}
                         </span>
                     </label>
-                    <input id="password" type="password" formControlName="password" placeholder="Your password..."
-                        customValidator [minLength]=3 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars">
+                    <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                        placeholder="Your password..." customValidator [minLength]=8 [maxLength]=32
+                        [allowedSpecialChars]="allowedSpecialChars" [passwordValidation]="true">
+
+                    <button class="password-toggle" type="button" (click)="togglePasswordShowing($event)">
+                        <svg-render *ngIf="showPassword" svgName="showIcon" />
+                        <svg-render *ngIf="!showPassword" svgName="hideIcon" />
+                    </button>
                 </div>
 
                 <p>By signing up, you agree to Ori-Carlin website's

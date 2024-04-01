@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { ValidationErrors } from '@angular/forms'
 import { Observable, throwError, catchError, tap, of, map } from 'rxjs'
-import { User, UserCredentials, UserSignup } from '../models/user'
+import { User, UserLogin, UserSignup } from '../models/user'
 import { HttpService } from './http.service'
 
 const SESSION_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -51,7 +51,7 @@ export class UserService {
     } else return this.httpService.post<User>(`${BASE_URL}add`, user)
   }
 
-  login(userCred: UserCredentials): Observable<User> {
+  login(userCred: UserLogin): Observable<User> {
     return this.httpService.post<User>('auth/login', userCred).pipe(
       tap(user => this.setLoggedinUser(user)),
       catchError(error => {

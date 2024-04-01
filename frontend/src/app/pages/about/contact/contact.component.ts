@@ -67,8 +67,7 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     if (this.contactForm.valid && this.isCaptchaResolved) {
       const formDataWithCaptcha = {
-        ...this.contactForm.value,
-        recaptchaToken: this.captchaResponse
+        ...this.contactForm.value, recaptchaToken: this.captchaResponse
       }
       this.utilService.sendContactUsMail(formDataWithCaptcha).subscribe({
         next: () => {

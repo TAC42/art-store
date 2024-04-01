@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ValidationEr
 import { Observable, debounceTime, distinctUntilChanged, first, of, switchMap } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
-import { UserCredentials, UserSignup } from '../../../models/user'
+import { UserLogin, UserSignup } from '../../../models/user'
 import { LOGIN, SIGNUP } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { UtilityService } from '../../../services/utility.service'
@@ -26,7 +26,8 @@ export class LoginModalComponent implements OnInit {
   public formUtils = this.formUtilsService
   public loginForm!: FormGroup
   public signupForm!: FormGroup
-  public isLoginMode = true
+  public isLoginMode: boolean = true
+  public showPassword: boolean = false
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
@@ -78,6 +79,11 @@ export class LoginModalComponent implements OnInit {
     }
   }
 
+  togglePasswordShowing(event: Event): void {
+    event.stopPropagation()
+    this.showPassword = !this.showPassword
+  }
+
   resolved(captchaResponse: string | null) {
     this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
@@ -92,10 +98,10 @@ export class LoginModalComponent implements OnInit {
   onSubmit() {
     if (this.isLoginMode) {
       if (this.loginForm.valid && this.isCaptchaResolved) {
-        const credentials: UserCredentials = {
-          username: this.loginForm.value.username,
-          password: this.loginForm.value.password,
-          recaptchaToken: this.captchaResponse
+        const { username, password } = this.loginForm.value
+
+        const credentials: UserLogin = {
+          username, password, recaptchaToken: this.captchaResponse
         }
         this.store.dispatch(LOGIN({ credentials }))
         // reset of form & recaptcha token
@@ -112,12 +118,8 @@ export class LoginModalComponent implements OnInit {
         let imgUrl = [`https://placehold.co/${100}/${randColor}/ffffff?text=${firstName[0].toUpperCase()}`]
 
         const credentials: UserSignup = {
-          fullName: `${firstName} ${lastName}`,
-          username,
-          email,
-          imgUrl,
-          password,
-          recaptchaToken: this.captchaResponse
+          fullName: `${firstName} ${lastName}`, username, email,
+          imgUrl, password, recaptchaToken: this.captchaResponse
         }
         this.store.dispatch(SIGNUP({ credentials }))
         this.closeLoginModal()

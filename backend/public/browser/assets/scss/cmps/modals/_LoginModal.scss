@@ -16,57 +16,55 @@
             margin-block-end: 1em;
             gap: 1em;
 
-            re-captcha {
-                width: fit-content;
-            }
-
             button {
-                width: fit-content;
-                margin: 0 auto;
-                padding: 0.5em 0.75em;
-                transition: all 0.5s ease-in-out;
-                background: $prmclr1;
-                color: $prmclr2;
-                border-radius: 0.5em;
-                font-size: 18px;
-                overflow: hidden;
-                position: relative;
-
-                span {
+                &:not(.password-toggle) {
+                    width: fit-content;
+                    margin: 0 auto;
+                    padding: 0.5em 0.75em;
                     transition: all 0.5s ease-in-out;
-                    opacity: 1;
-                }
-
-                &.disabled {
-                    background: $scdclr1;
-                    pointer-events: none;
+                    background: $prmclr1;
+                    color: $prmclr2;
+                    border-radius: 0.5em;
+                    font-size: 18px;
+                    overflow: hidden;
+                    position: relative;
 
                     span {
-                        opacity: 0.5;
+                        transition: all 0.5s ease-in-out;
+                        opacity: 1;
                     }
-                }
 
-                &:hover {
-                    background: $mnrclr1;
-                    color: $prmclr3;
+                    &.disabled {
+                        background: $scdclr1;
+                        pointer-events: none;
+
+                        span {
+                            opacity: 0.5;
+                        }
+                    }
+
+                    &:hover {
+                        background: $mnrclr1;
+                        color: $prmclr3;
+
+                        &::before {
+                            animation: snakeAround 4s linear infinite;
+                        }
+                    }
 
                     &::before {
-                        animation: snakeAround 4s linear infinite;
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 90%;
+                        height: 85%;
+                        border: 3px solid $mnrclr3;
+                        border-color: transparent;
+                        border-radius: inherit;
+                        transition: all 0.5s ease-in-out;
+                        z-index: 0;
                     }
-                }
-
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 90%;
-                    height: 85%;
-                    border: 3px solid $mnrclr3;
-                    border-color: transparent;
-                    border-radius: inherit;
-                    transition: all 0.5s ease-in-out;
-                    z-index: 0;
                 }
             }
 
@@ -128,6 +126,14 @@
                     textarea {
                         border: 1px solid $mnrclr2;
                     }
+                }
+
+                .password-toggle {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 32px;
+                    height: 32px;
                 }
             }
 

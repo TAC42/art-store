@@ -12,6 +12,7 @@ export class CustomValidatorDirective implements Validator {
   @Input() allowedSpecialChars: string = ''
   @Input() allowLetters: boolean = true
   @Input() allowNumbers: boolean = true
+  @Input() passwordValidation: boolean = false
 
   validate(control: AbstractControl): ValidationErrors | null {
     const value = control.value as string
@@ -19,8 +20,8 @@ export class CustomValidatorDirective implements Validator {
     if (value && value.length < this.minLength) {
       return {
         'minLength': {
-          'requiredLength':
-            this.minLength, 'actualLength': value.length
+          'requiredLength': this.minLength,
+          'actualLength': value.length
         }
       }
     } // length min limit check
@@ -28,11 +29,24 @@ export class CustomValidatorDirective implements Validator {
     if (value && value.length > this.maxLength) {
       return {
         'maxLength': {
-          'requiredLength':
-            this.maxLength, 'actualLength': value.length
+          'requiredLength': this.maxLength,
+          'actualLength': value.length
         }
       }
     } // length max limit check
+
+    if (value && this.passwordValidation) {
+      const errors: ValidationErrors = {}
+
+      if (!/[A-Z]/.test(value)) errors['uppercaseRequired'] = true
+      if (!/[a-z]/.test(value)) errors['lowercaseRequired'] = true
+      if (!/\d/.test(value)) errors['numberRequired'] = true
+      if (!new RegExp('[' + this.escapeSpecialChars(this.allowedSpecialChars) + ']').test(value)) {
+        errors['specialCharRequired'] = true
+      }
+
+      if (Object.keys(errors).length > 0) return errors
+    } // check if any requirement of password characters is missing
 
     // Build the regex pattern based on the input properties
     let pattern = '^[' + this.escapeSpecialChars(this.allowedSpecialChars)
