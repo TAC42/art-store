@@ -69,7 +69,7 @@ async function _getRandomProducts(req, res) {
         const excludeProductId = req.query.excludeProductId ? new ObjectId(req.query.excludeProductId) : undefined;
         loggerService.info(`Fetching products from ${type}, excluding id: ${excludeProductId}`);
         const products = await productService.getRandomProducts(type, excludeProductId);
-        loggerService.info(`Found relevent products: ${JSON.stringify(products)}`);
+        loggerService.info(`Found relevant products: ${JSON.stringify(products.map(product => product._id))}`);
         res.json(products);
     }
     catch (err) {
