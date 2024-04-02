@@ -158,11 +158,11 @@
         }
 
         .switch {
-            background: none;
-            color: $scdclr2;
-            transition: all 0.3s ease-in-out;
-            font-size: 15px;
+            text-align: center;
             font-family: 'nh-bold';
+            color: $scdclr2;
+            font-size: 15px;
+            transition: all 0.3s ease-in-out;
 
             &:hover {
                 color: $prmclr1;

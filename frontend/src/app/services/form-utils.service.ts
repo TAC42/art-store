@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms'
+import { Observable, debounceTime, distinctUntilChanged, first, map, of, switchMap } from 'rxjs'
 import { UtilityService } from './utility.service'
 
 @Injectable({
@@ -21,35 +22,39 @@ export class FormUtilsService {
     const field = form.get(fieldName)
     if (!field || !field.errors) return ''
 
-    if (field.errors['required']) return `${this.toReadableFieldName(fieldName)} is required`
+    if (field.errors['required']) return `${this.toReadableFieldName(fieldName)} is required!`
 
-    if (field.errors['email']) return 'Invalid email format'
+    if (field.errors['email']) return 'Invalid email format!'
 
-    if (field.errors['minLength']) return `${field.errors['minLength'].requiredLength} min characters required`
+    if (field.errors['minLength']) return `${field.errors['minLength'].requiredLength} min characters required!`
 
-    if (field.errors['maxLength']) return `Maximum length reached`
+    if (field.errors['maxLength']) return `Maximum length reached!`
 
-    if (field.errors['noNumbersAllowed']) return 'Numbers are not allowed'
+    if (field.errors['noNumbersAllowed']) return 'Numbers are not allowed!'
 
-    if (field.errors['noLettersAllowed']) return 'Letters are not allowed'
+    if (field.errors['noLettersAllowed']) return 'Letters are not allowed!'
 
-    if (field.errors['invalidCharacters']) return `Invalid characters used`
+    if (field.errors['invalidCharacters']) return `Invalid characters used!`
 
-    if (field.errors['nameTaken']) return 'This name is already in use elsewhere'
+    if (field.errors['nameTaken']) return 'Product Name already in use!'
 
-    if (field.errors['usernameTaken']) return 'This username is already taken'
+    if (field.errors['usernameTaken']) return 'Username already in use!'
 
-    if (field.errors['emailTaken']) return 'This email is already taken'
+    if (field.errors['emailTaken']) return 'Email already in use!'
 
-    if (field.errors['codeMismatch']) return 'The code does not match'
+    if (field.errors['codeMismatch']) return 'The code does not match!'
 
-    if (field.errors['uppercaseRequired']) return 'Missing an uppercase letter'
+    if (field.errors['uppercaseRequired']) return 'Missing an uppercase letter!'
 
-    if (field.errors['lowercaseRequired']) return 'Missing an lowercase letter'
+    if (field.errors['lowercaseRequired']) return 'Missing an lowercase letter!'
 
-    if (field.errors['numberRequired']) return 'Missing a number'
+    if (field.errors['numberRequired']) return 'Missing a number!'
 
-    if (field.errors['specialCharRequired']) return 'Missing a special character'
+    if (field.errors['specialCharRequired']) return 'Missing a special character!'
+
+    if (field.errors['emailMismatch']) return `Emails don't match!`
+
+    if (field.errors['passwordMismatch']) return `Passwords don't match!`
 
     return 'Unknown error' // Fallback error message
   }
@@ -60,6 +65,49 @@ export class FormUtilsService {
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     })
     return words.join(' ')
+  }
+
+  // confirm if certain input is available for use in a form
+  // validateField(validateFn: (value: string) => Observable<any>): AsyncValidatorFn {
+  //   return (control: AbstractControl): Observable<ValidationErrors | null> => {
+  //     if (!control.valueChanges) return of(null)
+
+  //     return control.valueChanges.pipe(
+  //       debounceTime(500),
+  //       distinctUntilChanged(),
+  //       switchMap(value => validateFn(value)),
+  //       first()
+  //     )
+  //   }
+  // }
+  validateField(validateFn: (value: string) => Observable<any>, initialValue?: string): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (!control.valueChanges || control.value === initialValue) {
+        return of(null)
+      }
+
+      return control.valueChanges.pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(value => validateFn(value)),
+        first()
+      )
+    }
+  }
+
+  confirmField(matchingControlName: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.parent) return null
+
+      const matchingControl = control.parent.get(matchingControlName)
+      const confirmControl = control
+
+      if (!matchingControl || !confirmControl) return null
+      if (matchingControl.value !== confirmControl.value) {
+        return { [`${matchingControlName}Mismatch`]: true }
+      }
+      return null
+    }
   }
 
   // Check if form has changed before bothering to allow saving changes

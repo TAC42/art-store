@@ -41,7 +41,10 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   initializeForm(): void {
     this.productEditForm = this.fBuilder.group({
-      name: [this.product.name, [Validators.required], this.productNameValidator()],
+      name: [this.product.name, [Validators.required],
+      [this.formUtilsService.validateField(value =>
+        this.sDbService.validateProductName(value),
+        this.initialFormData?.name)]],
       price: [this.product.price, [Validators.required]],
       description: [this.product.description, [Validators.required]],
       dimensions: [this.product.dimensions, [Validators.required]],
@@ -62,18 +65,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
         this.initialFormData = product
         this.initializeForm()
       })
-  }
-
-  productNameValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.valueChanges ||
-        control.value === this.initialFormData?.name) return of(null)
-
-      return control.valueChanges.pipe(
-        debounceTime(500), distinctUntilChanged(), switchMap(value =>
-          this.sDbService.validateProductName(value)), first()
-      )
-    }
   }
 
   get imgUrlsControls(): AbstractControl[] {

@@ -481,6 +481,34 @@ showcase-details {
     }
 }
 
+signup {
+    .page-contents {
+        @media(max-width: 600px) {
+            padding: 1em;
+
+            form {
+                gap: 1.5em;
+
+                .combined-inputs {
+                    grid-template-columns: 1fr;
+                }
+            }
+        }
+
+        @media(min-width: 601px) {
+            padding: 1em 2em;
+
+            form {
+                gap: 2em;
+
+                .combined-inputs {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
+    }
+}
+
 app-footer {
     .footer-contents {
 

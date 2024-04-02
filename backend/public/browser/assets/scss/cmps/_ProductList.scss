@@ -25,9 +25,15 @@ product-list {
       @media(min-width: 1200px) {
         grid-template-columns: repeat(4, 1fr);
       }
+
+      .no-results {
+        grid-column: 1 / -1;
+      }
     }
 
     &.masonry-layout {
+      position: relative;
+
       product-preview {
         margin-bottom: 1.5em;
         break-inside: avoid-column;
@@ -48,12 +54,20 @@ product-list {
       @media(min-width: 1200px) {
         column-count: 4;
       }
+
+      .no-results {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin-block-start: 1em;
+      }
     }
 
     .no-results {
-      gap: 1em;
       text-align: center;
       align-items: center;
+      gap: 1em;
 
       svg-render {
         width: 200px;

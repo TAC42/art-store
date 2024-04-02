@@ -24,6 +24,7 @@ import { HomeComponent } from './pages/home/home.component'
 import { AboutComponent } from './pages/about/about.component'
 import { ContactComponent } from './pages/about/contact/contact.component'
 import { IntroductionComponent } from './pages/about/introduction/introduction.component'
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component'
 import { ShopComponent } from './pages/shop/shop.component'
 import { ShopIndexComponent } from './pages/shop/index/shop-index.component'
 import { SculptureIndexComponent } from './pages/sculpture/index/sculpture-index.component'
@@ -37,6 +38,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
+import { SignupComponent } from './pages/signup/signup.component'
 
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { HeaderComponent } from './cmps/header/header.component'
@@ -58,8 +60,7 @@ import { ConfirmModalComponent } from './cmps/modals/confirm-modal/confirm-modal
 import { CartComponent } from './cmps/modals/cart/cart.component'
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
-import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component';
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
 import { ImageContainerComponent } from './cmps/image-container/image-container.component'
 
 @NgModule({
@@ -108,6 +109,7 @@ import { ImageContainerComponent } from './cmps/image-container/image-container.
     ResetPasswordComponent,
     PrivacyPolicyComponent,
     ImageContainerComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
