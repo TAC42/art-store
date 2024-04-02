@@ -68,24 +68,11 @@ export class FormUtilsService {
   }
 
   // confirm if certain input is available for use in a form
-  // validateField(validateFn: (value: string) => Observable<any>): AsyncValidatorFn {
-  //   return (control: AbstractControl): Observable<ValidationErrors | null> => {
-  //     if (!control.valueChanges) return of(null)
-
-  //     return control.valueChanges.pipe(
-  //       debounceTime(500),
-  //       distinctUntilChanged(),
-  //       switchMap(value => validateFn(value)),
-  //       first()
-  //     )
-  //   }
-  // }
   validateField(validateFn: (value: string) => Observable<any>, initialValue?: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (!control.valueChanges || control.value === initialValue) {
         return of(null)
       }
-
       return control.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
