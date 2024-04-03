@@ -1,8 +1,9 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { EMPTY, Observable, catchError, combineLatest, filter, mergeMap, of, take, tap } from 'rxjs'
+import { EMPTY, Observable, catchError, combineLatest, filter, from, mergeMap, of, take, tap } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
+import { loadScript } from '@paypal/paypal-js';
 import { User } from '../../models/user'
 import { Product } from '../../models/shop'
 import { AppState } from '../../store/app.state'
@@ -14,6 +15,8 @@ import { UPDATE_USER } from '../../store/user.actions'
 import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
+import { environment } from '../../../environments/environment.development';
+
 
 @Component({
   selector: 'payment',
@@ -37,6 +40,7 @@ export class PaymentComponent implements OnInit {
   orderSummary$!: Observable<{ total: number, taxes: number, deliveryFee: number, grandTotal: number }>
 
   public usStates = this.utilService.getStates()
+  paypalClientId = environment.paypalClientId
   optionState: string = 'order'
   payType: string = 'venmo'
 
@@ -47,6 +51,23 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
     this.initializeForms()
     this.orderSummary$ = this.orderService.getOrderSummary$(this.cart$)
+
+    this.loadPayPalScript()
+  }
+
+  loadPayPalScript(): void {
+    from(loadScript({ clientId: environment.paypalClientId })).pipe(
+      catchError((error) => {
+        console.error('Failed to load the PayPal JS SDK script', error)
+        throw error
+      })
+    ).subscribe((paypal) => {
+      if (paypal && paypal.Buttons) {
+        paypal.Buttons().render('#paypal-button-container');
+      } else {
+        console.error('PayPal.Buttons is null or undefined');
+      }
+    })
   }
 
   initializeForms(): void {
@@ -101,4 +122,6 @@ export class PaymentComponent implements OnInit {
       })
     ).subscribe()
   }
+
+
 }
