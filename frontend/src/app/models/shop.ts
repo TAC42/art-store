@@ -15,6 +15,7 @@ export interface Product {
 
 export interface MiniProduct {
   imgUrl: string
+  lowResImgUrl?: string
   name: string
   url: string
 }
@@ -27,6 +28,7 @@ export interface ShopFilter {
 export interface CarouselItem {
   type: 'image' | 'product'
   imgUrl: string
+  lowResImgUrl?: string
   url?: string
   name?: string
 }

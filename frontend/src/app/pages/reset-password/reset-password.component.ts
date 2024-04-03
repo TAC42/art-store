@@ -28,8 +28,9 @@ export class ResetPasswordComponent implements OnInit {
   private formUtilsService = inject(FormUtilsService)
 
   public formUtils = this.formUtilsService
-  emailForm!: FormGroup
-  resetForm!: FormGroup
+  public emailForm!: FormGroup
+  public resetForm!: FormGroup
+  public showPassword: boolean = false
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
   public message: string = 'Dear user, to reset the password of your account, please insert your email address.'
@@ -84,6 +85,11 @@ export class ResetPasswordComponent implements OnInit {
   codeValidator(control: AbstractControl): ValidationErrors | null {
     if (!control.value) return null
     return control.value === this.resetCode ? null : { codeMismatch: true }
+  }
+
+  togglePasswordShowing(event: Event): void {
+    event.stopPropagation()
+    this.showPassword = !this.showPassword
   }
 
   onSubmitReset() {

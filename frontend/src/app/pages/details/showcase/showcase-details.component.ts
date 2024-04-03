@@ -27,9 +27,11 @@ export class ShowcaseDetailsComponent implements OnInit {
   product$: Observable<Product> = this.route.data.pipe(
     map(data => data['product']))
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.product$.subscribe(product => {
-      this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
+      if (product.imgUrls.length > 1) {
+        this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
+      }
     })
   }
 

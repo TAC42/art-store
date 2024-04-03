@@ -13,15 +13,17 @@ export class HomeComponent {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
 
-  private dTypeService = inject(DeviceTypeService)
   private router = inject(Router)
+  private dTypeService = inject(DeviceTypeService)
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
-  loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
-  loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
+  public loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
+  public loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
+  public loneImg1LowRes: string = ''
+  public loneImg2LowRes: string = ''
 
-  artwareProducts: CarouselItem[] = [
+  public artwareProducts: CarouselItem[] = [
     {
       type: 'product',
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
@@ -47,7 +49,7 @@ export class HomeComponent {
       url: '/artware/details/elegant vase'
     },
   ]
-  shopProducts: CarouselItem[] = [
+  public shopProducts: CarouselItem[] = [
     {
       type: 'product',
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',

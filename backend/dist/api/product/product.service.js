@@ -37,7 +37,7 @@ async function getByName(productName) {
         const collection = await dbService.getCollection(PRODUCTS_COLLECTION);
         const product = await collection.findOne({ name: { $regex: `^${productName}$`, $options: 'i' } });
         if (product)
-            loggerService.info('found product: ', product);
+            loggerService.info('found product: ', product._id);
         else
             loggerService.error('No product found with name:', productName);
         return product;

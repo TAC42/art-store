@@ -1,11 +1,13 @@
 <div class="carousel-container flex">
     <button (click)="scrollLeft($event)" class="flex"> </button>
 
-    <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area flex row" #carouselRef>
-        <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
-            class="other-product-area flex column">
-            <img [src]="randomProduct.imgUrls[0]" alt="Random Product Image">
-            <p>{{ randomProduct.name }}</p>
+    <section *ngIf="CarouselItems$ | async as CarouselItems" class="other-products-area flex row" #carouselRef>
+        <a *ngFor="let item of CarouselItems" [routerLink]="item.url" class="other-product-area flex column">
+            <img [src]="item.lowResImgUrl" alt="{{item.name}}" class="w-h-100" loading="lazy" #lowResImage>
+            <img [src]="item.imgUrl" alt="{{item.name}}" class="w-h-100" (load)="onImageLoad($event, lowResImage)"
+                style="display:none;">
+
+            <p>{{ item.name }}</p>
         </a>
     </section>
 

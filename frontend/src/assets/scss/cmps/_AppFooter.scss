@@ -40,6 +40,10 @@ app-footer {
     span {
       font-size: 13px;
     }
+
+    .terms-privacy {
+      gap: 1em;
+    }
   }
 
   .desktop-view {
@@ -94,6 +98,10 @@ app-footer {
         span {
           text-align: right;
           font-size: 14px;
+        }
+
+        .terms-privacy {
+          align-self: end;
         }
       }
     }

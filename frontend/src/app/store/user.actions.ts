@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { User, UserCredentials, UserSignup } from '../models/user'
+import { User, UserLogin, UserSignup } from '../models/user'
 
 // handling of user loading
 export const SET_LOADING_STATE = createAction(
@@ -16,7 +16,7 @@ export const SET_LOGGEDIN_USER = createAction(
 )
 export const LOGIN = createAction(
     '[User] Login',
-    props<{ credentials: UserCredentials }>()
+    props<{ credentials: UserLogin }>()
 )
 export const SIGNUP = createAction(
     '[User] Signup',

@@ -1,8 +1,8 @@
-<a class="preview-contents flex column" [ngClass]="{'masonry-item': !isShopPage}"
+<a class="preview-contents w-h-100 flex column" [ngClass]="{'masonry-item': !isShopPage}"
   [routerLink]="['/', product.type, 'details',product.name]">
   <article class="product-body flex">
-    <img [src]="product.imgUrls[0]" [alt]="product.name"
-      [style.filter]="product.type !== 'shop' || (product.type === 'shop' && product.stock > 0) ? 'opacity(1)' : 'opacity(0.5)'" />
+    <image-container class="w-h-100" [imageUrl]="product.imgUrls[0]" [style.filter]="product.type !== 'shop' || 
+    (product.type === 'shop' && product.stock > 0) ? 'opacity(1)' : 'opacity(0.5)'" />
 
     <div *ngIf="(user$ | async)?.isAdmin" class="admin-options flex row">
       <button (click)="onRemoveProduct($event)" class="remove-btn">
@@ -20,13 +20,15 @@
       <svg-render svgName="shoppingCart" />
     </button>
 
-    <div *ngIf="product.type === 'shop' && product.stock!" class="price">${{ product.price }}</div>
-
-    <div *ngIf="product.type !== 'shop'" class="name">{{ product.name }}</div>
+    <div *ngIf="product.type === 'shop' && product.stock!" class="price">
+      <span> ${{ product.price }} </span>
+    </div>
+    <div *ngIf="product.type !== 'shop'" class="name">
+      <span> {{ product.name }} </span>
+    </div>
   </article>
 
   <div *ngIf="product.type === 'shop'" class="name">{{ product.name }}</div>
-
   <div *ngIf="product.type === 'shop'" class="stock-status">
     <ng-container [ngSwitch]="true">
       <span *ngSwitchCase="product.stock > 0 && product.stock <= 5">

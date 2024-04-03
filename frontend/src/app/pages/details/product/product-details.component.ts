@@ -1,14 +1,14 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { Observable, filter, map, take } from 'rxjs'
+import { Observable, map, take } from 'rxjs'
 import { DeviceTypeService } from '../../../services/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CarouselItem, Cart, Product } from '../../../models/shop'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { LOAD_RANDOM_PRODUCTS } from '../../../store/shop.actions'
-import { selectProductByName, selectRandomProducts } from '../../../store/shop.selectors'
+import { selectRandomProducts } from '../../../store/shop.selectors'
 import { User } from '../../../models/user'
-import { selectLoggedinUser, selectUser } from '../../../store/user.selectors'
+import { selectUser } from '../../../store/user.selectors'
 import { UPDATE_USER } from '../../../store/user.actions'
 import { ModalService } from '../../../services/modal.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
@@ -36,7 +36,6 @@ export class ProductDetailsComponent implements OnInit {
 
     deviceType$: Observable<string> = this.dTypeService.deviceType$
     user$: Observable<User> = this.store.select(selectUser)
-
     product$: Observable<Product> = this.route.data.pipe(
         map(data => data['product']))
     randomProducts$: Observable<Product[]> = this.store.select(selectRandomProducts)
@@ -49,7 +48,8 @@ export class ProductDetailsComponent implements OnInit {
                     excludeProductId: product._id
                 }))
             }
-            this.carouselItems = this.utilService.convertToCarouselItem(product.imgUrls)
+            if (product.imgUrls.length > 1) this.carouselItems =
+                this.utilService.convertToCarouselItem(product.imgUrls)
         })
     }
 
@@ -79,8 +79,7 @@ export class ProductDetailsComponent implements OnInit {
 
                 if (!isProductAlreadyInCart) {
                     const newUser: User = {
-                        ...updatedUser,
-                        cart: [...updatedUser.cart, newCartItem]
+                        ...updatedUser, cart: [...updatedUser.cart, newCartItem]
                     }
                     this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
                     showSuccessMsg('Product Added!',

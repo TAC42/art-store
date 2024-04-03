@@ -16,6 +16,7 @@ export class IntroductionComponent implements OnInit {
 
   public regularUtils = this.utilService
   public carouselItems: CarouselItem[] = []
+
   aboutImageUrls: string[] = [
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1707577522/artware/ecwol6n9wyog6jryjxis.jpg',
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/zion4h33enmpgxvz0yqa.png',
@@ -23,7 +24,7 @@ export class IntroductionComponent implements OnInit {
     'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880476/Artware/jloyblpg0ith2jnudq9z.png'
   ]
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.carouselItems = this.utilService.convertToCarouselItem(this.aboutImageUrls)
   }
 }

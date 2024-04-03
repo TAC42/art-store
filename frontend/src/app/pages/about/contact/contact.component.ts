@@ -15,13 +15,12 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
 export class ContactComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.layout-row') layoutRowClass = true
 
-  private dTypeService = inject(DeviceTypeService)
-  private eBusService = inject(EventBusService)
   private fBuilder = inject(FormBuilder)
   private utilService = inject(UtilityService)
   private formUtilsService = inject(FormUtilsService)
+  private dTypeService = inject(DeviceTypeService)
+  private eBusService = inject(EventBusService)
 
   public regularUtils = this.utilService
   public formUtils = this.formUtilsService
@@ -42,7 +41,7 @@ export class ContactComponent implements OnInit {
   captchaResponse: string | null = null
   recaptchaSize: ReCaptchaV2.Size = 'normal'
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.deviceType$.subscribe(deviceType => {
       if (deviceType === 'mobile') this.recaptchaSize = 'compact'
       else this.recaptchaSize = 'normal'
@@ -68,8 +67,7 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     if (this.contactForm.valid && this.isCaptchaResolved) {
       const formDataWithCaptcha = {
-        ...this.contactForm.value,
-        recaptchaToken: this.captchaResponse
+        ...this.contactForm.value, recaptchaToken: this.captchaResponse
       }
       this.utilService.sendContactUsMail(formDataWithCaptcha).subscribe({
         next: () => {
@@ -77,13 +75,11 @@ export class ContactComponent implements OnInit {
           this.contactForm.reset()
           this.isCaptchaResolved = false
           this.captchaResponse = null
-          showSuccessMsg('Email Sent!',
-            'Thank you for contacting!', this.eBusService)
+          showSuccessMsg('Email Sent!', 'Thank you for contacting!', this.eBusService)
         },
         error: (error) => {
           console.error(error)
-          showErrorMsg('Email Failed!',
-            'Please try again later...', this.eBusService)
+          showErrorMsg('Email Failed!', 'Please try again later...', this.eBusService)
         }
       })
     }

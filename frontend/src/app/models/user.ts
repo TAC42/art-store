@@ -13,7 +13,7 @@ export interface User {
     isVerified: boolean
 }
 
-export interface UserCredentials {
+export interface UserLogin {
     username: string
     password: string,
     recaptchaToken: string | null

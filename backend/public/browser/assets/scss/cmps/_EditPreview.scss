@@ -21,7 +21,7 @@ edit-preview {
             .product-area {
                 text-align: center;
 
-                .image-container {
+                .media-container {
                     position: relative;
 
                     img {
@@ -155,7 +155,7 @@ edit-preview {
                 text-align: left;
                 margin-block-end: 1em;
 
-                .image-container {
+                .media-container {
                     img {
                         object-fit: cover;
                         cursor: pointer;
@@ -170,8 +170,8 @@ edit-preview {
                 }
 
                 .details-area {
-                    margin-block-start: 1em;
                     font-family: 'sabon';
+                    margin-block-start: 1em;
                     padding: 0 1em;
 
                     h4 {
@@ -203,10 +203,10 @@ edit-preview {
                     }
 
                     button {
-                        border-radius: 0.5em;
-                        margin: 1em auto;
                         border: 1px solid $prmclr1;
+                        border-radius: 0.5em;
                         padding: 0.5em 1.5em;
+                        margin: 1em auto;
                         transition: all 0.3s ease-in-out;
 
                         span {
