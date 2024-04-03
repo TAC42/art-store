@@ -39,6 +39,7 @@ import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
 import { SignupComponent } from './pages/signup/signup.component'
+import { ServiceTermsComponent } from './pages/service-terms/service-terms.component'
 
 import { LoaderComponent } from './cmps/loader/loader.component'
 import { HeaderComponent } from './cmps/header/header.component'
@@ -110,6 +111,7 @@ import { ImageContainerComponent } from './cmps/image-container/image-container.
     PrivacyPolicyComponent,
     ImageContainerComponent,
     SignupComponent,
+    ServiceTermsComponent,
   ],
   imports: [
     BrowserModule,

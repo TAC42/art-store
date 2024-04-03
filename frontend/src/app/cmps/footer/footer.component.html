@@ -9,14 +9,15 @@
         <svg-render svgName="instagramIcon" />
       </a>
 
-      <a class="flex" href="https://account.venmo.com/u/ori-carlin" target="_blank">
+      <a class="flex" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
         <svg-render svgName="venmoIcon" />
       </a>
     </div>
 
     <span>All Rights Reserved © ORICARLIN 2024</span>
-    <span>
-      <a routerLink="/privacy" routerLinkActive="active">Privacy Policy</a>
+    <span class="terms-privacy flex row">
+      <a [routerLink]="['/privacy']" routerLinkActive="active">Privacy Policy</a>
+      <a [routerLink]="['/terms']" routerLinkActive="active">Terms of Service</a>
     </span>
     <span>Made by <a href="https://github.com/TAC42">TAC</a> & <a
         href="https://github.com/Valeriy-Kuvshinov">VK</a></span>
@@ -39,13 +40,14 @@
           <svg-render svgName="instagramIcon" />
         </a>
 
-        <a class="flex" href="https://venmo.com/" target="_blank">
+        <a class="flex" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
           <svg-render svgName="venmoIcon" />
         </a>
       </div>
       <span>All Rights Reserved © ORICARLIN 2024</span>
-      <span>
-        <a routerLink="/privacy" routerLinkActive="active">Privacy Policy</a>
+      <span class="terms-privacy flex row">
+        <a [routerLink]="['/privacy']" routerLinkActive="active">Privacy Policy</a>
+        <a [routerLink]="['/terms']" routerLinkActive="active">Terms of Service</a>
       </span>
       <span>Made by <a href="https://github.com/TAC42">TAC</a> & <a
           href="https://github.com/Valeriy-Kuvshinov">VK</a></span>

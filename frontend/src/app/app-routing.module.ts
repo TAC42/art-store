@@ -26,6 +26,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
 import { SignupComponent } from './pages/signup/signup.component'
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component'
+import { ServiceTermsComponent } from './pages/service-terms/service-terms.component'
 
 const routes: Routes = [
   {
@@ -69,6 +70,9 @@ const routes: Routes = [
   },
   {
     path: 'privacy', component: PrivacyPolicyComponent
+  },
+  {
+    path: 'terms', component: ServiceTermsComponent
   },
   {
     path: 'signup', component: SignupComponent, canActivate: [SignupGuard]
