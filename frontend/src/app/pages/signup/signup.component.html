@@ -1,5 +1,16 @@
-<main class="page-contents w-h-100 flex column">
+<main class="page-contents w-h-100 grid">
+    <div class="background flex column">
+        <p>Pottery...</p>
+        <p>Beauty...</p>
+        <p>Creativity...</p>
+        <image-container [imageUrl]="backgroundImage" />
+    </div>
+
     <form class="flex column" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <p class="heads-up">
+            Welcome! We are excited to have you here. Can you share a bit about yourself?
+        </p>
+
         <div class="combined-inputs grid">
             <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'firstName')">
                 <label for="firstName" class="flex row">
@@ -82,6 +93,10 @@
             </div>
         </div>
 
+        <p class="heads-up">
+            Please create a strong password using a mix of letters, numbers, and symbols, at least 8 characters long.
+        </p>
+
         <div class="combined-inputs grid">
             <div class="input-area flex column" style="position: relative;"
                 [class.error]="formUtils.isFieldInvalid(signupForm, 'password')">
@@ -131,13 +146,13 @@
 
         <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
 
-        <p>By signing up, you agree to Ori-Carlin website's
+        <p>By clicking sign up, you agree to our
             <a [routerLink]="['/privacy']">privacy policy</a>.
         </p>
 
         <button class="signup flex" type="submit" [disabled]="(signupForm.invalid || !isCaptchaResolved)"
             [class.disabled]="(signupForm.invalid || !isCaptchaResolved)">
-            <span>Signup</span>
+            <span>Sign up</span>
         </button>
 
         <button class="login" (click)="openLogin($event)">

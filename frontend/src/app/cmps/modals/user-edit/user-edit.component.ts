@@ -58,34 +58,16 @@ export class UserEditComponent implements OnInit {
         imgUrl: this.fBuilder.array(user.imgUrl?.map(
           url => this.fBuilder.control(url))),
         fullName: [user.fullName, [Validators.required]],
-        username: [user.username, [Validators.required], this.usernameValidator()],
-        email: [user.email, [Validators.required, Validators.email], this.emailValidator()],
+        username: [user.username, [Validators.required],
+        [this.formUtilsService.validateField(value =>
+          this.userService.validateUsername(value),
+          this.initialFormData?.username)]],
+        email: [user.email, [Validators.required, Validators.email],
+        [this.formUtilsService.validateField(value =>
+          this.userService.validateEmail(value),
+          this.initialFormData?.email)]],
       })
     })
-  }
-
-  usernameValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.valueChanges ||
-        control.value === this.initialFormData?.username) return of(null)
-
-      return control.valueChanges.pipe(
-        debounceTime(500), distinctUntilChanged(), switchMap(value =>
-          this.userService.validateUsername(value)), first()
-      )
-    }
-  }
-
-  emailValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (!control.valueChanges ||
-        control.value === this.initialFormData?.email) return of(null)
-
-      return control.valueChanges.pipe(
-        debounceTime(500), distinctUntilChanged(), switchMap(value =>
-          this.userService.validateEmail(value)), first()
-      )
-    }
   }
 
   get imgUrlsControls(): AbstractControl[] {

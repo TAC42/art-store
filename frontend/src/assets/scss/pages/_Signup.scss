@@ -1,21 +1,49 @@
 signup {
-    background: linear-gradient(to bottom,
-            $prmclr3,
-            $scdclr3,
-            $scdclr4,
-            $scdclr5,
-            $scdclr2 );
-
     .page-contents {
-        gap: 1em;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
+        .background {
+            position: relative;
+
+            p {
+                position: absolute;
+                font-family: 'sabon';
+                color: $prmclr2;
+                font-size: 4rem;
+                transform: translate(-50%, -50%);
+            }
+
+            p:nth-child(1) {
+                top: 0;
+                left: 0;
+                transform: translate(50%, 50%);
+            }
+
+            p:nth-child(2) {
+                top: 50%;
+                left: 50%;
+            }
+
+            p:nth-child(3) {
+                bottom: 0;
+                right: 0;
+                transform: translate(-50%, -50%);
+            }
+
+            image-container {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: -1;
+                filter: brightness(25%);
+            }
+        }
 
         form {
             align-items: center;
             width: 100%;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 1em auto;
 
             .signup {
                 width: fit-content;
@@ -85,6 +113,11 @@ signup {
                             color: $mnrclr2;
                             font-size: 12px;
                             text-transform: capitalize;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 1;
                         }
 
                         .label-info {
@@ -159,6 +192,12 @@ signup {
                     color: $scdclr8;
                 }
             }
+        }
+
+        .heads-up {
+            text-align: left;
+            width: 100%;
+            padding: 0 0.5em;
         }
 
         .switch {

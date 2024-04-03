@@ -31,6 +31,7 @@ export class SignupComponent implements OnInit {
   public signupForm!: FormGroup
   public showPassword: boolean = false
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
+  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false

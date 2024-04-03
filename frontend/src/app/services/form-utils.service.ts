@@ -44,13 +44,13 @@ export class FormUtilsService {
 
     if (field.errors['codeMismatch']) return 'The code does not match!'
 
-    if (field.errors['uppercaseRequired']) return 'Missing an uppercase letter!'
+    if (field.errors['uppercaseRequired']) return 'Password missing an uppercase letter!'
 
-    if (field.errors['lowercaseRequired']) return 'Missing an lowercase letter!'
+    if (field.errors['lowercaseRequired']) return 'Password missing an lowercase letter!'
 
-    if (field.errors['numberRequired']) return 'Missing a number!'
+    if (field.errors['numberRequired']) return 'Password missing a number!'
 
-    if (field.errors['specialCharRequired']) return 'Missing a special character!'
+    if (field.errors['specialCharRequired']) return 'Password missing a special character!'
 
     if (field.errors['emailMismatch']) return `Emails don't match!`
 
@@ -82,6 +82,7 @@ export class FormUtilsService {
     }
   }
 
+  // confirm if certain input's contents match the contents of another similar input
   confirmField(matchingControlName: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.parent) return null
