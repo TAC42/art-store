@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { EMPTY, Observable, catchError, combineLatest, filter, mergeMap, of, take, tap } from 'rxjs'
+import { EMPTY, Observable, catchError, combineLatest, filter, from, mergeMap, of, take, tap } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { User } from '../../models/user'
@@ -14,6 +14,7 @@ import { UPDATE_USER } from '../../store/user.actions'
 import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
+
 
 @Component({
   selector: 'payment',
@@ -47,6 +48,7 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
     this.initializeForms()
     this.orderSummary$ = this.orderService.getOrderSummary$(this.cart$)
+
   }
 
   initializeForms(): void {
@@ -101,4 +103,6 @@ export class PaymentComponent implements OnInit {
       })
     ).subscribe()
   }
+
+
 }

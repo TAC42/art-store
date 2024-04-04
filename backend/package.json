@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "@types/bcrypt": "^5.0.2",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.3",
@@ -35,6 +36,7 @@
     "@types/mongodb": "^4.0.7",
     "@types/node": "^20.11.24",
     "@types/nodemailer": "^6.4.14",
+    "@types/paypal__checkout-server-sdk": "^1.0.8",
     "typescript": "^5.4.2"
   }
 }
