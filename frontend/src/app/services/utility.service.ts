@@ -36,6 +36,10 @@ export class UtilityService {
     return this.httpService.post<any>(`${BASE_URL}/invoice`, orderDetails)
   }
 
+  sendOrderUpdateMail(orderDetails: Order): Observable<any> {
+    return this.httpService.post<any>(`${BASE_URL}/order-update`, orderDetails)
+  }
+
   getStates() {
     return usStates // fetch us states from json file
   }

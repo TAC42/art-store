@@ -12,6 +12,7 @@ mailRoutes.post('/verify', _sendVerificationMail)
 mailRoutes.post('/reset', _sendResetPasswordMail)
 mailRoutes.post('/reset-update', _sendPasswordUpdateMail)
 mailRoutes.post('/invoice', _sendInvoices)
+mailRoutes.post('/order-update', _sendOrderStatusMail)
 
 // mail controller functions
 async function _sendContactUsMail(req: Request<ContactUsRequestBody>,
@@ -78,6 +79,20 @@ async function _sendInvoices(req: Request<Order>,
     try {
         await mailService.sendCustomerInvoice(orderDetails)
         await mailService.sendArtistInvoice(orderDetails)
+        res.status(200).send({ msg: 'Mail successfully sent' })
+    } catch (error) {
+        loggerService.error('Failed sending mail: ' + error)
+        res.status(500).send({ error: 'Failed sending mail' })
+    }
+}
+
+async function _sendOrderStatusMail(req: Request<Order>,
+    res: Response): Promise<void> {
+    const orderDetails = req.body
+    loggerService.debug(`Received order data for update mail: ${JSON.stringify(orderDetails)}`)
+
+    try {
+        await mailService.sendOrderStatusMail(orderDetails)
         res.status(200).send({ msg: 'Mail successfully sent' })
     } catch (error) {
         loggerService.error('Failed sending mail: ' + error)

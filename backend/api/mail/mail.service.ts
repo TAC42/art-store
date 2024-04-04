@@ -10,7 +10,8 @@ export const mailService = {
     sendResetPasswordMail,
     sendPasswordUpdateMail,
     sendCustomerInvoice,
-    sendArtistInvoice
+    sendArtistInvoice,
+    sendOrderStatusMail
 }
 
 async function sendContactUsMail(name: string, email: string, title: string, message: string, recaptchaToken: string): Promise<void> {
@@ -42,7 +43,8 @@ async function sendVerificationMail(username: string, email: string, code: strin
         text: `Dear ${username}, In order to continue using our site,
         we'll need you to verify your account.
         Please use the following code to complete the process: ${code}.
-        If you did not request this, you may ignore this email.`,
+        If you did not request this, you may ignore this email.
+        The account will be deleted within 24 hours, if left unverified.`,
         html: `
             <p>Dear ${username},</p>
             <p>In order to continue using our site, we'll need you to verify your account.</p>
@@ -50,6 +52,7 @@ async function sendVerificationMail(username: string, email: string, code: strin
             <p><b>${code}</b></p>
             <hr>
             <p>If you did not request this, you may ignore this email.</p>
+            <p>The account will be deleted within 24 hours, if left unverified.</p>
             <p>Thank you,<br>The Ori Carlin Team</p>`,
     }
     await _sendEmail(mailOptions)
@@ -107,7 +110,7 @@ async function sendCustomerInvoice(orderDetails: Order): Promise<void> {
         subject: `Your Ori Carlin purchase #${orderDetails.createdAt}`,
         text: `Hello ${orderDetails.user.firstName},
         Thank you for shopping with us.
-        We'll send you a confirmation when your order ships.
+        Further updates on the status of your order will be sent in the future.
         Invoice: #${orderDetails.createdAt}
         Date issued: ${invoiceDate}
         Purchased products:
@@ -115,12 +118,12 @@ async function sendCustomerInvoice(orderDetails: Order): Promise<void> {
         Expenses:
         ${expensesText}
         Payment method: ${orderDetails.payment}.
-        This is your order confirmation, for any questions, please contact us through the site.
+        For any questions regarding this order, please contact us through the site.
         Thank you, The Ori Carlin Team`,
         html: `
             <p>Hello ${orderDetails.user.firstName},</p>
             <p>Thank you for shopping with us.</p>
-            <p>We'll send you a confirmation when your order ships.</p>
+            <p>Further updates on the status of your order will be sent in the future.</p>
             <hr>
             <p>Invoice: #${orderDetails.createdAt}</p>
             <p>Date issued ${invoiceDate},</p>
@@ -140,7 +143,7 @@ async function sendCustomerInvoice(orderDetails: Order): Promise<void> {
             </table>
             <p>Payment method: ${orderDetails.payment}</p>
             <br>
-            <p>This is your order confirmation, for any questions, please contact us through the <a href="https://www.oricarlin.com">site</a>.</p>
+            <p>For any questions regarding this order, please contact us through the <a href="https://www.oricarlin.com">site</a>.</p>
             <p>Thank you,<br>The Ori Carlin Team</p>`,
     }
     await _sendEmail(mailOptions)
@@ -192,6 +195,81 @@ async function sendArtistInvoice(orderDetails: Order): Promise<void> {
     await _sendEmail(mailOptions)
 }
 
+async function sendOrderStatusMail(orderDetails: Order): Promise<void> {
+    loggerService.debug(`Sending update email on order #${orderDetails.createdAt} to ${orderDetails.user.email}`)
+    const { orderUpdateText, orderUpdateHtml } = _FetchStatusContents(orderDetails)
+
+    const mailOptions: MailOptions = {
+        from: process.env.SENDER_GMAIL_ADDRESS ?? '',
+        to: orderDetails.user.email,
+        subject: `Ori Carlin Order #${orderDetails.createdAt} | Status - ${orderDetails.status}`,
+        text: `Hello ${orderDetails.user.firstName},
+        We'd like to update you in regards to the order #${orderDetails.createdAt}.
+        ${orderUpdateText}
+        Thank you, The Ori Carlin Team`,
+        html: `
+            <p>Hello ${orderDetails.user.firstName},</p>
+            <p>We'd like to update you in regards to the order #${orderDetails.createdAt}.</p>
+            <hr>
+            ${orderUpdateHtml}
+            <p>Thank you,<br>The Ori Carlin Team</p>`,
+    }
+    await _sendEmail(mailOptions)
+}
+
+function _FetchStatusContents(orderDetails: Order) {
+    let orderUpdateText = ``
+    let orderUpdateHtml = ``
+
+    switch (orderDetails.status) {
+        case 'canceled':
+            orderUpdateText = `
+                Unfortunately, your order cannot be processed at this time. 
+                Please contact our support team for further assistance.`
+            orderUpdateHtml = `
+                <p>Unfortunately, your order cannot be processed at this time.</p>
+                <p>Please contact our support team for further assistance.</p>`
+            break
+        case 'accepted':
+            orderUpdateText = `
+                Your order has been accepted and is now being processed. 
+                Thank you for your patience!`
+            orderUpdateHtml = `
+                <p>Your order has been accepted and is now being processed.</p>
+                <p>Thank you for your patience!</p>`
+            break
+        case 'delivering':
+            orderUpdateText = `
+                Your order is on its way to you. 
+                It is currently out for delivery and should reach you soon.`
+            orderUpdateHtml = `
+                <p>Your order is on its way to you.</p>
+                <p>It is currently out for delivery and should reach you soon.</p>`
+            break
+        case 'shipped':
+            const ShippingDate = new Date().toLocaleString("en-US", {
+                timeZone: "America/New_York", month: 'short', day: '2-digit',
+                year: 'numeric', hour: 'numeric', minute: '2-digit',
+                second: '2-digit', hour12: true
+            })
+            orderUpdateText = `
+                Your order has been shipped on ${ShippingDate}.
+                Please note, the reference number provided: ${orderDetails.createdAt}, is your order's number on the site.`
+            orderUpdateHtml = `
+                <p>Your order has been shipped on ${ShippingDate}.</p>
+                <p>Please note, the reference number provided: ${orderDetails.createdAt}, is your order's number on the site.</p>`
+            break
+        default:
+            orderUpdateText = `
+                There has been an update to your order status. 
+                Please check your account for the latest information.`
+            orderUpdateHtml = `
+                <p>There has been an update to your order status.</p>
+                <p>Please check your account for the latest information.</p>`
+    }
+    return { orderUpdateText, orderUpdateHtml }
+}
+
 // prepare html and text elements for invoice mail
 function _prepareInvoice(orderDetails: Order) {
     const invoiceDate = new Date(orderDetails.createdAt).toLocaleString("en-US", {
@@ -208,13 +286,27 @@ function _prepareInvoice(orderDetails: Order) {
         </tr>`
     ).join('')
     const expensesHtml = `
-        <tr><td colspan="3">Subtotal</td><td>$${orderDetails.expenses.total.toFixed(2)}</td></tr>
-        <tr><td colspan="3">Taxes</td><td>$${orderDetails.expenses.taxes.toFixed(2)}</td></tr>
-        <tr><td colspan="3">Delivery Fee</td><td>$${orderDetails.expenses.deliveryFee.toFixed(2)}</td></tr>
-        <tr><td colspan="3"><strong>Grand Total</strong></td><td><strong>$${orderDetails.expenses.grandTotal.toFixed(2)}</strong></td></tr>
+        <tr>
+            <td colspan="3">Subtotal</td>
+            <td>$${orderDetails.expenses.total.toFixed(2)}</td>
+        </tr>
+        <tr>
+            <td colspan="3">Taxes</td>
+            <td>$${orderDetails.expenses.taxes.toFixed(2)}</td>
+        </tr>
+        <tr>
+            <td colspan="3">Delivery Fee</td>
+            <td>$${orderDetails.expenses.deliveryFee.toFixed(2)}</td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Grand Total</strong></td>
+            <td><strong>$${orderDetails.expenses.grandTotal.toFixed(2)}</strong></td>
+        </tr>
     `
     const orderSummaryText = orderDetails.summary.map(item =>
-        `${item.name ?? 'N/A'} - Quantity: ${item.amount ?? 0}, Price: $${(item.price ?? 0).toFixed(2)}, Total: $${((item.amount ?? 0) * (item.price ?? 0)).toFixed(2)}`
+        `${item.name ?? 'N/A'} - Quantity: ${item.amount ?? 0},
+        Price: $${(item.price ?? 0).toFixed(2)},
+        Total: $${((item.amount ?? 0) * (item.price ?? 0)).toFixed(2)}`
     ).join('\n')
     const expensesText = `
         Subtotal: $${orderDetails.expenses.total.toFixed(2)}
