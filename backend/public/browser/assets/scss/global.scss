@@ -25,9 +25,9 @@
 @import "pages/Payment";
 @import "pages/Profile";
 @import "pages/Dashboard";
-@import "pages/ResetPassword";
 @import "pages/Signup";
 @import "pages/PrivacyPolicy";
+@import "pages/ServiceTerms";
 
 // Cmps
 @import "cmps/AppHeader";
@@ -50,3 +50,4 @@
 @import "cmps/modals/AsideMenu";
 @import "cmps/modals/ConfirmModal";
 @import "cmps/modals/ImageDisplay";
+@import "cmps/modals/ResetPassword";

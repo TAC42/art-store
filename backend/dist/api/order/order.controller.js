@@ -1,6 +1,7 @@
 import express from 'express';
 import { orderService } from './order.service.js';
 import { loggerService } from '../../services/logger.service.js';
+import paypal from '@paypal/checkout-server-sdk';
 // order routes
 export const orderRoutes = express.Router();
 orderRoutes.get('/', _getOrders);
@@ -41,9 +42,21 @@ async function _getOrderById(req, res) {
 async function _addOrder(req, res) {
     try {
         const order = req.body;
-        loggerService.debug('Creating order:', order);
-        const addedOrder = await orderService.save(order);
-        res.json(addedOrder);
+        if (order.payment === 'paypal') {
+            const paypalOrderId = await createPaypalOrder(order);
+            if (!paypalOrderId) {
+                loggerService.error('PayPal order creation failed');
+                res.status(500).send({ err: 'Failed to create PayPal order' });
+                return;
+            }
+            loggerService.debug('Creating order:', order);
+            const addedOrder = await orderService.save(order);
+            res.json(addedOrder);
+        }
+        else {
+            //loggerService.debug('Other payment method')
+            // Handle other payment methods here
+        }
     }
     catch (err) {
         loggerService.error('Failed to add order', err);
@@ -72,5 +85,70 @@ async function _removeOrder(req, res) {
     catch (err) {
         loggerService.error('Failed to remove order', err);
         res.status(500).send({ err: 'Failed to remove order' });
+    }
+}
+async function createPaypalOrder(order) {
+    try {
+        // Explicit check for PayPal client ID and secret
+        if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
+            throw new Error('PayPal client ID or secret is not defined.');
+        }
+        const environment = process.env.NODE_ENV === 'production'
+            ? new paypal.core.LiveEnvironment(process.env.PAYPAL_CLIENT_ID, process.env.PAYPAL_CLIENT_SECRET)
+            : new paypal.core.SandboxEnvironment(process.env.PAYPAL_CLIENT_ID, process.env.PAYPAL_CLIENT_SECRET);
+        const client = new paypal.core.PayPalHttpClient(environment);
+        const totalPrice = order.expenses.grandTotal;
+        const taxAmount = order.expenses.taxes;
+        const deliveryFee = order.expenses.deliveryFee;
+        // Create order request
+        const request = new paypal.orders.OrdersCreateRequest();
+        request.prefer("return=representation");
+        request.requestBody({
+            intent: "CAPTURE",
+            purchase_units: [
+                {
+                    amount: {
+                        currency_code: "USD",
+                        value: totalPrice.toFixed(2),
+                        breakdown: {
+                            item_total: {
+                                currency_code: "USD",
+                                value: totalPrice.toFixed(2),
+                            },
+                            tax_total: {
+                                currency_code: "USD",
+                                value: taxAmount.toFixed(2),
+                            },
+                            shipping: {
+                                currency_code: "USD",
+                                value: deliveryFee.toFixed(2),
+                            },
+                            // Provide defaults for other breakdown properties
+                            discount: { currency_code: "USD", value: "0.00" },
+                            handling: { currency_code: "USD", value: "0.00" },
+                            insurance: { currency_code: "USD", value: "0.00" },
+                            shipping_discount: { currency_code: "USD", value: "0.00" },
+                        },
+                    },
+                    items: order.summary.map(item => ({
+                        name: item.name ?? '',
+                        unit_amount: {
+                            currency_code: "USD",
+                            value: item.price?.toFixed(2) ?? '0.00',
+                        },
+                        quantity: '1',
+                        category: 'PHYSICAL_GOODS',
+                    })),
+                },
+            ],
+        });
+        // Execute PayPal request
+        const response = await client.execute(request);
+        // Return PayPal order ID
+        return response.result.id;
+    }
+    catch (err) {
+        loggerService.error('Failed to create PayPal order', err);
+        return undefined;
     }
 }

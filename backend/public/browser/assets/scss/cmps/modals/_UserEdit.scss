@@ -109,41 +109,35 @@ user-edit {
         }
 
         .form-action {
-          justify-content: center;
           position: fixed;
+          align-items: center;
+          gap: 1em;
           bottom: 0;
           left: 0;
           width: 100%;
           background-color: $prmclr2;
           border-block-start: 1px solid #76767615;
-          padding: 1em 0 2em 0;
+          padding: 1em 0;
 
-          button {
-            width: 60%;
+          .reset-pass {
             font-family: "nh-bold";
-            font-size: 1.25em;
-            padding: 1em 0;
-            background-color: $scdclr2;
+            font-size: 18px;
+            color: $prmclr1;
+          }
+
+          .submit {
+            font-family: "nh-bold";
+            font-size: 21px;
+            padding: 0.75em 1em;
+            background: $prmclr1;
             color: $prmclr2;
             border-radius: 0.5em;
-            transition: all 0.5s;
+            transition: all 0.3s ease-in-out;
 
             &.disabled {
-              background-color: $prmclr2;
-              color: $scdclr2;
               pointer-events: none;
+              background: $scdclr4;
             }
-          }
-        }
-
-        a {
-          color: $prmclr1;
-          font-size: 18px;
-          margin: 1em auto;
-          transition: all 0.5s ease-in-out;
-
-          &:hover {
-            color: $prmclr4;
           }
         }
       }
