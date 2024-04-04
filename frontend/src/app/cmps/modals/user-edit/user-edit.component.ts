@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
+import { Router } from '@angular/router'
 import { animate, state, style, transition, trigger } from '@angular/animations'
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
-import { Observable, Subscription, debounceTime, distinctUntilChanged, first, of, switchMap, take } from 'rxjs'
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
@@ -30,6 +31,7 @@ import { UserService } from '../../../services/user.service'
 export class UserEditComponent implements OnInit {
   @Input() user$!: Observable<User>
 
+  private router = inject(Router)
   private store = inject(Store<AppState>)
   private fBuilder = inject(FormBuilder)
   public modService = inject(ModalService)
@@ -76,6 +78,13 @@ export class UserEditComponent implements OnInit {
 
   handleImgUpload(event: { url: string, index: number, controlName: string }): void {
     this.formUtils.handleImageUpload(this.userEditForm, event)
+  }
+
+  openResetPassword(event: MouseEvent): void {
+    event.stopPropagation()
+    setTimeout(() => this.router.navigate(['/']), 1000)
+    this.modService.openModal('reset-password')
+    this.closeUserEdit()
   }
 
   onSaveUser() {

@@ -52,12 +52,18 @@ export class LoginModalComponent implements OnInit {
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  closeLoginModal() {
+  openResetPassword(event: MouseEvent): void {
+    event.stopPropagation()
+    this.modService.openModal('reset-password')
+    this.closeLoginModal()
+  }
+
+  closeLoginModal(): void {
     this.modService.closeModal('login')
     this.loginForm.reset()
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.valid && this.isCaptchaResolved) {
       const { username, password } = this.loginForm.value
 

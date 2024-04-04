@@ -1,14 +1,15 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import { Component, OnInit, inject } from '@angular/core'
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { AppState } from '../../store/app.state'
-import { User } from '../../models/user'
-import { LOGOUT } from '../../store/user.actions'
-import { FormUtilsService } from '../../services/form-utils.service'
-import { UtilityService } from '../../services/utility.service'
-import { UserService } from '../../services/user.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
+import { AppState } from '../../../store/app.state'
+import { User } from '../../../models/user'
+import { LOGOUT } from '../../../store/user.actions'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { FormUtilsService } from '../../../services/form-utils.service'
+import { UserService } from '../../../services/user.service'
+import { UtilityService } from '../../../services/utility.service'
+import { ModalService } from '../../../services/modal.service'
 
 @Component({
   selector: 'reset-password',
@@ -16,14 +17,12 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/ev
 })
 
 export class ResetPasswordComponent implements OnInit {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   private router = inject(Router)
   private utilService = inject(UtilityService)
   private eBusService = inject(EventBusService)
+  public modService = inject(ModalService)
   private userService = inject(UserService)
   private formUtilsService = inject(FormUtilsService)
 
@@ -39,7 +38,7 @@ export class ResetPasswordComponent implements OnInit {
   timer: number = 0
   resendAvailable: boolean = false
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initializeForms()
   }
 
@@ -53,7 +52,7 @@ export class ResetPasswordComponent implements OnInit {
     })
   }
 
-  onSubmitEmail() {
+  onSubmitEmail(): void {
     if (this.emailForm.valid) {
       // Generate and send code
       this.resetCode = this.utilService.generateRandomCode()
@@ -92,7 +91,14 @@ export class ResetPasswordComponent implements OnInit {
     this.showPassword = !this.showPassword
   }
 
-  onSubmitReset() {
+  closeResetModal(): void {
+    this.modService.closeModal('reset-password')
+    this.emailForm.reset()
+    this.resetForm.reset()
+    this.codeSent = false
+  }
+
+  onSubmitReset(): void {
     if (this.resetForm.valid) {
       const { code, password } = this.resetForm.value
       if (code !== this.resetCode) return
@@ -125,20 +131,18 @@ export class ResetPasswordComponent implements OnInit {
     this.utilService.sendPasswordUpdateMail(updateMailData).subscribe({
       next: () => {
         showSuccessMsg('Password Reset!', 'Please login with the new password', this.eBusService)
-        this.resetState()
+        this.logoutUser()
       },
       error: (error) => {
         console.error('Error sending password update notification email:', error)
         showErrorMsg('Email Failed!', 'Password was reset without an update email!', this.eBusService)
-        this.resetState()
+        this.logoutUser()
       }
     })
   }
 
-  private resetState(): void {
-    this.emailForm.reset()
-    this.resetForm.reset()
-    this.codeSent = false
+  private logoutUser(): void {
+    this.closeResetModal()
     this.store.dispatch(LOGOUT())
     setTimeout(() => this.router.navigate(['/']), 3000)
   }

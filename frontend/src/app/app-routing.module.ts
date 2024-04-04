@@ -23,7 +23,6 @@ import { ShowcaseDetailsComponent } from './pages/details/showcase/showcase-deta
 import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { ProfileComponent } from './pages/profile/profile.component'
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
 import { SignupComponent } from './pages/signup/signup.component'
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component'
 import { ServiceTermsComponent } from './pages/service-terms/service-terms.component'
@@ -64,9 +63,6 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AdminGuard]
-  },
-  {
-    path: 'reset', component: ResetPasswordComponent
   },
   {
     path: 'privacy', component: PrivacyPolicyComponent

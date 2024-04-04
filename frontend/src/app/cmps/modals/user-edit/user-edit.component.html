@@ -9,15 +9,15 @@
     </section>
 
     <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
-      <article class="upload-area grid" formArrayName="imgUrl">
+      <div class="upload-area grid" formArrayName="imgUrl">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="'user'"
             (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrl'})" />
           <svg-render svgName="camera" />
         </div>
-      </article>
+      </div>
 
-      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
+      <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
         <label for="fullName" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="idIcon" />
@@ -29,9 +29,9 @@
         </label>
         <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
           customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
-      </article>
+      </div>
 
-      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
+      <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
         <label for="username" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="personIcon" />
@@ -43,9 +43,9 @@
         </label>
         <input id="username" type="text" formControlName="username" placeholder="Please enter your username..."
           customValidator [minLength]=3 [maxLength]=24>
-      </article>
+      </div>
 
-      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
+      <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
         <label for="email" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="emailIcon" />
@@ -57,19 +57,19 @@
         </label>
         <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
           [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
-      </article>
+      </div>
 
-      <a [routerLink]="['/reset']" title="Reset password?">
-        <span (click)="closeUserEdit()">Edit password?</span>
-      </a>
+      <div class="form-action flex column">
+        <button class="reset-pass" (click)="openResetPassword($event)" title="Reset password?">
+          Reset password?
+        </button>
 
-      <article class="form-action flex">
-        <button class="glass" type="submit"
+        <button class="submit" type="submit"
           [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
           [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
           <span>Save changes</span>
         </button>
-      </article>
+      </div>
     </form>
   </section>
 </main>

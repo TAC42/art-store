@@ -38,20 +38,20 @@
                 </button>
             </div>
 
-            <a class="reset-pass" [routerLink]="['/reset']" title="Reset password?">
-                <span (click)="closeLoginModal()">Forgot password?</span>
-            </a>
+            <button class="reset-pass" (click)="openResetPassword($event)" title="Reset password?">
+                Forgot password?
+            </button>
 
             <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
 
-            <button class="flex" type="submit" [disabled]="(loginForm.invalid || !isCaptchaResolved)"
+            <button class="submit flex" type="submit" [disabled]="(loginForm.invalid || !isCaptchaResolved)"
                 [class.disabled]="(loginForm.invalid || !isCaptchaResolved)">
                 <span>Login</span>
             </button>
         </form>
 
-        <a class="switch" [routerLink]="['/signup']">
-            <span (click)="closeLoginModal()">Don't have an account yet? Signup!</span>
+        <a class="switch" (click)="closeLoginModal()" [routerLink]="['/signup']">
+            <span>Don't have an account yet? Signup!</span>
         </a>
     </section>
 </main>

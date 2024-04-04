@@ -37,7 +37,6 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { ProfileComponent } from './pages/profile/profile.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
 import { SignupComponent } from './pages/signup/signup.component'
 import { ServiceTermsComponent } from './pages/service-terms/service-terms.component'
 
@@ -62,7 +61,8 @@ import { CartComponent } from './cmps/modals/cart/cart.component'
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
-import { ImageContainerComponent } from './cmps/image-container/image-container.component'
+import { ImageContainerComponent } from './cmps/image-container/image-container.component';
+import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component'
 
 @NgModule({
   declarations: [
@@ -107,11 +107,11 @@ import { ImageContainerComponent } from './cmps/image-container/image-container.
     RandomProductCarouselComponent,
     EditPreviewComponent,
     UserEditComponent,
-    ResetPasswordComponent,
     PrivacyPolicyComponent,
     ImageContainerComponent,
     SignupComponent,
     ServiceTermsComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
