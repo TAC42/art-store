@@ -52,6 +52,7 @@ import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.com
 import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component'
 import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
+import { UserOrdersComponent } from './cmps/user-orders/user-orders.component'
 
 import { UserMsgComponent } from './cmps/modals/user-msg/user-msg.component'
 import { AsideMenuComponent } from './cmps/modals/aside-menu/aside-menu.component'
@@ -61,7 +62,7 @@ import { CartComponent } from './cmps/modals/cart/cart.component'
 import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-modal.component'
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
-import { ImageContainerComponent } from './cmps/image-container/image-container.component';
+import { ImageContainerComponent } from './cmps/image-container/image-container.component'
 import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component'
 
 @NgModule({
@@ -112,6 +113,7 @@ import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-passw
     SignupComponent,
     ServiceTermsComponent,
     ResetPasswordComponent,
+    UserOrdersComponent,
   ],
   imports: [
     BrowserModule,

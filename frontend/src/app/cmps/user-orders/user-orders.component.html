@@ -1,0 +1,80 @@
+<main class="orders grid w-100 layout-row" *ngIf="orders$ | async as orders">
+    <ng-container *ngIf="orders.length; else orderless">
+        <h3 class="family-bold">Your orders</h3>
+        <mat-expansion-panel class="order glass" [expanded]="optionState === 'order num'"
+            (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="heading flex family-bold">
+                    <span class="count"> {{ i + 1 }} </span>
+                    <span class="title"> Order #{{ order.createdAt }} </span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <section class="order-info grid">
+                <article class="purchased flex row align-center">
+                    <span>Purchased:</span>
+                    <span> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }} </span>
+                </article>
+
+                <article class="payment flex row align-center">
+                    <span>Payment:</span>
+                    <span style="text-transform: capitalize;"> {{ order.payment }} </span>
+                </article>
+
+                <article class="summary flex row align-center">
+                    <span>Summary:</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center text-capitalize">
+                            <ng-container *ngFor="let item of order.summary">
+                                <tr>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.amount }}</td>
+                                    <td>{{ item.price | currency : "USD" : "symbol" }}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="cost flex row align-center">
+                    <span>Cost:</span>
+                    <ul>
+                        <li class="grid">Subtotal:
+                            <span>{{ order.expenses.total | currency : "USD" : "symbol" }}</span>
+                        </li>
+                        <li class="grid">Taxes:
+                            <span>{{ order.expenses.taxes | currency : "USD" : "symbol" }}</span>
+                        </li>
+                        <li class="grid">Delivery Fee:
+                            <span>{{ order.expenses.deliveryFee | currency : "USD" : "symbol" }}</span>
+                        </li>
+                        <li class="grid">Grand Total:
+                            <span>{{ order.expenses.grandTotal| currency : "USD" : "symbol" }}</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="status flex row align-center">
+                    <span>Status:</span>
+                    <button class="text-capitalize fast-trans" [ngClass]="getStatusClass(order.status)">
+                        {{ order.status }}
+                    </button>
+                </article>
+            </section>
+        </mat-expansion-panel>
+    </ng-container>
+
+    <ng-template #orderless>
+        <section class="no-orders flex column justify-center">
+            <svg-render svgName="sorryRobot" />
+            <h3>You have no orders!</h3>
+        </section>
+    </ng-template>
+</main>
