@@ -4,7 +4,6 @@ app-home {
 
         .mobile-view {
             gap: 1em;
-            text-align: center;
             padding: 1em;
 
             .teasers {
@@ -13,8 +12,6 @@ app-home {
 
                 .teaser-area {
                     cursor: pointer;
-                    height: fit-content;
-                    transition: all 0.5s ease-in-out;
 
                     img {
                         transition: all 0.5s ease-in-out;
@@ -25,15 +22,12 @@ app-home {
                             color: $scdclr2;
                             font-size: 14px;
                             letter-spacing: 0.1em;
-                            font-family: 'nh-bold';
                             margin-block-start: 1em;
-                            transition: all 0.5s ease-in-out;
                         }
 
                         h2 {
                             color: $prmclr1;
                             font-size: 21px;
-                            transition: all 0.5s ease-in-out;
                         }
                     }
 
@@ -62,27 +56,19 @@ app-home {
                 .gallery-carousel {
                     position: relative;
 
-                    .lone-img {
-                        aspect-ratio: 1 / 1;
-                        width: 100%;
-                    }
-
                     .text-area {
                         button {
-                            margin: 1em auto 0 auto;
-                            width: fit-content;
                             padding: 0.75em 1.5em;
                             background: $prmclr3;
                             color: $prmclr1;
                             border: 1px solid $prmclr1;
-                            transition: all 0.5s ease-in-out;
                             letter-spacing: 0.05em;
                             font-size: 16px;
+                            margin: 1em auto 0 auto;
 
                             &:hover {
                                 background: $prmclr1;
                                 color: $prmclr3;
-                                text-decoration: none;
                             }
                         }
                     }
@@ -92,7 +78,6 @@ app-home {
 
         .desktop-view {
             gap: 2em;
-            text-align: center;
             padding: 2em;
             grid-template-columns: 1fr 1fr;
             max-width: 2000px;
@@ -104,8 +89,6 @@ app-home {
 
                 .teaser-area {
                     cursor: pointer;
-                    height: fit-content;
-                    transition: all 0.5s ease-in-out;
 
                     img {
                         transition: all 0.5s ease-in-out;
@@ -116,14 +99,11 @@ app-home {
                             color: $scdclr2;
                             font-size: 14px;
                             letter-spacing: 0.1em;
-                            font-family: 'nh-bold';
                             margin-block-start: 1em;
-                            transition: all 0.5s ease-in-out;
                         }
 
                         h2 {
                             font-size: 21px;
-                            transition: all 0.5s ease-in-out;
                         }
                     }
 
@@ -152,27 +132,19 @@ app-home {
                 .gallery-carousel {
                     position: relative;
 
-                    .lone-img {
-                        aspect-ratio: 1 / 1;
-                        width: 100%;
-                    }
-
                     .text-area {
                         button {
-                            margin: 1em auto 0 auto;
-                            width: fit-content;
                             padding: 0.75em 1.5em;
                             background: $prmclr3;
                             color: $prmclr1;
                             border: 1px solid $prmclr1;
-                            transition: all 0.5s ease-in-out;
                             letter-spacing: 0.05em;
                             font-size: 18px;
+                            margin: 1em auto 0 auto;
 
                             &:hover {
                                 background: $prmclr1;
                                 color: $prmclr3;
-                                text-decoration: none;
                             }
                         }
                     }

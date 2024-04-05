@@ -1,15 +1,11 @@
 app-about {
     .page-contents {
         .about-nav {
-            width: 100%;
-            justify-content: center;
-            align-items: center;
             gap: 2em;
-            border-bottom: 1px solid $scdclr3;
             padding: 0.5em 0em;
+            border-bottom: 1px solid $scdclr3;
 
             a {
-                transition: all 0.3s;
                 font-size: 18px;
 
                 &.active {
@@ -27,7 +23,6 @@ app-about {
 introduction-page {
     .page-contents {
         gap: 1em;
-        text-align: center;
         padding-bottom: 1em;
 
         .gallery-carousel {
@@ -35,12 +30,10 @@ introduction-page {
         }
 
         .introduction-text {
-            text-align: left;
             gap: 1em;
 
             p {
                 color: $prmclr1;
-                font-family: 'sabon';
                 font-size: 18px;
                 line-height: 1.6;
             }

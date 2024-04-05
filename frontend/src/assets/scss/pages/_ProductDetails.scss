@@ -8,7 +8,6 @@ product-details {
 
                 .actions {
                     justify-content: space-between;
-                    align-items: center;
                     position: fixed;
                     top: 0;
                     height: 62px;
@@ -109,7 +108,6 @@ product-details {
                     }
 
                     .action-btn {
-                        align-items: center;
                         gap: 0.25em;
                         padding: 0.5em 1.5em;
                         border: 1px solid $prmclr1;
@@ -160,7 +158,6 @@ product-details {
 
                 .actions {
                     justify-content: space-between;
-                    align-items: center;
                     padding: 0.5em 2em;
 
                     h2 {
@@ -193,7 +190,6 @@ product-details {
 
                 .image-container {
                     grid-column: 1 / 2;
-                    height: fit-content;
                     align-self: center;
                     margin-block-start: 1em;
 
@@ -249,9 +245,7 @@ product-details {
                     }
 
                     .action-btn {
-                        align-items: center;
                         gap: 0.25em;
-                        grid-column: 2 / -1;
                         padding: 0.5em 1.5em;
                         border: 1px solid $prmclr1;
                         border-radius: 0.5em;

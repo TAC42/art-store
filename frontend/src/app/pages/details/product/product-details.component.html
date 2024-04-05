@@ -2,7 +2,7 @@
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
         class="mobile-view flex column">
         <section class="actions-wrapper w-100">
-            <div class="actions flex row w-100">
+            <div class="actions flex row align-center w-100">
                 <a [routerLink]="['/shop']" title="Exit details page?">
                     <svg-render class="fast-trans" svgName="leftArrowIcon" />
                 </a>
@@ -49,12 +49,12 @@
                         option to order it in the near future, please press inquire.
                     </p>
 
-                    <button class="action-btn flex row fast-trans"
+                    <button class="action-btn flex row align-center fast-trans"
                         [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
                         (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
                         <span class="family-bold fast-trans">{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
 
-                        <svg-render class="fast-trans" *ngIf="product.stock > 0" svgName="shoppingCart" />
+                        <svg-render *ngIf="product.stock > 0" class="fast-trans" svgName="shoppingCart" />
                     </button>
                 </div>
             </section>
@@ -67,7 +67,7 @@
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column">
         <section class="actions-wrapper w-100">
-            <div class="actions flex row layout-row">
+            <div class="actions flex row align-center layout-row">
                 <a [routerLink]="['/shop']" title="Exit details page?">
                     <svg-render class="fast-trans" svgName="leftArrowIcon" />
                 </a>
@@ -114,12 +114,12 @@
                         option to order it in the near future, please press inquire.
                     </p>
 
-                    <button class="action-btn flex row fast-trans"
+                    <button class="action-btn flex row align-center fast-trans"
                         [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
                         (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
                         <span class="family-bold fast-trans">{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
 
-                        <svg-render class="fast-trans" *ngIf="product.stock > 0" svgName="shoppingCart" />
+                        <svg-render *ngIf="product.stock > 0" class="fast-trans" svgName="shoppingCart" />
                     </button>
                 </div>
             </section>

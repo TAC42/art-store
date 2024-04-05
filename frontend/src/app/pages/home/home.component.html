@@ -1,21 +1,21 @@
 <main class="page-contents w-h-100 flex column">
-  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column">
+  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column text-center">
     <section class="teasers grid">
-      <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/about/introduction')">
         <image-container [imageUrl]="loneImg1" />
 
         <div class="text-area flex column">
-          <p>BIOGRAPHY</p>
-          <h2>Introduction to Ori Carlin</h2>
+          <p class="family-bold normal-trans">BIOGRAPHY</p>
+          <h2 class="normal-trans">Introduction to Ori Carlin</h2>
         </div>
       </div>
 
-      <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/sculpture/details/stairway to the sky')">
         <image-container [imageUrl]="loneImg2" />
 
         <div class="text-area flex column">
-          <p>ONE OF MY FINEST</p>
-          <h2>The Endless Staircase</h2>
+          <p class="family-bold normal-trans">ONE OF MY FINEST</p>
+          <h2 class="normal-trans">The Endless Staircase</h2>
         </div>
       </div>
     </section>
@@ -25,7 +25,7 @@
         <product-carousel [carouselItems]="artwareProducts" />
 
         <div class="text-area flex column">
-          <button class="flex" (click)="navigateTo('/artware')" title="Go to artware gallery?">
+          <button class="flex normal-trans" (click)="navigateTo('/artware')" title="Go to artware gallery?">
             <span>Explore Ware</span>
           </button>
         </div>
@@ -35,7 +35,7 @@
         <product-carousel [carouselItems]="shopProducts" />
 
         <div class="text-area flex column">
-          <button class="flex" (click)="navigateTo('/shop')" title="Go to shop?">
+          <button class="flex normal-trans" (click)="navigateTo('/shop')" title="Go to shop?">
             <span>Visit Shop</span>
           </button>
         </div>
@@ -43,23 +43,23 @@
     </section>
   </section>
 
-  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view grid">
+  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view grid text-center">
     <section class="teasers flex column">
-      <div class="teaser-area grid" (click)="navigateTo('/sculpture/details/stairway to the sky')">
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/sculpture/details/stairway to the sky')">
         <image-container [imageUrl]="loneImg2" />
 
         <div class="text-area flex column">
-          <p>ONE OF MY FINEST</p>
-          <h2>The Endless Staircase</h2>
+          <p class="family-bold normal-trans">ONE OF MY FINEST</p>
+          <h2 class="normal-trans">The Endless Staircase</h2>
         </div>
       </div>
 
-      <div class="teaser-area grid" (click)="navigateTo('/about/introduction')">
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/about/introduction')">
         <image-container [imageUrl]="loneImg1" />
 
         <div class="text-area flex column">
-          <p>BIOGRAPHY</p>
-          <h2>Introduction to Ori Carlin</h2>
+          <p class="family-bold normal-trans">BIOGRAPHY</p>
+          <h2 class="normal-trans">Introduction to Ori Carlin</h2>
         </div>
       </div>
     </section>
@@ -69,7 +69,7 @@
         <product-carousel [carouselItems]="artwareProducts" />
 
         <div class="text-area flex column">
-          <button class="flex" (click)="navigateTo('/artware')" title="Go to artware gallery?">
+          <button class="flex normal-trans" (click)="navigateTo('/artware')" title="Go to artware gallery?">
             <span>Explore Ware</span>
           </button>
         </div>
@@ -79,7 +79,7 @@
         <product-carousel [carouselItems]="shopProducts" />
 
         <div class="text-area flex column">
-          <button class="flex" (click)="navigateTo('/shop')" title="Go to shop?">
+          <button class="flex normal-trans" (click)="navigateTo('/shop')" title="Go to shop?">
             <span>Visit Shop</span>
           </button>
         </div>

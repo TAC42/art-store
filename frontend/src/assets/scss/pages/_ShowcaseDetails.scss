@@ -6,45 +6,42 @@ showcase-details {
         .mobile-view {
             gap: 1em;
 
-            .actions {
-                justify-content: space-between;
-                align-items: center;
-                position: fixed;
-                top: 0;
-                width: 100%;
-                height: 62px;
-                z-index: 11;
-                padding: 0.5em 1em;
-                background: white;
-                border-bottom: 1px solid $scdclr3;
+            .actions-wrapper {
+                .actions {
+                    justify-content: space-between;
+                    align-items: center;
+                    position: fixed;
+                    top: 0;
+                    height: 62px;
+                    z-index: 11;
+                    padding: 0.5em 1em;
+                    background: $prmclr2;
+                    border-bottom: 1px solid $scdclr3;
 
-                h3 {
-                    letter-spacing: 0.5px;
-                    font-size: 26px;
-                    text-transform: capitalize;
-                    font-family: 'nh-bold';
-                }
-
-                button,
-                a {
-                    width: 42px;
-                    height: 42px;
-
-                    svg-render {
-                        fill: $scdclr2;
-                        transition: fill 0.3s ease-in-out;
+                    h3 {
+                        letter-spacing: 0.5px;
+                        font-size: 26px;
                     }
 
-                    &:hover {
+                    button,
+                    a {
+                        width: 42px;
+                        height: 42px;
+
                         svg-render {
-                            fill: $prmclr1;
+                            fill: $scdclr2;
+                        }
+
+                        &:hover {
+                            svg-render {
+                                fill: $prmclr1;
+                            }
                         }
                     }
                 }
             }
 
             .product-area {
-                text-align: left;
                 margin-block-end: 1em;
 
                 .image-container {
@@ -62,20 +59,15 @@ showcase-details {
                 }
 
                 .details-area {
-                    margin-block-start: 1em;
-                    font-family: 'sabon';
                     padding: 0 1em;
+                    margin-block-start: 1em;
 
                     h4 {
-                        width: 100%;
-                        font-family: 'nh-bold';
-                        text-transform: capitalize;
                         font-size: 26px;
                         margin-block-end: 0.5em;
                     }
 
                     p {
-                        width: 100%;
                         color: $scdclr2;
                         letter-spacing: 0.15px;
                         font-size: 18px;
@@ -90,23 +82,19 @@ showcase-details {
 
                     .notice {
                         color: $prmclr1;
-                        font-weight: bold;
                         margin-block-end: 1em;
                     }
 
                     button {
-                        border-radius: 0.5em;
-                        margin: 1em auto;
-                        border: 1px solid $prmclr1;
                         padding: 0.5em 1.5em;
-                        transition: all 0.3s ease-in-out;
+                        border-radius: 0.5em;
+                        border: 1px solid $prmclr1;
+                        margin: 1em auto;
 
                         span {
-                            font-size: 16px;
-                            font-family: 'nh-bold';
-                            color: $prmclr1;
-                            transition: all 0.3s ease-in-out;
                             padding: 0.2em 0.75em;
+                            font-size: 16px;
+                            color: $prmclr1;
                         }
 
                         &:hover {
@@ -114,7 +102,6 @@ showcase-details {
 
                             span {
                                 color: $prmclr3;
-                                text-decoration: none;
                             }
                         }
                     }
@@ -123,24 +110,19 @@ showcase-details {
         }
 
         .desktop-view {
-            margin-block-start: 1em;
             gap: 1em;
+            margin-block-start: 1em;
 
             a {
-                padding: 0 2em;
-                width: fit-content;
-                text-transform: uppercase;
-                letter-spacing: 1.25px;
-                color: $scdclr2;
                 align-items: center;
                 gap: 0.5em;
-                transition: all 0.3s ease-in-out;
+                padding: 0 2em;
+                letter-spacing: 1.25px;
+                color: $scdclr2;
 
                 svg-render {
                     width: 24px;
                     height: 24px;
-
-                    transition: all 0.3s ease-in-out;
                     fill: $scdclr2;
                 }
 
@@ -154,11 +136,10 @@ showcase-details {
             }
 
             .product-area {
-                text-align: left;
-                margin-block-end: 1em;
-                padding: 0 2em;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1em;
+                padding: 0 2em;
+                margin-block-end: 1em;
 
                 .image-container {
                     grid-column: 1 / 2;
@@ -178,22 +159,17 @@ showcase-details {
                 }
 
                 .details-area {
-                    margin-block-start: 1em;
-                    font-family: 'sabon';
                     grid-column: 2 / -1;
                     padding: 0 2em;
                     max-width: 600px;
+                    margin-block-start: 1em;
 
                     h4 {
-                        width: 100%;
-                        font-family: 'nh-bold';
-                        text-transform: capitalize;
                         font-size: 26px;
                         margin-block-end: 0.5em;
                     }
 
                     p {
-                        width: 100%;
                         color: $scdclr2;
                         letter-spacing: 0.15px;
                         font-size: 16px;
@@ -209,23 +185,18 @@ showcase-details {
                     .notice {
                         color: $prmclr1;
                         font-size: 16px;
-                        font-weight: bold;
                         margin-block-end: 1em;
                     }
 
                     button {
-                        border-radius: 0.5em;
-                        margin: 1em auto;
-                        border: 1px solid $prmclr1;
                         padding: 0.5em 1.5em;
-                        transition: all 0.3s ease-in-out;
-                        grid-column: 2 / -1;
+                        border-radius: 0.5em;
+                        border: 1px solid $prmclr1;
+                        margin: 2em auto;
 
                         span {
                             font-size: 16px;
-                            font-family: 'nh-bold';
                             color: $prmclr1;
-                            transition: all 0.3s ease-in-out;
                             padding: 0.2em 0.75em;
                         }
 
@@ -234,7 +205,6 @@ showcase-details {
 
                             span {
                                 color: $prmclr3;
-                                text-decoration: none;
                             }
                         }
                     }

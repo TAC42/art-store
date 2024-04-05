@@ -91,6 +91,35 @@
 }
 
 ////////////////////////////////////////////////////////////////
+// Width & Height
+.w-h-100 {
+    width: 100%;
+    height: 100%;
+    grid-row: 2 / 3;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    width: 100%;
+}
+
+.w-h-fit {
+    width: fit-content;
+    height: fit-content;
+}
+
+.w-fit {
+    width: fit-content
+}
+
+.h-fit {
+    height: fit-content
+}
+
+////////////////////////////////////////////////////////////////
 // Media helpers
 .square-ratio {
     @include aspect-ratio(1, 1);

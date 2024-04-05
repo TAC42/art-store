@@ -1,18 +1,18 @@
 <main class="dropdown-wrapper flex" *ngIf="modService.isModalOpen('user-dropdown')">
-    <section class="dropdown-contents flex column" (clickOutside)="closeDropdown()">
-        <div class="action-area" *ngIf="(user$ | async)?.isAdmin">
+    <section class="dropdown-contents flex column w-100" (clickOutside)="closeDropdown()">
+        <div *ngIf="(user$ | async)?.isAdmin" class="action-area fast-trans">
             <span (click)="navigateTo('/edit')">Add Product</span>
         </div>
 
-        <div class="action-area" *ngIf="(user$ | async)?._id">
+        <div *ngIf="(user$ | async)?._id" class="action-area fast-trans">
             <span (click)="navigateTo('/profile')">Profile</span>
         </div>
 
-        <div class="action-area" *ngIf="(user$ | async)?.isAdmin">
+        <div *ngIf="(user$ | async)?.isAdmin" class="action-area fast-trans">
             <span (click)="navigateTo('/dashboard')">Dashboard</span>
         </div>
 
-        <div class="action-area" *ngIf="user$ | async as loggedinUser">
+        <div *ngIf="user$ | async as loggedinUser" class="action-area fast-trans">
             <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
                 {{ loggedinUser._id ? 'Logout' : 'Login' }}
             </span>
