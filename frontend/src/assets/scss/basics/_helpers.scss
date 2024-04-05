@@ -1,18 +1,4 @@
-// Font Sizes
-
-// List
-.clean-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    &>li {
-        margin: 0;
-        padding: 0;
-    }
-}
-
-// Positioning
+// Flex & Grid
 .flex {
     display: flex;
 
@@ -40,7 +26,7 @@
         justify-content: space-around;
     }
 
-    &.auto-center {
+    &.full-center {
         justify-content: center;
         align-items: center;
     }
@@ -54,6 +40,8 @@
     display: grid;
 }
 
+////////////////////////////////////////////////////////////////
+// Text stuff
 .text-center {
     text-align: center;
 }
@@ -66,11 +54,43 @@
     text-align: left;
 }
 
-.center-block {
-    display: block;
-    margin: 0 auto;
+.text-capitalize {
+    text-transform: capitalize;
 }
 
+.text-allcaps {
+    text-transform: uppercase;
+}
+
+.text-nocaps {
+    text-transform: lowercase;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.family-bold {
+    font-family: 'nh-bold';
+}
+
+.family-regular {
+    font-family: 'nh-medium';
+}
+
+.family-light {
+    font-family: 'nh-light';
+}
+
+.family-sabon {
+    font-family: 'sabon';
+}
+
+.family-nunito {
+    font-family: 'nunito';
+}
+
+////////////////////////////////////////////////////////////////
 // Media helpers
 .square-ratio {
     @include aspect-ratio(1, 1);
@@ -84,134 +104,32 @@
     @include aspect-ratio(4, 3);
 }
 
-// Buttons
-.simple-button {
-    background: transparent;
-    color: black;
-    font-size: inherit;
-    font-family: inherit;
-    border: 0;
-    opacity: 0.6;
-    transition: 0.3s all;
-    padding: 0;
-    cursor: pointer;
-
-    &:disabled {
-        cursor: initial;
-        opacity: 0.2;
-    }
-
-    i {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-    }
-
-    &:hover:not(:disabled) {
-        opacity: 1;
-    }
-}
-
-.medium-button {
-    font-size: 1.5rem;
-}
-
+////////////////////////////////////////////////////////////////
 // Transitions
 .fast-trans {
-    transition: 0.25s all;
+    transition: all 0.3s ease-in-out;
 }
 
 .normal-trans {
-    transition: 0.4s all;
+    transition: all 0.5s ease-in-out;
 }
 
 .slow-trans {
-    transition: 0.7s all;
+    transition: all 0.75s ease-in-out;
 }
 
-// Spacing
-.p5 {
-    padding: 5px;
-}
-
-.p10 {
-    padding: 10px;
-}
-
-.p20 {
-    padding: 20px;
-}
-
-.m5 {
-    margin: 5px;
-}
-
-.m10 {
-    margin: 10px;
-}
-
-.m20 {
-    margin: 20px;
-}
-
-// Normalize Background
-.normBackground {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-}
-
-// Dividing
-.bottom-divider {
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid lightgray;
-}
-
-// Others
-.blurred {
-    filter: blur(4px);
-}
-
-.simple-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: 15px auto;
-
-    &>*:not(:last-child) {
-        margin-bottom: 10px;
-    }
-
-    input:not([type="checkbox"]),
-    button {
-        padding: 5px 8px;
-        width: 100%;
-    }
-
-    .form-errors {
-        text-align: center;
-        margin-top: 24px;
-        color: red;
-        font-size: 15px;
-    }
-}
-
-.z-50{
+////////////////////////////////////////////////////////////////
+// Other
+.z-50 {
     position: relative;
     z-index: 50 !important;
 }
 
-.b {
-    font-family: 'nh-bold', sans-serif; 
-}
-
-
-.glass{
+.glass {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
-    border:1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
