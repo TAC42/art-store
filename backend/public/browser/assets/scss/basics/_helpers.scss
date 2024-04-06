@@ -103,7 +103,7 @@
 }
 
 .h-100 {
-    width: 100%;
+    height: 100%;
 }
 
 .w-h-fit {
@@ -117,20 +117,6 @@
 
 .h-fit {
     height: fit-content
-}
-
-////////////////////////////////////////////////////////////////
-// Media helpers
-.square-ratio {
-    @include aspect-ratio(1, 1);
-}
-
-.wide-ratio {
-    @include aspect-ratio(16, 9);
-}
-
-.square-3 {
-    @include aspect-ratio(4, 3);
 }
 
 ////////////////////////////////////////////////////////////////

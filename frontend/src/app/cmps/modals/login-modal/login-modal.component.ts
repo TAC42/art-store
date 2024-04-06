@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { UserLogin } from '../../../models/user'
@@ -14,7 +13,6 @@ import { FormUtilsService } from '../../../services/form-utils.service'
 })
 
 export class LoginModalComponent implements OnInit {
-  private router = inject(Router)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
@@ -76,8 +74,6 @@ export class LoginModalComponent implements OnInit {
       this.isCaptchaResolved = false
       this.captchaResponse = null
       this.closeLoginModal()
-
-      setTimeout(() => this.router.navigate(['/profile']), 3000)
     }
   }
 }

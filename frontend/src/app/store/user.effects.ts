@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
+import { Router } from '@angular/router'
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators'
 import { EMPTY, of } from 'rxjs'
 import { Store } from '@ngrx/store'
@@ -16,6 +17,7 @@ import { showSuccessMsg, showErrorMsg, EventBusService } from '../services/event
 
 export class UserEffects {
     private actions$ = inject(Actions)
+    private router = inject(Router)
     private userService = inject(UserService)
     private eBusService = inject(EventBusService)
     private store = inject(Store<AppState>)
@@ -75,7 +77,7 @@ export class UserEffects {
 
             mergeMap(action => this.userService.login(action.credentials).pipe(
                 tap(user => showSuccessMsg('Login Successful!',
-                    `Welcome back ${user.username}!`, this.eBusService)),
+                    `Welcome back ${user.username}! Redirecting...`, this.eBusService)),
                 map(user => SET_LOGGEDIN_USER({ user })),
                 catchError((error) => {
                     console.error(`Error fetching logged-in user: `, error)
@@ -84,7 +86,10 @@ export class UserEffects {
                     return EMPTY
                 })
             )),
-            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+            tap(() => {
+                this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+                setTimeout(() => this.router.navigate(['/profile']), 3000)
+            })
         )
     )
 
@@ -95,7 +100,7 @@ export class UserEffects {
 
             mergeMap(action => this.userService.signup(action.credentials).pipe(
                 tap(user => showSuccessMsg('Signup Successful!',
-                    `Welcome ${user.username}!`, this.eBusService)),
+                    `Welcome ${user.username}! Redirecting...`, this.eBusService)),
                 map(user => SET_LOGGEDIN_USER({ user })),
                 catchError((error) => {
                     console.error(`Error fetching signup user: `, error)
@@ -104,7 +109,10 @@ export class UserEffects {
                     return EMPTY
                 })
             )),
-            tap(() => this.store.dispatch(SET_LOADING_STATE({ isLoading: false })))
+            tap(() => {
+                this.store.dispatch(SET_LOADING_STATE({ isLoading: false }))
+                setTimeout(() => this.router.navigate(['/profile']), 3000)
+            })
         )
     )
 

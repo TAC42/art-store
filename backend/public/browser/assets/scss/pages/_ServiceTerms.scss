@@ -12,10 +12,6 @@ service-terms {
             margin-block-end: 1em;
 
             h2 {
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                font-family: 'nh-bold';
                 user-select: none;
                 font-size: 28px;
                 gap: 0.25em;
@@ -37,14 +33,6 @@ service-terms {
             h3 {
                 font-size: 21px;
                 border-bottom: 2px dashed $prmclr1;
-                width: fit-content;
-                font-family: 'nh-bold';
-            }
-
-            p {
-                a {
-                    font-family: 'nh-bold';
-                }
             }
 
             ul {

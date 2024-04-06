@@ -1,5 +1,4 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
-import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -19,7 +18,6 @@ export class SignupComponent implements OnInit {
   @HostBinding('class.full') fullClass = true
   @HostBinding('class.w-h-100') fullWidthHeightClass = true
 
-  private router = inject(Router)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
@@ -91,8 +89,6 @@ export class SignupComponent implements OnInit {
       this.signupForm.reset()
       this.isCaptchaResolved = false
       this.captchaResponse = null
-
-      setTimeout(() => this.router.navigate(['/profile']), 3000)
     }
   }
 }
