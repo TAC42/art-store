@@ -59,6 +59,8 @@ export class LoginModalComponent implements OnInit {
   closeLoginModal(): void {
     this.modService.closeModal('login')
     this.loginForm.reset()
+    this.isCaptchaResolved = false
+    this.captchaResponse = null
   }
 
   onSubmit(): void {
@@ -69,10 +71,6 @@ export class LoginModalComponent implements OnInit {
         username, password, recaptchaToken: this.captchaResponse
       }
       this.store.dispatch(LOGIN({ credentials }))
-      // reset of form & recaptcha token
-      this.loginForm.reset()
-      this.isCaptchaResolved = false
-      this.captchaResponse = null
       this.closeLoginModal()
     }
   }

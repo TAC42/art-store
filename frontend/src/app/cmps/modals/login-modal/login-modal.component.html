@@ -1,9 +1,9 @@
 <main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('login')">
     <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
-        <form class="flex column" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(loginForm, 'username')">
-                <label for="username" class="flex row">
-                    <div class="label-info flex row">
+        <form class="flex column align-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'username')">
+                <label for="username" class="flex row align-center text-capitalize">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="personIcon" />
                         <span>Username</span>
                     </div>
@@ -16,10 +16,9 @@
                     customValidator [minLength]=3 [maxLength]=24 autofocus>
             </div>
 
-            <div class="input-area flex column" style="position: relative;"
-                [class.error]="formUtils.isFieldInvalid(loginForm, 'password')">
-                <label for="password" class="flex row">
-                    <div class="label-info flex row">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'password')">
+                <label for="password" class="flex row align-center text-capitalize">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="lockIcon" />
                         <span>Password</span>
                     </div>
@@ -38,19 +37,20 @@
                 </button>
             </div>
 
-            <button class="reset-pass" (click)="openResetPassword($event)" title="Reset password?">
+            <button class="reset-pass family-bold" (click)="openResetPassword($event)" title="Reset password?">
                 Forgot password?
             </button>
 
             <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
 
-            <button class="submit flex" type="submit" [disabled]="(loginForm.invalid || !isCaptchaResolved)"
+            <button class="submit flex normal-trans" type="submit"
+                [disabled]="(loginForm.invalid || !isCaptchaResolved)"
                 [class.disabled]="(loginForm.invalid || !isCaptchaResolved)">
                 <span>Login</span>
             </button>
         </form>
 
-        <a class="switch" (click)="closeLoginModal()" [routerLink]="['/signup']">
+        <a class="switch family-bold text-center fast-trans" (click)="closeLoginModal()" [routerLink]="['/signup']">
             <span>Don't have an account yet? Signup!</span>
         </a>
     </section>

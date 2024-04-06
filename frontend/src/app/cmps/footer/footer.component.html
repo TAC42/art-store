@@ -1,54 +1,54 @@
 <footer class="footer-contents layout-row">
-  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view flex column">
-    <div class="links flex row">
-      <a class="mail-link" routerLink="/about/contact">
-        <svg-render svgName="envelopeIcon" />
+  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view flex column align-center w-100">
+    <div class="links flex row align-center w-100">
+      <a class="flex fast-trans" routerLink="/about/contact">
+        <svg-render class="flex" svgName="envelopeIcon" />
       </a>
-
-      <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
-        <svg-render svgName="instagramIcon" />
+      <a class="flex fast-trans" href="https://www.instagram.com/oricarlin/" target="_blank">
+        <svg-render class="flex" svgName="instagramIcon" />
       </a>
-
-      <a class="flex" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
-        <svg-render svgName="venmoIcon" />
+      <a class="flex fast-trans" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
+        <svg-render class="flex" svgName="venmoIcon" />
       </a>
     </div>
 
-    <span>All Rights Reserved © ORICARLIN 2024</span>
+    <span>All Rights Reserved - © ORICARLIN 2024</span>
     <span class="terms-privacy flex row">
       <a [routerLink]="['/privacy']" routerLinkActive="active">Privacy Policy</a>
       <a [routerLink]="['/terms']" routerLinkActive="active">Terms of Service</a>
     </span>
+
     <span>Made by <a href="https://github.com/TAC42">TAC</a> & <a
         href="https://github.com/Valeriy-Kuvshinov">VK</a></span>
   </section>
 
-  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view flex row">
+  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view flex row align-center w-100">
     <div class="footer-part flex column">
-      <a routerLink="/about/introduction" routerLinkActive="active">About</a>
-      <a routerLink="/shop" routerLinkActive="active">Shop</a>
-      <a routerLink="/sculpture" routerLinkActive="active">Sculpture</a>
-      <a routerLink="/artware" routerLinkActive="active">Ware</a>
+      <a class="fast-trans" routerLink="/about/introduction" routerLinkActive="active">About</a>
+      <a class="fast-trans" routerLink="/shop" routerLinkActive="active">Shop</a>
+      <a class="fast-trans" routerLink="/sculpture" routerLinkActive="active">Sculpture</a>
+      <a class="fast-trans" routerLink="/artware" routerLinkActive="active">Ware</a>
     </div>
 
     <div class="footer-part flex column">
       <div class="social-media flex row">
-        <a class="mail-link" routerLink="/about/contact">
-          <svg-render svgName="envelopeIcon" />
+        <a class="flex full-center fast-trans" routerLink="/about/contact">
+          <svg-render class="flex" svgName="envelopeIcon" />
         </a>
-        <a class="flex" href="https://www.instagram.com/oricarlin/" target="_blank">
-          <svg-render svgName="instagramIcon" />
+        <a class="flex full-center fast-trans" href="https://www.instagram.com/oricarlin/" target="_blank">
+          <svg-render class="flex" svgName="instagramIcon" />
         </a>
-
-        <a class="flex" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
-          <svg-render svgName="venmoIcon" />
+        <a class="flex full-center fast-trans" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
+          <svg-render class="flex" svgName="venmoIcon" />
         </a>
       </div>
-      <span>All Rights Reserved © ORICARLIN 2024</span>
+
+      <span>All Rights Reserved - © ORICARLIN 2024</span>
       <span class="terms-privacy flex row">
         <a [routerLink]="['/privacy']" routerLinkActive="active">Privacy Policy</a>
         <a [routerLink]="['/terms']" routerLinkActive="active">Terms of Service</a>
       </span>
+
       <span>Made by <a href="https://github.com/TAC42">TAC</a> & <a
           href="https://github.com/Valeriy-Kuvshinov">VK</a></span>
     </div>

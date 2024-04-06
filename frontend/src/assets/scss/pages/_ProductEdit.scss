@@ -7,18 +7,15 @@ product-edit {
       $scdclr2 );
 
   .page-contents {
-    text-align: center;
     gap: 1em;
-    width: 100%;
 
     a {
       align-self: start;
       margin: 0.5em 0;
-      width: 36px;
+      height: 36px;
 
       svg-render {
         fill: $scdclr2;
-        transition: fill 0.3s ease-in-out;
 
         &:hover {
           fill: $prmclr1;
@@ -29,31 +26,25 @@ product-edit {
     form {
       gap: 1em;
       padding-bottom: 1em;
-      align-items: center;
       max-width: 900px;
       margin-block-start: 0.5em;
 
       .input-area {
-        width: 100%;
-        text-align: left;
         gap: 0.25em;
         font-size: 18px;
 
         label {
           padding: 0 0.5em;
-          align-items: center;
           justify-content: space-between;
           min-height: 30px;
 
           span {
             color: $mnrclr2;
             font-size: 15px;
-            text-transform: capitalize;
           }
 
           .label-info {
             gap: 0.5em;
-            align-items: center;
 
             svg-render {
               width: 24px;
@@ -74,15 +65,14 @@ product-edit {
         select {
           padding: 0.5em;
           width: 100%;
-          transition: all 0.3s;
-          border-radius: 0.5em;
           border: 1px solid $scdclr4;
+          border-radius: 0.5em;
           color: $prmclr1;
           font-size: 16px;
+          transition: all 0.3s ease-in-out;
 
           &:focus {
             border: 1px solid $prmclr1;
-            outline: none;
           }
         }
 
@@ -100,21 +90,17 @@ product-edit {
       }
 
       .form-actions {
-        width: 100%;
         justify-content: space-between;
-        align-items: center;
         padding: 0 0.5em;
         margin-block-start: 1em;
 
         button {
-          padding: 0.75em 2em 0.75em 1.25em;
-          transition: all 0.5s;
+          align-self: start;
+          gap: 0.5em;
+          padding: 0.75em 1.25em 0.75em 1.25em;
           background: $prmclr2;
           color: $prmclr1;
           border-radius: 0.5em;
-          align-items: center;
-          align-self: start;
-          gap: 0.5em;
 
           &.disabled {
             background: $scdclr2;
@@ -124,27 +110,22 @@ product-edit {
           span {
             font-size: 19px;
             line-height: 1.6;
-            font-family: "nh-bold";
           }
 
           svg-render {
             width: 32px;
             height: 32px;
-
-            svg {
-              transition: all 0.5s;
-              fill: $prmclr1;
-              transform: rotate(45deg);
-            }
+            fill: $prmclr1;
+            transform: translateY(-5px);
           }
 
           &:hover {
             background: $mnrclr1;
             color: $prmclr3;
 
-            svg {
+            svg-render {
               fill: $prmclr3;
-              transform: rotate(0deg) translate(12px, -3px);
+              transform: translateY(5px);
             }
           }
         }

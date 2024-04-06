@@ -1,30 +1,28 @@
 <main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')">
     <section class="user-auth-modal flex column" *ngIf="verifyForm">
-        <span>
-            {{ message }}
-        </span>
+        <span> {{ message }} </span>
 
         <span *ngIf="codeSent">
             If you do not see the code in your inbox, please check your Spam folder.
         </span>
 
-        <button (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
+        <button class="normal-trans" (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
             [class.disabled]="!resendAvailable && codeSent">
-            <span *ngIf="!resendAvailable && codeSent">
-                {{ timer }} seconds
-            </span>
+            <span *ngIf="!resendAvailable && codeSent"> {{ timer }} seconds </span>
+
             <span *ngIf="resendAvailable || !codeSent">
                 {{ codeSent ? 'Resend code' : 'Send code' }}
             </span>
         </button>
 
-        <form *ngIf="codeSent" class="flex column" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(verifyForm, 'code')">
-                <label for="code" class="flex row">
+        <form *ngIf="codeSent" class="flex column align-center" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(verifyForm, 'code')">
+                <label for="code" class="flex row align-center text-capitalize">
                     <span *ngIf="formUtils.isFieldInvalid(verifyForm, 'code')">
                         {{ formUtils.getErrorMessage(verifyForm, 'code') }}
                     </span>
                 </label>
+
                 <input id="code" type="text" formControlName="code" placeholder="XXXXXX" maxlength="6" customValidator
                     [minLength]=1 [maxLength]=6 [allowLetters]="false" autofocus>
             </div>

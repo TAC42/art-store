@@ -3,23 +3,21 @@
     position: fixed;
     top: 0;
     right: 0;
-    background: $prmclr2;
+    padding: 0.5em 1em;
     max-width: 500px;
     z-index: 15;
-    padding: 0.5em 1em;
+    background: $prmclr2;
 
     .cart-header {
       justify-content: space-between;
-      align-items: center;
       margin-block-end: 1em;
 
       .title {
-        font-family: "nunito";
         font-size: 1.75em;
         color: $prmclr1;
       }
 
-      .exit {
+      svg-render {
         cursor: pointer;
         width: 2em;
         height: 2em;
@@ -27,13 +25,10 @@
     }
 
     .cart-main {
-      height: 100%;
       grid-template-rows: 1fr auto;
       gap: 2em;
 
       .cart-list {
-        height: fit-content;
-
         .cart-item {
           max-height: 120px;
           grid-template-columns: repeat(5, 1fr);
@@ -58,14 +53,12 @@
             .name {
               grid-column: 1 / 3;
               grid-row: 1 / 2;
-              text-transform: capitalize;
               color: $mnrclr8;
             }
 
             .price {
               grid-column: 3 / -1;
               grid-row: 1 / 2;
-              font-family: "nh-bold";
               justify-self: end;
               color: $mnrclr8;
             }
@@ -73,12 +66,9 @@
             .quantity {
               grid-column: 3 / -1;
               grid-row: 3 / -1;
-              align-items: center;
               gap: 0.5em;
               color: $mnrclr8;
-            }
 
-            .quantity {
               svg-render {
                 width: 2em;
                 height: 2em;
@@ -87,7 +77,6 @@
                 border-radius: 50%;
                 padding: 0 0.25em;
                 cursor: pointer;
-                transition: all 0.9s ease-in-out;
 
                 &:hover {
                   fill: $mnrclr9;
@@ -106,7 +95,6 @@
 
               .amount {
                 color: $mnrclr8;
-                font-family: "nh-bold";
                 font-size: 1.25em;
               }
             }
@@ -125,23 +113,18 @@
           margin-block-end: 1em;
         }
 
-        .check-out-btn {
+        button {
           gap: 0.5em;
-          justify-content: center;
-          font-family: "nh-bold";
-          font-size: 1em;
-          width: 100%;
           padding: 1em;
+          font-size: 1em;
           color: $prmclr3;
           border: 2px solid transparent;
-          background: $mnrclr9;
           border-radius: 2em;
-          transition: all 0.3s ease-in-out;
+          background: $mnrclr9;
 
           svg-render {
             width: 1em;
             fill: $prmclr3;
-            transition: all 0.3s ease-in-out;
 
             &:first-child {
               transform: rotateY(180deg);
@@ -167,14 +150,13 @@
           }
         }
       }
+    }
 
-      .sorry {
-        align-items: center;
-        gap: 1em;
+    .sorry {
+      gap: 1em;
 
-        svg-render {
-          width: 30%;
-        }
+      svg-render {
+        width: 300px;
       }
     }
   }

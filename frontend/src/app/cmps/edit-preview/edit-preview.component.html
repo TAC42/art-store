@@ -1,7 +1,7 @@
 <main class="preview-contents flex column">
-    <span class="title">your results</span>
+    <span class="title family-bold text-center text-capitalize">your results</span>
     <div *ngIf="type === 'shop'" class="shop-type flex column">
-        <section class="product-area flex column">
+        <section class="product-area flex column text-center">
             <div class="media-container flex column">
                 <ng-container *ngIf="imgUrls.length > 1; else singleImage">
                     <product-carousel [carouselItems]="carouselItems"
@@ -16,36 +16,37 @@
                 <span class="price-tag flex">${{ price }}.00</span>
             </div>
 
-            <div class="details-area">
-                <h2>{{ name }}</h2>
+            <div class="details-area family-sabon">
+                <h2 class="family-bold text-capitalize">{{ name }}</h2>
 
                 <p class="description">{{ description }}</p>
-                <h4>Dimensions</h4>
+                <h4 class="text-bold">Dimensions</h4>
                 <p>{{ dimensions }}</p>
 
-                <h4>Materials</h4>
-                <p style="text-transform: capitalize;">{{materials}}</p>
+                <h4 class="text-bold">Materials</h4>
+                <p class="text-capitalize">{{materials}}</p>
 
-                <h4>Delivery</h4>
+                <h4 class="text-bold">Delivery</h4>
                 <p>
                     3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
                     soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
                 </p>
-                <p *ngIf="stock <= 0" class="unavailable">
+                <p *ngIf="stock <= 0" class="unavailable text-bold">
                     This product is currently out of stock, for further information and the
                     option to order it in the near future, please press inquire.
                 </p>
 
-                <button class="action-btn flex row" [title]="stock > 0 ? 'Buy product?' : 'Contact us!'">
+                <button class="flex row align-center family-bold fast-trans"
+                    [title]="stock > 0 ? 'Buy product?' : 'Contact us!'">
                     <span>{{ stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
-                    <svg-render *ngIf="stock > 0" svgName="shoppingCart" />
+                    <svg-render *ngIf="stock > 0" class="fast-trans" svgName="shoppingCart" />
                 </button>
             </div>
         </section>
     </div>
 
     <div *ngIf="type !== 'shop'" class="showcase-type flex column">
-        <section class="product-area flex column">
+        <section class="product-area flex column text-left">
             <div class="media-container flex column">
                 <ng-container *ngIf="imgUrls.length > 1; else singleImage">
                     <product-carousel [carouselItems]="carouselItems"
@@ -58,15 +59,17 @@
                 </ng-template>
             </div>
 
-            <div class="details-area">
-                <h4>{{ name }}</h4>
+            <div class="details-area family-sabon">
+                <h4 class="family-bold text-capitalize">{{ name }}</h4>
 
-                <p style="text-transform: capitalize;">{{dateMade}}</p>
-                <p style="text-transform: capitalize;">{{materials}}</p>
+                <p class="text-capitalize">{{dateMade}}</p>
+                <p class="text-capitalize">{{materials}}</p>
                 <p class="description">{{ description }}</p>
 
-                <p class="notice">Dear user, for special requests regarding this item, please press inquire.</p>
-                <button class="flex" title="Contact us!">
+                <p class="notice text-bold">
+                    Dear user, for special requests regarding this item, please press inquire.
+                </p>
+                <button class="flex family-bold fast-trans" title="Contact us!">
                     <span>Inquire</span>
                 </button>
             </div>
