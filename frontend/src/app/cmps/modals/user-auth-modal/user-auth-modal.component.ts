@@ -35,7 +35,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   resendAvailable: boolean = false
   private authModalTimer?: number
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user$.subscribe(() => {
       if (this.modService.isModalOpen('user-auth')) {
         this.initializeForm()
@@ -57,31 +57,29 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
         this.onSubmit())
   }
 
-  sendCode() {
+  sendCode(): void {
     this.user$.pipe(take(1)).subscribe(user => {
-      if (user._id && !user.isVerified) {
-        // Generate and send code
-        this.verificationCode = this.utilService.generateRandomCode()
-        const verifyFormData = {
-          code: this.verificationCode,
-          email: user.email,
-          username: user.username
-        }
-        this.utilService.sendVerificationMail(verifyFormData).subscribe({
-          next: () => {
-            this.codeSent = true
-            this.message = 'We\'ve sent the code to your email address, please insert it below.'
-            this.resendAvailable = false
-            this.utilService.startResendTimer().subscribe({
-              next: ({ timer, resendAvailable }) => {
-                this.timer = timer
-                this.resendAvailable = resendAvailable
-              }
-            })
-          },
-          error: (error) => console.error('Failed to send mail:', error)
-        })
+      // Generate and send code
+      this.verificationCode = this.utilService.generateRandomCode()
+      const verifyFormData = {
+        code: this.verificationCode,
+        email: user.email,
+        username: user.username
       }
+      this.utilService.sendVerificationMail(verifyFormData).subscribe({
+        next: () => {
+          this.codeSent = true
+          this.message = 'We\'ve sent the code to your email address, please insert it below.'
+          this.resendAvailable = false
+          this.utilService.startResendTimer().subscribe({
+            next: ({ timer, resendAvailable }) => {
+              this.timer = timer
+              this.resendAvailable = resendAvailable
+            }
+          })
+        },
+        error: (error) => console.error('Failed to send mail:', error)
+      })
     })
   }
 
@@ -90,19 +88,21 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
     return control.value === this.verificationCode ? null : { codeMismatch: true }
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.verifyForm.value.code === this.verificationCode) {
       this.user$.pipe(take(1)).subscribe(user => {
         const updatedUser: User = { ...user, isVerified: true }
         this.store.dispatch(UPDATE_USER({ updatedUser }))
+
         showSuccessMsg('User Verified!', 'Thank you for the cooperation!', this.eBusService)
+        this.modService.closeModal('user-auth')
+        this.verifyForm.reset()
       })
-      setTimeout(() => window.location.reload(), 2000)
     } else showErrorMsg('Verification Failed!',
       'Please try again later', this.eBusService)
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.authModalTimer) clearTimeout(this.authModalTimer)
   }
 }

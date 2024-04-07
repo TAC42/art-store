@@ -87,7 +87,13 @@ export class UserEditComponent implements OnInit {
     this.closeUserEdit()
   }
 
-  onSaveUser() {
+  openResetEmail(event: MouseEvent): void {
+    event.stopPropagation()
+    this.modService.openModal('reset-email')
+    this.closeUserEdit()
+  }
+
+  onSaveUser(): void {
     this.user$.pipe(take(1)).subscribe(user => {
       const formData = this.userEditForm.value
       const updatedUser = { ...user, ...formData }
@@ -96,12 +102,12 @@ export class UserEditComponent implements OnInit {
     this.closeUserEdit()
   }
 
-  closeUserEdit() {
+  closeUserEdit(): void {
     this.userEditState = 'hidden'
     setTimeout(() => this.modService.closeModal('user-edit'), 600)
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.modalSubscription) this.modalSubscription.unsubscribe()
   }
 }

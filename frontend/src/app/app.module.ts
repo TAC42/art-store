@@ -63,7 +63,8 @@ import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
 import { ImageContainerComponent } from './cmps/image-container/image-container.component'
-import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component'
+import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component';
+import { ResetEmailComponent } from './cmps/modals/reset-email/reset-email.component'
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-passw
     ServiceTermsComponent,
     ResetPasswordComponent,
     UserOrdersComponent,
+    ResetEmailComponent,
   ],
   imports: [
     BrowserModule,

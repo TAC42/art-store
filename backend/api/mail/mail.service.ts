@@ -7,8 +7,8 @@ import { utilityService } from '../../services/utility.service.js'
 export const mailService = {
     sendContactUsMail,
     sendVerificationMail,
-    sendResetPasswordMail,
-    sendPasswordUpdateMail,
+    sendResetCodeMail,
+    sendUserUpdatedMail,
     sendCustomerInvoice,
     sendArtistInvoice,
     sendOrderStatusMail
@@ -58,41 +58,45 @@ async function sendVerificationMail(username: string, email: string, code: strin
     await _sendEmail(mailOptions)
 }
 
-async function sendResetPasswordMail(email: string, code: string): Promise<void> {
-    loggerService.debug(`Sending reset password email containing: ${email}, ${code}`)
+async function sendResetCodeMail(email: string, code: string): Promise<void> {
+    loggerService.debug(`Sending reset code email containing: ${email}, ${code}`)
     const mailOptions: MailOptions = {
         from: process.env.SENDER_GMAIL_ADDRESS ?? '',
         to: email,
-        subject: `Reset password at Ori-Carlin`,
-        text: `Dear user, To proceed with reseting the password of your account,
+        subject: `Reset user at Ori-Carlin`,
+        text: `Dear user, To proceed with reseting the password / email of your account,
         please copy the following code: ${code}.
         Do not give this code to anyone!
-        If you did not request a password reset, please ignore this email or contact us through the site.`,
+        If you did not request a user reset, please ignore this email or contact us through the site.`,
         html: `
             <p>Dear user,</p>
-            <p>To proceed with reseting the password of your account, please copy the following code:</p>
+            <p>To proceed with reseting the password /email of your account, please copy the following code:</p>
             <p><b>${code}</b></p>
             <p>Do not give this code to anyone!</p>
             <hr>
-            <p>If you did not request a password reset, please ignore this email or contact us through the site.</p>
+            <p>If you did not request a user reset, please ignore this email or contact us through the site.</p>
             <p>Thank you,<br>The Ori Carlin Team</p>`,
     }
     await _sendEmail(mailOptions)
 }
 
-async function sendPasswordUpdateMail(username: string, email: string): Promise<void> {
-    loggerService.debug(`Sending password update email containing: ${username}, ${email}`)
+async function sendUserUpdatedMail(username: string, email: string): Promise<void> {
+    loggerService.debug(`Sending user updated email containing: ${username}, ${email}`)
+    const updateDate = utilityService.formatDate()
+
     const mailOptions: MailOptions = {
         from: process.env.SENDER_GMAIL_ADDRESS ?? '',
         to: email,
-        subject: `Account Password updated at Ori-Carlin`,
-        text: `Dear ${username}, we noticed that your account's password has changed recently.
-        We sent you this email to be sure, that you were the one who made the change.
+        subject: `Account Updated at Ori-Carlin`,
+        text: `Dear ${username}, we noticed that your account's password / email has changed recently.
+        The change happend at around ${updateDate} - US New York Time.
+        We sent you this email to be sure, that you in fact made the changes.
         If you did not perform this action, do not hesitate and contact us ASAP!`,
         html: `
             <p>Dear ${username},</p>
-            <p>We noticed that your account's password has changed recently.</p>
-            <p>We sent you this email to be sure, that you were the one who made the change.</p>
+            <p>We noticed that your account's password / email has changed recently.</p>
+            <p>The change happend at around ${updateDate} - US New York Time.</p>
+            <p>We sent you this email to be sure, that you in fact made the changes.</p>
             <hr>
             <p>If you did not perform this action, do not hesitate and contact us ASAP!</p>
             <p>Thank you,<br>The Ori Carlin Team</p>`,
@@ -247,11 +251,7 @@ function _FetchStatusContents(orderDetails: Order) {
                 <p>It is currently out for delivery and should reach you soon.</p>`
             break
         case 'shipped':
-            const ShippingDate = new Date().toLocaleString("en-US", {
-                timeZone: "America/New_York", month: 'short', day: '2-digit',
-                year: 'numeric', hour: 'numeric', minute: '2-digit',
-                second: '2-digit', hour12: true
-            })
+            const ShippingDate = utilityService.formatDate()
             orderUpdateText = `
                 Your order has been shipped on ${ShippingDate}.
                 Please note, the reference number provided: ${orderDetails.createdAt}, is your order's number on the site.`

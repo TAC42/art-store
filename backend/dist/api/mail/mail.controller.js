@@ -5,8 +5,8 @@ import { mailService } from './mail.service.js';
 export const mailRoutes = express.Router();
 mailRoutes.post('/contact', _sendContactUsMail);
 mailRoutes.post('/verify', _sendVerificationMail);
-mailRoutes.post('/reset', _sendResetPasswordMail);
-mailRoutes.post('/reset-update', _sendPasswordUpdateMail);
+mailRoutes.post('/reset', _sendResetCodeMail);
+mailRoutes.post('/user-reset', _sendUserUpdatedMail);
 mailRoutes.post('/invoice', _sendInvoices);
 mailRoutes.post('/order-update', _sendOrderStatusMail);
 // mail controller functions
@@ -34,11 +34,11 @@ async function _sendVerificationMail(req, res) {
         res.status(500).send({ error: 'Failed sending mail' });
     }
 }
-async function _sendResetPasswordMail(req, res) {
+async function _sendResetCodeMail(req, res) {
     const { email, code } = req.body;
-    loggerService.debug(`Received reset password form data: ${email}, ${code}`);
+    loggerService.debug(`Received reset code form data: ${email}, ${code}`);
     try {
-        await mailService.sendResetPasswordMail(email, code);
+        await mailService.sendResetCodeMail(email, code);
         res.status(200).send({ msg: 'Mail successfully sent' });
     }
     catch (error) {
@@ -46,11 +46,11 @@ async function _sendResetPasswordMail(req, res) {
         res.status(500).send({ error: 'Failed sending mail' });
     }
 }
-async function _sendPasswordUpdateMail(req, res) {
+async function _sendUserUpdatedMail(req, res) {
     const { username, email } = req.body;
-    loggerService.debug(`Received password update form data: ${username}, ${email}`);
+    loggerService.debug(`Received user updated form data: ${username}, ${email}`);
     try {
-        await mailService.sendPasswordUpdateMail(username, email);
+        await mailService.sendUserUpdatedMail(username, email);
         res.status(200).send({ msg: 'Mail successfully sent' });
     }
     catch (error) {

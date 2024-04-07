@@ -128,7 +128,7 @@ export class ResetPasswordComponent implements OnInit {
       username: updatedUser.username,
       email: updatedUser.email
     }
-    this.utilService.sendPasswordUpdateMail(updateMailData).subscribe({
+    this.utilService.sendUserUpdatedMail(updateMailData).subscribe({
       next: () => {
         showSuccessMsg('Password Reset!', 'Please login with the new password', this.eBusService)
         this.logoutUser()

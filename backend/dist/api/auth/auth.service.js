@@ -13,14 +13,16 @@ export const authService = {
 };
 dotenv.config();
 const cryptr = new Cryptr(process.env.DECRYPTION);
-async function login(username, password) {
-    loggerService.debug(`auth - login with username: ${username}`);
-    const user = await userService.getByUsername(username);
+async function login(loginId, password) {
+    loggerService.debug(`auth - login with loginId: ${loginId}`);
+    const user = loginId.includes('@')
+        ? await userService.getByEmail(loginId)
+        : await userService.getByUsername(loginId);
     if (!user)
-        throw new Error('Invalid username or password');
+        throw new Error('Invalid loginId or password');
     const match = await bcrypt.compare(password, user.password);
     if (!match)
-        throw new Error('Invalid username or password');
+        throw new Error('Invalid loginId or password');
     return user;
 }
 async function signup(username, password, fullName, email, imgUrl) {

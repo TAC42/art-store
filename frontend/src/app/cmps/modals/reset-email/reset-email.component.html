@@ -1,0 +1,60 @@
+<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('reset-email')">
+    <section class="reset-email-modal flex column" (clickOutside)="closeResetModal()">
+        <div class="message-area" *ngIf="message">
+            <p>{{ message }}</p>
+        </div>
+
+        <span *ngIf="codeSent">
+            If you do not see the code in your inbox, please check your Spam folder.
+        </span>
+
+        <button class="normal-trans" (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
+            [class.disabled]="!resendAvailable && codeSent">
+            <span *ngIf="!resendAvailable && codeSent"> {{ timer }} seconds </span>
+
+            <span *ngIf="resendAvailable || !codeSent">
+                {{ codeSent ? 'Resend code' : 'Send code' }}
+            </span>
+        </button>
+
+        <form *ngIf="codeSent" class="flex column align-center" [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(resetForm, 'code')">
+                <label for="code" class="flex row align-center">
+                    <div class="label-info flex row align-center">
+                        <svg-render svgName="lockIcon" />
+                        <span>Reset Code</span>
+                    </div>
+
+                    <span *ngIf="formUtils.isFieldInvalid(resetForm, 'code')">
+                        {{ formUtils.getErrorMessage(resetForm, 'code') }}
+                    </span>
+                </label>
+
+                <input id="code" type="text" formControlName="code" placeholder="XXXXXX" maxlength="6" customValidator
+                    [minLength]=1 [maxLength]=6 [allowLetters]="false" autofocus>
+            </div>
+
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(resetForm, 'email')">
+                <label for="email" class="flex row align-center">
+                    <div class="label-info flex row align-center">
+                        <svg-render svgName="emailIcon" />
+                        <span>New Email</span>
+                    </div>
+
+                    <span *ngIf="formUtils.isFieldInvalid(resetForm, 'email')">
+                        {{ formUtils.getErrorMessage(resetForm, 'email') }}
+                    </span>
+                </label>
+                <input id="email" type="email" formControlName="email" placeholder="Your new email..." customValidator
+                    [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
+            </div>
+
+            <div class="form-actions flex column full-center family-bold">
+                <button class="flex row normal-trans" type="submit" [disabled]="!resetForm.valid"
+                    [class.disabled]="!resetForm.valid">
+                    <span>Reset email</span>
+                </button>
+            </div>
+        </form>
+    </section>
+</main>

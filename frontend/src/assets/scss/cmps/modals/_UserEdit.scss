@@ -103,12 +103,17 @@ user-edit {
           right: 0;
           padding: 1em 0;
           background: $prmclr2;
-          border-block-start: 1px solid #76767615;
+          border-block-start: 1px solid $scdclr3;
 
           .reset-choices {
+            gap: 1em;
+
             button {
+              padding: 0.25em 0.5em;
               font-size: 18px;
               color: $prmclr1;
+              border-radius: 0.5em;
+              background: $scdclr3;
             }
           }
 
@@ -122,6 +127,10 @@ user-edit {
             &.disabled {
               pointer-events: none;
               background: $scdclr4;
+            }
+
+            &:hover {
+              background: $mnrclr1;
             }
           }
         }

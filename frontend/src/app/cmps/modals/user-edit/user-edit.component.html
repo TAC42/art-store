@@ -23,6 +23,7 @@
             <svg-render svgName="idIcon" />
             <span>Full name</span>
           </div>
+
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'fullName')">
             {{ formUtils.getErrorMessage(userEditForm, "fullName") }}
           </span>
@@ -37,6 +38,7 @@
             <svg-render svgName="personIcon" />
             <span>Username</span>
           </div>
+
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'username')">
             {{ formUtils.getErrorMessage(userEditForm, "username") }}
           </span>
@@ -45,31 +47,18 @@
           customValidator [minLength]=3 [maxLength]=24>
       </div>
 
-      <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
-        <label for="email" class="flex row">
-          <div class="label-info flex row">
-            <svg-render svgName="emailIcon" />
-            <span>Email</span>
-          </div>
-          <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'email')">
-            {{ formUtils.getErrorMessage(userEditForm, 'email') }}
-          </span>
-        </label>
-        <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
-          [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
-      </div>
-
       <section class="form-actions flex column align-center">
         <div class="reset-choices flex row">
-          <button class="family-bold" (click)="openResetPassword($event)" title="Reset password?">
-            Reset email
+          <button class="family-bold" (click)="openResetEmail($event)" title="Reset email?">
+            Reset E-mail
           </button>
+
           <button class="family-bold" (click)="openResetPassword($event)" title="Reset password?">
             Reset password
           </button>
         </div>
 
-        <button class="submit family-bold fast-trans" type="submit"
+        <button class="submit family-bold fast-trans" type="submit" title="Update your user?"
           [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
           [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
           <span>Save changes</span>
