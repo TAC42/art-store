@@ -1,20 +1,18 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, from, retry, tap, throwError } from 'rxjs';
-import { Product, ShopFilter } from '../models/shop';
-import { storageService } from './async-storage.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable, catchError, from, retry, tap, throwError } from 'rxjs'
+import { Product, ShopFilter } from '../../models/shop'
+import { storageService } from './async-storage.service'
+import { HttpErrorResponse } from '@angular/common/http'
 const ENTITY = 'products'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-
   private _products$ = new BehaviorSubject<Product[]>([])
   public products$ = this._products$.asObservable()
 
-
-  private _filterBy$ = new BehaviorSubject<ShopFilter>({ search: '' });
+  private _filterBy$ = new BehaviorSubject<ShopFilter>({ search: '' })
   public filterBy$ = this._filterBy$.asObservable()
 
   constructor() {
@@ -74,8 +72,6 @@ export class ShopService {
     }
   }
 
-
-
   private _updateContact(product: Product) {
     return from(storageService.put<Product>(ENTITY, product))
       .pipe(
@@ -103,12 +99,12 @@ export class ShopService {
   private _sort(products: Product[]): Product[] {
     return products.sort((a, b) => {
       if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
-        return -1;
+        return -1
       }
       if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
-        return 1;
+        return 1
       }
-      return 0;
+      return 0
     })
   }
 
@@ -145,7 +141,6 @@ export class ShopService {
         "inStock": true,
         "createdAt": "1234567891235"
       },
-
     ]
     return products
   }
@@ -157,11 +152,11 @@ export class ShopService {
 }
 
 function _getRandomId(length = 8): string {
-  let result = '';
+  let result = ''
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() *
-      characters.length));
+      characters.length))
   }
-  return result;
+  return result
 }

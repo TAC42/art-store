@@ -10,6 +10,7 @@ import { FormUtilsService } from '../../../services/form-utils.service'
 import { UserService } from '../../../services/user.service'
 import { UtilityService } from '../../../services/utility.service'
 import { ModalService } from '../../../services/modal.service'
+import { MailService } from '../../../services/mail.service'
 
 @Component({
   selector: 'reset-password',
@@ -21,6 +22,7 @@ export class ResetPasswordComponent implements OnInit {
   private store = inject(Store<AppState>)
   private router = inject(Router)
   private utilService = inject(UtilityService)
+  private emailService = inject(MailService)
   private eBusService = inject(EventBusService)
   public modService = inject(ModalService)
   private userService = inject(UserService)
@@ -33,7 +35,7 @@ export class ResetPasswordComponent implements OnInit {
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
   public message: string = 'Dear user, to reset the password of your account, please insert your email address.'
-  
+
   resetCode: string = ''
   codeSent: boolean = false
   timer: number = 0
@@ -54,17 +56,16 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmitEmail(): void {
-    if (this.emailForm.valid) {
-      // Generate and send code
+    if (this.emailForm.valid) { // Generate and send code
       this.resetCode = this.utilService.generateRandomCode()
       const resetFormData = {
         code: this.resetCode,
         email: this.emailForm.value.email,
       }
-      this.utilService.sendResetPasswordMail(resetFormData).subscribe({
+      this.emailService.sendResetCodeMail(resetFormData).subscribe({
         next: () => {
           this.codeSent = true
-          this.message = 'A reset code has been sent to your email.'
+          this.message = 'We\'ve sent the code to your email address, please insert it below.'
           this.resendAvailable = false
           this.utilService.startResendTimer().subscribe({
             next: ({ timer, resendAvailable }) => {
@@ -73,11 +74,7 @@ export class ResetPasswordComponent implements OnInit {
             }
           })
         },
-        error: (error) => {
-          showErrorMsg('Email Failed!',
-            'We were\'nt able to send the code!', this.eBusService)
-          console.error('Error sending code:', error)
-        },
+        error: (error) => console.error('Error sending code:', error),
       })
     }
   }
@@ -129,7 +126,7 @@ export class ResetPasswordComponent implements OnInit {
       username: updatedUser.username,
       email: updatedUser.email
     }
-    this.utilService.sendUserUpdatedMail(updateMailData).subscribe({
+    this.emailService.sendUserUpdatedMail(updateMailData).subscribe({
       next: () => {
         showSuccessMsg('Password Reset!', 'Please login with the new password', this.eBusService)
         this.logoutUser()

@@ -9,6 +9,7 @@ import { ModalService } from '../../../services/modal.service'
 import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { MailService } from '../../../services/mail.service'
 
 @Component({
   selector: 'user-auth-modal',
@@ -22,6 +23,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
   private utilService = inject(UtilityService)
+  private emailService = inject(MailService)
   private formUtilsService = inject(FormUtilsService)
   private eBusService = inject(EventBusService)
 
@@ -68,7 +70,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
         email: user.email,
         username: user.username
       }
-      this.utilService.sendVerificationMail(verifyFormData).subscribe({
+      this.emailService.sendVerificationMail(verifyFormData).subscribe({
         next: () => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'

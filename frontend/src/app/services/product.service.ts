@@ -10,7 +10,7 @@ const BASE_URL = 'product/'
   providedIn: 'root'
 })
 
-export class ShopDbService {
+export class ProductService {
   private httpService = inject(HttpService)
 
   currentFilter: ShopFilter = { search: '' }

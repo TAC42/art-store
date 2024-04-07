@@ -9,6 +9,7 @@ import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { ModalService } from '../../../services/modal.service'
 import { UtilityService } from '../../../services/utility.service'
+import { MailService } from '../../../services/mail.service'
 import { UserService } from '../../../services/user.service'
 
 @Component({
@@ -22,6 +23,7 @@ export class ResetEmailComponent implements OnInit {
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   private utilService = inject(UtilityService)
+  private emailService = inject(MailService)
   private eBusService = inject(EventBusService)
   private userService = inject(UserService)
   public modService = inject(ModalService)
@@ -63,12 +65,12 @@ export class ResetEmailComponent implements OnInit {
     this.user$.pipe(take(1)).subscribe(user => {
       // Generate and send code
       this.resetCode = this.utilService.generateRandomCode()
-      const verifyFormData = {
+      const resetFormData = {
         code: this.resetCode,
         email: user.email,
         username: user.username
       }
-      this.utilService.sendVerificationMail(verifyFormData).subscribe({
+      this.emailService.sendResetCodeMail(resetFormData).subscribe({
         next: () => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
@@ -117,7 +119,7 @@ export class ResetEmailComponent implements OnInit {
       username: updatedUser.username,
       email: this.oldEmail
     }
-    this.utilService.sendUserUpdatedMail(updateMailData).subscribe({
+    this.emailService.sendUserUpdatedMail(updateMailData).subscribe({
       next: () => {
         showSuccessMsg('Email Updated!', 'Have a great day!', this.eBusService)
         this.closeResetModal()
