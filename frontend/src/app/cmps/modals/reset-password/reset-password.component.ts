@@ -51,7 +51,8 @@ export class ResetPasswordComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     })
     this.resetForm = this.fBuilder.group({
-      code: ['', [Validators.required, this.codeValidator.bind(this)]],
+      code: ['', [Validators.required, this.formUtilsService.codeValidator(
+        () => this.resetCode)]],
       password: ['', [Validators.required]],
     })
   }
@@ -64,8 +65,7 @@ export class ResetPasswordComponent implements OnInit {
         email: this.emailForm.value.email,
       }
       this.utilService.sendCodeStartTimer(
-        resetFormData,
-        'sendResetCodeMail',
+        resetFormData, 'sendResetCodeMail',
         (timer, resendAvailable) => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
@@ -74,11 +74,6 @@ export class ResetPasswordComponent implements OnInit {
         },
         (error) => { console.error('Failed to send mail:', error) })
     }
-  }
-
-  codeValidator(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) return null
-    return control.value === this.resetCode ? null : { codeMismatch: true }
   }
 
   togglePasswordShowing(event: Event): void {

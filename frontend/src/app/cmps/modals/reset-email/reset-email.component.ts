@@ -53,7 +53,8 @@ export class ResetEmailComponent implements OnInit {
 
   initializeForm(): void {
     this.resetForm = this.fBuilder.group({
-      code: ['', [Validators.required, this.codeValidator.bind(this)]],
+      code: ['', [Validators.required, this.formUtilsService.codeValidator(
+        () => this.resetCode)]],
       email: ['', [Validators.required, Validators.email],
         [this.formUtilsService.validateField(value =>
           this.userService.validateEmail(value),
@@ -71,8 +72,7 @@ export class ResetEmailComponent implements OnInit {
         username: user.username
       }
       this.utilService.sendCodeStartTimer(
-        resetFormData,
-        'sendResetCodeMail',
+        resetFormData, 'sendResetCodeMail',
         (timer, resendAvailable) => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
@@ -81,11 +81,6 @@ export class ResetEmailComponent implements OnInit {
         },
         (error) => { console.error('Failed to send mail:', error) })
     })
-  }
-
-  codeValidator(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) return null
-    return control.value === this.resetCode ? null : { codeMismatch: true }
   }
 
   closeResetModal(): void {

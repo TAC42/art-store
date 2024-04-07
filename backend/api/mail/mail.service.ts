@@ -70,7 +70,7 @@ async function sendResetCodeMail(email: string, code: string): Promise<void> {
         If you did not request a user reset, please ignore this email or contact us through the site.`,
         html: `
             <p>Dear user,</p>
-            <p>To proceed with reseting the password /email of your account, please copy the following code:</p>
+            <p>To proceed with reseting the password / email of your account, please copy the following code:</p>
             <p><b>${code}</b></p>
             <p>Do not give this code to anyone!</p>
             <hr>

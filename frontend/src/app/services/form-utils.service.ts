@@ -98,6 +98,15 @@ export class FormUtilsService {
     }
   }
 
+  // Used for validating special code sent to user's email address
+  codeValidator(getExpectedCode: () => string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null
+      const expectedCode = getExpectedCode()
+      return control.value === expectedCode ? null : { codeMismatch: true }
+    }
+  }
+
   // Check if form has changed before bothering to allow saving changes
   isFormUnchanged<T>(form: FormGroup, initialData: T | null): boolean {
     if (!initialData) return false

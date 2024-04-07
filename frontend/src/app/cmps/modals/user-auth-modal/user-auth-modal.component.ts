@@ -53,7 +53,8 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
 
   initializeForm(): void {
     this.verifyForm = this.fBuilder.group({
-      code: ['', [Validators.required, this.codeValidator.bind(this)]]
+      code: ['', [Validators.required, this.formUtilsService.codeValidator(
+        () => this.verificationCode)]],
     })
     this.verifyForm.valueChanges.pipe(filter(() =>
       this.verifyForm.valid), debounceTime(500)).subscribe(() =>
@@ -70,8 +71,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
         username: user.username
       }
       this.utilService.sendCodeStartTimer(
-        verifyFormData,
-        'sendVerificationMail',
+        verifyFormData, 'sendVerificationMail',
         (timer, resendAvailable) => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
@@ -80,11 +80,6 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
         },
         (error) => { console.error('Failed to send mail:', error) })
     })
-  }
-
-  codeValidator(control: AbstractControl): ValidationErrors | null {
-    if (!control.value) return null
-    return control.value === this.verificationCode ? null : { codeMismatch: true }
   }
 
   onSubmit(): void {
