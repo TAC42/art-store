@@ -17,14 +17,17 @@ dotenv.config()
 
 const cryptr = new Cryptr(process.env.DECRYPTION!)
 
-async function login(username: string, password: string): Promise<User | null> {
-  loggerService.debug(`auth - login with username: ${username}`)
+async function login(loginId: string, password: string): Promise<User | null> {
+  loggerService.debug(`auth - login with loginId: ${loginId}`)
 
-  const user = await userService.getByUsername(username)
-  if (!user) throw new Error('Invalid username or password')
+  const user = loginId.includes('@')
+    ? await userService.getByEmail(loginId)
+    : await userService.getByUsername(loginId)
+
+  if (!user) throw new Error('Invalid loginId or password')
 
   const match = await bcrypt.compare(password, user.password!)
-  if (!match) throw new Error('Invalid username or password')
+  if (!match) throw new Error('Invalid loginId or password')
 
   return user
 }

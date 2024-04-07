@@ -1,23 +1,23 @@
 <main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('login')">
     <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
         <form class="flex column align-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'username')">
-                <label for="username" class="flex row align-center text-capitalize">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'loginId')">
+                <label for="loginId" class="flex row align-center">
                     <div class="label-info flex row align-center">
                         <svg-render svgName="personIcon" />
-                        <span>Username</span>
+                        <span>Username / Email</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(loginForm, 'username')">
-                        {{ formUtils.getErrorMessage(loginForm, 'username') }}
+                    <span *ngIf="formUtils.isFieldInvalid(loginForm, 'loginId')">
+                        {{ formUtils.getErrorMessage(loginForm, 'loginId') }}
                     </span>
                 </label>
 
-                <input id="username" type="text" formControlName="username" placeholder="Your username..."
-                    customValidator [minLength]=3 [maxLength]=24 autofocus>
+                <input id="loginId" type="text" formControlName="loginId" placeholder="Insert username or email..."
+                    customValidator [minLength]=3 [maxLength]=48 [allowedSpecialChars]="'.@'" autofocus>
             </div>
 
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'password')">
-                <label for="password" class="flex row align-center text-capitalize">
+                <label for="password" class="flex row align-center">
                     <div class="label-info flex row align-center">
                         <svg-render svgName="lockIcon" />
                         <span>Password</span>

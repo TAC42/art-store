@@ -3,9 +3,9 @@
     [@slideInOut]="userEditState">
     <section class="header flex">
       <button class="back" (click)="closeUserEdit()">
-        <svg-render svgName="back" />
+        <svg-render class="flex" svgName="back" />
       </button>
-      <h2 class="flex">Profile Edit</h2>
+      <h2 class="flex full-center family-nunito w-100">Profile Edit</h2>
     </section>
 
     <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
+      <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
         <label for="fullName" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="idIcon" />
@@ -31,7 +31,7 @@
           customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
       </div>
 
-      <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
+      <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
         <label for="username" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="personIcon" />
@@ -45,7 +45,7 @@
           customValidator [minLength]=3 [maxLength]=24>
       </div>
 
-      <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
+      <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
         <label for="email" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="emailIcon" />
@@ -59,17 +59,22 @@
           [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
       </div>
 
-      <div class="form-action flex column">
-        <button class="reset-pass" (click)="openResetPassword($event)" title="Reset password?">
-          Reset password?
-        </button>
+      <section class="form-actions flex column align-center">
+        <div class="reset-choices flex row">
+          <button class="family-bold" (click)="openResetPassword($event)" title="Reset password?">
+            Reset email
+          </button>
+          <button class="family-bold" (click)="openResetPassword($event)" title="Reset password?">
+            Reset password
+          </button>
+        </div>
 
-        <button class="submit" type="submit"
+        <button class="submit family-bold fast-trans" type="submit"
           [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
           [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
           <span>Save changes</span>
         </button>
-      </div>
+      </section>
     </form>
   </section>
 </main>

@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface UserLogin {
-    username: string
+    loginId: string
     password: string,
     recaptchaToken: string | null
 }

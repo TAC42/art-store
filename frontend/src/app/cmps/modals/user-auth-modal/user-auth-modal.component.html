@@ -17,7 +17,7 @@
 
         <form *ngIf="codeSent" class="flex column align-center" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(verifyForm, 'code')">
-                <label for="code" class="flex row align-center text-capitalize">
+                <label for="code" class="flex row align-center">
                     <span *ngIf="formUtils.isFieldInvalid(verifyForm, 'code')">
                         {{ formUtils.getErrorMessage(verifyForm, 'code') }}
                     </span>

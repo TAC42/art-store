@@ -1,15 +1,18 @@
 import { ObjectId } from "mongodb"
 
 export interface LoginRequestBody {
-    username: string
+    loginId: string
     password: string
     recaptchaToken: string
 }
 
-export interface SignupRequestBody extends LoginRequestBody {
+export interface SignupRequestBody {
+    username: string
+    password: string
     fullName: string
     email: string
     imgUrl?: string
+    recaptchaToken: string
 }
 
 export interface User {

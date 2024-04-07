@@ -35,7 +35,7 @@ export class LoginModalComponent implements OnInit {
 
   initializeForm(): void {
     this.loginForm = this.fBuilder.group({
-      username: ['', [Validators.required]],
+      loginId: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
   }
@@ -65,10 +65,10 @@ export class LoginModalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.loginForm.valid && this.isCaptchaResolved) {
-      const { username, password } = this.loginForm.value
+      const { loginId, password } = this.loginForm.value
 
       const credentials: UserLogin = {
-        username, password, recaptchaToken: this.captchaResponse
+        loginId, password, recaptchaToken: this.captchaResponse
       }
       this.store.dispatch(LOGIN({ credentials }))
       this.closeLoginModal()
