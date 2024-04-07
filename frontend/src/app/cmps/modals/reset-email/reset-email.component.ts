@@ -33,7 +33,8 @@ export class ResetEmailComponent implements OnInit {
 
   public message: string = `Dear user, to change the email of your account, you'll need a validation code.
     The code will be sent to your current email, once you press "Send code"...`
-  public resetCode: string = ''
+
+  resetCode: string = ''
   codeSent: boolean = false
   timer: number = 0
   resendAvailable: boolean = false
@@ -93,6 +94,8 @@ export class ResetEmailComponent implements OnInit {
     this.modService.closeModal('reset-email')
     this.resetForm.reset()
     this.codeSent = false
+    this.message = `Dear user, to change the email of your account, you'll need a validation code.
+      The code will be sent to your current email, once you press "Send code"...`
     this.oldEmail = ''
   }
 

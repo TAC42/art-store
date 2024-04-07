@@ -29,6 +29,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   public verifyForm!: FormGroup
 
   public message: string = 'Dear user, to ensure the safety of your account, we\'d like you to verify yourself.'
+
   verificationCode: string = ''
   codeSent: boolean = false
   timer: number = 0
@@ -41,6 +42,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
         this.initializeForm()
         this.authModalTimer = setTimeout(() => {
           showErrorMsg('Authentication Timeout', 'Please log back in to retry!', this.eBusService)
+
           this.store.dispatch(LOGOUT())
           setTimeout(() => window.location.reload(), 2000)
         }, 300000) as unknown as number

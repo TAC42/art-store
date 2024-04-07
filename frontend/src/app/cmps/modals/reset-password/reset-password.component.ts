@@ -33,6 +33,7 @@ export class ResetPasswordComponent implements OnInit {
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
   public message: string = 'Dear user, to reset the password of your account, please insert your email address.'
+  
   resetCode: string = ''
   codeSent: boolean = false
   timer: number = 0
