@@ -9,7 +9,6 @@ import { ModalService } from '../../../services/modal.service'
 import { UtilityService } from '../../../services/utility.service'
 import { FormUtilsService } from '../../../services/form-utils.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
-import { MailService } from '../../../services/mail.service'
 
 @Component({
   selector: 'user-auth-modal',
@@ -23,14 +22,14 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
   private utilService = inject(UtilityService)
-  private emailService = inject(MailService)
   private formUtilsService = inject(FormUtilsService)
   private eBusService = inject(EventBusService)
 
   public formUtils = this.formUtilsService
   public verifyForm!: FormGroup
 
-  public message: string = 'Dear user, to ensure the safety of your account, we\'d like you to verify yourself.'
+  public message: string = `Dear user, to ensure the safety of your account, 
+    we\'d like you to verify yourself.`
 
   verificationCode: string = ''
   codeSent: boolean = false
@@ -70,20 +69,16 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
         email: user.email,
         username: user.username
       }
-      this.emailService.sendVerificationMail(verifyFormData).subscribe({
-        next: () => {
+      this.utilService.sendCodeStartTimer(
+        verifyFormData,
+        'sendVerificationMail',
+        (timer, resendAvailable) => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
-          this.resendAvailable = false
-          this.utilService.startResendTimer().subscribe({
-            next: ({ timer, resendAvailable }) => {
-              this.timer = timer
-              this.resendAvailable = resendAvailable
-            }
-          })
+          this.timer = timer
+          this.resendAvailable = resendAvailable
         },
-        error: (error) => console.error('Failed to send mail:', error)
-      })
+        (error) => { console.error('Failed to send mail:', error) })
     })
   }
 

@@ -70,20 +70,16 @@ export class ResetEmailComponent implements OnInit {
         email: user.email,
         username: user.username
       }
-      this.emailService.sendResetCodeMail(resetFormData).subscribe({
-        next: () => {
+      this.utilService.sendCodeStartTimer(
+        resetFormData,
+        'sendResetCodeMail',
+        (timer, resendAvailable) => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
-          this.resendAvailable = false
-          this.utilService.startResendTimer().subscribe({
-            next: ({ timer, resendAvailable }) => {
-              this.timer = timer
-              this.resendAvailable = resendAvailable
-            }
-          })
+          this.timer = timer
+          this.resendAvailable = resendAvailable
         },
-        error: (error) => console.error('Failed to send mail:', error)
-      })
+        (error) => { console.error('Failed to send mail:', error) })
     })
   }
 
@@ -95,9 +91,11 @@ export class ResetEmailComponent implements OnInit {
   closeResetModal(): void {
     this.modService.closeModal('reset-email')
     this.resetForm.reset()
-    this.codeSent = false
     this.message = `Dear user, to change the email of your account, you'll need a validation code.
       The code will be sent to your current email, once you press "Send code"...`
+    this.codeSent = false
+    this.resendAvailable = false
+    this.timer = 0
     this.oldEmail = ''
   }
 

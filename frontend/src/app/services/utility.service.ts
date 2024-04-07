@@ -3,13 +3,37 @@ import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { CarouselItem, MiniProduct } from '../models/shop'
 import { ModalService } from './modal.service'
+import { MailService } from './mail.service'
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UtilityService {
+  private emailService = inject(MailService)
   private modService = inject(ModalService)
+
+  sendCodeStartTimer(
+    formData: { code: string; email: string; username?: string }, sendMailFunctionName:
+      'sendResetCodeMail' | 'sendVerificationMail', onSuccess: (timer: number, resendAvailable: boolean) =>
+        void, onError: (error: any) => void): void {
+    const sendMailFunction = this.emailService[sendMailFunctionName]
+
+    if (sendMailFunction) {
+      sendMailFunction.bind(this.emailService)(formData).subscribe({
+        next: () => {
+          onSuccess(0, false)
+          this.startResendTimer().subscribe({
+            next: ({ timer, resendAvailable }) => onSuccess(timer, resendAvailable)
+          })
+        },
+        error: onError
+      })
+    } else {
+      console.error("mail function is undefined")
+      onError(new Error("mail function is undefined"))
+    }
+  }
 
   getStates() {
     return usStates // fetch us states from json file
@@ -50,6 +74,7 @@ export class UtilityService {
     return new Observable((observer) => {
       let timer = 120
       let resendAvailable = false
+
       const resendCodeTimer = setInterval(() => {
         if (timer > 0) timer--
         else {

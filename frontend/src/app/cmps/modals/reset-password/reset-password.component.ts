@@ -34,7 +34,8 @@ export class ResetPasswordComponent implements OnInit {
   public showPassword: boolean = false
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
 
-  public message: string = 'Dear user, to reset the password of your account, please insert your email address.'
+  public message: string = `Dear user, to reset the password of your account,
+    please insert your email address.`
 
   resetCode: string = ''
   codeSent: boolean = false
@@ -62,20 +63,16 @@ export class ResetPasswordComponent implements OnInit {
         code: this.resetCode,
         email: this.emailForm.value.email,
       }
-      this.emailService.sendResetCodeMail(resetFormData).subscribe({
-        next: () => {
+      this.utilService.sendCodeStartTimer(
+        resetFormData,
+        'sendResetCodeMail',
+        (timer, resendAvailable) => {
           this.codeSent = true
           this.message = 'We\'ve sent the code to your email address, please insert it below.'
-          this.resendAvailable = false
-          this.utilService.startResendTimer().subscribe({
-            next: ({ timer, resendAvailable }) => {
-              this.timer = timer
-              this.resendAvailable = resendAvailable
-            }
-          })
+          this.timer = timer
+          this.resendAvailable = resendAvailable
         },
-        error: (error) => console.error('Error sending code:', error),
-      })
+        (error) => { console.error('Failed to send mail:', error) })
     }
   }
 
@@ -93,7 +90,11 @@ export class ResetPasswordComponent implements OnInit {
     this.modService.closeModal('reset-password')
     this.emailForm.reset()
     this.resetForm.reset()
+    this.message = `Dear user, to reset the password of your account,
+      please insert your email address.`
     this.codeSent = false
+    this.resendAvailable = false
+    this.timer = 0
   }
 
   onSubmitReset(): void {
