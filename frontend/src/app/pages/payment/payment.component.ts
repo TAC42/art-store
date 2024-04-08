@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { EMPTY, Observable, catchError, combineLatest, filter, from, mergeMap, of, take, tap } from 'rxjs'
+import { EMPTY, Observable, catchError, combineLatest, filter, from, mergeMap, of, switchMap, take, tap, throwError } from 'rxjs'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { User } from '../../models/user'
@@ -14,6 +14,7 @@ import { UPDATE_USER } from '../../store/user.actions'
 import { OrderService } from '../../services/order.service'
 import { UtilityService } from '../../services/utility.service'
 import { FormUtilsService } from '../../services/form-utils.service'
+import { loadScript, PayPalScriptOptions } from '@paypal/paypal-js';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class PaymentComponent implements OnInit {
 
   public usStates = this.utilService.getStates()
   optionState: string = 'order'
-  payType: string = 'venmo'
+  payType: string = 'paypal'
+  paypalClientId: string = ''
 
   public formUtils = this.formUtilsService
   public paymentForm!: FormGroup
@@ -49,6 +51,7 @@ export class PaymentComponent implements OnInit {
     this.initializeForms()
     this.orderSummary$ = this.orderService.getOrderSummary$(this.cart$)
 
+    this.loadPayPalScript()
   }
 
   initializeForms(): void {
@@ -79,6 +82,7 @@ export class PaymentComponent implements OnInit {
     this.optionState === option || (this.optionState = option)
   }
 
+
   onSubmitPurchase(): void {
     const userData = this.personalForm.value
 
@@ -105,4 +109,73 @@ export class PaymentComponent implements OnInit {
   }
 
 
+  loadPayPalScript(): void {
+    this.orderService.getPaypalClientId().pipe(
+      catchError(error => {
+        console.error('Failed to fetch PayPal client ID:', error)
+        return throwError(error)
+      }),
+      switchMap((clientId: string) => {
+        const scriptOptions = {
+          clientId: clientId
+        }
+        return loadScript(scriptOptions)
+      })
+    ).subscribe(
+      () => {
+        if (window.paypal && typeof window.paypal.Buttons === 'function') {
+          window.paypal.Buttons({
+            createOrder: () => {
+              return new Promise((resolve, reject) => {
+                const userData = this.personalForm.value;
+                combineLatest([this.cart$, this.user$]).pipe(
+                  take(1),
+                  mergeMap(([cart, user]) => {
+                    const order = this.orderService.createOrder(cart, user, userData, 'paypal');
+                    console.log('order in loadPayPal: ', order);
+                    
+                    return this.orderService.createPayPalOrder(order).toPromise();
+                  })
+                ).subscribe({
+                  next: (orderId: any) => {
+                    console.log('THIS IS THE ORDERID: ', orderId)
+                    if (orderId) {
+                      resolve(orderId.paypalOrderId)
+                    } else {
+                      reject(new Error('orderId is undefined'))
+                    }
+                  },
+                  error: (error: any) => {
+                    console.error('Error creating PayPal order:', error)
+                    reject(error);
+                  },
+                  complete: () => {
+                    // Complete callback
+                  }
+                })
+              })
+            },
+            onApprove: (data, actions) => {
+              if (actions.order) {
+                return actions.order.capture().then(() => {
+                  this.onSubmitPurchase()
+                  console.log('THE TRANSACTION WAS SUCCESSFUL')
+                })
+              } else {
+                console.error('actions.order is undefined.')
+                return Promise.resolve()
+              }
+            }
+          }).render('#paypal-button-container')
+        } else {
+          console.error('PayPal script loaded but window.paypal or window.paypal.Buttons is undefined.')
+        }
+      },
+      error => {
+        console.error('Failed to load PayPal script:', error)
+      }
+    )
+  }
+
 }
+

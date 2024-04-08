@@ -179,31 +179,20 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
 
-      <section class="methods grid">
-        <form class="grid" [formGroup]="paymentForm">
-          <span class="desc">Choose a payment method:</span>
-
-          <div class="option flex" [ngClass]="{ selected: payType === 'venmo' }">
-            <input type="radio" id="venmo" formControlName="paymentMethod" value="venmo" />
-            <label for="venmo">Venmo</label>
-            <svg-render svgName="venmo" />
-          </div>
-
-          <div class="option flex" [ngClass]="{ selected: payType === 'paypal' }">
-            <input type="radio" id="paypal" formControlName="paymentMethod" value="paypal" />
-            <label for="paypal">PayPal</label>
-            <svg-render svgName="paypal" />
-          </div>
-        </form>
+      <section class="methods grid"  id="paypal-button-container">
+        <p>By paying, you agree to Ori-Carlin website's
+          <a [routerLink]="['/privacy']">privacy policy</a>.
+        </p>
       </section>
     </mat-expansion-panel>
-
+    
     <section class="terms-payment flex column">
       <p>By clicking "Pay With", you agree to Ori-Carlin website's
         <a [routerLink]="['/privacy']">privacy policy</a>.
       </p>
-
-      <button class="flex" [disabled]="!paymentForm.valid || !personalForm.valid" (click)="onSubmitPurchase()"
+      
+      <!-- <div id="paypal-button-container" ></div> -->
+      <button class="flex" [disabled]="!paymentForm.valid || !personalForm.valid"
         [class.disabled]="!paymentForm.valid || !personalForm.valid">
         <svg-render svgName="lock" />
         <span class="pay-type"> Pay with {{ payType }} </span>

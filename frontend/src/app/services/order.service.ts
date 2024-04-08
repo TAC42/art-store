@@ -47,6 +47,28 @@ export class OrderService {
     } else return this.httpService.post<Order>(`${BASE_URL}`, order)
   }
 
+  createPayPalOrder(order: Order): Observable<string> {
+    const url = `${BASE_URL}paypal-order`
+    return this.httpService.post<string>(url, order).pipe(
+      catchError(error => {
+        console.error('Error creating PayPal order:', error)
+        return throwError(() => new Error('Error creating PayPal order'))
+      })
+    )
+  }
+  
+  getPaypalClientId(): Observable<string> {
+    return this.httpService.get<{ clientId: string }>('paypal-client-id')
+      .pipe(
+        map(response => response.clientId),
+        catchError(error => {
+          console.error('Error fetching PayPal client ID:', error)
+          return throwError(() => new Error('Error fetching PayPal client ID'))
+        })
+      )
+  }
+
+
   getDefaultFilter(): OrderFilter {
     return {
       _id: '',
