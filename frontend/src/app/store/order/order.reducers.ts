@@ -4,7 +4,7 @@ import {
   LOAD_FILTER, SET_LOADING_STATE,
   ORDER_REMOVED_SUCCESSFULLY, ORDER_SAVED
 } from './order.actions'
-import { Order, OrderFilter } from '../models/order'
+import { Order, OrderFilter } from '../../models/order'
 
 export interface OrderState {
   orders: Order[]

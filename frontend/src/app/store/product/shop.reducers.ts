@@ -4,7 +4,7 @@ import {
   LOAD_FILTER, SET_LOADING_STATE,
   PRODUCT_REMOVED_SUCCESSFULLY, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, CART_LOADED
 } from './shop.actions'
-import { Product, ShopFilter } from '../models/shop'
+import { Product, ShopFilter } from '../../models/shop'
 
 export interface ShopState {
   products: Product[]

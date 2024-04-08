@@ -3,17 +3,17 @@ import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { map, mergeMap, tap, withLatestFrom, catchError } from 'rxjs/operators'
 import { of } from 'rxjs'
 import { Store, select } from '@ngrx/store'
-import { AppState } from './app.state'
-import { Order } from '../models/order'
+import { AppState } from '../app.state'
+import { Order } from '../../models/order'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_ORDERS, ORDERS_LOADED,
   SAVE_ORDER, SET_LOADING_STATE, REMOVE_ORDER, ORDER_REMOVED_SUCCESSFULLY,
   ORDER_SAVED
 } from './order.actions'
 import { selectFilterBy } from './order.selectors'
-import { OrderService } from '../services/order.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { MailService } from '../services/mail.service'
+import { OrderService } from '../../services/api/order.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/utils/event-bus.service'
+import { MailService } from '../../services/api/mail.service'
 
 @Injectable()
 

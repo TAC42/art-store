@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { UserLogin } from '../../../models/user'
-import { LOGIN } from '../../../store/user.actions'
-import { ModalService } from '../../../services/modal.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
+import { LOGIN } from '../../../store/user/user.actions'
+import { ModalService } from '../../../services/utils/modal.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
 
 @Component({
   selector: 'login-modal',

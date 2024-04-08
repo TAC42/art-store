@@ -5,9 +5,9 @@ import { Subscription, filter, map } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { Product } from '../../models/shop'
-import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/shop.actions'
-import { ProductService } from '../../services/product.service'
-import { FormUtilsService } from '../../services/form-utils.service'
+import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/product/shop.actions'
+import { ProductService } from '../../services/api/product.service'
+import { FormUtilsService } from '../../services/utils/form-utils.service'
 
 @Component({
   selector: 'product-edit',

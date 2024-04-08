@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store'
 import * as UserActions from './user.actions'
-import { User } from '../models/user'
-import { UserService } from '../services/user.service'
+import { User } from '../../models/user'
+import { UserService } from '../../services/api/user.service'
 
 export interface UserState {
     user: User

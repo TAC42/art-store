@@ -10,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module'
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha'
 import { AppComponent } from './app-root/app.component'
 
-import { ShopEffects } from './store/shop.effects'
-import { UserEffects } from './store/user.effects'
-import { OrderEffects } from './store/order.effects'
+import { ShopEffects } from './store/product/shop.effects'
+import { UserEffects } from './store/user/user.effects'
+import { OrderEffects } from './store/order/order.effects'
 import { reducers } from './store/app.state'
 
 import { ClickOutsideDirective } from './directives/click-outside.directive'
@@ -63,7 +63,7 @@ import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
 import { ImageContainerComponent } from './cmps/image-container/image-container.component'
-import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component';
+import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component'
 import { ResetEmailComponent } from './cmps/modals/reset-email/reset-email.component'
 
 @NgModule({

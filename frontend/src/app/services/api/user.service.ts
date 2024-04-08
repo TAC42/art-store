@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core'
 import { ValidationErrors } from '@angular/forms'
 import { Observable, throwError, catchError, tap, of, map } from 'rxjs'
-import { User, UserLogin, UserSignup } from '../models/user'
-import { HttpService } from './http.service'
+import { User, UserLogin, UserSignup } from '../../models/user'
+import { HttpService } from '../utils/http.service'
 
 const SESSION_KEY_LOGGEDIN_USER = 'loggedinUser'
 const BASE_URL = 'user/'

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core'
-import { ImageLoadService } from '../../services/image-load.service'
+import { ImageLoadService } from '../../services/media/image-load.service'
 
 @Component({
   selector: 'image-container',

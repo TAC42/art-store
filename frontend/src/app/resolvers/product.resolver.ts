@@ -5,8 +5,8 @@ import { take, filter, distinctUntilChanged } from 'rxjs/operators'
 import { Store, select } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { Product } from '../models/shop'
-import { LOAD_PRODUCT_BY_NAME } from '../store/shop.actions'
-import { selectProductByName } from '../store/shop.selectors'
+import { LOAD_PRODUCT_BY_NAME } from '../store/product/shop.actions'
+import { selectProductByName } from '../store/product/shop.selectors'
 
 @Injectable({
   providedIn: 'root'

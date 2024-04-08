@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Order } from '../models/order'
-import { HttpService } from './http.service'
+import { Order } from '../../models/order'
+import { HttpService } from '../utils/http.service'
 
 const BASE_URL = 'mail/'
 

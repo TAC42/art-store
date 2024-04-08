@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { User, UserLogin, UserSignup } from '../models/user'
+import { User, UserLogin, UserSignup } from '../../models/user'
 
 // handling of user loading
 export const SET_LOADING_STATE = createAction(

@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
 import { trigger, style, animate, transition, state } from '@angular/animations'
-import { ModalService } from '../../../services/modal.service'
+import { ModalService } from '../../../services/utils/modal.service'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { Observable, Subscription } from 'rxjs'
-import { LOGOUT } from '../../../store/user.actions'
+import { LOGOUT } from '../../../store/user/user.actions'
 import { Router } from '@angular/router'
 
 @Component({

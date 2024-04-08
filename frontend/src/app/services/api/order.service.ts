@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core'
 import { Observable, catchError, map, of, startWith, throwError } from 'rxjs'
-import { Order, OrderFilter } from '../models/order'
-import { Product } from '../models/shop'
-import { User } from '../models/user'
-import { HttpService } from './http.service'
+import { Order, OrderFilter } from '../../models/order'
+import { Product } from '../../models/shop'
+import { User } from '../../models/user'
+import { HttpService } from '../utils/http.service'
 
 const BASE_URL = 'order/'
 

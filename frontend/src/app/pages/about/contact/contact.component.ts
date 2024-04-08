@@ -2,11 +2,11 @@ import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../../models/shop'
-import { UtilityService } from '../../../services/utility.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
-import { DeviceTypeService } from '../../../services/device-type.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
-import { MailService } from '../../../services/mail.service'
+import { UtilityService } from '../../../services/utils/utility.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
+import { DeviceTypeService } from '../../../services/utils/device-type.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/utils/event-bus.service'
+import { MailService } from '../../../services/api/mail.service'
 
 @Component({
   selector: 'contact-page',

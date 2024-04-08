@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core'
 import { Observable, map } from 'rxjs'
 import { MiniProduct, Product } from '../../../models/shop'
-import { ImageLoadService } from '../../../services/image-load.service'
+import { ImageLoadService } from '../../../services/media/image-load.service'
 
 @Component({
   selector: 'random-product-carousel',

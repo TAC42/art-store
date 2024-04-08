@@ -4,14 +4,14 @@ import { Router } from '@angular/router'
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators'
 import { EMPTY, of } from 'rxjs'
 import { Store } from '@ngrx/store'
-import { AppState } from './app.state'
-import { User } from '../models/user'
+import { AppState } from '../app.state'
+import { User } from '../../models/user'
 import {
     CHECK_SESSION, LOAD_USER, LOAD_USERS, LOGIN, LOGOUT, SET_LOADING_STATE,
     SET_LOGGEDIN_USER, SET_USER, SET_USERS, SIGNUP, UPDATE_USER
 } from './user.actions'
-import { UserService } from '../services/user.service'
-import { showSuccessMsg, showErrorMsg, EventBusService } from '../services/event-bus.service'
+import { UserService } from '../../services/api/user.service'
+import { showSuccessMsg, showErrorMsg, EventBusService } from '../../services/utils/event-bus.service'
 
 @Injectable()
 

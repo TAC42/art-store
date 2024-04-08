@@ -6,10 +6,10 @@ import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
-import { UPDATE_USER } from '../../../store/user.actions'
-import { ModalService } from '../../../services/modal.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
-import { UserService } from '../../../services/user.service'
+import { UPDATE_USER } from '../../../store/user/user.actions'
+import { ModalService } from '../../../services/utils/modal.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
+import { UserService } from '../../../services/api/user.service'
 
 @Component({
   selector: 'user-edit',

@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { UserSignup } from '../../models/user'
-import { SIGNUP } from '../../store/user.actions'
-import { FormUtilsService } from '../../services/form-utils.service'
-import { ModalService } from '../../services/modal.service'
-import { UserService } from '../../services/user.service'
-import { UtilityService } from '../../services/utility.service'
+import { SIGNUP } from '../../store/user/user.actions'
+import { FormUtilsService } from '../../services/utils/form-utils.service'
+import { ModalService } from '../../services/utils/modal.service'
+import { UserService } from '../../services/api/user.service'
+import { UtilityService } from '../../services/utils/utility.service'
 
 @Component({
   selector: 'signup',

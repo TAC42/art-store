@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { User } from '../../models/user'
 import { Order } from '../../models/order'
-import { selectUser } from '../../store/user.selectors'
-import { selectOrders } from '../../store/order.selectors'
-import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
-import { DeviceTypeService } from '../../services/device-type.service'
-import { ModalService } from '../../services/modal.service'
+import { selectUser } from '../../store/user/user.selectors'
+import { selectOrders } from '../../store/order/order.selectors'
+import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order/order.actions'
+import { DeviceTypeService } from '../../services/utils/device-type.service'
+import { ModalService } from '../../services/utils/modal.service'
 
 @Component({
   selector: 'profile',

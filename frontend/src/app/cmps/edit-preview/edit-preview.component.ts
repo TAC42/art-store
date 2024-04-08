@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core'
 import { CarouselItem } from '../../models/shop'
-import { UtilityService } from '../../services/utility.service'
+import { UtilityService } from '../../services/utils/utility.service'
 
 @Component({
   selector: 'edit-preview',

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Order, OrderFilter } from '../models/order'
+import { Order, OrderFilter } from '../../models/order'
 
 // handling of order loading
 export const SET_LOADING_STATE = createAction(

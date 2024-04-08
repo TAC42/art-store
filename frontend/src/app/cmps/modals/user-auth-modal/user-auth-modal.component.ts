@@ -1,14 +1,14 @@
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core'
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable, debounceTime, filter, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { User } from '../../../models/user'
-import { LOGOUT, UPDATE_USER } from '../../../store/user.actions'
-import { ModalService } from '../../../services/modal.service'
-import { UtilityService } from '../../../services/utility.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { LOGOUT, UPDATE_USER } from '../../../store/user/user.actions'
+import { ModalService } from '../../../services/utils/modal.service'
+import { UtilityService } from '../../../services/utils/utility.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/utils/event-bus.service'
 
 @Component({
   selector: 'user-auth-modal',

@@ -4,8 +4,8 @@ import { map, mergeMap, tap, withLatestFrom, catchError, take } from 'rxjs/opera
 import { forkJoin, of } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
-import { AppState } from './app.state'
-import { Product, ShopFilter } from '../models/shop'
+import { AppState } from '../app.state'
+import { Product, ShopFilter } from '../../models/shop'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
@@ -13,8 +13,8 @@ import {
   LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, LOAD_CART, CART_LOADED
 } from './shop.actions'
 import { selectFilterBy } from './shop.selectors'
-import { ProductService } from '../services/product.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { ProductService } from '../../services/api/product.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/utils/event-bus.service'
 
 @Injectable()
 

@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store'
 import { combineLatest, filter, map, Observable, Subscription } from 'rxjs'
 import { AppState } from '../store/app.state'
 import { User } from '../models/user'
-import { CHECK_SESSION, LOAD_USER } from '../store/user.actions'
-import { selectLoggedinUser, selectUser } from '../store/user.selectors'
-import { ModalService } from '../services/modal.service'
-import { DimmerService } from '../services/dimmer.service'
-import { DeviceTypeService } from '../services/device-type.service'
+import { CHECK_SESSION, LOAD_USER } from '../store/user/user.actions'
+import { selectLoggedinUser, selectUser } from '../store/user/user.selectors'
+import { ModalService } from '../services/utils/modal.service'
+import { DimmerService } from '../services/utils/dimmer.service'
+import { DeviceTypeService } from '../services/utils/device-type.service'
 
 @Component({
   selector: 'app-root',

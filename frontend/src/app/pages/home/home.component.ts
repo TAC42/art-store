@@ -2,7 +2,7 @@ import { Component, HostBinding, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../models/shop'
-import { DeviceTypeService } from '../../services/device-type.service'
+import { DeviceTypeService } from '../../services/utils/device-type.service'
 
 @Component({
   selector: 'app-home',

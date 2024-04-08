@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators'
 import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { User } from '../models/user'
-import { selectLoggedinUser } from '../store/user.selectors'
+import { selectLoggedinUser } from '../store/user/user.selectors'
 
 @Injectable({
   providedIn: 'root'
