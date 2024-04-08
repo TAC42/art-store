@@ -1,11 +1,11 @@
 import { Component, Input, inject } from '@angular/core'
 import { Observable } from 'rxjs'
-import { ModalService } from '../../../services/modal.service'
+import { ModalService } from '../../../services/utils/modal.service'
 import { AppState } from '../../../store/app.state'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { Router } from '@angular/router'
-import { LOGOUT } from '../../../store/user.actions'
+import { LOGOUT } from '../../../store/user/user.actions'
 
 @Component({
   selector: 'header-dropdown',

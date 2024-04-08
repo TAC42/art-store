@@ -1,7 +1,6 @@
 contact-page {
   .page-contents {
     gap: 1em;
-    text-align: center;
     padding-bottom: 1em;
 
     .gallery-carousel {
@@ -9,13 +8,11 @@ contact-page {
     }
 
     .contact-text {
-      text-align: left;
       gap: 1em;
 
       p {
         color: $prmclr1;
-        font-family: "sabon";
-        font-size: 18px;
+        font-size: 19px;
       }
     }
 
@@ -27,35 +24,28 @@ contact-page {
           $scdclr5,
           $scdclr2 );
       user-select: none;
-      width: 100%;
       max-width: 600px;
 
       form {
         gap: 1em;
         padding: 1em;
-        align-items: center;
 
         .input-area {
-          width: 100%;
-          text-align: left;
           gap: 0.25em;
           font-size: 18px;
 
           label {
-            padding: 0 0.5em;
-            align-items: center;
             justify-content: space-between;
             min-height: 30px;
+            padding: 0 0.5em;
 
             span {
               color: $mnrclr2;
               font-size: 15px;
-              text-transform: capitalize;
             }
 
             .label-info {
               gap: 0.5em;
-              align-items: center;
 
               span {
                 line-height: 1.6;
@@ -73,17 +63,16 @@ contact-page {
 
           input,
           textarea {
-            padding: 0.5em;
             width: 100%;
-            transition: all 0.3s;
+            padding: 0.5em;
             border-radius: 0.5em;
             border: 1px solid $scdclr4;
             color: $prmclr1;
             font-size: 16px;
+            transition: all 0.3s ease-in-out;
 
             &:focus {
               border: 1px solid $prmclr1;
-              outline: none;
             }
           }
 
@@ -101,9 +90,7 @@ contact-page {
         }
 
         .form-actions {
-          width: 100%;
           justify-content: space-between;
-          align-items: center;
           padding: 0 0.5em;
 
           svg-render {
@@ -112,28 +99,24 @@ contact-page {
           }
 
           button {
+            align-self: start;
+            gap: 0.5em;
             padding: 0.75em 2em 0.75em 1.25em;
-            transition: all 0.5s;
             background: $prmclr2;
             color: $prmclr1;
             border-radius: 0.5em;
-            align-items: center;
-            align-self: start;
-            gap: 0.5em;
 
             &.disabled {
-              background: $scdclr2;
               pointer-events: none;
+              background: $scdclr2;
             }
 
             span {
               font-size: 19px;
               line-height: 1.6;
-              font-family: "nh-bold";
             }
 
-            svg {
-              transition: all 0.5s;
+            svg-render {
               fill: $prmclr1;
               transform: rotate(45deg);
             }
@@ -142,15 +125,11 @@ contact-page {
               background: $mnrclr1;
               color: $prmclr3;
 
-              svg {
+              svg-render {
                 fill: $prmclr3;
                 transform: rotate(0deg) translate(12px, -3px);
               }
             }
-          }
-
-          re-captcha {
-            width: fit-content;
           }
         }
       }

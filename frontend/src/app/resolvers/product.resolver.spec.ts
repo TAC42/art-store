@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing'
 import { ProductResolver } from './product.resolver'
 import { StoreModule } from '@ngrx/store'
-import { shopReducer } from '../store/shop.reducers'
+import { shopReducer } from '../store/product/shop.reducers'
 
 describe('ProductResolver', () => {
   let resolver: ProductResolver

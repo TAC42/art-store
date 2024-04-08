@@ -24,9 +24,6 @@ profile {
 
       .personal-info {
         position: relative;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         gap: 0.25em;
         color: $scdclr2;
         margin-block-start: -6.5em;
@@ -34,10 +31,9 @@ profile {
         .user-img {
           position: absolute;
           left: 50%;
+          padding: 0.5em;
           transform: translate(-50%, -50%);
           border-radius: 50%;
-          width: fit-content;
-          padding: 0.5em;
           background-color: $prmclr2;
 
           image-container {
@@ -65,13 +61,11 @@ profile {
         .full-name {
           margin-block-start: 6em;
           color: $prmclr1;
-          font-family: "nh-bold";
           font-size: 1.5em;
         }
 
         .member-since {
           gap: 0.5em;
-          align-items: center;
 
           svg-render {
             width: 1.5em;
@@ -80,13 +74,11 @@ profile {
         }
 
         .edit-profile {
-          justify-content: center;
           font-size: 16px;
           gap: 0.5em;
           margin-block-start: 1em;
 
           button {
-            font-family: 'nh-bold';
             background-color: $scdclr2;
             color: $prmclr2;
             padding: 0.75em 1em;
@@ -94,7 +86,6 @@ profile {
           }
 
           a {
-            font-family: 'nh-bold';
             background-color: $scdclr2;
             color: $prmclr2;
             font-size: 14px;
@@ -103,101 +94,10 @@ profile {
           }
         }
       }
-
-      .orders {
-        gap: 1em;
-        padding: 0 1em;
-        margin: 1em 0 2em 0;
-
-        h3 {
-          font-family: "nh-bold";
-          font-size: 1.25em;
-          color: $scdclr2;
-        }
-
-        .order {
-          background: $prmclr2;
-          color: $scdclr7;
-          padding: 0.5em 0;
-          border-radius: 0.5em;
-
-          .heading {
-            gap: 1em;
-            font-family: "nh-bold";
-            font-size: 1.25em;
-            border-block-end: solid 2px $prmclr3;
-
-            .count {
-              padding: 0.4em 0.8em;
-              background: $scdclr3;
-              border-radius: 50%;
-              margin-block-end: 0.25em;
-            }
-          }
-
-          .order-info {
-            padding: 1em 0 0 0;
-            gap: 1em;
-
-            article {
-              align-items: center;
-              justify-content: space-between;
-
-              :last-child {
-                font-family: "nh-bold";
-              }
-            }
-          }
-
-          .summary {
-            gap: 0.5em;
-
-            table {
-              border-collapse: collapse;
-
-              tbody {
-                td {
-                  border: 1px solid #a3a1ab;
-                  border-bottom: none;
-                  text-align: center;
-                  text-transform: capitalize;
-                  padding: 0.5em 0.4em;
-                }
-
-                &:last-child {
-                  border-bottom: 1px solid #a3a1ab;
-                }
-              }
-            }
-          }
-
-          .cost {
-            li {
-              grid-auto-flow: column;
-              gap: 1em;
-              justify-content: space-between;
-            }
-          }
-
-          .status {
-            align-items: center;
-          }
-        }
-
-        .no-orders {
-          justify-content: center;
-
-          svg-render {
-            width: 20vw;
-            justify-self: center;
-          }
-        }
-      }
     }
 
     .desktop-view {
       position: relative;
-      height: 100%;
       min-height: 900px;
 
       .background {
@@ -213,9 +113,6 @@ profile {
       }
 
       .personal-info {
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         gap: 0.25em;
         color: $scdclr2;
         margin: 5em auto 0 auto;
@@ -235,13 +132,11 @@ profile {
 
         .full-name {
           color: $prmclr1;
-          font-family: "nh-bold";
           font-size: 1.5em;
         }
 
         .member-since {
           gap: 0.5em;
-          align-items: center;
 
           svg-render {
             width: 1.5em;
@@ -250,117 +145,22 @@ profile {
         }
 
         .edit-profile {
-          justify-content: center;
           margin-block-start: 1em;
 
           button {
-            font-family: 'nh-bold';
             background-color: $scdclr2;
             color: $prmclr2;
             font-size: 16px;
             padding: 0.75em 1em;
             border-radius: 1em;
           }
-        }
 
-        a {
-          font-family: 'nh-bold';
-          background-color: $scdclr2;
-          color: $prmclr2;
-          padding: 0.5em 0.75em;
-          border-radius: 1em;
-          margin-block-start: 1em;
-        }
-      }
-
-      .orders {
-        width: 100%;
-        gap: 1em;
-        padding: 0 2em;
-        margin: 1em auto 2em auto;
-
-        h3 {
-          font-family: "nh-bold";
-          font-size: 1.25em;
-          color: $scdclr3;
-        }
-
-        .order {
-          background: $prmclr2;
-          color: $scdclr7;
-          padding: 0.5em 0;
-          border-radius: 0.5em;
-
-          .heading {
-            gap: 1em;
-            font-family: "nh-bold";
-            font-size: 1.25em;
-            border-block-end: solid 2px $prmclr3;
-
-            .count {
-              padding: 0.4em 0.8em;
-              background: $scdclr3;
-              border-radius: 50%;
-              margin-block-end: 0.25em;
-            }
-          }
-
-          .order-info {
-            padding: 1em 0 0 0;
-            gap: 1em;
-
-            article {
-              align-items: center;
-              justify-content: space-between;
-
-              :last-child {
-                font-family: "nh-bold";
-              }
-            }
-          }
-
-          .summary {
-            gap: 0.5em;
-
-            table {
-              border-collapse: collapse;
-
-              tbody {
-                td {
-                  border: 1px solid #a3a1ab;
-                  border-bottom: none;
-                  text-align: center;
-                  text-transform: capitalize;
-                  padding: 0.5em 0.4em;
-                }
-
-                &:last-child {
-                  border-bottom: 1px solid #a3a1ab;
-                }
-              }
-            }
-          }
-
-          .cost {
-            li {
-              grid-auto-flow: column;
-              gap: 1em;
-              justify-content: space-between;
-            }
-          }
-
-          .status {
-            align-items: center;
-          }
-        }
-
-        .no-orders {
-          justify-content: center;
-          margin: 3em auto;
-
-          svg-render {
-            width: 20vw;
-            justify-self: center;
+          a {
+            background-color: $scdclr2;
+            color: $prmclr2;
+            padding: 0.5em 0.75em;
+            border-radius: 1em;
+            margin-block-start: 1em;
           }
         }
       }

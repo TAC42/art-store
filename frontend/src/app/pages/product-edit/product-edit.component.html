@@ -1,15 +1,16 @@
 <main class="page-contents grid layout-row w-h-100">
-  <form class="flex column" [formGroup]="productEditForm" (ngSubmit)="onSaveProduct()">
+  <form class="flex column align-center" [formGroup]="productEditForm" (ngSubmit)="onSaveProduct()">
     <a [routerLink]="['/shop']" title="Exit edit page?">
-      <svg-render svgName="leftArrowIcon" />
+      <svg-render class="fast-trans" svgName="leftArrowIcon" />
     </a>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'name')">
-      <label for="name" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'name')">
+      <label for="name" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="productName" />
           <span>Name*</span>
         </div>
+
         <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'name')">
           {{ formUtils.getErrorMessage(productEditForm, 'name') }}
         </span>
@@ -18,12 +19,13 @@
         [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. -/:'" autofocus />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'price')">
-      <label for="price" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'price')">
+      <label for="price" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="price" />
           <span>Price*</span>
         </div>
+
         <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'price')">
           {{ formUtils.getErrorMessage(productEditForm, 'price') }}
         </span>
@@ -32,12 +34,13 @@
         [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'description')">
-      <label for="description" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'description')">
+      <label for="description" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="descriptionIcon" />
           <span>Description*</span>
         </div>
+
         <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'description')">
           {{ formUtils.getErrorMessage(productEditForm, 'description') }}
         </span>
@@ -46,12 +49,13 @@
         customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
-      <label for="dimensions" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
+      <label for="dimensions" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="dimensions" />
           <span>Dimensions*</span>
         </div>
+
         <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
           {{ formUtils.getErrorMessage(productEditForm, 'dimensions') }}
         </span>
@@ -60,12 +64,13 @@
         customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="'/ .,'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'materials')">
-      <label for="materials" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'materials')">
+      <label for="materials" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="materials" />
           <span>Materials*</span>
         </div>
+
         <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'materials')">
           {{ formUtils.getErrorMessage(productEditForm, 'materials') }}
         </span>
@@ -75,12 +80,13 @@
         [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
     </div>
 
-    <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
-      <label for="dateMade" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
+      <label for="dateMade" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="calendar" />
           <span>Date Made*</span>
         </div>
+
         <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
           {{ formUtils.getErrorMessage(productEditForm, 'dateMade') }}
         </span>
@@ -89,24 +95,29 @@
         customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
     </div>
 
-    <div class="input-area flex column">
-      <label for="stock" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'stock')">
+      <label for="stock" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="inStock" />
           <span>Stock Amount*</span>
         </div>
+
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'stock')">
+          {{ formUtils.getErrorMessage(productEditForm, 'stock') }}
+        </span>
       </label>
       <input id="stock" type="number" formControlName="stock" placeholder="Please enter stock amount..." customValidator
         [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
-    <div class="input-area flex column">
-      <label for="type" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100">
+      <label for="type" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="location" />
           <span>Location</span>
         </div>
       </label>
+
       <select formControlName="type" id="type">
         <option value="shop">Shop</option>
         <option value="sculpture">Sculpture</option>
@@ -114,9 +125,9 @@
       </select>
     </div>
 
-    <div class="input-area flex column">
-      <label for="imgUrls" class="flex row">
-        <div class="label-info flex row">
+    <div class="input-area flex column w-100">
+      <label for="imgUrls" class="flex row align-center">
+        <div class="label-info flex row align-center">
           <svg-render svgName="imgUrls" />
           <span>Images</span>
         </div>
@@ -144,12 +155,12 @@
       </div>
     </div>
 
-    <div class="form-actions flex row">
-      <button class="flex row" type="submit"
+    <div class="form-actions flex row align-center">
+      <button class="flex row align-center family-bold normal-trans" type="submit"
         [disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)"
         [class.disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)">
         <span>Submit</span>
-        <svg-render svgName="paperPlaneIcon" />
+        <svg-render class="normal-trans" svgName="stampIcon" />
       </button>
     </div>
   </form>

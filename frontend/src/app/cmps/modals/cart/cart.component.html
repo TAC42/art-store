@@ -1,26 +1,27 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('cart')">
   <section class="shopping-cart w-h-100 flex column" (clickOutside)="closeCart()" [@slideInOut]="cartState">
-    <div class="cart-header flex row">
-      <h1 class="title">Your Cart</h1>
-      <svg-render class="exit" svgName="exit" (click)="closeCart()" />
+    <div class="cart-header flex row align-center">
+      <h1 class="title family-nunito">Your Cart</h1>
+      <svg-render svgName="exit" (click)="closeCart()" />
     </div>
 
     <ng-container *ngIf="cart$ | async as cart">
       <ng-container *ngIf="cart.length; else sorry">
-        <main class="cart-main grid">
-          <section class="cart-list grid">
+        <main class="cart-main grid h-100">
+          <section class="cart-list grid h-fit">
             <article class="cart-item grid" *ngFor="let cartItem of cart">
               <image-container [imageUrl]="cartItem.imgUrls[0]" />
 
-              <div class="cart-item-body grid">
+              <div class="cart-item-body grid text-capitalize">
                 <span class="name"> {{ cartItem.name }} </span>
-                <span class="price"> ${{ cartItem.price }} </span>
+                <span class="price family-bold"> ${{ cartItem.price }} </span>
 
-                <span class="quantity flex row">
-                  <svg-render (click)="changeAmount(cartItem, '-'); preventCartClosure($event)" svgName="minusIcon" />
-                  <span class="amount"> {{ cartItem.amount }} </span>
-                  <svg-render (click)="changeAmount(cartItem, '+'); preventCartClosure($event)" svgName="addIcon"
-                    [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }" />
+                <span class="quantity flex row align-center">
+                  <svg-render (click)="changeAmount(cartItem, '-'); preventCartClosure($event)" class="slow-trans"
+                    svgName="minusIcon" />
+                  <span class="amount family-bold"> {{ cartItem.amount }} </span>
+                  <svg-render (click)="changeAmount(cartItem, '+'); preventCartClosure($event)" class="slow-trans"
+                    svgName="addIcon" [ngClass]="{ 'no-more': cartItem.amount === cartItem.stock }" />
                 </span>
               </div>
             </article>
@@ -32,17 +33,18 @@
                 <span>Subtotal</span>
                 <span> {{ orderSummary.total | currency : "USD" : "symbol" }} </span>
               </div>
-              <button class="check-out-btn flex" (click)="onPayment()">
-                <svg-render svgName="shoppingCart" />
+              <button class="flex full-center family-bold fast-trans w-100" (click)="onPayment()">
+                <svg-render class="fast-trans" svgName="shoppingCart" />
                 <span> Checkout </span>
-                <svg-render svgName="shoppingCart" />
+                <svg-render class="fast-trans" svgName="shoppingCart" />
               </button>
             </ng-container>
           </section>
         </main>
       </ng-container>
+
       <ng-template #sorry>
-        <section class="sorry flex column">
+        <section class="sorry flex column align-center">
           <h3>Oops, Your cart is empty!</h3>
           <svg-render svgName="sorryRobot" />
           <h3>We're sure you can find a product that suits you!</h3>

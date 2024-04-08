@@ -5,8 +5,8 @@ import { switchMap, catchError, take, filter, map } from 'rxjs/operators'
 import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { User } from '../models/user'
-import { LOAD_USER } from '../store/user.actions'
-import { selectLoggedinUser, selectUser } from '../store/user.selectors'
+import { LOAD_USER } from '../store/user/user.actions'
+import { selectLoggedinUser, selectUser } from '../store/user/user.selectors'
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class UserGuard implements CanActivate {
         if (loggedInUser?._id) {
           this.store.dispatch(LOAD_USER({ userId: loggedInUser._id }))
           return this.user$.pipe(
-            filter(user => !!user._id),
+            filter(user => !!user._id && user.isVerified),
             take(1),
             map(user => user ? true : this.router.createUrlTree(['/'])),
           )

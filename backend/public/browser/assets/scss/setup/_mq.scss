@@ -276,6 +276,7 @@ introduction-page {
             .introduction-text,
             .contact-text {
                 margin-block-start: 1em;
+                padding-block-start: 1em;
             }
         }
 
@@ -331,7 +332,8 @@ introduction-page {
 
 product-edit,
 reset-password,
-privacy-policy {
+privacy-policy,
+service-terms {
 
     .page-contents {
         @media(max-width: 400px) {
@@ -387,40 +389,9 @@ privacy-policy {
 
 product-details,
 showcase-details {
-
     .page-contents {
-        .mobile-view {
-            .product-area {
-                .image-container {
-                    @media(max-width: 400px) {
-                        product-carousel {
-                            .carousel-container {
-                                min-height: 400px;
-                            }
-                        }
 
-                        img {
-                            min-height: 400px;
-                            max-height: 400px;
-                        }
-                    }
-
-                    @media(min-width:401px) {
-                        product-carousel {
-                            .carousel-container {
-                                min-height: 500px;
-                            }
-                        }
-
-                        img {
-                            min-height: 500px;
-                            max-height: 500px;
-                        }
-                    }
-                }
-            }
-        }
-
+        .mobile-view,
         .desktop-view {
             .product-area {
                 .image-container {
@@ -447,6 +418,32 @@ showcase-details {
                         img {
                             min-height: 300px;
                             max-height: 300px;
+                        }
+                    }
+
+                    @media(max-width: 400px) {
+                        product-carousel {
+                            .carousel-container {
+                                min-height: 400px;
+                            }
+                        }
+
+                        img {
+                            min-height: 400px;
+                            max-height: 400px;
+                        }
+                    }
+
+                    @media(min-width:401px) {
+                        product-carousel {
+                            .carousel-container {
+                                min-height: 500px;
+                            }
+                        }
+
+                        img {
+                            min-height: 500px;
+                            max-height: 500px;
                         }
                     }
 

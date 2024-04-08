@@ -3,73 +3,67 @@
     [@slideInOut]="userEditState">
     <section class="header flex">
       <button class="back" (click)="closeUserEdit()">
-        <svg-render svgName="back" />
+        <svg-render class="flex" svgName="back" />
       </button>
-      <h2 class="flex">Profile Edit</h2>
+      <h2 class="flex full-center family-nunito w-100">Profile Edit</h2>
     </section>
 
     <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
-      <article class="upload-area grid" formArrayName="imgUrl">
+      <div class="upload-area grid" formArrayName="imgUrl">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="'user'"
             (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrl'})" />
           <svg-render svgName="camera" />
         </div>
-      </article>
+      </div>
 
-      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
+      <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'fullName')">
         <label for="fullName" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="idIcon" />
             <span>Full name</span>
           </div>
+
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'fullName')">
             {{ formUtils.getErrorMessage(userEditForm, "fullName") }}
           </span>
         </label>
         <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
           customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
-      </article>
+      </div>
 
-      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
+      <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
         <label for="username" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="personIcon" />
             <span>Username</span>
           </div>
+
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'username')">
             {{ formUtils.getErrorMessage(userEditForm, "username") }}
           </span>
         </label>
         <input id="username" type="text" formControlName="username" placeholder="Please enter your username..."
           customValidator [minLength]=3 [maxLength]=24>
-      </article>
+      </div>
 
-      <article class="input-area flex column" [class.error]="formUtils.isFieldInvalid(userEditForm, 'email')">
-        <label for="email" class="flex row">
-          <div class="label-info flex row">
-            <svg-render svgName="emailIcon" />
-            <span>Email</span>
-          </div>
-          <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'email')">
-            {{ formUtils.getErrorMessage(userEditForm, 'email') }}
-          </span>
-        </label>
-        <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
-          [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
-      </article>
+      <section class="form-actions flex column align-center">
+        <div class="reset-choices flex row">
+          <button class="family-bold" (click)="openResetEmail($event)" title="Reset email?">
+            Reset E-mail
+          </button>
 
-      <a [routerLink]="['/reset']" title="Reset password?">
-        <span (click)="closeUserEdit()">Edit password?</span>
-      </a>
+          <button class="family-bold" (click)="openResetPassword($event)" title="Reset password?">
+            Reset password
+          </button>
+        </div>
 
-      <article class="form-action flex">
-        <button class="glass" type="submit"
+        <button class="submit family-bold fast-trans" type="submit" title="Update your user?"
           [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
           [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
           <span>Save changes</span>
         </button>
-      </article>
+      </section>
     </form>
   </section>
 </main>

@@ -4,17 +4,17 @@
             (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
     </section>
 
-    <section class="contact-text flex column">
+    <section class="contact-text flex column family-sabon text-left">
         <p>Got a request or a question, I'll be glad to answer them for you!</p>
         <p>If you're interested, please contact me using the form below:</p>
         <p>*Reply time can vary, between 1 to 3 business days*</p>
     </section>
 
-    <section class="form-area">
-        <form class="flex column" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'name')">
-                <label for="name" class="flex row">
-                    <div class="label-info flex row">
+    <section class="form-area w-100">
+        <form class="flex column align-center text-left" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'name')">
+                <label for="name" class="flex row align-center text-capitalize">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="personIcon" />
                         <span>Name*</span>
                     </div>
@@ -26,9 +26,9 @@
                     [minLength]=1 [maxLength]=48 [allowNumbers]="false" [allowedSpecialChars]="'. '" autofocus>
             </div>
 
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'email')">
-                <label for="email" class="flex row">
-                    <div class="label-info flex row">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'email')">
+                <label for="email" class="flex row align-center text-capitalize">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="emailIcon" />
                         <span>Email*</span>
                     </div>
@@ -40,9 +40,9 @@
                     [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'title')">
-                <label for="title" class="flex row">
-                    <div class="label-info flex row">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'title')">
+                <label for="title" class="flex row align-center text-capitalize">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="titleIcon" />
                         <span>Title*</span>
                     </div>
@@ -54,9 +54,9 @@
                     [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :?&!$'">
             </div>
 
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(contactForm, 'message')">
-                <label for="message" class="flex row">
-                    <div class="label-info flex row">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'message')">
+                <label for="message" class="flex row align-center text-capitalize">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="descriptionIcon" />
                         <span>Description*</span>
                     </div>
@@ -68,11 +68,12 @@
                     [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
             </div>
 
-            <div class="form-actions flex row">
-                <button class="flex row" type="submit" [disabled]="!isCaptchaResolved || !contactForm.valid"
+            <div class="form-actions w-100 flex row align-center">
+                <button class="flex row align-center normal-trans family-bold" type="submit"
+                    [disabled]="!isCaptchaResolved || !contactForm.valid"
                     [class.disabled]="!isCaptchaResolved || !contactForm.valid">
                     <span>Send</span>
-                    <svg-render svgName="paperPlaneIcon" />
+                    <svg-render class="normal-trans" svgName="paperPlaneIcon" />
                 </button>
                 <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
             </div>

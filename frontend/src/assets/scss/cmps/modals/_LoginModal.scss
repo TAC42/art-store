@@ -1,7 +1,6 @@
 .modal-wrapper {
     .login-modal {
         position: fixed;
-        overflow-y: auto;
         user-select: none;
         top: 5%;
         background: $prmclr2;
@@ -12,81 +11,25 @@
         border-radius: 0.5em;
 
         form {
-            align-items: center;
-            margin-block-end: 1em;
             gap: 1em;
-
-            button {
-                &:not(.password-toggle) {
-                    width: fit-content;
-                    margin: 0 auto;
-                    padding: 0.5em 0.75em;
-                    transition: all 0.5s ease-in-out;
-                    background: $prmclr1;
-                    color: $prmclr2;
-                    border-radius: 0.5em;
-                    font-size: 18px;
-                    overflow: hidden;
-                    position: relative;
-
-                    span {
-                        transition: all 0.5s ease-in-out;
-                        opacity: 1;
-                    }
-
-                    &.disabled {
-                        background: $scdclr1;
-                        pointer-events: none;
-
-                        span {
-                            opacity: 0.5;
-                        }
-                    }
-
-                    &:hover {
-                        background: $mnrclr1;
-                        color: $prmclr3;
-
-                        &::before {
-                            animation: snakeAround 4s linear infinite;
-                        }
-                    }
-
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 90%;
-                        height: 85%;
-                        border: 3px solid $mnrclr3;
-                        border-color: transparent;
-                        border-radius: inherit;
-                        transition: all 0.5s ease-in-out;
-                        z-index: 0;
-                    }
-                }
-            }
+            margin-block-end: 1em;
 
             .input-area {
-                width: 100%;
+                position: relative;
                 gap: 0.25em;
 
                 label {
-                    padding: 0 0.5em;
-                    align-items: center;
                     justify-content: space-between;
+                    padding: 0 0.5em;
                     min-height: 30px;
 
                     span {
                         color: $mnrclr2;
                         font-size: 12px;
-                        text-transform: capitalize;
                     }
 
                     .label-info {
                         gap: 0.5em;
-                        align-items: center;
 
                         span {
                             line-height: 1.6;
@@ -104,19 +47,18 @@
                 }
 
                 input {
-                    padding: 0.25em 0.5em;
                     width: 100%;
-                    transition: all 0.3s ease-in-out;
+                    font-family: 'nh-medium';
+                    padding: 0.25em 0.5em;
                     border-radius: 0.5em;
                     border: 1px solid $scdclr4;
                     color: $prmclr1;
-                    font-family: 'nh-medium';
                     font-size: 14px;
                     line-height: 1.6;
+                    transition: all 0.3s ease-in-out;
 
                     &:focus {
                         border: 1px solid $prmclr1;
-                        outline: none;
                     }
                 }
 
@@ -139,30 +81,59 @@
 
             .reset-pass {
                 color: $prmclr1;
-                transition: all 0.5s ease-in-out;
-
-                &:hover {
-                    text-decoration: none;
-                    color: $prmclr4;
-                }
+                font-size: 16px;
             }
 
-            p {
-                color: $prmclr1;
-                text-align: center;
+            .submit {
+                position: relative;
+                padding: 0.5em 0.75em;
+                background: $prmclr1;
+                color: $prmclr2;
+                border-radius: 0.5em;
+                font-size: 18px;
+                opacity: 1;
+                margin: 0 auto;
 
-                a {
-                    color: $scdclr8;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: inherit;
+                    width: 90%;
+                    height: 85%;
+                    border: 3px solid $mnrclr3;
+                    z-index: 0;
+                    opacity: 0;
+                    transition: all 0.5s ease-in-out;
+                }
+
+                &.disabled {
+                    pointer-events: none;
+                    background: $scdclr1;
+                    color: $prmclr1;
+                    opacity: 0.5;
+
+                    &::before {
+                        opacity: 0;
+                    }
+                }
+
+                &:hover {
+                    background: $mnrclr1;
+                    color: $prmclr3;
+
+                    &::before {
+                        opacity: 1;
+                        animation: snakeAround 4s linear infinite;
+                    }
                 }
             }
         }
 
         .switch {
-            text-align: center;
-            font-family: 'nh-bold';
             color: $scdclr2;
             font-size: 15px;
-            transition: all 0.3s ease-in-out;
 
             &:hover {
                 color: $prmclr1;

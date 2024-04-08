@@ -1,13 +1,13 @@
 import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
-import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, first, map, of, switchMap } from 'rxjs'
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Subscription, filter, map } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { Product } from '../../models/shop'
-import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/shop.actions'
-import { ShopDbService } from '../../services/shop-db.service'
-import { FormUtilsService } from '../../services/form-utils.service'
+import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/product/shop.actions'
+import { ProductService } from '../../services/api/product.service'
+import { FormUtilsService } from '../../services/utils/form-utils.service'
 
 @Component({
   selector: 'product-edit',
@@ -22,14 +22,14 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   private router = inject(Router)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
-  private sDbService = inject(ShopDbService)
+  private prodService = inject(ProductService)
   private formUtilsService = inject(FormUtilsService)
 
   private productSubscription: Subscription | undefined
 
   public formUtils = this.formUtilsService
   public productEditForm!: FormGroup
-  public product: Product = ShopDbService.getDefaultProduct()
+  public product: Product = ProductService.getDefaultProduct()
   public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
   public specialChars: string = "'. ?$%#!*:,/()\"'"
   public initialFormData: Product | null = null
@@ -43,7 +43,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.productEditForm = this.fBuilder.group({
       name: [this.product.name, [Validators.required],
       [this.formUtilsService.validateField(value =>
-        this.sDbService.validateProductName(value),
+        this.prodService.validateProductName(value),
         this.initialFormData?.name)]],
       price: [this.product.price, [Validators.required]],
       description: [this.product.description, [Validators.required]],

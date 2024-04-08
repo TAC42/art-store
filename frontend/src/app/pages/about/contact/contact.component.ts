@@ -2,10 +2,11 @@ import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../../models/shop'
-import { UtilityService } from '../../../services/utility.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
-import { DeviceTypeService } from '../../../services/device-type.service'
-import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service'
+import { UtilityService } from '../../../services/utils/utility.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
+import { DeviceTypeService } from '../../../services/utils/device-type.service'
+import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/utils/event-bus.service'
+import { MailService } from '../../../services/api/mail.service'
 
 @Component({
   selector: 'contact-page',
@@ -18,6 +19,7 @@ export class ContactComponent implements OnInit {
 
   private fBuilder = inject(FormBuilder)
   private utilService = inject(UtilityService)
+  private emailService = inject(MailService)
   private formUtilsService = inject(FormUtilsService)
   private dTypeService = inject(DeviceTypeService)
   private eBusService = inject(EventBusService)
@@ -69,7 +71,7 @@ export class ContactComponent implements OnInit {
       const formDataWithCaptcha = {
         ...this.contactForm.value, recaptchaToken: this.captchaResponse
       }
-      this.utilService.sendContactUsMail(formDataWithCaptcha).subscribe({
+      this.emailService.sendContactUsMail(formDataWithCaptcha).subscribe({
         next: () => {
           // reset of form & recaptcha token
           this.contactForm.reset()

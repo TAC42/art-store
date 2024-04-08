@@ -14,14 +14,15 @@ authRoutes.post('/logout', _logout)
 // auth controller functions
 async function _login(req: Request<LoginRequestBody>,
   res: Response): Promise<void> {
-  const { username, password, recaptchaToken } = req.body
+  const { loginId, password, recaptchaToken } = req.body
 
   try {
     await utilityService.verifyRecaptcha(recaptchaToken)
-    const user = await authService.login(username, password)
+    const user = await authService.login(loginId, password)
     const loginToken = authService.getLoginToken(user!)
 
     loggerService.info('User login: ', loginToken)
+
     res.cookie('loginToken', loginToken, { httpOnly: true })
     res.json(user)
   } catch (err) {

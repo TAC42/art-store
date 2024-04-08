@@ -14,21 +14,18 @@
 
 // Pages
 @import "pages/Home";
-@import "pages/ShopIndex";
 @import "pages/ProductDetails";
 @import "pages/Contact";
 @import "pages/Introduction";
 @import "pages/ProductEdit";
-@import "pages/SculptureIndex";
-@import "pages/ArtwareIndex";
 @import "pages/ShowcaseDetails";
 @import "pages/Payment";
 @import "pages/Profile";
 @import "pages/Dashboard";
-@import "pages/ResetPassword";
 @import "pages/Signup";
 @import "pages/PrivacyPolicy";
 @import "pages/ServiceTerms";
+@import "pages/ProductIndex";
 
 // Cmps
 @import "cmps/AppHeader";
@@ -40,6 +37,7 @@
 @import "cmps/AppFooter";
 @import "cmps/ImageUploader";
 @import "cmps/EditPreview";
+@import "cmps/UserOrders";
 
 // modals
 @import "cmps/modals/Cart";
@@ -51,3 +49,5 @@
 @import "cmps/modals/AsideMenu";
 @import "cmps/modals/ConfirmModal";
 @import "cmps/modals/ImageDisplay";
+@import "cmps/modals/ResetPassword";
+@import "cmps/modals/ResetEmail";

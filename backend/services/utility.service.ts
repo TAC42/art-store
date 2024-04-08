@@ -9,7 +9,8 @@ export const utilityService = {
     readJsonFile,
     makeId,
     idToObjectId,
-    verifyRecaptcha
+    verifyRecaptcha,
+    formatDate
 }
 dotenv.config()
 
@@ -55,4 +56,13 @@ async function verifyRecaptcha(token: string): Promise<void> {
         loggerService.error('reCAPTCHA verification failed:', data['error-codes'])
         throw new Error('Invalid reCAPTCHA')
     }
+}
+
+function formatDate() {
+    const date = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York", month: 'short', day: '2-digit',
+        year: 'numeric', hour: 'numeric', minute: '2-digit',
+        second: '2-digit', hour12: true
+    })
+    return date
 }

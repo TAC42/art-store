@@ -1,48 +1,53 @@
 <main class="modal-wrapper flex" *ngIf="modService.isModalOpen('aside-menu')">
     <section class="aside-menu w-h-100 flex column" [@slideInOut]="menuState" (clickOutside)="closeMenu()">
-        <div class="logo-container flex row">
-            <h1>oricarlin</h1>
+        <div class="logo-container flex row align-center">
+            <h1 class="family-nunito">oricarlin</h1>
             <ng-container *ngIf="user$ | async as loggedinUser">
                 <img *ngIf="loggedinUser._id" [src]="loggedinUser.imgUrl[0]" alt="User Image">
             </ng-container>
         </div>
 
         <div class="link-area">
-            <a (click)="closeMenu()" routerLink="/" routerLinkActive="active"
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }">Home
             </a>
         </div>
 
         <div class="link-area" *ngIf="(user$ | async)?.isAdmin">
-            <a (click)="closeMenu()" routerLink="/edit" routerLinkActive="active">Add Product</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/edit" routerLinkActive="active">Add
+                Product</a>
         </div>
 
         <div class="link-area">
-            <a (click)="closeMenu()" routerLink="/shop" routerLinkActive="active">Shop</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/shop" routerLinkActive="active">Shop</a>
         </div>
 
         <div class="link-area">
-            <a (click)="closeMenu()" routerLink="/artware" routerLinkActive="active">Ware</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/artware" routerLinkActive="active">Ware</a>
         </div>
 
         <div class="link-area">
-            <a (click)="closeMenu()" routerLink="/sculpture" routerLinkActive="active">Sculpture</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/sculpture"
+                routerLinkActive="active">Sculpture</a>
         </div>
 
         <div class="link-area" *ngIf="(user$ | async)?._id">
-            <a (click)="closeMenu()" routerLink="/profile" routerLinkActive="active">Profile</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/profile"
+                routerLinkActive="active">Profile</a>
         </div>
 
         <div class="link-area" *ngIf="(user$ | async)?.isAdmin">
-            <a (click)="closeMenu()" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/dashboard"
+                routerLinkActive="active">Dashboard</a>
         </div>
 
         <div class="link-area">
-            <a (click)="closeMenu()" routerLink="/about" routerLinkActive="active">About & Contact</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/about" routerLinkActive="active">About &
+                Contact</a>
         </div>
 
         <div class="link-area" *ngIf="user$ | async as loggedinUser">
-            <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
+            <span class="w-100 fast-trans" (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
                 {{ loggedinUser._id ? 'Logout' : 'Login' }}
             </span>
         </div>

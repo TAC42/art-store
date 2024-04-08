@@ -1,14 +1,15 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
+import { Router } from '@angular/router'
 import { animate, state, style, transition, trigger } from '@angular/animations'
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms'
-import { Observable, Subscription, debounceTime, distinctUntilChanged, first, of, switchMap, take } from 'rxjs'
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { User } from '../../../models/user'
 import { AppState } from '../../../store/app.state'
-import { UPDATE_USER } from '../../../store/user.actions'
-import { ModalService } from '../../../services/modal.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
-import { UserService } from '../../../services/user.service'
+import { UPDATE_USER } from '../../../store/user/user.actions'
+import { ModalService } from '../../../services/utils/modal.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
+import { UserService } from '../../../services/api/user.service'
 
 @Component({
   selector: 'user-edit',
@@ -30,6 +31,7 @@ import { UserService } from '../../../services/user.service'
 export class UserEditComponent implements OnInit {
   @Input() user$!: Observable<User>
 
+  private router = inject(Router)
   private store = inject(Store<AppState>)
   private fBuilder = inject(FormBuilder)
   public modService = inject(ModalService)
@@ -78,7 +80,20 @@ export class UserEditComponent implements OnInit {
     this.formUtils.handleImageUpload(this.userEditForm, event)
   }
 
-  onSaveUser() {
+  openResetPassword(event: MouseEvent): void {
+    event.stopPropagation()
+    setTimeout(() => this.router.navigate(['/']), 1000)
+    this.modService.openModal('reset-password')
+    this.closeUserEdit()
+  }
+
+  openResetEmail(event: MouseEvent): void {
+    event.stopPropagation()
+    this.modService.openModal('reset-email')
+    this.closeUserEdit()
+  }
+
+  onSaveUser(): void {
     this.user$.pipe(take(1)).subscribe(user => {
       const formData = this.userEditForm.value
       const updatedUser = { ...user, ...formData }
@@ -87,12 +102,12 @@ export class UserEditComponent implements OnInit {
     this.closeUserEdit()
   }
 
-  closeUserEdit() {
+  closeUserEdit(): void {
     this.userEditState = 'hidden'
     setTimeout(() => this.modService.closeModal('user-edit'), 600)
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.modalSubscription) this.modalSubscription.unsubscribe()
   }
 }

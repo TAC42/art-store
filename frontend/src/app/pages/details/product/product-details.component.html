@@ -1,18 +1,20 @@
 <main class="page-contents w-h-100 flex column">
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
         class="mobile-view flex column">
-        <section class="actions flex row">
-            <a [routerLink]="['/shop']" title="Exit details page?">
-                <svg-render svgName="leftArrowIcon" />
-            </a>
-            <h2>shop</h2>
-            <button (click)="onOpenCart($event)" title="Open your cart?">
-                <svg-render svgName="shoppingCart" />
-            </button>
+        <section class="actions-wrapper w-100">
+            <div class="actions flex row align-center w-100">
+                <a [routerLink]="['/shop']" title="Exit details page?">
+                    <svg-render class="fast-trans" svgName="leftArrowIcon" />
+                </a>
+                <h2 class="family-bold">Shop</h2>
+                <button (click)="onOpenCart($event)" title="Open your cart?">
+                    <svg-render class="fast-trans" svgName="shoppingCart" />
+                </button>
+            </div>
         </section>
 
         <ng-container *ngIf="product$ | async as product">
-            <section class="product-area flex column">
+            <section class="product-area flex column text-center">
                 <div class="image-container flex column">
                     <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
                         <product-carousel [carouselItems]="carouselItems"
@@ -23,51 +25,55 @@
                         <image-container [imageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
-                    <span class="price-tag flex">${{ product.price }}.00</span>
+                    <span class="price-tag flex full-center">${{ product.price }}.00</span>
                 </div>
 
-                <div class="details-area">
-                    <h2>{{ product.name }}</h2>
+                <div class="details-area family-sabon">
+                    <h2 class="family-bold text-capitalize">{{ product.name }}</h2>
 
                     <p class="description">{{ product.description }}</p>
-                    <h4>Dimensions</h4>
-                    <p>{{ product.dimensions }}</p>
-                    <h4>Materials</h4>
-                    <p style="text-transform: capitalize;">{{product.materials}}</p>
-                    <h4>Delivery</h4>
+                    <h4 class="text-bold">Dimensions</h4>
+                    <p class="">{{ product.dimensions }}</p>
+
+                    <h4 class="text-bold">Materials</h4>
+                    <p class="text-capitalize">{{product.materials}}</p>
+                    <h4 class="text-bold">Delivery</h4>
                     <p>
                         3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
-                        soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
+                        soil, for outside shipping requests, please
+                        <a class="text-bold" [routerLink]="['/about/contact']">contact us here</a>.
                     </p>
 
-                    <p *ngIf="product.stock <= 0" class="unavailable">
+                    <p *ngIf="product.stock <= 0" class="unavailable text-bold">
                         This product is currently out of stock, for further information and the
                         option to order it in the near future, please press inquire.
                     </p>
 
-                    <button class="action-btn flex row" [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
+                    <button class="action-btn flex row align-center fast-trans"
+                        [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
                         (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
-                        <span>{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
-                        <svg-render *ngIf="product.stock > 0" svgName="shoppingCart" />
+                        <span class="family-bold fast-trans">{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
+
+                        <svg-render *ngIf="product.stock > 0" class="fast-trans" svgName="shoppingCart" />
                     </button>
                 </div>
             </section>
         </ng-container>
 
-        <h3>related products</h3>
+        <h3 class="family-bold text-capitalize text-center">related products</h3>
         <random-product-carousel [randomProducts$]="randomProducts$" />
     </section>
 
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column">
-        <section class="actions-wrapper">
-            <div class="actions flex row layout-row">
+        <section class="actions-wrapper w-100">
+            <div class="actions flex row align-center layout-row">
                 <a [routerLink]="['/shop']" title="Exit details page?">
-                    <svg-render svgName="leftArrowIcon" />
+                    <svg-render class="fast-trans" svgName="leftArrowIcon" />
                 </a>
-                <h2>shop</h2>
+                <h2 class="family-bold">Shop</h2>
                 <button (click)="onOpenCart($event)" title="Open your cart?">
-                    <svg-render svgName="shoppingCart" />
+                    <svg-render class="fast-trans" svgName="shoppingCart" />
                 </button>
             </div>
         </section>
@@ -86,41 +92,45 @@
                     </ng-template>
                 </div>
 
-                <div class="details-area">
-                    <h2>{{ product.name }}</h2>
+                <div class="details-area family-sabon text-left">
+                    <h2 class="family-bold text-capitalize">{{ product.name }}</h2>
 
                     <p class="price">${{product.price}}.00</p>
                     <p class="description">{{ product.description }}</p>
-                    <h4>Dimensions</h4>
+                    <h4 class="text-bold">Dimensions</h4>
                     <p>{{ product.dimensions }}</p>
-                    <h4>Materials</h4>
-                    <p style="text-transform: capitalize;">{{product.materials}}</p>
-                    <h4>Delivery</h4>
+
+                    <h4 class="text-bold">Materials</h4>
+                    <p class="text-capitalize">{{product.materials}}</p>
+                    <h4 class="text-bold">Delivery</h4>
                     <p>
                         3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
-                        soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
+                        soil, for outside shipping requests, please
+                        <a class="text-bold" [routerLink]="['/about/contact']">contact us here</a>.
                     </p>
 
-                    <p *ngIf="product.stock <= 0" class="unavailable">
+                    <p *ngIf="product.stock <= 0" class="unavailable text-bold">
                         This product is currently out of stock, for further information and the
                         option to order it in the near future, please press inquire.
                     </p>
 
-                    <button class="action-btn flex row" [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
+                    <button class="action-btn flex row align-center fast-trans"
+                        [title]="product.stock > 0 ? 'Buy product?' : 'Contact us!'"
                         (click)="product.stock > 0 ? onAddToCart($event, product) : onInquire($event)">
-                        <span>{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
-                        <svg-render *ngIf="product.stock > 0" svgName="shoppingCart" />
+                        <span class="family-bold fast-trans">{{ product.stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
+
+                        <svg-render *ngIf="product.stock > 0" class="fast-trans" svgName="shoppingCart" />
                     </button>
                 </div>
             </section>
         </ng-container>
 
-        <h3>related products</h3>
-        <section *ngIf="randomProducts$ | async as randomProducts" class="other-products-area grid">
+        <h3 class="family-bold text-capitalize text-center">related products</h3>
+        <section class="other-products-area grid text-center" *ngIf="randomProducts$ | async as randomProducts">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column">
                 <image-container [imageUrl]="randomProduct.imgUrls[0]" />
-                <p>{{ randomProduct.name }}</p>
+                <p class="family-bold text-capitalize">{{ randomProduct.name }}</p>
             </a>
         </section>
     </section>

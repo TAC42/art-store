@@ -6,12 +6,12 @@ import { AppState } from '../../../store/app.state'
 import { Product } from '../../../models/shop'
 import { ShopFilter } from '../../../models/shop'
 import { User } from '../../../models/user'
-import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/shop.actions'
-import { selectProducts, selectIsLoading } from '../../../store/shop.selectors'
-import { selectUser } from '../../../store/user.selectors'
-import { CommunicationService } from '../../../services/communication.service'
-import { ModalService } from '../../../services/modal.service'
-import { DeviceTypeService } from '../../../services/device-type.service'
+import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/product/shop.actions'
+import { selectProducts, selectIsLoading } from '../../../store/product/shop.selectors'
+import { selectUser } from '../../../store/user/user.selectors'
+import { CommunicationService } from '../../../services/utils/communication.service'
+import { ModalService } from '../../../services/utils/modal.service'
+import { DeviceTypeService } from '../../../services/utils/device-type.service'
 
 @Component({
   selector: 'artware-index',

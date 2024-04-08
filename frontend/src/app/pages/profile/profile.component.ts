@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { User } from '../../models/user'
 import { Order } from '../../models/order'
-import { selectUser } from '../../store/user.selectors'
-import { selectOrders } from '../../store/order.selectors'
-import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order.actions'
-import { DeviceTypeService } from '../../services/device-type.service'
-import { ModalService } from '../../services/modal.service'
+import { selectUser } from '../../store/user/user.selectors'
+import { selectOrders } from '../../store/order/order.selectors'
+import { LOAD_FILTER, LOAD_ORDERS } from '../../store/order/order.actions'
+import { DeviceTypeService } from '../../services/utils/device-type.service'
+import { ModalService } from '../../services/utils/modal.service'
 
 @Component({
   selector: 'profile',
@@ -24,12 +24,11 @@ export class ProfileComponent implements OnInit {
   public modService = inject(ModalService)
 
   public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1706644779/ibir2pid5kftim9u7fvu.png'
+  public optionState: string = 'order1'
 
   user$: Observable<User> = this.store.select(selectUser)
   orders$: Observable<Order[]> = this.store.select(selectOrders)
   deviceType$: Observable<string> = this.dTypeService.deviceType$
-
-  optionState: string = 'order1'
 
   ngOnInit(): void {
     this.user$.subscribe(user => {
@@ -39,23 +38,6 @@ export class ProfileComponent implements OnInit {
         this.store.dispatch(LOAD_ORDERS({ filterBy }))
       }
     })
-  }
-
-  setSelection(option: string) {
-    if (this.optionState === option) return
-    this.optionState = option
-  }
-
-  getStatusClass(status: string): string {
-    const statusColors = {
-      pending: 'pending',
-      confirmed: 'confirmed',
-      shipped: 'shipped',
-      delivered: 'delivered',
-      cancelled: 'cancelled',
-    }
-    return statusColors[status.toLowerCase() as 'pending' |
-      'shipped' | 'delivered'] || 'gray'
   }
 
   onOpenUserEdit(event: Event): void {

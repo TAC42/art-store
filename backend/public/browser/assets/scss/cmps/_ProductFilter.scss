@@ -21,7 +21,6 @@ product-filter {
 
     &:focus,
     &:focus-visible {
-      outline: none;
       border: 1px solid $scdclr2;
       border-right: none;
     }

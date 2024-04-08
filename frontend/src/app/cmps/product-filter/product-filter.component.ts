@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { ShopFilter } from '../../models/shop'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { User } from '../../models/user'
-import { ModalService } from '../../services/modal.service'
+import { ModalService } from '../../services/utils/modal.service'
 
 @Component({
   selector: 'product-filter',

@@ -5,8 +5,8 @@ import { take, catchError, switchMap, filter } from 'rxjs/operators'
 import { Store } from '@ngrx/store'
 import { AppState } from '../store/app.state'
 import { User } from '../models/user'
-import { LOAD_USER } from '../store/user.actions'
-import { selectLoggedinUser, selectUser } from '../store/user.selectors'
+import { LOAD_USER } from '../store/user/user.actions'
+import { selectLoggedinUser, selectUser } from '../store/user/user.selectors'
 
 @Injectable({
   providedIn: 'root'

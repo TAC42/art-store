@@ -1,115 +1,115 @@
 <main class="page-contents w-h-100 grid">
-    <div class="background flex column">
+    <div class="background flex column family-sabon">
         <p>Pottery...</p>
         <p>Beauty...</p>
         <p>Creativity...</p>
         <image-container [imageUrl]="backgroundImage" />
     </div>
 
-    <form class="flex column" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <p class="heads-up">
+    <form class="flex column align-center w-100" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <p class="heads-up w-100">
             Welcome! We are excited to have you here. Can you share a bit about yourself?
         </p>
 
-        <div class="combined-inputs grid">
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'firstName')">
-                <label for="firstName" class="flex row">
-                    <div class="label-info flex row">
+        <div class="combined-inputs grid w-100">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(signupForm, 'firstName')">
+                <label for="firstName" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="idIcon" />
                         <span>First Name</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'firstName')">
                         {{ formUtils.getErrorMessage(signupForm, 'firstName') }}
                     </span>
                 </label>
-
                 <input id="firstName" type="text" formControlName="firstName" placeholder="Your first name..."
                     customValidator [minLength]=3 [maxLength]=24 [allowNumbers]="false" [allowedSpecialChars]="',.'"
                     autofocus>
             </div>
 
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'lastName')">
-                <label for="lastName" class="flex row">
-                    <div class="label-info flex row">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(signupForm, 'lastName')">
+                <label for="lastName" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="idIcon" />
                         <span>Last Name</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'lastName')">
                         {{ formUtils.getErrorMessage(signupForm, 'lastName') }}
                     </span>
                 </label>
-
                 <input id="lastName" type="text" formControlName="lastName" placeholder="Your last name..."
                     customValidator [minLength]=3 [maxLength]=24 [allowNumbers]="false" [allowedSpecialChars]="',.'">
             </div>
         </div>
 
-        <div class="combined-inputs grid">
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'username')">
-                <label for="username" class="flex row">
-                    <div class="label-info flex row">
+        <div class="combined-inputs grid w-100">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(signupForm, 'username')">
+                <label for="username" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="personIcon" />
                         <span>Username</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'username')">
                         {{ formUtils.getErrorMessage(signupForm, 'username') }}
                     </span>
                 </label>
-
                 <input id="username" type="text" formControlName="username" placeholder="Your username..."
                     customValidator [minLength]=3 [maxLength]=24>
             </div>
         </div>
 
-        <div class="combined-inputs grid">
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'email')">
-                <label for="email" class="flex row">
-                    <div class="label-info flex row">
+        <div class="combined-inputs grid w-100">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(signupForm, 'email')">
+                <label for="email" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="emailIcon" />
                         <span>Email</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'email')">
                         {{ formUtils.getErrorMessage(signupForm, 'email') }}
                     </span>
                 </label>
-
                 <input id="email" type="email" formControlName="email" placeholder="Your email..." customValidator
                     [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
-            <div class="input-area flex column" [class.error]="formUtils.isFieldInvalid(signupForm, 'confirmEmail')">
-                <label for="confirmEmail" class="flex row">
-                    <div class="label-info flex row">
+            <div class="input-area flex column w-100"
+                [class.error]="formUtils.isFieldInvalid(signupForm, 'confirmEmail')">
+                <label for="confirmEmail" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="emailIcon" />
                         <span>Confirm Email</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'confirmEmail')">
                         {{ formUtils.getErrorMessage(signupForm, 'confirmEmail') }}
                     </span>
                 </label>
-
                 <input id="confirmEmail" type="email" formControlName="confirmEmail" placeholder="Confirm your email..."
                     customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
         </div>
 
-        <p class="heads-up">
+        <p class="heads-up w-100">
             Please create a strong password using a mix of letters, numbers, and symbols, at least 8 characters long.
         </p>
 
-        <div class="combined-inputs grid">
-            <div class="input-area flex column" style="position: relative;"
-                [class.error]="formUtils.isFieldInvalid(signupForm, 'password')">
-                <label for="password" class="flex row">
-                    <div class="label-info flex row">
+        <div class="combined-inputs grid w-100">
+            <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(signupForm, 'password')">
+                <label for="password" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="lockIcon" />
                         <span>Password</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'password')">
                         {{ formUtils.getErrorMessage(signupForm, 'password') }}
                     </span>
                 </label>
-
                 <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
                     placeholder="Your password..." customValidator [minLength]=8 [maxLength]=32
                     [allowedSpecialChars]="allowedSpecialChars" [passwordValidation]="true">
@@ -120,18 +120,18 @@
                 </button>
             </div>
 
-            <div class="input-area flex column" style="position: relative;"
+            <div class="input-area flex column w-100"
                 [class.error]="formUtils.isFieldInvalid(signupForm, 'confirmPassword')">
-                <label for="confirmPassword" class="flex row">
-                    <div class="label-info flex row">
+                <label for="confirmPassword" class="flex row align-center">
+                    <div class="label-info flex row align-center">
                         <svg-render svgName="lockIcon" />
                         <span>Confirm Password</span>
                     </div>
+
                     <span *ngIf="formUtils.isFieldInvalid(signupForm, 'confirmPassword')">
                         {{ formUtils.getErrorMessage(signupForm, 'confirmPassword') }}
                     </span>
                 </label>
-
                 <input id="confirmPassword" [type]="showPassword ? 'text' : 'password'"
                     formControlName="confirmPassword" placeholder="Confirm your password..." customValidator
                     [minLength]=8 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars"
@@ -150,12 +150,12 @@
             <a [routerLink]="['/privacy']">privacy policy</a>.
         </p>
 
-        <button class="signup flex" type="submit" [disabled]="(signupForm.invalid || !isCaptchaResolved)"
+        <button class="signup flex normal-trans" type="submit" [disabled]="(signupForm.invalid || !isCaptchaResolved)"
             [class.disabled]="(signupForm.invalid || !isCaptchaResolved)">
             <span>Sign up</span>
         </button>
 
-        <button class="login" (click)="openLogin($event)">
+        <button class="login family-bold" (click)="openLogin($event)">
             Already have an account? Login!
         </button>
     </form>

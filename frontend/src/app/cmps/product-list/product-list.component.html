@@ -1,6 +1,6 @@
 <div class="list-contents w-h-100" [ngClass]="{'masonry-layout': !isShopPage, 'grid-layout': isShopPage}">
   <ng-container *ngIf="(!isLoading && (products && products.length === 0)); else productList">
-    <div class="no-results flex column">
+    <div class="no-results flex column align-center text-center">
       <h1>Oops, looks like you have no art available!</h1>
       <svg-render svgName="sorryRobot" />
     </div>

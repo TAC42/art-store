@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { trigger, state, style, transition, animate } from '@angular/animations'
-import { EventBusService } from '../../../services/event-bus.service'
+import { EventBusService } from '../../../services/utils/event-bus.service'
 
 @Component({
   selector: 'user-msg',

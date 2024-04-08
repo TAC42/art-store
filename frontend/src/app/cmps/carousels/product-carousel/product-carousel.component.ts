@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy, EventEmitter, Output, inject } fro
 import { interval, Subscription } from 'rxjs'
 import { CarouselItem } from '../../../models/shop'
 import { Router } from '@angular/router'
-import { ImageLoadService } from '../../../services/image-load.service'
+import { ImageLoadService } from '../../../services/media/image-load.service'
 
 @Component({
   selector: 'product-carousel',

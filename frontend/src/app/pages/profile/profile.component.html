@@ -5,207 +5,49 @@
       <image-container [imageUrl]="backgroundImage" />
     </div>
 
-    <article class="personal-info flex column" *ngIf="user$ | async as user">
+    <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center">
       <article class="user-img">
         <image-container [imageUrl]="user.imgUrl[0]" />
       </article>
-      <span class="full-name"> {{ user.fullName }} </span>
-      <span class="user-name"> &#64;{{ user.username }} </span>
+      <span class="full-name family-bold"> {{ user.fullName }} </span>
+      <span> &#64;{{ user.username }} </span>
 
-      <div class="member-since flex">
+      <div class="member-since flex align-center">
         <svg-render svgName="personIcon" />
         <span> Member since {{ user.createdAt | date : "MMM yyyy" }} </span>
       </div>
 
-      <section class="edit-profile flex">
+      <section class="edit-profile flex justify-center family-bold">
+        <button (click)="onOpenUserEdit($event)">Edit profile</button>
+        <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      </section>
+    </article>
+    <user-orders [orders$]="orders$" [optionState]="optionState" />
+  </section>
+
+  <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
+    class="desktop-view flex column h-100">
+    <div class="background">
+      <image-container [imageUrl]="backgroundImage" />
+    </div>
+
+    <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center">
+      <image-container [imageUrl]="user.imgUrl[0]" />
+
+      <span class="full-name family-bold"> {{ user.fullName }} </span>
+      <span> &#64;{{ user.username }} </span>
+
+      <div class="member-since flex align-center">
+        <svg-render svgName="personIcon" />
+        <span> Member since {{ user.createdAt | date : "MMM yyyy" }} </span>
+      </div>
+
+      <section class="edit-profile flex column justify-center family-bold">
         <button (click)="onOpenUserEdit($event)">Edit profile</button>
         <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       </section>
     </article>
 
-    <section class="orders grid" *ngIf="orders$ | async as orders">
-      <ng-container *ngIf="orders.length; else orderless">
-        <h3>Your orders</h3>
-        <mat-expansion-panel class="order glass" [expanded]="optionState === 'order num'"
-          (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="heading flex">
-              <span class="count"> {{ i + 1 }} </span>
-              <span class="title"> Order #{{ order.createdAt }} </span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <section class="order-info grid">
-            <article class="purchased flex row">
-              <span>Purchased:</span>
-              <span> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }} </span>
-            </article>
-
-            <article class="payment flex row">
-              <span>Payment:</span>
-              <span style="text-transform: capitalize;"> {{ order.payment }} </span>
-            </article>
-
-            <article class="summary flex row">
-              <span>Summary:</span>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <ng-container *ngFor="let item of order.summary">
-                    <tr>
-                      <td>{{ item.name }}</td>
-                      <td>{{ item.amount }}</td>
-                      <td>{{ item.price | currency : "USD" : "symbol" }}</td>
-                    </tr>
-                  </ng-container>
-                </tbody>
-              </table>
-            </article>
-            <article class="cost flex row">
-              <span>Cost:</span>
-              <ul>
-                <li class="grid">Subtotal:
-                  <span>{{ order.expenses.total | currency : "USD" : "symbol" }}</span>
-                </li>
-                <li class="grid">Taxes:
-                  <span>{{ order.expenses.taxes | currency : "USD" : "symbol" }}</span>
-                </li>
-                <li class="grid">Delivery Fee:
-                  <span>{{ order.expenses.deliveryFee | currency : "USD" : "symbol" }}</span>
-                </li>
-                <li class="grid">Grand Total:
-                  <span>{{ order.expenses.grandTotal| currency : "USD" : "symbol" }}</span>
-                </li>
-              </ul>
-            </article>
-
-            <article class="status flex row">
-              <span>Status:</span>
-              <button [ngClass]="getStatusClass(order.status)">
-                {{ order.status }}
-              </button>
-            </article>
-          </section>
-        </mat-expansion-panel>
-      </ng-container>
-
-      <ng-template #orderless>
-        <section class="no-orders flex column">
-          <svg-render svgName="sorryRobot" />
-          <h3>You have no orders!</h3>
-        </section>
-      </ng-template>
-    </section>
-  </section>
-
-  <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
-    class="desktop-view flex column">
-    <div class="background">
-      <image-container [imageUrl]="backgroundImage" />
-    </div>
-
-    <article class="personal-info flex column" *ngIf="user$ | async as user">
-      <image-container [imageUrl]="user.imgUrl[0]" />
-
-      <span class="full-name"> {{ user.fullName }} </span>
-      <span class="user-name"> &#64;{{ user.username }} </span>
-
-      <div class="member-since flex">
-        <svg-render svgName="personIcon" />
-        <span> Member since {{ user.createdAt | date : "MMM yyyy" }} </span>
-      </div>
-
-      <section class="edit-profile flex">
-        <button (click)="onOpenUserEdit($event)">Edit profile</button>
-      </section>
-
-      <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-    </article>
-
-    <section class="orders layout-row grid" *ngIf="orders$ | async as orders">
-      <ng-container *ngIf="orders.length; else orderless">
-        <h3>Your orders</h3>
-        <mat-expansion-panel class="order glass" [expanded]="optionState === 'order num'"
-          (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="heading flex">
-              <span class="count"> {{ i + 1 }} </span>
-              <span class="title"> Order #{{ order.createdAt }} </span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <section class="order-info grid">
-            <article class="purchased flex row">
-              <span>Purchased:</span>
-              <span> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }} </span>
-            </article>
-
-            <article class="payment flex row">
-              <span>Payment:</span>
-              <span style="text-transform: capitalize;"> {{ order.payment }} </span>
-            </article>
-
-            <article class="summary flex row">
-              <span>Summary:</span>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <ng-container *ngFor="let item of order.summary">
-                    <tr>
-                      <td>{{ item.name }}</td>
-                      <td>{{ item.amount }}</td>
-                      <td>{{ item.price | currency : "USD" : "symbol" }}</td>
-                    </tr>
-                  </ng-container>
-                </tbody>
-              </table>
-            </article>
-            <article class="cost flex row">
-              <span>Cost:</span>
-              <ul>
-                <li class="grid">Subtotal:
-                  <span>{{ order.expenses.total | currency : "USD" : "symbol" }}</span>
-                </li>
-                <li class="grid">Taxes:
-                  <span>{{ order.expenses.taxes | currency : "USD" : "symbol" }}</span>
-                </li>
-                <li class="grid">Delivery Fee:
-                  <span>{{ order.expenses.deliveryFee | currency : "USD" : "symbol" }}</span>
-                </li>
-                <li class="grid">Grand Total:
-                  <span>{{ order.expenses.grandTotal| currency : "USD" : "symbol" }}</span>
-                </li>
-              </ul>
-            </article>
-
-            <article class="status flex row">
-              <span>Status:</span>
-              <button [ngClass]="getStatusClass(order.status)">
-                {{ order.status }}
-              </button>
-            </article>
-          </section>
-        </mat-expansion-panel>
-      </ng-container>
-
-      <ng-template #orderless>
-        <section class="no-orders flex column">
-          <svg-render svgName="sorryRobot" />
-          <h3>You have no orders!</h3>
-        </section>
-      </ng-template>
-    </section>
+    <user-orders [orders$]="orders$" [optionState]="optionState" />
   </section>
 </main>

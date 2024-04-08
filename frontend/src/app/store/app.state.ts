@@ -1,9 +1,9 @@
-import { ShopState } from './shop.reducers'
-import { UserState } from './user.reducers'
+import { ShopState } from './product/shop.reducers'
+import { UserState } from './user/user.reducers'
 import { ActionReducerMap } from '@ngrx/store'
-import { shopReducer } from './shop.reducers'
-import { userReducer } from './user.reducers'
-import { OrderState, orderReducer } from './order.reducers'
+import { shopReducer } from './product/shop.reducers'
+import { userReducer } from './user/user.reducers'
+import { OrderState, orderReducer } from './order/order.reducers'
 
 export interface AppState {
   shop: ShopState

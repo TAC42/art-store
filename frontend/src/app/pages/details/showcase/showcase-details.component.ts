@@ -2,8 +2,8 @@ import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Observable, map } from 'rxjs'
 import { CarouselItem, Product } from '../../../models/shop'
-import { DeviceTypeService } from '../../../services/device-type.service'
-import { UtilityService } from '../../../services/utility.service'
+import { DeviceTypeService } from '../../../services/utils/device-type.service'
+import { UtilityService } from '../../../services/utils/utility.service'
 
 @Component({
   selector: 'showcase-details',

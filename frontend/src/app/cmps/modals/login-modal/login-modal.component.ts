@@ -1,12 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { UserLogin } from '../../../models/user'
-import { LOGIN } from '../../../store/user.actions'
-import { ModalService } from '../../../services/modal.service'
-import { FormUtilsService } from '../../../services/form-utils.service'
+import { LOGIN } from '../../../store/user/user.actions'
+import { ModalService } from '../../../services/utils/modal.service'
+import { FormUtilsService } from '../../../services/utils/form-utils.service'
 
 @Component({
   selector: 'login-modal',
@@ -14,7 +13,6 @@ import { FormUtilsService } from '../../../services/form-utils.service'
 })
 
 export class LoginModalComponent implements OnInit {
-  private router = inject(Router)
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
@@ -37,7 +35,7 @@ export class LoginModalComponent implements OnInit {
 
   initializeForm(): void {
     this.loginForm = this.fBuilder.group({
-      username: ['', [Validators.required]],
+      loginId: ['', [Validators.required]],
       password: ['', [Validators.required]]
     })
   }
@@ -52,26 +50,28 @@ export class LoginModalComponent implements OnInit {
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  closeLoginModal() {
-    this.modService.closeModal('login')
-    this.loginForm.reset()
+  openResetPassword(event: MouseEvent): void {
+    event.stopPropagation()
+    this.modService.openModal('reset-password')
+    this.closeLoginModal()
   }
 
-  onSubmit() {
+  closeLoginModal(): void {
+    this.modService.closeModal('login')
+    this.loginForm.reset()
+    this.isCaptchaResolved = false
+    this.captchaResponse = null
+  }
+
+  onSubmit(): void {
     if (this.loginForm.valid && this.isCaptchaResolved) {
-      const { username, password } = this.loginForm.value
+      const { loginId, password } = this.loginForm.value
 
       const credentials: UserLogin = {
-        username, password, recaptchaToken: this.captchaResponse
+        loginId, password, recaptchaToken: this.captchaResponse
       }
       this.store.dispatch(LOGIN({ credentials }))
-      // reset of form & recaptcha token
-      this.loginForm.reset()
-      this.isCaptchaResolved = false
-      this.captchaResponse = null
       this.closeLoginModal()
-
-      setTimeout(() => this.router.navigate(['/profile']), 3000)
     }
   }
 }

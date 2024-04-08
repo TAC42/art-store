@@ -2,9 +2,9 @@ privacy-policy {
     background: $prmclr5;
 
     .page-contents {
+        gap: 1.5em;
         padding-top: 1em;
         padding-bottom: 2em;
-        gap: 1.5em;
         line-height: 1.6;
         color: $prmclr1;
 
@@ -12,10 +12,6 @@ privacy-policy {
             margin-block-end: 1em;
 
             h2 {
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                font-family: 'nh-bold';
                 user-select: none;
                 font-size: 28px;
                 gap: 0.25em;
@@ -37,14 +33,6 @@ privacy-policy {
             h3 {
                 font-size: 21px;
                 border-bottom: 2px dashed $prmclr1;
-                width: fit-content;
-                font-family: 'nh-bold';
-            }
-
-            p {
-                a {
-                    font-family: 'nh-bold';
-                }
             }
 
             ul {

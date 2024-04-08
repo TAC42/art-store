@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
-import { UploadService } from '../../services/upload.service'
-import { EventBusService, showErrorMsg } from '../../services/event-bus.service'
+import { UploadService } from '../../services/media/upload.service'
+import { EventBusService, showErrorMsg } from '../../services/utils/event-bus.service'
 
 @Component({
   selector: 'image-uploader',

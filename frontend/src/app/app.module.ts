@@ -10,9 +10,9 @@ import { AppRoutingModule } from './app-routing.module'
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha'
 import { AppComponent } from './app-root/app.component'
 
-import { ShopEffects } from './store/shop.effects'
-import { UserEffects } from './store/user.effects'
-import { OrderEffects } from './store/order.effects'
+import { ShopEffects } from './store/product/shop.effects'
+import { UserEffects } from './store/user/user.effects'
+import { OrderEffects } from './store/order/order.effects'
 import { reducers } from './store/app.state'
 
 import { ClickOutsideDirective } from './directives/click-outside.directive'
@@ -37,7 +37,6 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
 import { ProfileComponent } from './pages/profile/profile.component'
 import { PaymentComponent } from './pages/payment/payment.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component'
 import { SignupComponent } from './pages/signup/signup.component'
 import { ServiceTermsComponent } from './pages/service-terms/service-terms.component'
 
@@ -53,6 +52,7 @@ import { ImageUploaderComponent } from './cmps/image-uploader/image-uploader.com
 import { EditPreviewComponent } from './cmps/edit-preview/edit-preview.component'
 import { ProductCarouselComponent } from './cmps/carousels/product-carousel/product-carousel.component'
 import { RandomProductCarouselComponent } from './cmps/carousels/random-product-carousel/random-product-carousel.component'
+import { UserOrdersComponent } from './cmps/user-orders/user-orders.component'
 
 import { UserMsgComponent } from './cmps/modals/user-msg/user-msg.component'
 import { AsideMenuComponent } from './cmps/modals/aside-menu/aside-menu.component'
@@ -63,6 +63,8 @@ import { UserAuthModalComponent } from './cmps/modals/user-auth-modal/user-auth-
 import { ImageDisplayComponent } from './cmps/modals/image-display/image-display.component'
 import { UserEditComponent } from './cmps/modals/user-edit/user-edit.component'
 import { ImageContainerComponent } from './cmps/image-container/image-container.component'
+import { ResetPasswordComponent } from './cmps/modals/reset-password/reset-password.component'
+import { ResetEmailComponent } from './cmps/modals/reset-email/reset-email.component'
 
 @NgModule({
   declarations: [
@@ -107,11 +109,13 @@ import { ImageContainerComponent } from './cmps/image-container/image-container.
     RandomProductCarouselComponent,
     EditPreviewComponent,
     UserEditComponent,
-    ResetPasswordComponent,
     PrivacyPolicyComponent,
     ImageContainerComponent,
     SignupComponent,
     ServiceTermsComponent,
+    ResetPasswordComponent,
+    UserOrdersComponent,
+    ResetEmailComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,17 +5,16 @@ product-preview {
   display: flex;
 
   .preview-contents {
+    gap: 0.25em;
+    padding-bottom: 0.25em;
     background: $prmclr2;
     border-radius: 0.75em;
-    padding-bottom: 0.25em;
-    height: fit-content;
-    gap: 0.25em;
 
     &.masonry-item {
+      gap: 0.5em;
       max-height: 750px;
       padding-bottom: 0;
       text-align: center;
-      gap: 0.5em;
 
       .product-body {
         img {
@@ -33,14 +32,12 @@ product-preview {
         text-overflow: ellipsis;
         white-space: nowrap;
         line-height: 1.6;
-        text-transform: capitalize;
         font-size: 20px;
         min-height: 24px;
         color: $prmclr2;
         background: $prmclr1;
         border-radius: 0 0 0.4em 0.4em;
         opacity: 0.5;
-        transition: all 0.3s ease-in-out;
       }
     }
 
@@ -51,14 +48,12 @@ product-preview {
         text-overflow: ellipsis;
         white-space: nowrap;
         line-height: 1.6;
-        text-transform: capitalize;
         min-height: 24px;
         font-size: 20px;
       }
     }
 
     .product-body {
-      height: fit-content;
       position: relative;
 
       img {
@@ -77,12 +72,10 @@ product-preview {
         opacity: 0.5;
         border-radius: 0.5em;
         z-index: 1;
-        transition: all 0.3s ease-in-out;
 
         button {
           height: 42px;
           width: 42px;
-          transition: all 0.3s ease-in-out;
 
           &:first-child {
             border-right: 1px solid $prmclr1;
@@ -91,10 +84,6 @@ product-preview {
 
           &:last-child {
             border-radius: 0 0.5em 0.5em 0;
-          }
-
-          svg-render {
-            transition: all 0.3s ease-in-out;
           }
 
           &:hover {
@@ -111,22 +100,20 @@ product-preview {
         position: absolute;
         bottom: 0.5em;
         left: 0.5em;
-        border-radius: 0.5em;
+        height: 42px;
         gap: 0.25em;
-        background: $prmclr3;
-        border: 1px solid $prmclr1;
         padding: 0.5em 0.75em;
+        border: 1px solid $prmclr1;
+        border-radius: 0.5em;
+        background: $prmclr3;
         font-size: 20px;
         line-height: 1.1;
         opacity: 0.5;
-        transition: all 0.3s ease-in-out;
-        height: 42px;
         z-index: 1;
 
         svg-render {
           width: 23px;
           height: 20px;
-          transition: all 0.3s ease-in-out;
         }
 
         &:hover {
@@ -151,13 +138,11 @@ product-preview {
         border-radius: 0.5em;
         opacity: 0.5;
         z-index: 1;
-        transition: all 0.3s ease-in-out;
       }
     }
 
     .stock-status {
       padding: 0 0.5em;
-      text-transform: capitalize;
       line-height: 1.6;
 
       span {

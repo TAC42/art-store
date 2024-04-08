@@ -1,8 +1,8 @@
 import { Component, inject, HostBinding, OnInit, Input, OnDestroy } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
 import { Router } from '@angular/router'
-import { DimmerService } from '../../services/dimmer.service'
-import { ModalService } from '../../services/modal.service'
+import { DimmerService } from '../../services/utils/dimmer.service'
+import { ModalService } from '../../services/utils/modal.service'
 import { User } from '../../models/user'
 
 @Component({

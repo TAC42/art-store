@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { SvgRenderService } from '../../services/svg-render.service'
+import { SvgRenderService } from '../../services/media/svg-render.service'
 
 @Component({
   selector: 'svg-render',

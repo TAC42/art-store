@@ -2,87 +2,101 @@ app-home {
     .page-contents {
         animation: backgroundFadeInOut 30s infinite;
 
-        .mobile-view {
-            gap: 1em;
-            text-align: center;
-            padding: 1em;
+        .mobile-view,
+        .desktop-view {
 
-            .teasers {
-                gap: 2em;
-                margin-block-end: 1em;
+            .teaser-area {
+                cursor: pointer;
 
-                .teaser-area {
-                    cursor: pointer;
-                    height: fit-content;
+                img {
                     transition: all 0.5s ease-in-out;
+                }
+
+                .text-area {
+                    p {
+                        color: $scdclr2;
+                        font-size: 14px;
+                        letter-spacing: 0.1em;
+                        margin-block-start: 1em;
+                    }
+
+                    h2 {
+                        color: $prmclr1;
+                        font-size: 21px;
+                    }
+                }
+
+                &:hover {
+                    background: $prmclr1;
 
                     img {
-                        transition: all 0.5s ease-in-out;
+                        filter: brightness(.75);
                     }
 
                     .text-area {
-                        p {
-                            color: $scdclr2;
-                            font-size: 14px;
-                            letter-spacing: 0.1em;
-                            font-family: 'nh-bold';
-                            margin-block-start: 1em;
-                            transition: all 0.5s ease-in-out;
-                        }
 
+                        p,
                         h2 {
-                            color: $prmclr1;
-                            font-size: 21px;
-                            transition: all 0.5s ease-in-out;
-                        }
-                    }
-
-                    &:hover {
-                        background: $prmclr1;
-
-                        img {
-                            filter: brightness(.75);
-                        }
-
-                        .text-area {
-
-                            p,
-                            h2 {
-                                color: $prmclr3;
-                            }
+                            color: $prmclr3;
                         }
                     }
                 }
             }
 
-            .carousels {
-                gap: 2em;
-                margin-block-end: 1em;
+            .gallery-carousel {
+                position: relative;
 
-                .gallery-carousel {
-                    position: relative;
+                .text-area button {
+                    gap: 0.5em;
+                    padding: 0.75em 1.5em;
+                    background: $prmclr3;
+                    color: $prmclr1;
+                    letter-spacing: 0.05em;
+                    font-size: 16px;
+                    border-radius: 0.5em;
+                    margin: 1em auto 0 auto;
 
-                    .lone-img {
-                        aspect-ratio: 1 / 1;
-                        width: 100%;
+                    svg-render {
+                        width: 24px;
+                        height: 24px;
+                        fill: $prmclr1;
                     }
 
-                    .text-area {
-                        button {
-                            margin: 1em auto 0 auto;
-                            width: fit-content;
-                            padding: 0.75em 1.5em;
-                            background: $prmclr3;
-                            color: $prmclr1;
-                            border: 1px solid $prmclr1;
-                            transition: all 0.5s ease-in-out;
-                            letter-spacing: 0.05em;
-                            font-size: 16px;
+                    &:hover {
+                        background: $prmclr1;
+                        color: $prmclr3;
 
-                            &:hover {
-                                background: $prmclr1;
-                                color: $prmclr3;
-                                text-decoration: none;
+                        svg-render {
+                            fill: $prmclr3;
+                        }
+                    }
+                }
+
+                &:first-of-type {
+                    .text-area button {
+                        &:hover svg-render {
+                            transform: translateY(-3px);
+                        }
+                    }
+                }
+
+                &:last-of-type {
+                    .text-area button {
+                        svg-render {
+                            &:first-of-type {
+                                transform: rotateY(180deg)
+                            }
+                        }
+
+                        &:hover {
+                            svg-render {
+                                &:first-of-type {
+                                    transform: rotateY(180deg) translateX(3px)
+                                }
+
+                                &:last-of-type {
+                                    transform: translateX(3px)
+                                }
                             }
                         }
                     }
@@ -90,92 +104,33 @@ app-home {
             }
         }
 
+        .mobile-view {
+            gap: 1em;
+            padding: 1em;
+
+            .teasers,
+            .carousels {
+                gap: 2em;
+                margin-block-end: 1em;
+            }
+        }
+
         .desktop-view {
             gap: 2em;
-            text-align: center;
             padding: 2em;
             grid-template-columns: 1fr 1fr;
             max-width: 2000px;
             margin: 0 auto;
 
-            .teasers {
-                gap: 3em;
-                margin-block-end: 1em;
-
-                .teaser-area {
-                    cursor: pointer;
-                    height: fit-content;
-                    transition: all 0.5s ease-in-out;
-
-                    img {
-                        transition: all 0.5s ease-in-out;
-                    }
-
-                    .text-area {
-                        p {
-                            color: $scdclr2;
-                            font-size: 14px;
-                            letter-spacing: 0.1em;
-                            font-family: 'nh-bold';
-                            margin-block-start: 1em;
-                            transition: all 0.5s ease-in-out;
-                        }
-
-                        h2 {
-                            font-size: 21px;
-                            transition: all 0.5s ease-in-out;
-                        }
-                    }
-
-                    &:hover {
-                        background: $prmclr1;
-
-                        img {
-                            filter: brightness(.75);
-                        }
-
-                        .text-area {
-
-                            p,
-                            h2 {
-                                color: $prmclr3;
-                            }
-                        }
-                    }
-                }
-            }
-
+            .teasers,
             .carousels {
                 gap: 3em;
                 margin-block-end: 1em;
+            }
 
-                .gallery-carousel {
-                    position: relative;
-
-                    .lone-img {
-                        aspect-ratio: 1 / 1;
-                        width: 100%;
-                    }
-
-                    .text-area {
-                        button {
-                            margin: 1em auto 0 auto;
-                            width: fit-content;
-                            padding: 0.75em 1.5em;
-                            background: $prmclr3;
-                            color: $prmclr1;
-                            border: 1px solid $prmclr1;
-                            transition: all 0.5s ease-in-out;
-                            letter-spacing: 0.05em;
-                            font-size: 18px;
-
-                            &:hover {
-                                background: $prmclr1;
-                                color: $prmclr3;
-                                text-decoration: none;
-                            }
-                        }
-                    }
+            .gallery-carousel .text-area {
+                button {
+                    font-size: 18px;
                 }
             }
         }
