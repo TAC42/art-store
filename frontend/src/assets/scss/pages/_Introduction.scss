@@ -6,7 +6,7 @@ app-about {
             border-bottom: 1px solid $scdclr3;
 
             a {
-                font-size: 18px;
+                font-size: 20px;
 
                 &.active {
                     color: $scdclr1;
@@ -31,10 +31,11 @@ introduction-page {
 
         .introduction-text {
             gap: 1em;
+            grid-row: span 2;
 
             p {
                 color: $prmclr1;
-                font-size: 18px;
+                font-size: 19px;
                 line-height: 1.6;
             }
         }
