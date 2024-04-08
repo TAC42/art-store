@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core'
 import { Observable, catchError, map, of, startWith, throwError } from 'rxjs'
-import { Order, OrderFilter } from '../../models/order'
+import { OrderFilter, Order } from '../../models/order'
 import { Product } from '../../models/shop'
 import { User } from '../../models/user'
 import { HttpService } from '../utils/http.service'

@@ -9,6 +9,7 @@ orderRoutes.get('/:id', _getOrderById);
 orderRoutes.post('/', _addOrder);
 orderRoutes.put('/:id', _updateOrder);
 orderRoutes.delete('/:id', _removeOrder);
+orderRoutes.post('/paypal-order', _createPaypalOrder);
 // order controller functions
 async function _getOrders(req, res) {
     try {
@@ -42,21 +43,9 @@ async function _getOrderById(req, res) {
 async function _addOrder(req, res) {
     try {
         const order = req.body;
-        if (order.payment === 'paypal') {
-            const paypalOrderId = await createPaypalOrder(order);
-            if (!paypalOrderId) {
-                loggerService.error('PayPal order creation failed');
-                res.status(500).send({ err: 'Failed to create PayPal order' });
-                return;
-            }
-            loggerService.debug('Creating order:', order);
-            const addedOrder = await orderService.save(order);
-            res.json(addedOrder);
-        }
-        else {
-            //loggerService.debug('Other payment method')
-            // Handle other payment methods here
-        }
+        loggerService.debug('Creating order:', order);
+        const addedOrder = await orderService.save(order);
+        res.json(addedOrder);
     }
     catch (err) {
         loggerService.error('Failed to add order', err);
@@ -87,9 +76,25 @@ async function _removeOrder(req, res) {
         res.status(500).send({ err: 'Failed to remove order' });
     }
 }
+async function _createPaypalOrder(req, res) {
+    try {
+        const order = req.body;
+        const paypalOrderId = await createPaypalOrder(order);
+        if (!paypalOrderId) {
+            loggerService.error('PayPal order creation failed');
+            res.status(500).send({ err: 'Failed to create PayPal order' });
+            return;
+        }
+        // Return the PayPal order ID to the client
+        res.json({ paypalOrderId });
+    }
+    catch (err) {
+        loggerService.error('Failed to create PayPal order', err);
+        res.status(500).send({ err: 'Failed to create PayPal order' });
+    }
+}
 async function createPaypalOrder(order) {
     try {
-        // Explicit check for PayPal client ID and secret
         if (!process.env.PAYPAL_CLIENT_ID || !process.env.PAYPAL_CLIENT_SECRET) {
             throw new Error('PayPal client ID or secret is not defined.');
         }
@@ -100,6 +105,7 @@ async function createPaypalOrder(order) {
         const totalPrice = order.expenses.grandTotal;
         const taxAmount = order.expenses.taxes;
         const deliveryFee = order.expenses.deliveryFee;
+        const total = order.expenses.total;
         // Create order request
         const request = new paypal.orders.OrdersCreateRequest();
         request.prefer("return=representation");
@@ -113,7 +119,7 @@ async function createPaypalOrder(order) {
                         breakdown: {
                             item_total: {
                                 currency_code: "USD",
-                                value: totalPrice.toFixed(2),
+                                value: total.toFixed(2),
                             },
                             tax_total: {
                                 currency_code: "USD",
@@ -136,15 +142,18 @@ async function createPaypalOrder(order) {
                             currency_code: "USD",
                             value: item.price?.toFixed(2) ?? '0.00',
                         },
-                        quantity: '1',
+                        quantity: item.amount?.toString() ?? '1',
                         category: 'PHYSICAL_GOODS',
                     })),
                 },
             ],
         });
+        console.log('THE ORDER REQUEST PAYPAL: ', request);
+        console.log('THE ORDER REQUEST PAYPAL: ', JSON.stringify(request.body.purchase_units));
         // Execute PayPal request
         const response = await client.execute(request);
-        // Return PayPal order ID
+        console.log('THE RESPONSE PAYPAL: ', response.result.id);
+        loggerService.debug('THE RESPONSE PAYPAL:', response);
         return response.result.id;
     }
     catch (err) {

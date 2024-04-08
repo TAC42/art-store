@@ -42,6 +42,10 @@ app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/mail', mailRoutes);
 app.use('/api/order', orderRoutes);
+app.get('/api/paypal-client-id', (req, res) => {
+    const paypalClientId = process.env.PAYPAL_CLIENT_ID;
+    res.json({ clientId: paypalClientId });
+});
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'public', 'browser', 'index.html'));
 });
