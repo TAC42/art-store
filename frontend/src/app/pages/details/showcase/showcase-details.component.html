@@ -3,7 +3,7 @@
         class="mobile-view flex column">
         <ng-container *ngIf="product$ | async as product">
             <section class="actions-wrapper w-100">
-                <div class="actions flex row w-100">
+                <div class="actions flex row align-center w-100">
                     <a [routerLink]="['/' + product.type]" title="Exit details page?">
                         <svg-render class="fast-trans" svgName="leftArrowIcon" />
                     </a>
@@ -47,7 +47,7 @@
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
         class="desktop-view flex column h-100">
         <ng-container *ngIf="product$ | async as product">
-            <a class="flex row text-allcaps w-fit fast-trans" [routerLink]="['/' + product.type]">
+            <a class="flex row align-center text-allcaps w-fit fast-trans" [routerLink]="['/' + product.type]">
                 <svg-render class="fast-trans" svgName="leftArrowIcon" />
                 <span class="fast-trans">back to results</span>
             </a>
