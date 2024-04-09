@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
-import { CarouselItem } from '../../../models/product'
+import { CarouselItem, ContactUsRequestBody } from '../../../models/utility'
 import { UtilityService } from '../../../services/utils/utility.service'
 import { FormUtilsService } from '../../../services/utils/form-utils.service'
 import { DeviceTypeService } from '../../../services/utils/device-type.service'
@@ -61,14 +61,14 @@ export class ContactComponent implements OnInit {
     })
   }
 
-  resolved(captchaResponse: string | null) {
+  resolved(captchaResponse: string | null): void {
     this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.contactForm.valid && this.isCaptchaResolved) {
-      const formDataWithCaptcha = {
+      const formDataWithCaptcha: ContactUsRequestBody = {
         ...this.contactForm.value, recaptchaToken: this.captchaResponse
       }
       this.emailService.sendContactUsMail(formDataWithCaptcha).subscribe({

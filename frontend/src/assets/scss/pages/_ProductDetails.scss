@@ -1,9 +1,10 @@
 product-details {
     .page-contents {
         color: $prmclr1;
-        margin-block-end: 2em;
 
         .mobile-view {
+            margin-block-end: 2em;
+
             .actions-wrapper {
 
                 .actions {
@@ -153,6 +154,8 @@ product-details {
         }
 
         .desktop-view {
+            margin-block-end: 2em;
+
             .actions-wrapper {
                 border-bottom: 1px solid $scdclr3;
 

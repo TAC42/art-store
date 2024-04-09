@@ -1,10 +1,10 @@
 showcase-details {
     .page-contents {
         color: $prmclr1;
-        margin-block-end: 2em;
 
         .mobile-view {
             gap: 1em;
+            margin-block-end: 2em;
 
             .actions-wrapper {
                 .actions {
@@ -112,6 +112,7 @@ showcase-details {
         .desktop-view {
             gap: 1em;
             margin-block-start: 1em;
+            margin-block-end: 2em;
 
             a {
                 align-items: center;

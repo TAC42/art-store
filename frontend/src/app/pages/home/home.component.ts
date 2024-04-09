@@ -1,7 +1,7 @@
 import { Component, HostBinding, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
-import { CarouselItem } from '../../models/product'
+import { CarouselItem } from '../../models/utility'
 import { DeviceTypeService } from '../../services/utils/device-type.service'
 
 @Component({
@@ -27,8 +27,8 @@ export class HomeComponent {
     {
       type: 'product',
       imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
-      name: 'tower plate',
-      url: '/artware/details/tower plate'
+      name: 'green vase 01',
+      url: '/artware/details/green vase 01'
     },
     {
       type: 'product',
