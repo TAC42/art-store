@@ -31,7 +31,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public productEditForm!: FormGroup
   public product: Product = ProductService.getDefaultProduct()
   public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
-  public specialChars: string = "'. ?$%#!*:,/()\"'"
+  public specialCharsFull: string = `!@#$%*()"':;/,.-=+ `
+  public specialCharsLimited: string = `"':/,. `
   public initialFormData: Product | null = null
 
   ngOnInit(): void {

@@ -45,8 +45,8 @@
                         {{ formUtils.getErrorMessage(resetForm, 'email') }}
                     </span>
                 </label>
-                <input id="email" type="email" formControlName="email" placeholder="Your new email..." customValidator
-                    [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
+                <input id="email" type="email" formControlName="email" placeholder="Your new email..." maxlength="48"
+                    customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
             <div class="form-actions flex column full-center family-bold">

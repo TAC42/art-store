@@ -73,6 +73,7 @@ async function getRandomProducts(type: string, excludeProductId?: ObjectId): Pro
 async function save(product: Product): Promise<Product> {
   const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
 
+  product.name = product.name.trim() // prevent issues with buggy name url
   try {
     if (product._id) {
       const { _id, ...productToUpdate } = product

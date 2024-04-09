@@ -27,7 +27,7 @@ export class ContactComponent implements OnInit {
   public regularUtils = this.utilService
   public formUtils = this.formUtilsService
   public contactForm!: FormGroup
-  public specialChars = "'. ?$%#!*:,/()\"'"
+  public specialCharsFull = `!@#$%*()"':;/,.-=+ `
 
   public carouselItems: CarouselItem[] = []
   public contactImageUrls: string[] = [

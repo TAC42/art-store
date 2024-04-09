@@ -22,8 +22,9 @@
                         {{ formUtils.getErrorMessage(contactForm, 'name') }}
                     </span>
                 </label>
-                <input id="name" type="text" formControlName="name" placeholder="John Doe..." customValidator
-                    [minLength]=1 [maxLength]=48 [allowNumbers]="false" [allowedSpecialChars]="'. '" autofocus>
+                <input id="name" type="text" formControlName="name" placeholder="John Doe..." maxlength="48"
+                    customValidator [minLength]=1 [maxLength]=48 [allowNumbers]="false" [allowedSpecialChars]="'. '"
+                    autofocus>
             </div>
 
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'email')">
@@ -36,8 +37,8 @@
                         {{ formUtils.getErrorMessage(contactForm, 'email') }}
                     </span>
                 </label>
-                <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." customValidator
-                    [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
+                <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." maxlength="48"
+                    customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'@.'">
             </div>
 
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'title')">
@@ -51,7 +52,7 @@
                     </span>
                 </label>
                 <input id="title" type="text" formControlName="title" placeholder="Request For Art / Question..."
-                    [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :?&!$'">
+                    maxlength="48" [minLength]=10 customValidator [maxLength]=48 [allowedSpecialChars]="' :?&!$'">
             </div>
 
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'message')">
@@ -64,8 +65,8 @@
                         {{ formUtils.getErrorMessage(contactForm, 'message') }}
                     </span>
                 </label>
-                <textarea id="message" formControlName="message" placeholder="I'd like to'..." customValidator
-                    [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
+                <textarea id="message" formControlName="message" placeholder="I'd like to'..." maxlength="500"
+                    customValidator [minLength]=32 [maxLength]=500 [allowedSpecialChars]="specialCharsFull"></textarea>
             </div>
 
             <div class="form-actions w-100 flex row align-center">

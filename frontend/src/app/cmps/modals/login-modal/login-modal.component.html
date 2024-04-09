@@ -13,7 +13,7 @@
                 </label>
 
                 <input id="loginId" type="text" formControlName="loginId" placeholder="Insert username or email..."
-                    customValidator [minLength]=3 [maxLength]=48 [allowedSpecialChars]="'.@'" autofocus>
+                    maxlength="48" customValidator [minLength]=3 [maxLength]=48 [allowedSpecialChars]="'.@'" autofocus>
             </div>
 
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'password')">
@@ -28,7 +28,7 @@
                 </label>
 
                 <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
-                    placeholder="Your password..." customValidator [minLength]=8 [maxLength]=32
+                    placeholder="Your password..." maxlength="32" customValidator [minLength]=8 [maxLength]=32
                     [allowedSpecialChars]="allowedSpecialChars" [passwordValidation]="true">
 
                 <button type="button" (click)="togglePasswordShowing($event)" class="password-toggle">
