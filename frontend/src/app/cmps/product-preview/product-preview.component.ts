@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
-import { Product } from '../../models/shop'
+import { Product } from '../../models/product'
 import { User } from '../../models/user'
 
 @Component({

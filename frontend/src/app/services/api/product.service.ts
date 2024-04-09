@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { ValidationErrors } from '@angular/forms'
 import { Observable, throwError, catchError, map, of } from 'rxjs'
-import { Product, ShopFilter } from '../../models/shop'
+import { Product, ShopFilter } from '../../models/product'
 import { HttpService } from '../utils/http.service'
 
 const BASE_URL = 'product/'

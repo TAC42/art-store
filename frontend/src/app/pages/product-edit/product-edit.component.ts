@@ -4,8 +4,8 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '
 import { Subscription, filter, map } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
-import { Product } from '../../models/shop'
-import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/product/shop.actions'
+import { Product } from '../../models/product'
+import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/product/product.actions'
 import { ProductService } from '../../services/api/product.service'
 import { FormUtilsService } from '../../services/utils/form-utils.service'
 
@@ -84,13 +84,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.formUtils.handleImageUpload(this.productEditForm, event)
   }
 
-  onSaveProduct() {
+  onSaveProduct(): void {
     const formValues = { ...this.productEditForm.value }
     formValues.name = formValues.name.toLowerCase()
 
     const productToSave = { ...this.product, ...formValues }
     this.store.dispatch(SAVE_PRODUCT({ product: productToSave }))
-    this.store.dispatch(PRODUCT_BY_NAME_LOADED({ product: null }))
 
     this.router.navigateByUrl(`/${encodeURIComponent(this.product.type || 'shop')}`)
   }

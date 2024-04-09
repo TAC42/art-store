@@ -5,20 +5,20 @@ import { forkJoin, of } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
 import { AppState } from '../app.state'
-import { Product, ShopFilter } from '../../models/shop'
+import { Product, ShopFilter } from '../../models/product'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
   PRODUCT_BY_NAME_LOADED, REMOVE_PRODUCT, PRODUCT_REMOVED_SUCCESSFULLY,
   LOAD_RANDOM_PRODUCTS, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, LOAD_CART, CART_LOADED
-} from './shop.actions'
-import { selectFilterBy } from './shop.selectors'
+} from './product.actions'
+import { selectFilterBy } from './product.selectors'
 import { ProductService } from '../../services/api/product.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../services/utils/event-bus.service'
 
 @Injectable()
 
-export class ShopEffects {
+export class ProductEffects {
   private actions$ = inject(Actions)
   private prodService = inject(ProductService)
   private eBusService = inject(EventBusService)
@@ -83,7 +83,10 @@ export class ShopEffects {
       mergeMap(({ product }) => this.prodService.save(product).pipe(
         tap(product => showSuccessMsg('Product Saved!',
           `${product.name} was saved successfully!`, this.eBusService)),
-        map(() => PRODUCT_SAVED({ product })),
+        map(updatedProduct => {
+          this.store.dispatch(PRODUCT_BY_NAME_LOADED({ product: updatedProduct }))
+          return PRODUCT_SAVED({ product: updatedProduct })
+        }),
         catchError(error => {
           console.error('Error saving product:', error)
           showErrorMsg('Failed To Save Product!',

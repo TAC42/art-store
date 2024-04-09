@@ -1,40 +1,40 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
-import { ShopState } from './shop.reducers'
+import { ProductState } from './product.reducers'
 
-export const selectShopState = createFeatureSelector<ShopState>('shop')
+export const selectProductState = createFeatureSelector<ProductState>('product')
 
 // handling of shop loading
 export const selectIsLoading = createSelector(
-  selectShopState,
-  (state: ShopState) => state.isLoading
+  selectProductState,
+  (state: ProductState) => state.isLoading
 )
 
 // handling of all products in index
 export const selectProducts = createSelector(
-  selectShopState,
-  (state: ShopState) => state.products
+  selectProductState,
+  (state: ProductState) => state.products
 )
 
 // handling of product in details
 export const selectProductByName = createSelector(
-  selectShopState,
-  (state: ShopState) => state.selectedProduct
+  selectProductState,
+  (state: ProductState) => state.selectedProduct
 )
 
 // handling of product in details
 export const selectCart = createSelector(
-  selectShopState,
-  (state: ShopState) => state.cart
+  selectProductState,
+  (state: ProductState) => state.cart
 )
 
 // handling of product filtering
 export const selectFilterBy = createSelector(
-  selectShopState,
-  (state: ShopState) => state.filterBy
+  selectProductState,
+  (state: ProductState) => state.filterBy
 )
 
 // handling of random products in details
 export const selectRandomProducts = createSelector(
-  selectShopState,
-  (state: ShopState) => state.randomProducts
+  selectProductState,
+  (state: ProductState) => state.randomProducts
 )

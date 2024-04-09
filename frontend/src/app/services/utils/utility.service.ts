@@ -1,7 +1,7 @@
 import usStates from '../../jsons/us-states.json'
 import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
-import { CarouselItem, MiniProduct } from '../../models/shop'
+import { CarouselItem, MiniProduct } from '../../models/product'
 import { ModalService } from './modal.service'
 import { MailService } from '../api/mail.service'
 

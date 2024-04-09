@@ -1,4 +1,4 @@
-import { Cart } from "./shop"
+import { Cart } from "./product"
 
 export interface Order {
   _id?: string

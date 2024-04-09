@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module'
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha'
 import { AppComponent } from './app-root/app.component'
 
-import { ShopEffects } from './store/product/shop.effects'
+import { ProductEffects } from './store/product/product.effects'
 import { UserEffects } from './store/user/user.effects'
 import { OrderEffects } from './store/order/order.effects'
 import { reducers } from './store/app.state'
@@ -125,7 +125,7 @@ import { ResetEmailComponent } from './cmps/modals/reset-email/reset-email.compo
     ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ShopEffects, UserEffects, OrderEffects]),
+    EffectsModule.forRoot([ProductEffects, UserEffects, OrderEffects]),
     RecaptchaFormsModule,
     RecaptchaModule,
     MatExpansionModule,

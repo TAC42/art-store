@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { CarouselItem } from '../../models/shop'
+import { CarouselItem } from '../../models/product'
 
 @Injectable({
   providedIn: 'root'

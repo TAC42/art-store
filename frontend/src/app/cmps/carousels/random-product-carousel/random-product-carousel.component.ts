@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core'
 import { Observable, map } from 'rxjs'
-import { MiniProduct, Product } from '../../../models/shop'
+import { MiniProduct, Product } from '../../../models/product'
 import { ImageLoadService } from '../../../services/media/image-load.service'
 
 @Component({

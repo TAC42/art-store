@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core'
 import { EMPTY, Observable } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
-import { selectIsLoading } from '../../store/product/shop.selectors'
+import { selectIsLoading } from '../../store/product/product.selectors'
 
 @Component({
   selector: 'loader',

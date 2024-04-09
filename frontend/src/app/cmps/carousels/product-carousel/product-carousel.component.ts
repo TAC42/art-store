@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, EventEmitter, Output, inject } from '@angular/core'
 import { interval, Subscription } from 'rxjs'
-import { CarouselItem } from '../../../models/shop'
+import { CarouselItem } from '../../../models/product'
 import { Router } from '@angular/router'
 import { ImageLoadService } from '../../../services/media/image-load.service'
 

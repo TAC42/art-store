@@ -63,6 +63,7 @@ async function getRandomProducts(type, excludeProductId) {
 }
 async function save(product) {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION);
+    product.name = product.name.trim(); // prevent issues with buggy name url
     try {
         if (product._id) {
             const { _id, ...productToUpdate } = product;

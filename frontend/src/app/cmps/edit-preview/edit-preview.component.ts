@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core'
-import { CarouselItem } from '../../models/shop'
+import { CarouselItem } from '../../models/product'
 import { UtilityService } from '../../services/utils/utility.service'
 
 @Component({
