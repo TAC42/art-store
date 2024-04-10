@@ -126,7 +126,8 @@
         </ng-container>
 
         <h3 class="family-bold text-capitalize text-center">related products</h3>
-        <section class="other-products-area grid text-center" *ngIf="randomProducts$ | async as randomProducts">
+        <section *ngIf="randomProducts$ | async as randomProducts"
+            class="other-products-area layout-row grid text-center">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column">
                 <image-container [imageUrl]="randomProduct.imgUrls[0]" />
