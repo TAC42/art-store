@@ -46,7 +46,7 @@ export class UserMsgComponent implements OnInit, OnDestroy {
           this.isVisible = false
           this.msg = null
         }, 1000)
-      }, 4000)
+      }, 3000)
     })
   }
 

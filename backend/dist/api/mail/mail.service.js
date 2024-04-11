@@ -120,7 +120,7 @@ async function sendCustomerInvoice(orderDetails) {
             <hr>
             <p>Invoice: #${orderDetails.createdAt}</p>
             <p>Date issued ${invoiceDate},</p>
-            <table border="1" style="width: 100%; border-collapse: collapse;">
+            <table border="1" style="width: 100%; border-collapse: collapse; max-width: 800px;">
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -164,7 +164,7 @@ async function sendArtistInvoice(orderDetails) {
             <hr>
             <p>Invoice: #${orderDetails.createdAt}</p>
             <p>Date issued: ${invoiceDate}</p>
-            <table border="1" style="width: 100%; border-collapse: collapse;">
+            <table border="1" style="width: 100%; border-collapse: collapse; max-width: 800px;">
                 <thead>
                     <tr>
                         <th>Product</th>
