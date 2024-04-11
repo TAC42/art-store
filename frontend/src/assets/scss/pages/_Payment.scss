@@ -3,13 +3,8 @@ payment {
     .payment-header {
       position: relative;
       padding: 0.5em 1em;
-      align-items: center;
 
       .title {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        font-family: "nunito";
         font-size: 1.75em;
         color: $prmclr1;
         letter-spacing: 0.05em;
@@ -17,7 +12,6 @@ payment {
 
       .back {
         position: absolute;
-        cursor: pointer;
         width: 24px;
         height: 24px;
 
@@ -38,20 +32,17 @@ payment {
         }
 
         .heading {
-          gap: 0.25em;
-          font-size: 1.25em;
-          align-content: center;
-          background-color: $prmclr3;
-          color: $scdclr1;
+          gap: 0.5em;
           padding: 0.75em;
-          transition: all 0.3s ease-in-out;
+          font-size: 1.25em;
+          background: $prmclr3;
+          color: $scdclr1;
 
           .pending {
-            background-color: $prmclr2;
+            background: $prmclr2;
             width: 1.25em;
             padding: 0.1em;
             border-radius: 50%;
-            text-align: center;
           }
 
           .title {
@@ -63,7 +54,7 @@ payment {
         &.selected {
           .heading {
             font-family: "nh-bold";
-            background-color: $scdclr3;
+            background: $scdclr3;
           }
         }
 
@@ -95,20 +86,15 @@ payment {
                   right: -0.5em;
                   width: 1.25em;
                   height: 1.25em;
-                  background-color: $prmclr2;
+                  background: $prmclr2;
                   border-radius: 50%;
                   border: 1px $scdclr6 solid;
-                  text-align: center;
                 }
               }
 
               .item-info {
                 grid-column: 2 / 5;
                 padding: 0.25em 1em;
-
-                .name {
-                  text-transform: capitalize;
-                }
 
                 .desc {
                   font-size: 1rem;
@@ -124,8 +110,8 @@ payment {
               .price {
                 grid-column: 5 / -1;
                 justify-self: end;
-                color: $prmclr1;
                 padding: 0.25em;
+                color: $prmclr1;
               }
             }
           }
@@ -136,7 +122,6 @@ payment {
             .info {
               justify-content: space-between;
               font-size: 1.1em;
-              font-family: "nh-bold";
               color: $mnrclr8;
 
               &:first-child {
@@ -146,12 +131,6 @@ payment {
 
               &:last-child {
                 font-size: 1.25em;
-              }
-
-              span {
-                &:first-child {
-                  text-transform: capitalize;
-                }
               }
             }
           }
@@ -169,11 +148,9 @@ payment {
             gap: 1.25em;
 
             .info-heading {
-              margin-block-start: 0.5em;
               gap: 0.5em;
-              align-items: center;
-              font-family: "nh-bold";
               font-size: 1.25em;
+              margin-block-start: 0.5em;
 
               svg-render {
                 display: inline-block;
@@ -190,7 +167,7 @@ payment {
                 top: -0.5em;
                 left: 1em;
                 padding: 0 0.5em;
-                background-color: $prmclr2;
+                background: $prmclr2;
                 color: $scdclr6;
                 border-radius: 1em;
               }
@@ -217,11 +194,12 @@ payment {
                 top: -0.5em;
                 right: 1em;
                 color: $mnrclr5;
-                background-color: $prmclr2;
+                background: $prmclr2;
                 padding: 0 0.5em;
               }
 
               &.error {
+
                 input,
                 select {
                   border: 2px solid $mnrclr5;
@@ -230,12 +208,13 @@ payment {
             }
           }
         }
-        .method {
+
+        &.method {
           .methods {
             gap: 1em;
             padding: 0.75em;
-            width: fit-content;
           }
+
           .submit-error {
             color: $mnrclr5;
           }
