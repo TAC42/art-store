@@ -4,9 +4,9 @@ import { Observable } from 'rxjs'
 import { take, filter, distinctUntilChanged } from 'rxjs/operators'
 import { Store, select } from '@ngrx/store'
 import { AppState } from '../store/app.state'
-import { Product } from '../models/shop'
-import { LOAD_PRODUCT_BY_NAME } from '../store/product/shop.actions'
-import { selectProductByName } from '../store/product/shop.selectors'
+import { Product } from '../models/product'
+import { LOAD_PRODUCT_BY_NAME } from '../store/product/product.actions'
+import { selectProductByName } from '../store/product/product.selectors'
 
 @Injectable({
   providedIn: 'root'

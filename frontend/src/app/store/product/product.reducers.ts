@@ -3,10 +3,10 @@ import {
   PRODUCTS_LOADED, PRODUCT_BY_NAME_LOADED, FILTER_UPDATED,
   LOAD_FILTER, SET_LOADING_STATE,
   PRODUCT_REMOVED_SUCCESSFULLY, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, CART_LOADED
-} from './shop.actions'
-import { Product, ShopFilter } from '../../models/shop'
+} from './product.actions'
+import { Product, ShopFilter } from '../../models/product'
 
-export interface ShopState {
+export interface ProductState {
   products: Product[]
   selectedProduct: Product | null
   randomProducts: Product[]
@@ -15,7 +15,7 @@ export interface ShopState {
   isLoading: boolean
 }
 
-export const initialState: ShopState = {
+export const initialState: ProductState = {
   products: [],
   selectedProduct: null,
   randomProducts: [],
@@ -24,7 +24,7 @@ export const initialState: ShopState = {
   isLoading: false,
 }
 
-export const shopReducer = createReducer(
+export const ProductReducer = createReducer(
   initialState,
   // handling of shop loading
   on(SET_LOADING_STATE, (state, { isLoading }) => ({

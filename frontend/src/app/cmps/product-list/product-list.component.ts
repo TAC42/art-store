@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { Observable } from 'rxjs'
-import { Product } from '../../models/shop'
+import { Product } from '../../models/product'
 import { User } from '../../models/user'
 
 @Component({

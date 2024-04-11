@@ -45,7 +45,7 @@ export class LoginModalComponent implements OnInit {
     this.showPassword = !this.showPassword
   }
 
-  resolved(captchaResponse: string | null) {
+  resolved(captchaResponse: string | null): void {
     this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, catchError, from, retry, tap, throwError } from 'rxjs'
-import { Product, ShopFilter } from '../../models/shop'
+import { Product, ShopFilter } from '../../models/product'
 import { storageService } from './async-storage.service'
 import { HttpErrorResponse } from '@angular/common/http'
 const ENTITY = 'products'

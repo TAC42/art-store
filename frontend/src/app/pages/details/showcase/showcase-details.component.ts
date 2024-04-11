@@ -1,7 +1,8 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Observable, map } from 'rxjs'
-import { CarouselItem, Product } from '../../../models/shop'
+import { Product } from '../../../models/product'
+import { CarouselItem } from '../../../models/utility'
 import { DeviceTypeService } from '../../../services/utils/device-type.service'
 import { UtilityService } from '../../../services/utils/utility.service'
 

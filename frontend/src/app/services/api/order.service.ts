@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { Observable, catchError, map, of, startWith, throwError } from 'rxjs'
 import { OrderFilter, Order } from '../../models/order'
-import { Product } from '../../models/shop'
+import { Product } from '../../models/product'
 import { User } from '../../models/user'
 import { HttpService } from '../utils/http.service'
 

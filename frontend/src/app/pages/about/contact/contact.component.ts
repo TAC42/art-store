@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
-import { CarouselItem } from '../../../models/shop'
+import { CarouselItem, ContactUsRequestBody } from '../../../models/utility'
 import { UtilityService } from '../../../services/utils/utility.service'
 import { FormUtilsService } from '../../../services/utils/form-utils.service'
 import { DeviceTypeService } from '../../../services/utils/device-type.service'
@@ -27,7 +27,7 @@ export class ContactComponent implements OnInit {
   public regularUtils = this.utilService
   public formUtils = this.formUtilsService
   public contactForm!: FormGroup
-  public specialChars = "'. ?$%#!*:,/()\"'"
+  public specialCharsFull = `!@#$%*()"':;/,.-=+ `
 
   public carouselItems: CarouselItem[] = []
   public contactImageUrls: string[] = [
@@ -61,14 +61,14 @@ export class ContactComponent implements OnInit {
     })
   }
 
-  resolved(captchaResponse: string | null) {
+  resolved(captchaResponse: string | null): void {
     this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.contactForm.valid && this.isCaptchaResolved) {
-      const formDataWithCaptcha = {
+      const formDataWithCaptcha: ContactUsRequestBody = {
         ...this.contactForm.value, recaptchaToken: this.captchaResponse
       }
       this.emailService.sendContactUsMail(formDataWithCaptcha).subscribe({

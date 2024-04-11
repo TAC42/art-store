@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing'
 import { ProductResolver } from './product.resolver'
 import { StoreModule } from '@ngrx/store'
-import { shopReducer } from '../store/product/shop.reducers'
+import { ProductReducer } from '../store/product/product.reducers'
 
 describe('ProductResolver', () => {
   let resolver: ProductResolver
@@ -9,7 +9,7 @@ describe('ProductResolver', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({ shop: shopReducer }),
+        StoreModule.forRoot({ shop: ProductReducer }),
       ],
       providers: [
         ProductResolver,

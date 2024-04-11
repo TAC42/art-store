@@ -127,8 +127,13 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'firstName')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'firstName')">
               {{ formUtils.getErrorMessage(personalForm, "firstName") }}
             </span>
+
+            <input id="firstName" type="text" #nameInput formControlName="firstName" placeholder="John..."
+              maxlength="24" customValidator [minLength]="2" [maxLength]="24" [allowNumbers]="false"
+              [allowedSpecialChars]="'. '" />
           </label>
 
           <label
@@ -151,8 +156,12 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'lastName')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'lastName')">
               {{ formUtils.getErrorMessage(personalForm, "lastName") }}
             </span>
+
+            <input id="lastName" type="text" formControlName="lastName" placeholder="Doe..." maxlength="24"
+              customValidator [minLength]="2" [maxLength]="24" [allowNumbers]="false" [allowedSpecialChars]="'. '" />
           </label>
 
           <div class="info-heading flex">
@@ -179,8 +188,12 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'email')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'email')">
               {{ formUtils.getErrorMessage(personalForm, "email") }}
             </span>
+
+            <input id="email" type="email" formControlName="email" placeholder="john@gmail.com..." maxlength="48"
+              customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'@.'" />
           </label>
 
           <label
@@ -203,8 +216,12 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'phone')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'phone')">
               {{ formUtils.getErrorMessage(personalForm, "phone") }}
             </span>
+
+            <input id="phone" type="text" formControlName="phone" placeholder="XXX-XXX-XXXX" maxlength="10"
+              customValidator [minLength]="10" [maxLength]="10" [allowedSpecialChars]="'. '" autofocus />
           </label>
 
           <div class="info-heading flex">
@@ -231,8 +248,12 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'street')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'street')">
               {{ formUtils.getErrorMessage(personalForm, "street") }}
             </span>
+
+            <input id="street" type="text" formControlName="street" placeholder="1 Example drive..." maxlength="48"
+              customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'. '" />
           </label>
 
           <label
@@ -254,8 +275,12 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'city')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'city')">
               {{ formUtils.getErrorMessage(personalForm, "city") }}
             </span>
+
+            <input id="city" type="text" formControlName="city" placeholder="New York..." maxlength="48" customValidator
+              [minLength]="3" [maxLength]="48" [allowedSpecialChars]="'. '" />
           </label>
 
           <label
@@ -263,6 +288,10 @@
             [class.error]="formUtils.isFieldInvalid(personalForm, 'state')"
           >
             <span class="label-info flex row">*State</span>
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'state')">
+              {{ formUtils.getErrorMessage(personalForm, "state") }}
+            </span>
+
             <select id="state" formControlName="state">
               <option value="">Select State</option>
               <option
@@ -300,8 +329,12 @@
               class="error"
               *ngIf="formUtils.isFieldInvalid(personalForm, 'zip')"
             >
+            <span class="error" *ngIf="formUtils.isFieldInvalid(personalForm, 'zip')">
               {{ formUtils.getErrorMessage(personalForm, "zip") }}
             </span>
+
+            <input id="zip" type="text" #nameInput formControlName="zip" placeholder="12345..." maxlength="5"
+              customValidator [minLength]="5" [maxLength]="5" [allowedSpecialChars]="'. '" />
           </label>
         </form>
       </section>
@@ -322,6 +355,8 @@
       <section class="methods grid justify-center" id="paypal-button-container">
         <p>
           By paying, you agree to Ori-Carlin website's
+      <section class="methods grid" id="paypal-button-container">
+        <p>By paying, you agree to Ori-Carlin website's
           <a [routerLink]="['/privacy']">privacy policy</a>.
         </p>
       </section>

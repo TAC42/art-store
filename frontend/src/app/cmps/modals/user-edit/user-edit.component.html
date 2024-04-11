@@ -29,7 +29,7 @@
           </span>
         </label>
         <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
-          customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
+          maxlength="48" customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
       </div>
 
       <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
@@ -44,7 +44,7 @@
           </span>
         </label>
         <input id="username" type="text" formControlName="username" placeholder="Please enter your username..."
-          customValidator [minLength]=3 [maxLength]=24>
+          maxlength="24" customValidator [minLength]=3 [maxLength]=24>
       </div>
 
       <section class="form-actions flex column align-center">

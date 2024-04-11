@@ -1,42 +1,38 @@
 showcase-details {
     .page-contents {
         color: $prmclr1;
-        margin-block-end: 2em;
 
-        .mobile-view {
+        .mobile-view,
+        .desktop-view {
             gap: 1em;
+            margin-block-end: 2em;
 
-            .actions-wrapper {
-                .actions {
-                    justify-content: space-between;
-                    align-items: center;
-                    position: fixed;
-                    top: 0;
-                    height: 62px;
-                    z-index: 11;
-                    padding: 0.5em 1em;
-                    background: $prmclr2;
-                    border-bottom: 1px solid $scdclr3;
+            .actions-wrapper .actions {
+                justify-content: space-between;
+                position: fixed;
+                top: 0;
+                height: 62px;
+                z-index: 11;
+                padding: 0.5em 1em;
+                background: $prmclr2;
+                border-bottom: 1px solid $scdclr3;
 
-                    h3 {
-                        letter-spacing: 0.5px;
-                        font-size: 26px;
+                h3 {
+                    letter-spacing: 0.5px;
+                    font-size: 26px;
+                }
+
+                button,
+                a {
+                    width: 42px;
+                    height: 42px;
+
+                    svg-render {
+                        fill: $scdclr2;
                     }
 
-                    button,
-                    a {
-                        width: 42px;
-                        height: 42px;
-
-                        svg-render {
-                            fill: $scdclr2;
-                        }
-
-                        &:hover {
-                            svg-render {
-                                fill: $prmclr1;
-                            }
-                        }
+                    &:hover svg-render {
+                        fill: $prmclr1;
                     }
                 }
             }
@@ -51,19 +47,18 @@ showcase-details {
                         transition: all 0.5s ease-in-out;
                     }
 
-                    &:hover {
-                        img {
-                            filter: brightness(0.75);
-                        }
+                    &:hover img {
+                        filter: brightness(0.75);
                     }
                 }
 
                 .details-area {
                     padding: 0 1em;
+                    max-width: 600px;
                     margin-block-start: 1em;
 
                     h4 {
-                        font-size: 26px;
+                        font-size: 28px;
                         margin-block-end: 0.5em;
                     }
 
@@ -89,20 +84,17 @@ showcase-details {
                         padding: 0.5em 1.5em;
                         border-radius: 0.5em;
                         border: 1px solid $prmclr1;
+                        color: $prmclr1;
+                        font-size: 16px;
                         margin: 1em auto;
 
                         span {
                             padding: 0.2em 0.75em;
-                            font-size: 16px;
-                            color: $prmclr1;
                         }
 
                         &:hover {
                             background: $prmclr1;
-
-                            span {
-                                color: $prmclr3;
-                            }
+                            color: $prmclr3;
                         }
                     }
                 }
@@ -110,11 +102,9 @@ showcase-details {
         }
 
         .desktop-view {
-            gap: 1em;
             margin-block-start: 1em;
 
             a {
-                align-items: center;
                 gap: 0.5em;
                 padding: 0 2em;
                 letter-spacing: 1.25px;
@@ -139,74 +129,19 @@ showcase-details {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1em;
                 padding: 0 2em;
-                margin-block-end: 1em;
 
                 .image-container {
                     grid-column: 1 / 2;
                     align-self: center;
-
-                    img {
-                        object-fit: cover;
-                        cursor: pointer;
-                        transition: all 0.5s ease-in-out;
-                    }
-
-                    &:hover {
-                        img {
-                            filter: brightness(0.75);
-                        }
-                    }
                 }
 
                 .details-area {
+                    align-self: center;
                     grid-column: 2 / -1;
                     padding: 0 2em;
-                    max-width: 600px;
-                    margin-block-start: 1em;
-
-                    h4 {
-                        font-size: 26px;
-                        margin-block-end: 0.5em;
-                    }
-
-                    p {
-                        color: $scdclr2;
-                        letter-spacing: 0.15px;
-                        font-size: 16px;
-                        margin-block-end: 1em;
-                    }
-
-                    .description {
-                        color: $prmclr1;
-                        font-size: 18px;
-                        margin-block-end: 1.5em;
-                    }
-
-                    .notice {
-                        color: $prmclr1;
-                        font-size: 16px;
-                        margin-block-end: 1em;
-                    }
 
                     button {
-                        padding: 0.5em 1.5em;
-                        border-radius: 0.5em;
-                        border: 1px solid $prmclr1;
                         margin: 2em auto;
-
-                        span {
-                            font-size: 16px;
-                            color: $prmclr1;
-                            padding: 0.2em 0.75em;
-                        }
-
-                        &:hover {
-                            background: $prmclr1;
-
-                            span {
-                                color: $prmclr3;
-                            }
-                        }
                     }
                 }
             }

@@ -9,7 +9,7 @@ import { Order } from '../../models/order';
 import { selectUser } from '../../store/user/user.selectors';
 import { selectOrders } from '../../store/order/order.selectors';
 import { LOAD_ORDERS } from '../../store/order/order.actions';
-import { LOAD_FILTER } from '../../store/product/shop.actions';
+import { LOAD_FILTER } from '../../store/product/product.actions';
 
 @Component({
   selector: 'dashboard',

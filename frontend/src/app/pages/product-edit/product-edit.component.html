@@ -15,8 +15,8 @@
           {{ formUtils.getErrorMessage(productEditForm, 'name') }}
         </span>
       </label>
-      <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." customValidator
-        [minLength]=6 [maxLength]=48 [allowedSpecialChars]="'. -/:'" autofocus />
+      <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." maxlength="48"
+        customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="specialCharsLimited" autofocus />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'price')">
@@ -30,8 +30,8 @@
           {{ formUtils.getErrorMessage(productEditForm, 'price') }}
         </span>
       </label>
-      <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." customValidator
-        [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
+      <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." maxlength="3"
+        customValidator [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'description')">
@@ -46,7 +46,8 @@
         </span>
       </label>
       <textarea id="description" formControlName="description" placeholder="Please enter info regarding your product..."
-        customValidator [minLength]=32 [maxLength]=256 [allowedSpecialChars]="specialChars"></textarea>
+        maxlength="900" customValidator [minLength]=32 [maxLength]=900
+        [allowedSpecialChars]="specialCharsFull"></textarea>
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
@@ -61,7 +62,7 @@
         </span>
       </label>
       <input id="dimensions" type="text" formControlName="dimensions" placeholder="Please enter product dimensions..."
-        customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="'/ .,'" />
+        maxlength="36" customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="specialCharsLimited" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'materials')">
@@ -76,8 +77,8 @@
         </span>
       </label>
       <input id="materials" type="text" formControlName="materials"
-        placeholder="The materials that make your product..." customValidator [minLength]=3 [maxLength]=24
-        [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
+        placeholder="The materials that make your product..." maxlength="24" customValidator [minLength]=3
+        [maxLength]=24 [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
@@ -92,7 +93,7 @@
         </span>
       </label>
       <input id="dateMade" type="text" formControlName="dateMade" placeholder="When your product was finished..."
-        customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
+        maxlength="24" customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'stock')">
@@ -106,8 +107,8 @@
           {{ formUtils.getErrorMessage(productEditForm, 'stock') }}
         </span>
       </label>
-      <input id="stock" type="number" formControlName="stock" placeholder="Please enter stock amount..." customValidator
-        [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
+      <input id="stock" type="number" formControlName="stock" placeholder="Please enter stock amount..." maxlength="3"
+        customValidator [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
     </div>
 
     <div class="input-area flex column w-100">

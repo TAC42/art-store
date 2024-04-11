@@ -25,14 +25,6 @@ export interface ShopFilter {
   type?: string
 }
 
-export interface CarouselItem {
-  type: 'image' | 'product'
-  imgUrl: string
-  lowResImgUrl?: string
-  url?: string
-  name?: string
-}
-
 export interface Cart {
   _id?: string
   name?: string

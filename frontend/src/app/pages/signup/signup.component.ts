@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  openLogin(event: Event) {
+  openLogin(event: Event): void {
     event.stopPropagation()
     this.modService.openModal('login')
   }
@@ -68,12 +68,12 @@ export class SignupComponent implements OnInit {
     this.showPassword = !this.showPassword
   }
 
-  resolved(captchaResponse: string | null) {
+  resolved(captchaResponse: string | null): void {
     this.captchaResponse = captchaResponse
     this.isCaptchaResolved = !!captchaResponse
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.signupForm.valid && this.isCaptchaResolved) {
       const { firstName, lastName, username, email, password } = this.signupForm.value
 
