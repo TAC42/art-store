@@ -109,6 +109,85 @@ export class PaymentComponent implements OnInit {
   }
 
 
+  // loadPayPalScript(): void {
+  //   this.orderService.getPaypalClientId().pipe(
+  //     catchError(error => {
+  //       console.error('Failed to fetch PayPal client ID:', error)
+  //       return throwError(error)
+  //     }),
+  //     switchMap((clientId: string) => {
+  //       const scriptOptions = {
+  //         clientId: clientId
+  //       }
+  //       return loadScript(scriptOptions)
+  //     })
+  //   ).subscribe(
+  //     () => {
+  //       if (window.paypal && typeof window.paypal.Buttons === 'function') {
+  //         window.paypal.Buttons({
+  //           onInit: (data, actions) => {
+  //             actions.disable()
+
+  //             this.personalForm.statusChanges.subscribe(status => {
+  //               if (status === 'VALID') {
+  //                 actions.enable()
+  //               } else {
+  //                 actions.disable()
+  //               }
+  //             })
+  //           },
+  //           createOrder: () => {
+  //             return new Promise((resolve, reject) => {
+  //               const userData = this.personalForm.value;
+  //               combineLatest([this.cart$, this.user$]).pipe(
+  //                 take(1),
+  //                 mergeMap(([cart, user]) => {
+  //                   const order = this.orderService.createOrder(cart, user, userData, 'paypal');
+  //                   console.log('order in loadPayPal: ', order);
+
+  //                   return this.orderService.createPayPalOrder(order).toPromise();
+  //                 })
+  //               ).subscribe({
+  //                 next: (orderId: any) => {
+  //                   console.log('THIS IS THE ORDERID: ', orderId)
+  //                   if (orderId) {
+  //                     resolve(orderId.paypalOrderId)
+  //                   } else {
+  //                     reject(new Error('orderId is undefined'))
+  //                   }
+  //                 },
+  //                 error: (error: any) => {
+  //                   console.error('Error creating PayPal order:', error)
+  //                   reject(error);
+  //                 },
+  //                 complete: () => {
+  //                   // Complete callback
+  //                 }
+  //               })
+  //             })
+  //           },
+  //           onApprove: (data, actions) => {
+  //             if (actions.order) {
+  //               return actions.order.capture().then(() => {
+  //                 this.onSubmitPurchase()
+  //                 console.log('THE TRANSACTION WAS SUCCESSFUL')
+  //               })
+  //             } else {
+  //               console.error('actions.order is undefined.')
+  //               return Promise.resolve()
+  //             }
+  //           },
+  //           fundingSource: window.paypal.FUNDING['VENMO']
+  //         }).render('#paypal-button-container')
+  //       } else {
+  //         console.error('PayPal script loaded but window.paypal or window.paypal.Buttons is undefined.')
+  //       }
+  //     },
+  //     error => {
+  //       console.error('Failed to load PayPal script:', error)
+  //     }
+  //   )
+  // }
   loadPayPalScript(): void {
     this.orderService.getPaypalClientId().pipe(
       catchError(error => {
@@ -124,17 +203,28 @@ export class PaymentComponent implements OnInit {
     ).subscribe(
       () => {
         if (window.paypal && typeof window.paypal.Buttons === 'function') {
-          window.paypal.Buttons({
+          const paypalConfig = {
+            onInit: (data: any, actions: any) => {
+              actions.disable()
+
+              this.personalForm.statusChanges.subscribe(status => {
+                if (status === 'VALID') {
+                  actions.enable()
+                } else {
+                  actions.disable()
+                }
+              })
+            },
             createOrder: () => {
-              return new Promise((resolve, reject) => {
-                const userData = this.personalForm.value;
+              return new Promise<string>((resolve, reject) => {
+                const userData = this.personalForm.value
                 combineLatest([this.cart$, this.user$]).pipe(
                   take(1),
                   mergeMap(([cart, user]) => {
-                    const order = this.orderService.createOrder(cart, user, userData, 'paypal');
-                    console.log('order in loadPayPal: ', order);
-                    
-                    return this.orderService.createPayPalOrder(order).toPromise();
+                    const order = this.orderService.createOrder(cart, user, userData, 'paypal')
+                    console.log('order in loadPayPal: ', order)
+
+                    return this.orderService.createPayPalOrder(order).toPromise()
                   })
                 ).subscribe({
                   next: (orderId: any) => {
@@ -147,7 +237,7 @@ export class PaymentComponent implements OnInit {
                   },
                   error: (error: any) => {
                     console.error('Error creating PayPal order:', error)
-                    reject(error);
+                    reject(error)
                   },
                   complete: () => {
                     // Complete callback
@@ -155,7 +245,7 @@ export class PaymentComponent implements OnInit {
                 })
               })
             },
-            onApprove: (data, actions) => {
+            onApprove: (data: any, actions: any) => {
               if (actions.order) {
                 return actions.order.capture().then(() => {
                   this.onSubmitPurchase()
@@ -166,7 +256,15 @@ export class PaymentComponent implements OnInit {
                 return Promise.resolve()
               }
             }
-          }).render('#paypal-button-container')
+          }
+
+          // // Check if VENMO is available before setting funding source
+          // if (window.paypal.FUNDING && 'VENMO' in window.paypal.FUNDING) {
+          //   const fundingSource = window.paypal.FUNDING['VENMO'];
+          //   (paypalConfig as any)['fundingSource'] = fundingSource
+          // }
+
+          window.paypal.Buttons(paypalConfig).render('#paypal-button-container')
         } else {
           console.error('PayPal script loaded but window.paypal or window.paypal.Buttons is undefined.')
         }
@@ -176,6 +274,7 @@ export class PaymentComponent implements OnInit {
       }
     )
   }
+
 
 }
 
