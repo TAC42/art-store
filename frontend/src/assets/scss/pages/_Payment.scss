@@ -222,7 +222,6 @@ payment {
               }
 
               &.error {
-
                 input,
                 select {
                   border: 2px solid $mnrclr5;
@@ -231,95 +230,17 @@ payment {
             }
           }
         }
-
-        .methods {
-          gap: 1em;
-          padding: 0.75em;
-
-          .desc {
-            font-size: 1em;
-            color: $scdclr6;
-          }
-
-          form {
+        .method {
+          .methods {
             gap: 1em;
-
-            .option {
-              align-items: center;
-              padding: 0.5em;
-              border: 1px $scdclr3 solid;
-              border-radius: 0.25em;
-              font-size: 1.25em;
-              font-family: "nh-bold";
-
-              svg-render {
-                width: 1.75em;
-                height: 1.75em;
-                margin-left: auto;
-              }
-
-              &.selected {
-                border-color: $mnrclr1;
-              }
-            }
+            padding: 0.75em;
+            width: fit-content;
           }
-        }
-      }
-
-      .terms-payment {
-        width: 100%;
-        padding: 0 1em 1em 1em;
-        gap: 1em;
-        justify-content: center;
-        align-items: center;
-
-        p {
-          color: $prmclr1;
-          text-align: center;
-
-          a {
-            color: $scdclr8;
-          }
-        }
-
-        button {
-          gap: 0.25em;
-          justify-content: center;
-          width: 100%;
-          max-width: 14em;
-          padding: 0.5em;
-          font-size: 1.5em;
-          color: $prmclr2;
-          background: $mnrclr10;
-          border-radius: 1em;
-          transition: all 0.5s ease-in-out;
-
-          svg-render {
-            width: 1em;
-            height: 1em;
-            transition: all 0.5s ease-in-out;
-            fill: $prmclr2;
-          }
-
-          &.disabled {
-            color: $prmclr4;
-            opacity: 0.5;
-            pointer-events: none;
-
-            svg-render {
-              fill: $prmclr4;
-            }
-          }
-
-          .pay-type {
-            text-transform: capitalize;
+          .submit-error {
+            color: $mnrclr5;
           }
         }
       }
     }
-  }
-  .submit-error{
-    color: $mnrclr5;
-    
   }
 }
