@@ -32,7 +32,7 @@ async function login(loginId: string, password: string): Promise<User | null> {
   return user
 }
 
-async function signup(username: string, password: string, fullName: string, email?: string, imgUrl?: string[]): Promise<User> {
+async function signup(username: string, password: string, fullName: string, email?: string, imgUrls?: string[]): Promise<User> {
   loggerService.debug(`auth - signup with username: ${username}`)
 
   if (!username || !password || !fullName) throw new Error('Missing required details')
@@ -43,7 +43,7 @@ async function signup(username: string, password: string, fullName: string, emai
     password: hash,
     fullName,
     email,
-    imgUrl,
+    imgUrls,
     cart: [],
     createdAt: Date.now(),
     isAdmin: false,
@@ -64,10 +64,7 @@ async function hashPassword(password: string): Promise<string> {
 }
 
 function getLoginToken(user: User): string {
-  const userInfo: User = {
-    _id: user._id!,
-    username: user.username,
-  }
+  const userInfo: User = { _id: user._id! }
   return cryptr.encrypt(JSON.stringify(userInfo))
 }
 
@@ -75,6 +72,7 @@ function validateToken(loginToken: string): User | null {
   try {
     const json = cryptr.decrypt(loginToken)
     const loggedInUser: User = JSON.parse(json)
+
     return loggedInUser
   } catch (err) {
     loggerService.error('Invalid login token')

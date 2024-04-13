@@ -11,7 +11,7 @@ export interface SignupRequestBody {
     password: string
     fullName: string
     email: string
-    imgUrl?: string
+    imgUrls?: string[]
     recaptchaToken: string
 }
 
@@ -21,7 +21,7 @@ export interface User {
     password?: string
     fullName?: string
     email?: string
-    imgUrl?: string[]
+    imgUrls?: string[]
     cart?: any[]
     createdAt?: number
     isAdmin?: boolean

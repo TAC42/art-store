@@ -12,6 +12,7 @@ export interface Order {
 }
 
 export interface OrderUser {
+    _id?: ObjectId
     firstName: string
     lastName: string
     email: string
@@ -20,7 +21,6 @@ export interface OrderUser {
     city: string
     state: string
     zip: string
-    _id?: ObjectId
 }
 
 export interface OrderExpenses {

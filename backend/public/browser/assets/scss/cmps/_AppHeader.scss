@@ -6,94 +6,91 @@ app-header {
   .header-contents {
     position: relative;
 
-    .desktop-view,
-    .mobile-view {
+    .desktop-view .links,
+    .mobile-view .links {
+      justify-content: space-between;
 
-      .links {
-        justify-content: space-between;
+      span {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
 
-        span {
-          width: 32px;
-          height: 32px;
-          cursor: pointer;
-        }
+      image-container img {
+        width: 32px;
+        height: 32px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      }
 
-        img {
-          width: 32px;
-          height: 32px;
-          object-fit: cover;
-          border-radius: 50%;
-          cursor: pointer;
-        }
+      a {
+        font-size: 24px;
+        letter-spacing: 0.05em;
 
-        a {
-          font-size: 24px;
-          letter-spacing: 0.05em;
-
-          h1 {
-            font-size: 32px;
-            color: $prmclr1;
-          }
-
-          &.active {
-            color: $scdclr1;
-          }
-
-          &:hover {
-            color: $scdclr1;
-          }
-        }
-
-        input {
-          padding: 0.5em;
-          border-radius: 0.5em 0 0 0.5em;
-          border: 1px solid $scdclr4;
-          border-width: 1px 0 1px 1px;
+        h1 {
+          font-size: 32px;
           color: $prmclr1;
-          font-family: "nh-medium";
-          font-size: 1em;
-          opacity: 0;
-
-          &:focus,
-          &:focus-visible {
-            border: 1px solid $scdclr2;
-            border-width: 1px 0 1px 1px;
-          }
         }
 
-        &.search-on {
-          input {
-            width: 65%;
-            animation-name: slideIn;
-            animation-duration: 0.6s;
-            animation-timing-function: ease-in-out;
-            animation-fill-mode: forwards;
-            animation-delay: 0s;
-            opacity: 1;
-          }
+        &.active {
+          color: $scdclr1;
+        }
 
-          .clear {
-            position: absolute;
-            right: 7.5em;
+        &:hover {
+          color: $scdclr1;
+        }
+      }
+
+      input {
+        padding: 0.5em;
+        border-radius: 0.5em 0 0 0.5em;
+        border: 1px solid $scdclr4;
+        border-width: 1px 0 1px 1px;
+        color: $prmclr1;
+        font-family: "nh-medium";
+        font-size: 1em;
+        opacity: 0;
+
+        &:focus,
+        &:focus-visible {
+          border: 1px solid $scdclr2;
+          border-width: 1px 0 1px 1px;
+        }
+      }
+
+      &.search-on {
+        input {
+          width: 65%;
+          animation-name: slideIn;
+          animation-duration: 0.6s;
+          animation-timing-function: ease-in-out;
+          animation-fill-mode: forwards;
+          animation-delay: 0s;
+          opacity: 1;
+        }
+
+        .clear {
+          position: absolute;
+          right: 7.5em;
+          width: 24px;
+          height: 24px;
+          fill: $scdclr4;
+          opacity: 0.8;
+        }
+
+        .search {
+          width: fit-content;
+          height: 43.6px;
+          padding: 0 0.75em;
+          transform: translateX(-100%);
+          border-radius: 0 0.5em 0.5em 0;
+          background: $scdclr1;
+
+          svg-render {
+            fill: $prmclr2;
             width: 24px;
             height: 24px;
-            fill: $scdclr4;
-            opacity: 0.8;
-          }
-
-          .search {
-            width: fit-content;
-            height: 43.6px;
-            padding: 0 0.75em;
-            transform: translateX(-100%);
-            border-radius: 0 0.5em 0.5em 0;
-            background: $scdclr1;
-
-            svg-render {
-              fill: $prmclr2;
-              width: 24px;
-              height: 24px;
-            }
           }
         }
       }
@@ -131,32 +128,29 @@ app-header {
         border: 1px solid $scdclr3;
         z-index: 10;
 
-        .dropdown-contents {
-          .action-area {
+        .dropdown-contents .action-area {
+          &:first-child {
+            border-radius: 0.25em 0.25em 0 0;
+          }
 
-            &:first-child {
-              border-radius: 0.25em 0.25em 0 0;
-            }
+          &:last-child {
+            border-radius: 0 0 0.25em 0.25em;
+          }
 
-            &:last-child {
-              border-radius: 0 0 0.25em 0.25em;
-            }
+          &:only-child {
+            border-radius: 0.25em;
+          }
 
-            &:only-child {
-              border-radius: 0.25em;
-            }
+          span {
+            display: block;
+            padding: 0.5em 0.75em;
+            cursor: pointer;
+            font-size: 18px;
+            color: $prmclr1;
+          }
 
-            span {
-              display: block;
-              padding: 0.5em 0.75em;
-              cursor: pointer;
-              font-size: 18px;
-              color: $prmclr1;
-            }
-
-            &:hover {
-              background-color: $prmclr3;
-            }
+          &:hover {
+            background-color: $prmclr3;
           }
         }
 

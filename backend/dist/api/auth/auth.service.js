@@ -25,7 +25,7 @@ async function login(loginId, password) {
         throw new Error('Invalid loginId or password');
     return user;
 }
-async function signup(username, password, fullName, email, imgUrl) {
+async function signup(username, password, fullName, email, imgUrls) {
     loggerService.debug(`auth - signup with username: ${username}`);
     if (!username || !password || !fullName)
         throw new Error('Missing required details');
@@ -35,7 +35,7 @@ async function signup(username, password, fullName, email, imgUrl) {
         password: hash,
         fullName,
         email,
-        imgUrl,
+        imgUrls,
         cart: [],
         createdAt: Date.now(),
         isAdmin: false,
@@ -54,10 +54,7 @@ async function hashPassword(password) {
     return hash;
 }
 function getLoginToken(user) {
-    const userInfo = {
-        _id: user._id,
-        username: user.username,
-    };
+    const userInfo = { _id: user._id };
     return cryptr.encrypt(JSON.stringify(userInfo));
 }
 function validateToken(loginToken) {

@@ -9,7 +9,7 @@ import { ImageLoadService } from '../../services/media/image-load.service'
 export class ImageContainerComponent implements OnInit {
   @Input() imageUrl!: string
   @Input() alt: string = 'Loading...'
-  @Output() imageClick = new EventEmitter<{ event: Event, imageUrl: string }>()
+  @Output() imageClick = new EventEmitter<{ event: Event, imageUrl?: string }>()
 
   private imgLoadService = inject(ImageLoadService)
 
@@ -26,7 +26,7 @@ export class ImageContainerComponent implements OnInit {
     lowResImage.style.display = 'none'
   }
 
-  onImageClick(event: Event, imageUrl: string): void {
+  onImageClick(event: Event, imageUrl?: string): void {
     this.imageClick.emit({ event: event, imageUrl: imageUrl })
   }
 }
