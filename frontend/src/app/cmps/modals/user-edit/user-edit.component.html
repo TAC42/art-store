@@ -9,10 +9,10 @@
     </section>
 
     <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
-      <div class="upload-area grid" formArrayName="imgUrl">
+      <div class="upload-area grid" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="'user'"
-            (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrl'})" />
+            (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrls'})" />
           <svg-render svgName="camera" />
         </div>
       </div>

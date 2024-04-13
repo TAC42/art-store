@@ -57,7 +57,7 @@ export class UserEditComponent implements OnInit {
     this.user$.subscribe(user => {
       this.initialFormData = user
       this.userEditForm = this.fBuilder.group({
-        imgUrl: this.fBuilder.array(user.imgUrl?.map(
+        imgUrls: this.fBuilder.array(user.imgUrls?.map(
           url => this.fBuilder.control(url))),
         fullName: [user.fullName, [Validators.required]],
         username: [user.username, [Validators.required],
@@ -73,7 +73,7 @@ export class UserEditComponent implements OnInit {
   }
 
   get imgUrlsControls(): AbstractControl[] {
-    return (this.userEditForm.get('imgUrl') as FormArray).controls
+    return (this.userEditForm.get('imgUrls') as FormArray).controls
   }
 
   handleImgUpload(event: { url: string, index: number, controlName: string }): void {

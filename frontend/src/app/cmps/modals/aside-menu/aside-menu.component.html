@@ -3,7 +3,7 @@
         <div class="logo-container flex row align-center">
             <h1 class="family-nunito">oricarlin</h1>
             <ng-container *ngIf="user$ | async as loggedinUser">
-                <img *ngIf="loggedinUser._id" [src]="loggedinUser.imgUrl[0]" alt="User Image">
+                <img [src]="loggedinUser.imgUrls[0]" alt="User Image">
             </ng-container>
         </div>
 

@@ -30,17 +30,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       (active: boolean) => { this.searchState = active })
   }
 
-  openAsideMenu(event: MouseEvent) {
+  openAsideMenu(event: MouseEvent): void {
     event.stopPropagation()
     this.modService.openModal('aside-menu')
   }
 
-  openDropdown(event: MouseEvent) {
+  openDropdown(event: MouseEvent): void {
     event.stopPropagation()
     this.modService.openModal('user-dropdown')
   }
 
-  onOpenSearch(event: MouseEvent) {
+  onOpenSearch(event: MouseEvent): void {
     event.stopPropagation()
     const currentUrl = this.router.url
     if (currentUrl.startsWith('/shop') ||
@@ -55,21 +55,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCloseSearch() {
+  onCloseSearch(): void {
     this.searchState = false
   }
 
-  onSearchInput(event: Event) {
+  onSearchInput(event: Event): void {
     const target = event.target as HTMLInputElement
     this.searchValue = target.value
   }
 
-  onClearFilter(event: Event) {
+  onClearFilter(event: Event): void {
     event.stopPropagation()
     this.searchValue = ''
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.dimSubscription) this.dimSubscription.unsubscribe()
   }
 }

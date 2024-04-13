@@ -18,9 +18,10 @@ body>div:last-child {
   position: absolute !important;
   bottom: 0 !important;
   left: 0 !important;
-  max-width: 350px;
+  right: 0 !important;
   height: fit-content;
-  z-index: 100;
+  width: fit-content;
+  margin: auto;
 }
 
 img {

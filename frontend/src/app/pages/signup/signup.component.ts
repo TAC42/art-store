@@ -78,11 +78,11 @@ export class SignupComponent implements OnInit {
       const { firstName, lastName, username, email, password } = this.signupForm.value
 
       const randColor = this.utilService.getRandomMidColor().substring(1)
-      let imgUrl = [`https://placehold.co/${100}/${randColor}/ffffff?text=${firstName[0].toUpperCase()}`]
+      let imgUrls = [`https://placehold.co/${100}/${randColor}/ffffff?text=${firstName[0].toUpperCase()}`]
 
       const credentials: UserSignup = {
         fullName: `${firstName} ${lastName}`, username, email,
-        imgUrl, password, recaptchaToken: this.captchaResponse
+        imgUrls, password, recaptchaToken: this.captchaResponse
       }
       this.store.dispatch(SIGNUP({ credentials }))
       // reset of form & recaptcha token

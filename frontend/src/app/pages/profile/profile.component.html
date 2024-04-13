@@ -7,7 +7,7 @@
 
     <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center">
       <article class="user-img">
-        <image-container [imageUrl]="user.imgUrl[0]" />
+        <image-container [imageUrl]="user.imgUrls[0]" />
       </article>
       <span class="full-name family-bold"> {{ user.fullName }} </span>
       <span> &#64;{{ user.username }} </span>
@@ -32,7 +32,7 @@
     </div>
 
     <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center">
-      <image-container [imageUrl]="user.imgUrl[0]" />
+      <image-container [imageUrl]="user.imgUrls[0]" />
 
       <span class="full-name family-bold"> {{ user.fullName }} </span>
       <span> &#64;{{ user.username }} </span>
