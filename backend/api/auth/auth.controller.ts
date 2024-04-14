@@ -36,11 +36,11 @@ async function _login(req: Request<LoginRequestBody>,
 
 async function _signup(req: Request<SignupRequestBody>,
   res: Response): Promise<void> {
-  const { username, password, fullName, email, imgUrl, recaptchaToken } = req.body
+  const { username, password, fullName, email, imgUrls, recaptchaToken } = req.body
 
   try {
     await utilityService.verifyRecaptcha(recaptchaToken)
-    const account = await authService.signup(username, password, fullName, email, imgUrl)
+    const account = await authService.signup(username, password, fullName, email, imgUrls)
     loggerService.debug(`auth.route - new account created: ${JSON.stringify(account)}`)
 
     const user = await authService.login(username, password)

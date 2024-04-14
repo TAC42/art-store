@@ -63,10 +63,7 @@ export class UserService {
 
   signup(signupData: UserSignup): Observable<User> {
     return this.httpService.post<User>('auth/signup', signupData).pipe(
-      tap(newUser => {
-        console.log('Registered user:', newUser.fullName)
-        this.setLoggedinUser(newUser)
-      }),
+      tap(newUser => this.setLoggedinUser(newUser)),
       catchError(error => {
         console.error('Error during signup:', error)
         return throwError(() => new Error('Error during signup'))

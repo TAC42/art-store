@@ -65,18 +65,6 @@ async function getByEmail(email: string): Promise<User | null> {
   }
 }
 
-async function remove(userId: ObjectId): Promise<number> {
-  try {
-    const collection = await dbService.getCollection(USERS_COLLECTION)
-    const { deletedCount } = await collection.deleteOne({ _id: new ObjectId(userId) })
-
-    return deletedCount
-  } catch (err) {
-    loggerService.error(`cannot remove user ${userId}`, err)
-    throw err
-  }
-}
-
 async function save(user: User): Promise<User> {
   const collection = await dbService.getCollection(USERS_COLLECTION)
 
@@ -104,6 +92,21 @@ async function save(user: User): Promise<User> {
   }
 }
 
+async function remove(userId: ObjectId): Promise<number> {
+  try {
+    const collection = await dbService.getCollection(USERS_COLLECTION)
+    const { deletedCount } = await collection.deleteOne({
+      _id: new ObjectId(userId)
+    })
+    if (deletedCount === 0) throw new Error(`User with id ${userId} was not found`)
+
+    return deletedCount
+  } catch (err) {
+    loggerService.error(`cannot remove user ${userId}`, err)
+    throw err
+  }
+}
+
 function _buildPipeline(filterBy: UserQueryParams): any {
   const criteria: any = {}
   if (filterBy.userId) criteria._id = new ObjectId(filterBy.userId)
@@ -115,6 +118,9 @@ async function checkNonVerifiedUsers(): Promise<number> {
   try {
     const collection = await dbService.getCollection(USERS_COLLECTION)
     const { deletedCount } = await collection.deleteMany({ isVerified: false })
+
+    if (deletedCount === 0) loggerService.error('No unverified users found')
+    else loggerService.info(`${deletedCount} unverified users were found and removed`)
 
     return deletedCount
   } catch (err) {

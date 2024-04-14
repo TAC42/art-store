@@ -32,7 +32,7 @@ async function login(loginId: string, password: string): Promise<User | null> {
   return user
 }
 
-async function signup(username: string, password: string, fullName: string, email?: string, imgUrls?: string[]): Promise<User> {
+async function signup(username: string, password: string, fullName: string, email: string, imgUrls: string[]): Promise<User> {
   loggerService.debug(`auth - signup with username: ${username}`)
 
   if (!username || !password || !fullName) throw new Error('Missing required details')

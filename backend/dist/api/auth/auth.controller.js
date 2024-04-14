@@ -28,10 +28,10 @@ async function _login(req, res) {
     }
 }
 async function _signup(req, res) {
-    const { username, password, fullName, email, imgUrl, recaptchaToken } = req.body;
+    const { username, password, fullName, email, imgUrls, recaptchaToken } = req.body;
     try {
         await utilityService.verifyRecaptcha(recaptchaToken);
-        const account = await authService.signup(username, password, fullName, email, imgUrl);
+        const account = await authService.signup(username, password, fullName, email, imgUrls);
         loggerService.debug(`auth.route - new account created: ${JSON.stringify(account)}`);
         const user = await authService.login(username, password);
         const loginToken = authService.getLoginToken(user);

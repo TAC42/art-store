@@ -82,7 +82,6 @@ async function remove(orderId: ObjectId): Promise<number> {
     const { deletedCount } = await collection.deleteOne({
       _id: new ObjectId(orderId)
     })
-
     if (deletedCount === 0) throw new Error(`Order with id ${orderId} was not found`)
 
     return deletedCount

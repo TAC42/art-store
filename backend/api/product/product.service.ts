@@ -98,9 +98,9 @@ async function save(product: Product): Promise<Product> {
 async function remove(productId: ObjectId): Promise<number> {
   try {
     const collection = await dbService.getCollection(PRODUCTS_COLLECTION)
-    const { deletedCount } = await collection.deleteOne(
-      { _id: new ObjectId(productId) })
-
+    const { deletedCount } = await collection.deleteOne({
+      _id: new ObjectId(productId)
+    })
     if (deletedCount === 0) throw new Error(`Product with id ${productId} was not found`)
 
     return deletedCount
