@@ -77,7 +77,7 @@ export class ContactComponent implements OnInit {
           this.contactForm.reset()
           this.isCaptchaResolved = false
           this.captchaResponse = null
-          showSuccessMsg('Email Sent!', 'Thank you for contacting!', this.eBusService)
+          showSuccessMsg('Email Sent!', 'Thank you for contacting us!', this.eBusService)
         },
         error: (error) => {
           console.error(error)

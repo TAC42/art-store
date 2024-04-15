@@ -50,11 +50,17 @@ async function verifyRecaptcha(token) {
         throw new Error('Invalid reCAPTCHA');
     }
 }
-function formatDate() {
-    const date = new Date().toLocaleString("en-US", {
-        timeZone: "America/New_York", month: 'short', day: '2-digit',
-        year: 'numeric', hour: 'numeric', minute: '2-digit',
-        second: '2-digit', hour12: true
+function formatDate(dateInput = new Date()) {
+    // If dateInput is a number, convert it to a Date object
+    const date = new Date(dateInput);
+    return date.toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
     });
-    return date;
 }

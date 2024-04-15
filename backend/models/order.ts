@@ -30,6 +30,18 @@ export interface OrderExpenses {
     grandTotal: number
 }
 
+export interface OrderStatus {
+    orderUpdateText: string
+    orderUpdateHtml: string
+}
+
+export interface OrderInvoice {
+    invoiceDate: string
+    htmlTable: string
+    orderSummaryText: string
+    expensesText: string
+}
+
 export interface MatchCriteria {
     $match: {
         $or?: Array<{ 'user._id': ObjectId }>

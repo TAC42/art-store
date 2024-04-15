@@ -148,12 +148,10 @@ async function createPaypalOrder(order) {
                 },
             ],
         });
-        console.log('THE ORDER REQUEST PAYPAL: ', request);
-        console.log('THE ORDER REQUEST PAYPAL: ', JSON.stringify(request.body.purchase_units));
+        loggerService.debug('PayPal order request: ', JSON.stringify(request.body.purchase_units));
         // Execute PayPal request
         const response = await client.execute(request);
-        console.log('THE RESPONSE PAYPAL: ', response.result.id);
-        loggerService.debug('THE RESPONSE PAYPAL:', response);
+        loggerService.debug('PayPal response ID: ', response.result.id);
         return response.result.id;
     }
     catch (err) {

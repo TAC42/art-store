@@ -4,7 +4,6 @@ import { orderService } from './order.service.js'
 import { loggerService } from '../../services/logger.service.js'
 import { ObjectId } from 'mongodb'
 import paypal from '@paypal/checkout-server-sdk'
-import { log } from 'console'
 
 // order routes
 export const orderRoutes: Router = express.Router()
@@ -14,7 +13,7 @@ orderRoutes.get('/:id', _getOrderById)
 orderRoutes.post('/', _addOrder)
 orderRoutes.put('/:id', _updateOrder)
 orderRoutes.delete('/:id', _removeOrder)
-orderRoutes.post('/paypal-order', _createPaypalOrder);
+orderRoutes.post('/paypal-order', _createPaypalOrder)
 
 // order controller functions
 async function _getOrders(req: Request<{}, {}, {}, { _id?: ObjectId }>,
@@ -53,12 +52,11 @@ async function _getOrderById(req: Request<{ id: ObjectId }>,
 async function _addOrder(req: Request<{}, {}, Order>,
     res: Response): Promise<void> {
     try {
-        const order = req.body;
-
+        const order = req.body
         loggerService.debug('Creating order:', order)
         const addedOrder = await orderService.save(order)
-        res.json(addedOrder)
 
+        res.json(addedOrder)
     } catch (err) {
         loggerService.error('Failed to add order', err)
         res.status(500).send({ err: 'Failed to add order' })
@@ -96,17 +94,16 @@ async function _removeOrder(req: Request<{ id: ObjectId }>,
 async function _createPaypalOrder(req: Request<{}, {}, Order>,
     res: Response): Promise<void> {
     try {
-        const order = req.body;
+        const order = req.body
 
         const paypalOrderId = await createPaypalOrder(order)
         if (!paypalOrderId) {
             loggerService.error('PayPal order creation failed')
             res.status(500).send({ err: 'Failed to create PayPal order' })
-            return;
+            return
         }
-
         // Return the PayPal order ID to the client
-        res.json({ paypalOrderId });
+        res.json({ paypalOrderId })
     } catch (err) {
         loggerService.error('Failed to create PayPal order', err)
         res.status(500).send({ err: 'Failed to create PayPal order' })
@@ -173,13 +170,10 @@ async function createPaypalOrder(order: Order): Promise<string | undefined> {
                 },
             ],
         })
-        console.log('THE ORDER REQUEST PAYPAL: ', request)
-        console.log('THE ORDER REQUEST PAYPAL: ', JSON.stringify(request.body.purchase_units))
-
+        loggerService.debug('PayPal order request: ', JSON.stringify(request.body.purchase_units))
         // Execute PayPal request
         const response = await client.execute(request)
-        console.log('THE RESPONSE PAYPAL: ', response.result.id)
-        loggerService.debug('THE RESPONSE PAYPAL:', response)
+        loggerService.debug('PayPal response ID: ', response.result.id)
         return response.result.id
     } catch (err) {
         loggerService.error('Failed to create PayPal order', err)
