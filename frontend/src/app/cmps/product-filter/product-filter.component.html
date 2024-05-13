@@ -1,4 +1,8 @@
-<input [(ngModel)]="filterBy.search" (ngModelChange)="onFilterChange($event)" type="text" placeholder="Search...">
-<svg-render *ngIf="filterBy.search" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
+<div class="input-container">
+    <input [(ngModel)]="filterBy.search" (ngModelChange)="onFilterChange($event)" type="text" placeholder="Search...">
+    <button *ngIf="filterBy.search" class="flex fast-trans" (click)="onClearFilter($event)">
+        <svg-render svgName="removeIcon" />
+    </button>
+</div>
 <svg-render class="search" svgName="searchIcon" />
 <svg-render *ngIf="isShopPage" class="cart" (click)="onCartOpen($event)" svgName="shoppingCart" />

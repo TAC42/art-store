@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
-import { ShopFilter } from '../../models/product'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
+import { ProductFilter } from '../../models/product'
 import { User } from '../../models/user'
 import { ModalService } from '../../services/utils/modal.service'
 
@@ -10,32 +10,34 @@ import { ModalService } from '../../services/utils/modal.service'
 })
 
 export class ProductFilterComponent {
-  @Input() set filterBy(value: ShopFilter) {
+  @Input() set filterBy(value: ProductFilter) {
     this._filterBy = { ...value }
   }
   @Input() isShopPage!: boolean
   @Input() loggedinUser!: User | null
 
-  @Output() onSetFilter = new EventEmitter<string>()
+  @Output() onSetFilter = new EventEmitter<ProductFilter>()
   @Output() onOpenCart = new EventEmitter<void>()
   hasValue = false
 
-  get filterBy(): ShopFilter {
-    return this._filterBy
-  }
-  private _filterBy!: ShopFilter
+  private _filterBy!: ProductFilter
 
   private filterSubject: Subject<string> = new Subject<string>()
   private modService = inject(ModalService)
 
+  get filterBy(): ProductFilter {
+    return this._filterBy
+  }
+
   constructor() {
     this.filterSubject
       .pipe(
-        debounceTime(500),
+        debounceTime(1000),
         distinctUntilChanged()
       )
       .subscribe((value: string) => {
-        this.onSetFilter.emit(value)
+        const updatedFilter = { ...this._filterBy, search: value }
+        this.onSetFilter.emit(updatedFilter)
         this.hasValue = true
       })
   }
@@ -46,8 +48,9 @@ export class ProductFilterComponent {
 
   onClearFilter(event: Event) {
     event.stopPropagation()
-    this.filterBy.search = ''
-    this.onSetFilter.emit('')
+    const updatedFilter = { ...this._filterBy, search: '' }
+    this._filterBy = updatedFilter
+    this.onSetFilter.emit(updatedFilter)
     this.hasValue = false
   }
 

@@ -4,7 +4,7 @@ import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { Cart, Product } from '../../../models/product'
-import { ShopFilter } from '../../../models/product'
+import { ProductFilter } from '../../../models/product'
 import { User } from '../../../models/user'
 import { selectProducts, selectIsLoading } from '../../../store/product/product.selectors'
 import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/product/product.actions'
@@ -38,7 +38,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
 
   public isShopPage: boolean = false
   public isLoading: boolean = false
-  public filterBy: ShopFilter = { search: '', type: 'shop' }
+  public filterBy: ProductFilter = { search: '', type: 'shop' }
 
   ngOnInit(): void {
     this.isShopPage = this.router.url.startsWith('/shop')
@@ -86,15 +86,13 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
     })
   }
 
-  onSetFilter(newFilterValue: string): void {
-    let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
-    updatedFilter = { ...updatedFilter, type: 'shop' }
-    this.updateFilter(updatedFilter)
+  onSetFilter(newFilter: ProductFilter): void {
+    this.updateFilter(newFilter)
   }
 
-  private updateFilter(newFilter: Partial<ShopFilter>): void {
+  private updateFilter(newFilter: ProductFilter): void {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
-    this.store.dispatch({ type: '[Shop] Load Products' })
+    this.store.dispatch(LOAD_PRODUCTS({ filterBy: newFilter }))
 
     this.activatedRoute.queryParams.subscribe(params => {
       const updatedParams = { ...params, search: newFilter.search }
@@ -105,7 +103,6 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
       })
     })
   }
-
   ngOnDestroy(): void {
     if (this.removeProductSubscription) this.removeProductSubscription.unsubscribe()
     if (this.isLoadingSubscription) this.isLoadingSubscription.unsubscribe()

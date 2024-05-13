@@ -4,14 +4,14 @@ import {
   LOAD_FILTER, SET_LOADING_STATE,
   PRODUCT_REMOVED_SUCCESSFULLY, RANDOM_PRODUCTS_LOADED, PRODUCT_SAVED, CART_LOADED
 } from './product.actions'
-import { Product, ShopFilter } from '../../models/product'
+import { Product, ProductFilter } from '../../models/product'
 
 export interface ProductState {
   products: Product[]
   selectedProduct: Product | null
   randomProducts: Product[]
   cart: Product[]
-  filterBy: ShopFilter
+  filterBy: ProductFilter
   isLoading: boolean
 }
 

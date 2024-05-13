@@ -5,7 +5,7 @@ import { forkJoin, of } from 'rxjs'
 import { Store, select } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
 import { AppState } from '../app.state'
-import { Product, ShopFilter } from '../../models/product'
+import { Product, ProductFilter } from '../../models/product'
 import {
   FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, PRODUCTS_LOADED,
   SAVE_PRODUCT, LOAD_PRODUCT_BY_NAME, SET_LOADING_STATE,
@@ -52,8 +52,8 @@ export class ProductEffects {
     )
   )
 
-  private getInitialFilter(queryParams: any): ShopFilter {
-    const filterFromParams: ShopFilter = { search: '' }
+  private getInitialFilter(queryParams: any): ProductFilter {
+    const filterFromParams: ProductFilter = { search: '' }
 
     if (queryParams.has('search')) filterFromParams.search = queryParams.get('search') || ''
     return filterFromParams

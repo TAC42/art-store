@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Product, ShopFilter, Cart } from '../../models/product'
+import { Product, ProductFilter, Cart } from '../../models/product'
 
 // handling of product loading
 export const SET_LOADING_STATE = createAction(
@@ -10,7 +10,7 @@ export const SET_LOADING_STATE = createAction(
 // handling of all products in index
 export const LOAD_PRODUCTS = createAction(
   '[Product] Load Products',
-  props<{ filterBy: ShopFilter }>()
+  props<{ filterBy: ProductFilter }>()
 )
 export const PRODUCTS_LOADED = createAction(
   '[Product] Products Loaded',
@@ -50,11 +50,11 @@ export const RANDOM_PRODUCTS_LOADED = createAction(
 // handling of product filtering
 export const LOAD_FILTER = createAction(
   '[Product] Load Filter',
-  props<{ filterBy: Partial<ShopFilter> }>()
+  props<{ filterBy: Partial<ProductFilter> }>()
 )
 export const FILTER_UPDATED = createAction(
   '[Product] Filter Updated',
-  props<{ updatedFilter: Partial<ShopFilter> }>()
+  props<{ updatedFilter: Partial<ProductFilter> }>()
 )
 
 // handling of product saving

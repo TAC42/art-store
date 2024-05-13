@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { ValidationErrors } from '@angular/forms'
 import { Observable, throwError, catchError, map, of } from 'rxjs'
-import { Product, ShopFilter } from '../../models/product'
+import { Product, ProductFilter } from '../../models/product'
 import { HttpService } from '../utils/http.service'
 
 const BASE_URL = 'product/'
@@ -13,9 +13,9 @@ const BASE_URL = 'product/'
 export class ProductService {
   private httpService = inject(HttpService)
 
-  currentFilter: ShopFilter = { search: '' }
+  currentFilter: ProductFilter = { search: '' }
 
-  query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
+  query(filterBy: Partial<ProductFilter> = {}): Observable<any> {
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError(error => {
         console.error('Error querying products:', error)
@@ -93,13 +93,13 @@ export class ProductService {
     }
   }
 
-  getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
-    const newFilterBy: ShopFilter = { search: '' }
+  getFilterFromParams(searchParams: URLSearchParams): ProductFilter {
+    const newFilterBy: ProductFilter = { search: '' }
     let isNewRefresh = false
 
     searchParams.forEach((value, key) => {
       if (key in newFilterBy) {
-        newFilterBy[key as keyof ShopFilter] = value
+        newFilterBy[key as keyof ProductFilter] = value
         isNewRefresh = true
       }
     })
@@ -108,7 +108,7 @@ export class ProductService {
     return newFilterBy
   }
 
-  setFilter(filter: ShopFilter): void {
+  setFilter(filter: ProductFilter): void {
     this.currentFilter = filter
   }
 }
