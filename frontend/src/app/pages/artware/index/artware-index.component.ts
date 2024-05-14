@@ -53,10 +53,6 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
     this.modService.openModal(`confirm`, productId)
   }
 
-  onOpenCart(): void {
-    this.modService.openModal('cart')
-  }
-
   onRemoveProduct(productId: string) {
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }

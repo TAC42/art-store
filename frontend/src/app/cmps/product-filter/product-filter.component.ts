@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { ProductFilter } from '../../models/product'
-import { User } from '../../models/user'
-import { ModalService } from '../../services/utils/modal.service'
 
 @Component({
   selector: 'product-filter',
@@ -13,17 +11,13 @@ export class ProductFilterComponent {
   @Input() set filterBy(value: ProductFilter) {
     this._filterBy = { ...value }
   }
-  @Input() isShopPage!: boolean
-  @Input() loggedinUser!: User | null
-
   @Output() onSetFilter = new EventEmitter<ProductFilter>()
-  @Output() onOpenCart = new EventEmitter<void>()
-  hasValue = false
+
+  public hasValue = false
 
   private _filterBy!: ProductFilter
 
   private filterSubject: Subject<string> = new Subject<string>()
-  private modService = inject(ModalService)
 
   get filterBy(): ProductFilter {
     return this._filterBy
@@ -52,11 +46,5 @@ export class ProductFilterComponent {
     this._filterBy = updatedFilter
     this.onSetFilter.emit(updatedFilter)
     this.hasValue = false
-  }
-
-  onCartOpen(event: Event) {
-    event.stopPropagation()
-    if (this.loggedinUser?._id) this.onOpenCart.emit()
-    else this.modService.openModal('login')
   }
 }

@@ -1,6 +1,6 @@
 product-filter {
   display: grid;
-  grid-template-columns: 1fr 56px auto;
+  grid-template-columns: 1fr 56px;
   align-items: center;
   width: 100%;
   max-width: 600px;
@@ -57,13 +57,5 @@ product-filter {
       padding: 1.2em 1em 6px 1em;
       border-radius: 0 0.5em 0.5em 0;
     }
-  }
-
-  .cart {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    fill: $scdclr3;
-    margin-inline-start: 1em;
   }
 }

@@ -2,8 +2,7 @@
     class="mobile-view flex column">
     <section class="filter-area flex column">
         <h4 class="family-bold">Sculpture</h4>
-        <product-filter [isShopPage]="isShopPage" [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)"
-            (onOpenCart)="onOpenCart()" />
+        <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" />
     </section>
 
     <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"
@@ -14,8 +13,7 @@
     class="desktop-view flex column">
     <section class="filter-area flex column">
         <h4 class="family-bold">Sculpture</h4>
-        <product-filter [isShopPage]="isShopPage" [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)"
-            (onOpenCart)="onOpenCart()" />
+        <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" />
     </section>
 
     <product-list [isShopPage]="isShopPage" [isLoading]="(isLoading)" (remove)="onRemoveProductModal($event)"

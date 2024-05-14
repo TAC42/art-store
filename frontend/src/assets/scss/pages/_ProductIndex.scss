@@ -23,16 +23,27 @@ artware-wrapper {
                         letter-spacing: 1px;
                         margin: 1em auto 1em auto;
                     }
+
+                    .filter-shop {
+                        gap: 1em;
+                        max-width: 600px;
+                        margin: 0 auto;
+
+                        .cart {
+                            width: 2.75em;
+                            height: 2.75em;
+                            cursor: pointer;
+                            fill: $scdclr3;
+                        }
+                    }
                 }
             }
 
             .desktop-view {
                 min-height: 900px;
 
-                .filter-area {
-                    h4 {
-                        margin: 2em auto 1em auto;
-                    }
+                .filter-area h4 {
+                    margin: 2em auto 1em auto;
                 }
             }
         }

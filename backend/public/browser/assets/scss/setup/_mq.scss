@@ -25,13 +25,28 @@ sculpture-wrapper {
     shop-index,
     artware-index,
     sculpture-index {
+
         product-filter {
-            @media(max-width: 600px) {
+            @media (max-width: 600px) {
                 padding: 0 1em;
             }
 
-            @media(min-width: 601px) {
+            @media (min-width: 601px) {
                 padding: 0 2em;
+            }
+        }
+
+        .filter-shop {
+            @media (max-width: 600px) {
+                padding: 0 1em;
+            }
+
+            @media (min-width: 601px) {
+                padding: 0 2em;
+            }
+
+            product-filter {
+                padding: 0;
             }
         }
 
