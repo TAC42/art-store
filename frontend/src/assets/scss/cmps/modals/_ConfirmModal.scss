@@ -29,9 +29,9 @@ confirm-modal {
         padding: 0.5em;
         border-radius: 0.5em;
         color: $prmclr1;
-        transition: all 0.3s;
+        transition: all 0.3s ease-in-out;
         font-size: 1em;
-        font-family: "nh-bold";
+        font-family: "nh-bold", Arial, sans-serif;
 
         &:hover {
           background-color: $prmclr1;

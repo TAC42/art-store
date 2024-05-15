@@ -53,7 +53,7 @@ payment {
         &:hover,
         &.selected {
           .heading {
-            font-family: "nh-bold";
+            font-family: "nh-bold", Arial, sans-serif;
             background: $scdclr3;
           }
         }
