@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { CarouselItem, ContactUsRequestBody } from '../../../models/utility'
@@ -10,13 +10,11 @@ import { MailService } from '../../../services/api/mail.service'
 
 @Component({
   selector: 'contact-page',
-  templateUrl: './contact.component.html'
+  templateUrl: './contact.component.html',
+  host: { 'class': 'layout-row w-h-100' }
 })
 
 export class ContactComponent implements OnInit {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private fBuilder = inject(FormBuilder)
   private utilService = inject(UtilityService)
   private emailService = inject(MailService)

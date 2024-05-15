@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -11,13 +11,11 @@ import { UtilityService } from '../../services/utils/utility.service'
 
 @Component({
   selector: 'signup',
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class SignupComponent implements OnInit {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)

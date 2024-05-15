@@ -17,7 +17,8 @@ import { DeviceTypeService } from '../../../services/utils/device-type.service'
 
 @Component({
   selector: 'shop-index',
-  templateUrl: './shop-index.component.html'
+  templateUrl: './shop-index.component.html',
+  host: { 'class': 'w-h-100' }
 })
 
 export class ShopIndexComponent implements OnInit, OnDestroy {
@@ -69,19 +70,18 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   onAddToCart(product: Product) {
-    this.user$.pipe(take(1)).subscribe(updatedUser => {
-      if (updatedUser._id) {
+    this.user$.pipe(take(1)).subscribe(user => {
+      if (user._id) {
         const newCartItem: Cart = { _id: product._id, amount: 1 }
 
-        const isProductAlreadyInCart = updatedUser.cart.some(
+        const isProductAlreadyInCart = user.cart.some(
           cartProduct => cartProduct._id === newCartItem._id)
 
         if (!isProductAlreadyInCart) {
-          const newUser: User = {
-            ...updatedUser,
-            cart: [...updatedUser.cart, newCartItem]
+          const updatedUser: User = {
+            ...user, cart: [...user.cart, newCartItem]
           }
-          this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+          this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
           showSuccessMsg('Product Added!',
             'Product has been added to the cart', this.eBusService)
         } else showErrorMsg('Cannot Add!',

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
+import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { ProductFilter } from '../../models/product'
 

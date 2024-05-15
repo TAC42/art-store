@@ -1,17 +1,14 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { CarouselItem } from '../../../models/utility'
 import { UtilityService } from '../../../services/utils/utility.service'
 
 @Component({
   selector: 'introduction-page',
-  templateUrl: './introduction.component.html'
+  templateUrl: './introduction.component.html',
+  host: { 'class': 'layout-row w-h-100' }
 })
 
 export class IntroductionComponent implements OnInit {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.layout-row') layoutRowClass = true
-
   private utilService = inject(UtilityService)
 
   public regularUtils = this.utilService

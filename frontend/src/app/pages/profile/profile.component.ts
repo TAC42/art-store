@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -12,13 +12,11 @@ import { ModalService } from '../../services/utils/modal.service'
 
 @Component({
   selector: 'profile',
-  templateUrl: './profile.component.html'
+  templateUrl: './profile.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class ProfileComponent implements OnInit {
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.full') fullClass = true
-
   private store = inject(Store<AppState>)
   private dTypeService = inject(DeviceTypeService)
   public modService = inject(ModalService)

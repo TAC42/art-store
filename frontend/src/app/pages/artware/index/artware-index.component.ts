@@ -15,7 +15,8 @@ import { DeviceTypeService } from '../../../services/utils/device-type.service'
 
 @Component({
   selector: 'artware-index',
-  templateUrl: './artware-index.component.html'
+  templateUrl: './artware-index.component.html',
+  host: { 'class': 'w-h-100' }
 })
 
 export class ArtwareIndexComponent implements OnInit, OnDestroy {

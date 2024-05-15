@@ -15,7 +15,8 @@ import { DeviceTypeService } from '../../../services/utils/device-type.service'
 
 @Component({
   selector: 'sculpture-index',
-  templateUrl: './sculpture-index.component.html'
+  templateUrl: './sculpture-index.component.html',
+  host: { 'class': 'w-h-100' }
 })
 
 export class SculptureIndexComponent implements OnInit, OnDestroy {

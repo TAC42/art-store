@@ -2,6 +2,7 @@
   class="mobile-view flex column">
   <section class="filter-area flex column">
     <h4 class="family-bold">Shop</h4>
+
     <div class="filter-shop flex row align-center w-100">
       <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" />
       <svg-render class="cart" (click)="onCartOpen($event)" svgName="shoppingCart" />
@@ -16,6 +17,7 @@
   class="desktop-view flex column">
   <section class="filter-area flex column">
     <h4 class="family-bold">Shop</h4>
+
     <div class="filter-shop flex row align-center w-100">
       <product-filter [filterBy]="filterBy" (onSetFilter)="onSetFilter($event)" />
       <svg-render class="cart" (click)="onCartOpen($event)" svgName="shoppingCart" />

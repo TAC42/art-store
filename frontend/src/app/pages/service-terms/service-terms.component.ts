@@ -1,11 +1,10 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'service-terms',
-  templateUrl: './service-terms.component.html'
+  templateUrl: './service-terms.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class ServiceTermsComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
 }

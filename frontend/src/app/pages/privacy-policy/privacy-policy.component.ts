@@ -1,11 +1,10 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'privacy-policy',
-  templateUrl: './privacy-policy.component.html'
+  templateUrl: './privacy-policy.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class PrivacyPolicyComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
 }

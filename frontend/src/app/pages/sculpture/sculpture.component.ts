@@ -1,11 +1,10 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'sculpture-wrapper',
-  templateUrl: './sculpture.component.html'
+  templateUrl: './sculpture.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class SculptureComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
 }

@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../models/utility'
@@ -6,13 +6,11 @@ import { DeviceTypeService } from '../../services/utils/device-type.service'
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class HomeComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private router = inject(Router)
   private dTypeService = inject(DeviceTypeService)
 
