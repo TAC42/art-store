@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { Observable, Subscription, take } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
@@ -7,9 +7,9 @@ import { Cart, Product } from '../../../models/product'
 import { ProductFilter } from '../../../models/product'
 import { User } from '../../../models/user'
 import { selectProducts, selectIsLoading } from '../../../store/product/product.selectors'
+import { selectUser } from '../../../store/user/user.selectors'
 import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/product/product.actions'
 import { UPDATE_USER } from '../../../store/user/user.actions'
-import { selectUser } from '../../../store/user/user.selectors'
 import { ModalService } from '../../../services/utils/modal.service'
 import { CommunicationService } from '../../../services/utils/communication.service'
 import { EventBusService, showErrorMsg, showSuccessMsg } from '../../../services/utils/event-bus.service'
@@ -24,7 +24,6 @@ import { DeviceTypeService } from '../../../services/utils/device-type.service'
 export class ShopIndexComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   private router = inject(Router)
-  private activatedRoute = inject(ActivatedRoute)
   private modService = inject(ModalService)
   private comService = inject(CommunicationService)
   private eBusService = inject(EventBusService)
@@ -97,16 +96,8 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   private updateFilter(newFilter: ProductFilter): void {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: newFilter }))
-
-    this.activatedRoute.queryParams.subscribe(params => {
-      const updatedParams = { ...params, search: newFilter.search }
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: updatedParams,
-        queryParamsHandling: 'merge',
-      })
-    })
   }
+
   ngOnDestroy(): void {
     if (this.removeProductSubscription) this.removeProductSubscription.unsubscribe()
     if (this.isLoadingSubscription) this.isLoadingSubscription.unsubscribe()

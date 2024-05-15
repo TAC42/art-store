@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
 import { ProductFilter } from '../../models/product'
 
@@ -13,15 +14,15 @@ export class ProductFilterComponent {
   }
   @Output() onSetFilter = new EventEmitter<ProductFilter>()
 
+  private router = inject(Router)
+  private activatedRoute = inject(ActivatedRoute)
+
   public hasValue = false
 
   private _filterBy!: ProductFilter
+  get filterBy(): ProductFilter { return this._filterBy }
 
   private filterSubject: Subject<string> = new Subject<string>()
-
-  get filterBy(): ProductFilter {
-    return this._filterBy
-  }
 
   constructor() {
     this.filterSubject
@@ -32,6 +33,7 @@ export class ProductFilterComponent {
       .subscribe((value: string) => {
         const updatedFilter = { ...this._filterBy, search: value }
         this.onSetFilter.emit(updatedFilter)
+        this.updateQueryParams(updatedFilter)
         this.hasValue = true
       })
   }
@@ -45,6 +47,18 @@ export class ProductFilterComponent {
     const updatedFilter = { ...this._filterBy, search: '' }
     this._filterBy = updatedFilter
     this.onSetFilter.emit(updatedFilter)
+    this.updateQueryParams(updatedFilter)
     this.hasValue = false
+  }
+
+  updateQueryParams(newFilter: ProductFilter): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const updatedParams = { ...params, search: newFilter.search }
+      this.router.navigate([], {
+        relativeTo: this.activatedRoute,
+        queryParams: updatedParams,
+        queryParamsHandling: 'merge',
+      })
+    })
   }
 }

@@ -93,21 +93,6 @@ export class ProductService {
     }
   }
 
-  getFilterFromParams(searchParams: URLSearchParams): ProductFilter {
-    const newFilterBy: ProductFilter = { search: '' }
-    let isNewRefresh = false
-
-    searchParams.forEach((value, key) => {
-      if (key in newFilterBy) {
-        newFilterBy[key as keyof ProductFilter] = value
-        isNewRefresh = true
-      }
-    })
-    if (isNewRefresh) this.setFilter({ ...newFilterBy })
-
-    return newFilterBy
-  }
-
   setFilter(filter: ProductFilter): void {
     this.currentFilter = filter
   }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { Observable, Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
@@ -22,7 +22,6 @@ import { DeviceTypeService } from '../../../services/utils/device-type.service'
 export class SculptureIndexComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   private router = inject(Router)
-  private activatedRoute = inject(ActivatedRoute)
   private modService = inject(ModalService)
   private comService = inject(CommunicationService)
   private dTypeService = inject(DeviceTypeService)
@@ -65,15 +64,6 @@ export class SculptureIndexComponent implements OnInit, OnDestroy {
   private updateFilter(newFilter: ProductFilter): void {
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: newFilter }))
-
-    this.activatedRoute.queryParams.subscribe(params => {
-      const updatedParams = { ...params, search: newFilter.search }
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: updatedParams,
-        queryParamsHandling: 'merge',
-      })
-    })
   }
 
   ngOnDestroy(): void {

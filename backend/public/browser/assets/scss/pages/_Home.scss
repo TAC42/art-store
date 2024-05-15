@@ -8,7 +8,7 @@ app-home {
             .teaser-area {
                 cursor: pointer;
 
-                img {
+                image-container img {
                     transition: all 0.5s ease-in-out;
                 }
 
@@ -29,7 +29,7 @@ app-home {
                 &:hover {
                     background: $prmclr1;
 
-                    img {
+                    image-container img {
                         filter: brightness(.75);
                     }
 
