@@ -50,11 +50,11 @@ export const RANDOM_PRODUCTS_LOADED = createAction(
 // handling of product filtering
 export const LOAD_FILTER = createAction(
   '[Product] Load Filter',
-  props<{ filterBy: Partial<ProductFilter> }>()
+  props<{ filterBy: ProductFilter }>()
 )
 export const FILTER_UPDATED = createAction(
   '[Product] Filter Updated',
-  props<{ updatedFilter: Partial<ProductFilter> }>()
+  props<{ updatedFilter: ProductFilter }>()
 )
 
 // handling of product saving

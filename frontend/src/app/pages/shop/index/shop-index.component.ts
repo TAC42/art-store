@@ -94,6 +94,7 @@ export class ShopIndexComponent implements OnInit, OnDestroy {
   }
 
   private updateFilter(newFilter: ProductFilter): void {
+    this.filterBy = { ...newFilter }
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
     this.store.dispatch(LOAD_PRODUCTS({ filterBy: newFilter }))
   }
