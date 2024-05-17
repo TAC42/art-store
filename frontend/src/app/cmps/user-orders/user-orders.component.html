@@ -1,16 +1,20 @@
-<main class="orders grid w-100 layout-row" *ngIf="orders$ | async as orders">
+<main class="orders grid w-100 layout-row" *ngIf="orders$ | async as orders" role="region"
+    aria-labelledby="orders-title">
     <ng-container *ngIf="orders.length; else orderless">
-        <h3 class="family-bold">Your orders</h3>
-        <mat-expansion-panel class="order glass" [expanded]="optionState === 'order num'"
-            (click)="setSelection('order num')" *ngFor="let order of orders; let i = index">
-            <mat-expansion-panel-header>
+        <h3 id="orders-title" class="family-bold">Your orders</h3>
+
+        <mat-expansion-panel class="order glass" *ngFor="let order of orders; let i = index"
+            [expanded]="optionState === 'order num ' + order.createdAt"
+            (click)="setSelection('order num ' + order.createdAt)">
+            <mat-expansion-panel-header [attr.aria-expanded]="optionState === 'order num ' + order.createdAt"
+                [attr.aria-controls]="'order-content-' + i">
                 <mat-panel-title class="heading flex family-bold">
                     <span class="count"> {{ i + 1 }} </span>
                     <span class="title"> Order #{{ order.createdAt }} </span>
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <section class="order-info grid">
+            <section id="order-content-{{i}}" class="order-info grid">
                 <article class="purchased flex row align-center">
                     <span>Purchased:</span>
                     <span> {{ order.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }} </span>
@@ -63,7 +67,8 @@
 
                 <article class="status flex row align-center">
                     <span>Status:</span>
-                    <button class="text-capitalize fast-trans" [ngClass]="getStatusClass(order.status)">
+                    <button class="text-capitalize fast-trans" [ngClass]="getStatusClass(order.status)"
+                        [attr.aria-label]="'Order Status: ' + order.status">
                         {{ order.status }}
                     </button>
                 </article>
@@ -72,7 +77,7 @@
     </ng-container>
 
     <ng-template #orderless>
-        <section class="no-orders flex column justify-center text-center">
+        <section class="no-orders flex column justify-center text-center" aria-live="polite">
             <svg-render svgName="sorryRobot" />
             <h3>You have no orders!</h3>
         </section>

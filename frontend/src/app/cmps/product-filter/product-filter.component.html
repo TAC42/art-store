@@ -1,6 +1,8 @@
 <div class="input-container">
-    <input [(ngModel)]="filterBy.search" (ngModelChange)="onFilterChange($event)" type="text" placeholder="Search...">
-    <button *ngIf="filterBy.search" class="flex fast-trans" (click)="onClearFilter($event)">
+    <input [(ngModel)]="filterBy.search" (ngModelChange)="onFilterChange($event)" type="text" placeholder="Search..."
+        aria-label="Search for products by name" title="Search for products by name">
+    <button *ngIf="filterBy.search" class="flex fast-trans" (click)="onClearFilter($event)"
+        aria-label="Clear search results">
         <svg-render svgName="removeIcon" />
     </button>
 </div>

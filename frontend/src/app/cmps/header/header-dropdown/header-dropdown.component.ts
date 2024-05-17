@@ -1,11 +1,11 @@
 import { Component, Input, inject } from '@angular/core'
-import { Observable } from 'rxjs'
-import { ModalService } from '../../../services/utils/modal.service'
-import { AppState } from '../../../store/app.state'
-import { Store } from '@ngrx/store'
-import { User } from '../../../models/user'
 import { Router } from '@angular/router'
+import { Observable } from 'rxjs'
+import { Store } from '@ngrx/store'
+import { AppState } from '../../../store/app.state'
+import { User } from '../../../models/user'
 import { LOGOUT } from '../../../store/user/user.actions'
+import { ModalService } from '../../../services/utils/modal.service'
 
 @Component({
   selector: 'header-dropdown',
@@ -29,12 +29,7 @@ export class HeaderDropdownComponent {
     event.stopPropagation()
     this.store.dispatch(LOGOUT())
     this.closeDropdown()
-    this.navigateTo('/')
-  }
-
-  navigateTo(url: string) {
-    this.router.navigate([url])
-    this.closeDropdown()
+    this.router.navigate(['/'])
   }
 
   closeDropdown(): void {

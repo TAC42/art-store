@@ -1,13 +1,14 @@
-<div class="list-contents w-h-100" [ngClass]="{'masonry-layout': !isShopPage, 'grid-layout': isShopPage}">
+<div class="list-contents w-h-100" [ngClass]="{'masonry-layout': !isShopPage, 'grid-layout': isShopPage}" role="region"
+  aria-live="polite" aria-label="Product List">
   <ng-container *ngIf="(!isLoading && (products && products.length === 0)); else productList">
-    <div class="no-results flex column align-center text-center">
-      <h1>Oops, looks like you have no art available!</h1>
+    <div class="no-results flex column align-center text-center" role="alert" aria-live="assertive">
+      <h1>Oops, looks like there are no products matching your search!</h1>
       <svg-render svgName="sorryRobot" />
     </div>
   </ng-container>
 
   <ng-template #productList>
-    <div *ngFor="let product of products">
+    <div *ngFor="let product of products" role="listitem">
       <product-preview [isShopPage]="isShopPage" (remove)="remove.emit($event)" (add)="add.emit($event)"
         [product]="product" [user$]="user$" />
     </div>

@@ -9,8 +9,6 @@ import { ModalService } from '../../../services/utils/modal.service'
 export class ImageDisplayComponent {
   public modService = inject(ModalService)
 
-  public imageUrl: string = ''
-
   getImageUrl(): string {
     return this.modService.getModalParam('image-display') || ''
   }

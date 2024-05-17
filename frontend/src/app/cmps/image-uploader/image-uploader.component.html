@@ -1,9 +1,10 @@
-<main class="upload-preview">
+<main class="upload-preview" role="region" aria-labelledby="upload-label" aria-describedby="upload-description">
     <div class="file-upload-container flex column">
-        <label for="{{inputId}}" class="flex column">
-            <span> {{ getUploadLabel() }} </span>
+        <label for="{{inputId}}" class="flex column" id="upload-label">
+            <span id="upload-description"> {{ getUploadLabel() }} </span>
             <image-container class="w-h-100" [imageUrl]="imgUrl" />
         </label>
-        <input type="file" (change)="uploadImg($event)" accept="image/*" [id]="inputId" style="display: none" />
+        <input type="file" (change)="uploadImg($event)" accept="image/*" [id]="inputId" style="display: none"
+            aria-labelledby="upload-label" aria-describedby="upload-description" />
     </div>
 </main>

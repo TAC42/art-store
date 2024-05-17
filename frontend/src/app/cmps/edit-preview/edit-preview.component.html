@@ -1,7 +1,8 @@
-<main class="preview-contents flex column">
-    <span class="title family-bold text-center text-capitalize">your results</span>
+<main class="preview-contents flex column" role="region" aria-labelledby="preview-title">
+    <span id="preview-title" class="title family-bold text-center">Your Results</span>
+
     <div *ngIf="type === 'shop'" class="shop-type flex column">
-        <section class="product-area flex column text-center">
+        <section class="product-area flex column text-center" role="region" aria-labelledby="product-title">
             <div class="media-container flex column">
                 <ng-container *ngIf="imgUrls.length > 1; else singleImage">
                     <product-carousel [carouselItems]="carouselItems"
@@ -17,7 +18,7 @@
             </div>
 
             <div class="details-area family-sabon">
-                <h2 class="family-bold text-capitalize">{{ name }}</h2>
+                <h2 id="product-title" class="family-bold text-capitalize">{{ name }}</h2>
 
                 <p class="description">{{ description }}</p>
                 <h4 class="text-bold">Dimensions</h4>
@@ -31,13 +32,14 @@
                     3 to 7 business days ground shipping delivery to your home. Currently delivery is limited to US
                     soil, for outside shipping requests, please <a href="/about/contact">contact us here</a>.
                 </p>
-                <p *ngIf="stock <= 0" class="unavailable text-bold">
+                <p *ngIf="stock <= 0" class="unavailable text-bold" aria-live="polite">
                     This product is currently out of stock, for further information and the
                     option to order it in the near future, please press inquire.
                 </p>
 
                 <button class="flex row align-center family-bold fast-trans"
-                    [title]="stock > 0 ? 'Buy product?' : 'Contact us!'">
+                    [title]="stock > 0 ? 'Add product to your cart' : 'You will be taken to our contact page'"
+                    [attr.aria-label]="stock > 0 ? 'Add to Cart' : 'Inquire'">
                     <span>{{ stock > 0 ? 'Add to Cart' : 'Inquire' }}</span>
                     <svg-render *ngIf="stock > 0" class="fast-trans" svgName="shoppingCart" />
                 </button>
@@ -46,7 +48,7 @@
     </div>
 
     <div *ngIf="type !== 'shop'" class="showcase-type flex column">
-        <section class="product-area flex column text-left">
+        <section class="product-area flex column text-left" role="region" aria-labelledby="showcase-title">
             <div class="media-container flex column">
                 <ng-container *ngIf="imgUrls.length > 1; else singleImage">
                     <product-carousel [carouselItems]="carouselItems"
@@ -60,7 +62,7 @@
             </div>
 
             <div class="details-area family-sabon">
-                <h4 class="family-bold text-capitalize">{{ name }}</h4>
+                <h4 id="showcase-title" class="family-bold text-capitalize">{{ name }}</h4>
 
                 <p class="text-capitalize">{{dateMade}}</p>
                 <p class="text-capitalize">{{materials}}</p>
@@ -69,7 +71,8 @@
                 <p class="notice text-bold">
                     Dear user, for special requests regarding this item, please press inquire.
                 </p>
-                <button class="flex family-bold fast-trans" title="Contact us!">
+                <button class="flex family-bold fast-trans" title="You will be taken to our contact page"
+                    aria-label="Inquire">
                     <span>Inquire</span>
                 </button>
             </div>

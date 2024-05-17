@@ -213,14 +213,14 @@ product-details {
                 .other-product-area {
                     gap: 0.25em;
 
-                    img {
+                    image-container img {
                         object-fit: cover;
                         max-height: 300px;
                         aspect-ratio: 1 / 1;
                         transition: all 0.5s ease-in-out;
                     }
 
-                    &:hover img {
+                    &:hover image-container img {
                         filter: brightness(.75);
                     }
                 }

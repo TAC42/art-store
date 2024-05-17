@@ -1,7 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core'
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import { Observable, map } from 'rxjs'
 import { MiniProduct, Product } from '../../../models/product'
-import { ImageLoadService } from '../../../services/media/image-load.service'
 
 @Component({
   selector: 'random-product-carousel',
@@ -14,31 +13,14 @@ export class RandomProductCarouselComponent implements OnInit {
 
   CarouselItems$!: Observable<MiniProduct[]>
 
-  private imgLoadService = inject(ImageLoadService)
-
   ngOnInit(): void {
     this.CarouselItems$ = this.randomProducts$.pipe(
       map(products => products.map(product => ({
-        lowResImgUrl: this.imgLoadService.getLowResImageUrl(product.imgUrls[0]),
         imgUrl: product.imgUrls[0],
         name: product.name,
         url: `/shop/details/${product.name}`
       }))),
     )
-    this.preloadCarouselItems()
-  }
-
-  preloadCarouselItems(): void {
-    this.CarouselItems$.subscribe(carouselItems => {
-      const imgUrls = carouselItems.map(item => item.imgUrl)
-      this.imgLoadService.preloadImagesArray(imgUrls)
-    })
-  }
-
-  onImageLoad(event: Event, lowResImageElement: HTMLElement): void {
-    const highResImgElement = event.target as HTMLImageElement
-    lowResImageElement.style.display = 'none'
-    highResImgElement.style.display = 'block'
   }
 
   scrollLeft(event: Event): void {

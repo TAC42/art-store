@@ -1,7 +1,8 @@
-<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('aside-menu')">
-    <section class="aside-menu w-h-100 flex column" [@slideInOut]="menuState" (clickOutside)="closeMenu()">
+<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('aside-menu')" role="dialog" aria-modal="true"
+    aria-labelledby="aside-menu-label">
+    <nav class="aside-menu w-h-100 flex column" [@slideInOut]="menuState" (clickOutside)="closeMenu()">
         <div class="logo-container flex row align-center">
-            <h1 class="family-nunito">oricarlin</h1>
+            <h1 id="aside-menu-label" class="family-nunito">oricarlin</h1>
             <ng-container *ngIf="user$ | async as loggedinUser">
                 <image-container [imageUrl]="loggedinUser.imgUrls[0]" alt="User Image" />
             </ng-container>
@@ -9,47 +10,49 @@
 
         <div class="link-area">
             <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/" routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }">Home
-            </a>
+                [routerLinkActiveOptions]="{ exact: true }" aria-label="Navigate to home">Home</a>
         </div>
 
         <div class="link-area" *ngIf="(user$ | async)?.isAdmin">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/edit" routerLinkActive="active">Add
-                Product</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/edit" routerLinkActive="active"
+                aria-label="Navigate to product editing">Add Product</a>
         </div>
 
         <div class="link-area">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/shop" routerLinkActive="active">Shop</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/shop" routerLinkActive="active"
+                aria-label="Navigate to shop items">Shop</a>
         </div>
 
         <div class="link-area">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/artware" routerLinkActive="active">Ware</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/artware" routerLinkActive="active"
+                aria-label="Navigate to ware items">Ware</a>
         </div>
 
         <div class="link-area">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/sculpture"
-                routerLinkActive="active">Sculpture</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/sculpture" routerLinkActive="active"
+                aria-label="Navigate to sculpture items">Sculpture</a>
         </div>
 
         <div class="link-area" *ngIf="(user$ | async)?._id">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/profile"
-                routerLinkActive="active">Profile</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/profile" routerLinkActive="active"
+                aria-label="Navigate to profile">Profile</a>
         </div>
 
         <div class="link-area" *ngIf="(user$ | async)?.isAdmin">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/dashboard"
-                routerLinkActive="active">Dashboard</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/dashboard" routerLinkActive="active"
+                aria-label="Navigate to dashboard">Dashboard</a>
         </div>
 
         <div class="link-area">
-            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/about" routerLinkActive="active">About &
-                Contact</a>
+            <a class="w-100 fast-trans" (click)="closeMenu()" routerLink="/about" routerLinkActive="active"
+                aria-label="Navigate to about and contact">About & Contact</a>
         </div>
 
         <div class="link-area" *ngIf="user$ | async as loggedinUser">
-            <span class="w-100 fast-trans" (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
+            <span class="w-100 fast-trans" (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)"
+                [attr.aria-label]="loggedinUser._id ? 'Logout' : 'Login'">
                 {{ loggedinUser._id ? 'Logout' : 'Login' }}
             </span>
         </div>
-    </section>
+    </nav>
 </main>

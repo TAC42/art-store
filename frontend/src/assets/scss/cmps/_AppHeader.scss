@@ -141,10 +141,12 @@ app-header {
             border-radius: 0.25em;
           }
 
-          span {
+          span,
+          a {
             display: block;
             padding: 0.5em 0.75em;
             cursor: pointer;
+            line-height: 1.6;
             font-size: 18px;
             color: $prmclr1;
           }

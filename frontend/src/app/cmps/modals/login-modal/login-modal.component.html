@@ -1,4 +1,5 @@
-<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('login')">
+<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('login')" role="dialog" aria-modal="true"
+    aria-label="Login" aria-describedby="login-modal-description">
     <section class="login-modal flex column" (clickOutside)="closeLoginModal()">
         <form class="flex column align-center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(loginForm, 'loginId')">
@@ -7,7 +8,7 @@
                         <svg-render svgName="personIcon" />
                         <span>Username / Email</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(loginForm, 'loginId')">
+                    <span *ngIf="formUtils.isFieldInvalid(loginForm, 'loginId')" aria-live="polite">
                         {{ formUtils.getErrorMessage(loginForm, 'loginId') }}
                     </span>
                 </label>
@@ -22,7 +23,7 @@
                         <svg-render svgName="lockIcon" />
                         <span>Password</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(loginForm, 'password')">
+                    <span *ngIf="formUtils.isFieldInvalid(loginForm, 'password')" aria-live="polite">
                         {{ formUtils.getErrorMessage(loginForm, 'password') }}
                     </span>
                 </label>
@@ -31,26 +32,30 @@
                     placeholder="Your password..." maxlength="32" customValidator [minLength]=8 [maxLength]=32
                     [allowedSpecialChars]="allowedSpecialChars" [passwordValidation]="true">
 
-                <button type="button" (click)="togglePasswordShowing($event)" class="password-toggle">
+                <button type="button" (click)="togglePasswordShowing($event)" class="password-toggle"
+                    aria-label="Toggle Password Visibility">
                     <svg-render *ngIf="showPassword" svgName="showIcon" />
                     <svg-render *ngIf="!showPassword" svgName="hideIcon" />
                 </button>
             </div>
 
-            <button class="reset-pass family-bold" (click)="openResetPassword($event)" title="Reset password?">
+            <button class="reset-pass family-bold" (click)="openResetPassword($event)" title="Reset password?"
+                aria-label="Reset Password">
                 Forgot password?
             </button>
 
-            <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
+            <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize"
+                aria-label="Captcha Verification" />
 
             <button class="submit flex normal-trans" type="submit"
                 [disabled]="(loginForm.invalid || !isCaptchaResolved)"
-                [class.disabled]="(loginForm.invalid || !isCaptchaResolved)">
+                [class.disabled]="(loginForm.invalid || !isCaptchaResolved)" aria-label="Submit Login">
                 <span>Login</span>
             </button>
         </form>
 
-        <a class="switch family-bold text-center fast-trans" (click)="closeLoginModal()" [routerLink]="['/signup']">
+        <a class="switch family-bold text-center fast-trans" (click)="closeLoginModal()" [routerLink]="['/signup']"
+            aria-label="Switch to Signup">
             <span>Don't have an account yet? Signup!</span>
         </a>
     </section>

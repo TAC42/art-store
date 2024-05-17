@@ -1,68 +1,76 @@
-<header class="header-contents w-h-100 layout-row" [ngClass]="{ 'z-50': searchState }" (clickOutside)="onCloseSearch()">
+<header class="header-contents w-h-100 layout-row" [ngClass]="{ 'z-50': searchState }" (clickOutside)="onCloseSearch()"
+  role="banner">
   <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view flex row align-center w-100">
-    <section class="links flex row align-center w-100" [ngClass]="{ 'search-on': searchState }">
+    <nav class="links flex row align-center w-100" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else searchOff">
-        <span class="flex full-center" (click)="openAsideMenu($event)">
+        <span class="flex full-center" (click)="openAsideMenu($event)" aria-label="Open Menu">
           <svg-render svgName="burgerMenuIcon" />
         </span>
 
         <div>
-          <a class="fast-trans" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="fast-trans" routerLink="/" routerLinkActive="active" aria-label="Navigate to home">
             <h1 class="family-nunito">oricarlin</h1>
           </a>
         </div>
       </ng-container>
 
-      <span class="search flex" (click)="onOpenSearch($event)">
+      <span class="search flex" (click)="onOpenSearch($event)" aria-label="Open Search">
         <svg-render svgName="searchIcon" />
       </span>
 
       <ng-template #searchOff>
-        <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
-        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
+        <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search..."
+          aria-label="Search">
+        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon"
+          aria-label="Clear Search" />
       </ng-template>
-    </section>
+    </nav>
   </section>
 
   <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view flex row align-center w-100">
-    <section class="links flex row align-center w-100" [ngClass]="{ 'search-on': searchState }">
+    <nav class="links flex row align-center w-100" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else searchOff">
         <ng-container *ngIf="user$ | async as loggedinUser">
           <image-container [imageUrl]="loggedinUser.imgUrls[0]" alt="User Image" (click)="openDropdown($event)" />
         </ng-container>
 
         <div>
-          <a class="fast-trans" routerLink="/about" routerLinkActive="active">About</a>
+          <a class="fast-trans" routerLink="/about" routerLinkActive="active" aria-label="Navigate to about">About</a>
         </div>
 
         <div>
-          <a class="fast-trans" routerLink="/sculpture" routerLinkActive="active">Sculpture</a>
+          <a class="fast-trans" routerLink="/sculpture" routerLinkActive="active"
+            aria-label="Navigate to sculpture items">Sculpture</a>
         </div>
 
         <div>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/" routerLinkActive="active" aria-label="Navigate to home">
             <h1 class="family-nunito">oricarlin</h1>
           </a>
         </div>
 
         <div>
-          <a class="fast-trans" routerLink="/artware" routerLinkActive="active">Ware</a>
+          <a class="fast-trans" routerLink="/artware" routerLinkActive="active"
+            aria-label="Navigate to ware items">Ware</a>
         </div>
 
         <div>
-          <a class="fast-trans" routerLink="/shop" routerLinkActive="active">Shop</a>
+          <a class="fast-trans" routerLink="/shop" routerLinkActive="active"
+            aria-label="Navigate to shop items">Shop</a>
         </div>
       </ng-container>
 
-      <span class="search flex align-center normal-trans" (click)="onOpenSearch($event)">
+      <span class="search flex align-center normal-trans" (click)="onOpenSearch($event)" aria-label="Open Search">
         <svg-render class="normal-trans" svgName="searchIcon" />
       </span>
 
       <ng-template #searchOff>
-        <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search...">
-        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon" />
+        <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search..."
+          aria-label="Search">
+        <svg-render *ngIf="searchValue" class="clear" (click)="onClearFilter($event)" svgName="removeIcon"
+          aria-label="Clear Search" />
       </ng-template>
-    </section>
+    </nav>
     <header-dropdown [user$]="user$" />
   </section>
 </header>

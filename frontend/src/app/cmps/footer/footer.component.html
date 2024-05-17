@@ -1,56 +1,62 @@
-<footer class="footer-contents layout-row">
+<footer class="footer-contents layout-row" role="contentinfo" aria-label="Website Footer">
   <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view flex column align-center w-100">
-    <div class="links flex row align-center w-100">
-      <a class="flex fast-trans" routerLink="/about/contact">
+    <nav class="links flex row align-center w-100">
+      <a class="flex fast-trans" routerLink="/about/contact" aria-label="Navigate to contact">
         <svg-render class="flex" svgName="envelopeIcon" />
       </a>
-      <a class="flex fast-trans" href="https://www.instagram.com/oricarlin/" target="_blank">
+      <a class="flex fast-trans" href="https://www.instagram.com/oricarlin/" target="_blank"
+        aria-label="Navigate to Ori Carlin Instagram">
         <svg-render class="flex" svgName="instagramIcon" />
       </a>
-      <a class="flex fast-trans" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
+      <a class="flex fast-trans" href="https://account.venmo.com/u/ori-carlin/" target="_blank"
+        aria-label="Navigate to Ori Carlin Venmo">
         <svg-render class="flex" svgName="venmoIcon" />
       </a>
-    </div>
+    </nav>
 
     <span>All Rights Reserved - © ORICARLIN 2024</span>
-    <span class="terms-privacy flex row">
-      <a [routerLink]="['/privacy']" routerLinkActive="active">Privacy Policy</a>
-      <a [routerLink]="['/terms']" routerLinkActive="active">Terms of Service</a>
-    </span>
+    <nav class="terms-privacy flex row">
+      <a routerLink="/privacy" routerLinkActive="active" aria-label="Navigate to privacy policy">Privacy Policy</a>
+      <a routerLink="/terms" routerLinkActive="active" aria-label="Navigate to terms of service">Terms of Service</a>
+    </nav>
 
-    <span>Made by <a href="https://github.com/TAC42">TAC</a> & <a
-        href="https://github.com/Valeriy-Kuvshinov">VK</a></span>
+    <span>Made by <a href="https://github.com/TAC42" aria-label="Navigate to Tomi Carlin on GitHub">TAC</a> & <a
+        href="https://github.com/Valeriy-Kuvshinov" aria-label="Navigate to Valeriy Kuvshinov on GitHub">VK</a></span>
   </section>
 
   <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view flex row align-center w-100">
-    <div class="footer-part flex column">
-      <a class="fast-trans" routerLink="/about/introduction" routerLinkActive="active">About</a>
-      <a class="fast-trans" routerLink="/shop" routerLinkActive="active">Shop</a>
-      <a class="fast-trans" routerLink="/sculpture" routerLinkActive="active">Sculpture</a>
-      <a class="fast-trans" routerLink="/artware" routerLinkActive="active">Ware</a>
-    </div>
+    <nav class="footer-part flex column">
+      <a class="fast-trans" routerLink="/about/introduction" routerLinkActive="active"
+        aria-label="Navigate to about">About</a>
+      <a class="fast-trans" routerLink="/shop" routerLinkActive="active" aria-label="Navigate to shop items">Shop</a>
+      <a class="fast-trans" routerLink="/sculpture" routerLinkActive="active"
+        aria-label="Navigate to sculpture items">Sculpture</a>
+      <a class="fast-trans" routerLink="/artware" routerLinkActive="active" aria-label="Navigate to ware items">Ware</a>
+    </nav>
 
-    <div class="footer-part flex column">
+    <nav class="footer-part flex column">
       <div class="social-media flex row">
-        <a class="flex full-center fast-trans" routerLink="/about/contact">
+        <a class="flex full-center fast-trans" routerLink="/about/contact" aria-label="Navigate to contact">
           <svg-render class="flex" svgName="envelopeIcon" />
         </a>
-        <a class="flex full-center fast-trans" href="https://www.instagram.com/oricarlin/" target="_blank">
+        <a class="flex full-center fast-trans" href="https://www.instagram.com/oricarlin/" target="_blank"
+          aria-label="Navigate to Ori Carlin Instagram">
           <svg-render class="flex" svgName="instagramIcon" />
         </a>
-        <a class="flex full-center fast-trans" href="https://account.venmo.com/u/ori-carlin/" target="_blank">
+        <a class="flex full-center fast-trans" href="https://account.venmo.com/u/ori-carlin/" target="_blank"
+          aria-label="Navigate to Ori Carlin Venmo">
           <svg-render class="flex" svgName="venmoIcon" />
         </a>
       </div>
 
       <span>All Rights Reserved - © ORICARLIN 2024</span>
-      <span class="terms-privacy flex row">
-        <a [routerLink]="['/privacy']" routerLinkActive="active">Privacy Policy</a>
-        <a [routerLink]="['/terms']" routerLinkActive="active">Terms of Service</a>
-      </span>
+      <nav class="terms-privacy flex row">
+        <a routerLink="/privacy" routerLinkActive="active" aria-label="Navigate to privacy policy">Privacy Policy</a>
+        <a routerLink="/terms" routerLinkActive="active" aria-label="Navigate to terms of service">Terms of Service</a>
+      </nav>
 
-      <span>Made by <a href="https://github.com/TAC42">TAC</a> & <a
-          href="https://github.com/Valeriy-Kuvshinov">VK</a></span>
-    </div>
+      <span>Made by <a href="https://github.com/TAC42" aria-label="Navigate to Tomi Carlin on GitHub">TAC</a> & <a
+          href="https://github.com/Valeriy-Kuvshinov" aria-label="Navigate to Valeriy Kuvshinov on GitHub">VK</a></span>
+    </nav>
   </section>
 </footer>
