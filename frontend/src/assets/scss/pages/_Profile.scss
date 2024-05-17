@@ -36,24 +36,22 @@ profile {
           border-radius: 50%;
           background-color: $prmclr2;
 
-          image-container {
-            img {
-              object-fit: cover;
-              width: 125px;
-              height: 125px;
-              border-radius: 50%;
-              border: 2px $scdclr6 solid;
+          image-container img {
+            object-fit: cover;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            border: 2px $scdclr6 solid;
 
-              &::before {
-                content: "";
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                right: -2px;
-                bottom: -2px;
-                border: 2px solid $prmclr2;
-                border-radius: 50%;
-              }
+            &::before {
+              content: "";
+              position: absolute;
+              top: -2px;
+              left: -2px;
+              right: -2px;
+              bottom: -2px;
+              border: 2px solid $prmclr2;
+              border-radius: 50%;
             }
           }
         }
@@ -100,16 +98,14 @@ profile {
       position: relative;
       min-height: 900px;
 
-      .background {
-        image-container {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: -1;
-          filter: brightness(25%);
-        }
+      .background image-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        filter: brightness(25%);
       }
 
       .personal-info {
@@ -117,17 +113,15 @@ profile {
         color: $scdclr2;
         margin: 5em auto 0 auto;
         background: #ffffffc4;
-        padding: 1em;
+        padding: 1em 2em;
         border-radius: 4em;
 
-        image-container {
-          img {
-            object-fit: cover;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 2px $scdclr6 solid;
-          }
+        image-container img {
+          object-fit: cover;
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          border: 2px $scdclr6 solid;
         }
 
         .full-name {

@@ -16,7 +16,7 @@ export class HomeComponent {
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
-  public loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
+  public loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1715962904/ContactandAbout/bboc85okcqi39lx9yhod.avif'
   public loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
   public loneImg1LowRes: string = ''
   public loneImg2LowRes: string = ''

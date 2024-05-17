@@ -22,7 +22,7 @@ edit-preview {
                 .media-container {
                     position: relative;
 
-                    img {
+                    image-container img {
                         object-fit: cover;
                         cursor: pointer;
                         transition: all 0.5s ease-in-out;
@@ -39,10 +39,8 @@ edit-preview {
                         border-radius: 0.5em;
                     }
 
-                    &:hover {
-                        img {
-                            filter: brightness(0.75);
-                        }
+                    &:hover image-container img {
+                        filter: brightness(0.75);
                     }
                 }
 
@@ -99,10 +97,8 @@ edit-preview {
                             fill: $prmclr1;
                         }
 
-                        &:not(:has(svg-render)) {
-                            span {
-                                padding: 0.2em 0.75em;
-                            }
+                        &:not(:has(svg-render)) span {
+                            padding: 0.2em 0.75em;
                         }
 
                         &:hover {
@@ -119,31 +115,27 @@ edit-preview {
             }
         }
 
-        .showcase-type {
-            .product-area {
-                .details-area {
-                    margin-block-start: 1em;
-                    padding: 0 1em;
+        .showcase-type .product-area .details-area {
+            margin-block-start: 1em;
+            padding: 0 1em;
 
-                    h4 {
-                        color: $prmclr1;
-                        font-size: 26px;
-                        margin-block-end: 0.5em;
-                    }
+            h4 {
+                color: $prmclr1;
+                font-size: 26px;
+                margin-block-end: 0.5em;
+            }
 
-                    p {
-                        padding: 0;
-                        color: $scdclr2;
-                        letter-spacing: 0.15px;
-                        font-size: 18px;
-                        margin-block-end: 1em;
-                    }
+            p {
+                padding: 0;
+                color: $scdclr2;
+                letter-spacing: 0.15px;
+                font-size: 18px;
+                margin-block-end: 1em;
+            }
 
-                    .description {
-                        font-size: 20px;
-                        margin-block-end: 1.5em;
-                    }
-                }
+            .description {
+                font-size: 20px;
+                margin-block-end: 1.5em;
             }
         }
     }

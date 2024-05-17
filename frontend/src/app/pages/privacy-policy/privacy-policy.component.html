@@ -1,5 +1,5 @@
-<main class="page-contents layout-row w-h-100 flex column">
-    <section class="intro-part">
+<main class="page-contents layout-row w-h-100 flex column" aria-label="Privacy policy page">
+    <section class="intro-part" role="region" aria-label="Intro part">
         <h2 class="flex row full-center family-bold text-center">
             <svg-render svgName="lockIcon" />
             <span> Privacy Policy </span>
@@ -13,8 +13,8 @@
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">1. Information We Collect</h3>
+    <section class="info-part" role="region" aria-labelledby="information-collect-title">
+        <h3 id="information-collect-title" class="w-fit family-bold">1. Information We Collect</h3>
         <p>
             We collect information directly from you through various interactions on our site, including when you create
             an account, make a purchase, or contact us. The types of information we collect include:
@@ -44,8 +44,8 @@
             and browsing behavior, through cookies and similar technologies.</p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">2. Utilization of Your Information</h3>
+    <section class="info-part" role="region" aria-labelledby="utilization-title">
+        <h3 id="utilization-title" class="w-fit family-bold">2. Utilization of Your Information</h3>
         <p>We use your information to:</p>
         <ul>
             <li>
@@ -81,8 +81,8 @@
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">3. Use of Cookies and Session Storage</h3>
+    <section class="info-part" role="region" aria-labelledby="cookies-title">
+        <h3 id="cookies-title" class="w-fit family-bold">3. Use of Cookies and Session Storage</h3>
         <p>
             To enhance your experience on our website and facilitate seamless navigation, Ori Carlin uses cookies and
             session storage technology. Here’s how and why we use these technologies:
@@ -114,33 +114,33 @@
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">4. Sharing Your Information</h3>
+    <section class="info-part" role="region" aria-labelledby="sharing-title">
+        <h3 id="sharing-title" class="w-fit family-bold">4. Sharing Your Information</h3>
         <p>
             We do not sell, trade, or rent your personal identification information to third parties. Anonymized,
             aggregated data may be shared with partners and advertisers to enhance and market our services.
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">5. Data Security</h3>
+    <section class="info-part" role="region" aria-labelledby="security-title">
+        <h3 id="security-title" class="w-fit family-bold">5. Data Security</h3>
         <p>
             We implement stringent data management and security protocols to protect your personal information from
             unauthorized access, alteration, and disclosure.
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">6. Your Rights</h3>
+    <section class="info-part" role="region" aria-labelledby="rights-title">
+        <h3 id="rights-title" class="w-fit family-bold">6. Your Rights</h3>
         <p>
             You have rights regarding your personal information, including the right to access, correct, or delete your
             data, as well as withdrawing consent for its use. For inquiries or requests concerning your rights, please
-            contact us <a class="family-bold" [routerLink]="['/about/contact']">here</a>.
+            contact us <a class="family-bold" routerLink="/about/contact">here</a>.
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">7. Children's Privacy</h3>
+    <section class="info-part" role="region" aria-labelledby="children-title">
+        <h3 id="children-title" class="w-fit family-bold">7. Children's Privacy</h3>
         <p>
             In alignment with the Children's Online Privacy Protection Act (COPPA), Ori Carlin respects the privacy of
             children. We do not knowingly collect or solicit personal information from anyone under the age of 13.
@@ -150,22 +150,22 @@
         <p>
             Additionally, our services are designed for a general audience and are not intended for users under the age
             of 18. We apologize to the younger crowd eager to engage with our content ("sorry, Billy, this means you’ll
-            need your parents to purchase that mug for you!").
+            need your parents to purchase that mug for you").
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">8. Updates to This Policy</h3>
+    <section class="info-part" role="region" aria-labelledby="updates-title">
+        <h3 id="updates-title" class="w-fit family-bold">8. Updates to This Policy</h3>
         <p>
             We may update this Privacy Policy periodically to reflect changes in our practices or relevant laws. We
             recommend reviewing it regularly. Updates will be effective upon posting.
         </p>
     </section>
 
-    <section class="info-part">
-        <h3 class="w-fit family-bold">9. How to Contact Us</h3>
+    <section class="info-part" role="region" aria-labelledby="contact-title">
+        <h3 id="contact-title" class="w-fit family-bold">9. How to Contact Us</h3>
         <p>If you have questions about this Privacy Policy, please reach out
-            <a class="family-bold" [routerLink]="['/about/contact']">here</a>.
+            <a class="family-bold" routerLink="/about/contact">here</a>.
         </p>
     </section>
 

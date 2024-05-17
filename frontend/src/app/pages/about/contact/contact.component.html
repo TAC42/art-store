@@ -1,16 +1,16 @@
-<main class="page-contents w-h-100 grid">
-    <section class="gallery-carousel flex column">
+<main class="page-contents w-h-100 grid" aria-label="Contact Ori Carlin">
+    <section class="gallery-carousel flex column" role="region" aria-label="Galeery carousel">
         <product-carousel [carouselItems]="carouselItems" [autoSwitch]="true"
             (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
     </section>
 
-    <section class="contact-text flex column family-sabon text-left">
+    <section class="contact-text flex column family-sabon text-left" role="region" aria-label="Contact text">
         <p>Got a request or a question, I'll be glad to answer them for you!</p>
         <p>If you're interested, please contact me using the form below:</p>
         <p>*Reply time can vary, between 1 to 3 business days*</p>
     </section>
 
-    <section class="form-area w-100">
+    <section class="form-area w-100" role="region" aria-label="Contact form">
         <form class="flex column align-center text-left" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'name')">
                 <label for="name" class="flex row align-center text-capitalize">
@@ -18,7 +18,7 @@
                         <svg-render svgName="personIcon" />
                         <span>Name*</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'name')">
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'name')" aria-live="polite">
                         {{ formUtils.getErrorMessage(contactForm, 'name') }}
                     </span>
                 </label>
@@ -33,7 +33,7 @@
                         <svg-render svgName="emailIcon" />
                         <span>Email*</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'email')">
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'email')" aria-live="polite">
                         {{ formUtils.getErrorMessage(contactForm, 'email') }}
                     </span>
                 </label>
@@ -47,7 +47,7 @@
                         <svg-render svgName="titleIcon" />
                         <span>Title*</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'title')">
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'title')" aria-live="polite">
                         {{ formUtils.getErrorMessage(contactForm, 'title') }}
                     </span>
                 </label>
@@ -61,7 +61,7 @@
                         <svg-render svgName="descriptionIcon" />
                         <span>Description*</span>
                     </div>
-                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'message')">
+                    <span *ngIf="formUtils.isFieldInvalid(contactForm, 'message')" aria-live="polite">
                         {{ formUtils.getErrorMessage(contactForm, 'message') }}
                     </span>
                 </label>
@@ -71,12 +71,14 @@
 
             <div class="form-actions w-100 flex row align-center">
                 <button class="flex row align-center normal-trans family-bold" type="submit"
+                    title="Submit your contact request to Ori Carlin"
                     [disabled]="!isCaptchaResolved || !contactForm.valid"
-                    [class.disabled]="!isCaptchaResolved || !contactForm.valid">
+                    [class.disabled]="!isCaptchaResolved || !contactForm.valid" [attr.aria-label]="'Send Message'">
                     <span>Send</span>
                     <svg-render class="normal-trans" svgName="paperPlaneIcon" />
                 </button>
-                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
+                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize"
+                    aria-label="Captcha Verification" />
             </div>
         </form>
     </section>
