@@ -1,8 +1,8 @@
 <main class="page-contents layout-row w-h-100 flex column" aria-label="Product details page">
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
-        class="mobile-view flex column" role="region" aria-label="Mobile view">
+        class="mobile-view flex column" aria-label="Mobile view">
         <ng-container *ngIf="product$ | async as product">
-            <section class="actions-wrapper w-100" role="region" aria-label="User actions">
+            <section class="actions-wrapper w-100" aria-label="User actions">
                 <nav class="actions flex row align-center w-100">
                     <a [routerLink]="['/' + product.type]" title="Exit details page?" aria-label="Exit details page">
                         <svg-render class="fast-trans" svgName="leftArrowIcon" />
@@ -14,7 +14,7 @@
                 </nav>
             </section>
 
-            <section class="product-area flex column text-left" role="region">
+            <section class="product-area flex column text-left">
                 <div class="image-container flex column">
                     <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
                         <product-carousel [carouselItems]="carouselItems"
@@ -45,7 +45,7 @@
     </section>
 
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
-        class="desktop-view flex column h-100" role="region" aria-label="Desktop view">
+        class="desktop-view flex column h-100" aria-label="Desktop view">
         <ng-container *ngIf="product$ | async as product">
             <a class="flex row align-center text-allcaps w-fit fast-trans" [routerLink]="['/' + product.type]"
                 aria-label="Back to results">
@@ -53,7 +53,7 @@
                 <span class="fast-trans">back to results</span>
             </a>
 
-            <section class="product-area grid text-left h-100" role="region">
+            <section class="product-area grid text-left h-100">
                 <div class="image-container flex column">
                     <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
                         <product-carousel [carouselItems]="carouselItems"

@@ -14,9 +14,10 @@
         </div>
       </ng-container>
 
-      <span class="search flex" (click)="onOpenSearch($event)" aria-label="Open Search">
+      <button class="search flex align-center normal-trans" (click)="onOpenSearch($event)"
+        title="Open to search for shop items by name" aria-label="Open Search">
         <svg-render svgName="searchIcon" />
-      </span>
+      </button>
 
       <ng-template #searchOff>
         <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search..."
@@ -60,9 +61,10 @@
         </div>
       </ng-container>
 
-      <span class="search flex align-center normal-trans" (click)="onOpenSearch($event)" aria-label="Open Search">
+      <button class="search flex align-center normal-trans" (click)="onOpenSearch($event)"
+        title="Open to search for shop items by name" aria-label="Open Search">
         <svg-render class="normal-trans" svgName="searchIcon" />
-      </span>
+      </button>
 
       <ng-template #searchOff>
         <input type="text" [(ngModel)]="searchValue" (input)="onSearchInput($event)" placeholder="Search..."

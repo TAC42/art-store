@@ -1,16 +1,16 @@
 <main class="page-contents w-h-100 grid" aria-label="Contact Ori Carlin">
-    <section class="gallery-carousel flex column" role="region" aria-label="Galeery carousel">
+    <section class="gallery-carousel flex column" aria-label="Galeery carousel">
         <product-carousel [carouselItems]="carouselItems" [autoSwitch]="true"
             (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
     </section>
 
-    <section class="contact-text flex column family-sabon text-left" role="region" aria-label="Contact text">
+    <section class="contact-text flex column family-sabon text-left" aria-label="Contact text">
         <p>Got a request or a question, I'll be glad to answer them for you!</p>
         <p>If you're interested, please contact me using the form below:</p>
         <p>*Reply time can vary, between 1 to 3 business days*</p>
     </section>
 
-    <section class="form-area w-100" role="region" aria-label="Contact form">
+    <section class="form-area w-100" aria-label="Contact form">
         <form class="flex column align-center text-left" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(contactForm, 'name')">
                 <label for="name" class="flex row align-center text-capitalize">

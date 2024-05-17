@@ -1,7 +1,7 @@
 <main class="page-contents w-h-100 flex column" aria-label="Product details page">
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
-        class="mobile-view flex column" aria-label="Mobile view" role="region">
-        <section class="actions-wrapper w-100" role="region" aria-label="User actions">
+        class="mobile-view flex column" aria-label="Mobile view">
+        <section class="actions-wrapper w-100" aria-label="User actions">
             <nav class="actions flex row align-center w-100">
                 <a routerLink="/shop" title="Exit details page?" aria-label="Exit details page">
                     <svg-render class="fast-trans" svgName="leftArrowIcon" />
@@ -14,7 +14,7 @@
         </section>
 
         <ng-container *ngIf="product$ | async as product">
-            <section class="product-area flex column text-center" role="region">
+            <section class="product-area flex column text-center">
                 <div class="image-container flex column">
                     <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
                         <product-carousel [carouselItems]="carouselItems"
@@ -66,8 +66,8 @@
     </section>
 
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
-        class="desktop-view flex column" aria-label="Desktop view" role="region">
-        <section class="actions-wrapper w-100" role="region" aria-label="User actions">
+        class="desktop-view flex column" aria-label="Desktop view">
+        <section class="actions-wrapper w-100" aria-label="User actions">
             <nav class="actions flex row align-center layout-row">
                 <a routerLink="/shop" title="Exit details page?" aria-label="Exit details page">
                     <svg-render class="fast-trans" svgName="leftArrowIcon" />
@@ -80,7 +80,7 @@
         </section>
 
         <ng-container *ngIf="product$ | async as product">
-            <section class="product-area grid layout-row" role="region">
+            <section class="product-area grid layout-row">
                 <div class="image-container flex column">
                     <ng-container *ngIf="product.imgUrls.length > 1; else singleImage">
                         <product-carousel [carouselItems]="carouselItems"
@@ -129,7 +129,7 @@
 
         <h3 class="family-bold text-capitalize text-center">related products</h3>
         <section *ngIf="randomProducts$ | async as randomProducts"
-            class="other-products-area layout-row grid text-center" role="region" aria-label="Related products">
+            class="other-products-area layout-row grid text-center" aria-label="Related products">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column" [attr.aria-label]="'View details for ' + randomProduct.name">
                 <image-container [imageUrl]="randomProduct.imgUrls[0]" />

@@ -10,7 +10,8 @@ app-header {
     .mobile-view .links {
       justify-content: space-between;
 
-      span {
+      span,
+      button {
         width: 32px;
         height: 32px;
         cursor: pointer;

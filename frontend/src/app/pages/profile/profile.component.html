@@ -1,6 +1,6 @@
 <main class="page-contents w-h-100 flex column" aria-label="User profile page">
   <section *ngIf="((deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile')"
-    class="mobile-view layout-row flex column" role="region" aria-label="Mobile view">
+    class="mobile-view layout-row flex column" aria-label="Mobile view">
     <div class="background">
       <image-container [imageUrl]="backgroundImage" />
     </div>
@@ -28,7 +28,7 @@
   </section>
 
   <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
-    class="desktop-view flex column h-100" role="region" aria-label="Desktop view">
+    class="desktop-view flex column h-100" aria-label="Desktop view">
     <div class="background">
       <image-container [imageUrl]="backgroundImage" />
     </div>

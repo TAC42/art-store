@@ -168,7 +168,7 @@
       </div>
     </div>
 
-    <div class="form-actions flex row align-center">
+    <section class="form-actions flex row align-center">
       <button class="flex row align-center family-bold normal-trans" type="submit"
         [disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)"
         [class.disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)"
@@ -177,7 +177,7 @@
         <span>Submit</span>
         <svg-render class="normal-trans" svgName="stampIcon" />
       </button>
-    </div>
+    </section>
   </form>
 
   <edit-preview [name]="productEditForm.get('name')?.value" [type]="productEditForm.get('type')?.value"
