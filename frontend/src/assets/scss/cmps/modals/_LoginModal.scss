@@ -48,14 +48,12 @@
 
                 input {
                     width: 100%;
-                    font-family: 'nh-medium', Arial, sans-serif;
                     padding: 0.25em 0.5em;
                     border-radius: 0.5em;
                     border: 1px solid $scdclr4;
                     color: $prmclr1;
                     font-size: 14px;
                     line-height: 1.6;
-                    transition: all 0.3s ease-in-out;
 
                     &:focus {
                         border: 1px solid $prmclr1;

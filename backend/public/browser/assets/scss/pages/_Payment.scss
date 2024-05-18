@@ -31,10 +31,11 @@ payment {
           padding: 0;
         }
 
-        .heading {
+        mat-panel-title {
           gap: 0.5em;
           padding: 0.75em;
           font-size: 1.25em;
+          letter-spacing: 0.05em;
           background: $prmclr3;
           color: $scdclr1;
 
@@ -50,12 +51,9 @@ payment {
           }
         }
 
-        &:hover,
-        &.selected {
-          .heading {
-            font-family: "nh-bold", Arial, sans-serif;
-            background: $scdclr3;
-          }
+        &:hover mat-panel-title,
+        &.selected mat-panel-title {
+          background: $scdclr3;
         }
 
         .order {

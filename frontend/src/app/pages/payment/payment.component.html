@@ -9,7 +9,7 @@
   <section class="payment-body grid">
     <mat-expansion-panel class="selector" [expanded]="optionState === 'order'" (click)="setSelection('order')">
       <mat-expansion-panel-header>
-        <mat-panel-title class="heading flex align-center fast-trans">
+        <mat-panel-title class="flex align-center family-bold fast-trans">
           <span class="pending text-center">1</span>
           <span class="title">Order summary</span>
         </mat-panel-title>
@@ -71,7 +71,7 @@
 
     <mat-expansion-panel class="selector" [expanded]="optionState === 'personal'" (click)="setSelection('personal')">
       <mat-expansion-panel-header>
-        <mat-panel-title class="heading flex align-center fast-trans">
+        <mat-panel-title class="flex align-center family-bold fast-trans">
           <span class="pending text-center">2</span>
           <span class="title">Personal info</span>
         </mat-panel-title>
@@ -186,7 +186,7 @@
     <mat-expansion-panel class="selector method" [expanded]="optionState === 'payment'"
       (click)="setSelection('payment')">
       <mat-expansion-panel-header>
-        <mat-panel-title class="heading flex align-center fast-trans">
+        <mat-panel-title class="flex align-center family-bold fast-trans">
           <span class="pending text-center">3</span>
           <span class="title">Payment method</span>
         </mat-panel-title>

@@ -151,18 +151,18 @@
         </div>
 
         <div class="amount-management grid">
-          <button class="flex column" type="button" (click)="addNewImgUploader()"
+          <button class="flex column full-center fast-trans" type="button" (click)="addNewImgUploader()"
             [disabled]="imgUrlsControls.length >= 5" [class.disabled]="imgUrlsControls.length >= 5"
             aria-label="Add Image">
             <svg-render svgName="addIcon" />
-            <span>Add</span>
+            <span class="family-bold">Add</span>
           </button>
 
-          <button class="flex column" type="button" (click)="removeImgUploader(imgUrlsControls.length - 1)"
-            [disabled]="imgUrlsControls.length <= 1" [class.disabled]="imgUrlsControls.length <= 1"
-            aria-label="Remove Image">
+          <button class="flex column full-center fast-trans" type="button"
+            (click)="removeImgUploader(imgUrlsControls.length - 1)" [disabled]="imgUrlsControls.length <= 1"
+            [class.disabled]="imgUrlsControls.length <= 1" aria-label="Remove Image">
             <svg-render svgName="removeIcon" />
-            <span>Remove</span>
+            <span class="family-bold">Remove</span>
           </button>
         </div>
       </div>

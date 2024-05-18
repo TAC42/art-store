@@ -71,7 +71,6 @@ button {
 
 input,
 textarea {
-  font-family: inherit;
   text-align: inherit;
   line-height: 1.6;
   resize: none;
@@ -79,11 +78,17 @@ textarea {
 }
 
 select {
-  font-family: inherit;
   text-align: inherit;
   line-height: 1.6;
   cursor: pointer;
   outline: none;
+}
+
+input,
+textarea,
+select {
+  font-family: "nh-medium", Arial, sans-serif;
+  transition: all 0.3s ease-in-out;
 }
 
 ul,

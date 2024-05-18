@@ -3,39 +3,32 @@ product-edit {
         .upload-area {
             gap: 1em;
 
-            image-uploader {
-                label {
-                    cursor: pointer;
-                    height: 200px;
-                    padding: 0;
-                    margin: 0;
+            image-uploader label {
+                cursor: pointer;
+                height: 200px;
+                padding: 0;
+                margin: 0;
 
-                    &:hover {
-                        span {
-                            background: $scdclr4;
-                            color: $prmclr3;
-                        }
-                    }
+                &:hover span {
+                    background: $scdclr4;
+                    color: $prmclr3;
+                }
 
-                    span {
-                        font-family: 'nh-bold', Arial, sans-serif;
-                        text-align: center;
-                        padding: 0.25em;
-                        width: 100%;
-                        border-radius: 0.5em 0.5em 0 0;
-                        color: $prmclr1;
-                        font-size: 16px;
-                        background: $scdclr3;
-                        transition: all 0.3s ease-in-out;
-                    }
+                span {
+                    padding: 0.25em;
+                    width: 100%;
+                    border-radius: 0.5em 0.5em 0 0;
+                    color: $prmclr1;
+                    font-size: 16px;
+                    background: $scdclr3;
+                }
 
-                    img {
-                        border-radius: 0 0 0.5em 0.5em;
-                        width: 100%;
-                        height: 100%;
-                        max-height: 172px;
-                        object-fit: cover;
-                    }
+                img {
+                    border-radius: 0 0 0.5em 0.5em;
+                    width: 100%;
+                    height: 100%;
+                    max-height: 172px;
+                    object-fit: cover;
                 }
             }
 
@@ -44,13 +37,9 @@ product-edit {
                 border-radius: 0.5em;
 
                 button {
-                    justify-content: center;
-                    align-items: center;
-                    text-align: center;
                     background: $scdclr3;
                     height: 200px;
                     gap: 1em;
-                    transition: all 0.3s ease-in-out;
 
                     &:hover {
                         background: $scdclr4;
@@ -69,7 +58,6 @@ product-edit {
 
                     span {
                         font-size: 16px;
-                        font-family: 'nh-bold', Arial, sans-serif;
                     }
                 }
             }
@@ -80,26 +68,22 @@ product-edit {
 user-edit {
     .upload-area {
         position: relative;
-        height: fit-content;
-        width: fit-content;
         margin: 0 auto;
         cursor: pointer;
 
-        image-uploader {
-            .upload-preview {
-                img {
-                    object-fit: cover;
-                    width: 125px;
-                    height: 125px;
-                    border-radius: 50%;
-                }
+        image-uploader .upload-preview {
+            img {
+                object-fit: cover;
+                width: 125px;
+                height: 125px;
+                border-radius: 50%;
+            }
 
-                label {
-                    cursor: pointer;
+            label {
+                cursor: pointer;
 
-                    span {
-                        display: none;
-                    }
+                span {
+                    display: none;
                 }
             }
         }
@@ -109,8 +93,7 @@ user-edit {
             pointer-events: none;
             bottom: 50%;
             right: 50%;
-            width: 100%;
-            height: 100%;
+            grid-row: 1 / -1;
             fill: $prmclr1;
             transform: translate(50%, 50%);
             opacity: 0;
@@ -118,13 +101,10 @@ user-edit {
             border: 3px solid $prmclr1;
             border-radius: 50%;
             padding: 1em;
-            transition: all 0.5s ease-in-out;
         }
 
-        &:hover {
-            svg-render {
-                opacity: 1;
-            }
+        &:hover svg-render {
+            opacity: 1;
         }
     }
 }

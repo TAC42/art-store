@@ -3,9 +3,10 @@
   <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view flex row align-center w-100">
     <nav class="links flex row align-center w-100" [ngClass]="{ 'search-on': searchState }">
       <ng-container *ngIf="!searchState; else searchOff">
-        <span class="flex full-center" (click)="openAsideMenu($event)" aria-label="Open Menu">
+        <button class="flex full-center" (click)="openAsideMenu($event)" title="Open menu to access further navigation"
+          aria-label="Open Menu">
           <svg-render svgName="burgerMenuIcon" />
-        </span>
+        </button>
 
         <div>
           <a class="fast-trans" routerLink="/" routerLinkActive="active" aria-label="Navigate to home">

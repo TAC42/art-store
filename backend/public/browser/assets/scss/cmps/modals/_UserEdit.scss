@@ -51,7 +51,6 @@ user-edit {
             span {
               color: $mnrclr2;
               font-size: 15px;
-              text-transform: capitalize;
             }
 
             .label-info {
@@ -68,7 +67,6 @@ user-edit {
                 line-height: 1.6;
                 color: $prmclr1;
                 letter-spacing: 0.025em;
-                font-family: "nh-bold", Arial, sans-serif;
                 font-size: 18px;
               }
             }
@@ -77,7 +75,6 @@ user-edit {
           input {
             padding: 0.5em;
             width: 100%;
-            transition: all 0.3s ease-in-out;
             border-radius: 0.5em;
             border: 1px solid $scdclr4;
             color: $prmclr1;

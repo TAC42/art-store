@@ -10,12 +10,12 @@
     </section>
 
     <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()" aria-labelledby="user-edit-modal-label">
-      <div class="upload-area grid" formArrayName="imgUrls">
+      <div class="upload-area grid w-h-fit" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="'user'"
             (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrls'})"
             aria-label="Image uploader for user profile picture" />
-          <svg-render svgName="camera" />
+          <svg-render class="w-h-100 normal-trans" svgName="camera" />
         </div>
       </div>
 
@@ -23,7 +23,7 @@
         <label for="fullName" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="idIcon" />
-            <span>Full name</span>
+            <span class="family-bold">Full Name</span>
           </div>
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'fullName')">
             {{ formUtils.getErrorMessage(userEditForm, "fullName") }}
@@ -38,7 +38,7 @@
         <label for="username" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="personIcon" />
-            <span>Username</span>
+            <span class="family-bold">Username</span>
           </div>
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'username')">
             {{ formUtils.getErrorMessage(userEditForm, "username") }}

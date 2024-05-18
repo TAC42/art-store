@@ -11,8 +11,6 @@ confirm-modal {
     border-radius: 0.5em;
     -webkit-user-select: none;
     user-select: none;
-    align-items: center;
-    justify-content: center;
 
     span {
       font-size: 2em;
@@ -20,7 +18,7 @@ confirm-modal {
       margin-block-end: 0.5em;
     }
 
-    .btns {
+    .user-actions {
       grid-auto-flow: column;
       gap: 5em;
 
@@ -29,9 +27,7 @@ confirm-modal {
         padding: 0.5em;
         border-radius: 0.5em;
         color: $prmclr1;
-        transition: all 0.3s ease-in-out;
         font-size: 1em;
-        font-family: "nh-bold", Arial, sans-serif;
 
         &:hover {
           background-color: $prmclr1;

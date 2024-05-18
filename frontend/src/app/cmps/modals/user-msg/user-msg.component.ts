@@ -5,6 +5,7 @@ import { EventBusService } from '../../../services/utils/event-bus.service'
 @Component({
   selector: 'user-msg',
   templateUrl: './user-msg.component.html',
+  host: { 'class': 'h-fit w-100' },
   animations: [
     trigger('messageAnimation', [
       state('visible', style({

@@ -1,12 +1,14 @@
 <main class="modal-wrapper flex" *ngIf="isModalOpen" role="dialog" aria-modal="true"
     aria-labelledby="confirm-modal-title" aria-describedby="confirm-modal-description">
-    <section (clickOutside)="closeModal()" class="confirm-modal flex column">
+    <section (clickOutside)="closeModal()" class="confirm-modal flex column full-center">
         <span id="confirm-modal-description">Proceeding any further will result in the permanent loss of the
             product!</span>
         <span id="confirm-modal-title">Are you sure?</span>
-        <nav class="btns grid">
-            <button (click)="onAnswer($event, true)" aria-label="Confirm Yes">Yes</button>
-            <button (click)="onAnswer($event, false)" aria-label="Confirm No">No</button>
+        <nav class="user-actions grid">
+            <button class="family-bold fast-trans" (click)="onAnswer($event, true)"
+                aria-label="Confirm Delete">Yes</button>
+            <button class="family-bold fast-trans" (click)="onAnswer($event, false)"
+                aria-label="Confirm Cancel">No</button>
         </nav>
     </section>
 </main>

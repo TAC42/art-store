@@ -1,8 +1,8 @@
-<main *ngIf="isVisible" [@messageAnimation]="msgState" class="user-msg-contents flex column" role="alert"
-    aria-live="assertive" aria-atomic="true">
-    <span class="msg-title flex row {{ msg?.type }}">
+<main *ngIf="isVisible" [@messageAnimation]="msgState" class="user-msg-contents flex column full-center w-fit"
+    role="alert" aria-live="assertive" aria-atomic="true">
+    <span class="msg-title flex row full-center {{ msg?.type }} w-fit">
         <svg-render [svgName]="msg?.type === 'success' ? successIcon : errorIcon" />
-        <h4>{{ msg?.title }}</h4>
+        <h4 class="family-bold">{{ msg?.title }}</h4>
     </span>
     <p class="{{ msg?.type }}">{{ msg?.txt }}</p>
 </main>
