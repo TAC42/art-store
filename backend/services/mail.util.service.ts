@@ -9,7 +9,7 @@ export const mailUtilService = {
 
 // generic function for preparing a somewhat neat looking email
 function prepareEmailBody(emailHtml: string): string {
-    const siteLogo = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703504944/fd28pqemcyrb8l3aztkg.png'
+    const siteLogo = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716147351/qksbcflgrftel1b99g2z.png'
     return `
     <div style="display: flex; height: 100%; margin: 0 auto; max-width:800px;">
         <div style="width: 30px; background: linear-gradient(to bottom, #8B4513, #A0522D, #D2691E, #A0522D, #8B4513);">

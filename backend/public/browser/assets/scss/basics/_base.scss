@@ -87,6 +87,7 @@ select {
 input,
 textarea,
 select {
+  width: 100%;
   font-family: "nh-medium", Arial, sans-serif;
   transition: all 0.3s ease-in-out;
 }

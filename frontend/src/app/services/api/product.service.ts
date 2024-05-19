@@ -81,7 +81,7 @@ export class ProductService {
 
     return {
       name: 'something',
-      imgUrls: ['https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'],
+      imgUrls: ['https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716147582/PlaceholderImages/mdpppbo6xed6xwq0jvfa.avif'],
       price: 0,
       description: 'This is a product / art item, intended for sale / showcase!',
       dimensions: '5 x 5 x 5 inch',

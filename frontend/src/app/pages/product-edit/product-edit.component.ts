@@ -28,7 +28,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public formUtils = this.formUtilsService
   public productEditForm!: FormGroup
   public product: Product = ProductService.getDefaultProduct()
-  public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
+  public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716147582/PlaceholderImages/mdpppbo6xed6xwq0jvfa.avif'
   public specialCharsFull: string = `!@#$%*()"':;/,.-=+ `
   public specialCharsLimited: string = `"':/,. `
   public initialFormData: Product | null = null
