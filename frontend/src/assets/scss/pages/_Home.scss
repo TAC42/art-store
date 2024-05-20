@@ -1,6 +1,6 @@
 app-home {
     .page-contents {
-        animation: backgroundFadeInOut 30s infinite;
+        animation: backgroundFadeInOut 60s ease-in-out infinite;
 
         .mobile-view,
         .desktop-view {
@@ -127,10 +127,8 @@ app-home {
                 margin-block-end: 1em;
             }
 
-            .gallery-carousel .text-area {
-                button {
-                    font-size: 18px;
-                }
+            .gallery-carousel .text-area button {
+                font-size: 18px;
             }
         }
     }
