@@ -19,6 +19,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive'
 import { CustomValidatorDirective } from './directives/custom-validator.directive'
 import { SwipeDirective } from './directives/swipe.directive'
 import { AutofocusDirective } from './directives/auto-focus.directive'
+import { DragDropDirective } from './directives/drag-drop.directive'
 
 import { HomeComponent } from './pages/home/home.component'
 import { AboutComponent } from './pages/about/about.component'
@@ -116,6 +117,7 @@ import { ResetEmailComponent } from './cmps/modals/reset-email/reset-email.compo
     ResetPasswordComponent,
     UserOrdersComponent,
     ResetEmailComponent,
+    DragDropDirective,
   ],
   imports: [
     BrowserModule,

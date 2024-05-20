@@ -44,19 +44,19 @@ export class ImageUploaderComponent {
     return { isValid: true }
   }
 
-  async uploadImg(event: Event): Promise<void> {
-    const fileInput = event.target as HTMLInputElement
-    if (!fileInput.files?.length) return
+  // When the user decides to drag & drop
+  onFileDropped(file: File) {
+    this.uploadFile(file)
+  }
 
-    const file = fileInput.files[0]
+  async uploadFile(file: File): Promise<void> {
     const validation = this.validateFile(file)
-
     if (!validation.isValid) {
       showErrorMsg(validation.errorHeader!, validation.errorMessage!, this.eBusService)
       return
     }
-
     this.isUploading = true
+
     try {
       const data = await this.upService.uploadImg(file, this.folderName)
       this.imgUrl = data.secure_url
@@ -66,6 +66,13 @@ export class ImageUploaderComponent {
       showErrorMsg('Upload Failed!', 'Sorry! Try to upload the image again...', this.eBusService)
     } finally {
       this.isUploading = false
+    }
+  }
+
+  onFileInputChange(event: Event): void {
+    const fileInput = event.target as HTMLInputElement
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.uploadFile(fileInput.files[0])
     }
   }
 
