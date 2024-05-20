@@ -29,10 +29,10 @@ export class ContactComponent implements OnInit {
 
   public carouselItems: CarouselItem[] = []
   public contactImageUrls: string[] = [
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/r0vaet9gmlapbshf6hb1.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/pqiuffqnaa7gmznrsnmy.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/h9adgfdphiip2xujdm4d.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/kuglbewtdm4pc7sr2dct.png'
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716234077/Sculpture/h9qediuxfaeipa4oaxrv.avif',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716238673/Artware/qnybnp5mqb0tsagaelp8.avif',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716237619/Artware/jgqg9ntqcachua8ylzis.avif',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716238019/Artware/wgarv8cz2zr0xqq64po8.avif'
   ]
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
