@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /signup
+Allow: /shop
+Allow: /sculpture
+Allow: /ware
+Allow: /about/contact
+Allow: /about/introduction
