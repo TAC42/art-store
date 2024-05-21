@@ -1,163 +1,164 @@
-.modal-wrapper {
-  .shopping-cart {
-    position: fixed;
-    top: 0;
-    right: 0;
-    padding: 0.5em 1em;
-    max-width: 500px;
-    z-index: 15;
-    background: $prmclr2;
+cart .modal-wrapper .shopping-cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  gap: 1em;
+  padding: 0.5em 1em;
+  max-width: 500px;
+  z-index: 15;
+  background: $prmclr2;
 
-    .cart-header {
-      justify-content: space-between;
-      margin-block-end: 1em;
+  .cart-header {
+    justify-content: space-between;
 
-      .title {
-        font-size: 1.75em;
-        color: $prmclr1;
-      }
-
-      svg-render {
-        cursor: pointer;
-        width: 2em;
-        height: 2em;
-      }
+    .title {
+      font-size: 1.75em;
+      color: $prmclr1;
     }
 
-    .cart-main {
-      grid-template-rows: 1fr auto;
-      gap: 2em;
+    svg-render {
+      cursor: pointer;
+      width: 2em;
+      height: 2em;
+    }
+  }
 
-      .cart-list {
-        .cart-item {
-          max-height: 120px;
-          grid-template-columns: repeat(5, 1fr);
-          margin-block-end: 1.5em;
+  .cart-main {
+    grid-template-rows: 1fr auto;
+    gap: 1em;
 
-          image-container {
+    .cart-list {
+      overflow-y: auto;
+      max-height: 100%;
+      scrollbar-width: thin;
+
+      .cart-item {
+        max-height: 120px;
+        grid-template-columns: repeat(5, 1fr);
+
+        image-container {
+          grid-column: 1 / 3;
+
+          img {
+            aspect-ratio: 1.5/1;
+            object-fit: cover;
+          }
+        }
+
+        .cart-item-body {
+          padding: 0 0.75em;
+          grid-column: 3 / -1;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(3, auto);
+          gap: 1em;
+
+          .name {
             grid-column: 1 / 3;
-
-            img {
-              aspect-ratio: 1.5/1;
-              object-fit: cover;
-            }
+            grid-row: 1 / 2;
+            color: $mnrclr8;
           }
 
-          .cart-item-body {
-            padding: 0 0.75em;
+          .price {
             grid-column: 3 / -1;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, auto);
-            gap: 1em;
-
-            .name {
-              grid-column: 1 / 3;
-              grid-row: 1 / 2;
-              color: $mnrclr8;
-            }
-
-            .price {
-              grid-column: 3 / -1;
-              grid-row: 1 / 2;
-              justify-self: end;
-              color: $mnrclr8;
-            }
-
-            .quantity {
-              grid-column: 3 / -1;
-              grid-row: 3 / -1;
-              gap: 0.5em;
-              color: $mnrclr8;
-
-              svg-render {
-                width: 2em;
-                height: 2em;
-                fill: $prmclr2;
-                background-color: $mnrclr9;
-                border-radius: 50%;
-                padding: 0 0.25em;
-                cursor: pointer;
-
-                &:hover {
-                  fill: $mnrclr9;
-                  background-color: $prmclr2;
-                }
-
-                &.no-more {
-                  pointer-events: none;
-                  background-color: red;
-
-                  &:hover {
-                    fill: $prmclr2;
-                  }
-                }
-              }
-
-              .amount {
-                color: $mnrclr8;
-                font-size: 1.25em;
-              }
-            }
-          }
-        }
-      }
-
-      .check-out {
-        padding: 1em;
-        border-top: 1px solid $scdclr3;
-
-        .subtotal {
-          font-size: 1.25em;
-          justify-content: space-between;
-          color: $mnrclr9;
-          margin-block-end: 1em;
-        }
-
-        button {
-          gap: 0.5em;
-          padding: 1em;
-          font-size: 1em;
-          color: $prmclr3;
-          border: 2px solid transparent;
-          border-radius: 2em;
-          background: $mnrclr9;
-
-          svg-render {
-            width: 1em;
-            fill: $prmclr3;
-
-            &:first-child {
-              transform: rotateY(180deg);
-            }
+            grid-row: 1 / 2;
+            justify-self: end;
+            color: $mnrclr8;
           }
 
-          &:hover {
-            color: $mnrclr9;
-            border-color: $mnrclr9;
-            background: $prmclr3;
+          .quantity {
+            grid-column: 3 / -1;
+            grid-row: 3 / -1;
+            gap: 0.5em;
+            color: $mnrclr8;
 
             svg-render {
-              fill: $mnrclr9;
+              width: 2em;
+              height: 2em;
+              fill: $prmclr2;
+              background-color: $mnrclr9;
+              border-radius: 50%;
+              padding: 0 0.25em;
+              cursor: pointer;
 
-              &:first-child {
-                animation: m-wave 2s linear infinite;
+              &:hover {
+                fill: $mnrclr9;
+                background-color: $prmclr2;
               }
 
-              &:last-child {
-                animation: wave 2s linear infinite;
+              &.no-more {
+                pointer-events: none;
+                background-color: red;
+
+                &:hover {
+                  fill: $prmclr2;
+                }
               }
+            }
+
+            .amount {
+              color: $mnrclr8;
+              font-size: 1.25em;
             }
           }
         }
       }
     }
 
-    .sorry {
-      gap: 1em;
+    .check-out {
+      padding: 1em;
+      border-top: 1px solid $scdclr3;
 
-      svg-render {
-        width: 300px;
+      .subtotal {
+        font-size: 1.25em;
+        justify-content: space-between;
+        color: $mnrclr9;
+        margin-block-end: 1em;
       }
+
+      button {
+        gap: 0.5em;
+        padding: 1em;
+        font-size: 1em;
+        color: $prmclr3;
+        border: 2px solid transparent;
+        border-radius: 2em;
+        background: $mnrclr9;
+
+        svg-render {
+          width: 1em;
+          fill: $prmclr3;
+
+          &:first-child {
+            transform: rotateY(180deg);
+          }
+        }
+
+        &:hover {
+          color: $mnrclr9;
+          border-color: $mnrclr9;
+          background: $prmclr3;
+
+          svg-render {
+            fill: $mnrclr9;
+
+            &:first-child {
+              animation: m-wave 2s linear infinite;
+            }
+
+            &:last-child {
+              animation: wave 2s linear infinite;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sorry {
+    gap: 1em;
+
+    svg-render {
+      width: 300px;
     }
   }
 }

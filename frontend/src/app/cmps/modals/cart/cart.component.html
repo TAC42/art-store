@@ -9,7 +9,7 @@
     <ng-container *ngIf="cart$ | async as cart">
       <ng-container *ngIf="cart.length; else sorry">
         <main class="cart-main grid h-100" id="cart-description">
-          <section class="cart-list grid h-fit">
+          <section class="cart-list grid h-100">
             <article class="cart-item grid" *ngFor="let cartItem of cart" role="listitem" aria-label="Cart Item">
               <image-container [imageUrl]="cartItem.imgUrls[0]" alt="{{ cartItem.name }}" />
 

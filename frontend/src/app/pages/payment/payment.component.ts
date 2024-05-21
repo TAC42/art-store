@@ -93,7 +93,7 @@ export class PaymentComponent implements OnInit {
             const updatedUser: User = { ...user, cart: [] }
             this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
 
-            setTimeout(() => this.router.navigate(['/profile']), 3000)
+            setTimeout(() => this.router.navigateByUrl('/profile'), 3000)
           }),
           catchError(error => {
             console.error('Error creating order: ', error)
@@ -111,9 +111,7 @@ export class PaymentComponent implements OnInit {
         return throwError(error)
       }),
       switchMap((clientId: string) => {
-        const scriptOptions = {
-          clientId: clientId
-        }
+        const scriptOptions = { clientId: clientId }
         return loadScript(scriptOptions)
       })
     ).subscribe(() => {
@@ -153,6 +151,8 @@ export class PaymentComponent implements OnInit {
             if (actions.order) {
               return actions.order.capture().then(() => {
                 this.onSubmitPurchase()
+              }).catch((error: any) => {
+                console.error('Error capturing order:', error)
               })
             } else {
               console.error('actions.order is undefined.')

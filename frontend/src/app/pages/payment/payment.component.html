@@ -1,6 +1,6 @@
 <main class="page-contents layout-row w-h-100 flex column">
   <section class="payment-header flex align-center">
-    <a class="back" [routerLink]="['/shop']" title="Back to shop?">
+    <a class="back" routerLink="/shop" title="Back to shop?">
       <svg-render class="flex" svgName="back" />
     </a>
     <h1 class="title flex full-center family-nunito w-100">Checkout</h1>
@@ -127,8 +127,9 @@
               {{ formUtils.getErrorMessage(personalForm, "phone") }}
             </span>
 
-            <input id="phone" type="text" formControlName="phone" placeholder="XXX-XXX-XXXX" maxlength="10"
-              customValidator [minLength]="10" [maxLength]="10" [allowedSpecialChars]="'. '" autofocus />
+            <input id="phone" type="text" formControlName="phone" placeholder="XXX-XXX-XXXX" maxlength="13"
+              customValidator [minLength]="10" [maxLength]="13" [allowLetters]="false" [allowedSpecialChars]="'. +'"
+              autofocus />
           </label>
 
           <div class="info-heading flex align-center family-bold">
@@ -153,7 +154,7 @@
             </span>
 
             <input id="city" type="text" formControlName="city" placeholder="New York..." maxlength="48" customValidator
-              [minLength]="3" [maxLength]="48" [allowedSpecialChars]="'. '" />
+              [minLength]="3" [maxLength]="48" [allowNumbers]="false" [allowedSpecialChars]="'. '" />
           </label>
 
           <label class="flex column" [class.error]="formUtils.isFieldInvalid(personalForm, 'state')">
@@ -177,7 +178,7 @@
             </span>
 
             <input id="zip" type="text" #nameInput formControlName="zip" placeholder="12345..." maxlength="5"
-              customValidator [minLength]="5" [maxLength]="5" [allowedSpecialChars]="'. '" />
+              customValidator [minLength]="5" [maxLength]="5" [allowLetters]="false" [allowedSpecialChars]="'. '" />
           </label>
         </form>
       </section>
@@ -195,7 +196,7 @@
       <section class="methods grid justify-center" id="paypal-button-container">
         <p>
           By paying, you agree to Ori-Carlin website's
-          <a class="family-bold" [routerLink]="['/privacy']">privacy policy</a>.
+          <a class="family-bold" routerLink="/privacy">privacy policy</a>.
         </p>
       </section>
       <span *ngIf="!personalForm.valid" class="submit-error flex justify-center text-bold">

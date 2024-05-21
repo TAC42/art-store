@@ -1,140 +1,134 @@
-.modal-wrapper {
-    .login-modal {
-        position: fixed;
-        user-select: none;
-        top: 5%;
-        background: $prmclr2;
-        max-width: 350px;
-        max-height: 600px;
-        z-index: 15;
-        padding: 1em;
-        border-radius: 0.5em;
+login-modal .modal-wrapper .login-modal {
+    position: fixed;
+    user-select: none;
+    top: 5%;
+    background: $prmclr2;
+    max-width: 350px;
+    max-height: 600px;
+    z-index: 15;
+    padding: 1em;
+    border-radius: 0.5em;
 
-        form {
-            gap: 1em;
-            margin-block-end: 1em;
+    form {
+        gap: 1em;
+        margin-block-end: 1em;
 
-            .input-area {
-                position: relative;
-                gap: 0.25em;
+        .input-area {
+            position: relative;
+            gap: 0.25em;
 
-                label {
-                    justify-content: space-between;
-                    padding: 0 0.5em;
-                    min-height: 30px;
+            label {
+                justify-content: space-between;
+                padding: 0 0.5em;
+                min-height: 30px;
+
+                span {
+                    color: $mnrclr2;
+                    font-size: 12px;
+                }
+
+                .label-info {
+                    gap: 0.5em;
 
                     span {
-                        color: $mnrclr2;
-                        font-size: 12px;
+                        line-height: 1.6;
+                        color: $prmclr1;
+                        letter-spacing: 0.025em;
+                        font-size: 15px;
                     }
 
-                    .label-info {
-                        gap: 0.5em;
-
-                        span {
-                            line-height: 1.6;
-                            color: $prmclr1;
-                            letter-spacing: 0.025em;
-                            font-size: 15px;
-                        }
-
-                        svg-render {
-                            width: 24px;
-                            height: 24px;
-                            fill: $prmclr1;
-                        }
+                    svg-render {
+                        width: 24px;
+                        height: 24px;
+                        fill: $prmclr1;
                     }
-                }
-
-                input {
-                    padding: 0.25em 0.5em;
-                    border-radius: 0.5em;
-                    border: 1px solid $scdclr4;
-                    color: $prmclr1;
-                    font-size: 14px;
-                    line-height: 1.6;
-
-                    &:focus {
-                        border: 1px solid $prmclr1;
-                    }
-                }
-
-                &.error {
-
-                    input,
-                    textarea {
-                        border: 1px solid $mnrclr2;
-                    }
-                }
-
-                .password-toggle {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    width: 32px;
-                    height: 32px;
                 }
             }
 
-            .reset-pass {
-                color: $prmclr1;
-                font-size: 16px;
-            }
-
-            .submit {
-                position: relative;
-                padding: 0.5em 0.75em;
-                background: $prmclr1;
-                color: $prmclr2;
+            input {
+                padding: 0.25em 0.5em;
                 border-radius: 0.5em;
-                font-size: 18px;
-                opacity: 1;
-                margin: 0 auto;
+                border: 1px solid $scdclr4;
+                color: $prmclr1;
+                font-size: 14px;
+                line-height: 1.6;
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    border-radius: inherit;
-                    width: 90%;
-                    height: 85%;
-                    border: 3px solid $mnrclr3;
-                    z-index: 0;
-                    opacity: 0;
-                    transition: all 0.5s ease-in-out;
+                &:focus {
+                    border: 1px solid $prmclr1;
                 }
+            }
 
-                &.disabled {
-                    pointer-events: none;
-                    background: $scdclr1;
-                    color: $prmclr1;
-                    opacity: 0.5;
+            &.error input {
+                border: 1px solid $mnrclr2;
+            }
 
-                    &::before {
-                        opacity: 0;
-                    }
-                }
-
-                &:hover {
-                    background: $mnrclr1;
-                    color: $prmclr3;
-
-                    &::before {
-                        opacity: 1;
-                        animation: snakeAround 4s linear infinite;
-                    }
-                }
+            .password-toggle {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 32px;
+                height: 32px;
             }
         }
 
-        .switch {
-            color: $scdclr2;
-            font-size: 15px;
+        .reset-pass {
+            color: $prmclr1;
+            font-size: 16px;
+        }
+
+        .submit {
+            position: relative;
+            padding: 0.5em 0.75em;
+            background: $prmclr1;
+            color: $prmclr2;
+            border-radius: 0.5em;
+            font-size: 18px;
+            opacity: 1;
+            margin: 0 auto;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: inherit;
+                width: 90%;
+                height: 85%;
+                border: 3px solid $mnrclr3;
+                z-index: 0;
+                opacity: 0;
+                transition: all 0.5s ease-in-out;
+            }
+
+            &.disabled {
+                pointer-events: none;
+                background: $scdclr1;
+                color: $prmclr1;
+                opacity: 0.5;
+
+                &::before {
+                    opacity: 0;
+                }
+            }
 
             &:hover {
-                color: $prmclr1;
+                background: $mnrclr1;
+                color: $prmclr3;
+
+                &::before {
+                    opacity: 1;
+                    animation: snakeAround 4s linear infinite;
+                }
             }
+        }
+    }
+
+    .switch {
+        color: $scdclr2;
+        font-size: 15px;
+
+        &:hover {
+            color: $prmclr1;
         }
     }
 }
