@@ -30,7 +30,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   const corsOptions = {
     origin: [
-      'http://oricarlin.onrender.com',
       'http://oricarlin.com',
       'http://93.188.162.182',
       'http://127.0.0.1:4200',
