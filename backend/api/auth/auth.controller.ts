@@ -23,7 +23,7 @@ async function _login(req: Request<LoginRequestBody>,
 
     loggerService.info('User login: ', loginToken)
 
-    res.cookie('loginToken', loginToken, { httpOnly: true })
+    res.cookie('loginToken', loginToken, { httpOnly: true, sameSite: 'none', secure: true })
     res.json(user)
   } catch (err) {
     const error = err as { message: string }
@@ -47,7 +47,7 @@ async function _signup(req: Request<SignupRequestBody>,
     const loginToken = authService.getLoginToken(user!)
 
     loggerService.info('User signup: ', loginToken)
-    res.cookie('loginToken', loginToken, { httpOnly: true })
+    res.cookie('loginToken', loginToken, { httpOnly: true, sameSite: 'none', secure: true })
     res.json(user)
   } catch (err) {
     const error = err as { message: string }
