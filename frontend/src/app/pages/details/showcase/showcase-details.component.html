@@ -22,7 +22,7 @@
                     </ng-container>
 
                     <ng-template #singleImage>
-                        <image-container [highResImageUrl]="product.imgUrls[0]"
+                        <image-container class="w-h-100" [highResImageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
                 </div>
@@ -61,7 +61,7 @@
                     </ng-container>
 
                     <ng-template #singleImage>
-                        <image-container [highResImageUrl]="product.imgUrls[0]"
+                        <image-container class="w-h-100" [highResImageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
                 </div>

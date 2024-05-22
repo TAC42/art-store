@@ -7,7 +7,7 @@
         <a *ngFor="let item of CarouselItems; let i = index" [routerLink]="item.url"
             class="other-product-area flex column align-center" role="listitem"
             [attr.aria-label]="'Product ' + item.name">
-            <image-container [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name" />
+            <image-container class="w-h-100" [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name" />
             <p class="text-capitalize family-bold">{{ item.name }}</p>
         </a>
     </section>

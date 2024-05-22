@@ -143,3 +143,9 @@ input[type="radio"] {
 table {
   border-collapse: collapse;
 }
+
+image-container img {
+  object-fit: cover;
+  background: $scdclr3;
+  transition: all 0.5s ease-in-out;
+}

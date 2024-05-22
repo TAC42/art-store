@@ -19,7 +19,7 @@ export class ImageLoadService {
   }
 
   getLowResImageUrl(imageUrl: string): string {
-    const transformation = 'w_50,h_50,c_scale,e_blur:300,q_auto'
+    const transformation = 'w_25,h_25,c_scale,e_blur:300,q_auto'
     const parts = imageUrl.split('/upload/')
     return `${parts[0]}/upload/${transformation}/${parts[1]}`
   }

@@ -78,12 +78,9 @@ product-edit {
           min-height: 100px;
         }
 
-        &.error {
-
-          input,
-          textarea {
-            border: 1px solid $mnrclr2;
-          }
+        &.error input,
+        &.error textarea {
+          border: 1px solid $mnrclr2;
         }
       }
 

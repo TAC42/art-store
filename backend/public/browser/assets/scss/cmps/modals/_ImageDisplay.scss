@@ -8,10 +8,6 @@ image-display .modal-wrapper .image-display {
     border: 3px solid $scdclr5;
     margin: 0 auto;
 
-    image-container img {
-        object-fit: cover;
-    }
-
     button {
         position: absolute;
         right: 1%;

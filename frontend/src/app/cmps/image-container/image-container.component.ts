@@ -3,7 +3,7 @@ import { ImageLoadService } from '../../services/media/image-load.service'
 
 @Component({
   selector: 'image-container',
-  templateUrl: './image-container.component.html'
+  templateUrl: './image-container.component.html',
 })
 
 export class ImageContainerComponent implements OnInit {
@@ -14,10 +14,8 @@ export class ImageContainerComponent implements OnInit {
   private imgLoadService = inject(ImageLoadService)
 
   public lowResImgUrl: string = ''
-  public highResImageLoaded: boolean = false
 
   ngOnInit(): void {
-    // console.log('url received: ' + this.highResImageUrl)
     this.lowResImgUrl = this.imgLoadService.getLowResImageUrl(this.highResImageUrl)
     this.imgLoadService.preloadSingleImage(this.lowResImgUrl)
   }

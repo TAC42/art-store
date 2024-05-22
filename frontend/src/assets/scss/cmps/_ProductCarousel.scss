@@ -15,10 +15,7 @@ product-carousel {
             transition: all 1s ease-in-out;
 
             image-container img {
-                width: 100%;
                 min-height: 400px;
-                object-fit: cover;
-                transition: all 0.5s ease-in-out;
                 cursor: pointer;
                 aspect-ratio: 1 / 1;
             }

@@ -23,9 +23,7 @@ edit-preview {
                     position: relative;
 
                     image-container img {
-                        object-fit: cover;
                         cursor: pointer;
-                        transition: all 0.5s ease-in-out;
                     }
 
                     .price-tag {

@@ -1,128 +1,122 @@
-product-edit {
-    .input-area .upload-area {
-        gap: 1em;
+product-edit .input-area .upload-area {
+    gap: 1em;
 
-        image-uploader .upload-preview {
-            &.drag-over .file-upload-container label {
-                border: 2px dashed $prmclr1;
-                border-radius: 0.5em;
+    image-uploader .upload-preview {
+        &.drag-over .file-upload-container label {
+            border: 2px dashed $prmclr1;
+            border-radius: 0.5em;
 
-                image-container img {
-                    background: $prmclr1;
-                    opacity: 0.25;
-                }
-            }
-
-            .file-upload-container label {
-                cursor: pointer;
-                height: 200px;
-                padding: 0;
-                margin: 0;
-
-                &:hover span {
-                    background: $scdclr4;
-                    color: $prmclr3;
-                }
-
-                span {
-                    padding: 0.25em;
-                    width: 100%;
-                    color: $prmclr1;
-                    background: $scdclr3;
-                    border-radius: 0.5em 0.5em 0 0;
-                    font-size: 16px;
-                }
-
-                image-container img {
-                    border-radius: 0 0 0.5em 0.5em;
-                    max-height: 172px;
-                    object-fit: cover;
-                }
+            image-container img {
+                background: $prmclr1;
+                opacity: 0.25;
             }
         }
 
-        .amount-management {
-            grid-template-columns: 1fr 1fr;
-            border-radius: 0.5em;
+        .file-upload-container label {
+            cursor: pointer;
+            height: 200px;
+            padding: 0;
+            margin: 0;
 
-            button {
+            &:hover span {
+                background: $scdclr4;
+                color: $prmclr3;
+            }
+
+            span {
+                padding: 0.25em;
+                width: 100%;
+                color: $prmclr1;
                 background: $scdclr3;
-                height: 200px;
-                gap: 1em;
+                border-radius: 0.5em 0.5em 0 0;
+                font-size: 16px;
+            }
 
-                &:hover {
-                    background: $scdclr4;
-                }
+            image-container img {
+                border-radius: 0 0 0.5em 0.5em;
+                max-height: 172px;
+            }
+        }
+    }
 
-                &.disabled {
-                    pointer-events: none;
-                    background: $prmclr1;
-                    color: $scdclr1;
-                }
+    .amount-management {
+        grid-template-columns: 1fr 1fr;
+        border-radius: 0.5em;
 
-                svg-render {
-                    width: 64px;
-                    height: 64px;
-                }
+        button {
+            background: $scdclr3;
+            height: 200px;
+            gap: 1em;
 
-                span {
-                    font-size: 16px;
-                }
+            &:hover {
+                background: $scdclr4;
+            }
+
+            &.disabled {
+                pointer-events: none;
+                background: $prmclr1;
+                color: $scdclr1;
+            }
+
+            svg-render {
+                width: 64px;
+                height: 64px;
+            }
+
+            span {
+                font-size: 16px;
             }
         }
     }
 }
 
-user-edit {
-    .upload-area {
-        position: relative;
-        cursor: pointer;
-        margin: 0 auto;
+user-edit .upload-area {
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
 
-        image-uploader .upload-preview {
-            &.drag-over .file-upload-container label {
-                border: 2px dashed $prmclr1;
-                border-radius: 50%;
-
-                image-container img {
-                    background: $prmclr1;
-                    opacity: 0.25;
-                }
-            }
+    image-uploader .upload-preview {
+        &.drag-over .file-upload-container label {
+            border: 2px dashed $prmclr1;
+            border-radius: 50%;
 
             image-container img {
-                object-fit: cover;
-                width: 125px;
-                height: 125px;
-                border-radius: 50%;
-            }
-
-            label {
-                cursor: pointer;
-
-                span {
-                    display: none;
-                }
+                background: $prmclr1;
+                opacity: 0.25;
             }
         }
 
-        svg-render {
-            position: absolute;
-            bottom: 50%;
-            right: 50%;
-            grid-row: 1 / -1;
-            padding: 1em;
-            pointer-events: none;
-            opacity: 0;
-            background: $prmclr3;
-            border: 3px solid $prmclr1;
+        image-container img {
+            width: 125px;
+            height: 125px;
             border-radius: 50%;
-            fill: $prmclr1;
-            transform: translate(50%, 50%);
         }
 
-        &:hover svg-render {
-            opacity: 1;
+        label {
+            cursor: pointer;
+
+            span {
+                display: none;
+            }
         }
+    }
+
+    svg-render {
+        position: absolute;
+        bottom: 50%;
+        right: 50%;
+        grid-row: 1 / -1;
+        padding: 1em;
+        pointer-events: none;
+        opacity: 0;
+        background: $prmclr3;
+        border: 3px solid $prmclr1;
+        border-radius: 50%;
+        fill: $prmclr1;
+        transform: translate(50%, 50%);
+    }
+
+    &:hover svg-render {
+        opacity: 1;
     }
 }

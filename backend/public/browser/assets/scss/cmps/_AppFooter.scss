@@ -40,47 +40,45 @@ app-footer {
     }
   }
 
-  .desktop-view {
-    .footer-part {
-      &:nth-of-type(1) {
-        gap: 0.5em;
+  .desktop-view .footer-part {
+    &:nth-of-type(1) {
+      gap: 0.5em;
+
+      a {
+        &:hover {
+          color: $prmclr1;
+        }
+      }
+    }
+
+    &:nth-of-type(2) {
+      justify-content: space-between;
+      align-self: start;
+      align-items: end;
+      height: 121px;
+
+      .social-media {
+        gap: 1em;
 
         a {
+          padding: 0.5em;
+          width: 32px;
+          height: 32px;
+          background: $scdclr5;
+          border-radius: 50%;
+
+          svg-render {
+            fill: $prmclr2;
+          }
+
           &:hover {
-            color: $prmclr1;
+            background: $scdclr2;
           }
         }
       }
 
-      &:nth-of-type(2) {
-        justify-content: space-between;
-        align-self: start;
-        align-items: end;
-        height: 121px;
-
-        .social-media {
-          gap: 1em;
-
-          a {
-            padding: 0.5em;
-            width: 32px;
-            height: 32px;
-            background: $scdclr5;
-            border-radius: 50%;
-
-            svg-render {
-              fill: $prmclr2;
-            }
-
-            &:hover {
-              background: $scdclr2;
-            }
-          }
-        }
-
-        span {
-          font-size: 14px;
-        }
+      span {
+        font-size: 14px;
       }
     }
   }

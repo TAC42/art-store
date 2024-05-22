@@ -2,7 +2,7 @@ random-product-carousel {
     overflow: hidden;
 
     .carousel-container {
-        padding: 0.5em 1em;
+        padding: 0.5em 0;
         position: relative;
         overflow: hidden;
         margin-bottom: -20px;
@@ -65,10 +65,8 @@ random-product-carousel {
                 user-select: none;
 
                 image-container img {
-                    height: 200px;
-                    width: 200px;
-                    object-fit: cover;
-                    transition: all 0.5s ease-in-out;
+                    max-height: 180px;
+                    aspect-ratio: 1.25/ 1;
                 }
 
                 &:hover image-container img {

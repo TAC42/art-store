@@ -22,7 +22,7 @@
                     </ng-container>
 
                     <ng-template #singleImage>
-                        <image-container [highResImageUrl]="product.imgUrls[0]"
+                        <image-container class="w-h-100" [highResImageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
                     <span class="price-tag flex full-center">${{ product.price }}.00</span>
@@ -88,7 +88,7 @@
                     </ng-container>
 
                     <ng-template #singleImage>
-                        <image-container [highResImageUrl]="product.imgUrls[0]"
+                        <image-container class="w-h-100" [highResImageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
                 </div>
@@ -132,7 +132,7 @@
             class="other-products-area layout-row grid text-center" aria-label="Related products">
             <a *ngFor="let randomProduct of randomProducts" [routerLink]="['/shop/details', randomProduct.name]"
                 class="other-product-area flex column" [attr.aria-label]="'View details for ' + randomProduct.name">
-                <image-container [highResImageUrl]="randomProduct.imgUrls[0]" />
+                <image-container class="w-h-100" [highResImageUrl]="randomProduct.imgUrls[0]" />
                 <p class="family-bold text-capitalize">{{ randomProduct.name }}</p>
             </a>
         </section>
