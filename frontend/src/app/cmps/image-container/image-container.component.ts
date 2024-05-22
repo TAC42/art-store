@@ -7,17 +7,19 @@ import { ImageLoadService } from '../../services/media/image-load.service'
 })
 
 export class ImageContainerComponent implements OnInit {
-  @Input() imageUrl!: string
+  @Input() highResImageUrl!: string
   @Input() alt: string = 'Loading...'
   @Output() imageClick = new EventEmitter<{ event: Event, imageUrl?: string }>()
 
   private imgLoadService = inject(ImageLoadService)
 
   public lowResImgUrl: string = ''
+  public highResImageLoaded: boolean = false
 
   ngOnInit(): void {
-    this.lowResImgUrl = this.imgLoadService.getLowResImageUrl(this.imageUrl)
-    this.imgLoadService.preloadSingleImage(this.imageUrl)
+    // console.log('url received: ' + this.highResImageUrl)
+    this.lowResImgUrl = this.imgLoadService.getLowResImageUrl(this.highResImageUrl)
+    this.imgLoadService.preloadSingleImage(this.lowResImgUrl)
   }
 
   onImageLoad(event: Event, lowResImage: HTMLElement): void {

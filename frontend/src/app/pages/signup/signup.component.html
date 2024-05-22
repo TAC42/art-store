@@ -3,7 +3,7 @@
         <p>Pottery...</p>
         <p>Beauty...</p>
         <p>Creativity...</p>
-        <image-container [imageUrl]="backgroundImage" [alt]="'background image'" />
+        <image-container [highResImageUrl]="backgroundImage" [alt]="'background image'" />
     </section>
 
     <form class="flex column align-center w-100" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -151,7 +151,7 @@
             aria-label="Captcha Verification" />
 
         <p>By clicking sign up, you agree to our
-            <a [routerLink]="['/privacy']">privacy policy</a>.
+            <a routerLink="/privacy">privacy policy</a>.
         </p>
 
         <button class="signup flex normal-trans" type="submit" [disabled]="(signupForm.invalid || !isCaptchaResolved)"

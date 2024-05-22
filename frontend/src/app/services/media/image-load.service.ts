@@ -24,10 +24,6 @@ export class ImageLoadService {
     return `${parts[0]}/upload/${transformation}/${parts[1]}`
   }
 
-  getHighResImageUrl(imageUrl: string): string {
-    return imageUrl
-  }
-
   preloadImagesArray(imageUrls: string[]): void {
     imageUrls.forEach(imageUrl => {
       const lowResUrl = this.getLowResImageUrl(imageUrl)

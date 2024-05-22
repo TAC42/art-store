@@ -20,8 +20,8 @@
           <ng-container *ngIf="cart.length; else sorry">
             <section class="summary-list grid">
               <article class="summary-item grid" *ngFor="let summaryItem of cart">
-                <div class="image">
-                  <img [src]="summaryItem.imgUrls[0]" [alt]="summaryItem.name" />
+                <div class="image-area">
+                  <image-container [highResImageUrl]="summaryItem.imgUrls[0]" [alt]="summaryItem.name" />
                   <span class="amount text-center"> {{ summaryItem.amount }} </span>
                 </div>
 

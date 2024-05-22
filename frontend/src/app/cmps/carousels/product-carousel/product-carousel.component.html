@@ -6,13 +6,13 @@
         [attr.aria-label]="'Slide ' + (i + 1) + ' of ' + carouselItems.length"
         [attr.aria-current]="currentIndex === i ? 'true' : null">
         <ng-container *ngIf="item.type === 'image'">
-            <image-container [imageUrl]="item.imgUrl" [alt]="'Image of ' + item.name!"
+            <image-container [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name!"
                 (click)="onItemClicked($event, item)" />
         </ng-container>
 
         <ng-container *ngIf="item.type === 'product'">
             <a [href]="item.url">
-                <image-container [imageUrl]="item.imgUrl" [alt]="'Image of ' + item.name!" />
+                <image-container [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name!" />
                 <span class="product-name text-capitalize normal-trans">{{ item.name }}</span>
             </a>
         </ng-container>

@@ -1,4 +1,11 @@
 <img [src]="lowResImgUrl" [alt]="alt" class="w-h-100" loading="lazy" #lowResImage>
 
-<img [src]="imageUrl" [alt]="alt" class="w-h-100" (load)="onImageLoad($event, lowResImage)" style="display:none;"
-    (click)="onImageClick($event, imageUrl)">
+<img [src]="highResImageUrl" [alt]="alt" class="w-h-100" (load)="onImageLoad($event, lowResImage)" style="display:none;"
+    (click)="onImageClick($event, highResImageUrl)">
+
+<!-- <amp-img #lowResImage [src]="lowResImgUrl" [srcset]="lowResImgUrl" [alt]="alt" class="w-h-100" layout="responsive"
+    width="200" height="200" />
+
+<amp-img [src]="highResImageUrl" [srcset]="highResImageUrl" [alt]="alt" class="w-h-100" layout="responsive" width="400"
+    height="400" (amp-img-loaded)="onImageLoad($event, lowResImage)" style="display:none;"
+    (click)="onImageClick($event, highResImageUrl)" /> -->

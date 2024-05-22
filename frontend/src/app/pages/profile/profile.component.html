@@ -2,13 +2,13 @@
   <section *ngIf="((deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile')"
     class="mobile-view layout-row flex column" aria-label="Mobile view">
     <div class="background">
-      <image-container [imageUrl]="backgroundImage" />
+      <image-container [highResImageUrl]="backgroundImage" />
     </div>
 
     <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center" role="region"
       aria-label="Personal information">
       <article class="user-img">
-        <image-container [imageUrl]="user.imgUrls[0]" />
+        <image-container [highResImageUrl]="user.imgUrls[0]" />
       </article>
       <span class="full-name family-bold"> {{ user.fullName }} </span>
       <span> &#64;{{ user.username }} </span>
@@ -30,12 +30,12 @@
   <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
     class="desktop-view flex column h-100" aria-label="Desktop view">
     <div class="background">
-      <image-container [imageUrl]="backgroundImage" />
+      <image-container [highResImageUrl]="backgroundImage" />
     </div>
 
     <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center" role="region"
       aria-label="Personal information">
-      <image-container [imageUrl]="user.imgUrls[0]" />
+      <image-container [highResImageUrl]="user.imgUrls[0]" />
 
       <span class="full-name family-bold"> {{ user.fullName }} </span>
       <span> &#64; {{ user.username }} </span>

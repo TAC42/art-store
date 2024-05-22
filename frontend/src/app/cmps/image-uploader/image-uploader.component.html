@@ -3,7 +3,7 @@
     <div class="file-upload-container flex column">
         <label for="{{inputId}}" class="flex column fast-trans" id="upload-label">
             <span id="upload-description" class="family-bold text-center fast-trans"> {{ getUploadLabel() }} </span>
-            <image-container class="w-h-100" [imageUrl]="imgUrl" />
+            <image-container class="w-h-100" [highResImageUrl]="imgUrl" />
         </label>
         <input type="file" (change)="onFileInputChange($event)" accept="image/*" [id]="inputId" style="display: none"
             aria-labelledby="upload-label" aria-describedby="upload-description" />

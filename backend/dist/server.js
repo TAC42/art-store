@@ -41,7 +41,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/mail', mailRoutes);
 app.use('/api/order', orderRoutes);
-app.get('/api/paypal-client-id', (req, res) => {
+app.use('/api/paypal-client-id', (req, res) => {
     const paypalClientId = process.env.PAYPAL_CLIENT_ID;
     res.json({ clientId: paypalClientId });
 });
