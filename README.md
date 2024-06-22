@@ -45,6 +45,15 @@ For those interested in our website [click here!](https://www.oricarlin.com/)
 **Product For Showcase**
 ![ware](https://res.cloudinary.com/dv4a9gwn4/image/upload/v1712593340/ContactandAbout/frltcbwjrcfno3sjciax.png)
 
+## Running The Project
+For those interested in simply running the project, here are the instructions:
+- Download ZIP and extract the contents to an accessible folder.
+- Open said folder in Visual Studio Code.
+- For running the backend (open a terminal):
+1) cd backend ---> npm run dev
+- For running the frontend (open another terminal):
+1) cd frontend ---> ng generate
+- Do your shenanigans
 
 ## Acknowledgments
 This project was made and is maintained by:
