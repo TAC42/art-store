@@ -49,10 +49,14 @@ For those interested in our website [click here!](https://www.oricarlin.com/)
 For those interested in simply running the project, here are the instructions:
 - Download ZIP and extract the contents to an accessible folder.
 - Open said folder in Visual Studio Code.
-- For running the backend (open a terminal):
-1) cd backend ---> npm run dev
-- For running the frontend (open another terminal):
-1) cd frontend ---> ng generate
+- For running the backend, open a terminal and type the following:
+1) cd backend
+2) npm install
+3) npm run dev
+- For running the frontend, open another terminal and type the following:
+1) cd frontend
+2) npm install
+3) ng generate
 - Do your shenanigans
 
 ## Acknowledgments
