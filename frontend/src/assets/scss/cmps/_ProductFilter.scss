@@ -1,43 +1,51 @@
 product-filter {
-  position: sticky;
   display: grid;
-  grid-template-columns: 1fr 56px auto;
+  grid-template-columns: 1fr 56px;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
   max-width: 600px;
+  margin: 0 auto;
 
-  input {
-    padding: 0.5em;
-    transition: all 0.3s;
-    border-radius: 0.5em 0 0 0.5em;
-    border: 1px solid $scdclr4;
-    border-right: none;
-    color: $prmclr1;
-    font-family: "nh-medium";
-    font-size: 1em;
-    line-height: 1.6;
-    text-align: left;
+  .input-container {
+    position: relative;
 
-    &:focus,
-    &:focus-visible {
-      border: 1px solid $scdclr2;
+    input {
+      padding: 0.5em;
+      color: $prmclr1;
+      font-size: 1em;
+      line-height: 1.6;
+      text-align: left;
+      border-radius: 0.5em 0 0 0.5em;
+      border: 1px solid $scdclr4;
       border-right: none;
+
+      &:focus,
+      &:focus-visible {
+        border: 1px solid $scdclr2;
+        border-right: none;
+      }
+    }
+
+    button {
+      width: 2.5em;
+      height: 2.5em;
+      position: absolute;
+      right: 0.5em;
+      top: 0.35em;
+      fill: $scdclr4;
+      opacity: 0.75;
+
+      svg-render {
+        pointer-events: none;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 
-  .clear {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: 8em;
-    fill: $scdclr4;
-    opacity: 0.8;
-  }
-
   .search {
-    cursor: pointer;
     width: 24px;
     height: 24px;
     fill: $prmclr2;
@@ -47,13 +55,5 @@ product-filter {
       padding: 1.2em 1em 6px 1em;
       border-radius: 0 0.5em 0.5em 0;
     }
-  }
-
-  .cart {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    fill: $scdclr3;
-    margin-inline-start: 1em;
   }
 }

@@ -11,7 +11,7 @@ body {
   height: 100%;
   margin: 0;
   min-height: 100vh;
-  font-family: "nh-medium";
+  font-family: "nh-medium", Arial, sans-serif;
 }
 
 body>div:last-child {
@@ -71,7 +71,6 @@ button {
 
 input,
 textarea {
-  font-family: inherit;
   text-align: inherit;
   line-height: 1.6;
   resize: none;
@@ -79,11 +78,18 @@ textarea {
 }
 
 select {
-  font-family: inherit;
   text-align: inherit;
   line-height: 1.6;
   cursor: pointer;
   outline: none;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  font-family: "nh-medium", Arial, sans-serif;
+  transition: all 0.3s ease-in-out;
 }
 
 ul,
@@ -112,8 +118,8 @@ input[type="radio"] {
       height: 1em;
       border: 2px solid $scdclr5;
       border-radius: 50%;
-      margin: 0 0.5em 0 0;
       vertical-align: middle;
+      margin: 0 0.5em 0 0;
     }
   }
 
@@ -136,4 +142,10 @@ input[type="radio"] {
 
 table {
   border-collapse: collapse;
+}
+
+image-container img {
+  object-fit: cover;
+  background: $scdclr3;
+  transition: all 0.5s ease-in-out;
 }

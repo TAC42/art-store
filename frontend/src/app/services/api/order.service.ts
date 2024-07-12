@@ -56,7 +56,7 @@ export class OrderService {
       })
     )
   }
-  
+
   getPaypalClientId(): Observable<string> {
     return this.httpService.get<{ clientId: string }>('paypal-client-id')
       .pipe(
@@ -68,11 +68,8 @@ export class OrderService {
       )
   }
 
-
   getDefaultFilter(): OrderFilter {
-    return {
-      _id: '',
-    }
+    return { _id: '', }
   }
 
   createOrder(cart: Product[], user: User, userData: any, payType: string): Order {
@@ -96,7 +93,7 @@ export class OrderService {
         { total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
       startWith({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 }),
       catchError(error => {
-        console.error('Error calculating order summary: ', error);
+        console.error('Error calculating order summary: ', error)
         return of({ total: 0, taxes: 0, deliveryFee: 0, grandTotal: 0 })
       })
     )

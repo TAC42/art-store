@@ -12,4 +12,5 @@
 <router-outlet />
 <user-msg />
 <app-footer class="full" *ngIf="!hideFooterHeader" [deviceType$]="deviceType$" />
-<div class="modal-wrapper" *ngIf="dimmer" (click)="onCloseDimmer($event)"></div>
+<div class="modal-wrapper" *ngIf="dimmer" (click)="onCloseDimmer($event)" role="dialog" aria-modal="true"
+    aria-label="Page dimmer for focusing"></div>

@@ -1,15 +1,16 @@
-<div class="carousel-container flex">
-    <button (click)="scrollLeft($event)" class="flex"> </button>
+<div class="carousel-container flex justify-center w-100" role="region" aria-roledescription="carousel"
+    aria-label="Product Carousel" aria-live="polite">
+    <button (click)="scrollLeft($event)" class="flex full-center fast-trans" aria-label="Scroll Left"> </button>
 
-    <section *ngIf="CarouselItems$ | async as CarouselItems" class="other-products-area flex row" #carouselRef>
-        <a *ngFor="let item of CarouselItems" [routerLink]="item.url" class="other-product-area flex column">
-            <img [src]="item.lowResImgUrl" alt="{{item.name}}" class="w-h-100" loading="lazy" #lowResImage>
-            <img [src]="item.imgUrl" alt="{{item.name}}" class="w-h-100" (load)="onImageLoad($event, lowResImage)"
-                style="display:none;">
-
-            <p>{{ item.name }}</p>
+    <section *ngIf="CarouselItems$ | async as CarouselItems" class="other-products-area flex row" #carouselRef
+        role="list">
+        <a *ngFor="let item of CarouselItems; let i = index" [routerLink]="item.url"
+            class="other-product-area flex column align-center" role="listitem"
+            [attr.aria-label]="'Product ' + item.name">
+            <image-container class="w-h-100" [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name" />
+            <p class="text-capitalize family-bold">{{ item.name }}</p>
         </a>
     </section>
 
-    <button (click)="scrollRight($event)" class="flex"> </button>
+    <button (click)="scrollRight($event)" class="flex full-center fast-trans" aria-label="Scroll Right"> </button>
 </div>

@@ -1,15 +1,16 @@
-<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('reset-email')">
+<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('reset-email')" role="dialog"
+    aria-modal="true" aria-label="Reset email" aria-describedby="reset-email-modal-description">
     <section class="reset-email-modal flex column" (clickOutside)="closeResetModal()">
-        <div class="message-area" *ngIf="message">
+        <div class="message-area" *ngIf="message" aria-live="polite">
             <p>{{ message }}</p>
         </div>
 
-        <span *ngIf="codeSent">
+        <span *ngIf="codeSent" id="reset-email-modal-description">
             If you do not see the code in your inbox, please check your Spam folder.
         </span>
 
         <button class="normal-trans" (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
-            [class.disabled]="!resendAvailable && codeSent">
+            [class.disabled]="!resendAvailable && codeSent" aria-label="Send or Resend Code">
             <span *ngIf="!resendAvailable && codeSent"> {{ timer }} seconds </span>
 
             <span *ngIf="resendAvailable || !codeSent">
@@ -25,7 +26,7 @@
                         <span>Reset Code</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(resetForm, 'code')">
+                    <span *ngIf="formUtils.isFieldInvalid(resetForm, 'code')" aria-live="polite">
                         {{ formUtils.getErrorMessage(resetForm, 'code') }}
                     </span>
                 </label>
@@ -41,7 +42,7 @@
                         <span>New Email</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(resetForm, 'email')">
+                    <span *ngIf="formUtils.isFieldInvalid(resetForm, 'email')" aria-live="polite">
                         {{ formUtils.getErrorMessage(resetForm, 'email') }}
                     </span>
                 </label>
@@ -51,7 +52,7 @@
 
             <div class="form-actions flex column full-center family-bold">
                 <button class="flex row normal-trans" type="submit" [disabled]="!resetForm.valid"
-                    [class.disabled]="!resetForm.valid">
+                    [class.disabled]="!resetForm.valid" aria-label="Reset Email">
                     <span>Reset email</span>
                 </button>
             </div>

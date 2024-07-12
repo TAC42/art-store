@@ -1,13 +1,14 @@
-<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')">
+<main class="modal-wrapper flex justify-center" *ngIf="modService.isModalOpen('user-auth')" role="dialog"
+    aria-modal="true" aria-label="User authentication" aria-describedby="user-auth-modal-description">
     <section class="user-auth-modal flex column" *ngIf="verifyForm">
-        <span> {{ message }} </span>
+        <span id="user-auth-modal-description"> {{ message }} </span>
 
-        <span *ngIf="codeSent">
+        <span *ngIf="codeSent" aria-live="polite">
             If you do not see the code in your inbox, please check your Spam folder.
         </span>
 
         <button class="normal-trans" (click)="sendCode()" [disabled]="!resendAvailable && codeSent"
-            [class.disabled]="!resendAvailable && codeSent">
+            [class.disabled]="!resendAvailable && codeSent" aria-label="Send or Resend Code">
             <span *ngIf="!resendAvailable && codeSent"> {{ timer }} seconds </span>
 
             <span *ngIf="resendAvailable || !codeSent">
@@ -18,7 +19,7 @@
         <form *ngIf="codeSent" class="flex column align-center" [formGroup]="verifyForm" (ngSubmit)="onSubmit()">
             <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(verifyForm, 'code')">
                 <label for="code" class="flex row align-center">
-                    <span *ngIf="formUtils.isFieldInvalid(verifyForm, 'code')">
+                    <span *ngIf="formUtils.isFieldInvalid(verifyForm, 'code')" aria-live="polite">
                         {{ formUtils.getErrorMessage(verifyForm, 'code') }}
                     </span>
                 </label>

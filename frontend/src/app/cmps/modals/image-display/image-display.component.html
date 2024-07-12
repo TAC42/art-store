@@ -1,8 +1,10 @@
-<main class="modal-wrapper flex justify-center align-center" *ngIf="modService.isModalOpen('image-display')">
-    <section class="image-display flex column" (clickOutside)="closeImageDisplayModal()">
-        <img [src]="getImageUrl()" alt="Full Size Image">
-        <button class="flex" (click)="closeImageDisplayModal()">
-            <svg-render svgName="removeIcon" />
+<main class="modal-wrapper flex justify-center align-center" *ngIf="modService.isModalOpen('image-display')"
+    role="dialog" aria-modal="true" aria-label="image display title">
+    <section class="image-display flex column w-h-fit" (clickOutside)="closeImageDisplayModal()">
+        <image-container [highResImageUrl]="getImageUrl()" alt="Full Size Image" />
+
+        <button class="flex" (click)="closeImageDisplayModal()" aria-label="Close Image Display">
+            <svg-render class="fast-trans" svgName="removeIcon" />
         </button>
     </section>
 </main>

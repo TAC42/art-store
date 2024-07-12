@@ -1,10 +1,10 @@
-<main class="page-contents w-h-100 grid">
-    <section class="gallery-carousel flex column">
+<main class="page-contents w-h-100 grid" aria-label="About Ori Carlin">
+    <section class="gallery-carousel flex column" aria-label="Gallery corousel">
         <product-carousel [carouselItems]="carouselItems" [autoSwitch]="true"
             (imageClick)="regularUtils.onImageClick($event.event, $event.imageUrl)" />
     </section>
 
-    <section class="introduction-text flex column family-sabon text-left">
+    <section class="introduction-text flex column family-sabon text-left" aria-label="About text">
         <p>Ori Carlin, based in the Hudson Valley, is an artist specializing in clay and wood, with a distinctive use of
             stoneware and glaze. Working through various techniques in these mediums, his work often explores
             architecture, geometry, and form. Ori teaches ceramics at Cone Zero studio in Catskill and works for various

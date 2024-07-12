@@ -31,7 +31,7 @@
     align-items: center;
   }
 
-  > *.full-grow {
+  >*.full-grow {
     flex: 1;
   }
 }
@@ -84,23 +84,23 @@
 }
 
 .family-bold {
-  font-family: "nh-bold";
+  font-family: "nh-bold", Arial, sans-serif;
 }
 
 .family-regular {
-  font-family: "nh-medium";
+  font-family: "nh-medium", Arial, sans-serif;
 }
 
 .family-light {
-  font-family: "nh-light";
+  font-family: "nh-light", Arial, sans-serif;
 }
 
 .family-sabon {
-  font-family: "sabon";
+  font-family: "sabon", Arial, sans-serif;
 }
 
 .family-nunito {
-  font-family: "nunito";
+  font-family: "nunito", Arial, sans-serif;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -154,11 +154,9 @@
 }
 
 .glass {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0)
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;

@@ -1,4 +1,5 @@
-<img [src]="lowResImgUrl" [alt]="alt" class="w-h-100" loading="lazy" #lowResImage>
+<img [src]="lowResImgUrl" [alt]="alt" class="w-h-100" style="min-width: 50px; min-height: 50px;" loading="lazy"
+    #lowResImage>
 
-<img [src]="imageUrl" [alt]="alt" class="w-h-100" (load)="onImageLoad($event, lowResImage)" style="display:none;"
-    (click)="onImageClick($event, imageUrl)">
+<img [src]="highResImageUrl" [alt]="alt" class="w-h-100" (load)="onImageLoad($event, lowResImage)" style="display:none;"
+    (click)="onImageClick($event, highResImageUrl)">

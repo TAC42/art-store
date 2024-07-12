@@ -1,23 +1,21 @@
-import { Component, HostBinding, OnDestroy, OnInit, inject } from '@angular/core'
+import { Component, OnDestroy, OnInit, inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Subscription, filter, map } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
 import { Product } from '../../models/product'
-import { PRODUCT_BY_NAME_LOADED, SAVE_PRODUCT } from '../../store/product/product.actions'
+import { SAVE_PRODUCT } from '../../store/product/product.actions'
 import { ProductService } from '../../services/api/product.service'
 import { FormUtilsService } from '../../services/utils/form-utils.service'
 
 @Component({
   selector: 'product-edit',
-  templateUrl: './product-edit.component.html'
+  templateUrl: './product-edit.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class ProductEditComponent implements OnInit, OnDestroy {
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-  @HostBinding('class.full') fullClass = true
-
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   private fBuilder = inject(FormBuilder)
@@ -30,7 +28,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   public formUtils = this.formUtilsService
   public productEditForm!: FormGroup
   public product: Product = ProductService.getDefaultProduct()
-  public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
+  public defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716147582/PlaceholderImages/mdpppbo6xed6xwq0jvfa.avif'
   public specialCharsFull: string = `!@#$%*()"':;/,.-=+ `
   public specialCharsLimited: string = `"':/,. `
   public initialFormData: Product | null = null

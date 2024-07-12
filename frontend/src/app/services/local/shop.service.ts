@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, catchError, from, retry, tap, throwError } from 'rxjs'
-import { Product, ShopFilter } from '../../models/product'
+import { Product, ProductFilter } from '../../models/product'
 import { storageService } from './async-storage.service'
 import { HttpErrorResponse } from '@angular/common/http'
 const ENTITY = 'products'
@@ -12,7 +12,7 @@ export class ShopService {
   private _products$ = new BehaviorSubject<Product[]>([])
   public products$ = this._products$.asObservable()
 
-  private _filterBy$ = new BehaviorSubject<ShopFilter>({ search: '' })
+  private _filterBy$ = new BehaviorSubject<ProductFilter>({ search: '' })
   public filterBy$ = this._filterBy$.asObservable()
 
   constructor() {
@@ -108,7 +108,7 @@ export class ShopService {
     })
   }
 
-  public setFilterBy(filterBy: ShopFilter) {
+  public setFilterBy(filterBy: ProductFilter) {
     this._filterBy$.next(filterBy)
     this.loadProducts().pipe().subscribe()
   }

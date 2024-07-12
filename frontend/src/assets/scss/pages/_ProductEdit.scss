@@ -64,12 +64,10 @@ product-edit {
         textarea,
         select {
           padding: 0.5em;
-          width: 100%;
           border: 1px solid $scdclr4;
           border-radius: 0.5em;
           color: $prmclr1;
           font-size: 16px;
-          transition: all 0.3s ease-in-out;
 
           &:focus {
             border: 1px solid $prmclr1;
@@ -80,12 +78,9 @@ product-edit {
           min-height: 100px;
         }
 
-        &.error {
-
-          input,
-          textarea {
-            border: 1px solid $mnrclr2;
-          }
+        &.error input,
+        &.error textarea {
+          border: 1px solid $mnrclr2;
         }
       }
 

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { ValidationErrors } from '@angular/forms'
 import { Observable, throwError, catchError, map, of } from 'rxjs'
-import { Product, ShopFilter } from '../../models/product'
+import { Product, ProductFilter } from '../../models/product'
 import { HttpService } from '../utils/http.service'
 
 const BASE_URL = 'product/'
@@ -13,9 +13,9 @@ const BASE_URL = 'product/'
 export class ProductService {
   private httpService = inject(HttpService)
 
-  currentFilter: ShopFilter = { search: '' }
+  currentFilter: ProductFilter = { search: '' }
 
-  query(filterBy: Partial<ShopFilter> = {}): Observable<any> {
+  query(filterBy: Partial<ProductFilter> = {}): Observable<any> {
     return this.httpService.get(BASE_URL, filterBy).pipe(
       catchError(error => {
         console.error('Error querying products:', error)
@@ -81,7 +81,7 @@ export class ProductService {
 
     return {
       name: 'something',
-      imgUrls: ['https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'],
+      imgUrls: ['https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716147582/PlaceholderImages/mdpppbo6xed6xwq0jvfa.avif'],
       price: 0,
       description: 'This is a product / art item, intended for sale / showcase!',
       dimensions: '5 x 5 x 5 inch',
@@ -93,22 +93,7 @@ export class ProductService {
     }
   }
 
-  getFilterFromParams(searchParams: URLSearchParams): ShopFilter {
-    const newFilterBy: ShopFilter = { search: '' }
-    let isNewRefresh = false
-
-    searchParams.forEach((value, key) => {
-      if (key in newFilterBy) {
-        newFilterBy[key as keyof ShopFilter] = value
-        isNewRefresh = true
-      }
-    })
-    if (isNewRefresh) this.setFilter({ ...newFilterBy })
-
-    return newFilterBy
-  }
-
-  setFilter(filter: ShopFilter): void {
+  setFilter(filter: ProductFilter): void {
     this.currentFilter = filter
   }
 }

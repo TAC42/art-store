@@ -1,31 +1,35 @@
-<div class="carousel-container flex" customSwipe (swipeLeft)="previousImage()" (swipeRight)="nextImage()">
-    <div class="carousel-slide" *ngFor="let item of carouselItems; let i = index" [ngStyle]="getSlideStyle(i)">
+<div class="carousel-container flex justify-center w-100" customSwipe (swipeLeft)="previousImage()"
+    (swipeRight)="nextImage()" role="region" aria-roledescription="carousel" aria-label="Image Carousel"
+    aria-live="polite">
+    <div class="carousel-slide w-h-100" *ngFor="let item of carouselItems; let i = index" [ngStyle]="getSlideStyle(i)"
+        role="group" [attr.aria-roledescription]="item.type === 'image' ? 'slide' : 'product slide'"
+        [attr.aria-label]="'Slide ' + (i + 1) + ' of ' + carouselItems.length"
+        [attr.aria-current]="currentIndex === i ? 'true' : null">
         <ng-container *ngIf="item.type === 'image'">
-            <img [src]="item.lowResImgUrl" [alt]="'Image ' + (i + 1)" loading="lazy" #lowResImage>
-            <img [src]="item.imgUrl" [alt]="'Image ' + (i + 1)" (load)="onCarouselImageLoad($event, lowResImage)"
-                style="display:none;" (click)="onItemClicked($event, item)">
+            <image-container class="w-h-100" [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name!"
+                (click)="onItemClicked($event, item)" />
         </ng-container>
 
         <ng-container *ngIf="item.type === 'product'">
             <a [href]="item.url">
-                <img [src]="item.lowResImgUrl" [alt]="item.name" loading="lazy" #lowResImage>
-                <img [src]="item.imgUrl" [alt]="item.name" (load)="onCarouselImageLoad($event, lowResImage)"
-                    style="display:none;">
-                <span class="product-name">{{ item.name }}</span>
+                <image-container class="w-h-100" [highResImageUrl]="item.imgUrl" [alt]="'Image of ' + item.name!" />
+                <span class="product-name text-capitalize normal-trans">{{ item.name }}</span>
             </a>
         </ng-container>
     </div>
 
-    <div class="carousel-dots flex row">
-        <span class="dot" *ngFor="let url of carouselItems; let i = index" [ngClass]="{'active': currentIndex  === i}"
-            (click)="goToSlide(i)"> </span>
+    <div class="carousel-dots flex row align-center text-center" aria-label="Carousel Navigation Dots">
+        <button class="fast-trans" *ngFor="let url of carouselItems; let i = index"
+            [ngClass]="{'active': currentIndex  === i}" (click)="goToSlide(i)"
+            [attr.aria-label]="'Go to slide ' + (i + 1)" [attr.aria-current]="currentIndex === i ? 'true' : null">
+        </button>
     </div>
 
-    <button class="flex" (click)="previousImage()">
+    <button class="flex full-center fast-trans" (click)="previousImage()" aria-label="Previous Slide">
         <svg-render svgName="leftArrowIcon" />
     </button>
 
-    <button class="flex" (click)="nextImage()">
+    <button class="flex full-center fast-trans" (click)="nextImage()" aria-label="Next Slide">
         <svg-render svgName="rightArrowIcon" />
     </button>
 </div>

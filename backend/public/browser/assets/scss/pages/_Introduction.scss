@@ -1,43 +1,39 @@
-app-about {
-    .page-contents {
-        .about-nav {
-            gap: 2em;
-            padding: 0.5em 0em;
-            border-bottom: 1px solid $scdclr3;
+app-about .page-contents {
+    nav {
+        gap: 2em;
+        padding: 0.5em 0em;
+        border-bottom: 1px solid $scdclr3;
 
-            a {
-                font-size: 20px;
+        a {
+            font-size: 20px;
 
-                &.active {
-                    color: $scdclr1;
-                }
+            &.active {
+                color: $scdclr1;
+            }
 
-                &:hover {
-                    color: $scdclr1;
-                }
+            &:hover {
+                color: $scdclr1;
             }
         }
     }
 }
 
-introduction-page {
-    .page-contents {
+introduction-page .page-contents {
+    gap: 1em;
+    padding-bottom: 1em;
+
+    .gallery-carousel {
+        position: relative;
+    }
+
+    .introduction-text {
         gap: 1em;
-        padding-bottom: 1em;
+        grid-row: span 2;
 
-        .gallery-carousel {
-            position: relative;
-        }
-
-        .introduction-text {
-            gap: 1em;
-            grid-row: span 2;
-
-            p {
-                color: $prmclr1;
-                font-size: 19px;
-                line-height: 1.6;
-            }
+        p {
+            color: $prmclr1;
+            font-size: 19px;
+            line-height: 1.6;
         }
     }
 }

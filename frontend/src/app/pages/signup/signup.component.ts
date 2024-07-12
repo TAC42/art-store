@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../store/app.state'
@@ -11,13 +11,11 @@ import { UtilityService } from '../../services/utils/utility.service'
 
 @Component({
   selector: 'signup',
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class SignupComponent implements OnInit {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private fBuilder = inject(FormBuilder)
   private store = inject(Store<AppState>)
   public modService = inject(ModalService)
@@ -29,7 +27,7 @@ export class SignupComponent implements OnInit {
   public signupForm!: FormGroup
   public showPassword: boolean = false
   public allowedSpecialChars: string = '$#@!&*()_+-=[]{}|;:\'",.<>?/~`%^'
-  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1705592960/vsrpskacudkuu4qjtdvi.png'
+  public backgroundImage: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716117647/qu8f0kezhzb8dhusjsq9.avif'
 
   siteKey: string = '6LdnmEIpAAAAACZzpdSF05qOglBB7fI41OP0cQ0V'
   isCaptchaResolved: boolean = false

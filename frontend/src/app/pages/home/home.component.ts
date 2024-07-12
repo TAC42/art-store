@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs'
 import { CarouselItem } from '../../models/utility'
@@ -6,45 +6,43 @@ import { DeviceTypeService } from '../../services/utils/device-type.service'
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class HomeComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private router = inject(Router)
   private dTypeService = inject(DeviceTypeService)
 
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 
-  public loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703533506/ContactandAbout/hn6xwtxhyjukte3tdeqt.jpg'
-  public loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880241/Sculpture/kbmf486sbcavkhpq6s7r.png'
+  public loneImg1: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1715962904/ContactandAbout/bboc85okcqi39lx9yhod.avif'
+  public loneImg2: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716233021/Sculpture/rrdjhri4gdnmmcrlwqe7.avif'
   public loneImg1LowRes: string = ''
   public loneImg2LowRes: string = ''
 
   public artwareProducts: CarouselItem[] = [
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/gwbdk2xu6zp9grs9acdp.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716234411/Artware/m4suwoojmmjbmufwsocj.avif',
       name: 'green vase 01',
       url: '/artware/details/green vase 01'
     },
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/ibyk1mbjlblc3hrymhpi.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716235026/Artware/yylgykjcbkpeououzdhy.avif',
       name: 'ancient cup',
       url: '/artware/details/ancient cup'
     },
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/nlejntudcw8gsdfw1owo.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716237618/Artware/idpbhdaettq8br4jke4m.avif',
       name: 'casual brew',
       url: '/artware/details/casual brew'
     },
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880471/Artware/spwj3lmccf44ke56d53p.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716235026/Artware/v45xvcbdpz39dmyxoep1.avif',
       name: 'elegant vase',
       url: '/artware/details/elegant vase'
     },
@@ -52,25 +50,25 @@ export class HomeComponent {
   public shopProducts: CarouselItem[] = [
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704917781/shop/v0hzwqgk0idasguqdiue.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716232306/Shop/i1atkq6fiwab4b1gmjhe.avif',
       name: 'dark green mug',
       url: '/shop/details/dark green mug'
     },
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/fekcvwmimrtm9wghntnr.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716232307/Shop/rnqoxe2t7d7vn7x9dmlr.avif',
       name: 'black mug',
       url: '/shop/details/black mug'
     },
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/vc8dzka5spwt0jwkfgmy.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716232306/Shop/y1vpsb12qo3eekrbrrop.avif',
       name: 'blue mug',
       url: '/shop/details/blue mug'
     },
     {
       type: 'product',
-      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1703510700/Shop/sr7vuhhliiq6mnwnbdqv.png',
+      imgUrl: 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716232306/Shop/dbrffgy3hpohly7esray.avif',
       name: 'makara mug',
       url: '/shop/details/makara mug'
     },

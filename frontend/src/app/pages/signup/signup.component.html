@@ -1,10 +1,10 @@
-<main class="page-contents w-h-100 grid">
-    <div class="background flex column family-sabon">
+<main class="page-contents w-h-100 grid" aria-label="User signup page">
+    <section class="background flex column family-sabon" aria-label="Background decoration">
         <p>Pottery...</p>
         <p>Beauty...</p>
         <p>Creativity...</p>
-        <image-container [imageUrl]="backgroundImage" />
-    </div>
+        <image-container [highResImageUrl]="backgroundImage" [alt]="'background image'" />
+    </section>
 
     <form class="flex column align-center w-100" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <p class="heads-up w-100">
@@ -19,7 +19,7 @@
                         <span>First Name</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'firstName')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'firstName')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'firstName') }}
                     </span>
                 </label>
@@ -35,7 +35,7 @@
                         <span>Last Name</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'lastName')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'lastName')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'lastName') }}
                     </span>
                 </label>
@@ -53,7 +53,7 @@
                         <span>Username</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'username')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'username')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'username') }}
                     </span>
                 </label>
@@ -70,7 +70,7 @@
                         <span>Email</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'email')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'email')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'email') }}
                     </span>
                 </label>
@@ -86,7 +86,7 @@
                         <span>Confirm Email</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'confirmEmail')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'confirmEmail')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'confirmEmail') }}
                     </span>
                 </label>
@@ -107,7 +107,7 @@
                         <span>Password</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'password')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'password')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'password') }}
                     </span>
                 </label>
@@ -115,7 +115,8 @@
                     placeholder="Your password..." maxlength="32" customValidator [minLength]=8 [maxLength]=32
                     [allowedSpecialChars]="allowedSpecialChars" [passwordValidation]="true">
 
-                <button class="password-toggle" type="button" (click)="togglePasswordShowing($event)">
+                <button class="password-toggle" type="button" (click)="togglePasswordShowing($event)"
+                    aria-label="Toggle Password Visibility">
                     <svg-render *ngIf="showPassword" svgName="showIcon" />
                     <svg-render *ngIf="!showPassword" svgName="hideIcon" />
                 </button>
@@ -129,7 +130,7 @@
                         <span>Confirm Password</span>
                     </div>
 
-                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'confirmPassword')">
+                    <span *ngIf="formUtils.isFieldInvalid(signupForm, 'confirmPassword')" aria-live="polite">
                         {{ formUtils.getErrorMessage(signupForm, 'confirmPassword') }}
                     </span>
                 </label>
@@ -138,25 +139,27 @@
                     customValidator [minLength]=8 [maxLength]=32 [allowedSpecialChars]="allowedSpecialChars"
                     [passwordValidation]="true">
 
-                <button class="password-toggle" type="button" (click)="togglePasswordShowing($event)">
+                <button class="password-toggle" type="button" (click)="togglePasswordShowing($event)"
+                    aria-label="Toggle Password Visibility">
                     <svg-render *ngIf="showPassword" svgName="showIcon" />
                     <svg-render *ngIf="!showPassword" svgName="hideIcon" />
                 </button>
             </div>
         </div>
 
-        <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize" />
+        <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [size]="recaptchaSize"
+            aria-label="Captcha Verification" />
 
         <p>By clicking sign up, you agree to our
-            <a [routerLink]="['/privacy']">privacy policy</a>.
+            <a routerLink="/privacy">privacy policy</a>.
         </p>
 
         <button class="signup flex normal-trans" type="submit" [disabled]="(signupForm.invalid || !isCaptchaResolved)"
-            [class.disabled]="(signupForm.invalid || !isCaptchaResolved)">
+            [class.disabled]="(signupForm.invalid || !isCaptchaResolved)" aria-label="Sign Up">
             <span>Sign up</span>
         </button>
 
-        <button class="login family-bold" (click)="openLogin($event)">
+        <button class="login family-bold" (click)="openLogin($event)" aria-label="Login">
             Already have an account? Login!
         </button>
     </form>

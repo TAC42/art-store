@@ -1,6 +1,7 @@
-<main class="page-contents grid layout-row w-h-100">
-  <form class="flex column align-center" [formGroup]="productEditForm" (ngSubmit)="onSaveProduct()">
-    <a [routerLink]="['/shop']" title="Exit edit page?">
+<main class="page-contents grid layout-row w-h-100" aria-label="Editing product page">
+  <form class="flex column align-center" [formGroup]="productEditForm" (ngSubmit)="onSaveProduct()"
+    aria-label="Product edit form">
+    <a routerLink="/shop" title="Exit edit page?" aria-label="Exit edit page">
       <svg-render class="fast-trans" svgName="leftArrowIcon" />
     </a>
 
@@ -11,12 +12,13 @@
           <span>Name*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'name')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'name')" aria-live="polite" id="name-error">
           {{ formUtils.getErrorMessage(productEditForm, 'name') }}
         </span>
       </label>
       <input id="name" type="text" formControlName="name" placeholder="Please enter product name..." maxlength="48"
-        customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="specialCharsLimited" autofocus />
+        customValidator [minLength]=6 [maxLength]=48 [allowedSpecialChars]="specialCharsLimited" autofocus
+        aria-describedby="name-error" [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'name')" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'price')">
@@ -26,12 +28,13 @@
           <span>Price*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'price')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'price')" aria-live="polite" id="price-error">
           {{ formUtils.getErrorMessage(productEditForm, 'price') }}
         </span>
       </label>
       <input id="price" type="number" formControlName="price" placeholder="Please enter a price..." maxlength="3"
-        customValidator [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
+        customValidator [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999"
+        aria-describedby="price-error" [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'price')" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'description')">
@@ -41,13 +44,15 @@
           <span>Description*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'description')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'description')" aria-live="polite"
+          id="description-error">
           {{ formUtils.getErrorMessage(productEditForm, 'description') }}
         </span>
       </label>
       <textarea id="description" formControlName="description" placeholder="Please enter info regarding your product..."
-        maxlength="900" customValidator [minLength]=32 [maxLength]=900
-        [allowedSpecialChars]="specialCharsFull"></textarea>
+        maxlength="900" customValidator [minLength]=32 [maxLength]=900 [allowedSpecialChars]="specialCharsFull"
+        aria-describedby="description-error"
+        [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'description')"></textarea>
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
@@ -57,12 +62,14 @@
           <span>Dimensions*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dimensions')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dimensions')" aria-live="polite" id="dimensions-error">
           {{ formUtils.getErrorMessage(productEditForm, 'dimensions') }}
         </span>
       </label>
       <input id="dimensions" type="text" formControlName="dimensions" placeholder="Please enter product dimensions..."
-        maxlength="36" customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="specialCharsLimited" />
+        maxlength="36" customValidator [minLength]=6 [maxLength]=36 [allowedSpecialChars]="specialCharsLimited"
+        aria-describedby="dimensions-error"
+        [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'dimensions')" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'materials')">
@@ -72,13 +79,14 @@
           <span>Materials*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'materials')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'materials')" aria-live="polite" id="materials-error">
           {{ formUtils.getErrorMessage(productEditForm, 'materials') }}
         </span>
       </label>
       <input id="materials" type="text" formControlName="materials"
         placeholder="The materials that make your product..." maxlength="24" customValidator [minLength]=3
-        [maxLength]=24 [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" />
+        [maxLength]=24 [allowNumbers]="false" [allowedSpecialChars]="'/ .,()'" aria-describedby="materials-error"
+        [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'materials')" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
@@ -88,12 +96,13 @@
           <span>Date Made*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dateMade')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'dateMade')" aria-live="polite" id="dateMade-error">
           {{ formUtils.getErrorMessage(productEditForm, 'dateMade') }}
         </span>
       </label>
       <input id="dateMade" type="text" formControlName="dateMade" placeholder="When your product was finished..."
-        maxlength="24" customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'" />
+        maxlength="24" customValidator [minLength]=4 [maxLength]=24 [allowedSpecialChars]="'/ .,'"
+        aria-describedby="dateMade-error" [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'dateMade')" />
     </div>
 
     <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(productEditForm, 'stock')">
@@ -103,23 +112,24 @@
           <span>Stock Amount*</span>
         </div>
 
-        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'stock')">
+        <span *ngIf="formUtils.isFieldInvalid(productEditForm, 'stock')" aria-live="polite" id="stock-error">
           {{ formUtils.getErrorMessage(productEditForm, 'stock') }}
         </span>
       </label>
       <input id="stock" type="number" formControlName="stock" placeholder="Please enter stock amount..." maxlength="3"
-        customValidator [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999" />
+        customValidator [minLength]=1 [maxLength]=3 [allowLetters]="false" min="0" max="999"
+        aria-describedby="stock-error" [attr.aria-invalid]="formUtils.isFieldInvalid(productEditForm, 'stock')" />
     </div>
 
     <div class="input-area flex column w-100">
-      <label for="type" class="flex row align-center">
+      <label for="type" class="flex row align-center" id="type-label">
         <div class="label-info flex row align-center">
           <svg-render svgName="location" />
           <span>Location</span>
         </div>
       </label>
 
-      <select formControlName="type" id="type">
+      <select formControlName="type" id="type" aria-labelledby="type-label">
         <option value="shop">Shop</option>
         <option value="sculpture">Sculpture</option>
         <option value="artware">Ware</option>
@@ -127,43 +137,47 @@
     </div>
 
     <div class="input-area flex column w-100">
-      <label for="imgUrls" class="flex row align-center">
+      <label for="imgUrls" class="flex row align-center" id="imgUrls-label">
         <div class="label-info flex row align-center">
           <svg-render svgName="imgUrls" />
           <span>Images</span>
         </div>
       </label>
 
-      <div class="upload-area grid" formArrayName="imgUrls">
+      <div class="upload-area grid" formArrayName="imgUrls" aria-labelledby="imgUrls-label">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="productEditForm.get('type')?.value"
             (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrls'})" />
         </div>
 
         <div class="amount-management grid">
-          <button class="flex column" type="button" (click)="addNewImgUploader()"
-            [disabled]="imgUrlsControls.length >= 5" [class.disabled]="imgUrlsControls.length >= 5">
+          <button class="flex column full-center fast-trans" type="button" (click)="addNewImgUploader()"
+            [disabled]="imgUrlsControls.length >= 5" [class.disabled]="imgUrlsControls.length >= 5"
+            aria-label="Add Image">
             <svg-render svgName="addIcon" />
-            <span>Add</span>
+            <span class="family-bold">Add</span>
           </button>
 
-          <button class="flex column" type="button" (click)="removeImgUploader(imgUrlsControls.length - 1)"
-            [disabled]="imgUrlsControls.length <= 1" [class.disabled]="imgUrlsControls.length <= 1">
+          <button class="flex column full-center fast-trans" type="button"
+            (click)="removeImgUploader(imgUrlsControls.length - 1)" [disabled]="imgUrlsControls.length <= 1"
+            [class.disabled]="imgUrlsControls.length <= 1" aria-label="Remove Image">
             <svg-render svgName="removeIcon" />
-            <span>Remove</span>
+            <span class="family-bold">Remove</span>
           </button>
         </div>
       </div>
     </div>
 
-    <div class="form-actions flex row align-center">
+    <section class="form-actions flex row align-center">
       <button class="flex row align-center family-bold normal-trans" type="submit"
         [disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)"
-        [class.disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)">
+        [class.disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)"
+        aria-label="Submit Product Edit Form" title="Save changes to your desired product"
+        [attr.aria-disabled]="!productEditForm.valid || formUtils.isFormUnchanged(productEditForm, initialFormData)">
         <span>Submit</span>
         <svg-render class="normal-trans" svgName="stampIcon" />
       </button>
-    </div>
+    </section>
   </form>
 
   <edit-preview [name]="productEditForm.get('name')?.value" [type]="productEditForm.get('type')?.value"

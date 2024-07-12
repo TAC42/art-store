@@ -1,8 +1,10 @@
-<main class="page-contents w-h-100 flex column">
-  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column text-center">
+<main class="page-contents w-h-100 flex column" aria-label="Ori Carlin home page">
+  <section *ngIf="(deviceType$ | async) !== 'desktop'" class="mobile-view layout-row flex column text-center"
+    aria-label="Mobile view">
     <section class="teasers grid">
-      <div class="teaser-area grid normal-trans" (click)="navigateTo('/about/introduction')">
-        <image-container [imageUrl]="loneImg1" />
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/about/introduction')" role="button"
+        aria-label="Introduction to Ori Carlin">
+        <image-container [highResImageUrl]="loneImg1" />
 
         <div class="text-area flex column">
           <p class="family-bold normal-trans">BIOGRAPHY</p>
@@ -10,8 +12,9 @@
         </div>
       </div>
 
-      <div class="teaser-area grid normal-trans" (click)="navigateTo('/sculpture/details/staircase vase')">
-        <image-container [imageUrl]="loneImg2" />
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/sculpture/details/staircase vase')" role="button"
+        aria-label="Staircase Vase">
+        <image-container [highResImageUrl]="loneImg2" />
 
         <div class="text-area flex column">
           <p class="family-bold normal-trans">ONE OF MY FINEST</p>
@@ -21,11 +24,12 @@
     </section>
 
     <section class="carousels grid">
-      <article class="gallery-carousel grid">
+      <article class="gallery-carousel grid" role="region" aria-label="Ware items carousel">
         <product-carousel [carouselItems]="artwareProducts" />
 
         <div class="text-area flex column">
-          <button class="flex align-center normal-trans" (click)="navigateTo('/artware')" title="Go to ware gallery?">
+          <button class="flex align-center normal-trans" (click)="navigateTo('/artware')" title="Go to ware gallery?"
+            aria-label="Discover Artisan Crafts">
             <svg-render class="fast-trans" svgName="vaseIcon" />
             <span>Discover Artisan Crafts</span>
             <svg-render class="fast-trans" svgName="vaseIcon" />
@@ -33,11 +37,12 @@
         </div>
       </article>
 
-      <article class="gallery-carousel grid">
+      <article class="gallery-carousel grid" role="region" aria-label="Shop items carousel">
         <product-carousel [carouselItems]="shopProducts" />
 
         <div class="text-area flex column">
-          <button class="flex align-center normal-trans" (click)="navigateTo('/shop')" title="Go to shop?">
+          <button class="flex align-center normal-trans" (click)="navigateTo('/shop')" title="Go to shop?"
+            aria-label="Purchase Unique Pottery">
             <svg-render class="fast-trans" svgName="shoppingCart" />
             <span>Purchase Unique Pottery</span>
             <svg-render class="fast-trans" svgName="shoppingCart" />
@@ -47,10 +52,11 @@
     </section>
   </section>
 
-  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view grid text-center">
+  <section *ngIf="(deviceType$ | async) === 'desktop'" class="desktop-view grid text-center" aria-label="Desktop view">
     <section class="teasers flex column">
-      <div class="teaser-area grid normal-trans" (click)="navigateTo('/sculpture/details/staircase vase')">
-        <image-container [imageUrl]="loneImg2" />
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/sculpture/details/staircase vase')" role="button"
+        aria-label="Staircase Vase">
+        <image-container [highResImageUrl]="loneImg2" />
 
         <div class="text-area flex column">
           <p class="family-bold normal-trans">ONE OF MY FINEST</p>
@@ -58,9 +64,9 @@
         </div>
       </div>
 
-      <div class="teaser-area grid normal-trans" (click)="navigateTo('/about/introduction')">
-        <image-container [imageUrl]="loneImg1" />
-
+      <div class="teaser-area grid normal-trans" (click)="navigateTo('/about/introduction')" role="button"
+        aria-label="Introduction to Ori Carlin">
+        <image-container [highResImageUrl]="loneImg1" />
         <div class="text-area flex column">
           <p class="family-bold normal-trans">BIOGRAPHY</p>
           <h2 class="normal-trans">Introduction to Ori Carlin</h2>
@@ -69,11 +75,12 @@
     </section>
 
     <section class="carousels flex column">
-      <article class="gallery-carousel grid">
+      <article class="gallery-carousel grid" role="region" aria-label="Ware items carousel">
         <product-carousel [carouselItems]="artwareProducts" />
 
         <div class="text-area flex column">
-          <button class="flex align-center normal-trans" (click)="navigateTo('/artware')" title="Go to ware gallery?">
+          <button class="flex align-center normal-trans" (click)="navigateTo('/artware')" title="Go to ware gallery?"
+            aria-label="Discover Artisan Crafts">
             <svg-render class="fast-trans" svgName="vaseIcon" />
             <span>Discover Artisan Crafts</span>
             <svg-render class="fast-trans" svgName="vaseIcon" />
@@ -81,11 +88,12 @@
         </div>
       </article>
 
-      <article class="gallery-carousel grid">
+      <article class="gallery-carousel grid" role="region" aria-label="Shop items carousel">
         <product-carousel [carouselItems]="shopProducts" />
 
         <div class="text-area flex column">
-          <button class="flex align-center normal-trans" (click)="navigateTo('/shop')" title="Go to shop?">
+          <button class="flex align-center normal-trans" (click)="navigateTo('/shop')" title="Go to shop?"
+            aria-label="Purchase Unique Pottery">
             <svg-render class="fast-trans" svgName="shoppingCart" />
             <span>Purchase Unique Pottery</span>
             <svg-render class="fast-trans" svgName="shoppingCart" />

@@ -1,6 +1,6 @@
 app-home {
     .page-contents {
-        animation: backgroundFadeInOut 30s infinite;
+        animation: backgroundFadeInOut 60s ease-in-out infinite;
 
         .mobile-view,
         .desktop-view {
@@ -8,28 +8,23 @@ app-home {
             .teaser-area {
                 cursor: pointer;
 
-                img {
-                    transition: all 0.5s ease-in-out;
-                }
-
                 .text-area {
                     p {
-                        color: $scdclr2;
-                        font-size: 14px;
+                        font-size: 18px;
                         letter-spacing: 0.1em;
                         margin-block-start: 1em;
                     }
 
                     h2 {
-                        color: $prmclr1;
                         font-size: 21px;
+                        letter-spacing: 0.05em;
                     }
                 }
 
                 &:hover {
                     background: $prmclr1;
 
-                    img {
+                    image-container img {
                         filter: brightness(.75);
                     }
 
@@ -128,10 +123,8 @@ app-home {
                 margin-block-end: 1em;
             }
 
-            .gallery-carousel .text-area {
-                button {
-                    font-size: 18px;
-                }
+            .gallery-carousel .text-area button {
+                font-size: 18px;
             }
         }
     }

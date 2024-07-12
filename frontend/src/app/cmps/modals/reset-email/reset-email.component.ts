@@ -100,7 +100,7 @@ export class ResetEmailComponent implements OnInit {
         const newEmail = this.resetForm.value.email
         const updatedUser: User = { ...user, email: newEmail }
 
-        this.store.dispatch(UPDATE_USER({ updatedUser }))
+        this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
         this.notifyUser(user)
       })
     } else showErrorMsg('Failed to Update!',

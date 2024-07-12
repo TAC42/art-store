@@ -16,10 +16,8 @@ product-preview {
       padding-bottom: 0;
       text-align: center;
 
-      .product-body {
-        img {
-          border-radius: 0.5em;
-        }
+      .product-body image-container img {
+        border-radius: 0.5em;
       }
 
       .name {
@@ -41,23 +39,20 @@ product-preview {
       }
     }
 
-    &:not(.masonry-item) {
-      .name {
-        padding: 0 0.4em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: 1.6;
-        min-height: 24px;
-        font-size: 20px;
-      }
+    &:not(.masonry-item) .name {
+      padding: 0 0.4em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 1.6;
+      min-height: 24px;
+      font-size: 20px;
     }
 
     .product-body {
       position: relative;
 
-      img {
-        object-fit: cover;
+      image-container img {
         min-width: 150px;
         min-height: 150px;
         background: $prmclr1;

@@ -1,138 +1,128 @@
-user-edit {
-  .modal-wrapper {
-    .profile-edit {
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding: 0.5em 1em;
-      min-width: 275px;
-      max-width: 500px;
-      z-index: 15;
-      background: $prmclr2;
+user-edit .modal-wrapper .profile-edit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.5em 1em;
+  min-width: 275px;
+  max-width: 500px;
+  z-index: 15;
+  background: $prmclr2;
 
-      .header {
-        position: relative;
-        margin-block-end: 1em;
+  .header {
+    position: relative;
+    margin-block-end: 1em;
 
-        h2 {
-          font-size: 1.75em;
-          color: $prmclr1;
-          letter-spacing: 0.05em;
+    h2 {
+      font-size: 1.75em;
+      color: $prmclr1;
+      letter-spacing: 0.05em;
+    }
+
+    .back {
+      position: absolute;
+      width: 3em;
+      height: 3em;
+
+      svg-render {
+        fill: $prmclr1;
+      }
+    }
+  }
+
+  form {
+    gap: 1em;
+    padding-bottom: 1em;
+    max-width: 900px;
+    margin-block-start: 0.5em;
+
+    .input-area {
+      width: 100%;
+      gap: 0.25em;
+      font-size: 18px;
+
+      label {
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0.5em;
+        min-height: 30px;
+
+        span {
+          color: $mnrclr2;
+          font-size: 15px;
         }
 
-        .back {
-          position: absolute;
-          width: 3em;
-          height: 3em;
+        .label-info {
+          align-items: center;
+          gap: 0.5em;
 
           svg-render {
+            width: 24px;
+            height: 24px;
             fill: $prmclr1;
+          }
+
+          span {
+            line-height: 1.6;
+            color: $prmclr1;
+            letter-spacing: 0.025em;
+            font-size: 18px;
           }
         }
       }
 
-      form {
+      input {
+        padding: 0.5em;
+        border-radius: 0.5em;
+        border: 1px solid $scdclr4;
+        color: $prmclr1;
+        font-size: 16px;
+
+        &:focus {
+          border: 1px solid $prmclr1;
+        }
+      }
+
+      &.error input {
+        border: 1px solid $mnrclr2;
+      }
+    }
+
+    .form-actions {
+      position: fixed;
+      gap: 1em;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1em 0;
+      background: $prmclr2;
+      border-block-start: 1px solid $scdclr3;
+
+      .reset-choices {
         gap: 1em;
-        padding-bottom: 1em;
-        max-width: 900px;
-        margin-block-start: 0.5em;
 
-        .input-area {
-          width: 100%;
-          gap: 0.25em;
+        button {
+          padding: 0.25em 0.5em;
           font-size: 18px;
+          color: $prmclr1;
+          border-radius: 0.5em;
+          background: $scdclr3;
+        }
+      }
 
-          label {
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 0.5em;
-            min-height: 30px;
+      .submit {
+        font-size: 21px;
+        padding: 0.75em 1em;
+        background: $prmclr1;
+        color: $prmclr2;
+        border-radius: 0.5em;
 
-            span {
-              color: $mnrclr2;
-              font-size: 15px;
-              text-transform: capitalize;
-            }
-
-            .label-info {
-              align-items: center;
-              gap: 0.5em;
-
-              svg-render {
-                width: 24px;
-                height: 24px;
-                fill: $prmclr1;
-              }
-
-              span {
-                line-height: 1.6;
-                color: $prmclr1;
-                letter-spacing: 0.025em;
-                font-family: "nh-bold";
-                font-size: 18px;
-              }
-            }
-          }
-
-          input {
-            padding: 0.5em;
-            width: 100%;
-            transition: all 0.3s ease-in-out;
-            border-radius: 0.5em;
-            border: 1px solid $scdclr4;
-            color: $prmclr1;
-            font-size: 16px;
-
-            &:focus {
-              border: 1px solid $prmclr1;
-            }
-          }
-
-          &.error {
-            input {
-              border: 1px solid $mnrclr2;
-            }
-          }
+        &.disabled {
+          pointer-events: none;
+          background: $scdclr4;
         }
 
-        .form-actions {
-          position: fixed;
-          gap: 1em;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 1em 0;
-          background: $prmclr2;
-          border-block-start: 1px solid $scdclr3;
-
-          .reset-choices {
-            gap: 1em;
-
-            button {
-              padding: 0.25em 0.5em;
-              font-size: 18px;
-              color: $prmclr1;
-              border-radius: 0.5em;
-              background: $scdclr3;
-            }
-          }
-
-          .submit {
-            font-size: 21px;
-            padding: 0.75em 1em;
-            background: $prmclr1;
-            color: $prmclr2;
-            border-radius: 0.5em;
-
-            &.disabled {
-              pointer-events: none;
-              background: $scdclr4;
-            }
-
-            &:hover {
-              background: $mnrclr1;
-            }
-          }
+        &:hover {
+          background: $mnrclr1;
         }
       }
     }

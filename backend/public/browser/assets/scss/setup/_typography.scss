@@ -1,24 +1,29 @@
 @font-face {
-    src: url("../../fonts/NeueHaasDisplayLight.ttf");
     font-family: 'nh-light';
+    src: url("../../fonts/NeueHaasDisplayLight.ttf") format("truetype");
+    font-display: swap;
 }
 
 @font-face {
-    src: url("../../fonts/NeueHaasDisplayMedium.ttf");
     font-family: 'nh-medium';
+    src: url("../../fonts/NeueHaasDisplayMedium.ttf") format("truetype");
+    font-display: swap;
 }
 
 @font-face {
-    src: url("../../fonts/NeueHaasDisplayBold.ttf");
     font-family: 'nh-bold';
+    src: url("../../fonts/NeueHaasDisplayBold.ttf") format("truetype");
+    font-display: swap;
 }
 
 @font-face {
-    src: url("../../fonts/Sabon.ttf");
     font-family: 'sabon';
+    src: url("../../fonts/Sabon.ttf") format("truetype");
+    font-display: swap;
 }
 
 @font-face {
-    src: url("../../fonts/NunitoSans-ExtraBold.ttf");
     font-family: 'nunito';
+    src: url("../../fonts/NunitoSans-ExtraBold.ttf") format("truetype");
+    font-display: swap;
 }

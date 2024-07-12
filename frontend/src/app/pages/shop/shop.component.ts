@@ -1,11 +1,10 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'shop-wrapper',
-  templateUrl: './shop.component.html'
+  templateUrl: './shop.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class ShopComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
 }

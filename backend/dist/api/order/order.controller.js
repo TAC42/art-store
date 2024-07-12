@@ -79,6 +79,7 @@ async function _removeOrder(req, res) {
 async function _createPaypalOrder(req, res) {
     try {
         const order = req.body;
+        loggerService.debug('Received order details for PayPal: ', order);
         const paypalOrderId = await createPaypalOrder(order);
         if (!paypalOrderId) {
             loggerService.error('PayPal order creation failed');
@@ -102,10 +103,23 @@ async function createPaypalOrder(order) {
             ? new paypal.core.LiveEnvironment(process.env.PAYPAL_CLIENT_ID, process.env.PAYPAL_CLIENT_SECRET)
             : new paypal.core.SandboxEnvironment(process.env.PAYPAL_CLIENT_ID, process.env.PAYPAL_CLIENT_SECRET);
         const client = new paypal.core.PayPalHttpClient(environment);
-        const totalPrice = order.expenses.grandTotal;
-        const taxAmount = order.expenses.taxes;
-        const deliveryFee = order.expenses.deliveryFee;
-        const total = order.expenses.total;
+        const { total, taxes, deliveryFee, grandTotal } = order.expenses;
+        if (!order.summary || order.summary.length === 0) {
+            throw new Error('Order summary is empty');
+        }
+        if (!order.expenses || isNaN(order.expenses.total) || isNaN(order.expenses.taxes) ||
+            isNaN(order.expenses.deliveryFee) || isNaN(order.expenses.grandTotal)) {
+            throw new Error('Invalid order expenses');
+        }
+        const items = order.summary.map(item => ({
+            name: item.name ?? '',
+            unit_amount: {
+                currency_code: "USD",
+                value: item.price?.toFixed(2) ?? '0.00',
+            },
+            quantity: item.amount?.toString() ?? '1',
+            category: 'PHYSICAL_GOODS',
+        }));
         // Create order request
         const request = new paypal.orders.OrdersCreateRequest();
         request.prefer("return=representation");
@@ -115,7 +129,7 @@ async function createPaypalOrder(order) {
                 {
                     amount: {
                         currency_code: "USD",
-                        value: totalPrice.toFixed(2),
+                        value: grandTotal.toFixed(2),
                         breakdown: {
                             item_total: {
                                 currency_code: "USD",
@@ -123,39 +137,41 @@ async function createPaypalOrder(order) {
                             },
                             tax_total: {
                                 currency_code: "USD",
-                                value: taxAmount.toFixed(2),
+                                value: taxes.toFixed(2),
                             },
                             shipping: {
                                 currency_code: "USD",
                                 value: deliveryFee.toFixed(2),
                             },
-                            // Provide defaults for other breakdown properties
-                            discount: { currency_code: "USD", value: "0.00" },
-                            handling: { currency_code: "USD", value: "0.00" },
-                            insurance: { currency_code: "USD", value: "0.00" },
-                            shipping_discount: { currency_code: "USD", value: "0.00" },
+                            discount: {
+                                currency_code: "USD",
+                                value: "0.00",
+                            },
+                            handling: {
+                                currency_code: "USD",
+                                value: "0.00",
+                            },
+                            insurance: {
+                                currency_code: "USD",
+                                value: "0.00",
+                            },
+                            shipping_discount: {
+                                currency_code: "USD",
+                                value: "0.00",
+                            },
                         },
                     },
-                    items: order.summary.map(item => ({
-                        name: item.name ?? '',
-                        unit_amount: {
-                            currency_code: "USD",
-                            value: item.price?.toFixed(2) ?? '0.00',
-                        },
-                        quantity: item.amount?.toString() ?? '1',
-                        category: 'PHYSICAL_GOODS',
-                    })),
+                    items: items,
                 },
             ],
         });
-        loggerService.debug('PayPal order request: ', JSON.stringify(request.body.purchase_units));
-        // Execute PayPal request
-        const response = await client.execute(request);
+        loggerService.debug('PayPal order request: ', JSON.stringify(request.body, null, 2));
+        const response = await client.execute(request); // Execute PayPal request
         loggerService.debug('PayPal response ID: ', response.result.id);
         return response.result.id;
     }
     catch (err) {
         loggerService.error('Failed to create PayPal order', err);
-        return undefined;
+        throw new Error('Failed to create PayPal order');
     }
 }

@@ -2,7 +2,7 @@ random-product-carousel {
     overflow: hidden;
 
     .carousel-container {
-        padding: 0.5em 1em;
+        padding: 0.5em 0;
         position: relative;
         overflow: hidden;
         margin-bottom: -20px;
@@ -30,8 +30,6 @@ random-product-carousel {
 
         button {
             position: absolute;
-            align-items: center;
-            justify-content: center;
             background: $prmclr2;
             top: 0;
             bottom: 0;
@@ -40,7 +38,6 @@ random-product-carousel {
             width: 50px;
             height: 100%;
             opacity: 0.25;
-            transition: all 0.3s ease-in-out;
 
             &:first-of-type {
                 left: 0.5em;
@@ -63,27 +60,17 @@ random-product-carousel {
 
             .other-product-area {
                 flex: 0 0 auto;
-                align-items: center;
                 gap: 0.25em;
                 cursor: pointer;
                 user-select: none;
 
-                img {
-                    height: 200px;
-                    width: 200px;
-                    object-fit: cover;
-                    transition: all 0.5s ease-in-out;
+                image-container img {
+                    max-height: 180px;
+                    aspect-ratio: 1.25/ 1;
                 }
 
-                p {
-                    font-family: 'nh-bold';
-                    text-transform: capitalize;
-                }
-
-                &:hover {
-                    img {
-                        filter: brightness(.75);
-                    }
+                &:hover image-container img {
+                    filter: brightness(.75);
                 }
             }
         }

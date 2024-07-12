@@ -1,21 +1,24 @@
-<main class="dropdown-wrapper flex" *ngIf="modService.isModalOpen('user-dropdown')">
-    <section class="dropdown-contents flex column w-100" (clickOutside)="closeDropdown()">
-        <div *ngIf="(user$ | async)?.isAdmin" class="action-area fast-trans">
-            <span (click)="navigateTo('/edit')">Add Product</span>
+<main class="dropdown-wrapper flex" *ngIf="modService.isModalOpen('user-dropdown')" role="dialog" aria-modal="true"
+    aria-labelledby="user-dropdown-label">
+    <nav class="dropdown-contents flex column w-100" (clickOutside)="closeDropdown()" role="menu"
+        aria-label="User Dropdown Menu">
+        <div *ngIf="(user$ | async)?.isAdmin" class="action-area fast-trans" role="menuitem">
+            <a routerLink="/edit" (click)="closeDropdown()" aria-label="Navigate to product editing">Add Product</a>
         </div>
 
-        <div *ngIf="(user$ | async)?._id" class="action-area fast-trans">
-            <span (click)="navigateTo('/profile')">Profile</span>
+        <div *ngIf="(user$ | async)?._id" class="action-area fast-trans" role="menuitem">
+            <a routerLink="/profile" (click)="closeDropdown()" aria-label="Navigate to profile">Profile</a>
         </div>
 
-        <div *ngIf="(user$ | async)?.isAdmin" class="action-area fast-trans">
-            <span (click)="navigateTo('/dashboard')">Dashboard</span>
+        <div *ngIf="(user$ | async)?.isAdmin" class="action-area fast-trans" role="menuitem">
+            <a routerLink="/dashboard" (click)="closeDropdown()" aria-label="Navigate to dashboard">Dashboard</a>
         </div>
 
-        <div *ngIf="user$ | async as loggedinUser" class="action-area fast-trans">
-            <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)">
+        <div *ngIf="user$ | async as loggedinUser" class="action-area fast-trans" role="menuitem">
+            <span (click)="loggedinUser._id ? exitAccount($event) : openLogin($event)"
+                [attr.aria-label]="loggedinUser._id ? 'Logout' : 'Login'">
                 {{ loggedinUser._id ? 'Logout' : 'Login' }}
             </span>
         </div>
-    </section>
+    </nav>
 </main>

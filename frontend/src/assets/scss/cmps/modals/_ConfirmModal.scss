@@ -1,42 +1,36 @@
-confirm-modal {
-  .confirm-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: $prmclr2;
-    z-index: 15;
-    padding: 1em;
-    max-width: 300px;
-    border-radius: 0.5em;
-    -webkit-user-select: none;
-    user-select: none;
-    align-items: center;
-    justify-content: center;
+confirm-modal .modal-wrapper .confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $prmclr2;
+  z-index: 15;
+  padding: 1em;
+  max-width: 300px;
+  border-radius: 0.5em;
+  -webkit-user-select: none;
+  user-select: none;
 
-    span {
-      font-size: 2em;
-      display: inline;
-      margin-block-end: 0.5em;
-    }
+  span {
+    font-size: 2em;
+    display: inline;
+    margin-block-end: 0.5em;
+  }
 
-    .btns {
-      grid-auto-flow: column;
-      gap: 5em;
+  .user-actions {
+    grid-auto-flow: column;
+    gap: 5em;
 
-      button {
-        background-color: $scdclr4;
-        padding: 0.5em;
-        border-radius: 0.5em;
-        color: $prmclr1;
-        transition: all 0.3s;
-        font-size: 1em;
-        font-family: "nh-bold";
+    button {
+      background-color: $scdclr4;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      color: $prmclr1;
+      font-size: 1em;
 
-        &:hover {
-          background-color: $prmclr1;
-          color: $scdclr4;
-        }
+      &:hover {
+        background-color: $prmclr1;
+        color: $scdclr4;
       }
     }
   }

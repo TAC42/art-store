@@ -9,7 +9,7 @@ import { EventBusService, showErrorMsg } from '../../services/utils/event-bus.se
 
 export class ImageUploaderComponent {
   @Input() index: number = 0
-  @Input() defaultImgUrl: string = 'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704997581/PlaceholderImages/oxvsreygp3nxtk5oexwq.jpg'
+  @Input() defaultImgUrl: string = ''
   @Input() folderName: string = ''
   @Output() onUploaded = new EventEmitter<{ url: string, index: number }>()
 
@@ -28,7 +28,7 @@ export class ImageUploaderComponent {
   // Check if image is either too heavy or wrong format
   validateFile(file: File): { isValid: boolean, errorHeader?: string, errorMessage?: string } {
     const fileSize = file.size / 1024 / 1024
-    const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png']
+    const allowedFormats = ['image/avif']
 
     if (fileSize > 2) return {
       isValid: false,
@@ -39,24 +39,24 @@ export class ImageUploaderComponent {
     if (!allowedFormats.includes(file.type)) return {
       isValid: false,
       errorHeader: 'Invalid format!',
-      errorMessage: 'Only JPG, JPEG, and PNG are allowed!'
+      errorMessage: 'Only AVIF is allowed!'
     }
     return { isValid: true }
   }
 
-  async uploadImg(event: Event): Promise<void> {
-    const fileInput = event.target as HTMLInputElement
-    if (!fileInput.files?.length) return
+  // When the user decides to drag & drop
+  onFileDropped(file: File) {
+    this.uploadFile(file)
+  }
 
-    const file = fileInput.files[0]
+  async uploadFile(file: File): Promise<void> {
     const validation = this.validateFile(file)
-
     if (!validation.isValid) {
       showErrorMsg(validation.errorHeader!, validation.errorMessage!, this.eBusService)
       return
     }
-
     this.isUploading = true
+
     try {
       const data = await this.upService.uploadImg(file, this.folderName)
       this.imgUrl = data.secure_url
@@ -66,6 +66,13 @@ export class ImageUploaderComponent {
       showErrorMsg('Upload Failed!', 'Sorry! Try to upload the image again...', this.eBusService)
     } finally {
       this.isUploading = false
+    }
+  }
+
+  onFileInputChange(event: Event): void {
+    const fileInput = event.target as HTMLInputElement
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.uploadFile(fileInput.files[0])
     }
   }
 

@@ -1,177 +1,168 @@
-signup {
-    .page-contents {
-        .background {
-            position: relative;
+signup .page-contents {
+    .background {
+        position: relative;
 
-            p {
-                position: absolute;
-                color: $prmclr2;
-                font-size: 4rem;
-                transform: translate(-50%, -50%);
-            }
+        p {
+            position: absolute;
+            color: $prmclr2;
+            font-size: 4rem;
+            transform: translate(-50%, -50%);
+        }
 
-            p:nth-child(1) {
-                top: 0;
-                left: 0;
-                transform: translate(50%, 50%);
-            }
+        p:nth-child(1) {
+            top: 0;
+            left: 0;
+            transform: translate(50%, 50%);
+        }
 
-            p:nth-child(2) {
-                top: 50%;
-                left: 50%;
-            }
+        p:nth-child(2) {
+            top: 50%;
+            left: 50%;
+        }
 
-            p:nth-child(3) {
-                bottom: 0;
-                right: 0;
-                transform: translate(-50%, -50%);
-            }
+        p:nth-child(3) {
+            bottom: 0;
+            right: 0;
+            transform: translate(-50%, -50%);
+        }
 
-            image-container {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                z-index: -1;
-                filter: brightness(25%);
+        image-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            filter: brightness(25%);
+        }
+    }
+
+    form {
+        max-width: 800px;
+        margin: 1em auto;
+
+        .combined-inputs {
+            gap: 1em;
+
+            .input-area {
+                position: relative;
+                gap: 0.25em;
+
+                label {
+                    justify-content: space-between;
+                    padding: 0 0.5em;
+                    min-height: 30px;
+
+                    span {
+                        color: $mnrclr2;
+                        font-size: 12px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 1;
+                    }
+
+                    .label-info {
+                        gap: 0.5em;
+
+                        span {
+                            line-height: 1.6;
+                            color: $prmclr1;
+                            letter-spacing: 0.025em;
+                            font-size: 15px;
+                        }
+
+                        svg-render {
+                            width: 24px;
+                            height: 24px;
+                            fill: $prmclr1;
+                        }
+                    }
+                }
+
+                input {
+                    padding: 0.25em 0.5em;
+                    border-radius: 0.5em;
+                    border: 1px solid $scdclr4;
+                    color: $prmclr1;
+                    font-size: 14px;
+                    line-height: 1.6;
+
+                    &:focus {
+                        border: 1px solid $prmclr1;
+                    }
+                }
+
+                &.error input {
+                    border: 1px solid $mnrclr2;
+                }
+
+                .password-toggle {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 32px;
+                    height: 32px;
+                }
             }
         }
 
-        form {
-            max-width: 800px;
-            margin: 1em auto;
+        p {
+            color: $prmclr1;
 
-            .combined-inputs {
-                gap: 1em;
-
-                .input-area {
-                    position: relative;
-                    gap: 0.25em;
-
-                    label {
-                        justify-content: space-between;
-                        padding: 0 0.5em;
-                        min-height: 30px;
-
-                        span {
-                            color: $mnrclr2;
-                            font-size: 12px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            -webkit-line-clamp: 1;
-                        }
-
-                        .label-info {
-                            gap: 0.5em;
-
-                            span {
-                                line-height: 1.6;
-                                color: $prmclr1;
-                                letter-spacing: 0.025em;
-                                font-size: 15px;
-                            }
-
-                            svg-render {
-                                width: 24px;
-                                height: 24px;
-                                fill: $prmclr1;
-                            }
-                        }
-                    }
-
-                    input {
-                        width: 100%;
-                        padding: 0.25em 0.5em;
-                        border-radius: 0.5em;
-                        border: 1px solid $scdclr4;
-                        color: $prmclr1;
-                        font-family: 'nh-medium';
-                        font-size: 14px;
-                        line-height: 1.6;
-                        transition: all 0.3s ease-in-out;
-
-                        &:focus {
-                            border: 1px solid $prmclr1;
-                        }
-                    }
-
-                    &.error {
-
-                        input,
-                        textarea {
-                            border: 1px solid $mnrclr2;
-                        }
-                    }
-
-                    .password-toggle {
-                        position: absolute;
-                        right: 0;
-                        bottom: 0;
-                        width: 32px;
-                        height: 32px;
-                    }
-                }
+            a {
+                color: $scdclr8;
             }
+        }
 
-            p {
+        .signup {
+            position: relative;
+            padding: 0.5em 0.75em;
+            background: $prmclr1;
+            color: $prmclr2;
+            border-radius: 0.5em;
+            font-size: 18px;
+            opacity: 1;
+
+            &.disabled {
+                pointer-events: none;
+                background: $scdclr1;
                 color: $prmclr1;
-
-                a {
-                    color: $scdclr8;
-                }
+                opacity: 0.5;
             }
 
-            .signup {
-                position: relative;
-                padding: 0.5em 0.75em;
-                background: $prmclr1;
-                color: $prmclr2;
-                border-radius: 0.5em;
-                font-size: 18px;
-                opacity: 1;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 90%;
+                height: 85%;
+                border: 3px solid $mnrclr3;
+                border-color: transparent;
+                border-radius: inherit;
+                transition: all 0.5s ease-in-out;
+                z-index: 0;
+            }
 
-                &.disabled {
-                    pointer-events: none;
-                    background: $scdclr1;
-                    color: $prmclr1;
-                    opacity: 0.5;
-                }
+            &:hover {
+                background: $mnrclr1;
+                color: $prmclr3;
 
                 &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 90%;
-                    height: 85%;
-                    border: 3px solid $mnrclr3;
-                    border-color: transparent;
-                    border-radius: inherit;
-                    transition: all 0.5s ease-in-out;
-                    z-index: 0;
-                }
-
-                &:hover {
-                    background: $mnrclr1;
-                    color: $prmclr3;
-
-                    &::before {
-                        animation: snakeAround 4s linear infinite;
-                    }
+                    animation: snakeAround 4s linear infinite;
                 }
             }
+        }
 
-            .heads-up {
-                padding: 0 0.5em;
-            }
+        .heads-up {
+            padding: 0 0.5em;
+        }
 
-            .login {
-                color: $prmclr1;
-                font-size: 18px;
-            }
+        .login {
+            color: $prmclr1;
+            font-size: 18px;
         }
     }
 }

@@ -1,19 +1,21 @@
-<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('user-edit')">
+<main class="modal-wrapper flex" *ngIf="modService.isModalOpen('user-edit')" role="dialog" aria-modal="true"
+  aria-labelledby="user-edit-modal-label">
   <section class="profile-edit w-h-100" *ngIf="user$ | async as user" (clickOutside)="closeUserEdit()"
     [@slideInOut]="userEditState">
     <section class="header flex">
-      <button class="back" (click)="closeUserEdit()">
+      <button class="back" (click)="closeUserEdit()" title="Cancel editing" aria-label="Cancel editing">
         <svg-render class="flex" svgName="back" />
       </button>
-      <h2 class="flex full-center family-nunito w-100">Profile Edit</h2>
+      <h2 id="user-edit-modal-label" class="flex full-center family-nunito w-100">Profile Edit</h2>
     </section>
 
-    <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()">
-      <div class="upload-area grid" formArrayName="imgUrls">
+    <form class="grid" [formGroup]="userEditForm" (ngSubmit)="onSaveUser()" aria-labelledby="user-edit-modal-label">
+      <div class="upload-area grid w-h-fit" formArrayName="imgUrls">
         <div *ngFor="let control of imgUrlsControls; let i = index">
           <image-uploader [index]="i" [defaultImgUrl]="control.value" [folderName]="'user'"
-            (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrls'})" />
-          <svg-render svgName="camera" />
+            (onUploaded)="handleImgUpload({url: $event.url, index: i, controlName: 'imgUrls'})"
+            aria-label="Image uploader for user profile picture" />
+          <svg-render class="w-h-100 normal-trans" svgName="camera" />
         </div>
       </div>
 
@@ -21,46 +23,46 @@
         <label for="fullName" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="idIcon" />
-            <span>Full name</span>
+            <span class="family-bold">Full Name</span>
           </div>
-
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'fullName')">
             {{ formUtils.getErrorMessage(userEditForm, "fullName") }}
           </span>
         </label>
         <input id="fullName" type="text" formControlName="fullName" placeholder="Please enter your full name..."
-          maxlength="48" customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus />
+          maxlength="48" customValidator [minLength]="6" [maxLength]="48" [allowedSpecialChars]="'.,'" autofocus
+          aria-required="true" [attr.aria-invalid]="formUtils.isFieldInvalid(userEditForm, 'fullName')" />
       </div>
 
       <div class="input-area flex column w-100" [class.error]="formUtils.isFieldInvalid(userEditForm, 'username')">
         <label for="username" class="flex row">
           <div class="label-info flex row">
             <svg-render svgName="personIcon" />
-            <span>Username</span>
+            <span class="family-bold">Username</span>
           </div>
-
           <span *ngIf="formUtils.isFieldInvalid(userEditForm, 'username')">
             {{ formUtils.getErrorMessage(userEditForm, "username") }}
           </span>
         </label>
         <input id="username" type="text" formControlName="username" placeholder="Please enter your username..."
-          maxlength="24" customValidator [minLength]=3 [maxLength]=24>
+          maxlength="24" customValidator [minLength]=3 [maxLength]=24 aria-required="true"
+          [attr.aria-invalid]="formUtils.isFieldInvalid(userEditForm, 'username')" />
       </div>
 
       <section class="form-actions flex column align-center">
         <div class="reset-choices flex row">
-          <button class="family-bold" (click)="openResetEmail($event)" title="Reset email?">
+          <button class="family-bold" (click)="openResetEmail($event)" aria-label="Reset email?">
             Reset E-mail
           </button>
-
-          <button class="family-bold" (click)="openResetPassword($event)" title="Reset password?">
+          <button class="family-bold" (click)="openResetPassword($event)" aria-label="Reset password">
             Reset password
           </button>
         </div>
 
-        <button class="submit family-bold fast-trans" type="submit" title="Update your user?"
+        <button class="submit family-bold fast-trans" type="submit" title="Confirm changes to your user?"
           [disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
-          [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
+          [class.disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)"
+          [attr.aria-disabled]="!userEditForm.valid || formUtils.isFormUnchanged(userEditForm, initialFormData)">
           <span>Save changes</span>
         </button>
       </section>

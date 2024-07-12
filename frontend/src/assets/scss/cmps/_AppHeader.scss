@@ -10,16 +10,14 @@ app-header {
     .mobile-view .links {
       justify-content: space-between;
 
-      span {
+      button {
         width: 32px;
         height: 32px;
-        cursor: pointer;
       }
 
       image-container img {
         width: 32px;
         height: 32px;
-        object-fit: cover;
         border-radius: 50%;
         cursor: pointer;
       }
@@ -48,7 +46,6 @@ app-header {
         border: 1px solid $scdclr4;
         border-width: 1px 0 1px 1px;
         color: $prmclr1;
-        font-family: "nh-medium";
         font-size: 1em;
         opacity: 0;
 
@@ -141,10 +138,12 @@ app-header {
             border-radius: 0.25em;
           }
 
-          span {
+          span,
+          a {
             display: block;
             padding: 0.5em 0.75em;
             cursor: pointer;
+            line-height: 1.6;
             font-size: 18px;
             color: $prmclr1;
           }

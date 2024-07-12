@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnDestroy, EventEmitter, Output, inject } fro
 import { interval, Subscription } from 'rxjs'
 import { CarouselItem } from '../../../models/utility'
 import { Router } from '@angular/router'
-import { ImageLoadService } from '../../../services/media/image-load.service'
 
 @Component({
   selector: 'product-carousel',
@@ -15,7 +14,6 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   @Output() imageClick = new EventEmitter<{ event: Event, imageUrl: string }>()
 
   private router = inject(Router)
-  private imgLoadService = inject(ImageLoadService)
 
   private autoSwitchSubscription: Subscription | null = null
   public currentIndex: number = 0
@@ -23,20 +21,6 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.autoSwitch) this.autoSwitchSubscription = interval(
       10000).subscribe(() => this.nextImage())
-    this.preloadCarouselItems()
-  }
-
-  preloadCarouselItems(): void {
-    this.carouselItems.forEach(item => {
-      item.lowResImgUrl = this.imgLoadService.getLowResImageUrl(item.imgUrl)
-      this.imgLoadService.preloadSingleImage(item.imgUrl)
-    })
-  }
-
-  onCarouselImageLoad(event: Event, lowResImageElement: HTMLElement): void {
-    const highResImgElement = event.target as HTMLImageElement
-    lowResImageElement.style.display = 'none'
-    highResImgElement.style.display = 'block'
   }
 
   nextImage(): void {

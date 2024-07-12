@@ -1,223 +1,216 @@
-payment {
-  .page-contents {
-    .payment-header {
-      position: relative;
-      padding: 0.5em 1em;
+payment .page-contents {
+  margin-block-end: 1em;
 
-      .title {
-        font-size: 1.75em;
-        color: $prmclr1;
-        letter-spacing: 0.05em;
-      }
+  .payment-header {
+    position: relative;
+    padding: 0.5em 1em;
 
-      .back {
-        position: absolute;
-        width: 24px;
-        height: 24px;
-
-        svg-render {
-          fill: $prmclr1;
-        }
-      }
+    .title {
+      font-size: 1.75em;
+      color: $prmclr1;
+      letter-spacing: 0.05em;
     }
 
-    .payment-body {
-      gap: 1em;
+    .back {
+      position: absolute;
+      width: 24px;
+      height: 24px;
 
-      .selector {
-        padding: 0 1.5em 0 0;
+      svg-render {
+        fill: $prmclr1;
+      }
+    }
+  }
 
-        mat-expansion-panel-header {
-          padding: 0;
+  .payment-body {
+    gap: 1em;
+
+    .selector {
+      padding: 0 1.5em 0 0;
+
+      mat-expansion-panel-header {
+        padding: 0;
+      }
+
+      mat-panel-title {
+        gap: 0.5em;
+        padding: 0.75em;
+        font-size: 1.25em;
+        letter-spacing: 0.05em;
+        background: $prmclr3;
+        color: $scdclr1;
+
+        .pending {
+          background: $prmclr2;
+          width: 1.25em;
+          padding: 0.1em;
+          border-radius: 50%;
         }
 
-        .heading {
-          gap: 0.5em;
-          padding: 0.75em;
-          font-size: 1.25em;
-          background: $prmclr3;
-          color: $scdclr1;
-
-          .pending {
-            background: $prmclr2;
-            width: 1.25em;
-            padding: 0.1em;
-            border-radius: 50%;
-          }
-
-          .title {
-            align-self: center;
-          }
+        .title {
+          align-self: center;
         }
+      }
 
-        &:hover,
-        &.selected {
-          .heading {
-            font-family: "nh-bold";
-            background: $scdclr3;
-          }
-        }
+      &:hover mat-panel-title,
+      &.selected mat-panel-title {
+        background: $scdclr3;
+      }
 
-        .order {
-          .summary-list {
-            .summary-item {
-              grid-template-columns: repeat(5, 1fr);
-              padding: 0.75em 0;
-              font-size: 1.25em;
-              color: $prmclr1;
+      .order {
+        .summary-list {
+          .summary-item {
+            grid-template-columns: repeat(5, 1fr);
+            padding: 0.75em 0;
+            font-size: 1.25em;
+            color: $prmclr1;
 
-              &:not(:first-child) {
-                border-top: 1px solid $scdclr7;
-              }
-
-              .image {
-                grid-column: 1 / 2;
-                position: relative;
-
-                img {
-                  object-fit: cover;
-                  aspect-ratio: 1/1;
-                  border-radius: 0.5em;
-                }
-
-                .amount {
-                  position: absolute;
-                  top: -0.5em;
-                  right: -0.5em;
-                  width: 1.25em;
-                  height: 1.25em;
-                  background: $prmclr2;
-                  border-radius: 50%;
-                  border: 1px $scdclr6 solid;
-                }
-              }
-
-              .item-info {
-                grid-column: 2 / 5;
-                padding: 0.25em 1em;
-
-                .desc {
-                  font-size: 1rem;
-                  max-height: 2.6em;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  -webkit-box-orient: vertical;
-                  -webkit-line-clamp: 2;
-                }
-              }
-
-              .price {
-                grid-column: 5 / -1;
-                justify-self: end;
-                padding: 0.25em;
-                color: $prmclr1;
-              }
-            }
-          }
-
-          .check-out {
-            gap: 1em;
-
-            .info {
-              justify-content: space-between;
-              font-size: 1.1em;
-              color: $mnrclr8;
-
-              &:first-child {
-                border-top: 3px solid $scdclr4;
-                padding-block-start: 1em;
-              }
-
-              &:last-child {
-                font-size: 1.25em;
-              }
-            }
-          }
-        }
-
-        .personal {
-          padding: 1em;
-
-          .desc {
-            font-size: 1em;
-            color: $scdclr6;
-          }
-
-          form {
-            gap: 1.25em;
-
-            .info-heading {
-              gap: 0.5em;
-              font-size: 1.25em;
-              margin-block-start: 0.5em;
-
-              svg-render {
-                display: inline-block;
-                width: 1.25em;
-                height: 1.25em;
-              }
+            &:not(:first-child) {
+              border-top: 1px solid $scdclr7;
             }
 
-            label {
+            .image-area {
+              grid-column: 1 / 2;
               position: relative;
 
-              .label-info {
-                position: absolute;
-                top: -0.5em;
-                left: 1em;
-                padding: 0 0.5em;
-                background: $prmclr2;
-                color: $scdclr6;
-                border-radius: 1em;
-              }
-
-              input,
-              select {
-                width: 100%;
-                font-size: 1.25em;
-                padding: 1em;
-                border-color: $scdclr7;
+              image-container img {
+                aspect-ratio: 1.25/1;
                 border-radius: 0.5em;
-
-                &:focus-visible {
-                  border-color: $scdclr8;
-                }
               }
 
-              select {
-                background: $prmclr2;
-              }
-
-              .error {
+              .amount {
                 position: absolute;
                 top: -0.5em;
-                right: 1em;
-                color: $mnrclr5;
+                right: -0.5em;
+                width: 1.25em;
+                height: 1.25em;
                 background: $prmclr2;
-                padding: 0 0.5em;
+                border-radius: 50%;
+                border: 1px $scdclr6 solid;
               }
+            }
 
-              &.error {
+            .item-info {
+              grid-column: 2 / 5;
+              padding: 0.25em 1em;
 
-                input,
-                select {
-                  border: 2px solid $mnrclr5;
-                }
+              .desc {
+                font-size: 1rem;
+                max-height: 2.6em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
               }
+            }
+
+            .price {
+              grid-column: 5 / -1;
+              justify-self: end;
+              padding: 0.25em;
+              color: $prmclr1;
             }
           }
         }
 
-        &.method {
-          .methods {
-            gap: 1em;
-            padding: 0.75em;
+        .check-out {
+          gap: 1em;
+
+          .info {
+            justify-content: space-between;
+            font-size: 1.1em;
+            color: $mnrclr8;
+
+            &:first-child {
+              border-top: 3px solid $scdclr4;
+              padding-block-start: 1em;
+            }
+
+            &:last-child {
+              font-size: 1.25em;
+            }
+          }
+        }
+      }
+
+      .personal {
+        padding: 1em;
+
+        .desc {
+          font-size: 1em;
+          color: $scdclr6;
+        }
+
+        form {
+          gap: 1.25em;
+
+          .info-heading {
+            gap: 0.5em;
+            font-size: 1.25em;
+            margin-block-start: 0.5em;
+
+            svg-render {
+              display: inline-block;
+              width: 1.25em;
+              height: 1.25em;
+            }
           }
 
-          .submit-error {
-            color: $mnrclr5;
+          label {
+            position: relative;
+
+            .label-info {
+              position: absolute;
+              top: -0.5em;
+              left: 1em;
+              padding: 0 0.5em;
+              background: $prmclr2;
+              color: $scdclr6;
+              border-radius: 1em;
+            }
+
+            input,
+            select {
+              font-size: 1.25em;
+              padding: 1em;
+              border-color: $scdclr7;
+              border-radius: 0.5em;
+
+              &:focus-visible {
+                border-color: $scdclr8;
+              }
+            }
+
+            select {
+              background: $prmclr2;
+            }
+
+            .error {
+              position: absolute;
+              top: -0.5em;
+              right: 1em;
+              color: $mnrclr5;
+              background: $prmclr2;
+              padding: 0 0.5em;
+            }
+
+            &.error input,
+            &.error select {
+              border: 2px solid $mnrclr5;
+            }
           }
+        }
+      }
+
+      &.method {
+        .methods {
+          gap: 1em;
+          padding: 0.75em;
+        }
+
+        .submit-error {
+          color: $mnrclr5;
         }
       }
     }

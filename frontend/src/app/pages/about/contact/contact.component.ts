@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { CarouselItem, ContactUsRequestBody } from '../../../models/utility'
@@ -10,13 +10,11 @@ import { MailService } from '../../../services/api/mail.service'
 
 @Component({
   selector: 'contact-page',
-  templateUrl: './contact.component.html'
+  templateUrl: './contact.component.html',
+  host: { 'class': 'layout-row w-h-100' }
 })
 
 export class ContactComponent implements OnInit {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
   private fBuilder = inject(FormBuilder)
   private utilService = inject(UtilityService)
   private emailService = inject(MailService)
@@ -31,10 +29,10 @@ export class ContactComponent implements OnInit {
 
   public carouselItems: CarouselItem[] = []
   public contactImageUrls: string[] = [
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880473/Artware/r0vaet9gmlapbshf6hb1.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/pqiuffqnaa7gmznrsnmy.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880470/Artware/h9adgfdphiip2xujdm4d.png',
-    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1704880469/Artware/kuglbewtdm4pc7sr2dct.png'
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716234077/Sculpture/h9qediuxfaeipa4oaxrv.avif',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716238673/Artware/qnybnp5mqb0tsagaelp8.avif',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716237619/Artware/jgqg9ntqcachua8ylzis.avif',
+    'https://res.cloudinary.com/dv4a9gwn4/image/upload/v1716238019/Artware/wgarv8cz2zr0xqq64po8.avif'
   ]
   deviceType$: Observable<string> = this.dTypeService.deviceType$
 

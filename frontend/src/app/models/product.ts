@@ -20,7 +20,7 @@ export interface MiniProduct {
   url: string
 }
 
-export interface ShopFilter {
+export interface ProductFilter {
   search?: string
   type?: string
 }

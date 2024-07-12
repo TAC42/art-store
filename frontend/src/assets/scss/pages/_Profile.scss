@@ -1,167 +1,157 @@
-profile {
-  .page-contents {
-    .mobile-view {
-      .background {
-        position: relative;
+profile .page-contents {
+  .mobile-view {
+    .background {
+      position: relative;
 
-        img {
-          filter: brightness(25%);
-        }
-
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          right: 50%;
-          transform: translateX(-50%);
-          width: 300px;
-          height: 40px;
-          background: $mnrcl11;
-          border-radius: 100% 100% 100% 100% / 100% 100% 0% 0%;
-        }
+      image-container img {
+        filter: brightness(25%);
       }
 
-      .personal-info {
-        position: relative;
-        gap: 0.25em;
-        color: $scdclr2;
-        margin-block-start: -6.5em;
-
-        .user-img {
-          position: absolute;
-          left: 50%;
-          padding: 0.5em;
-          transform: translate(-50%, -50%);
-          border-radius: 50%;
-          background-color: $prmclr2;
-
-          image-container {
-            img {
-              object-fit: cover;
-              width: 125px;
-              height: 125px;
-              border-radius: 50%;
-              border: 2px $scdclr6 solid;
-
-              &::before {
-                content: "";
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                right: -2px;
-                bottom: -2px;
-                border: 2px solid $prmclr2;
-                border-radius: 50%;
-              }
-            }
-          }
-        }
-
-        .full-name {
-          margin-block-start: 6em;
-          color: $prmclr1;
-          font-size: 1.5em;
-        }
-
-        .member-since {
-          gap: 0.5em;
-
-          svg-render {
-            width: 1.5em;
-            fill: $scdclr2;
-          }
-        }
-
-        .edit-profile {
-          font-size: 16px;
-          gap: 0.5em;
-          margin-block-start: 1em;
-
-          button {
-            background-color: $scdclr2;
-            color: $prmclr2;
-            padding: 0.75em 1em;
-            border-radius: 1em;
-          }
-
-          a {
-            background-color: $scdclr2;
-            color: $prmclr2;
-            font-size: 14px;
-            padding: 0.5em 0.75em;
-            border-radius: 1em;
-          }
-        }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 40px;
+        background: $mnrcl11;
+        border-radius: 100% 100% 100% 100% / 100% 100% 0% 0%;
       }
     }
 
-    .desktop-view {
+    .personal-info {
       position: relative;
-      min-height: 900px;
+      gap: 0.25em;
+      color: $scdclr2;
+      margin-block-start: -6.5em;
 
-      .background {
-        image-container {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: -1;
-          filter: brightness(25%);
+      .user-img {
+        position: absolute;
+        left: 50%;
+        padding: 0.5em;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background-color: $prmclr2;
+
+        image-container img {
+          width: 125px;
+          height: 125px;
+          border-radius: 50%;
+          border: 2px $scdclr6 solid;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid $prmclr2;
+            border-radius: 50%;
+          }
         }
       }
 
-      .personal-info {
-        gap: 0.25em;
-        color: $scdclr2;
-        margin: 5em auto 0 auto;
-        background: #ffffffc4;
-        padding: 1em;
-        border-radius: 4em;
+      .full-name {
+        margin-block-start: 6em;
+        color: $prmclr1;
+        font-size: 1.5em;
+      }
 
-        image-container {
-          img {
-            object-fit: cover;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 2px $scdclr6 solid;
-          }
+      .member-since {
+        gap: 0.5em;
+
+        svg-render {
+          width: 1.5em;
+          fill: $scdclr2;
+        }
+      }
+
+      .edit-profile {
+        font-size: 16px;
+        gap: 0.5em;
+        margin-block-start: 1em;
+
+        button {
+          background-color: $scdclr2;
+          color: $prmclr2;
+          padding: 0.75em 1em;
+          border-radius: 1em;
         }
 
-        .full-name {
-          color: $prmclr1;
-          font-size: 1.5em;
+        a {
+          background-color: $scdclr2;
+          color: $prmclr2;
+          font-size: 14px;
+          padding: 0.5em 0.75em;
+          border-radius: 1em;
+        }
+      }
+    }
+  }
+
+  .desktop-view {
+    position: relative;
+    min-height: 900px;
+
+    .background image-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      filter: brightness(25%);
+    }
+
+    .personal-info {
+      gap: 0.25em;
+      color: $scdclr2;
+      margin: 5em auto 0 auto;
+      background: #ffffffc4;
+      padding: 1em 2em;
+      border-radius: 4em;
+
+      image-container img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 2px $scdclr6 solid;
+      }
+
+      .full-name {
+        color: $prmclr1;
+        font-size: 1.5em;
+      }
+
+      .member-since {
+        gap: 0.5em;
+
+        svg-render {
+          width: 1.5em;
+          fill: $scdclr2;
+        }
+      }
+
+      .edit-profile {
+        margin-block-start: 1em;
+
+        button {
+          background-color: $scdclr2;
+          color: $prmclr2;
+          font-size: 16px;
+          padding: 0.75em 1em;
+          border-radius: 1em;
         }
 
-        .member-since {
-          gap: 0.5em;
-
-          svg-render {
-            width: 1.5em;
-            fill: $scdclr2;
-          }
-        }
-
-        .edit-profile {
+        a {
+          background-color: $scdclr2;
+          color: $prmclr2;
+          padding: 0.5em 0.75em;
+          border-radius: 1em;
           margin-block-start: 1em;
-
-          button {
-            background-color: $scdclr2;
-            color: $prmclr2;
-            font-size: 16px;
-            padding: 0.75em 1em;
-            border-radius: 1em;
-          }
-
-          a {
-            background-color: $scdclr2;
-            color: $prmclr2;
-            padding: 0.5em 0.75em;
-            border-radius: 1em;
-            margin-block-start: 1em;
-          }
         }
       }
     }

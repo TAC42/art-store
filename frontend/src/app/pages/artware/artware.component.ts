@@ -1,11 +1,10 @@
-import { Component, HostBinding } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'artware-wrapper',
-  templateUrl: './artware.component.html'
+  templateUrl: './artware.component.html',
+  host: { 'class': 'full w-h-100' }
 })
 
 export class ArtwareComponent {
-  @HostBinding('class.full') fullClass = true
-  @HostBinding('class.w-h-100') fullWidthHeightClass = true
 }

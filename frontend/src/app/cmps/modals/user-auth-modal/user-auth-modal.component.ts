@@ -86,7 +86,7 @@ export class UserAuthModalComponent implements OnInit, OnDestroy {
     if (this.verifyForm.value.code === this.verificationCode) {
       this.user$.pipe(take(1)).subscribe(user => {
         const updatedUser: User = { ...user, isVerified: true }
-        this.store.dispatch(UPDATE_USER({ updatedUser }))
+        this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
 
         showSuccessMsg('User Verified!', 'Thank you for the cooperation!', this.eBusService)
         this.modService.closeModal('user-auth')

@@ -1,41 +1,48 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core'
-import { ShopFilter } from '../../models/product'
-import { Subject, debounceTime, distinctUntilChanged } from 'rxjs'
-import { User } from '../../models/user'
-import { ModalService } from '../../services/utils/modal.service'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs'
+import { ProductFilter } from '../../models/product'
 
 @Component({
   selector: 'product-filter',
   templateUrl: './product-filter.component.html'
 })
 
-export class ProductFilterComponent {
-  @Input() set filterBy(value: ShopFilter) {
+export class ProductFilterComponent implements OnInit, OnDestroy {
+  @Input() set filterBy(value: ProductFilter) {
     this._filterBy = { ...value }
   }
-  @Input() isShopPage!: boolean
-  @Input() loggedinUser!: User | null
+  @Output() onSetFilter = new EventEmitter<ProductFilter>()
 
-  @Output() onSetFilter = new EventEmitter<string>()
-  @Output() onOpenCart = new EventEmitter<void>()
-  hasValue = false
+  private router = inject(Router)
+  private activatedRoute = inject(ActivatedRoute)
 
-  get filterBy(): ShopFilter {
-    return this._filterBy
-  }
-  private _filterBy!: ShopFilter
+  public hasValue = false
 
+  private _filterBy!: ProductFilter
   private filterSubject: Subject<string> = new Subject<string>()
-  private modService = inject(ModalService)
+  private destroy$ = new Subject<void>()
 
-  constructor() {
+  get filterBy(): ProductFilter { return this._filterBy }
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        const search = params['search'] || ''
+        this._filterBy = { ...this._filterBy, search }
+        this.hasValue = !!search
+      })
     this.filterSubject
       .pipe(
-        debounceTime(500),
-        distinctUntilChanged()
+        debounceTime(1000),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
       )
       .subscribe((value: string) => {
-        this.onSetFilter.emit(value)
+        const updatedFilter = { ...this._filterBy, search: value }
+        this.onSetFilter.emit(updatedFilter)
+        this.updateQueryParams(updatedFilter)
         this.hasValue = true
       })
   }
@@ -44,16 +51,30 @@ export class ProductFilterComponent {
     this.filterSubject.next(value)
   }
 
-  onClearFilter(event: Event) {
+  onClearFilter(event: Event): void {
     event.stopPropagation()
-    this.filterBy.search = ''
-    this.onSetFilter.emit('')
+    const updatedFilter = { ...this._filterBy, search: '' }
+    this._filterBy = updatedFilter
+    this.onSetFilter.emit(updatedFilter)
+    this.updateQueryParams(updatedFilter)
     this.hasValue = false
   }
 
-  onCartOpen(event: Event) {
-    event.stopPropagation()
-    if (this.loggedinUser?._id) this.onOpenCart.emit()
-    else this.modService.openModal('login')
+  updateQueryParams(newFilter: ProductFilter): void {
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        const updatedParams = { ...params, search: newFilter.search }
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams: updatedParams,
+          queryParamsHandling: 'merge',
+        })
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 }

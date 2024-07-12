@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, inject } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { Observable, map, take } from 'rxjs'
 import { DeviceTypeService } from '../../../services/utils/device-type.service'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -18,12 +18,10 @@ import { UtilityService } from '../../../services/utils/utility.service'
 @Component({
     selector: 'product-details',
     templateUrl: './product-details.component.html',
+    host: { 'class': 'w-h-100' }
 })
 
 export class ProductDetailsComponent implements OnInit {
-    @HostBinding('class.full') fullClass = true
-    @HostBinding('class.w-h-100') fullWidthHeightClass = true
-
     private store = inject(Store<AppState>)
     private router = inject(Router)
     private route = inject(ActivatedRoute)
@@ -71,18 +69,18 @@ export class ProductDetailsComponent implements OnInit {
         event.stopPropagation()
         if (!product) return
 
-        this.user$.pipe(take(1)).subscribe(updatedUser => {
-            if (updatedUser._id) {
+        this.user$.pipe(take(1)).subscribe(user => {
+            if (user._id) {
                 const newCartItem: Cart = { _id: product._id, amount: 1 }
 
-                const isProductAlreadyInCart = updatedUser.cart.some(
+                const isProductAlreadyInCart = user.cart.some(
                     cartProduct => cartProduct._id === newCartItem._id)
 
                 if (!isProductAlreadyInCart) {
-                    const newUser: User = {
-                        ...updatedUser, cart: [...updatedUser.cart, newCartItem]
+                    const updatedUser: User = {
+                        ...user, cart: [...user.cart, newCartItem]
                     }
-                    this.store.dispatch(UPDATE_USER({ updatedUser: newUser }))
+                    this.store.dispatch(UPDATE_USER({ updatedUser: updatedUser }))
                     showSuccessMsg('Product Added!',
                         'Product has been added to the cart', this.eBusService)
                 } else showErrorMsg('Cannot Add!',

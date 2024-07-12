@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { Observable, Subscription } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { AppState } from '../../../store/app.state'
 import { Product } from '../../../models/product'
-import { ShopFilter } from '../../../models/product'
+import { ProductFilter } from '../../../models/product'
 import { User } from '../../../models/user'
 import { FILTER_UPDATED, LOAD_FILTER, LOAD_PRODUCTS, REMOVE_PRODUCT } from '../../../store/product/product.actions'
 import { selectProducts, selectIsLoading } from '../../../store/product/product.selectors'
@@ -15,13 +15,13 @@ import { DeviceTypeService } from '../../../services/utils/device-type.service'
 
 @Component({
   selector: 'artware-index',
-  templateUrl: './artware-index.component.html'
+  templateUrl: './artware-index.component.html',
+  host: { 'class': 'w-h-100' }
 })
 
 export class ArtwareIndexComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>)
   private router = inject(Router)
-  private activatedRoute = inject(ActivatedRoute)
   private modService = inject(ModalService)
   private comService = inject(CommunicationService)
   private dTypeService = inject(DeviceTypeService)
@@ -35,7 +35,7 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
 
   public isShopPage: boolean = false
   public isLoading: boolean = false
-  public filterBy: ShopFilter = { search: '', type: 'artware' }
+  public filterBy: ProductFilter = { search: '', type: 'artware' }
 
   ngOnInit(): void {
     this.isShopPage = this.router.url.startsWith('/shop')
@@ -53,32 +53,18 @@ export class ArtwareIndexComponent implements OnInit, OnDestroy {
     this.modService.openModal(`confirm`, productId)
   }
 
-  onOpenCart(): void {
-    this.modService.openModal('cart')
-  }
-
   onRemoveProduct(productId: string) {
     this.store.dispatch(REMOVE_PRODUCT({ productId }))
   }
 
-  onSetFilter(newFilterValue: string): void {
-    let updatedFilter: Partial<ShopFilter> = { search: newFilterValue }
-    updatedFilter = { ...updatedFilter, type: 'artware' }
-    this.updateFilter(updatedFilter)
+  onSetFilter(newFilter: ProductFilter): void {
+    this.updateFilter(newFilter)
   }
 
-  private updateFilter(newFilter: Partial<ShopFilter>): void {
+  private updateFilter(newFilter: ProductFilter): void {
+    this.filterBy = { ...newFilter }
     this.store.dispatch(FILTER_UPDATED({ updatedFilter: newFilter }))
-    this.store.dispatch({ type: '[Shop] Load Products' })
-
-    this.activatedRoute.queryParams.subscribe(params => {
-      const updatedParams = { ...params, search: newFilter.search }
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: updatedParams,
-        queryParamsHandling: 'merge',
-      })
-    })
+    this.store.dispatch(LOAD_PRODUCTS({ filterBy: newFilter }))
   }
 
   ngOnDestroy(): void {

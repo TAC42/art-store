@@ -1,17 +1,17 @@
-<main class="page-contents w-h-100 flex column">
+<main class="page-contents layout-row w-h-100 flex column" aria-label="Product details page">
     <section *ngIf="(deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile'"
-        class="mobile-view flex column">
+        class="mobile-view flex column" aria-label="Mobile view">
         <ng-container *ngIf="product$ | async as product">
-            <section class="actions-wrapper w-100">
-                <div class="actions flex row align-center w-100">
-                    <a [routerLink]="['/' + product.type]" title="Exit details page?">
+            <section class="actions-wrapper w-100" aria-label="User actions">
+                <nav class="actions flex row align-center w-100">
+                    <a [routerLink]="['/' + product.type]" title="Exit details page?" aria-label="Exit details page">
                         <svg-render class="fast-trans" svgName="leftArrowIcon" />
                     </a>
                     <h3 class="family-bold text-capitalize">collection</h3>
-                    <button (click)="onInquire($event)" title="Contact artist?">
+                    <button (click)="onInquire($event)" title="Contact artist?" aria-label="Contact artist">
                         <svg-render class="fast-trans" svgName="emailIcon" />
                     </button>
-                </div>
+                </nav>
             </section>
 
             <section class="product-area flex column text-left">
@@ -22,7 +22,7 @@
                     </ng-container>
 
                     <ng-template #singleImage>
-                        <image-container [imageUrl]="product.imgUrls[0]"
+                        <image-container class="w-h-100" [highResImageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
                 </div>
@@ -36,7 +36,7 @@
 
                     <p class="notice text-bold">Dear user, for special requests regarding this item, please press
                         inquire.</p>
-                    <button class="flex fast-trans" (click)="onInquire($event)" title="Contact us!">
+                    <button class="flex fast-trans" (click)="onInquire($event)" aria-label="Contact us">
                         <span class="family-bold fast-trans">Inquire</span>
                     </button>
                 </div>
@@ -45,9 +45,10 @@
     </section>
 
     <section *ngIf="(deviceType$ | async) === 'tablet' || (deviceType$ | async) === 'desktop'"
-        class="desktop-view flex column h-100">
+        class="desktop-view flex column h-100" aria-label="Desktop view">
         <ng-container *ngIf="product$ | async as product">
-            <a class="flex row align-center text-allcaps w-fit fast-trans" [routerLink]="['/' + product.type]">
+            <a class="flex row align-center text-allcaps w-fit fast-trans" [routerLink]="['/' + product.type]"
+                aria-label="Back to results">
                 <svg-render class="fast-trans" svgName="leftArrowIcon" />
                 <span class="fast-trans">back to results</span>
             </a>
@@ -60,7 +61,7 @@
                     </ng-container>
 
                     <ng-template #singleImage>
-                        <image-container [imageUrl]="product.imgUrls[0]"
+                        <image-container class="w-h-100" [highResImageUrl]="product.imgUrls[0]"
                             (imageClick)="regularUtils.onImageClick($event.event, product.imgUrls[0])" />
                     </ng-template>
                 </div>
@@ -74,7 +75,7 @@
 
                     <p class="notice text-bold">Dear user, for special requests regarding this item, please press
                         inquire.</p>
-                    <button class="flex fast-trans" (click)="onInquire($event)" title="Contact us!">
+                    <button class="flex fast-trans" (click)="onInquire($event)" aria-label="Contact us">
                         <span class="family-bold fast-trans">Inquire</span>
                     </button>
                 </div>

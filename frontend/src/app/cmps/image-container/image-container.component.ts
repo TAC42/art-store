@@ -3,11 +3,11 @@ import { ImageLoadService } from '../../services/media/image-load.service'
 
 @Component({
   selector: 'image-container',
-  templateUrl: './image-container.component.html'
+  templateUrl: './image-container.component.html',
 })
 
 export class ImageContainerComponent implements OnInit {
-  @Input() imageUrl!: string
+  @Input() highResImageUrl!: string
   @Input() alt: string = 'Loading...'
   @Output() imageClick = new EventEmitter<{ event: Event, imageUrl?: string }>()
 
@@ -16,8 +16,8 @@ export class ImageContainerComponent implements OnInit {
   public lowResImgUrl: string = ''
 
   ngOnInit(): void {
-    this.lowResImgUrl = this.imgLoadService.getLowResImageUrl(this.imageUrl)
-    this.imgLoadService.preloadSingleImage(this.imageUrl)
+    this.lowResImgUrl = this.imgLoadService.getLowResImageUrl(this.highResImageUrl)
+    this.imgLoadService.preloadSingleImage(this.lowResImgUrl)
   }
 
   onImageLoad(event: Event, lowResImage: HTMLElement): void {

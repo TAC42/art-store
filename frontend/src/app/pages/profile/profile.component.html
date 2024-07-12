@@ -1,13 +1,14 @@
-<main class="page-contents w-h-100 flex column">
+<main class="page-contents w-h-100 flex column" aria-label="User profile page">
   <section *ngIf="((deviceType$ | async) === 'mini-tablet' || (deviceType$ | async) === 'mobile')"
-    class="mobile-view layout-row flex column">
+    class="mobile-view layout-row flex column" aria-label="Mobile view">
     <div class="background">
-      <image-container [imageUrl]="backgroundImage" />
+      <image-container [highResImageUrl]="backgroundImage" />
     </div>
 
-    <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center">
+    <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center" role="region"
+      aria-label="Personal information">
       <article class="user-img">
-        <image-container [imageUrl]="user.imgUrls[0]" />
+        <image-container [highResImageUrl]="user.imgUrls[0]" />
       </article>
       <span class="full-name family-bold"> {{ user.fullName }} </span>
       <span> &#64;{{ user.username }} </span>
@@ -18,24 +19,26 @@
       </div>
 
       <section class="edit-profile flex justify-center family-bold">
-        <button (click)="onOpenUserEdit($event)">Edit profile</button>
-        <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <button (click)="onOpenUserEdit($event)" aria-label="Edit profile">Edit profile</button>
+        <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active"
+          aria-label="Dashboard">Dashboard</a>
       </section>
     </article>
     <user-orders [orders$]="orders$" [optionState]="optionState" />
   </section>
 
   <section *ngIf="((deviceType$ | async) === 'desktop' || (deviceType$ | async) === 'tablet')"
-    class="desktop-view flex column h-100">
+    class="desktop-view flex column h-100" aria-label="Desktop view">
     <div class="background">
-      <image-container [imageUrl]="backgroundImage" />
+      <image-container [highResImageUrl]="backgroundImage" />
     </div>
 
-    <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center">
-      <image-container [imageUrl]="user.imgUrls[0]" />
+    <article *ngIf="user$ | async as user" class="personal-info flex column full-center text-center" role="region"
+      aria-label="Personal information">
+      <image-container [highResImageUrl]="user.imgUrls[0]" />
 
       <span class="full-name family-bold"> {{ user.fullName }} </span>
-      <span> &#64;{{ user.username }} </span>
+      <span> &#64; {{ user.username }} </span>
 
       <div class="member-since flex align-center">
         <svg-render svgName="personIcon" />
@@ -43,8 +46,9 @@
       </div>
 
       <section class="edit-profile flex column justify-center family-bold">
-        <button (click)="onOpenUserEdit($event)">Edit profile</button>
-        <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <button (click)="onOpenUserEdit($event)" aria-label="Edit profile">Edit profile</button>
+        <a *ngIf="(user$ | async)?.isAdmin" routerLink="/dashboard" routerLinkActive="active"
+          aria-label="Dashboard">Dashboard</a>
       </section>
     </article>
 
