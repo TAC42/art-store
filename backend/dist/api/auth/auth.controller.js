@@ -15,7 +15,7 @@ async function _login(req, res) {
         const user = await authService.login(loginId, password);
         const loginToken = authService.getLoginToken(user);
         loggerService.info('User login: ', loginToken);
-        res.cookie('loginToken', loginToken, { httpOnly: true });
+        res.cookie('loginToken', loginToken, { httpOnly: true, sameSite: 'none', secure: true });
         res.json(user);
     }
     catch (err) {
@@ -36,7 +36,7 @@ async function _signup(req, res) {
         const user = await authService.login(username, password);
         const loginToken = authService.getLoginToken(user);
         loggerService.info('User signup: ', loginToken);
-        res.cookie('loginToken', loginToken, { httpOnly: true });
+        res.cookie('loginToken', loginToken, { httpOnly: true, sameSite: 'none', secure: true });
         res.json(user);
     }
     catch (err) {
