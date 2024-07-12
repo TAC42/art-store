@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { AppState } from '../../store/app.state';
 import { OrderService } from '../../services/api/order.service';
 import { Store } from '@ngrx/store';
@@ -16,9 +16,12 @@ import { LOAD_FILTER } from '../../store/product/product.actions';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
+  optionState: string = ''
+  orderStatus: object = {}
   private store = inject(Store<AppState>)
   private orderService = inject(OrderService)
   private dTypeService = inject(DeviceTypeService)
+
 
   user$: Observable<User> = this.store.select(selectUser)
   orders$: Observable<Order[]> = this.store.select(selectOrders)
@@ -34,6 +37,28 @@ export class DashboardComponent {
       }
     })
   }
+
+  setSelection(option: string): void {
+    if (this.optionState === option) return
+    this.optionState = option
+  }
+
+  getStatusClass(status: string): string {
+    const statusColors = {
+      pending: 'pending',
+      accepted: 'accepted',
+      delivering: 'delivering',
+      shipped: 'shipped',
+      cancelled: 'cancelled',
+    }
+    return statusColors[status.toLowerCase() as 'pending' |
+      'cancelled' | 'accepted' | 'delivering' | 'shipped'] || 'gray'
+  }
+
+  openOrderStatus(id: string | undefined) {
+    if (id) {
+      
+    }
+  }
+
 }
-
-
